@@ -1,5 +1,5 @@
 <div class="min-h-screen flex flex-col sm:justify-center items-center sm:pt-14" style="background-image: url({{asset('image/bg_intranet.jpg')}});background-size: cover;box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.4);">
-    <div class="mt-14 sm:mt-2">
+    <div class="pt-12">
         {{ $logo }}
     </div>
 
