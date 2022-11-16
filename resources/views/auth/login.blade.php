@@ -23,7 +23,7 @@
             </div>
 
             <div class="mt-4 my-6  px-6">
-                <x-jet-label for="password" value="{{ __('Password') }}" class="text-white text-center text-lg my-2" />
+                <x-jet-label for="password" value="{{ __('Contraseña') }}" class="text-white text-center text-lg my-2" />
                 <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
             </div>
             {{--
