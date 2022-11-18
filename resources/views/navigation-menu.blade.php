@@ -92,6 +92,11 @@
                         </x-slot>
 
                         <x-slot name="content">
+                            
+                            <x-jet-dropdown-link href="{{ route('productors.index') }}">
+                                {{ __('Productores') }}
+                            </x-jet-dropdown-link>
+
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
                                 {{ __('Configuración') }}
