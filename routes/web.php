@@ -29,3 +29,5 @@ Route::middleware([
 });
 
 Route::get('productores', [HomeController::class,'index'])->name('productors.index');
+
+Route::get('productores/refresh', [HomeController::class,'productor_refresh'])->name('productor.refresh');
