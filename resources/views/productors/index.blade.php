@@ -80,7 +80,7 @@
                                                 </td>
                                                 <td class="pl-10">
                                                     <div class="flex items-center">
-                                                    <select  class="block w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:bg-white focus:border-gray-500">
+                                                    <select  class="block w-full">
                                                         <option value="">76034369</option>
                                                         <option value="">50172360</option>
                                                         <option value="">3930230</option>
