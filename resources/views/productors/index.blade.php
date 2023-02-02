@@ -80,12 +80,8 @@
                                                 </td>
                                                 <td class="pl-10">
                                                     <div class="flex items-center">
-                                                    <select  class="block w-full">
-                                                        <option value="">76034369</option>
-                                                        <option value="">50172360</option>
-                                                        <option value="">3930230</option>
-                                                        <option value="">76775537</option>
-                                                    </select>
+                                                    
+                                                        <p class="text-sm leading-none text-gray-600 ml-2">992192597</p>
                                                     </div>
                                                 </td>
                                                 <td class="pl-5">
