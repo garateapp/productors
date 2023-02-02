@@ -80,11 +80,11 @@
                                                 </td>
                                                 <td class="pl-10">
                                                     <div class="flex items-center">
-                                                    <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                        <option value="US">76034369</option>
-                                                        <option value="CA">50172360</option>
-                                                        <option value="FR">3930230</option>
-                                                        <option value="DE">76775537</option>
+                                                    <select  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                        <option>76034369</option>
+                                                        <option>50172360</option>
+                                                        <option>3930230</option>
+                                                        <option>76775537</option>
                                                     </select>
                                                     </div>
                                                 </td>
