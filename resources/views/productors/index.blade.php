@@ -19,18 +19,24 @@
                                 </a>
                             </div>
 
-                            <h1>4) NOMBRE <br> 29) RUT</h1>
+                        
+                           
 
-                            <div class="mt-7 overflow-x-auto">
-                         
-                                <table class="w-full whitespace-nowrap">
-                                    <thead>
+            
+
+                            
+                                <table class="min-w-full divide-y divide-gray-200 mb-20 pb-20">
+                                    <thead class="bg-gray-50">
                                         <th>ID</th>
                                         <th>Empresa</th>
-                                       
+                                        <th>RUT Empresa</th>
+                                        <th class="text-left">CSG</th>
+                                        <th class="text-left">Usurio</th>
+                                        <th class="text-left">Pass</th>
                                         <th>CELULAR</th>
                                         <th>EMAIL</th>
-                                        <th>RUT Empresa</th>
+                                        <th>ULTIMA MODIFICACIÓN</th>
+                                        
                                         <th>Estado</th>
                                     </thead>
                                     <tbody>
@@ -52,10 +58,25 @@
                                             
                                             <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
                                                 <td class="text-center">
-                                                    {{$n}}
-                                                @php
-                                                    $n+=1;
-                                                @endphp
+                                                    <p class="text-base font-medium leading-none text-gray-700 mr-2">
+
+                                                        @php
+                                                            $m=1;
+                                                        @endphp
+                                                        {{-- ID --}}
+                                                        @foreach ($user as $item)
+                                                            @if ($m==1)
+                                                                {{$item}}<br>
+                                                            @endif
+                                                           
+                                                            @php
+                                                                $m+=1;
+                                                            @endphp
+                                                        @endforeach
+                                                       
+                                                        
+                                                    </p>
+                                                
                                                 </td>
                                                 <td class="">
                                                     <div class="flex items-center pl-5">
@@ -80,23 +101,10 @@
                                                     
                                                     </div>
                                                 </td>
-                                                
                                                 <td class="pl-5">
-                                                    <div class="flex items-center">
-                                                    
-                                                        <p class="text-sm leading-none text-gray-600 ml-2">992192597</p>
-                                                    </div>
-                                                </td>
-                                                <td class="pl-5">
-                                                    <div class="flex items-center">
-                                                    
-                                                        <p class="text-sm leading-none text-gray-600 ml-2">manete@gmail.com</p>
-                                                    </div>
-                                                </td>
-                                                <td class="pl-5">
-                                                    <div class="flex items-center">
+                                                    <div class="whitespace-nowrap flex items-center">
                                                         
-                                                        <p class="text-sm leading-none text-gray-600 ml-2">
+                                                        <p class="whitespace-nowrap text-sm leading-none text-gray-600 ml-2">
                                                             @php
                                                             $m=1;
                                                         @endphp
@@ -113,6 +121,105 @@
                                                         </p>
                                                     </div>
                                                 </td>
+                                                <td class="pl-5">
+                                                    <p class="text-base font-medium leading-none text-gray-700 mr-2">
+    
+                                                       @php
+                                                           $m=1;
+                                                       @endphp
+                                                       {{-- CSG --}}
+                                                       @foreach ($user as $item)
+                                                           @if ($m==35)
+                                                               {{$item}}<br>
+                                                           @endif
+                                                          
+                                                           @php
+                                                               $m+=1;
+                                                           @endphp
+                                                       @endforeach
+                                                      
+                                                       
+                                                   </p>
+                                                   
+                                               </td>
+                                                <td class="pl-5 whitespace-nowrap">
+                                                    <p class="whitespace-nowrap  text-base flex font-medium leading-none text-gray-700 mr-2">
+
+                                                      
+
+                                                    @php
+                                                        $m=1;
+                                                    @endphp
+                                                    {{-- Usuario --}}
+                                                    @foreach ($user as $item)
+                                                        @if ($m==3)
+                                                           
+                                                            <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center font-bold inline w-full" > {{'gre-'.$item}}</h1>
+                                                   
+                                                        @endif
+                                                       
+                                                        @php
+                                                            $m+=1;
+                                                        @endphp
+                                                    @endforeach
+                                                   
+                                                       
+                                                   </p>
+                                                   
+                                               </td>
+                                               
+                                               <td class="pl-5">
+                                                
+
+                                                 
+                                                <button  class="mx-4 focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
+     
+                                                    <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >gre-1234</h1>
+                                                </button>
+                                                
+                                                        
+                                                   
+                                               
+                                                   
+                                               
+                                           </td>
+                                               
+                                                <td class="pl-5">
+                                                    <div class="flex items-center">
+                                                    
+                                                        <p class="text-sm leading-none text-gray-600 ml-2">-</p>
+                                                    </div>
+                                                </td>
+                                                <td class="pl-5">
+                                                    <div class="flex items-center">
+                                                    
+                                                        <p class="text-sm leading-none text-gray-600 ml-2">-</p>
+                                                    </div>
+                                                </td>
+                                                <td class="pl-5">
+                                                    <div class="flex items-center">
+                                                    
+                                                        <p class="text-base font-medium leading-none text-gray-700 mr-2">
+
+                                                            @php
+                                                                $m=1;
+                                                            @endphp
+                                                            {{-- NOMBRE --}}
+                                                            @foreach ($user as $item)
+                                                                @if ($m==34)
+                                                                    {{$item}}<br>
+                                                                @endif
+                                                               
+                                                                @php
+                                                                    $m+=1;
+                                                                @endphp
+                                                            @endforeach
+                                                           
+                                                            
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                               
                                                 <td class="pl-5">
                                                     <button class="py-3 px-3 text-sm focus:outline-none leading-none text-red-700 bg-red-100 rounded">Usuario ya creado</button>
                                                 </td>
@@ -144,6 +251,7 @@
                                       
                                     </tbody>
                                 </table>
+                            
                             </div>
                         </div>
                     </div>
