@@ -20,7 +20,7 @@ class HomeController extends Controller
 
     public function productor_refresh()
     {  
-        $users= Http::get('http://api.appgreenex.cl:8080/productors');
+        $users= Http::get('http://api.appgreenex.cl/productors');
         
         $users = $users->json();
 
