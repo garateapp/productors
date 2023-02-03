@@ -42,8 +42,8 @@
                                                                 $m=1;
                                                             @endphp
                                                             @foreach ($user as $item)
-                                                               {{$m}}) {{$item}}<br>
-                                                            
+                                                       {{-- comment        {{$m}}) {{$item}}<br>
+                                                             --}}
                                                                 @php
                                                                     $m+=1;
                                                                 @endphp
