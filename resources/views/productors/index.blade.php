@@ -27,7 +27,7 @@
                                     <thead>
                                         <th>ID</th>
                                         <th>Empresa</th>
-                                        <th>GRUPO</th>
+                                       
                                         <th>CELULAR</th>
                                         <th>EMAIL</th>
                                         <th>RUT Empresa</th>
@@ -80,12 +80,7 @@
                                                     
                                                     </div>
                                                 </td>
-                                                <td class="pl-10">
-                                                    <div class="flex items-center">
-                                                    
-                                                        <p class="text-sm leading-none text-gray-600 ml-2">992192597</p>
-                                                    </div>
-                                                </td>
+                                                
                                                 <td class="pl-5">
                                                     <div class="flex items-center">
                                                     
