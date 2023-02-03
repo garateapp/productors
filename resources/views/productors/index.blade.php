@@ -30,7 +30,7 @@
                                         <th>ID</th>
                                         <th>Empresa</th>
                                         <th>RUT Empresa</th>
-                                        <th class="text-left">CSG</th>
+                                        <th class="text-center">CSG</th>
                                         <th class="text-left">Usurio</th>
                                         <th class="text-left">Pass</th>
                                         <th>CELULAR</th>
