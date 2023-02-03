@@ -31,8 +31,8 @@
                                         <th>Empresa</th>
                                         <th>RUT Empresa</th>
                                         <th class="text-center">CSG</th>
-                                        <th class="text-left">Usurio</th>
-                                        <th class="text-left">Pass</th>
+                                        <th class="text-center">Usurio</th>
+                                        <th class="text-center">Pass</th>
                                         <th>CELULAR</th>
                                         <th>EMAIL</th>
                                         <th>ULTIMA MODIFICACIÓN</th>
