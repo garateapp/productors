@@ -19,6 +19,8 @@
                                 </a>
                             </div>
 
+                            <h1>4) NOMBRE <br> 29) RUT</h1>
+
                             <div class="mt-7 overflow-x-auto">
                          
                                 <table class="w-full whitespace-nowrap">
@@ -37,15 +39,15 @@
                                         @endphp
                                                         @foreach ($users as $user)
                                                             @php
-                                                                    $m=1;
-                                                                @endphp
-                                                                @foreach ($user as $item)
-                                                               {{-- comment {{$m}}) {{$item}}<br>
-                                                             --}}
+                                                                $m=1;
+                                                            @endphp
+                                                            @foreach ($user as $item)
+                                                               {{$m}}) {{$item}}<br>
+                                                            
                                                                 @php
                                                                     $m+=1;
                                                                 @endphp
-                                                            @endforeach
+                                                        @endforeach
                                                            
                                             
                                             <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
