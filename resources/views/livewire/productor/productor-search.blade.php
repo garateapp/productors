@@ -281,10 +281,26 @@ t --}}
                                     
                                         
                                     
-                                       </td>
+                                            </td>
                                     
-                                        <td class="pl-5">
-                                           +56963176726                             
+                                        <td class="pl-5 text-center">
+
+                                            @if ($user->telefonos)
+                                                @foreach ($user->telefonos as $telefono)
+                                                <div class="flex text-center justify-center">
+                                                    <b>{{$telefono->numero}}  </b>
+                                                    <p wire:click="phone_destroy({{$telefono}})" class="text-red-500 cursor-pointer ml-1"> (X)</p>
+
+                                                </div>
+                                                    <br>
+                                                    
+                                                @endforeach
+                                                
+                                            @endif
+
+                                           
+                                           
+                                           
                                         </td>
                                         <td class="pl-5">
                                             <div class="flex items-center">

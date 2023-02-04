@@ -56,5 +56,11 @@ class ProductorSearch extends Component
         $this->user = User::find($this->cellid);
 
     }
+    public function phone_destroy(Telefono $telefono){
+        $telefono->delete();
+        $this->user=User::find($this->cellid);
+    }
+
+    
 
 }
