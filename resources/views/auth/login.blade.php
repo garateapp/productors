@@ -18,8 +18,8 @@
             @csrf
 
             <div class="my-6  px-6">
-                <x-jet-label for="email" value="{{ __('Email o Usuario') }}" class="text-white text-center text-lg my-2" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="text" name="email" :value="old('email')" required autofocus />
+                <x-jet-label for="user" value="{{ __('Email o Usuario') }}" class="text-white text-center text-lg my-2" />
+                <x-jet-input id="user" class="block mt-1 w-full" type="text" name="user" :value="old('user')" required autofocus />
             </div>
 
             <div class="mt-4 my-6  px-6">
