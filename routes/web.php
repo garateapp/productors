@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TelefonoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,8 @@ Route::middleware([
         return view('dashboard');})->name('dashboard');
 });
 
-Route::get('productores', [HomeController::class,'index'])->name('productors.index');
+Route::get('productores', [HomeController::class,'index'])->middleware('auth')->name('productors.index');
 
-Route::get('productores/refresh', [HomeController::class,'productor_refresh'])->name('productor.refresh');
+Route::get('productores/refresh', [HomeController::class,'productor_refresh'])->middleware('auth')->name('productor.refresh');
+
+Route::resource('telefono', TelefonoController::class)->names('telefonos');
