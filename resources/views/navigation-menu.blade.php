@@ -18,6 +18,9 @@
                     <x-jet-nav-link href="{{ route('productors.index') }}" :active="request()->routeIs('productors.index')">
                         {{ __('Productores') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('production.index') }}" :active="request()->routeIs('production.index')">
+                        {{ __('Producción') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 
@@ -148,6 +151,9 @@
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('productors.index') }}" :active="request()->routeIs('productors.index')">
                 {{ __('Productores') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('production.index') }}" :active="request()->routeIs('production.index')">
+                {{ __('Producción') }}
             </x-jet-responsive-nav-link>
         </div>
 

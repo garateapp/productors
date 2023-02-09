@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TelefonoController;
 use App\Models\User;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,11 @@ Route::middleware([
 
 Route::get('productores', [HomeController::class,'index'])->middleware('auth')->name('productors.index');
 
+Route::get('production', [HomeController::class,'production'])->middleware('auth')->name('production.index');
+
+Route::get('production/refresh', [HomeController::class,'production_refresh'])->middleware('auth')->name('production.refresh');
+
 Route::get('productores/refresh', [HomeController::class,'productor_refresh'])->middleware('auth')->name('productor.refresh');
+
 
 Route::resource('telefono', TelefonoController::class)->names('telefonos');
