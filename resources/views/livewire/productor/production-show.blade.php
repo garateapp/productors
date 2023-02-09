@@ -291,7 +291,7 @@
       <div class="">
          {{$recepcions->links()}}
      </div>
-      @endif 
+     
      
 
      <a href="{{route('production.index')}}">
@@ -299,7 +299,7 @@
             <p class="text-sm font-medium leading-none text-white">Ver Todos</p>
          </button>
       </a>
-
+ @endif 
     </div>
  </div>
 
