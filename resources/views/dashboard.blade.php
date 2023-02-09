@@ -1,5 +1,8 @@
 <x-app-layout>
-   <div class="mt-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+
+   <h1 class="block sm:hidden text-2xl mt-2 mx-4 font-bold">Hola {{Auth()->user()->name}}</h1>
+
+   <div class="mt-0 sm:mt-2 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
       <div></div>
       <a href="{{ route('productors.index') }}">
          <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 mx-4">
