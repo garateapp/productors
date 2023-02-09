@@ -1,6 +1,6 @@
 <x-app-layout>
 
-   <h1 class="block sm:hidden text-2xl mt-2 mx-4 font-bold">Hola {{Auth()->user()->name}}</h1>
+   <h1 class="block sm:hidden text-2xl mt-4 mx-4 font-bold">Hola {{Auth()->user()->name}}</h1>
 
    <div class="mt-0 sm:mt-2 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
       <div></div>
