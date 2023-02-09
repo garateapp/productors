@@ -287,9 +287,12 @@
     </div>
  @endif
     <div class="flex justify-between mt-4 mx-12">
+      @if ($recepcions->count())
       <div class="">
          {{$recepcions->links()}}
      </div>
+      @endif 
+     
 
      <a href="{{route('production.index')}}">
          <button  class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
