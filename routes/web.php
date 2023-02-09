@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TelefonoController;
+use App\Models\Recepcion;
 use App\Models\User;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -27,9 +28,7 @@ Route::middleware([
 ])->group(function () {
     
 
-    Route::get('/dashboard', function () {
-        $users=User::all();
-        return view('dashboard',compact('users'));})->name('dashboard');
+Route::get('/dashboard',[HomeController::class,'dashboard'])->name('dashboard');
 });
 
 Route::get('productores', [HomeController::class,'index'])->middleware('auth')->name('productors.index');

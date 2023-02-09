@@ -18,6 +18,9 @@
          </div>
       </a>
    </div>
+
+             
+   @livewire('productor.production-show')
    
 
     <div class="pb-12 pt-4">

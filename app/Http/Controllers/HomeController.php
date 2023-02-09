@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 
 
+
 class HomeController extends Controller
 {
     public function index()
@@ -17,6 +18,10 @@ class HomeController extends Controller
         $users=User::all();
 
         return view('productors.index',compact('users'));
+    }
+    public function dashboard () {
+        $users=User::all();
+        return view('dashboard',compact('users'));
     }
 
     public function production()

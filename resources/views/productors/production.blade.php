@@ -18,6 +18,7 @@
            <table class="min-w-full divide-y divide-gray-200 mb-20 pb-20">
   
               <thead class="bg-gray-50 rounded-full">
+                  <th>ID</th>
                  <th>Agricola</th>
                  <th>Especie</th>
                  <th>Variedad</th>
@@ -49,6 +50,18 @@
                                    --}}  
                       {{-- comment  --}}    
                        <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
+                        <td class="text-center">
+                           <p class="text-base font-medium leading-none text-gray-700 mr-2">
+
+                           
+
+                                
+                                    {{$recepcion->id}}
+                              
+                                 
+                           </p>
+                        
+                        </td>
                           <td class="text-center">
                              <p class="text-base font-medium leading-none text-gray-700 mr-2">
   
