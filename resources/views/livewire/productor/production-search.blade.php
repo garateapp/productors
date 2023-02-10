@@ -77,8 +77,8 @@
                             </p>
                             
                             </td>
-                            <td class="text-center whitespace-nowrap">
-                                <p class="whitespace-nowrap text-base font-medium leading-none text-gray-700 mr-2">
+                            <td class="text-center">
+                                <p class="text-base font-medium leading-none text-gray-700 mr-2">
     
                                 
     
