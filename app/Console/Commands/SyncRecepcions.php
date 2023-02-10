@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\Recepcion;
+use App\Models\Sync;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
@@ -31,6 +33,8 @@ class SyncRecepcions extends Command
     {   
         $productions=Http::get('http://api.appgreenex.cl/production');
         $productions = $productions->json();
+        $ri=Recepcion::all();
+        $totali=$ri->count();
 
         foreach ($productions as $production){
             $id_g_recepcion=Null;//1
@@ -131,7 +135,17 @@ class SyncRecepcions extends Command
                 $m+=1;
                 
             } 
+ 
         }
+
+        $rf=Recepcion::all();
+        $total=$rf->count()-$ri->count();
+        Sync::create([
+            'tipo'=>'PROGRAMADA',
+            'entidad'=>'RECEPCIONES',
+            'fecha'=>Carbon::now(),
+            'cantidad'=>$total
+        ]);
 
         return Command::SUCCESS;
     }
