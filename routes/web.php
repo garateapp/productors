@@ -33,7 +33,7 @@ Route::get('/dashboard',[HomeController::class,'dashboard'])->name('dashboard');
 
 Route::get('productores', [HomeController::class,'index'])->middleware('auth')->name('productors.index');
 
-Route::get('production', [HomeController::class,'production'])->middleware('auth')->name('production.index');
+Route::get('recepcion', [HomeController::class,'production'])->middleware('auth')->name('production.index');
 
 Route::get('production/refresh', [HomeController::class,'production_refresh'])->middleware('auth')->name('production.refresh');
 

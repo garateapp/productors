@@ -10,7 +10,7 @@ use Livewire\WithPagination;
 class ProductorSearch extends Component
 {   use WithPagination;
 
-    public $search, $cellid, $phone, $user;
+    public $search, $cellid, $phone, $user, $ctd=25;
 
     public function render()
     {   $users=User::where('rut','LIKE','%'. $this->search .'%')
@@ -19,10 +19,10 @@ class ProductorSearch extends Component
                 ->orwhere('csg','LIKE','%'. $this->search .'%')
                 ->orwhere('idprod','LIKE','%'. $this->search .'%')
                 ->orwhere('user','LIKE','%'. $this->search .'%')
-                ->latest('id')->
-                get();
+                ->latest('id')->paginate($this->ctd);
+        $allusers=User::all();
 
-        return view('livewire.productor.productor-search',compact('users'));
+        return view('livewire.productor.productor-search',compact('users','allusers'));
     }
 
 

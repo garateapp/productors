@@ -10,12 +10,21 @@
       
             <div class="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
                 <div class="sm:flex items-center justify-between">
-                    <p class="text-sm font-medium leading-none text-gray-800">Productores: {{$users->count()}}</p>
+                    <p class="text-sm font-medium leading-none text-gray-800">Productores: {{$allusers->count()}}</p>
+                   <div class="flex"> 
                     <a href="{{route('productor.refresh')}}">
                         <button  class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
                             <p class="text-sm font-medium leading-none text-white">FX IMPORT</p>
                         </button>
                     </a>
+                        <select wire:model="ctd" class="max-w-xl  mx-2 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-6 rounded focus:outline-none focus:bg-white focus:border-gray-500">
+                            <option value="25" class="text-left px-10">25 </option>
+                            <option value="50" class="text-left px-10">50 </option>
+                            <option value="100" class="text-left px-10">100 </option>
+                            <option value="500" class="text-left px-10">500 </option>
+                            
+                        </select>
+                    </div>
                 </div>
 
             
@@ -369,6 +378,12 @@
                             </tbody>
                         </table>
                     </x-table-responsive>
+                    @if ($users->count())
+                        <div class="">
+                            {{$users->links()}}
+                        </div>
+                   
+                    @endif 
             </div>
 
         </div>

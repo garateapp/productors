@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('fecha_g_recepcion');
             $table->integer('id_emisor');
             $table->string('r_emisor');
-            $table->string('folio');
             $table->string('n_emisor');
             $table->string('Codigo_Sag_emisor');
             $table->string('tipo_documento_recepcion');
