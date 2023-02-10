@@ -123,7 +123,8 @@
     
                             
                                 @if ($recepcion->fecha_g_recepcion)
-                                        {{$recepcion->fecha_g_recepcion}}
+                                        {{date('d M Y g:i a', strtotime($recepcion->fecha_g_recepcion))}}
+                                        
                                         
                                     @endif
                                 
