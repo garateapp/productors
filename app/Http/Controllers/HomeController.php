@@ -26,15 +26,15 @@ class HomeController extends Controller
 
     public function production()
     {  
-        $recepcions=Http::get('http://localhost:8080/production');
-        $recepcions = $recepcions->json();
+        $recepcions=Recepcion::all();
+        //$recepcions = $recepcions->json();
 
         return view('productors.production',compact('recepcions'));
     }
 
     public function production_refresh()
     {        
-        $productions=Http::get('http://localhost:8080/production');
+        $productions=Http::get('http://api.appgreenex.cl/production');
         $productions = $productions->json();
 
         foreach ($productions as $production){
