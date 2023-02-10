@@ -77,8 +77,8 @@
                             </p>
                             
                             </td>
-                            <td class="text-center">
-                                <p class="text-base font-medium leading-none text-gray-700 mr-2">
+                            <td class="text-center whitespace-nowrap">
+                                <p class="whitespace-nowrap text-base font-medium leading-none text-gray-700 mr-2">
     
                                 
     
@@ -118,8 +118,8 @@
                                     </p>
                                 </div>
                             </td>
-                            <td class="pl-5 text-center">
-                                <p class="text-base text-center font-medium leading-none text-gray-700 mr-2">
+                            <td class="pl-5 text-center whitespace-nowrap">
+                                <p class="whitespace-nowrap text-base text-center font-medium leading-none text-gray-700 mr-2">
     
                             
                                 @if ($recepcion->fecha_g_recepcion)
