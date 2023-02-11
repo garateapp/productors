@@ -18,12 +18,14 @@ class HomeController extends Controller
     public function index()
     {        
         $users=User::all();
+       
 
         return view('productors.index',compact('users'));
     }
     public function dashboard () {
         $users=User::all();
-        return view('dashboard',compact('users'));
+        $recepcions=Recepcion::all();
+        return view('dashboard',compact('users','recepcions'));
     }
 
     public function production()
@@ -40,7 +42,7 @@ class HomeController extends Controller
         $productions = $productions->json();
         $ri=Recepcion::all();
         $totali=$ri->count();
-        
+
         foreach ($productions as $production){
             $id_g_recepcion=Null;//1
             $tipo_g_recepcion=Null;//2
