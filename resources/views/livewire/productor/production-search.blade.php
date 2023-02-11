@@ -18,7 +18,7 @@
                    </div>
                 </div>
 
-                <h1 class="text-center text-sm my-4"><b>Ultima Sincronizacion:</b> {{date('d M Y g:i a', strtotime($sync->fecha))}} <b>Tipo:</b> {{$sync->tipo}} <b>Cantidad:</b> {{$sync->cantidad}}</h1>
+                <h1 class="text-center text-sm my-4 mx-6"><b>Ultima Sincronizacion:</b> {{date('d M Y g:i a', strtotime($sync->fecha))}} <b>Tipo:</b> {{$sync->tipo}} <b>Cantidad:</b> {{$sync->cantidad}}</h1>
 
             <div class="flex justify-center mb-2 items-center content-center"> 
                 <a href="{{route('production.refresh')}}">
