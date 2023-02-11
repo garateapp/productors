@@ -2,8 +2,8 @@
 
    
 
-   <div class="mt-0 sm:mt-2 w-full grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-x-4 gap-y-2">
-      <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 mx-4">
+   <div class="mt-4 sm:mt-2 w-full grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-x-4 gap-y-2 ">
+      <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-2 mx-4">
          <div class="flex items-center">
             <div class="flex-shrink-0">
                <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900"><h1 class="block text-2xl font-bold">Hola {{Auth()->user()->name}}</h1></span>
@@ -13,7 +13,7 @@
          </div>
       </div>
       <a href="{{ route('productors.index') }}">
-         <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 mx-4">
+         <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-2 mx-4">
             <div class="flex items-center">
                <div class="flex-shrink-0">
                   <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($users->count())}}</span>
@@ -30,7 +30,7 @@
       </a>
       
       <a href="{{ route('production.index') }}">
-         <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 mx-4">
+         <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-2 mx-4">
             <div class="flex items-center">
                <div class="flex-shrink-0">
                   <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($recepcions->count())}}</span>
