@@ -8,7 +8,7 @@
         <div class="sm:flex items-center justify-between my-2">
 
  
-                <div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 mx-4">
+                <div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 mx-12">
                    <div class="flex items-center justify-center">
                       <div class="flex-shrink-0 text-center">
                          <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($allrecepcions->count())}}</span>
