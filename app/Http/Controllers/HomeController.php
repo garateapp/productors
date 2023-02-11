@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Actions\Fortify\CreateNewUser;
 use App\Models\Recepcion;
+use App\Models\Sync;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
@@ -36,7 +38,9 @@ class HomeController extends Controller
     {        
         $productions=Http::get('http://api.appgreenex.cl/production');
         $productions = $productions->json();
-
+        $ri=Recepcion::all();
+        $totali=$ri->count();
+        
         foreach ($productions as $production){
             $id_g_recepcion=Null;//1
             $tipo_g_recepcion=Null;//2
@@ -137,6 +141,16 @@ class HomeController extends Controller
                 
             } 
         }
+
+        
+        $rf=Recepcion::all();
+        $total=$rf->count()-$ri->count();
+        Sync::create([
+            'tipo'=>'MANUAL',
+            'entidad'=>'RECEPCIONES',
+            'fecha'=>Carbon::now(),
+            'cantidad'=>$total
+        ]);
 
         return redirect()->route('production.index');
 
