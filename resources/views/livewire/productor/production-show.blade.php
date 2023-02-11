@@ -1,6 +1,6 @@
 <div>
 @if ($recepcions->count())
-   <div class="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
+   <div class="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10 ">
     <x-table-responsive>   
        <table class="min-w-full divide-y divide-gray-200 mb-20 pb-20">
 
@@ -80,12 +80,12 @@
                                  </p>
                            </div>
                         </td>
-                        <td class="pl-5 text-center">
-                           <p class="text-base text-center font-medium leading-none text-gray-700 mr-2">
+                        <td class="pl-5 text-center whitespace-nowrap">
+                           <p class="whitespace-nowrap text-base text-center font-medium leading-none text-gray-700 mr-2">
 
                         
-                           @if ($recepcion->fecha_g_recepcion)
-                                    {{$recepcion->fecha_g_recepcion}}
+                              @if ($recepcion->fecha_g_recepcion)
+                                    {{date('d M Y g:i a', strtotime($recepcion->fecha_g_recepcion))}}
                                     
                               @endif
                            
@@ -189,7 +189,7 @@
          <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-4 xl:p-4 my-4 mx-4">
             <div class="flex items-center">
                <img class="rounded-xl w-24 object-contain" src="{{asset('image/empty.png')}}" alt="">
-               <p class="text-center text-red-500 text-xl font-bold leading-none  mr-2">
+               <p class="text-center text-gray-900 mx-2 text-xl font-bold leading-none  mr-2">
 
                
 

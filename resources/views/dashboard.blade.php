@@ -24,7 +24,6 @@
 
              
    @livewire('productor.production-show')
-   
 
     <div class="pb-12 pt-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
