@@ -2,11 +2,11 @@
 
    
 
-   <div class="mt-2 sm:mt-2 w-full grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-x-4 gap-y-2 ">
-      <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-2 mx-4">
+   <div class="mt-2 sm:mt-4 mb-4 w-full grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-x-4 gap-y-2 items-center content-center">
+      <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
          <div class="flex items-center">
             <div class="flex-shrink-0">
-               <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900"><h1 class="block text-2xl font-bold">Hola {{Auth()->user()->name}}</h1></span>
+               <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900"><h1 class="block text-2xl font-bold">Hola<br> {{Auth()->user()->name}}</h1></span>
                <h3 class="text-base font-normal text-gray-500">Administrador</h3>
             </div>
             
