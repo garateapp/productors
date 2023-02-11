@@ -165,6 +165,9 @@ class HomeController extends Controller
         
         $users = $users->json();
 
+        $ri=User::all();
+        $totali=$ri->count();
+
        
         foreach ($users as $user){
             $id=null;
@@ -211,6 +214,15 @@ class HomeController extends Controller
                 
             } 
         }
+
+        $rf=User::all();
+        $total=$rf->count()-$ri->count();
+        Sync::create([
+            'tipo'=>'MANUAL',
+            'entidad'=>'PRODUCTORES',
+            'fecha'=>Carbon::now(),
+            'cantidad'=>$total
+        ]);
 
         return redirect()->route('productors.index');
 

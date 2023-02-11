@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Productor;
 
+use App\Models\Sync;
 use App\Models\Telefono;
 use App\Models\User;
 use Livewire\Component;
@@ -21,8 +22,11 @@ class ProductorSearch extends Component
                 ->orwhere('user','LIKE','%'. $this->search .'%')
                 ->latest('id')->paginate($this->ctd);
         $allusers=User::all();
+        $sync=Sync::where('entidad','PRODUCTORES')
+        ->orderby('id','DESC')
+        ->first();
 
-        return view('livewire.productor.productor-search',compact('users','allusers'));
+        return view('livewire.productor.productor-search',compact('users','allusers','sync'));
     }
 
 
