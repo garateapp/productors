@@ -2,7 +2,7 @@
 
    
 
-   <div class="mt-4 sm:mt-2 w-full grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-x-4 gap-y-2 ">
+   <div class="mt-4 sm:mt-4 w-full grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-x-4 gap-y-2 ">
       <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 mx-4">
          <div class="flex items-center">
             <div class="flex-shrink-0">
