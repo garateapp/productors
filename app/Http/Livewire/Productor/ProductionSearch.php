@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Productor;
 
 use App\Models\Recepcion;
+use App\Models\Sync;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -26,8 +27,11 @@ class ProductionSearch extends Component
         ->orwhere('n_estado','LIKE','%'. $this->search .'%')
         ->latest('id')->paginate($this->ctd);
         $allrecepcions=Recepcion::all();
+        $sync=Sync::where('entidad','RECEPCIONES')
+        ->orderby('id','DESC')
+        ->first();
         
-        return view('livewire.productor.production-search',compact('recepcions','allrecepcions'));
+        return view('livewire.productor.production-search',compact('recepcions','allrecepcions','sync'));
     }
     
     public function limpiar_page(){
