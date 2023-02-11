@@ -170,7 +170,7 @@
      
 
          <a href="{{route('production.index')}}">
-            <button  class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
+            <button  class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-500  inline-flex items-start justify-start px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
                <p class="text-sm font-medium leading-none text-white">Ver Todos</p>
             </button>
          </a>
