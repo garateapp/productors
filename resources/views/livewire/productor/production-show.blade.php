@@ -1,5 +1,5 @@
 <div>
-    
+@if ($recepcions->count())
    <div class="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
     <x-table-responsive>   
        <table class="min-w-full divide-y divide-gray-200 mb-20 pb-20">
@@ -19,7 +19,7 @@
              @php
                    $n=1;
              @endphp
-            @if ($recepcions->count())
+            
 
                @foreach ($recepcions as $recepcion)
                   {{-- comment        {{$n.') '.$recepcion}}<br>
@@ -152,95 +152,7 @@
 
                @endforeach
 
-            @else
-
-            <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
-               <td class="text-center">
-                  <p class="text-base font-medium leading-none text-gray-700 mr-2">
-
-                  
-
-                        
-                         N/A
-                     
-                        
-                  </p>
-               
-               </td>
-                  <td class="text-center">
-                     <p class="text-base font-medium leading-none text-gray-700 mr-2">
-
-                     
-                        N/A
-                           
-                     </p>
-                  
-                  </td>
-                  <td class="text-center">
-                     <div class="flex items-center pl-5">
-                           <p class="text-center text-base font-medium leading-none text-gray-700 mr-2">
-
-                            -
-                           
-                              
-                           </p>
-                     
-                     </div>
-                  </td>
-                  <td class="text-center">
-                     <div class="flex items-center text-center">
-                           
-                           <p class="text-sm text-center leading-none text-gray-600">
-                        
-                           </p>
-                     </div>
-                  </td>
-                  <td class="text-center">
-                     <p class="text-base text-center font-medium leading-none text-gray-700 mr-2">
-
-                  
-                    -   
-                     
-                     </p>
-                  
-                  </td>
-                     <td class="pl-5 text-center">
-                     <p class="whitespace-nowrap  text-base flex font-medium leading-none text-gray-700 mr-2">
-
-                        -
-                           
-                     </p>
-                     
-                  </td>
-                  
-                  <td class="pl-5">
-                  
-
-                    -
-                           
-                  
-               
-                  
-               
-                  </td>
-               
-                  <td class="pl-5">
-                     
-                  -
-            
-                  
-                                                                  
-                  </td>
-               
-                              {{-- commen
-                  <td class="pl-4">
-                     <button class="focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">Ver</button>
-                  </td> --}}
-                 
-               
-               </tr>
-                
-            @endif
+          
             
            
           
@@ -249,39 +161,50 @@
        </table>
     </x-table-responsive>
 
-    @if ($recepcions->count())
-
-   
-     
-      @else
-
-   <div>
-       <p class="text-center text-red-500 text-xl mt-6 font-bold leading-none  mr-2">
-
-       
-
-             
-                Usted No registra Producción esta Temporada
-          
-             
-       </p>
-    </div>
- @endif
     <div class="flex justify-between mt-4 mx-12">
       @if ($recepcions->count())
-      <div class="">
-         {{$recepcions->links()}}
-     </div>
+         <div class="">
+            {{$recepcions->links()}}
+         </div>
      
      
 
-     <a href="{{route('production.index')}}">
-         <button  class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
-            <p class="text-sm font-medium leading-none text-white">Ver Todos</p>
-         </button>
-      </a>
- @endif 
+         <a href="{{route('production.index')}}">
+            <button  class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
+               <p class="text-sm font-medium leading-none text-white">Ver Todos</p>
+            </button>
+         </a>
+      @endif 
     </div>
- </div>
+
+     
+   </div>
+        
+      
+
+   @else
+
+     
+     <div class="flex justify-center">
+         <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-4 xl:p-4 my-4 mx-4">
+            <div class="flex items-center">
+               <img class="rounded-xl w-24 object-contain" src="{{asset('image/empty.png')}}" alt="">
+               <p class="text-center text-red-500 text-xl font-bold leading-none  mr-2">
+
+               
+
+                     
+                        Usted No registra Producción esta Temporada
+                  
+                     
+               </p>
+            </div>
+         </div>
+      </div>
+   
+   @endif
+
+    
+ 
 
 </div>
