@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TelefonoController;
 use App\Models\Recepcion;
 use App\Models\User;
@@ -41,3 +42,5 @@ Route::get('productores/refresh', [HomeController::class,'productor_refresh'])->
 
 
 Route::resource('telefono', TelefonoController::class)->names('telefonos');
+
+Route::resource('role', RoleController::class)->names('admin.roles');

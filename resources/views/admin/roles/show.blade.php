@@ -6,8 +6,7 @@
 
                     
 
-                    @livewire('productor.productor-search')
-
+   
               
                
              

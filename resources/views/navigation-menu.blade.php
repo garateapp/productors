@@ -98,7 +98,10 @@
                         </x-slot>
 
                         <x-slot name="content">
-                           
+                            
+                            <x-jet-dropdown-link href="{{ route('admin.roles.index') }}">
+                                {{ __('Roles') }}
+                            </x-jet-dropdown-link>
 
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
