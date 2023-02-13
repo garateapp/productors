@@ -1,4 +1,10 @@
 <div>
+    @php
+    $cant=0;
+        foreach($recepcions as $recepcion){
+            $cant+=$recepcion->peso_neto;
+        }
+    @endphp
     <div class="pb-12">
         <div class="sm:px-6 w-full">
         <div class="px-6 py-4">
@@ -7,8 +13,8 @@
         
         <div class="sm:flex items-center justify-between my-2">
 
- 
-                <div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 mx-12">
+ <div class="flex w-full">
+                <div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 mr-2 ml-12">
                    <div class="flex items-center justify-center">
                       <div class="flex-shrink-0 text-center">
                          <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($allrecepcions->count())}}</span>
@@ -16,7 +22,17 @@
                       </div>
                      
                    </div>
-                </div>
+                </div><div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 ml-2 mr-12">
+                    <div class="flex items-center justify-center">
+                       <div class="flex-shrink-0 text-center">
+                          <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($cant)}}</span>
+                          <h3 class="text-base font-normal text-gray-500">Kilos</h3>
+                       </div>
+                      
+                    </div>
+                 </div>
+</div>
+
                 
                     <h1 class="text-center text-sm my-4 mx-6"><b>Ultima Sincronizacion:</b> {{date('d M Y g:i a', strtotime($sync->fecha))}} <b>Tipo:</b> {{$sync->tipo}} <b>Cantidad:</b> {{$sync->cantidad}}</h1>
     
