@@ -13,7 +13,7 @@
         
         <div class="sm:flex items-center justify-between my-2">
 
- <div class="flex w-full">
+            <div class="flex">
                 <div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 mr-2 ml-12">
                    <div class="flex items-center justify-center">
                       <div class="flex-shrink-0 text-center">
@@ -31,7 +31,7 @@
                       
                     </div>
                  </div>
-</div>
+        </div>
 
                 
                     <h1 class="text-center text-sm my-4 mx-6"><b>Ultima Sincronizacion:</b> {{date('d M Y g:i a', strtotime($sync->fecha))}} <b>Tipo:</b> {{$sync->tipo}} <b>Cantidad:</b> {{$sync->cantidad}}</h1>
