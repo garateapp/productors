@@ -22,7 +22,7 @@
                       </div>
                      
                    </div>
-                </div><div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 ml-2 mr-12">
+                </div><div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 ml-2">
                     <div class="flex items-center justify-center">
                        <div class="flex-shrink-0 text-center">
                           <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($cant)}}</span>
