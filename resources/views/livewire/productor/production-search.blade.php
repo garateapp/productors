@@ -1,9 +1,14 @@
 <div>
     @php
     $cant=0;
+    $cant2=0;
         foreach($allrecepcions as $recepcion){
             $cant+=$recepcion->peso_neto;
         }
+        foreach($allsubrecepcions as $recepcion){
+            $cant2+=$recepcion->peso_neto;
+        }
+
     @endphp
     <div class="pb-12">
         <div class="sm:px-6 w-full">
@@ -23,14 +28,25 @@
                      
                    </div>
                 </div><div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 ml-2">
+                    @if ($search)
+                        <div class="flex items-center justify-center content-center">
+                                    <span class="text-xl sm:text-xl leading-none font-bold text-gray-900 content-center">{{number_format($cant2)}}/</span>
+                                    <h3 class="text-base font-normal items-center content-center text-gray-500">{{$search}}</h3>
+                               
+                        
+                        </div>
+                    @endif
                     <div class="flex items-center justify-center">
-                       <div class="flex-shrink-0 text-center">
-                          <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($cant)}}</span>
-                          <h3 class="text-base font-normal text-gray-500">Kilos</h3>
-                       </div>
-                      
-                    </div>
+                        <div class="flex-shrink-0 text-center">
+                           <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($cant)}}</span>
+                           <h3 class="text-base font-normal text-gray-500">Kilos</h3>
+                        </div>
+                       
+                     </div>
                  </div>
+                
+                  
+                
         </div>
 
                 
