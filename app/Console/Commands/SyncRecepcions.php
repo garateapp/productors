@@ -105,13 +105,10 @@ class SyncRecepcions extends Command
                 }
                if($m==17){
                     $n_estado=$item;
-
-                    $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion);
-                    if($cont->count()>0){
-                    //nothing
-                    }else{
-                        Recepcion::create([
-                           'id_g_recepcion' => $id_g_recepcion,//1
+                    $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->first();
+                    if($cont){
+                        Recepcion::updated([
+                            'id_g_recepcion' => $id_g_recepcion,//1
                             'tipo_g_recepcion' => $tipo_g_recepcion,//2
                             'numero_g_recepcion' => $numero_g_recepcion,//3
                             'fecha_g_recepcion' => $fecha_g_recepcion,//4
@@ -127,9 +124,31 @@ class SyncRecepcions extends Command
                             'peso_neto' => $peso_neto,
                             'nota_calidad' => $nota_calidad,
                             'n_estado' => $n_estado,
-                    
-                        
                         ]);
+                        }
+                    else{
+                        if($n_estado=='Finalizado'){
+                            Recepcion::create([
+                            'id_g_recepcion' => $id_g_recepcion,//1
+                                'tipo_g_recepcion' => $tipo_g_recepcion,//2
+                                'numero_g_recepcion' => $numero_g_recepcion,//3
+                                'fecha_g_recepcion' => $fecha_g_recepcion,//4
+                                'id_emisor' => $id_emisor,//5
+                                'r_emisor' => $r_emisor,//6
+                                'n_emisor' => $n_emisor,//8
+                                'Codigo_Sag_emisor' => $Codigo_Sag_emisor,//9
+                                'tipo_documento_recepcion' => $tipo_documento_recepcion,//10
+                                'numero_documento_recepcion' => $numero_documento_recepcion,//11
+                                'n_especie' => $n_especie,//12
+                                'n_variedad' => $n_variedad,
+                                'cantidad' => $cantidad,
+                                'peso_neto' => $peso_neto,
+                                'nota_calidad' => $nota_calidad,
+                                'n_estado' => $n_estado,
+                        
+                            
+                            ]);
+                        }
                     }
                 }
                 $m+=1;
