@@ -127,6 +127,9 @@
               </tbody>
            </table>
         </x-table-responsive>
+
+        @livewire('admin.users-show')
+
     </div>
                
              

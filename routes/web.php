@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TelefonoController;
+use App\Http\Controllers\UserController;
 use App\Models\Recepcion;
 use App\Models\User;
 use Illuminate\Support\Facades\Http;
@@ -40,7 +41,8 @@ Route::get('production/refresh', [HomeController::class,'production_refresh'])->
 
 Route::get('productores/refresh', [HomeController::class,'productor_refresh'])->middleware('auth')->name('productor.refresh');
 
-
 Route::resource('telefono', TelefonoController::class)->names('telefonos');
 
 Route::resource('role', RoleController::class)->names('admin.roles');
+
+Route::resource('users', UserController::class)->only(['index','edit','update','destroy'])->names('users');
