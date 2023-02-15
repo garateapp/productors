@@ -113,7 +113,7 @@ class HomeController extends Controller
                if($m==17){
                     $n_estado=$item;
 
-                    if($n_estado=='Finalizado'){
+                   
                         $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion);
 
                         if($cont->count()>0){
@@ -157,7 +157,7 @@ class HomeController extends Controller
                             
                             ]);
                         }
-                    }
+                    
                 }
                 $m+=1;
                 
