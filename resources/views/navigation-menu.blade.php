@@ -162,6 +162,13 @@
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
+            <div class="mt-3 space-y-1">
+                <!-- Account Management -->
+                <x-jet-responsive-nav-link href="{{ route('admin.roles.index') }}" :active="request()->routeIs('profile.show')">
+                    {{ __('Roles') }}
+                </x-jet-responsive-nav-link>
+
+            </div>
             <div class="flex items-center px-4">
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                     <div class="shrink-0 mr-3">
