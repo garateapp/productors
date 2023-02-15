@@ -70,6 +70,7 @@
                     <th class="text-center">Cantidad</th>
                     <th>Kilos</th>
                     <th class="text-center">Nota</th>
+                    <th class="text-center">Estado</th>
                     
                 </thead>
                 <tbody>
@@ -225,10 +226,14 @@
                                                                             
                             </td>
                             
-                                        {{-- commen
+                                        
                             <td class="pl-4">
-                                <button class="focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">Ver</button>
-                            </td> --}}
+                                @if ($recepcion->n_estado)
+                                    <button class="focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">
+                                        {{$recepcion->n_estado}}
+                                    </button>
+                                @endif
+                            </td> 
                             <td>
                                 <div class="relative px-5 pt-2">
                                     <button class="focus:ring-2 rounded-md focus:outline-none" onclick="dropdownFunction(this)" role="button" aria-label="option">
