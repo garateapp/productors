@@ -47,8 +47,10 @@
                             <td class="text-center">
                                 <p class="text-base font-medium leading-none text-gray-700 mr-2">
     
-                                
-                                                           Administrador, Productor
+                                                    @foreach ($user->roles as $role)
+                                                    {{$role->name}}
+                                                    @endforeach
+                                                          
                                 
                                     
                                 </p>
@@ -58,9 +60,9 @@
 
                             <td width='120px'> 
                             <a href="{{route('users.edit', $user)}}">
-                                <button  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-blue-600 hover:bg-blue-500 focus:outline-none rounded">
-                                    <p class="text-sm font-medium leading-none text-white">EDIT</p>
-                                </button>
+                                <button  class="ml-auto items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
+                                    <p class="text-sm font-medium leading-none text-white">Edit</p>
+                                 </button>
                             </a>
                             </td>
                             <td width='120px'>

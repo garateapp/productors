@@ -19,10 +19,37 @@
         @endif
 
    
-        <div class="px-6 py-4">
-           
-            
-        </div>
+
+   
+            <div class="grid grid-cols-1 md:grid-cols-2">
+                <div>
+                        <div class="form-group flex justify-center">
+                            <div class="block">
+                                <h1 class="h5">Nombre:</h1>
+                                {{$user->name}}
+                            </div>
+                        </div>
+                </div>
+                <div>
+                <strong class="flex justify-center">Roles</strong>
+                    {!! Form::model($user, ['route'=>['users.update',$user],'method' => 'put']) !!}
+        
+                    @foreach ($roles as $role)
+                        <div class="mb-4">
+                            <label>
+                                {!! Form::checkbox('roles[]', $role->id, null, ['class' => 'mr-1']) !!}
+                                {{$role->name}}
+                            </label>
+                        </div>
+                    @endforeach
+                    
+                    <button  class="my-4 ml-auto items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
+                        <p class="text-sm font-medium leading-none text-white">Asignar Rol</p>
+                     </button>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+
 
     </div>
 
