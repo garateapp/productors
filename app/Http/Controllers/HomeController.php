@@ -116,7 +116,7 @@ class HomeController extends Controller
                     
                         $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion);
 
-                        if($cont->count()>0){
+                        if($cont->count()){
                             Recepcion::updated([
                                 'id_g_recepcion' => $id_g_recepcion,//1
                                 'tipo_g_recepcion' => $tipo_g_recepcion,//2
