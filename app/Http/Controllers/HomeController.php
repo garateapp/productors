@@ -114,7 +114,7 @@ class HomeController extends Controller
                     $n_estado=$item;
 
                     
-                        $cont=Recepcion::find('id_g_recepcion',$id_g_recepcion);
+                        $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->first();
 
                         if($cont){
                             Recepcion::updated([
