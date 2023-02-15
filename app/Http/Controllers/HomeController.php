@@ -136,7 +136,7 @@ class HomeController extends Controller
                                 'n_estado' => $n_estado,
                             ]);
                         }else{
-                            if($n_estado=='Finalizado'){
+                            
                                 Recepcion::create([
                                 'id_g_recepcion' => $id_g_recepcion,//1
                                     'tipo_g_recepcion' => $tipo_g_recepcion,//2
@@ -157,7 +157,7 @@ class HomeController extends Controller
                             
                                 
                                 ]);
-                            }
+                            
                         }
                     }
                 }
