@@ -47,9 +47,13 @@
                             <td class="text-center">
                                 <p class="text-base font-medium leading-none text-gray-700 mr-2">
     
-                                                    @foreach ($user->roles as $role)
+                                                    @forelse ($user->roles as $role)
                                                     {{$role->name}}
-                                                    @endforeach
+
+                                                    @empty
+                                                        -    
+
+                                                    @endforelse
                                                           
                                 
                                     
