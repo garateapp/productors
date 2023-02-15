@@ -115,8 +115,7 @@ class HomeController extends Controller
 
                     
                         $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->first();
-                    if($cont){
-                        if($cont->n_estado!='Finalizado'){
+                        if($cont->count()){
                             Recepcion::updated([
                                 'id_g_recepcion' => $id_g_recepcion,//1
                                 'tipo_g_recepcion' => $tipo_g_recepcion,//2
@@ -135,8 +134,9 @@ class HomeController extends Controller
                                 'nota_calidad' => $nota_calidad,
                                 'n_estado' => $n_estado,
                             ]);
-                        }else{
-                            
+                            }
+                        else{
+                            if($n_estado=='Finalizado'){
                                 Recepcion::create([
                                 'id_g_recepcion' => $id_g_recepcion,//1
                                     'tipo_g_recepcion' => $tipo_g_recepcion,//2
@@ -157,9 +157,9 @@ class HomeController extends Controller
                             
                                 
                                 ]);
-                            
+                            }
                         }
-                    }
+                    
                 }
                 $m+=1;
                 
