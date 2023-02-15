@@ -10,8 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
-
-
+use Spatie\Permission\Models\Role;
 
 class HomeController extends Controller
 {
@@ -218,9 +217,10 @@ class HomeController extends Controller
                 }
                
                 if($m==41){
-                    $cont=User::where('rut',$rut);
-                    if($cont->count()>0){
-                    //nothing
+                    $cont=User::where('rut',$rut)->first();
+                    if($cont){
+                        $roleid=Role::where('name','Productor')->first();
+                        $cont->roles()->sync([$roleid->id]);
                     }else{
                         User::create([
                             'name' => $nombre,
@@ -230,6 +230,8 @@ class HomeController extends Controller
                             'rut' => $rut,
                             'password' => Hash::make('gre1234'),
                         ]);
+                        $roleid=Role::where('name','Productor')->first();
+                        $cont->roles()->sync([$roleid->id]);
                     }
                 }
                 $m+=1;
