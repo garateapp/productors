@@ -45,11 +45,12 @@
                             
                             </td>
                             <td class="text-center">
-                                <p class="text-base font-medium leading-none text-gray-700 mr-2">
+                                <p class="text-base font-medium leading-none text-white mr-2">
     
                                                     @forelse ($user->roles as $role)
-                                                    {{$role->name}}
-
+                                                        <button class="ml-auto items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
+                                                            {{$role->name}}
+                                                        </button>
                                                     @empty
                                                         -    
 
