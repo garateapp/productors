@@ -3,7 +3,7 @@
             <div class="form-group flex justify-center">
                 <div class="block">
                     {!! Form::label('name', 'Nombre:',['class'=>'text-center']) !!}<br>
-                    {!! Form::text('name', null , ['class' => 'form-control'.($errors->has('name') ? ' is-invalid' : ''),'placeholder'=>'Escriba un nombre']) !!}
+                    {!! Form::text('name', null , ['class' => 'form-control mb-4'.($errors->has('name') ? ' is-invalid' : ''),'placeholder'=>'Escriba un nombre']) !!}
                     @error('name')
                         <span class="invalid-feedback">
                             <strong>{{$message}}</strong>
