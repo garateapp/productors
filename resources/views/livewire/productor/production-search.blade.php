@@ -1,7 +1,7 @@
 <div>
     @php
     $cant=0;
-        foreach($recepcions as $recepcion){
+        foreach($allrecepcions as $recepcion){
             $cant+=$recepcion->peso_neto;
         }
     @endphp
