@@ -32,7 +32,7 @@
     
               <thead class="bg-gray-50 rounded-full">
                   <th>ID</th>
-                 <th>Roles</th>
+                 <th>Rol</th>
               
                
                 
