@@ -35,6 +35,13 @@ class HomeController extends Controller
         return view('productors.production',compact('recepcions'));
     }
 
+    public function productionpropia()
+    {  
+        //$recepcions = $recepcions->json();
+
+        return view('productors.productionpropia');
+    }
+
     public function production_refresh()
     {        
         $productions=Http::get('http://api.appgreenex.cl/production');
@@ -115,7 +122,7 @@ class HomeController extends Controller
                     
                         $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->first();
                         if($cont){
-                            Recepcion::updated([
+                            $cont->forceFill([
                                 'id_g_recepcion' => $id_g_recepcion,//1
                                 'tipo_g_recepcion' => $tipo_g_recepcion,//2
                                 'numero_g_recepcion' => $numero_g_recepcion,//3
@@ -132,7 +139,7 @@ class HomeController extends Controller
                                 'peso_neto' => $peso_neto,
                                 'nota_calidad' => $nota_calidad,
                                 'n_estado' => $n_estado,
-                            ]);
+                            ])->save();
                             }
                         else{
                             if($n_estado=='Finalizado'){
@@ -218,20 +225,26 @@ class HomeController extends Controller
                
                 if($m==41){
                     $cont=User::where('rut',$rut)->first();
+                    $search=['.','-'];
                     if($cont){
+                         $cont->forceFill([
+                            'idprod' => $id,
+                            'csg' => $csg,
+                            'user' => 'gre-'.str_replace($search, '', $us),
+                        ])->save();
                         $roleid=Role::where('name','Productor')->first();
                         $cont->roles()->sync([$roleid->id]);
                     }else{
-                        User::create([
+                        $user=User::create([
                             'name' => $nombre,
                             'idprod' => $id,
                             'csg' => $csg,
-                            'user' => 'gre-'.$us,
+                            'user' => 'gre-'.str_replace($search, '', $us),
                             'rut' => $rut,
                             'password' => Hash::make('gre1234'),
                         ]);
                         $roleid=Role::where('name','Productor')->first();
-                        $cont->roles()->sync([$roleid->id]);
+                        $user->roles()->sync([$roleid->id]);
                     }
                 }
                 $m+=1;

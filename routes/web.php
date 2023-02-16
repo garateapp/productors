@@ -37,6 +37,8 @@ Route::get('productores', [HomeController::class,'index'])->middleware('auth')->
 
 Route::get('recepcion', [HomeController::class,'production'])->middleware('auth')->name('production.index');
 
+Route::get('recepciones', [HomeController::class,'productionpropia'])->middleware('auth')->name('productionpropia.index');
+
 Route::get('production/refresh', [HomeController::class,'production_refresh'])->middleware('auth')->name('production.refresh');
 
 Route::get('productores/refresh', [HomeController::class,'productor_refresh'])->middleware('auth')->name('productor.refresh');

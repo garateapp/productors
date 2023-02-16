@@ -3,7 +3,7 @@
        
     </x-slot>
 
-    @livewire('productor.production-search')               
+    @livewire('productor.production-propia')               
      
 
 </x-app-layout>
