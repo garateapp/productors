@@ -318,7 +318,7 @@
                                 <div class="flex items-center pl-5">
                                    
                                 <button class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
-                                    AGREGAR CC
+                                    AGREGAR SS
                                 </button>
                                 
                                 </div>
@@ -326,14 +326,25 @@
                             <td class="pl-5">
                                 <div class="whitespace-nowrap flex items-center text-center">
                                     
+                                    <button class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
+                                        VER INFORME PREVIO
+                                    </button>
+                                    
                                  
                                 </div>
                             </td>
                             <td class="pl-5 text-center whitespace-nowrap">
+
+                                <button class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
+                                    VALIDAR INFORME
+                                </button>
                               
                             
                             </td>
                             <td class="pl-5 whitespace-nowrap">
+                                <button class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
+                                   CARGAR FIMPRO
+                                </button>
                               
                                 
                             </td>
