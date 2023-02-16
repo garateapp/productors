@@ -112,15 +112,25 @@
                                     @endforeach
                                     --}}  
                         {{-- comment  --}}    
-                        <tr  style="background-color: #74b72f;">
+                        <tr class="text-white" style="background-color: #74b72f;">
                             <td class="my-4 text-white">
-                                @if ($recepcion->id_g_recepcion)
-                                    {{$recepcion->id_g_recepcion}}
-                                @endif
+                                Agregar:
                             </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td class="flex justify-center items-center content-center pb-1">
+                                <div class="text-center cursor-pointer focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-xs leading-none text-gray-600 py-1 px-2 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none mb-1 mt-1">
+                                    Observación
+                                </div>
+                               
+                            </td>
+                            <td class="justify-center items-center content-center pb-1">
+                                <div class="text-center cursor-pointer focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-xs leading-none text-gray-600 py-1 px-2 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none mb-1 mt-1 mx-6">
+                                    Obs Int
+                                </div>
+
+                            </td>
+                            <td>
+
+                            </td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -139,7 +149,7 @@
 
                                     
                                 @if ($recepcion->id_g_recepcion)
-                                    {{$recepcion->id_g_recepcion}}
+                                   ID: {{$recepcion->id_g_recepcion}}
                                 @endif 
                                 
                                     
@@ -292,13 +302,13 @@
                             </td>
                         
                         </tr>
-                        <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
+                        <tr tabindex="0" class="focus:outline-none h-20 border border-gray-100 rounded">
                             <td class="text-center">
                             
                             </td>
                             <td class="text-center">
                             
-                                <button class="focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
+                                <button class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
                                     AGREGAR CC
                                 </button>
                             
@@ -307,7 +317,7 @@
                             <td class="">
                                 <div class="flex items-center pl-5">
                                    
-                                <button class="focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
+                                <button class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
                                     AGREGAR CC
                                 </button>
                                 
