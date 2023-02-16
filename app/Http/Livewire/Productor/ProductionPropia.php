@@ -12,37 +12,13 @@ class ProductionPropia extends Component
     public $search, $ctd=25;
 
     public function render()
-    {   $recepcions=Recepcion::where('id_emisor',auth()->user()->idprod)
-        ->orwhere('id_g_recepcion','LIKE','%'. $this->search .'%')
-        ->where('tipo_g_recepcion','LIKE','%'. $this->search .'%')
-        ->where('numero_g_recepcion','LIKE','%'. $this->search .'%')
-        ->where('fecha_g_recepcion','LIKE','%'. $this->search .'%')
-        ->where('id_emisor','LIKE','%'. $this->search .'%')
-        ->where('r_emisor','LIKE','%'. $this->search .'%')
-        ->where('n_emisor','LIKE','%'. $this->search .'%')
-        ->where('Codigo_Sag_emisor','LIKE','%'. $this->search .'%')
-        ->where('tipo_documento_recepcion','LIKE','%'. $this->search .'%')
-        ->where('numero_documento_recepcion','LIKE','%'. $this->search .'%')
-        ->where('n_especie','LIKE','%'. $this->search .'%')
-        ->where('n_variedad','LIKE','%'. $this->search .'%')
-        ->where('n_estado','LIKE','%'. $this->search .'%')
+    {   $recepcions=Recepcion::where('r_emisor',auth()->user()->rut)
         ->latest('id')->paginate($this->ctd);
         $allsubrecepcions=Recepcion::where('r_emisor',auth()->user()->rut)
-        ->where('id_g_recepcion','LIKE','%'. $this->search .'%')
-        ->where('tipo_g_recepcion','LIKE','%'. $this->search .'%')
-        ->where('numero_g_recepcion','LIKE','%'. $this->search .'%')
-        ->where('fecha_g_recepcion','LIKE','%'. $this->search .'%')
-        ->where('id_emisor','LIKE','%'. $this->search .'%')
-        ->where('r_emisor','LIKE','%'. $this->search .'%')
-        ->where('n_emisor','LIKE','%'. $this->search .'%')
-        ->where('Codigo_Sag_emisor','LIKE','%'. $this->search .'%')
-        ->where('tipo_documento_recepcion','LIKE','%'. $this->search .'%')
-        ->where('numero_documento_recepcion','LIKE','%'. $this->search .'%')
         ->where('n_especie','LIKE','%'. $this->search .'%')
-        ->where('n_variedad','LIKE','%'. $this->search .'%')
-        ->where('n_estado','LIKE','%'. $this->search .'%')
         ->latest('id')->get();
-        $allrecepcions=Recepcion::where('r_emisor',auth()->user()->rut);
+        $allrecepcions=Recepcion::where('r_emisor',auth()->user()->rut)
+        ->latest('id')->get();
         $sync=Sync::where('entidad','RECEPCIONES')
         ->orderby('id','DESC')
         ->first();

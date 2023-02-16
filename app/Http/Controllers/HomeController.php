@@ -24,7 +24,9 @@ class HomeController extends Controller
     public function dashboard () {
         $users=User::all();
         $recepcions=Recepcion::all();
-        return view('dashboard',compact('users','recepcions'));
+        $prop_recep=Recepcion::where('r_emisor',auth()->user()->rut)
+        ->latest('id')->get();
+        return view('dashboard',compact('users','recepcions','prop_recep'));
     }
 
     public function production()

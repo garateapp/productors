@@ -49,17 +49,19 @@
                 
         </div>
 
-                
+                {{-- comment
                     <h1 class="text-center text-sm my-4 mx-6"><b>Ultima Sincronizacion:</b> {{date('d M Y g:i a', strtotime($sync->fecha))}} <b>Tipo:</b> {{$sync->tipo}} <b>Cantidad:</b> {{$sync->cantidad}}</h1>
-    
+     --}}
                 
                 
             <div class="flex justify-center mb-2 items-center content-center"> 
+                {{--                 
                 <a href="{{route('production.refresh')}}">
                     <button  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
                         <p class="text-sm font-medium leading-none text-white">FX IMPORT</p>
                     </button>
-                </a>
+                </a>comment --}}
+
                 <select wire:model="ctd" class="max-w-xl  mx-2 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-6 rounded focus:outline-none focus:bg-white focus:border-gray-500">
                     <option value="25" class="text-left px-10">25 </option>
                     <option value="50" class="text-left px-10">50 </option>
