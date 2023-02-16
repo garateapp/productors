@@ -228,9 +228,11 @@ class HomeController extends Controller
                     $search=['.','-'];
                     if($cont){
                          $cont->forceFill([
+                            'name' => $nombre,
                             'idprod' => $id,
                             'csg' => $csg,
                             'user' => 'gre-'.str_replace($search, '', $us),
+                            'rut' => $rut
                         ])->save();
                         $roleid=Role::where('name','Productor')->first();
                         $cont->roles()->sync([$roleid->id]);
