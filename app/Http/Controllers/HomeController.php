@@ -44,6 +44,13 @@ class HomeController extends Controller
         return view('productors.productionpropia');
     }
 
+    public function productioncc()
+    {  
+        //$recepcions = $recepcions->json();
+
+        return view('productors.productioncc');
+    }
+
     public function production_refresh()
     {        
         $productions=Http::get('http://api.appgreenex.cl/production');

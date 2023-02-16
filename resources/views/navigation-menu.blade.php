@@ -20,10 +20,14 @@
                             {{ __('Productores') }}
                         </x-jet-nav-link>
                     @endcan
-                    
                     @can('Ver produccion_total')
                         <x-jet-nav-link href="{{ route('production.index') }}" :active="request()->routeIs('production.index')">
                             {{ __('Recepciones') }}
+                        </x-jet-nav-link>
+                    @endcan
+                    @can('Ver produccion_cc')
+                        <x-jet-nav-link href="{{ route('productioncc.index') }}" :active="request()->routeIs('productioncc.index')">
+                            {{ __('Recepciones CC') }}
                         </x-jet-nav-link>
                     @endcan
                     @can('Ver produccion_propia')
