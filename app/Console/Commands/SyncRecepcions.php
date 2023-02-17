@@ -7,6 +7,7 @@ use App\Models\Sync;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
+use Livewire\Livewire;
 
 class SyncRecepcions extends Command
 {
@@ -165,6 +166,8 @@ class SyncRecepcions extends Command
             'fecha'=>Carbon::now(),
             'cantidad'=>$total
         ]);
+
+        Livewire::emit('render');
 
         return Command::SUCCESS;
     }
