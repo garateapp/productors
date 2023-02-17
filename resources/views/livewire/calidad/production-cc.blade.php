@@ -77,12 +77,12 @@
         @if ($recep)
            
 
-        <h1>  
+        <h1 class="text-center">  
             @if ($recep->numero_g_recepcion)
-            <p>Lote: {{$recep->numero_g_recepcion}}</p>
+            <p class="text-center">Lote: {{$recep->numero_g_recepcion}}</p>
             @endif
         </h1>
-        <h1>  
+        <h1 class="text-center">  
             @if ($recep->fecha_g_recepcion)
                 {{date('d M Y g:i a', strtotime($recep->fecha_g_recepcion))}}
             @endif
