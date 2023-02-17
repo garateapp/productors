@@ -11,6 +11,8 @@ class ProductionSearch extends Component
 {   use WithPagination;
     public $search, $ctd=25;
 
+    protected $listeners=['sync:recepcions'=>'render'];
+
     public function render()
     {   $recepcions=Recepcion::where('id_g_recepcion','LIKE','%'. $this->search .'%')
         ->orwhere('tipo_g_recepcion','LIKE','%'. $this->search .'%')
