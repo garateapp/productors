@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 
 class ProductionCc extends Component
 {   use WithPagination;
-    public $search, $ctd=25;
+    public $search, $ctd=25, $recep, $recepcion_id;
 
     public function render()
     {   $recepcions=Recepcion::where('id_g_recepcion','LIKE','%'. $this->search .'%')
@@ -46,6 +46,16 @@ class ProductionCc extends Component
         ->first();
         
         return view('livewire.calidad.production-cc',compact('recepcions','allrecepcions','allsubrecepcions','sync'));
+    }
+
+    public function set_recepcion($id){
+        $this->recepcion_id=$id;
+        $this->recep=Recepcion::find($this->recepcion_id);
+    }
+
+    public function recep_clean(){
+        $this->recepcion_id=NULL;
+        $this->recep=NULL;
     }
     
     public function limpiar_page(){
