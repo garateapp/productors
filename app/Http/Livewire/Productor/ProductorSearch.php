@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Productor;
 use App\Models\Sync;
 use App\Models\Telefono;
 use App\Models\User;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -57,11 +58,17 @@ class ProductorSearch extends Component
         ]);
         
         $this->reset(['phone']);
+        $this->user->ForceFill([
+            'updated_at'=> Carbon::now()
+        ])->save();
         $this->user = User::find($this->cellid);
 
     }
     public function phone_destroy(Telefono $telefono){
         $telefono->delete();
+        $this->user->ForceFill([
+            'updated_at'=> Carbon::now()
+        ])->save();
         $this->user=User::find($this->cellid);
     }
 

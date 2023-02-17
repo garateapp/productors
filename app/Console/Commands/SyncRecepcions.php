@@ -167,7 +167,6 @@ class SyncRecepcions extends Command
             'cantidad'=>$total
         ]);
 
-        Livewire::emit('render');
 
         return Command::SUCCESS;
     }

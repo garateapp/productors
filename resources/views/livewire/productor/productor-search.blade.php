@@ -165,7 +165,7 @@
                                     
                                        </td>
                                     
-                                        <td class="pl-5">
+                                        <td class="pl-5 flex justify-center">
                                             @if ($user->id==$cellid)
                                                 <button wire:click="cellid_clean" class="mx-4 focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded">
 
@@ -177,15 +177,28 @@
                                                     </h1>
                                                 </button>
                                             @else
-                                                <button wire:click="set_iduser({{$user->id}})" class="mx-4 focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
+                                                @if ($user->telefonos->count())
+                                                    <button wire:click="set_iduser({{$user->id}})" class="mx-4 focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded">
 
-                                                    <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                                                            <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
-                                                        </svg>
-                                                        
-                                                    </h1>
-                                                </button>
+                                                        <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                                <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
+                                                            </svg>
+                                                            
+                                                        </h1>
+                                                    </button>
+                                                @else
+                                                    <button wire:click="set_iduser({{$user->id}})" class="mx-4 focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
+
+                                                        <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                                <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
+                                                            </svg>
+                                                            
+                                                        </h1>
+                                                    </button>
+                                                @endif
+
                                             @endif
                                                                                         
                                         </td>
@@ -200,25 +213,14 @@
                                             </div>
                                         </td>
                                         <td class="pl-5">
-                                            <div class="flex items-center">
+                                            <div class="flex items-center whitespace-nowrap">
                                             
-                                                <p class="text-base font-medium leading-none text-gray-700 mr-2">
-
-                                                    @php
-                                                        $m=1;
-                                                    @endphp
-                                                    {{-- NOMBRE --}}
-                                                    @foreach ($user as $item)
-                                                        @if ($m==34)
-                                                            {{$item}}<br>
-                                                        @endif
-                                                    
-                                                        @php
-                                                            $m+=1;
-                                                        @endphp
-                                                    @endforeach
-                                                
-                                                    
+                                                <p class="whitespace-nowrap text-base font-medium leading-none text-gray-700 mr-2">
+                                                    @if ($user->updated_at!=$user->created_at)
+                                                        {{date('d M Y g:i a', strtotime($user->updated_at))}}
+                                                        
+                                                        
+                                                    @endif
                                                 </p>
                                             </div>
                                         </td>
@@ -288,16 +290,7 @@
                                             
                                         </p>
                                         
-                                        </td>
-                                            <td class="pl-5 whitespace-nowrap">
-                                                <p class="whitespace-nowrap  text-base flex font-medium leading-none text-gray-700 mr-2">
-
-                                                
-
-                                                
-                                            </p>
-                                            
-                                        </td>
+                                     
                                         
                                         <td class="pl-5">
                                         
@@ -306,13 +299,13 @@
                                     
                                         
                                     
-                                            </td>
+                                        </td>
                                     
-                                        <td class="pl-5 text-center">
+                                        <td class="pl-5 text-center items-center content-center">
 
                                             @if ($user->telefonos)
                                                 @foreach ($user->telefonos as $telefono)
-                                                <div class="flex text-center justify-center">
+                                                <div class="flex text-center justify-center items-center content-center">
                                                     <b>{{$telefono->numero}}  </b>
                                                     <p wire:click="phone_destroy({{$telefono}})" class="text-red-500 cursor-pointer ml-1"> (X)</p>
 
@@ -355,24 +348,20 @@
                                             
                                                 <p class="text-base font-medium leading-none text-gray-700 mr-2">
 
-                                                    @php
-                                                        $m=1;
-                                                    @endphp
-                                                    {{-- NOMBRE --}}
-                                                    @foreach ($user as $item)
-                                                        @if ($m==34)
-                                                            {{$item}}<br>
-                                                        @endif
-                                                    
-                                                        @php
-                                                            $m+=1;
-                                                        @endphp
-                                                    @endforeach
-                                                
                                                     
                                                 </p>
                                             </div>
                                         </td>
+                                    </td>
+                                    <td class="pl-5 whitespace-nowrap">
+                                        <p class="whitespace-nowrap  text-base flex font-medium leading-none text-gray-700 mr-2">
+
+                                            
+
+                                            
+                                        </p>
+                                        
+                                    </td>
                                     
                                         <td class="pl-5">
                                        
