@@ -89,13 +89,15 @@
         </h1>
 
             <br>
-            <button wire:click="recep_clean" class="mx-4 focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded">
+            <div class="flex justify-center">
+                <button wire:click="recep_clean" class="mx-4 focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded">
 
-                <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
-                   Clean
-                    
-                </h1>
-            </button>
+                    <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
+                    Clean
+                        
+                    </h1>
+                </button>
+            </div>
 
         @else
 
@@ -109,12 +111,11 @@
                             <th>Especie</th>
                             <th>Variedad</th>
                             <th class="text-center">Fecha</th>
-                            <th class="text-center">Lote</th>
                             <th class="text-center">Guia</th>
                             <th class="text-center">Cantidad</th>
                             <th>Kilos</th>
                             <th class="text-center">Nota</th>
-                            <th class="text-center">Estado</th>
+
                             
                         </thead>
                         <tbody>
@@ -157,8 +158,6 @@
                                     <td>
 
                                     </td>
-                                    <td></td>
-                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -236,19 +235,8 @@
                                         </p>
                                     
                                     </td>
-                                    <td class="pl-5 whitespace-nowrap">
-                                        <p class="whitespace-nowrap  text-base flex font-medium leading-none  mr-2">
-
-                                    
-
-                                                @if ($recepcion->numero_g_recepcion)
-                                                {{$recepcion->numero_g_recepcion}}
-                                                @endif
-                                                
-                                        </p>
-                                        
-                                    </td>
-                                    <td class="pl-5 whitespace-nowrap">
+                                   
+                                    <td class="pl-5 whitespace-nowrap ">
                                         <p class="whitespace-nowrap  text-base flex font-medium leading-none  mr-2">
 
                                     
@@ -300,13 +288,7 @@
                                     </td>
                                     
                                                 
-                                    <td class="pl-4">
-                                        @if ($recepcion->n_estado)
-                                            <button class="focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">
-                                                {{$recepcion->n_estado}}
-                                            </button>
-                                        @endif
-                                    </td> 
+                                 
                                     <td>
                                         <div class="relative px-5 pt-2">
                                             <button class="focus:ring-2 rounded-md focus:outline-none" onclick="dropdownFunction(this)" role="button" aria-label="option">
@@ -374,26 +356,13 @@
                                     
                                         
                                     </td>
+                                  
                                     <td class="pl-5 whitespace-nowrap">
-                                    
-                                        
-                                    </td>
-                                        <td class="pl-5 whitespace-nowrap">
                                         
                                         
                                     </td>
                                     
-                                    <td class="pl-5">
-                                    
-            
-                                    
-                                    
-                                            
-                                    
-                                
-                                    
-                                
-                                    </td>
+                                  
                                 
                                     <td class="pl-5 text-center">
                                         
