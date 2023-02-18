@@ -19,15 +19,17 @@
         <div class="sm:flex items-center justify-between my-2">
 
             <div class="flex">
-                <div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 mr-2 ml-12">
-                   <div class="flex items-center justify-center">
-                      <div class="flex-shrink-0 text-center">
-                         <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($allrecepcions->count())}}</span>
-                         <h3 class="text-base font-normal text-gray-500">Recepciones</h3>
-                      </div>
-                     
-                   </div>
-                </div>
+                @if ($recep)
+                    <div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 mr-2 ml-12">
+                    <div class="flex items-center justify-center">
+                        <div class="flex-shrink-0 text-center">
+                            <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900"> {{$recep->numero_g_recepcion}}</span>
+                            <h3 class="text-base font-normal text-gray-500">Lote</h3>
+                        </div>
+                        
+                    </div>
+                    </div>
+                @endif
                 {{-- comment
                 <div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 ml-2">
                     @if ($search)
@@ -51,42 +53,43 @@
                 
         </div>
 
+                @if (IS_NULL($recep))
+                    
                 
                     <h1 class="text-center text-sm my-4 mx-6"><b>Ultima Sincronizacion:</b> {{date('d M Y g:i a', strtotime($sync->fecha))}} <b>Tipo:</b> {{$sync->tipo}} <b>Cantidad:</b> {{$sync->cantidad}}</h1>
     
-                
-                
-            <div class="flex justify-center mb-2 items-center content-center"> 
-                <a href="{{route('production.refresh')}}">
-                    <button  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
-                        <p class="text-sm font-medium leading-none text-white">FX IMPORT</p>
-                    </button>
-                </a>
-                <select wire:model="ctd" class="max-w-xl  mx-2 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-6 rounded focus:outline-none focus:bg-white focus:border-gray-500">
-                    <option value="25" class="text-left px-10">25 </option>
-                    <option value="50" class="text-left px-10">50 </option>
-                    <option value="100" class="text-left px-10">100 </option>
-                    <option value="500" class="text-left px-10">500 </option>
-                    
-                </select>
-            </div>
+                        
+                        
+                    <div class="flex justify-center mb-2 items-center content-center"> 
+                        <a href="{{route('production.refresh')}}">
+                            <button  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
+                                <p class="text-sm font-medium leading-none text-white">FX IMPORT</p>
+                            </button>
+                        </a>
+                        <select wire:model="ctd" class="max-w-xl  mx-2 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-6 rounded focus:outline-none focus:bg-white focus:border-gray-500">
+                            <option value="25" class="text-left px-10">25 </option>
+                            <option value="50" class="text-left px-10">50 </option>
+                            <option value="100" class="text-left px-10">100 </option>
+                            <option value="500" class="text-left px-10">500 </option>
+                            
+                        </select>
+                    </div>
+                @else
+
+                <h1 class="text-center">  
+                    @if ($recep->fecha_g_recepcion)
+                        {{date('d M Y g:i a', strtotime($recep->fecha_g_recepcion))}}
+                    @endif
+                </h1>
+
+                @endif
         </div>
 
      
                         
         @if ($recep)
            
-
-        <h1 class="text-center">  
-            @if ($recep->numero_g_recepcion)
-            <p class="text-center">Lote: {{$recep->numero_g_recepcion}}</p>
-            @endif
-        </h1>
-        <h1 class="text-center">  
-            @if ($recep->fecha_g_recepcion)
-                {{date('d M Y g:i a', strtotime($recep->fecha_g_recepcion))}}
-            @endif
-        </h1>
+       
 
             <br>
             <div class="flex justify-center">
