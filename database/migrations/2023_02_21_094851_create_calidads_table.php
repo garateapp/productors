@@ -56,8 +56,25 @@ return new class extends Migration
             $table->integer('d_granizo')->nullable();
             $table->integer('piel_lagardo')->nullable();
             $table->integer('daño_pajaro')->nullable();
-            
-            
+
+            $table->integer('trips')->nullable();
+            $table->integer('escama')->nullable();
+            $table->integer('polilla')->nullable();
+            $table->integer('d_suzukii')->nullable();
+            $table->integer('tijereta')->nullable();
+
+            $table->integer('guata_blanca')->nullable();
+            $table->integer('falto_color')->nullable();
+            $table->integer('hijuelo')->nullable();
+            $table->integer('fruto_doble')->nullable();
+            $table->integer('fruto_deforme')->nullable();
+            $table->integer('russet')->nullable();
+            $table->integer('herida_cicatrizada')->nullable();
+            $table->integer('mancha_roce')->nullable();
+            $table->integer('sutura')->nullable();
+            $table->integer('sin_pedicelo')->nullable();
+            $table->integer('ramaleo')->nullable();
+            $table->integer('pre_calibre')->nullable();
 
             $table->timestamps();
         });
