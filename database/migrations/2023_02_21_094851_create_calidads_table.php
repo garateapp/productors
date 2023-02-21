@@ -37,15 +37,6 @@ return new class extends Migration
             $table->string('h_esponjas');
             $table->string('llenado_tottes');
 
-            $table->string('materia_vegetal');
-            $table->string('piedras');
-            $table->string('barro');
-            $table->string('pedicelo_largo');
-            $table->string('racimo');
-            $table->string('esponjas');
-            $table->string('h_esponjas');
-            $table->string('llenado_tottes');
-
             $table->integer('h_abierta')->nullable();
             $table->integer('desgarro_peduncular')->nullable();
             $table->integer('desgarro_peduncular')->nullable();
