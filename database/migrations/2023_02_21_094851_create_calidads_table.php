@@ -39,7 +39,6 @@ return new class extends Migration
 
             $table->integer('h_abierta')->nullable();
             $table->integer('desgarro_peduncular')->nullable();
-            $table->integer('desgarro_peduncular')->nullable();
             $table->integer('p_agua')->nullable();
             $table->integer('p_longitudinal')->nullable();
             $table->integer('p_apical')->nullable();
