@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Fortify\CreateNewUser;
+use App\Models\Especie;
 use App\Models\Recepcion;
 use App\Models\Sync;
 use App\Models\User;
+use App\Models\Variedad;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -112,6 +114,7 @@ class HomeController extends Controller
                 }
                 if($m==12){
                     $n_especie=$item;
+
                 }
                 if($m==13){
                     $n_variedad=$item;
@@ -128,6 +131,40 @@ class HomeController extends Controller
                if($m==17){
                     $n_estado=$item;
 
+                        $espec=Especie::where('name',$n_especie)->first();
+                        if($espec){
+                            $espec->forceFill([
+                                'name'=> $n_especie
+                            ]);
+                            $varie=Variedad::where('name',$n_variedad)->first();
+                            if($varie){
+                                $varie->forceFill([
+                                    'name'=> $n_variedad,
+                                    'especie_id='=> $espec->id
+                                ]);
+                            }else{
+                                Variedad::create([
+                                    'name'=> $n_variedad,
+                                    'especie_id'=>$espec->id
+                                ]);
+                            }
+                        }else{
+                            $especie=Especie::create([
+                            'name'=> $n_especie
+                            ]);
+                            $varie=Variedad::where('name',$n_variedad)->first();
+                            if($varie){
+                                $varie->forceFill([
+                                    'name'=> $n_variedad,
+                                    'especie_id='=> $especie->id
+                                ]);
+                            }else{
+                                Variedad::create([
+                                    'name'=> $n_variedad,
+                                    'especie_id'=>$especie->id
+                                ]);
+                            }
+                        }
                     
                         $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->first();
                         if($cont){

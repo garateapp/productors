@@ -2,8 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Especie;
 use App\Models\Recepcion;
 use App\Models\Sync;
+use App\Models\Variedad;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
@@ -106,6 +108,41 @@ class SyncRecepcions extends Command
                 }
                if($m==17){
                     $n_estado=$item;
+                    $espec=Especie::where('name',$n_especie)->first();
+                    if($espec){
+                        $espec->forceFill([
+                            'name'=> $n_especie
+                        ]);
+                        $varie=Variedad::where('name',$n_variedad)->first();
+                        if($varie){
+                            $varie->forceFill([
+                                'name'=> $n_variedad,
+                                'especie_id='=> $espec->id
+                            ]);
+                        }else{
+                            Variedad::create([
+                                'name'=> $n_variedad,
+                                'especie_id'=>$espec->id
+                            ]);
+                        }
+                    }else{
+                        $especie=Especie::create([
+                        'name'=> $n_especie
+                        ]);
+                        $varie=Variedad::where('name',$n_variedad)->first();
+                        if($varie){
+                            $varie->forceFill([
+                                'name'=> $n_variedad,
+                                'especie_id='=> $especie->id
+                            ]);
+                        }else{
+                            Variedad::create([
+                                'name'=> $n_variedad,
+                                'especie_id'=>$especie->id
+                            ]);
+                        }
+                    }
+                
                     $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->first();
                     if($cont){
                         Recepcion::updated([
