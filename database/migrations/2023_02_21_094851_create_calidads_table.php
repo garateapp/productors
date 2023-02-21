@@ -21,21 +21,21 @@ return new class extends Migration
                 ->onDelete('cascade');
 
             $table->integer('nro_muestra');
-            $table->integer('t_muestra');
+            $table->integer('t_muestra')->nullable();
 
-            $table->string('t_camion');
-            $table->string('encarpado');
-            $table->string('seteo_termo');
-            $table->string('condicion');
+            $table->string('t_camion')->nullable();
+            $table->string('encarpado')->nullable();
+            $table->string('seteo_termo')->nullable();
+            $table->string('condicion')->nullable();
 
-            $table->string('materia_vegetal');
-            $table->string('piedras');
-            $table->string('barro');
-            $table->string('pedicelo_largo');
-            $table->string('racimo');
-            $table->string('esponjas');
-            $table->string('h_esponjas');
-            $table->string('llenado_tottes');
+            $table->string('materia_vegetal')->nullable();
+            $table->string('piedras')->nullable();
+            $table->string('barro')->nullable();
+            $table->string('pedicelo_largo')->nullable();
+            $table->string('racimo')->nullable();
+            $table->string('esponjas')->nullable();
+            $table->string('h_esponjas')->nullable();
+            $table->string('llenado_tottes')->nullable();
 
             $table->integer('h_abierta')->nullable();
             $table->integer('desgarro_peduncular')->nullable();

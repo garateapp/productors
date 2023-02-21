@@ -10,4 +10,8 @@ class Recepcion extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function calidad(){
+        return $this->hasOne('App\Models\Calidad');
+    }
 }

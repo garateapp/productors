@@ -41,8 +41,35 @@
                     <div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 mr-2 ml-12">
                         <div class="flex items-center justify-center">
                             <div class="flex-shrink-0 text-left">
-                                <h3 class="text-base font-normal text-gray-500">Nro Muestra</h3>
-                                
+                                <div class="flex justify-between">
+                                    <label class="w-32 mx-2"><strong>Nro Muestra:</strong></label>
+                                    @if ($calidad)
+                                        {{$calidad->nro_muestra}}
+                                    @else
+                                        <label class=""><strong>{{$nro_muestra}}</strong></label>
+                                    @endif
+                                </div>
+                                @if (IS_NULL($calidad))
+                                    <div class="flex gap-x-2 mb-2">
+                                        <button  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
+                                            <p class="text-sm font-medium leading-none text-white">50</p>
+                                        </button>
+                                        <button  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
+                                            <p class="text-sm font-medium leading-none text-white">80</p>
+                                        </button>
+                                        <button  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
+                                            <p class="text-sm font-medium leading-none text-white">100</p>
+                                        </button>
+                                    </div>
+                                    <input wire:model="nro_muestra" type="number" class="form-input w-full border-2 border-gray-300 bg-white h-10 rounded-lg text-sm focus:outline-none">
+                                    <div class="flex justify-center mt-2">
+                                        <button wire:click="calidad_store" class="mx-4 focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded">
+                                            <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
+                                            Ingresar
+                                            </h1>
+                                        </button>
+                                    </div>
+                                @endif
                             </div>
                             
                         </div>
@@ -111,10 +138,10 @@
 
             <br>
             <div class="flex justify-center">
-                <button wire:click="recep_clean" class="mx-4 focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded">
+                <button wire:click="recep_clean" class="mx-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-red-500 hover:bg-red-500 focus:outline-none rounded">
 
                     <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
-                    Clean
+                    Cancelar
                         
                     </h1>
                 </button>
@@ -323,7 +350,13 @@
                                     <td class="text-center">
                                     
                                         <button wire:click="set_recepcion({{$recepcion->id}})" class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
-                                            AGREGAR CC
+                                            @if ($recepcion->calidad)
+                                                FINALIZAR CC
+                                            @else
+                                                AGREGAR CC
+                                            @endif
+                                                
+
                                         </button>
                                     
                                     </td>
