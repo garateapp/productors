@@ -57,6 +57,8 @@ class ProductionSearch extends Component
     
     public function set_especie($id){
         $this->especieid=$id;
+        $this->variedadid=NULL;
+        $this->varie =NULL;
         $this->espec=Especie::find($this->especieid);
         $this->search=$this->espec->name;
     }
