@@ -18,7 +18,7 @@
         
         <div class="sm:flex items-center justify-between my-2">
 
-            <div class="flex">
+            <div class="flex justify-between">
                 @if ($recep)
                     <div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 mr-2 ml-12">
                     <div class="flex items-center justify-center">
@@ -28,6 +28,24 @@
                         </div>
                         
                     </div>
+                    </div>
+                    <div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 mr-2 ml-12">
+                        <div class="flex items-center justify-center">
+                            <div class="flex-shrink-0 text-left">
+                                <h3 class="text-base font-normal text-gray-500">{{$recep->n_emisor}}</h3>
+                                <h3 class="text-base font-normal text-gray-500">Guia: {{$recep->numero_documento_recepcion}}</h3>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 mr-2 ml-12">
+                        <div class="flex items-center justify-center">
+                            <div class="flex-shrink-0 text-left">
+                                <h3 class="text-base font-normal text-gray-500">Nro Muestra</h3>
+                                
+                            </div>
+                            
+                        </div>
                     </div>
                 @endif
                 {{-- comment
@@ -56,13 +74,13 @@
                 @if (IS_NULL($recep))
                     
                 
-                    <h1 class="text-center text-sm my-4 mx-6"><b>Ultima Sincronizacion:</b> {{date('d M Y g:i a', strtotime($sync->fecha))}} <b>Tipo:</b> {{$sync->tipo}} <b>Cantidad:</b> {{$sync->cantidad}}</h1>
+                    <h1 class="hidden text-center text-sm my-4 mx-6"><b>Ultima Sincronizacion:</b> {{date('d M Y g:i a', strtotime($sync->fecha))}} <b>Tipo:</b> {{$sync->tipo}} <b>Cantidad:</b> {{$sync->cantidad}}</h1>
     
                         
                         
                     <div class="flex justify-center mb-2 items-center content-center"> 
                         <a href="{{route('production.refresh')}}">
-                            <button  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
+                            <button  class="hidden items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
                                 <p class="text-sm font-medium leading-none text-white">FX IMPORT</p>
                             </button>
                         </a>
@@ -127,21 +145,6 @@
                             @endphp
                             
                             @foreach ($recepcions as $recepcion)
-                        {{-- comment        {{$n.') '.$recepcion}}<br>
-                                                @php
-                                                    $m=1;
-                                                    $n+=1;
-                                                @endphp
-                                                
-                                            @foreach ($recepcion as $item)
-                                            {{$m}}) {{$item}}<br>
-                                                
-                                                    @php
-                                                        $m+=1;
-                                                    @endphp
-                                            @endforeach
-                                            --}}  
-                                {{-- comment  --}}    
                                 <tr class="text-white" style="background-color: #74b72f;">
                                     <td class="my-4 text-white">
                                         Agregar:
