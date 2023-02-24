@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Productor;
 
+use App\Models\Detalle;
 use App\Models\Especie;
 use App\Models\Recepcion;
 use App\Models\Sync;

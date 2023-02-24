@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Calidad;
 
 use App\Models\Calidad;
+use App\Models\Detalle;
 use App\Models\Parametro;
 use App\Models\Recepcion;
 use App\Models\Sync;
@@ -12,7 +13,7 @@ use Livewire\WithPagination;
 
 class ProductionCc extends Component
 {   use WithPagination;
-    public $search, $ctd=25, $recep, $recepcion_id, $calidad, $nro_muestra, $parametros, $valores, $selectedparametro, $selectedvalor;
+    public $search, $ctd=25, $recep, $detalles, $recepcion_id, $calidad, $nro_muestra, $parametros, $valores, $selectedparametro, $selectedvalor;
 
     public function render()
     {   
@@ -66,8 +67,10 @@ class ProductionCc extends Component
         $this->recep=Recepcion::find($this->recepcion_id);
         if($this->recep->calidad){
             $this->calidad=$this->recep->calidad;
+            $this->detalles=Detalle::where('calidad_id',$this->calidad->id);
         }
         $this->parametros=Parametro::all();
+        
     }
 
     public function calidad_store(){
