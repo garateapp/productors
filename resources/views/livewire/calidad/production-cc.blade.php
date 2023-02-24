@@ -12,7 +12,7 @@
     @endphp
     <div class="pb-12">
         <div class="sm:px-6 w-full">
-        <div class="px-6 py-4">
+        <div class="px-6 py-4 hidden">
             <input wire:keydown="limpiar_page" wire:model="search"  class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" placeholder="Ingrese el variedad, especie o lote de la recepción" autocomplete="off">
         </div>
         
@@ -34,11 +34,13 @@
                             <div class="flex-shrink-0 text-left">
                                 <h3 class="text-base font-normal text-gray-500">{{$recep->n_emisor}}</h3>
                                 <h3 class="text-base font-normal text-gray-500">Guia: {{$recep->numero_documento_recepcion}}</h3>
+                                <h3 class="text-base font-normal text-gray-500">Especie: {{$recep->n_especie}}</h3>
                             </div>
                             
                         </div>
                     </div>
-                    <div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 mr-2 ml-12">
+
+                    <div class="hidden max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 mr-2 ml-12">
                         <div class="flex items-center justify-center">
                             <div class="flex-shrink-0 text-left">
                                 <div class="flex justify-between">
@@ -74,29 +76,13 @@
                             
                         </div>
                     </div>
+
+
                 @endif
-                {{-- comment
-                <div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 ml-2">
-                    @if ($search)
-                        <div class="flex items-center justify-center content-center">
-                                    <span class="text-xl sm:text-xl leading-none font-bold text-gray-900 content-center">{{number_format($cant2)}}/</span>
-                                    <h3 class="text-base font-normal items-center content-center text-gray-500">{{$search}}</h3>
-                               
-                        
-                        </div>
-                    @endif
-                    <div class="flex items-center justify-center">
-                        <div class="flex-shrink-0 text-center">
-                           <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($cant)}}</span>
-                           <h3 class="text-base font-normal text-gray-500">Kilos</h3>
-                        </div>
-                       
-                     </div>
-                 </div>
-                 --}}
-                  
-                
-        </div>
+             
+            </div>
+
+
 
                 @if (IS_NULL($recep))
                     
@@ -133,8 +119,64 @@
      
                         
         @if ($recep)
-           
-       
+        <div class="flex justify-center mt-4">
+            <div class="max-w-5xl grid grid-cols-3 gap-x-4 mt-4 mx-12">
+                <div>
+                    <p class="font-bold">Tipo Item: </p> 
+                    <select wire:model="selectedparametro" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                        <option value="" class="text-center">Selecciona una categoría</option>
+
+                            @foreach ($parametros as $parametro)
+
+                                <option value="{{$parametro->id}}" class="text-center">{{$parametro->name}}</option>
+                                
+                            @endforeach
+
+                    </select>
+                </div>
+                <div>
+                    <p class="font-bold">Detalle item: </p> 
+                    <select wire:model="selectedvalor" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                        <option value="" class="text-center">Seleccione..</option>
+                        @if ($valores)
+                            @foreach ($valores as $parametro)
+
+                                <option value="{{$parametro->id}}" class="text-center">{{$parametro->name}}</option>
+                                
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
+                <div>
+                    <p class="font-bold">Fecha </p> 
+                    <input type="text" placeholder="{{date('d M Y', strtotime($recep->fecha_g_recepcion))}}" disabled class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" >
+                   
+                    
+                </div>
+            </div>
+            
+        </div>
+        <div class="flex justify-center mt-4">
+            <div class="max-w-5xl grid grid-cols-3 gap-x-4 mt-4 mx-12">
+                <div class="justify-center content-center">
+                    <p class="font-bold">Embalaje: </p> 
+                     <input wire:keydown="limpiar_page" wire:model="search"  class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" autocomplete="off">
+                </div>
+                <div class="justify-center content-center">
+                    <p class="font-bold">% Muestra: </p> 
+                     <input wire:keydown="limpiar_page" wire:model="search"  class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" autocomplete="off">
+                </div>
+                <div class="justify-center content-center">
+                    <p class="font-bold">Cantidad Muestra: </p> 
+                    <input wire:keydown="limpiar_page" wire:model="search"  class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" autocomplete="off">
+                    <p class="font-bold">Total Muestra: </p> 
+                     <input wire:keydown="limpiar_page" wire:model="search"  class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" autocomplete="off">
+
+                    
+                </div>
+            </div>
+            
+        </div>
 
             <br>
             <div class="flex justify-center">

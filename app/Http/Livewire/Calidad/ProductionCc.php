@@ -3,17 +3,20 @@
 namespace App\Http\Livewire\Calidad;
 
 use App\Models\Calidad;
+use App\Models\Parametro;
 use App\Models\Recepcion;
 use App\Models\Sync;
+use App\Models\Valor;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class ProductionCc extends Component
 {   use WithPagination;
-    public $search, $ctd=25, $recep, $recepcion_id, $calidad, $nro_muestra;
+    public $search, $ctd=25, $recep, $recepcion_id, $calidad, $nro_muestra, $parametros, $valores, $selectedparametro, $selectedvalor;
 
     public function render()
-    {   $recepcions=Recepcion::where('id_g_recepcion','LIKE','%'. $this->search .'%')
+    {   
+        $recepcions=Recepcion::where('id_g_recepcion','LIKE','%'. $this->search .'%')
         ->orwhere('tipo_g_recepcion','LIKE','%'. $this->search .'%')
         ->orwhere('numero_g_recepcion','LIKE','%'. $this->search .'%')
         ->orwhere('fecha_g_recepcion','LIKE','%'. $this->search .'%')
@@ -46,8 +49,16 @@ class ProductionCc extends Component
         $sync=Sync::where('entidad','RECEPCIONES')
         ->orderby('id','DESC')
         ->first();
+
         
         return view('livewire.calidad.production-cc',compact('recepcions','allrecepcions','allsubrecepcions','sync'));
+    }
+
+    public function updatedselectedparametro($parametro){
+        
+        $this->valores = Valor::where('parametro_id',$parametro)->get();
+        
+    
     }
 
     public function set_recepcion($id){
@@ -56,6 +67,7 @@ class ProductionCc extends Component
         if($this->recep->calidad){
             $this->calidad=$this->recep->calidad;
         }
+        $this->parametros=Parametro::all();
     }
 
     public function calidad_store(){
