@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Calidad;
 use App\Models\Especie;
 use App\Models\Recepcion;
 use App\Models\Sync;
@@ -145,7 +146,7 @@ class SyncRecepcions extends Command
                 
                     $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->first();
                     if($cont){
-                        Recepcion::updated([
+                        $cont->forceFill([
                             'id_g_recepcion' => $id_g_recepcion,//1
                             'tipo_g_recepcion' => $tipo_g_recepcion,//2
                             'numero_g_recepcion' => $numero_g_recepcion,//3
@@ -162,12 +163,17 @@ class SyncRecepcions extends Command
                             'peso_neto' => $peso_neto,
                             'nota_calidad' => $nota_calidad,
                             'n_estado' => $n_estado,
-                        ]);
+                        ])->save();
+                        if(IS_NULL($cont->calidad)){
+                            Calidad::create([
+                                'recepcion_id'=>$cont->id
+                            ]);
+                        }
                         }
                     else{
                         if($n_estado=='Finalizado'){
-                            Recepcion::create([
-                            'id_g_recepcion' => $id_g_recepcion,//1
+                            $rec=Recepcion::create([
+                                'id_g_recepcion' => $id_g_recepcion,//1
                                 'tipo_g_recepcion' => $tipo_g_recepcion,//2
                                 'numero_g_recepcion' => $numero_g_recepcion,//3
                                 'fecha_g_recepcion' => $fecha_g_recepcion,//4
@@ -183,8 +189,9 @@ class SyncRecepcions extends Command
                                 'peso_neto' => $peso_neto,
                                 'nota_calidad' => $nota_calidad,
                                 'n_estado' => $n_estado,
-                        
-                            
+                            ]);
+                            Calidad::create([
+                                'recepcion_id'=>$rec->id
                             ]);
                         }
                     }

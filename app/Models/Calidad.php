@@ -12,7 +12,11 @@ class Calidad extends Model
     protected $guarded = ['id'];
 
      // relacion uno a muchos inversa
-     public function recepcion(){
+    public function recepcion(){
         return $this->BelongsTo('App\Models\Recepcion');
+    }
+
+    public function detalles(){
+        return $this->hasMany('App\Models\Detalle');
     }
 }

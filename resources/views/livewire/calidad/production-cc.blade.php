@@ -122,7 +122,14 @@
         <div class="flex justify-center mt-4">
             <div class="max-w-5xl grid grid-cols-3 gap-x-4 mt-4 mx-12">
                 <div>
-                    <p class="font-bold">Tipo Item: </p> 
+                    @if ($tipo_control=='cc')
+                        <p class="font-bold">Tipo Item: </p> 
+                    @endif
+                    @if ($tipo_control=='ss')
+                        <p class="font-bold">Tamaño: </p> 
+                    @endif
+                        
+
                     <select wire:model="selectedparametro" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                         <option value="" class="text-center">Selecciona una categoría</option>
 
@@ -135,21 +142,31 @@
                     </select>
                 </div>
                 <div>
-                    <p class="font-bold">Detalle item: </p> 
+                    @if ($tipo_control=='cc')
+                        <p class="font-bold">Detalle item: </p> 
+                    @endif
+                    @if ($tipo_control=='ss')
+                        <p class="font-bold">Nombre: </p> 
+                    @endif
+                   
                     <select wire:model="selectedvalor" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                         <option value="" class="text-center">Seleccione..</option>
                         @if ($valores)
-                            @foreach ($valores as $parametro)
+                            @foreach ($valores as $item)
 
-                                <option value="{{$parametro->id}}" class="text-center">{{$parametro->name}}</option>
+                                <option value="{{$item->id}}" class="text-center">{{$item->name}}</option>
                                 
                             @endforeach
                         @endif
                     </select>
+                   
+                    @error('detalle')
+                        <span class="text-sm text-red-500">{{$message}}</span>
+                    @enderror
                 </div>
                 <div>
                     <p class="font-bold">Fecha </p> 
-                    <input type="text" placeholder="{{date('d M Y', strtotime($recep->fecha_g_recepcion))}}" disabled class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" >
+                    <input type="date" wire:model="fecha" class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" >
                    
                     
                 </div>
@@ -159,23 +176,87 @@
         <div class="flex justify-center mt-4">
             <div class="max-w-5xl grid grid-cols-3 gap-x-4 mt-4 mx-12">
                 <div class="justify-center content-center">
-                    <p class="font-bold">Embalaje: </p> 
-                     <input wire:keydown="limpiar_page" wire:model="search"  class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" autocomplete="off">
+                    @if ($tipo_control=='cc')
+                        <p class="font-bold">Embalaje: </p> 
+                        <input wire:model="embalaje" type="number"  class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" autocomplete="off">
+                    @endif
+                    @if ($tipo_control=='ss')
+                        <p class="font-bold">Temperatura: </p> 
+                        <input wire:model="temperatura" type="number" placeholder="20.9" class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" autocomplete="off">
+                    @endif
+                    
+                    
                 </div>
                 <div class="justify-center content-center">
-                    <p class="font-bold">% Muestra: </p> 
-                     <input wire:keydown="limpiar_page" wire:model="search"  class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" autocomplete="off">
-                </div>
-                <div class="justify-center content-center">
-                    <p class="font-bold">Cantidad Muestra: </p> 
-                    <input wire:keydown="limpiar_page" wire:model="search"  class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" autocomplete="off">
-                    <p class="font-bold">Total Muestra: </p> 
-                     <input wire:keydown="limpiar_page" wire:model="search"  class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" autocomplete="off">
+                    @if ($total_muestra==0)
+                        
+                        <button wire:click="muestra_clean" class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-600 rounded hover:bg-red-500 focus:outline-none">
 
+                            <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
+                                ERROR! Total Muestra = 0
+                                
+                            </h1>
+                        </button>
+                    @endif
+                    @if ($tipo_control=='cc')
+                        <p class="font-bold">% Muestra: </p> 
+                        <input wire:model="porcentaje_muestra" type="number" disabled placeholder="25.3" class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" autocomplete="off">
+                    @endif
+                    @if ($tipo_control=='ss')
+                        <p class="font-bold">Valor: </p> 
+                        <input wire:model="valor" type="number"  class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" autocomplete="off">
+                 
+                    @endif
+                    
+                    
+                    
+                    
+                       
+
+                </div>
+                <div class="justify-center content-center">
+                    @if ($tipo_control=='cc')
+                        <p class="font-bold">Cantidad Muestra: </p> 
+                        <input wire:change="actualizar_porcentaje" wire:model="cantidad" type="number" class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" autocomplete="off">
+                        @error('cantidad')
+                            <span class="text-sm text-red-500">{{$message}}</span>
+                        @enderror
+                        <p class="font-bold">Total Muestra: </p> 
+                        <input wire:change="actualizar_porcentaje" wire:model="total_muestra" type="number"  class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" autocomplete="off">
+                    @endif
                     
                 </div>
             </div>
             
+        </div>
+
+        <div class="flex justify-center gap-2 mt-4">
+            <button wire:click="recep_clean" class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-600 rounded hover:bg-red-500 focus:outline-none">
+
+                <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
+                Cancelar
+                    
+                </h1>
+            </button>
+            @if ($tipo_control=='cc')
+                <button wire:click="detalle_store" class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-green-300 text-sm leading-none text-green-600 py-3 px-5 bg-green-600 rounded hover:bg-green-500 focus:outline-none">
+
+                    <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
+                    Agregar
+                        
+                    </h1>
+                </button>
+            @endif
+            @if ($tipo_control=='ss')
+                <button wire:click="ss_store" class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-green-300 text-sm leading-none text-green-600 py-3 px-5 bg-green-600 rounded hover:bg-green-500 focus:outline-none">
+
+                    <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
+                    Agregar
+                        
+                    </h1>
+                </button>
+            @endif
+           
         </div>
 
         <div class="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10 mt-6">
@@ -183,48 +264,51 @@
             <table class="min-w-full divide-y divide-gray-200 mb-20 pb-20">
     
                 <thead class="bg-gray-50 rounded-full">
+                @if ($tipo_control=='cc')
                     <th>ID</th>
-                    <th>Agricola</th>
-                    <th>Especie</th>
-                    <th>Variedad</th>
+                    <th>Lote</th>
+                    <th>Embalaje</th>
+                    <th>Cantidad</th>
+                    <th class="text-center">Tipo Item</th>
+                    <th class="text-center">Detalle Item</th>
+                    <th class="text-center">% Muestra</th>
+                    <th class="text-center">Cantidad Muestra</th>
+                    <th>Estado</th>
                     <th class="text-center">Fecha</th>
-                    <th class="text-center">Lote</th>
-                    <th class="text-center">Guia</th>
-                    <th class="text-center">Cantidad</th>
-                    <th>Kilos</th>
-                    <th class="text-center">Nota</th>
+                @endif
+                @if ($tipo_control=='ss')
+                    <th>ID</th>
+                    <th>Lote</th>
+                    <th>temperatura</th>
+                    <th>Cantidad</th>
+                    <th class="text-center">Tamaño</th>
+                    <th class="text-center">Nombre Presión</th>
+                    <th class="text-center">Valor Presión</th>
+                    <th class="text-center">Fecha</th>
+                @endif
+                    
                     
                 </thead>
                 <tbody>
                     @php
                         $n=1;
                     @endphp
-                    @if ($detalles)
-                        @foreach ($detalles as $recepcioin)
-                                {{-- comment        {{$n.') '.$recepcion}}<br>
-                                            @php
-                                                $m=1;
-                                                $n+=1;
-                                            @endphp
-                                            
-                                        @foreach ($recepcion as $item)
-                                        {{$m}}) {{$item}}<br>
-                                            
-                                                @php
-                                                    $m+=1;
-                                                @endphp
-                                        @endforeach
-                                        --}}  
-                            {{-- comment  --}}    
-                            <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
+                    @if ($recep->calidad->detalles)
+                        @foreach ($recep->calidad->detalles as $detalle)
+
+                       
+                        @if ($detalle->tipo_detalle==$tipo_control)
+                            
+                        @if ($tipo_control=='cc')
+                            <tr tabindex="0" class="focus:outline-none h-10 border border-gray-100 rounded">
                                 <td class="text-center">
                                 <p class="text-base font-medium leading-none text-gray-700 mr-2">
 
                                 
 
                                         
-                                    @if ($recepcion->id_g_recepcion)
-                                        {{$recepcion->id_g_recepcion}}
+                                    @if ($recep->id_g_recepcion)
+                                        {{$recep->id_g_recepcion}}
                                     @endif 
                                     
                                         
@@ -236,8 +320,8 @@
         
                                     
         
-                                        @if ($recepcion->n_emisor)
-                                            {{$recepcion->n_emisor}}
+                                        @if ($recep->numero_g_recepcion)
+                                            {{$recep->numero_g_recepcion}}
                                             
                                         @endif
                                     
@@ -245,41 +329,34 @@
                                     </p>
                                 
                                 </td>
-                                <td class="">
-                                    <div class="flex items-center pl-5">
-                                        <p class="text-base font-medium leading-none text-gray-700 mr-2">
+                                <td class="text-center">
+
+                                        <p class="text-base font-medium leading-none text-gray-700 mr-2 text-center">
         
                                         
-                                            @if ($recepcion->n_especie)
-                                            {{$recepcion->n_especie}}
-                                            
+                                            @if ($detalle->embalaje)
+                                                {{$detalle->embalaje}}
                                             @endif
                                         
                                             
                                         </p>
-                                    
-                                    </div>
+                            
                                 </td>
                                 <td class="pl-5">
                                     <div class="whitespace-nowrap flex items-center text-center">
                                         
                                         <p class="whitespace-nowrap text-sm leading-none text-gray-600 ml-2">
                                     
-                                            @if ($recepcion->n_variedad)
-                                                {{$recepcion->n_variedad}}
-                                                
-                                            @endif
+                                            1737
                                         </p>
                                     </div>
                                 </td>
-                                <td class="pl-5 text-center whitespace-nowrap">
-                                    <p class="whitespace-nowrap text-base text-center font-medium leading-none text-gray-700 mr-2">
+                                <td class="pl-5 whitespace-nowrap">
+                                    <p class="whitespace-nowrap text-base font-medium leading-none text-gray-700 mr-2">
         
                                 
-                                    @if ($recepcion->fecha_g_recepcion)
-                                            {{date('d M Y g:i a', strtotime($recepcion->fecha_g_recepcion))}}
-                                            
-                                            
+                                        @if ($detalle->tipo_item)
+                                            {{$detalle->tipo_item}}
                                         @endif
                                     
                                     </p>
@@ -290,9 +367,9 @@
 
                                 
 
-                                            @if ($recepcion->numero_g_recepcion)
-                                            {{$recepcion->numero_g_recepcion}}
-                                            @endif
+                                        @if ($detalle->detalle_item)
+                                            {{$detalle->detalle_item}}
+                                        @endif
                                             
                                     </p>
                                     
@@ -301,10 +378,10 @@
                                     <p class="whitespace-nowrap  text-base flex font-medium leading-none text-gray-700 mr-2">
 
                                 
-
-                                            @if ($recepcion->numero_documento_recepcion)
-                                            {{$recepcion->numero_documento_recepcion}}
-                                            @endif
+                                        @if ($detalle->porcentaje_muestra)
+                                            {{$detalle->porcentaje_muestra}}
+                                            
+                                        @endif
                                             
                                     </p>
                                     
@@ -314,20 +391,33 @@
         
                                         
         
-                                        @if ($recepcion->cantidad)
-                                            {{number_format($recepcion->cantidad)}}
-                                        @endif
+                                            @if ($detalle->cantidad)
+                                                {{$detalle->cantidad}}
+                                            @endif
                                         
                                     </p>
                                     
                                 </td>
                                 
-                                <td class="pl-5">
+                                <td class="pl-5 text-center">
                                 
         
-                                    @if ($recepcion->peso_neto)
-                                        {{number_format($recepcion->peso_neto)}}
-                                    @endif
+                                
+                                    @switch($detalle->estado)
+                                    @case(1)
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                            Pendiente
+                                        </span>
+                                        @break
+                                    @case(2)
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                        Aprobado
+                                        </span>
+                                        @break
+                                
+                                    @default
+                                        
+                                @endswitch
                                 
                                         
                                 
@@ -338,11 +428,12 @@
                             
                                 <td class="pl-5 text-center">
                                     
-                                    @if ($recepcion->nota_calidad==0)   
-                                            S/N
-                                    @elseif($recepcion->nota_calidad)
-                                        {{number_format($recepcion->nota_calidad)}}
+                                    @if ($detalle->fecha)
+                                        {{date('d M Y', strtotime($detalle->fecha))}}
+                                    @else
+                                        {{date('d M Y', strtotime($detalle->created_at))}}
                                     @endif
+                                
                             
                                 
                                                                                 
@@ -351,28 +442,135 @@
                                             
                             
                                 <td>
-                                    <div class="relative px-5 pt-2">
-                                        <button class="focus:ring-2 rounded-md focus:outline-none" onclick="dropdownFunction(this)" role="button" aria-label="option">
-                                            <svg class="dropbtn" onclick="dropdownFunction(this)" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                <path d="M4.16667 10.8332C4.62691 10.8332 5 10.4601 5 9.99984C5 9.5396 4.62691 9.1665 4.16667 9.1665C3.70643 9.1665 3.33334 9.5396 3.33334 9.99984C3.33334 10.4601 3.70643 10.8332 4.16667 10.8332Z" stroke="#9CA3AF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                <path d="M10 10.8332C10.4602 10.8332 10.8333 10.4601 10.8333 9.99984C10.8333 9.5396 10.4602 9.1665 10 9.1665C9.53976 9.1665 9.16666 9.5396 9.16666 9.99984C9.16666 10.4601 9.53976 10.8332 10 10.8332Z" stroke="#9CA3AF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                <path d="M15.8333 10.8332C16.2936 10.8332 16.6667 10.4601 16.6667 9.99984C16.6667 9.5396 16.2936 9.1665 15.8333 9.1665C15.3731 9.1665 15 9.5396 15 9.99984C15 10.4601 15.3731 10.8332 15.8333 10.8332Z" stroke="#9CA3AF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
-                                            </svg>
-                                        </button>
-                                        <div class="dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 hidden">
-                                            <div tabindex="0" class="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
-                                                <p>Edit</p>
-                                            </div>
-                                            <div tabindex="0" class="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
-                                                <p>Delete</p>
-                                            </div>
-                                        </div>
+                                    <div tabindex="0" wire:click="delete_detalle({{$detalle}})" class="focus:outline-none text-green-600 text-xs w-full py-4 px-4 cursor-pointer hover:text-red-600">
+                                        <p>Eliminar</p>
                                     </div>
                                 </td>
                             
                             </tr>
+                        @endif
+                        @if ($tipo_control=='ss')
+                            <tr tabindex="0" class="focus:outline-none h-10 border border-gray-100 rounded">
+                                <td class="text-center">
+                                <p class="text-base font-medium leading-none text-gray-700 mr-2">
+
+                                
+
+                                        
+                                    @if ($recep->id_g_recepcion)
+                                        {{$recep->id_g_recepcion}}
+                                    @endif 
+                                    
+                                        
+                                </p>
+                                
+                                </td>
+                                <td class="text-center">
+                                    <p class="text-base font-medium leading-none text-gray-700 mr-2">
+        
+                                    
+        
+                                        @if ($recep->numero_g_recepcion)
+                                            {{$recep->numero_g_recepcion}}
+                                            
+                                        @endif
+                                    
+                                        
+                                    </p>
+                                
+                                </td>
+                                <td class="text-center">
+
+                                        <p class="text-base font-medium leading-none text-gray-700 mr-2 text-center">
+        
+                                        
+                                            @if ($detalle->temperatura)
+                                                {{$detalle->temperatura}}
+                                            @endif
+                                        
+                                            
+                                        </p>
+                            
+                                </td>
+                                <td class="text-center">
+
+                                    <p class="text-base font-medium leading-none text-gray-700 mr-2 text-center">
+    
+                                        
+                                        <p class="whitespace-nowrap text-sm leading-none text-gray-600 ml-2">
+                                    
+                                            1737
+                                        </p>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+
+                                        <p class="text-base font-medium leading-none text-gray-700 mr-2 text-center">
+        
+                                
+                                        @if ($detalle->tipo_item)
+                                            {{$detalle->tipo_item}}
+                                        @endif
+                                    
+                                    </p>
+                                
+                                </td>
+                                <td class="text-center">
+
+                                    <p class="text-base font-medium leading-none text-gray-700 mr-2 text-center">
+    
+
+                                        @if ($detalle->detalle_item)
+                                            {{$detalle->detalle_item}}
+                                        @endif
+                                            
+                                    </p>
+                                    
+                                </td>
+                                <td class="text-center">
+
+                                    <p class="text-base font-medium leading-none text-gray-700 mr-2 text-center">
+    
+                                
+                                        @if ($detalle->valor_ss)
+                                            {{$detalle->valor_ss}}
+                                            
+                                        @endif
+                                            
+                                    </p>
+                                    
+                                </td>
+                                   
+                                
+                               
+                            
+                                <td class="pl-5 text-center">
+                                    
+                                    @if ($detalle->fecha)
+                                        {{date('d M Y', strtotime($detalle->fecha))}}
+                                    @else
+                                        {{date('d M Y', strtotime($detalle->created_at))}}
+                                    @endif
+                                
+                            
+                                
+                                                                                
+                                </td>
+                                
+                                            
+                            
+                                <td>
+                                    <div tabindex="0" wire:click="delete_detalle({{$detalle}})" class="focus:outline-none text-green-600 text-xs w-full py-4 px-4 cursor-pointer hover:text-red-600">
+                                        <p>Eliminar</p>
+                                    </div>
+                                </td>
+                            
+                            </tr>
+                        @endif
+                           
                         
-                    
+                        @endif
+
                             
         
                         @endforeach
@@ -390,15 +588,7 @@
         </div>
 
             <br>
-            <div class="flex justify-center">
-                <button wire:click="recep_clean" class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-600 rounded hover:bg-red-500 focus:outline-none">
-
-                    <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
-                    Cancelar
-                        
-                    </h1>
-                </button>
-            </div>
+            
 
         @else
 
@@ -602,12 +792,15 @@
                                     </td>
                                     <td class="text-center">
                                     
-                                        <button wire:click="set_recepcion({{$recepcion->id}})" class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
-                                            @if ($recepcion->calidad)
+                                        <button wire:click="set_recepcion_cc({{$recepcion->id}})" class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
+                                           {{-- 
+                                            @if ($recepcion->calidad->detalles->count())
                                                 FINALIZAR CC
                                             @else
                                                 AGREGAR CC
                                             @endif
+                                                --}}
+                                                AGREGAR CC
                                                 
 
                                         </button>
@@ -617,7 +810,7 @@
                                     <td class="">
                                         <div class="flex items-center pl-5">
                                         
-                                        <button class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
+                                        <button wire:click="set_recepcion_ss({{$recepcion->id}})" class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
                                             AGREGAR SS
                                         </button>
                                         

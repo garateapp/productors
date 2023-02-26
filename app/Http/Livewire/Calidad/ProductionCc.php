@@ -8,13 +8,15 @@ use App\Models\Parametro;
 use App\Models\Recepcion;
 use App\Models\Sync;
 use App\Models\Valor;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class ProductionCc extends Component
 {   use WithPagination;
-    public $search, $ctd=25, $recep, $detalles, $recepcion_id, $calidad, $nro_muestra, $parametros, $valores, $selectedparametro, $selectedvalor;
 
+
+    public $search, $ctd=25, $recep, $temperatura, $valor, $tipo_control, $fecha, $embalaje=1, $cantidad, $detalle, $porcentaje_muestra, $total_muestra=100, $detalles, $recepcion_id, $calidad, $nro_muestra, $parametros, $valores, $selectedparametro, $selectedvalor;
     public function render()
     {   
         $recepcions=Recepcion::where('id_g_recepcion','LIKE','%'. $this->search .'%')
@@ -58,34 +60,74 @@ class ProductionCc extends Component
     public function updatedselectedparametro($parametro){
         
         $this->valores = Valor::where('parametro_id',$parametro)->get();
-        
-    
+        $this->reset(['detalle']);
     }
 
-    public function set_recepcion($id){
+    public function updatedselectedvalor($valor){
+        
+        $this->detalle = Valor::find($valor);
+    }
+
+    public function set_recepcion_cc($id){
         $this->recepcion_id=$id;
         $this->recep=Recepcion::find($this->recepcion_id);
-        if($this->recep->calidad){
-            $this->calidad=$this->recep->calidad;
-            $this->detalles=Detalle::where('calidad_id',$this->calidad->id);
-        }
-        $this->parametros=Parametro::all();
+        $this->parametros=Parametro::where('tipo',"cc")->get();
+        $this->tipo_control='cc';
         
     }
 
-    public function calidad_store(){
+    public function set_recepcion_ss($id){
+        $this->recepcion_id=$id;
+        $this->recep=Recepcion::find($this->recepcion_id);
+        $this->parametros=Parametro::where('tipo',"ss")->get();
+        $this->tipo_control='ss';
+        
+    }
+
+    public function detalle_store(){
         $rules = [
-            'nro_muestra'=>'required'
+            'cantidad'=>'required',
+            'detalle'=>'required'
+            
             ];
       
         $this->validate ($rules);
 
-        $this->calidad = Calidad::create([
-            'nro_muestra'=> $this->nro_muestra,
-            'recepcion_id'=>$this->recep->id
+        Detalle::create([
+            'calidad_id'=>$this->recep->calidad->id,
+            'embalaje'=>$this->embalaje,
+            'cantidad'=>$this->cantidad,
+            'porcentaje_muestra'=>$this->porcentaje_muestra,
+            'tipo_item'=>$this->detalle->parametro->name,
+            'tipo_detalle'=>$this->tipo_control,
+            'detalle_item'=>$this->detalle->name,
+            'fecha'=>$this->fecha                
         ]);
         
-        $this->reset(['nro_muestra']);
+        $this->reset(['detalle','porcentaje_muestra','selectedvalor','selectedparametro','cantidad','fecha','embalaje']);
+        $this->recep = Recepcion::find($this->recepcion_id);
+    }
+
+    public function ss_store(){
+        $rules = [
+            'valor'=>'required',
+            'detalle'=>'required'
+            
+            ];
+      
+        $this->validate ($rules);
+
+        Detalle::create([
+            'calidad_id'=>$this->recep->calidad->id,
+            'temperatura'=>$this->temperatura,
+            'valor_ss'=>$this->valor,
+            'tipo_item'=>$this->detalle->parametro->name,
+            'tipo_detalle'=>$this->tipo_control,
+            'detalle_item'=>$this->detalle->name,
+            'fecha'=>$this->fecha                
+        ]);
+        
+        $this->reset(['detalle','selectedvalor','selectedparametro','valor','fecha']);
         $this->recep = Recepcion::find($this->recepcion_id);
     }
 
@@ -93,9 +135,32 @@ class ProductionCc extends Component
         $this->recepcion_id=NULL;
         $this->recep=NULL;
         $this->calidad=Null;
+        $this->cantidad=Null;
+        $this->porcentaje_muestra=Null;
+        $this->detalle=Null;
+        $this->total_muestra=100;
+
+    }
+    public function muestra_clean(){
+        $this->total_muestra=100;
+        $this->porcentaje_muestra=$this->cantidad*100/$this->total_muestra;
     }
     
     public function limpiar_page(){
         $this->resetPage();
+    }
+
+    public function delete_detalle(Detalle $detalle){
+        $detalle->delete();
+        $this->recep = Recepcion::find($this->recepcion_id);
+    }
+
+    public function actualizar_porcentaje(){
+        if($this->total_muestra==0){
+            $this->porcentaje_muestra='NO SE PUEDE INGRESAR 0 MUESTRAS';
+        }else{
+            $this->porcentaje_muestra=$this->cantidad*100/$this->total_muestra;
+        }
+        
     }
 }

@@ -19,8 +19,6 @@ return new class extends Migration
             $table->foreignId('recepcion_id')
                 ->constrained()
                 ->onDelete('cascade');
-
-            $table->integer('nro_muestra');
             $table->integer('t_muestra')->nullable();
 
             $table->string('t_camion')->nullable();

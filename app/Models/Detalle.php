@@ -11,6 +11,9 @@ class Detalle extends Model
 
     protected $guarded = ['id'];
 
+    const PENDIENTE =1;
+    const APROBADO =2;
+
      // relacion uno a muchos inversa
     public function calidad(){
         return $this->BelongsTo('App\Models\Calidad');
