@@ -16,7 +16,7 @@ class ProductionCc extends Component
 {   use WithPagination;
 
 
-    public $search, $ctd=25, $recep, $temperatura, $valor, $tipo_control, $fecha, $embalaje=1, $cantidad, $detalle, $porcentaje_muestra, $total_muestra=100, $detalles, $recepcion_id, $calidad, $nro_muestra, $parametros, $valores, $selectedparametro, $selectedvalor;
+    public $search, $ctd=25, $recep, $materia_vegetal, $temperatura, $valor, $tipo_control, $fecha, $embalaje=1, $cantidad, $detalle, $porcentaje_muestra, $total_muestra=100, $detalles, $recepcion_id, $calidad, $nro_muestra, $parametros, $valores, $selectedparametro, $selectedvalor;
     public function render()
     {   
         $recepcions=Recepcion::where('id_g_recepcion','LIKE','%'. $this->search .'%')
@@ -163,4 +163,5 @@ class ProductionCc extends Component
         }
         
     }
+    
 }

@@ -787,85 +787,13 @@
                                         </td>
                                     
                                     </tr>
-                                    <tr tabindex="0" class="focus:outline-none h-20 border border-gray-100 rounded">
-                                        <td class="text-center">
-                                        
-                                        </td>
-                                        <td class="text-center">
-                                        
-                                            <p class="font-bold">Materia Vegetal: </p>
-                                            <select wire:model="selectedvalor" class="mx-auto block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                                                <option value="NO" class="text-center">NO</option>
-                                                <option value="SI" class="text-center">SI</option>
-                                            </select> 
-                                        
-                                        </td>
-                                    
-                                        <td class="text-center">
-                                   
-                                                <p class="font-bold">Piedras: </p>
-                                                <select wire:model="selectedvalor" class="mx-auto block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                                                    <option value="NO" class="text-center">NO</option>
-                                                    <option value="SI" class="text-center">SI</option>
-                                                </select> 
 
-                                        </td>
-                                        <td class="text-center">
-                                         
-                                                
-                                                <p class="font-bold">Barro y/o Polvo: </p>
-                                                <select wire:model="selectedvalor" class="mx-auto block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                                                    <option value="NO" class="text-center">NO</option>
-                                                    <option value="SI" class="text-center">SI</option>
-                                                </select> 
-                                            
-                                        </td>
-                                        <td class="text-center">
+                                 
+                                    
+                                    @livewire('calidad.actualizar-datos', ['recepcion' => $recepcion], key($recepcion->id))
 
-                                            <p class="font-bold">Pediselos largos: </p>
-                                            <select wire:model="selectedvalor" class="mx-auto block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                                                <option value="NO" class="text-center">NO</option>
-                                                <option value="SI" class="text-center">SI</option>
-                                            </select> 
-                                        
-                                        
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="font-bold">Fruta en Racimo: </p>
-                                            <select wire:model="selectedvalor" class="mx-auto block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                                                <option value="NO" class="text-center">NO</option>
-                                                <option value="SI" class="text-center">SI</option>
-                                            </select> 
-                                            
-                                        </td>
                                     
-                                        <td class="text-center">
-                                            
-                                            <p class="font-bold"> Esponjas: </p>
-                                            <select wire:model="selectedvalor" class="mx-auto block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                                                <option value="NO" class="text-center">NO</option>
-                                                <option value="SI" class="text-center">SI</option>
-                                            </select> 
-                                        </td>
-                                        
-                                    
-                                    
-                                        <td class="text-center">
-                                            
-                                            <p class="font-bold">Humedad de: </p>
-                                            <select wire:model="selectedvalor" class="mx-auto block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                                                <option value="NO" class="text-center">NO</option>
-                                                <option value="SI" class="text-center">SI</option>
-                                            </select> 
-                                    
-                                        
-                                                                                        
-                                        </td>
-                                        
-                                                    
-                                    
-                                    
-                                    </tr>
+
                                     <tr tabindex="0" class="focus:outline-none h-20 border border-gray-100 rounded">
                                         <td class="text-center">
                                         
