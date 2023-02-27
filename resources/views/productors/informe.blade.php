@@ -30,7 +30,7 @@
 <body>
 	<div class="container">
 		<img src="https://static.wixstatic.com/media/08547c_e7dc5092cad4472189d3be634557e720~mv2.png/v1/fill/w_314,h_89,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/GREENEX_logo.png" alt="Logo de la empresa" class="logo">
-		<h1>Reporte de la Recepcion Nro: {{$recepcion->id}}</h1>
+		<h1>Reporte del Lote Nro: {{$recepcion->numero_g_recepcion}}</h1>
 		<!-- Aquí puedes incluir tus gráficos en formato HTML -->
 		<!-- Ejemplo: <div id="grafico"></div> -->
 		<!-- También puedes incluir texto e imágenes como lo desees -->
