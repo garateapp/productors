@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Spatie\Permission\Models\Role;
+use PDF;
+
 
 class HomeController extends Controller
 {
@@ -30,6 +32,15 @@ class HomeController extends Controller
         $prop_recep=Recepcion::where('r_emisor',auth()->user()->rut)
         ->latest('id')->get();
         return view('dashboard',compact('users','recepcions','prop_recep'));
+    }
+
+    public function downloadpdf(Recepcion $recepcion) {
+
+        view()->share('productors.informe',$recepcion);
+ 
+         $pdf = PDF::loadView('productors.informe', ['recepcion' => $recepcion]);
+ 
+         return $pdf->download('reporte Nro:'.$recepcion->id.'.pdf');
     }
 
     public function production()

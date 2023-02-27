@@ -45,6 +45,8 @@ Route::get('production/refresh', [HomeController::class,'production_refresh'])->
 
 Route::get('productores/refresh', [HomeController::class,'productor_refresh'])->middleware('auth')->name('productor.refresh');
 
+Route::get('informe/{recepcion}', [HomeController::class,'downloadpdf'])->middleware('auth')->name('informe.download');
+
 Route::resource('telefono', TelefonoController::class)->names('telefonos');
 
 Route::resource('role', RoleController::class)->names('admin.roles');
