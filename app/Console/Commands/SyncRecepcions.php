@@ -35,8 +35,14 @@ class SyncRecepcions extends Command
      */
     public function handle()
     {   
+        
+        
         $productions=Http::get('http://api.appgreenex.cl/production');
+
+
+
         $productions = $productions->json();
+        
         $ri=Recepcion::all();
         $totali=$ri->count();
 
@@ -60,8 +66,7 @@ class SyncRecepcions extends Command
             $n_estado=Null;//17
 
             $m=1;
-            foreach ($production as $item){
-                
+            foreach ($production as $item){    
                 if($m==1){
                     $id_g_recepcion=$item;
                 }
@@ -109,6 +114,7 @@ class SyncRecepcions extends Command
                 }
                if($m==17){
                     $n_estado=$item;
+                    /*
                     $espec=Especie::where('name',$n_especie)->first();
                     if($espec){
                         $espec->forceFill([
@@ -142,7 +148,7 @@ class SyncRecepcions extends Command
                                 'especie_id'=>$especie->id
                             ]);
                         }
-                    }
+                    }*/
                 
                     $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->first();
                     if($cont){
