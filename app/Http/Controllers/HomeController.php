@@ -49,10 +49,9 @@ class HomeController extends Controller
     public function production()
     {  
         $recepcions=Recepcion::all();
-        $productions2=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/ObtenerRecepcion');
-        //$recepcions = $recepcions->json();
+        
 
-        return view('productors.production',compact('recepcions','productions2'));
+        return view('productors.production',compact('recepcions'));
     }
 
     public function productionpropia()
