@@ -31,10 +31,15 @@
                         </x-jet-nav-link>
                     @endcan
                     @can('Ver produccion_propia')
-                    <x-jet-nav-link href="{{ route('productionpropia.index') }}" :active="request()->routeIs('productionpropia.index')">
-                        {{ __('Recepciones') }}
-                    </x-jet-nav-link>
-                @endcan
+                        <x-jet-nav-link href="{{ route('productionpropia.index') }}" :active="request()->routeIs('productionpropia.index')">
+                            {{ __('Recepciones') }}
+                        </x-jet-nav-link>
+                    @endcan
+                    @can('Ver produccion_cc')
+                        <x-jet-nav-link href="{{ route('procesos.index') }}" :active="request()->routeIs('procesos.index')">
+                            {{ __('Procesos') }}
+                        </x-jet-nav-link>
+                    @endcan
                 </div>
             </div>
 

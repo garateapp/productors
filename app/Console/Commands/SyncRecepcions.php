@@ -37,7 +37,7 @@ class SyncRecepcions extends Command
     {   
         
         
-        $productions=Http::get('http://api.appgreenex.cl/production');
+        $productions=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/ObtenerRecepcion');
 
 
 
@@ -67,29 +67,29 @@ class SyncRecepcions extends Command
 
             $m=1;
             foreach ($production as $item){    
-                if($m==1){
+                if($m==2){
                     $id_g_recepcion=$item;
                 }
-                if($m==2){
+                if($m==3){
                     $tipo_g_recepcion=$item;
                 }
-                if($m==3){
+                if($m==4){
                     $numero_g_recepcion=$item;
                 }
-                if($m==4){
+                if($m==5){
                     $fecha_g_recepcion=$item;
                 }
-                if($m==5){
+                if($m==6){
                     $id_emisor=$item;
                 }
-                if($m==6){
+                if($m==7){
                     $r_emisor=$item;
                 }
                 if($m==8){
-                    $n_emisor=$item;
+                    $Codigo_Sag_emisor=$item;
                 }
                 if($m==9){
-                    $Codigo_Sag_emisor=$item;
+                    $n_emisor=$item;
                 }
                 if($m==10){
                     $tipo_documento_recepcion=$item;
@@ -99,6 +99,7 @@ class SyncRecepcions extends Command
                 }
                 if($m==12){
                     $n_especie=$item;
+
                 }
                 if($m==13){
                     $n_variedad=$item;

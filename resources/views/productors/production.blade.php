@@ -3,6 +3,7 @@
        
     </x-slot>
 
+
     @livewire('productor.production-search')               
      
 

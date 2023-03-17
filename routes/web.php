@@ -52,3 +52,5 @@ Route::resource('telefono', TelefonoController::class)->names('telefonos');
 Route::resource('role', RoleController::class)->names('admin.roles');
 
 Route::resource('users', UserController::class)->only(['index','edit','update','destroy'])->names('users');
+
+Route::get('procesos', [HomeController::class,'procesos'])->middleware('auth')->name('procesos.index');

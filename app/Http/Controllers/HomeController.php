@@ -21,11 +21,14 @@ class HomeController extends Controller
 {
     public function index()
     {        
-        $users=User::all();
-       
-
-        return view('productors.index',compact('users'));
+        return view('productors.index');
     }
+
+    public function procesos()
+    {        
+        return view('productors.procesos');
+    }
+
     public function dashboard () {
         $users=User::all();
         $recepcions=Recepcion::all();
@@ -46,9 +49,10 @@ class HomeController extends Controller
     public function production()
     {  
         $recepcions=Recepcion::all();
+        $productions2=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/ObtenerRecepcion');
         //$recepcions = $recepcions->json();
 
-        return view('productors.production',compact('recepcions'));
+        return view('productors.production',compact('recepcions','productions2'));
     }
 
     public function productionpropia()
@@ -67,7 +71,7 @@ class HomeController extends Controller
 
     public function production_refresh()
     {        
-        $productions=Http::get('http://api.appgreenex.cl/production');
+        $productions=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/ObtenerRecepcion');
         $productions = $productions->json();
         $ri=Recepcion::all();
         $totali=$ri->count();
@@ -94,29 +98,29 @@ class HomeController extends Controller
             $m=1;
             foreach ($production as $item){
                 
-                if($m==1){
+                if($m==2){
                     $id_g_recepcion=$item;
                 }
-                if($m==2){
+                if($m==3){
                     $tipo_g_recepcion=$item;
                 }
-                if($m==3){
+                if($m==4){
                     $numero_g_recepcion=$item;
                 }
-                if($m==4){
+                if($m==5){
                     $fecha_g_recepcion=$item;
                 }
-                if($m==5){
+                if($m==6){
                     $id_emisor=$item;
                 }
-                if($m==6){
+                if($m==7){
                     $r_emisor=$item;
                 }
                 if($m==8){
-                    $n_emisor=$item;
+                    $Codigo_Sag_emisor=$item;
                 }
                 if($m==9){
-                    $Codigo_Sag_emisor=$item;
+                    $n_emisor=$item;
                 }
                 if($m==10){
                     $tipo_documento_recepcion=$item;
@@ -253,8 +257,9 @@ class HomeController extends Controller
 
     public function productor_refresh()
     {  
-        $users= Http::get('http://api.appgreenex.cl/productors');
-        
+
+        $users= Http::post('https://apigarate.azurewebsites.net/api/v1.0/Productor/ObtenerProductor');
+
         $users = $users->json();
 
         $ri=User::all();
@@ -280,14 +285,14 @@ class HomeController extends Controller
                 if($m==4){
                     $nombre=$item;
                 }
-                if($m==29){
+                if($m==3){
                     $rut=$item;
                 }
-                if($m==35){
+                if($m==2){
                     $csg=$item;
                 }
                
-                if($m==41){
+                if($m==14){
                     $cont=User::where('rut',$rut)->first();
                     $search=['.','-'];
                     if($cont){
