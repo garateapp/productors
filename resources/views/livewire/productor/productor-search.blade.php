@@ -216,7 +216,7 @@
                                             
                                         </td>
                                         <td class="pl-5 text-white">
-                                            {!! Form::submit('Actualizar', ['class'=>'mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
+                                            {!! Form::submit('Actualizar', ['class'=>'mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
                                             {!! Form::close() !!}
                                         </td>
                                         <td class="pl-5">
