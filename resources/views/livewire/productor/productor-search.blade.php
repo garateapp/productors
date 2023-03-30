@@ -220,13 +220,12 @@
                                             {!! Form::close() !!}
                                         </td>
                                         <td class="pl-5">
-                                            <div class="flex items-center whitespace-nowrap">
+                                            <div class="flex items-center">
                                             
-                                                <p class="whitespace-nowrap text-base font-medium leading-none text-gray-700 mr-2">
+                                                <p class="text-base leading-none text-gray-700 mr-2">
                                                     @if ($user->updated_at!=$user->created_at)
                                                         {{date('d M Y g:i a', strtotime($user->updated_at))}}
-                                                        
-                                                        
+                            
                                                     @endif
                                                 </p>
                                             </div>
