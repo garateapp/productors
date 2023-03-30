@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Productor\UserController as ProductorUserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TelefonoController;
 use App\Http\Controllers\UserController;
@@ -52,5 +53,7 @@ Route::resource('telefono', TelefonoController::class)->names('telefonos');
 Route::resource('role', RoleController::class)->names('admin.roles');
 
 Route::resource('users', UserController::class)->only(['index','edit','update','destroy'])->names('users');
+
+Route::resource('prod/users', ProductorUserController::class)->only(['update'])->names('productor.users');
 
 Route::get('procesos', [HomeController::class,'procesos'])->middleware('auth')->name('procesos.index');
