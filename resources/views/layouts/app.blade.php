@@ -18,6 +18,7 @@
 
         <!-- Styles -->
         @livewireStyles
+        @yield('css')
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />
@@ -58,5 +59,12 @@
         @stack('modals')
 
         @livewireScripts
+
+        @isset($js)
+
+            {{$js}}
+
+        @endisset
+        
     </body>
 </html>

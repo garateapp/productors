@@ -24,10 +24,13 @@ class HomeController extends Controller
         return view('productors.index');
     }
 
-    public function subir_procesos()
+    public function envio_masivo()
     {       
- 
-        
+        return view('productors.envio-masivo');
+    }
+
+    public function subir_procesos()
+    {         
         return view('productors.subir-proceso');
     }
 
