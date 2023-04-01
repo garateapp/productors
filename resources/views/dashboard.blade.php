@@ -20,7 +20,7 @@
             
          </div>
       </div>
-      @can('Ver productores')
+    {{--   @can('Ver productores')
          <a href="{{ route('productors.index') }}">
             <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-2 mx-4">
                <div class="flex items-center">
@@ -92,8 +92,9 @@
             </div>
          </a>
       @endcan
-   </div>
-
+  
+comment --}}
+</div>
    @can('Ver produccion_propia')
       @livewire('productor.production-show')
    @endcan

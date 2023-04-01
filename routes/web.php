@@ -57,3 +57,5 @@ Route::resource('users', UserController::class)->only(['index','edit','update','
 Route::resource('prod/users', ProductorUserController::class)->only(['update'])->names('productor.users');
 
 Route::get('procesos', [HomeController::class,'procesos'])->middleware('auth')->name('procesos.index');
+
+Route::get('subir-proceso', [HomeController::class,'subir_procesos'])->middleware('auth')->name('subir.procesos');

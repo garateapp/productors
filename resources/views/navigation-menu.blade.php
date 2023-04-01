@@ -121,6 +121,9 @@
                             <x-jet-dropdown-link href="{{ route('admin.roles.index') }}">
                                 {{ __('Roles') }}
                             </x-jet-dropdown-link>
+                            <x-jet-dropdown-link href="{{ route('subir.procesos') }}">
+                                {{ __('Subir Procesos') }}
+                            </x-jet-dropdown-link>
 
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
@@ -187,8 +190,11 @@
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
-                <x-jet-responsive-nav-link href="{{ route('admin.roles.index') }}" :active="request()->routeIs('profile.show')">
+                <x-jet-responsive-nav-link href="{{ route('admin.roles.index') }}" :active="request()->routeIs('admin.roles.index')">
                     {{ __('Roles') }}
+                </x-jet-responsive-nav-link>
+                <x-jet-responsive-nav-link href="{{ route('subir.procesos') }}" :active="request()->routeIs('subir.procesos')">
+                    {{ __('Subir Procesos') }}
                 </x-jet-responsive-nav-link>
 
             </div>

@@ -24,9 +24,18 @@ class HomeController extends Controller
         return view('productors.index');
     }
 
+    public function subir_procesos()
+    {       
+ 
+        
+        return view('productors.subir-proceso');
+    }
+
     public function procesos()
-    {        
-        return view('productors.procesos');
+    {       
+        $procesos=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/ObtenerRecepcion');
+        
+        return view('productors.procesos',compact('procesos'));
     }
 
     public function dashboard () {

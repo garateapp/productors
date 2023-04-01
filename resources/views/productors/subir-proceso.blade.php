@@ -5,8 +5,6 @@
 
 
                  
-    {{$procesos}}
-               
              
             
 </x-app-layout>
