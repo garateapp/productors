@@ -39,7 +39,7 @@ class SyncRecepcions extends Command
         
         $productions=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/ObtenerRecepcion');
         
-        //$productions = $productions->json();
+        $productions = $productions->json();
         
         $ri=Recepcion::all();
         $totali=$ri->count();
