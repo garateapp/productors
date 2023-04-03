@@ -69,7 +69,10 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
-    {
+    {   $request->validate([
+            'email'=>'email'
+        ]);
+        
         $user->update($request->all());
 
         return redirect()->back();

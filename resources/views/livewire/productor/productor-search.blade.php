@@ -223,7 +223,7 @@
                                            
                                                 
                                                 {!! Form::model($user, ['route'=>['productor.users.update',$user],'method' => 'put', 'autocomplete'=>'off']) !!}                
-                                                {!! Form::text('email', null , ['class' => 'mt-1 block w-full']) !!}
+                                                {!! Form::email('email', null , ['class' => 'mt-1 block w-full']) !!}
                                                     
                                                    
                                                
