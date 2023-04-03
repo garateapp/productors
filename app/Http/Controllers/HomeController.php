@@ -36,14 +36,14 @@ class HomeController extends Controller
     }
 
     public function procesos()
-    {       
+    {    
         return view('productors.procesos');
     }
 
     public function sync_proces()
     {       
         $procesos=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Produccion/ObtenerProduccion');
-        //$procesos = $procesos->json();
+        $procesos = $procesos->json();
 
         $ri=Proceso::all();
         $totali=$ri->count();

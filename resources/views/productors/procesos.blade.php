@@ -2,7 +2,6 @@
     <x-slot name="header">
        
     </x-slot>
-   
     
        @livewire('procesos.proceso-search')
              
