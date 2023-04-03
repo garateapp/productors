@@ -48,6 +48,8 @@ Route::get('productores/refresh', [HomeController::class,'productor_refresh'])->
 
 Route::get('informe/{recepcion}', [HomeController::class,'downloadpdf'])->middleware('auth')->name('informe.download');
 
+Route::post('pass/{user}', [UserController::class,'password_rec'])->middleware('auth')->name('recuperar.contrasena');
+
 Route::resource('telefono', TelefonoController::class)->names('telefonos');
 
 Route::resource('role', RoleController::class)->names('admin.roles');
