@@ -2,11 +2,9 @@
     <x-slot name="header">
        
     </x-slot>
-
-
-                 
-    {{$procesos}}
-               
+   
+    
+       @livewire('procesos.proceso-search')
              
             
 </x-app-layout>

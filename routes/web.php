@@ -58,6 +58,8 @@ Route::resource('prod/users', ProductorUserController::class)->only(['update'])-
 
 Route::get('procesos', [HomeController::class,'procesos'])->middleware('auth')->name('procesos.index');
 
+Route::get('proceso/refresh', [HomeController::class,'sync_proces'])->middleware('auth')->name('proceso.refresh');
+
 Route::get('subir-proceso', [HomeController::class,'subir_procesos'])->middleware('auth')->name('subir.procesos');
 
 Route::get('envio-masivo', [HomeController::class,'envio_masivo'])->middleware('auth')->name('envio.masivo');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\Fortify\CreateNewUser;
 use App\Models\Calidad;
 use App\Models\Especie;
+use App\Models\Proceso;
 use App\Models\Recepcion;
 use App\Models\Sync;
 use App\Models\User;
@@ -36,9 +37,102 @@ class HomeController extends Controller
 
     public function procesos()
     {       
-        $procesos=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/ObtenerRecepcion');
+        return view('productors.procesos');
+    }
+
+    public function sync_proces()
+    {       
+        $procesos=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Produccion/ObtenerProduccion');
+        $procesos = $procesos->json();
+
+        $ri=Proceso::all();
+        $totali=$ri->count();
+
+        foreach ($procesos as $proceso){
+            $agricola=Null;//1
+            $n_proceso=Null;//2
+            $especie=Null;//3
+            $variedad=Null;//4
+            $kilos_netos=Null;//5
+            $categoria=Null;//6
+            //7
+            $id_empresa=Null;//8
+            
+            $m=1;
+            foreach ($proceso as $item){
+                
+                if($m==1){
+                    $agricola=$item;
+                }
+                if($m==2){
+                    $n_proceso=$item;
+                }
+                if($m==3){
+                    $especie=$item;
+                }
+                if($m==4){
+                    $variedad=$item;
+                }
+                if($m==5){
+                    $fecha=$item;
+                }
+                if($m==6){
+                    $kilos_netos=$item;
+                }
+                if($m==7){
+                    $categoria=$item;
+                }
+                if($m==8){
+                    $id_empresa=$item;
+                }
+               if($m==8){
+
+                        $cont=Proceso::where('n_proceso',$n_proceso)->first();
+                        if($cont){
+                            $cont->forceFill([
+                                'agricola' => $agricola,//1
+                                'n_proceso' => $n_proceso,//2
+                                'especie' => $especie,//3
+                                'variedad' => $variedad,//4
+                                'fecha' => $fecha,//5
+                                'kilos_netos' => $kilos_netos,//6
+                                'categoria' => $categoria,//7
+                                'id_empresa' => $id_empresa,//8
+                            ])->save();
+                            }
+                        else{
+                            
+                                $rec=Proceso::create([
+                                    'agricola' => $agricola,//1
+                                    'n_proceso' => $n_proceso,//2
+                                    'especie' => $especie,//3
+                                    'variedad' => $variedad,//4
+                                    'fecha' => $fecha,//5
+                                    'kilos_netos' => $kilos_netos,//6
+                                    'categoria' => $categoria,//7
+                                    'id_empresa' => $id_empresa,//8
+                                ]);
+                               
+                        }
+                    
+                }
+                $m+=1;
+                
+            } 
+        }
+
         
-        return view('productors.procesos',compact('procesos'));
+        $rf=Proceso::all();
+        $total=$rf->count()-$ri->count();
+        Sync::create([
+            'tipo'=>'MANUAL',
+            'entidad'=>'PROCESOS',
+            'fecha'=>Carbon::now(),
+            'cantidad'=>$total
+        ]);
+
+        return redirect()->route('procesos.index');
+
     }
 
     public function dashboard () {
