@@ -27,8 +27,8 @@ class HomeController extends Controller
     
 
     public function envio_masivo()
-    {       
-        return view('productors.envio-masivo');
+    {       $especies=Especie::all();
+        return view('productors.envio-masivo',compact('especies'));
     }
 
     public function subir_procesos()
