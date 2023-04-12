@@ -11,12 +11,13 @@ use App\Models\Sync;
 use App\Models\User;
 use App\Models\Variedad;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Spatie\Permission\Models\Role;
 use PDF;
-
+use Illuminate\support\Str;
 
 class HomeController extends Controller
 {
@@ -27,13 +28,76 @@ class HomeController extends Controller
     
 
     public function envio_masivo()
-    {       $especies=Especie::all();
+    {  try {
+        
+        //TOKEN QUE NOS DA FACEBOOK
+        $token = 'EABVGwJYpNswBAEZBAkttf9xCesIiieZCGpr38okLtFZCK9J5SJmFw6ta1BmZBBwE8buEePOcgpe01LtBuK0PA009lkosW7xBe0B8ouQHqSZBu8zeyVAhda5nyPZAY0AuljLO1z4lHm9yBAsIkIG80nDPTP1LeeRg8wqPckD8SYt8Go0ZCJzAkgZCcZAgvHfuSwW0pE3MyxtBTo232J2npCRFm';
+        $phoneid='100799979656074';
+        $version='v16.0';
+        $url="https://appgreenex.cl/";
+        $payload=[
+            'messaging_product' => 'whatsapp',
+            "preview_url"=> false,
+            'to'=>'56963176726',
+            "text"=>[
+                "body"=> "La recepcion nro 20 esta lista en la ur: ".$url." Haz click y descarga el informe de procesos"
+                    
+            ]
+        ];
+        
+        Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+
+        $especies=Especie::all();
         return view('productors.envio-masivo',compact('especies'));
+
+    } catch (Exception $e) {
+        $especies=Especie::all();
+        return view('productors.envio-masivo',compact('especies'));
+        /*
+        return response()->json([
+            'success'=> false,
+            'error'=>$e->getMessage(),
+        ],500);*/
+    }
+       
     }
 
     public function subir_procesos()
     {         
         return view('productors.subir-proceso');
+    }
+
+    public function proceso_upload(Request $request)
+    {   
+        //$nombre = $request->file('file')->getClientOriginalName();
+        $file = $request->file('file');
+        $name = $file->getClientOriginalName();
+
+        $nombre = $request->file('file')->storeAs(
+            'pdf-procesos', $name
+        );
+        $proceso=Proceso::find(explode("-",$name)[0]);
+        if($proceso){
+            $proceso->update([
+                'informe'=>$nombre
+            ]);
+        }
+
+
+        return view('productors.subir-proceso',compact('nombre'))->with('info','Archivo subido con exito');
+    }
+
+    public function download_proceso(Proceso $proceso) {
+
+        return response()->download(storage_path('app/'.$proceso->informe));
+    }
+
+    public function proceso_destroy(Proceso $proceso) {
+
+        $proceso->update([
+            'informe'=>NULL
+        ]);
+        return redirect()->back();
     }
 
     public function procesos()

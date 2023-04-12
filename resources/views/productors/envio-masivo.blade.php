@@ -5,7 +5,6 @@
     @endsection
 
 
-
     <div class="max-w-7xl mx-auto px-4 ">
         <div class="bg-white shadow-lg rounded overflow-hidden py-12">
           <div class="flex justify-center">

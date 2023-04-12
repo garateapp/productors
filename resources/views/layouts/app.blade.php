@@ -13,9 +13,9 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <!-- Styles -->
+        <!-- Styles 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+-->
         <!-- Styles -->
         @livewireStyles
         @yield('css')

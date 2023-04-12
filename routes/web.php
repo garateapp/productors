@@ -46,7 +46,7 @@ Route::get('production/refresh', [HomeController::class,'production_refresh'])->
 
 Route::get('productores/refresh', [HomeController::class,'productor_refresh'])->middleware('auth')->name('productor.refresh');
 
-Route::get('informe/{recepcion}', [HomeController::class,'downloadpdf'])->middleware('auth')->name('informe.download');
+Route::get('informe/{recepcion}', [HomeController::class,'downloadpdf'])->name('informe.download');
 
 Route::post('pass/{user}', [UserController::class,'password_rec'])->middleware('auth')->name('recuperar.contrasena');
 
@@ -58,10 +58,16 @@ Route::resource('users', UserController::class)->only(['index','edit','update','
 
 Route::resource('prod/users', ProductorUserController::class)->only(['update'])->names('productor.users');
 
+Route::get('envio-masivo', [HomeController::class,'envio_masivo'])->middleware('auth')->name('envio.masivo');
+
 Route::get('procesos', [HomeController::class,'procesos'])->middleware('auth')->name('procesos.index');
 
 Route::get('proceso/refresh', [HomeController::class,'sync_proces'])->middleware('auth')->name('proceso.refresh');
 
 Route::get('subir-proceso', [HomeController::class,'subir_procesos'])->middleware('auth')->name('subir.procesos');
 
-Route::get('envio-masivo', [HomeController::class,'envio_masivo'])->middleware('auth')->name('envio.masivo');
+Route::post('archivo/procesos', [HomeController::class,'proceso_upload'])->name('proceso.upload');
+
+Route::get('download/{proceso}', [HomeController::class,'download_proceso'])->name('download.proceso');
+
+Route::delete('delete/proceso/{proceso}',[HomeController::class,'proceso_destroy'])->name('delete.proceso');
