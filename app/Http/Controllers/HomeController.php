@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Http;
 use Spatie\Permission\Models\Role;
 use PDF;
 use Illuminate\support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -72,16 +73,18 @@ class HomeController extends Controller
         //$nombre = $request->file('file')->getClientOriginalName();
         $file = $request->file('file');
         $name = $file->getClientOriginalName();
-
-        $nombre = $request->file('file')->storeAs(
-            'pdf-procesos', $name
-        );
         $proceso=Proceso::find(explode("-",$name)[0]);
         if($proceso){
+            $nombre = $request->file('file')->storeAs(
+                'pdf-procesos', $name
+            );
             $proceso->update([
                 'informe'=>$nombre
             ]);
+
         }
+        
+       
 
 
         return view('productors.subir-proceso',compact('nombre'))->with('info','Archivo subido con exito');
@@ -93,10 +96,13 @@ class HomeController extends Controller
     }
 
     public function proceso_destroy(Proceso $proceso) {
+        Storage::delete($proceso->informe);
 
         $proceso->update([
             'informe'=>NULL
         ]);
+
+
         return redirect()->back();
     }
 
@@ -152,7 +158,8 @@ class HomeController extends Controller
                 }
                if($m==8){
 
-                        $cont=Proceso::where('n_proceso',$n_proceso)->first();
+                        $cont=Proceso::where('n_proceso',$n_proceso)
+                        ->where('categoria',$categoria)->first();
                         if($cont){
                             $cont->forceFill([
                                 'agricola' => $agricola,//1

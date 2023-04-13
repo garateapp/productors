@@ -38,7 +38,7 @@
               'X-CSRF-TOKEN' : "{!! csrf_token() !!}"
             },
             acceptedFiles: "application/pdf",
-            maxFiles: 6,
+            maxFiles: 20,
             
     
               

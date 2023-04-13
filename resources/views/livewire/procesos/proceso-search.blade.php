@@ -23,6 +23,7 @@
                  <th>Variedad</th>
                  <th class="text-center">Fecha</th>
                  <th class="text-center">Kg<br>Procesados</th>
+                 <th class="text-center">CATEGORIA</th>
                  <th class="text-center">%<br>Exportación</th>
                  <th class="text-center">%<br>Comercial</th>
                  <th class="text-center">%<br>Desecho</th>
@@ -133,6 +134,17 @@
                                                       
                                     </p>
                                  </td>
+                                 <td class="pl-5 whitespace-nowrap">
+                                    <p class="whitespace-nowrap  text-base flex font-medium leading-none text-gray-700 mr-2">
+   
+                                    
+   
+                                    @if ($proceso->categoria)
+                                       {{$proceso->categoria}}
+                                    @endif
+                                                     
+                                   </p>
+                                </td>
                                        <td class="pl-5 whitespace-nowrap">
                                                 <p class="whitespace-nowrap  text-base flex font-medium leading-none text-gray-700 mr-2">
 
