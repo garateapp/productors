@@ -214,7 +214,7 @@ class HomeController extends Controller
  
          $pdf = PDF::loadView('productors.informe', ['recepcion' => $recepcion]);
  
-         return $pdf->download($recepcion->id_g_recepcion.'-'.$recepcion->id_emisor);
+         return $pdf->download($recepcion->id_g_recepcion.'-'.$recepcion->id_emisor.'.pdf');
     }
 
     public function production()
