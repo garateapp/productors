@@ -80,9 +80,9 @@ class UserController extends Controller
 
          //TOKEN QUE NOS DA FACEBOOK
          $token = env('WS_TOKEN');
-         $phoneid='100799979656074';
+         $phoneid= env('WS_PHONEID');
          $version='v16.0';
-         $url="https://appgreenex.test/";
+         $url="https://appgreenex.cl/";
          $payload=[
              'messaging_product' => 'whatsapp',
              "preview_url"=> false,
@@ -90,7 +90,7 @@ class UserController extends Controller
              
              'type'=>'template',
                  'template'=>[
-                     'name'=>'nuevo_pedido',
+                     'name'=>'bienvenida',
                      'language'=>[
                          'code'=>'es'],
                      'components'=>[ 
@@ -100,14 +100,6 @@ class UserController extends Controller
                                  [
                                      'type'=>'text',
                                      'text'=> 'JUAN'
-                                 ],
-                                 [
-                                     'type'=>'text',
-                                     'text'=> 'DIEGO'
-                                 ],
-                                 [
-                                     'type'=>'text',
-                                     'text'=> '$10.000'
                                  ]
                              ]
                          ]
