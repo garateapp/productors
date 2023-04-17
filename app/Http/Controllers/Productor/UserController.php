@@ -76,6 +76,46 @@ class UserController extends Controller
         
         $user->update($request->all());
 
+        $fono='56963176726';
+        //TOKEN QUE NOS DA FACEBOOK
+        $token = env('WS_TOKEN');
+        $phoneid= env('WS_PHONEID');
+        $version='v16.0';
+        $url="https://appgreenex.cl/";
+        $payload=[
+            'messaging_product' => 'whatsapp',
+            "preview_url"=> false,
+            'to'=>$fono,
+            
+            'type'=>'template',
+                'template'=>[
+                    'name'=>'bienvenida',
+                    'language'=>[
+                        'code'=>'es'],
+                    'components'=>[ 
+                        [
+                            'type'=>'body',
+                            'parameters'=>[
+                                [
+                                    'type'=>'text',
+                                    'text'=> $this->user->name
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+                
+            
+            
+            /*
+            "text"=>[
+                "body"=> "Buena Rider, Bienvenido al club"
+            ]*/
+        ];
+        
+        Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+
+
         return redirect()->back();
     }
 
