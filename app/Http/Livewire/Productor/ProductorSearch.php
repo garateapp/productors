@@ -8,6 +8,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Http;
 
 class ProductorSearch extends Component
 {   use WithPagination;
@@ -62,6 +63,41 @@ class ProductorSearch extends Component
             'updated_at'=> Carbon::now()
         ])->save();
         $this->user = User::find($this->cellid);
+        
+
+        $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
+        //TOKEN QUE NOS DA FACEBOOK
+        $token = 'EAAMk3XLOBD0BAE0fvMttY77NkXqQIzj1zyqXnZBgo3vyMN0iX1u5qFVU171c7TZAPzHFA037z2kSOKmgjKib41gNnApIIhP0mjL81JUoCaJoFH7DjfEUK3alZBekRuADcZC4wJJZBCZACQZCGJhIIB5qNnST7dyMpJQJE1uAeZAqKoY6rE9syDRnQLrX4n3DWzfZBtZCZCPFYfs5AZDZD';
+        $phoneid='114061014990020';
+        $version='v16.0';
+        $url="https://appgreenex.cl/";
+        $payload=[
+            'messaging_product' => 'whatsapp',
+            "preview_url"=> false,
+            'to'=>$fono,
+            'type'=>'template',
+                'template'=>[
+                    'name'=>'bienvenida',
+                    'language'=>[
+                        'code'=>'es'],
+                    'components'=>[ 
+                        [
+                            'type'=>'body',
+                            'parameters'=>[
+                                [   //Usuario
+                                    'type'=>'text',
+                                    'text'=>  $this->user->name
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+                
+            
+        ];
+        
+        Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+
 
     }
     public function phone_destroy(Telefono $telefono){

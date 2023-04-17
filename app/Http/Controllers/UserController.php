@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 
 class UserController extends Controller
 {
@@ -94,6 +95,8 @@ class UserController extends Controller
         $user->forceFill([
             'password' => Hash::make('gre1234'),
         ])->save();
+
+         
 
         return redirect()->back()->with('info','La contraseña de '.$user->name.' fue actualizada con éxito');
     }
