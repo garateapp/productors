@@ -65,7 +65,7 @@ class ProductorSearch extends Component
         ])->save();
         $this->user = User::find($this->cellid);
        
-        $fono='56963176726';
+        $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
         //TOKEN QUE NOS DA FACEBOOK
         $token = env('WS_TOKEN');
         $phoneid= env('WS_PHONEID');
