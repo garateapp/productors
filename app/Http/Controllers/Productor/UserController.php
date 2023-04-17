@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Productor;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class UserController extends Controller
 {
@@ -74,6 +75,55 @@ class UserController extends Controller
         ]);
         
         $user->update($request->all());
+
+        
+
+         //TOKEN QUE NOS DA FACEBOOK
+         $token = env('WS_TOKEN');
+         $phoneid='100799979656074';
+         $version='v16.0';
+         $url="https://appgreenex.test/";
+         $payload=[
+             'messaging_product' => 'whatsapp',
+             "preview_url"=> false,
+             'to'=>'56963176726',
+             
+             'type'=>'template',
+                 'template'=>[
+                     'name'=>'nuevo_pedido',
+                     'language'=>[
+                         'code'=>'es'],
+                     'components'=>[ 
+                         [
+                             'type'=>'body',
+                             'parameters'=>[
+                                 [
+                                     'type'=>'text',
+                                     'text'=> 'JUAN'
+                                 ],
+                                 [
+                                     'type'=>'text',
+                                     'text'=> 'DIEGO'
+                                 ],
+                                 [
+                                     'type'=>'text',
+                                     'text'=> '$10.000'
+                                 ]
+                             ]
+                         ]
+                     ]
+                 ]
+                 
+             
+             
+             /*
+             "text"=>[
+                 "body"=> "Buena Rider, Bienvenido al club"
+              ]*/
+         ];
+         
+         Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+ 
 
         return redirect()->back();
     }
