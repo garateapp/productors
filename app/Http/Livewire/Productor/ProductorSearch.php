@@ -66,8 +66,8 @@ class ProductorSearch extends Component
         
 
         $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
-        //TOKEN QUE NOS DA FACEBOOK
-        $token = 'EAAMk3XLOBD0BAE0fvMttY77NkXqQIzj1zyqXnZBgo3vyMN0iX1u5qFVU171c7TZAPzHFA037z2kSOKmgjKib41gNnApIIhP0mjL81JUoCaJoFH7DjfEUK3alZBekRuADcZC4wJJZBCZACQZCGJhIIB5qNnST7dyMpJQJE1uAeZAqKoY6rE9syDRnQLrX4n3DWzfZBtZCZCPFYfs5AZDZD';
+        //TOKEN QUE NOS DA FACEBOOK ,
+        $token = env('WS_TOKEN');
         $phoneid='114061014990020';
         $version='v16.0';
         $url="https://appgreenex.cl/";
