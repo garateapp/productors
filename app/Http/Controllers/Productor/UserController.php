@@ -98,7 +98,7 @@ class UserController extends Controller
                             'parameters'=>[
                                 [
                                     'type'=>'text',
-                                    'text'=> $this->user->name
+                                    'text'=> 'David'
                                 ]
                             ]
                         ]
