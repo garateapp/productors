@@ -109,7 +109,7 @@ class HomeController extends Controller
                                     'type'=>'document',
                                     'document'=> [
                                         'link'=>$link,
-                                        'filename'=>$proceso->n_proceso
+                                        'filename'=>$name
                                         ]
                                 ]
                             ]
@@ -119,7 +119,7 @@ class HomeController extends Controller
                             'parameters'=>[
                                 [
                                     'type'=>'text',
-                                    'text'=> '10'
+                                    'text'=> $proceso->n_proceso
                                 ]
                             ]
                         ]
