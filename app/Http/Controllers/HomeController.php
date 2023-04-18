@@ -82,7 +82,7 @@ class HomeController extends Controller
                 'informe'=>$nombre
             ]);
 
-        }
+        
         
         //$fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
         //TOKEN QUE NOS DA FACEBOOK
@@ -131,10 +131,10 @@ class HomeController extends Controller
         
         Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
 
-       
+    }
 
 
-        return view('productors.subir-proceso',compact('nombre'))->with('info','Archivo subido con exito');
+        return view('productors.subir-proceso')->with('info','Archivo subido con exito');
     }
 
     public function download_proceso(Proceso $proceso) {
