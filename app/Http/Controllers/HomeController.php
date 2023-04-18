@@ -84,6 +84,54 @@ class HomeController extends Controller
 
         }
         
+        //$fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
+        //TOKEN QUE NOS DA FACEBOOK
+        $token = env('WS_TOKEN');
+        $phoneid= env('WS_PHONEID');
+        $version='v16.0';
+        $url="https://appgreenex.cl/";
+        $payload=[
+            'messaging_product' => 'whatsapp',
+            "preview_url"=> false,
+            'to'=>'56963176726',
+            
+            'type'=>'template',
+                'template'=>[
+                    'name'=>'proceso',
+                    'language'=>[
+                        'code'=>'es'],
+                    'components'=>[ 
+                        [
+                            'type'=>'header',
+                            'parameters'=>[
+                                [
+                                    'type'=>'document',
+                                    'text'=> 'https://appgrenex.cl/'.$nombre
+                                ]
+                            ]
+                        ],
+                        [
+                            'type'=>'body',
+                            'parameters'=>[
+                                [
+                                    'type'=>'text',
+                                    'text'=> explode("-",$name)[0]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+                
+            
+            
+            /*
+            "text"=>[
+                "body"=> "Buena Rider, Bienvenido al club"
+            ]*/
+        ];
+        
+        Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+
        
 
 
