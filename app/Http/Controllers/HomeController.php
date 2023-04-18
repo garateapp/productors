@@ -115,7 +115,7 @@ class HomeController extends Controller
                             'parameters'=>[
                                 [
                                     'type'=>'text',
-                                    'text'=> explode("-",$name)[0]
+                                    'text'=> '10'
                                 ]
                             ]
                         ]
