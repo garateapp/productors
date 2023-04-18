@@ -88,7 +88,7 @@ class HomeController extends Controller
         //TOKEN QUE NOS DA FACEBOOK
         $token = env('WS_TOKEN');
         $phoneid= env('WS_PHONEID');
-        $link=storage_path('app/'.$name);
+        $link= storage_path('app/'.$name);
         $version='v16.0';
         $url="https://appgreenex.cl/";
         $payload=[
