@@ -88,7 +88,7 @@ class HomeController extends Controller
         //TOKEN QUE NOS DA FACEBOOK
         $token = env('WS_TOKEN');
         $phoneid= env('WS_PHONEID');
-        $link= 'https://appgreenex.cl/download/1.pdf';
+        $link= 'https://appgreenex.cl/download/'.$proceso->id.'.pdf';
         $version='v16.0';
         $url="https://appgreenex.cl/";
         $payload=[
@@ -109,7 +109,7 @@ class HomeController extends Controller
                                     'type'=>'document',
                                     'document'=> [
                                         'link'=>$link,
-                                        'filename'=>$nombre
+                                        'filename'=>$proceso->n_proceso
                                         ]
                                 ]
                             ]
