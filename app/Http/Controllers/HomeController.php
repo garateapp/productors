@@ -64,27 +64,7 @@ class HomeController extends Controller
     }
 
     public function subir_procesos()
-    {         
-        return view('productors.subir-proceso');
-    }
-
-    public function proceso_upload(Request $request)
-    {   
-        //$nombre = $request->file('file')->getClientOriginalName();
-        $file = $request->file('file');
-        $name = $file->getClientOriginalName();
-        $proceso=Proceso::find(explode("-",$name)[0]);
-        if($proceso){
-            $nombre = $request->file('file')->storeAs(
-                'pdf-procesos', $name
-            );
-            $proceso->update([
-                'informe'=>$nombre
-            ]);
-
-        }
-        
-        //$fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
+    {     //$fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
         //TOKEN QUE NOS DA FACEBOOK
         $token = env('WS_TOKEN');
         $phoneid= env('WS_PHONEID');
@@ -126,15 +106,30 @@ class HomeController extends Controller
                 ]
                 
             
-            
-            /*
-            "text"=>[
-                "body"=> "Buena Rider, Bienvenido al club"
-            ]*/
         ];
         
         Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
 
+        return view('productors.subir-proceso');
+    }
+
+    public function proceso_upload(Request $request)
+    {   
+        //$nombre = $request->file('file')->getClientOriginalName();
+        $file = $request->file('file');
+        $name = $file->getClientOriginalName();
+        $proceso=Proceso::find(explode("-",$name)[0]);
+        if($proceso){
+            $nombre = $request->file('file')->storeAs(
+                'pdf-procesos', $name
+            );
+            $proceso->update([
+                'informe'=>$nombre
+            ]);
+
+        }
+        
+      
        
 
 
