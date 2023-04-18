@@ -92,6 +92,7 @@ class HomeController extends Controller
         $url="https://appgreenex.cl/";
         $payload=[
             'messaging_product' => 'whatsapp',
+            "preview_url"=> false,
             'to'=>'56963176726',
             
             'type'=>'template',
