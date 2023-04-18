@@ -107,7 +107,8 @@ class HomeController extends Controller
                                 [
                                     'type'=>'document',
                                     'document'=> [
-                                        'link'=>'https://appgrenex.cl/'.$nombre
+                                        'link'=>'https://appgrenex.cl/'.$nombre,
+                                        'filename'=>$nombre
                                         ]
                                 ]
                             ]
