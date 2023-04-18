@@ -68,6 +68,6 @@ Route::get('subir-proceso', [HomeController::class,'subir_procesos'])->middlewar
 
 Route::post('archivo/procesos', [HomeController::class,'proceso_upload'])->name('proceso.upload');
 
-Route::get('download/{proceso}', [HomeController::class,'download_proceso'])->name('download.proceso');
+Route::get('download/{proceso}.pdf', [HomeController::class,'download_proceso'])->name('download.proceso');
 
 Route::delete('delete/proceso/{proceso}',[HomeController::class,'proceso_destroy'])->name('delete.proceso');
