@@ -101,7 +101,7 @@ class HomeController extends Controller
                     'language'=>[
                         'code'=>'es'],
                     'components'=>[ 
-                       /* [
+                        [
                             'type'=>'header',
                             'parameters'=>[
                                 [
@@ -111,7 +111,7 @@ class HomeController extends Controller
                                         ]
                                 ]
                             ]
-                        ],*/
+                        ],
                         [
                             'type'=>'body',
                             'parameters'=>[
