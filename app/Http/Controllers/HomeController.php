@@ -105,9 +105,10 @@ class HomeController extends Controller
                             'type'=>'header',
                             'parameters'=>[
                                 [
-                                    'type'=>'image',
-                                    'image'=> [
-                                        'link'=>'https://appgrenex.cl/'.$nombre
+                                    'type'=>'document',
+                                    'document'=> [
+                                        'link'=>'https://appgrenex.cl/'.$nombre,
+                                        'provider'=>'Greenex'
                                         ]
                                 ]
                             ]
