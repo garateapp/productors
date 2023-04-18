@@ -23,7 +23,6 @@
                  <th>Variedad</th>
                  <th class="text-center">Fecha</th>
                  <th class="text-center">Kg<br>Procesados</th>
-                 <th class="text-center">CATEGORIA</th>
                  <th class="text-center">%<br>Exportación</th>
                  <th class="text-center">%<br>Comercial</th>
                  <th class="text-center">%<br>Desecho</th>
@@ -134,26 +133,15 @@
                                                       
                                     </p>
                                  </td>
-                                 <td class="pl-5 whitespace-nowrap">
-                                    <p class="whitespace-nowrap  text-base flex font-medium leading-none text-gray-700 mr-2">
-   
-                                    
-   
-                                    @if ($proceso->categoria)
-                                       {{$proceso->categoria}}
-                                    @endif
-                                                     
-                                   </p>
-                                </td>
+                              
                                        <td class="pl-5 whitespace-nowrap">
                                                 <p class="whitespace-nowrap  text-base flex font-medium leading-none text-gray-700 mr-2">
 
                                                 
 
-                                                @if ($proceso->kilos_netos)
-                                                   {{$proceso->kilos_netos}}
+                                                @if ($proceso->kilos_netos>0)
+                                                   {{round($proceso->exp*100/$proceso->kilos_netos, 1)}}%
                                                 @endif
-                                                
                                           </p>
                                           
                                        </td>
@@ -162,8 +150,8 @@
 
                                           
 
-                                          @if ($proceso->kilos_netos)
-                                             {{$proceso->kilos_netos}}
+                                          @if ($proceso->kilos_netos>0)
+                                             {{round($proceso->comercial*100/$proceso->kilos_netos, 1)}}%
                                           @endif
                                           
                                     </p>
@@ -174,8 +162,8 @@
 
                                     
 
-                                    @if ($proceso->kilos_netos)
-                                       {{$proceso->kilos_netos}}
+                                    @if ($proceso->kilos_netos>0)
+                                       {{round($proceso->desecho*100/$proceso->kilos_netos, 1)}}%
                                     @endif
                                     
                               </p>
@@ -186,9 +174,11 @@
 
                               
 
-                              @if ($proceso->kilos_netos)
-                                 {{$proceso->kilos_netos}}
+                              @if ($proceso->kilos_netos>0)
+                                 {{round(($proceso->kilos_netos-$proceso->exp-$proceso->comercial-$proceso->desecho)*100/$proceso->kilos_netos, 1)}}%
                               @endif
+                                
+                            
                               
                         </p>
                         

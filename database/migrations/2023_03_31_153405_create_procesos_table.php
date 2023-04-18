@@ -22,8 +22,12 @@ return new class extends Migration
             $table->string('variedad');
             $table->string('fecha');
             $table->integer('kilos_netos');
-            $table->string('categoria');
             $table->integer('id_empresa');
+            $table->string('informe')->nullable();
+            $table->integer('exp');
+            $table->integer('comercial');
+            $table->integer('desecho');
+            $table->integer('merma');
 
             $table->timestamps();
         });

@@ -17,7 +17,6 @@ class ProcesoSearch extends Component
         ->orwhere('especie','LIKE','%'. $this->search .'%')
         ->orwhere('variedad','LIKE','%'. $this->search .'%')
         ->orwhere('fecha','LIKE','%'. $this->search .'%')
-        ->orwhere('categoria','LIKE','%'. $this->search .'%')
         ->orwhere('id_empresa','LIKE','%'. $this->search .'%')
         ->latest('id')->paginate($this->ctd);
 
