@@ -106,7 +106,9 @@ class HomeController extends Controller
                             'parameters'=>[
                                 [
                                     'type'=>'document',
-                                    'link'=> 'https://appgrenex.cl/'.$nombre
+                                    'document'=> [
+                                        'link'=>'https://appgrenex.cl/'.$nombre
+                                        ]
                                 ]
                             ]
                         ],
