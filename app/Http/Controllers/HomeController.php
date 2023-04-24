@@ -368,11 +368,24 @@ class HomeController extends Controller
         return view('productors.productionpropia');
     }
 
-    public function productioncc()
+    public function productionccindex()
     {  
         //$recepcions = $recepcions->json();
 
         return view('productors.productioncc');
+    }
+
+    public function productioncc(Recepcion $recepcion)
+    {  
+        //$recepcions = $recepcions->json();
+
+        return view('productors.agregarcc',compact('recepcion'));
+    }
+    public function productionss(Recepcion $recepcion)
+    {  
+        //$recepcions = $recepcions->json();
+
+        return view('productors.agregarss',compact('recepcion'));
     }
 
     public function production_refresh()

@@ -41,7 +41,13 @@ Route::get('recepcion', [HomeController::class,'production'])->middleware('auth'
 
 Route::get('recepciones', [HomeController::class,'productionpropia'])->middleware('auth')->name('productionpropia.index');
 
-Route::get('recepciones/cc', [HomeController::class,'productioncc'])->middleware('auth')->name('productioncc.index');
+Route::get('recepciones/cc', [HomeController::class,'productionccindex'])->middleware('auth')->name('productioncc.index');
+
+Route::get('recepcion/{recepcion}/cc', [HomeController::class,'productioncc'])->middleware('auth')->name('agregar.cc');
+
+Route::get('recepcion/{recepcion}/ss', [HomeController::class,'productionss'])->middleware('auth')->name('agregar.ss');
+
+
 
 Route::get('production/refresh', [HomeController::class,'production_refresh'])->middleware('auth')->name('production.refresh');
 
