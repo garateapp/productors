@@ -147,7 +147,7 @@
             placeholder="Buscar..." />
         </label>
        
-        <ul class="mt-6">
+        <ul class="my-6">
           
           @foreach ($mensajes as $item)
               @if ($current->id==$item->id)
