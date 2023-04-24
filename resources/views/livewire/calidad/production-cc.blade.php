@@ -820,7 +820,7 @@
                                                     </td>
                                                     <td class="pl-5">
                                                         <div class="whitespace-nowrap flex items-center text-center">
-                                                        <a href="{{route('informe.download',$recepcion)}}" target="blank">
+                                                        <a href="{{route('informe.view',$recepcion)}}" target="blank">
                                                             <button class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
                                                                 VER INFORME PREVIO
                                                             </button>

@@ -47,13 +47,13 @@ Route::get('recepcion/{recepcion}/cc', [HomeController::class,'productioncc'])->
 
 Route::get('recepcion/{recepcion}/ss', [HomeController::class,'productionss'])->middleware('auth')->name('agregar.ss');
 
-
-
 Route::get('production/refresh', [HomeController::class,'production_refresh'])->middleware('auth')->name('production.refresh');
 
 Route::get('productores/refresh', [HomeController::class,'productor_refresh'])->middleware('auth')->name('productor.refresh');
 
-Route::get('informe/{recepcion}', [HomeController::class,'downloadpdf'])->name('informe.download');
+Route::get('download/recepcion/{recepcion}.pdf', [HomeController::class,'downloadpdf'])->name('informe.download');
+
+Route::get('informe/{recepcion}', [HomeController::class,'viewpdf'])->name('informe.view');
 
 Route::post('pass/{user}', [UserController::class,'password_rec'])->middleware('auth')->name('recuperar.contrasena');
 
