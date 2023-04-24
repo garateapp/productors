@@ -13,7 +13,7 @@ use Carbon\Carbon;
 use Livewire\Component;
 use PDF;
 use Livewire\WithPagination;
-use Illuminate\Support\Facades\Http;
+
 
 class ProductionCc extends Component
 {   use WithPagination;
@@ -170,64 +170,64 @@ class ProductionCc extends Component
     public function validar_informe(Recepcion $recepcion) {
         $recepcion->n_estado='CERRADO';
         $recepcion->save();
-   
+        
         $user=User::where('rut',$recepcion->r_emisor)->first();
         if($user){
             
             if($user->telefonos->count()){
-                foreach($user->telefonos as $telefono){
-                $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
-                //TOKEN QUE NOS DA FACEBOOK
-                $token = env('WS_TOKEN');
-                $phoneid= env('WS_PHONEID');
-                $link= 'https://appgreenex.cl/download/recepcion/'.$recepcion->id.'.pdf';
-                $version='v16.0';
-                $url="https://appgreenex.cl/";
-                $payload=[
-                    'messaging_product' => 'whatsapp',
-                    "preview_url"=> false,
-                    'to'=>$fono,
-                    
-                    'type'=>'template',
-                        'template'=>[
-                            'name'=>'recepcion',
-                            'language'=>[
-                                'code'=>'es'],
-                            'components'=>[ 
-                                [
-                                    'type'=>'header',
-                                    'parameters'=>[
+                    foreach($user->telefonos as $telefono){
+                        $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
+                        //TOKEN QUE NOS DA FACEBOOK
+                        $token = env('WS_TOKEN');
+                        $phoneid= env('WS_PHONEID');
+                        $link= 'https://appgreenex.cl/download/recepcion/'.$recepcion->id.'.pdf';
+                        $version='v16.0';
+                        $url="https://appgreenex.cl/";
+                        $payload=[
+                            'messaging_product' => 'whatsapp',
+                            "preview_url"=> false,
+                            'to'=>$fono,
+                            
+                            'type'=>'template',
+                                'template'=>[
+                                    'name'=>'recepcion',
+                                    'language'=>[
+                                        'code'=>'es'],
+                                    'components'=>[ 
                                         [
-                                            'type'=>'document',
-                                            'document'=> [
-                                                'link'=>$link,
-                                                'filename'=>'nro_lote-csg'
+                                            'type'=>'header',
+                                            'parameters'=>[
+                                                [
+                                                    'type'=>'document',
+                                                    'document'=> [
+                                                        'link'=>$link,
+                                                        'filename'=>'nro_lote-csg'
+                                                        ]
                                                 ]
-                                        ]
-                                    ]
-                                ],
-                                [
-                                    'type'=>'body',
-                                    'parameters'=>[
-                                        [
-                                            'type'=>'text',
-                                            'text'=> $recepcion->numero_g_recepcion
+                                            ]
                                         ],
                                         [
-                                            'type'=>'text',
-                                            'text'=> $recepcion->n_especie
+                                            'type'=>'body',
+                                            'parameters'=>[
+                                                [
+                                                    'type'=>'text',
+                                                    'text'=> $recepcion->numero_g_recepcion
+                                                ],
+                                                [
+                                                    'type'=>'text',
+                                                    'text'=> $recepcion->n_especie
+                                                ]
+                                            ]
                                         ]
                                     ]
                                 ]
-                            ]
-                        ]
+                                
+                            
+                        ];
                         
-                    
-                ];
-                
-                Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
-            }
-        }    
+                   //     Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+                    }
+            }    
         }
 
        return redirect()->route('productioncc.index');
