@@ -73,7 +73,7 @@
                                 <th>ACTUALIZAR</th>
                                 <th>ULTIMA <br>MODIFICACIÓN</th>
                                 
-                               <th>Estado</th> 
+                               <th>ESPECIE</th> 
                             </thead>
                             <tbody>
                                 @php
@@ -245,8 +245,17 @@
                                             </div>
                                         </td>
                                   
-                                        <td class="pl-5">
-                                            <button class="py-3 px-3 text-sm focus:outline-none leading-none text-red-700 bg-red-100 rounded">Usuario ya creado</button>
+                                        <td class="pl-5 py-2">
+                                           
+                                                @foreach ($user->especies_comercializas()->get() as $especie)
+                                                    <div class="flex justify-center">
+                                                        <button class="py-3 px-3 text-sm focus:outline-none leading-none text-green-700 bg-green-100 rounded">{{$especie->name}}</button>
+                                                    </div>
+                                                @endforeach
+
+                                           
+                                                
+
                                         </td>
                                          
                                     </tr>

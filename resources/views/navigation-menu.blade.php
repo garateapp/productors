@@ -121,6 +121,9 @@
                             <x-jet-dropdown-link href="{{ route('admin.roles.index') }}">
                                 {{ __('Roles') }}
                             </x-jet-dropdown-link>
+                            <x-jet-dropdown-link href="{{ route('mensajes.index') }}">
+                                {{ __('Bandeja de Entrada') }}
+                            </x-jet-dropdown-link>
                             <x-jet-dropdown-link href="{{ route('subir.procesos') }}">
                                 {{ __('Subir Procesos') }}
                             </x-jet-dropdown-link>

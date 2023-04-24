@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Especie extends Model
+class Mensaje extends Model
 {
     use HasFactory;
-
+    
     protected $guarded = ['id'];
 
-    public function comercializado(){
-        return $this->BelongsToMany('App\Models\User');
-    }
+    const ENVIADO =1;
+    const LEIDO =2;
 }

@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Storage;
 class HomeController extends Controller
 {
     public function index()
-    {        
+    {
         return view('productors.index');
     }
     
@@ -32,8 +32,8 @@ class HomeController extends Controller
     {  try {
         
         //TOKEN QUE NOS DA FACEBOOK
-        $token = 'EABVGwJYpNswBAEZBAkttf9xCesIiieZCGpr38okLtFZCK9J5SJmFw6ta1BmZBBwE8buEePOcgpe01LtBuK0PA009lkosW7xBe0B8ouQHqSZBu8zeyVAhda5nyPZAY0AuljLO1z4lHm9yBAsIkIG80nDPTP1LeeRg8wqPckD8SYt8Go0ZCJzAkgZCcZAgvHfuSwW0pE3MyxtBTo232J2npCRFm';
-        $phoneid='100799979656074';
+        $token = env('WS_TOKEN');
+        $phoneid= env('WS_PHONEID');
         $version='v16.0';
         $url="https://appgreenex.cl/";
         $payload=[
@@ -453,6 +453,16 @@ class HomeController extends Controller
                             $espec->forceFill([
                                 'name'=> $n_especie
                             ]);
+
+                            $user=User::where('idprod',$id_emisor)->first();
+                            if(!IS_NULL($user)){
+                                if($espec->comercializado->contains($user->id)){
+
+                                }else{
+                                    $espec->comercializado()->attach($user->id);
+                                }
+                            }
+                            
                             $varie=Variedad::where('name',$n_variedad)->first();
                             if($varie){
                                 $varie->forceFill([
@@ -469,6 +479,14 @@ class HomeController extends Controller
                             $especie=Especie::create([
                             'name'=> $n_especie
                             ]);
+                            $user=User::where('idprod',$id_emisor)->first();
+                            if(!IS_NULL($user)){
+                                if($especie->comercializado->contains($user->id)){
+
+                                }else{
+                                    $especie->comercializado()->attach($user->id);
+                                }
+                            }
                             $varie=Variedad::where('name',$n_variedad)->first();
                             if($varie){
                                 $varie->forceFill([

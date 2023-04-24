@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MensajeController;
 use App\Http\Controllers\Productor\UserController as ProductorUserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TelefonoController;
@@ -71,3 +72,5 @@ Route::post('archivo/procesos', [HomeController::class,'proceso_upload'])->name(
 Route::get('download/{proceso}.pdf', [HomeController::class,'download_proceso'])->name('download.proceso');
 
 Route::delete('delete/proceso/{proceso}',[HomeController::class,'proceso_destroy'])->name('delete.proceso');
+
+Route::resource('mensaje', MensajeController::class)->middleware('auth')->names('mensajes');

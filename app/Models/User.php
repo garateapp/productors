@@ -68,4 +68,8 @@ class User extends Authenticatable
     public function telefonos(){
         return $this->hasMany('App\Models\Telefono');
     }
+
+    public function especies_comercializas(){
+        return $this->belongsToMany('App\Models\Especie');
+    }
 }
