@@ -117,10 +117,12 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            
-                            <x-jet-dropdown-link href="{{ route('admin.roles.index') }}">
-                                {{ __('Roles') }}
-                            </x-jet-dropdown-link>
+                            @can('Ver produccion_total')
+                                <x-jet-dropdown-link href="{{ route('admin.roles.index') }}">
+                                    {{ __('Roles') }}
+                                </x-jet-dropdown-link>
+                            @endcan
+                           
                             <x-jet-dropdown-link href="{{ route('mensajes.index') }}">
                                 {{ __('Bandeja de Entrada') }}
                             </x-jet-dropdown-link>
@@ -196,9 +198,12 @@
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
-                <x-jet-responsive-nav-link href="{{ route('admin.roles.index') }}" :active="request()->routeIs('admin.roles.index')">
-                    {{ __('Roles') }}
-                </x-jet-responsive-nav-link>
+                @can('Ver produccion_total')
+                    <x-jet-responsive-nav-link href="{{ route('admin.roles.index') }}" :active="request()->routeIs('admin.roles.index')">
+                        {{ __('Roles') }}
+                    </x-jet-responsive-nav-link>
+                @endcan
+               
                 <x-jet-responsive-nav-link href="{{ route('mensajes.index') }}" :active="request()->routeIs('mensajes.index')">
                     {{ __('Bandeja de Entrada') }}
                 </x-jet-responsive-nav-link>

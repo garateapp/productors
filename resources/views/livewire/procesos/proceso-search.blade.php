@@ -1,10 +1,16 @@
 <div>
     <div class="flex justify-center my-2 items-center content-center"> 
         <a href="{{route('proceso.refresh')}}">
-            <button  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
+            <button  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
                 <p class="text-sm font-medium leading-none text-white">PROCESO IMPORT</p>
             </button>
         </a>
+
+         <a href="{{route('subir.procesos')}}">
+               <button  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-green-500 hover:bg-green-600 focus:outline-none rounded ml-2">
+                  <p class="text-sm font-medium leading-none text-white">SUBIR PROCESO</p>
+               </button>
+         </a>
            
       
     </div>
