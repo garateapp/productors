@@ -126,13 +126,15 @@
                             <x-jet-dropdown-link href="{{ route('mensajes.index') }}">
                                 {{ __('Bandeja de Entrada') }}
                             </x-jet-dropdown-link>
-                            <x-jet-dropdown-link href="{{ route('subir.procesos') }}">
-                                {{ __('Subir Procesos') }}
-                            </x-jet-dropdown-link>
-                            <x-jet-dropdown-link href="{{ route('envio.masivo') }}">
-                                {{ __('Envio Masivo') }}
-                            </x-jet-dropdown-link>
+                            @can('Ver produccion_total')
+                                <x-jet-dropdown-link href="{{ route('subir.procesos') }}">
+                                    {{ __('Subir Procesos') }}
+                                </x-jet-dropdown-link>
 
+                                <x-jet-dropdown-link href="{{ route('envio.masivo') }}">
+                                    {{ __('Envio Masivo') }}
+                                </x-jet-dropdown-link>
+                            @endcan
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
                                 {{ __('Configuración') }}
@@ -207,13 +209,14 @@
                 <x-jet-responsive-nav-link href="{{ route('mensajes.index') }}" :active="request()->routeIs('mensajes.index')">
                     {{ __('Bandeja de Entrada') }}
                 </x-jet-responsive-nav-link>
-                <x-jet-responsive-nav-link href="{{ route('subir.procesos') }}" :active="request()->routeIs('subir.procesos')">
-                    {{ __('Subir Procesos') }}
-                </x-jet-responsive-nav-link>
-                <x-jet-responsive-nav-link href="{{ route('envio.masivo') }}" :active="request()->routeIs('envio.masivo')">
-                    {{ __('Envio Masivo') }}
-                </x-jet-responsive-nav-link>
-
+                @can('Ver produccion_total')
+                    <x-jet-responsive-nav-link href="{{ route('subir.procesos') }}" :active="request()->routeIs('subir.procesos')">
+                        {{ __('Subir Procesos') }}
+                    </x-jet-responsive-nav-link>
+                    <x-jet-responsive-nav-link href="{{ route('envio.masivo') }}" :active="request()->routeIs('envio.masivo')">
+                        {{ __('Envio Masivo') }}
+                    </x-jet-responsive-nav-link>
+                @endcan
 
             </div>
             <div class="flex items-center px-4">
