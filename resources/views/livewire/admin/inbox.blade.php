@@ -52,7 +52,7 @@
             
             @foreach ($mensajes as $item)
                 @if ($current->id==$item->id)
-                    <li class="py-5 border-b px-3 bg-indigo-600 text-white">
+                    <li class="py-5 border-b px-3 bg-indigo-600 text-white" wire:click="changemensaje({{$item->id}})">
                         <a class="flex justify-between items-center">
                         <h3 class="text-lg font-semibold">{{$item->tipo}} Para Productores De {{$item->especie}}</h3>
                         <p class="text-md">23m ago</p>
@@ -151,7 +151,7 @@
           
           @foreach ($mensajes as $item)
               @if ($current->id==$item->id)
-                  <li class="py-5 border-b px-3 bg-indigo-600 text-white">
+                  <li class="py-5 border-b px-3 bg-indigo-600 text-white" wire:click="changemensaje({{$item->id}})">
                       <a class="flex justify-between items-center">
                       <h3 class="text-lg font-semibold">{{$item->tipo}} Para Productores De {{$item->especie}}</h3>
                       <p class="text-md">23m ago</p>
