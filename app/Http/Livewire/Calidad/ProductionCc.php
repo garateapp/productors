@@ -211,11 +211,11 @@ class ProductionCc extends Component
                                             'parameters'=>[
                                                 [
                                                     'type'=>'text',
-                                                    'text'=> $recepcion->numero_g_recepcion
+                                                    'text'=> '100'
                                                 ],
                                                 [
                                                     'type'=>'text',
-                                                    'text'=> $recepcion->n_especie
+                                                    'text'=> 'Manzanas'
                                                 ]
                                             ]
                                         ]
