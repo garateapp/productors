@@ -83,7 +83,7 @@
            
           </ul>
         </section>
-        <section class="w-full sm:w-6/12 px-4 flex flex-col bg-white rounded-r-3xl">
+        <section class="w-full sm:w-6/12 px-4 flex flex-col bg-white rounded-r-3xl order-1 lg:order-2">
             @if ($current)
                 <div class="flex justify-between items-center h-48 border-b-2 mb-2">
                     <div class="flex space-x-4 items-center">
