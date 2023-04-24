@@ -199,6 +199,9 @@
                 <x-jet-responsive-nav-link href="{{ route('admin.roles.index') }}" :active="request()->routeIs('admin.roles.index')">
                     {{ __('Roles') }}
                 </x-jet-responsive-nav-link>
+                <x-jet-responsive-nav-link href="{{ route('mensajes.index') }}" :active="request()->routeIs('mensajes.index')">
+                    {{ __('Bandeja de Entrada') }}
+                </x-jet-responsive-nav-link>
                 <x-jet-responsive-nav-link href="{{ route('subir.procesos') }}" :active="request()->routeIs('subir.procesos')">
                     {{ __('Subir Procesos') }}
                 </x-jet-responsive-nav-link>
