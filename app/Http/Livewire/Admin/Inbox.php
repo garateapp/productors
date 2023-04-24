@@ -20,7 +20,10 @@ class Inbox extends Component
         }
         if(!$this->current){
             $this->current = $this->mensajes->first();
-            $this->emisor = User::find($this->current->emisor_id);
+            if($this->current){
+                $this->emisor = User::find($this->current->emisor_id);
+            }
+            
         }
     }
 
