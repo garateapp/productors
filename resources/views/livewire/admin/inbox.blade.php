@@ -141,7 +141,7 @@
             @endif
         </section>
       </main>
-      <section class="flex sm:hidden flex-col pt-3 w-full sm:w-4/12 bg-gray-50 h-full overflow-y-scroll order-2 lg:order-1">
+      <section class="flex sm:hidden flex-col pt-3 w-full sm:w-4/12 bg-gray-50 h-full overflow-y-scroll order-2 lg:order-1 mb-8">
         <label class="px-3">
           <input class="rounded-lg p-4 bg-gray-100 transition duration-200 focus:outline-none focus:ring-2 w-full"
             placeholder="Buscar..." />
