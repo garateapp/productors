@@ -31,34 +31,14 @@ class HomeController extends Controller
     public function envio_masivo()
     {  try {
         
-        //TOKEN QUE NOS DA FACEBOOK
-        $token = env('WS_TOKEN');
-        $phoneid= env('WS_PHONEID');
-        $version='v16.0';
-        $url="https://appgreenex.cl/";
-        $payload=[
-            'messaging_product' => 'whatsapp',
-            "preview_url"=> false,
-            'to'=>'56963176726',
-            "text"=>[
-                "body"=> "La recepcion nro 20 esta lista en la ur: ".$url." Haz click y descarga el informe de procesos"
-                    
-            ]
-        ];
-        
-        Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
-
+       
         $especies=Especie::all();
         return view('productors.envio-masivo',compact('especies'));
 
     } catch (Exception $e) {
         $especies=Especie::all();
         return view('productors.envio-masivo',compact('especies'));
-        /*
-        return response()->json([
-            'success'=> false,
-            'error'=>$e->getMessage(),
-        ],500);*/
+       
     }
        
     }

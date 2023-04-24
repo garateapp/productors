@@ -180,7 +180,7 @@ class ProductionCc extends Component
                         //TOKEN QUE NOS DA FACEBOOK
                         $token = env('WS_TOKEN');
                         $phoneid= env('WS_PHONEID');
-                        $link= 'https://www.cogrowers.cl/greenex/upload/pdf-recepciones/26-1802-87344.pdf';
+                        $link= 'https://appgreenex.cl/download/recepcion/'.$recepcion->id.'.pdf';
                         $version='v16.0';
                         $url="https://appgreenex.cl/";
                         $payload=[
@@ -201,7 +201,7 @@ class ProductionCc extends Component
                                                     'type'=>'document',
                                                     'document'=> [
                                                         'link'=>$link,
-                                                        'filename'=>'nro_lote-csg'
+                                                        'filename'=> $recepcion->id_g_recepcion.'-'.$recepcion->id_emisor.'.pdf'
                                                         ]
                                                 ]
                                             ]
