@@ -42,7 +42,7 @@
             </a>
           </nav>
         </section>
-        <section class="flex flex-col pt-3 w-4/12 bg-gray-50 h-full overflow-y-scroll order-2 lg:order-1">
+        <section class="flex flex-col pt-3 w-full sm:w-4/12 bg-gray-50 h-full overflow-y-scroll order-2 lg:order-1">
           <label class="px-3">
             <input class="rounded-lg p-4 bg-gray-100 transition duration-200 focus:outline-none focus:ring-2 w-full"
               placeholder="Buscar..." />
@@ -83,7 +83,7 @@
            
           </ul>
         </section>
-        <section class="w-6/12 px-4 flex flex-col bg-white rounded-r-3xl order-1 lg:order-2">
+        <section class="w-full sm:w-6/12 px-4 flex flex-col bg-white rounded-r-3xl">
             @if ($current)
                 <div class="flex justify-between items-center h-48 border-b-2 mb-2">
                 <div class="flex space-x-4 items-center">
@@ -159,4 +159,45 @@
             @endif
         </section>
       </main>
+      <section class="flex sm:hidden flex-col pt-3 w-full sm:w-4/12 bg-gray-50 h-full overflow-y-scroll order-2 lg:order-1">
+        <label class="px-3">
+          <input class="rounded-lg p-4 bg-gray-100 transition duration-200 focus:outline-none focus:ring-2 w-full"
+            placeholder="Buscar..." />
+        </label>
+       
+        <ul class="mt-6">
+          
+          @foreach ($mensajes as $item)
+              @if ($current->id==$item->id)
+                  <li class="py-5 border-b px-3 bg-indigo-600 text-white">
+                      <a class="flex justify-between items-center">
+                      <h3 class="text-lg font-semibold">{{$item->tipo}} Para Productores De {{$item->especie}}</h3>
+                      <p class="text-md">23m ago</p>
+                      </a>
+                      @if ($item->status==1)
+                          <div class="text-md">Mensaje Pendiente de Leer!</div>
+                      @else
+                          <div class="text-md">Mensaje leido!</div>
+                      @endif
+                      
+                  </li>
+              @else
+                  <li class="py-5 border-b px-3 transition hover:bg-indigo-100" wire:click="changemensaje({{$item->id}})">
+                      <a class="flex justify-between items-center">
+                      <h3 class="text-lg font-semibold">{{$item->tipo}} Para Productores De {{$item->especie}}</h3>
+                      <p class="text-md text-gray-400">23m ago</p>
+                      </a>
+                      @if ($item->status==1)
+                          <div class="text-md">Mensaje Pendiente de Leer!</div>
+                      @else
+                          <div class="text-md">Mensaje leido!</div>
+                      @endif
+                  </li>
+              @endif
+              
+          @endforeach
+         
+         
+        </ul>
+      </section>
 </div>
