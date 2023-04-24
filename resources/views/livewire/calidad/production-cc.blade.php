@@ -793,87 +793,129 @@
                                     @livewire('calidad.actualizar-datos', ['recepcion' => $recepcion], key($recepcion->id))
 
                                     
-
-                                    <tr tabindex="0" class="focus:outline-none h-20 border border-gray-100 rounded">
-                                        <td class="text-center">
-                                        
-                                        </td>
-                                        <td class="text-center">
-                                        <a href="{{route('agregar.cc',$recepcion)}}">
-                                            <button  class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
-                                                {{-- 
-                                                @if ($recepcion->calidad->detalles->count())
-                                                    FINALIZAR CC
-                                                @else
-                                                    AGREGAR CC
-                                                @endif
-                                                    --}}
-                                                    AGREGAR CC
+                                        @if ($recepcion->n_estado!='CERRADO')
+                                            <tr tabindex="0" class="focus:outline-none h-20 border border-gray-100 rounded">
+                                                    <td class="text-center">
                                                     
+                                                    </td>
+                                                    <td class="text-center">
+                                                    <a href="{{route('agregar.cc',$recepcion)}}">
+                                                        <button  class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
+                                                        
+                                                                AGREGAR CC
+                                                                
 
-                                            </button>
-                                        </a>
-                                        </td>
-                                    
-                                        <td class="">
-                                            <div class="flex items-center pl-5">
-                                            <a href="{{route('agregar.ss',$recepcion)}}">
-                                                <button  class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
-                                                    AGREGAR SS
-                                                </button>
-                                            </a>
-                                            </div>
-                                        </td>
-                                        <td class="pl-5">
-                                            <div class="whitespace-nowrap flex items-center text-center">
-                                            <a href="{{route('informe.download',$recepcion)}}">
-                                                <button class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
-                                                    VER INFORME PREVIO
-                                                </button>
-                                            </a>
-                                            
-                                            </div>
-                                        </td>
-                                        <td class="pl-5 text-center whitespace-nowrap">
-
-                                            <button class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
-                                                VALIDAR INFORME
-                                            </button>
-                                        
-                                        
-                                        </td>
-                                        <td class="pl-5 whitespace-nowrap">
-                                            <button class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
-                                            CARGAR FIMPRO
-                                            </button>
-                                        
-                                            
-                                        </td>
-                                    
-                                        <td class="pl-5 whitespace-nowrap">
-                                            
-                                            
-                                        </td>
-                                        
-                                    
-                                    
-                                        <td class="pl-5 text-center">
-                                            
-                                        
-                                    
-                                        
-                                                                                        
-                                        </td>
-                                        
+                                                        </button>
+                                                    </a>
+                                                    </td>
+                                                
+                                                    <td class="">
+                                                        <div class="flex items-center pl-5">
+                                                        <a href="{{route('agregar.ss',$recepcion)}}">
+                                                            <button  class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
+                                                                AGREGAR SS
+                                                            </button>
+                                                        </a>
+                                                        </div>
+                                                    </td>
+                                                    <td class="pl-5">
+                                                        <div class="whitespace-nowrap flex items-center text-center">
+                                                        <a href="{{route('informe.download',$recepcion)}}" target="blank">
+                                                            <button class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
+                                                                VER INFORME PREVIO
+                                                            </button>
+                                                        </a>
+                                                        
+                                                        </div>
+                                                    </td>
+                                                    <td class="pl-5 text-center whitespace-nowrap">
+                                                        
+                                                        <button wire:click="validar_informe({{$recepcion->id}})" class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
+                                                            VALIDAR INFORME
+                                                        </button>
                                                     
-                                        <td class="pl-4">
-                                        
-                                        </td> 
-                                        <td>
-                                        
-                                        </td>
+                                                    
+                                                    </td>
+                                                    <td class="pl-5 whitespace-nowrap">
+                                                        <button class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
+                                                        CARGAR FIMPRO
+                                                        </button>
+                                                    
+                                                        
+                                                    </td>
+                                                
+                                                    <td class="pl-5 whitespace-nowrap">
+                                                        
+                                                        
+                                                    </td>
+                                                    
+                                                
+                                                
+                                                    <td class="pl-5 text-center">
+                                                        
+                                                    
+                                                
+                                                    
+                                                                                                    
+                                                    </td>
+                                                    
+                                                                
+                                                    <td class="pl-4">
+                                                    
+                                                    </td> 
+                                                    <td>
+                                                    
+                                                    </td>
+                                                </tr>
+                                        @else
+                                            <tr tabindex="0" class="focus:outline-none h-10 border border-gray-100 rounded">
+                                                <td class="text-center">
+                                                        
+                                                </td>
+                                                <td class="text-center">
+                                                
+                                                </td>
+                                            
+                                                <td class="">
+                                                   
+                                                </td>
+                                                <td class="pl-5">
+                                                  
+                                                </td>
+                                                <td class="pl-5 text-center whitespace-nowrap">
+                                                  
+                                                
+                                                </td>
+                                                <td class="pl-5 whitespace-nowrap">
+                                                  
+                                                    
+                                                </td>
+                                            
+                                                <td class="pl-5 whitespace-nowrap">
+                                                  
+                                                </td>
+                                                
+                                            
+                                            
+                                                <td class="pl-5 text-center">
+                                                    
+                                                
+                                            
+                                                
+                                                                                                
+                                                </td>
+                                                
+                                                            
+                                                <td class="pl-4">
+                                                
+                                                </td> 
+                                                <td>
+                                                 
+                                                </td>
+                                            </tr>
+                                        @endif
+
                                     
-                                    </tr>
                                     
                                 
                             

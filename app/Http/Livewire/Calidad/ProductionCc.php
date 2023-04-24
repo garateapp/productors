@@ -10,6 +10,7 @@ use App\Models\Sync;
 use App\Models\Valor;
 use Carbon\Carbon;
 use Livewire\Component;
+use PDF;
 use Livewire\WithPagination;
 
 class ProductionCc extends Component
@@ -163,5 +164,13 @@ class ProductionCc extends Component
         }
         
     }
+
+    public function validar_informe(Recepcion $recepcion) {
+        $recepcion->n_estado='CERRADO';
+        $recepcion->save();
+       return redirect()->route('productioncc.index');
+    }
+
+   
     
 }

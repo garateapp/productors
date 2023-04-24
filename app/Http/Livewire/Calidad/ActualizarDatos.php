@@ -63,4 +63,10 @@ class ActualizarDatos extends Component
         }
         
     }
+
+    public function editar(Recepcion $recepcion) {
+        $recepcion->n_estado='Finalizado';
+        $recepcion->save();
+       return redirect()->route('productioncc.index');
+    }
 }
