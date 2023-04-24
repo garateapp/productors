@@ -42,7 +42,8 @@
             </a>
           </nav>
         </section>
-        <section class="block sm:flex flex-col pt-3 w-full sm:w-4/12 bg-gray-50 h-full overflow-y-scroll order-2 lg:col-span-2 lg:order-1">
+        
+        <section class="flex flex-col pt-3 w-full sm:w-4/12 bg-gray-50 overflow-y-scroll order-2 lg:order-1">
           <label class="px-3">
             <input class="rounded-lg p-4 bg-gray-100 transition duration-200 focus:outline-none focus:ring-2 w-full"
               placeholder="Buscar..." />
@@ -83,7 +84,7 @@
            
           </ul>
         </section>
-        <section class="w-full sm:w-6/12 px-4 block sm:flex flex-col bg-white rounded-r-3xl order-1 lg:order-2">
+        <section class="flex flex-col w-full sm:w-6/12 px-4 bg-white rounded-r-3xl order-1 lg:order-2">
             @if ($current)
                 <div class="flex justify-between items-center h-48 border-b-2 mb-2">
                 <div class="flex space-x-4 items-center">
@@ -158,5 +159,6 @@
               </section>
             @endif
         </section>
+
       </main>
 </div>
