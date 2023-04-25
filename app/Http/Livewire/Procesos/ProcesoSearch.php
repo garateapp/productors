@@ -18,7 +18,7 @@ class ProcesoSearch extends Component
         ->orwhere('variedad','LIKE','%'. $this->search .'%')
         ->orwhere('fecha','LIKE','%'. $this->search .'%')
         ->orwhere('id_empresa','LIKE','%'. $this->search .'%')
-        ->latest('id')->paginate($this->ctd);
+        ->latest('n_proceso')->paginate($this->ctd);
 
         return view('livewire.procesos.proceso-search',compact('procesos'));
     }
