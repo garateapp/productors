@@ -13,7 +13,7 @@ class ProcesoSearch extends Component
 
     public function render()
     {   $procesos=Proceso::where('agricola',auth()->user()->name)
-        ->latest('id')->paginate($this->ctd);
+        ->latest('n_proceso')->paginate($this->ctd);
 
         return view('livewire.productor.proceso-search',compact('procesos'));
     }
