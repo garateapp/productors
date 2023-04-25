@@ -1,9 +1,20 @@
 <div>
-    <div class="flex justify-center my-2 items-center content-center"> 
+    <div class="flex justify-between my-2 items-center content-center mx-12"> 
         
             <button  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
                 <p class="text-sm font-medium leading-none text-white">Descargar Excel</p>
             </button>
+
+         
+             
+               <select wire:model="ctd" class="max-w-xl  mx-2 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-6 rounded focus:outline-none focus:bg-white focus:border-gray-500">
+                   <option value="25" class="text-left px-10">25 </option>
+                   <option value="50" class="text-left px-10">50 </option>
+                   <option value="100" class="text-left px-10">100 </option>
+                   <option value="500" class="text-left px-10">500 </option>
+                   
+               </select>
+         
        
 
     </div>
