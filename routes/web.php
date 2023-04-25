@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MensajeController;
+use App\Http\Controllers\ProcesoController;
 use App\Http\Controllers\Productor\UserController as ProductorUserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TelefonoController;
@@ -68,6 +69,8 @@ Route::resource('prod/users', ProductorUserController::class)->only(['update'])-
 Route::get('envio-masivo', [HomeController::class,'envio_masivo'])->middleware('auth')->name('envio.masivo');
 
 Route::get('procesos', [HomeController::class,'procesos'])->middleware('auth')->name('procesos.index');
+
+Route::get('procesos/productor', [ProcesoController::class,'index'])->middleware('auth')->name('procesos.productor.index');
 
 Route::get('proceso/refresh', [HomeController::class,'sync_proces'])->middleware('auth')->name('proceso.refresh');
 
