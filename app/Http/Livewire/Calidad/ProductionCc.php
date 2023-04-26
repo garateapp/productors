@@ -212,7 +212,7 @@ class ProductionCc extends Component
                                             'parameters'=>[
                                                 [
                                                     'type'=>'text',
-                                                    'text'=> '10'
+                                                    'text'=> $recepcion->id
                                                 ]
                                             ]
                                         ]
