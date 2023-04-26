@@ -201,14 +201,7 @@
                                  <a href="{{route('download.proceso',$proceso)}}" target="_blank" >   
                                     <img class="w-10 my-2 mr-2" src="{{asset('image/pdf_icon2.png')}}" title="Descargar" alt="">
                                  </a>
-                                 <form action="{{route('delete.proceso',$proceso)}}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                    
-                                    <button class="font-bold py-1 px-3 mt-2 rounded-full bg-red-500 text-white text-2xl" type="submit" title="Eliminar">x</button>
-                                    
-                                </form>
-                                 
+                                
                               @else
                                   
                               @endif
