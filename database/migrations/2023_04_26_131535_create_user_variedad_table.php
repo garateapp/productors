@@ -13,18 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_especie', function (Blueprint $table) {
+        Schema::create('user_variedad', function (Blueprint $table) {
             $table->id();
 
             $table ->foreignId('user_id')
             ->constrained()
             ->onDelete('cascade');
 
-            $table  ->foreignId('especie_id')
+            $table  ->foreignId('variedad_id')
             ->constrained()
             ->onDelete('cascade');
             
-
             $table->timestamps();
         });
     }
@@ -36,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_especie');
+        Schema::dropIfExists('user_variedad');
     }
 };

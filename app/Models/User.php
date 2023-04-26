@@ -72,4 +72,8 @@ class User extends Authenticatable
     public function especies_comercializas(){
         return $this->belongsToMany('App\Models\Especie');
     }
+
+    public function variedades_comercializas(){
+        return $this->belongsToMany('App\Models\Variedad');
+    }
 }

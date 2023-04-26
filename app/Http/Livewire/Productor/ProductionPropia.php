@@ -14,18 +14,37 @@ class ProductionPropia extends Component
     public $search, $ctd=25,$espec, $especieid, $especiename, $varie, $variedadid;
 
     public function render()
-    {   $recepcions=Recepcion::where('n_emisor',auth()->user()->name)
-        ->latest('id')->paginate($this->ctd);
-        $allsubrecepcions=Recepcion::where('n_emisor',auth()->user()->name)
-        ->where('n_especie','LIKE','%'. $this->search .'%')
-        ->latest('id')->get();
+    {   if($this->espec){
+            if($this->varie){
+                $recepcions=Recepcion::where('n_emisor',auth()->user()->name)
+                ->where('n_variedad','LIKE', $this->search)
+                ->latest('id')->paginate($this->ctd);
+            }else{
+                $recepcions=Recepcion::where('n_emisor',auth()->user()->name)
+                ->where('n_especie','LIKE', $this->search)
+                ->latest('id')->paginate($this->ctd);
+            }
+
+        }else{
+            $recepcions=Recepcion::where('n_emisor',auth()->user()->name)
+                        ->latest('id')->paginate($this->ctd);
+        }
+        if($this->varie){
+            $allsubrecepcions=Recepcion::where('n_emisor',auth()->user()->name)
+            ->where('n_variedad','LIKE','%'. $this->search .'%')
+            ->latest('id')->get();
+        }else{
+            $allsubrecepcions=Recepcion::where('n_emisor',auth()->user()->name)
+            ->where('n_especie','LIKE','%'. $this->search .'%')
+            ->latest('id')->get();
+        }
         $allrecepcions=Recepcion::where('n_emisor',auth()->user()->name)
         ->latest('id')->get();
         $sync=Sync::where('entidad','RECEPCIONES')
         ->orderby('id','DESC')
         ->first();
         $especies=auth()->user()->especies_comercializas()->get();
-        $variedades=Variedad::all();
+        $variedades=auth()->user()->variedades_comercializas()->get();
 
         return view('livewire.productor.production-propia',compact('variedades','especies','recepcions','allrecepcions','allsubrecepcions','sync'));
     }

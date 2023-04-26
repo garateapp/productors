@@ -15,4 +15,8 @@ class Variedad extends Model
      public function especie(){
         return $this->BelongsTo('App\Models\Especie');
     }
+
+    public function comercializado(){
+        return $this->BelongsToMany('App\Models\User');
+    }
 }

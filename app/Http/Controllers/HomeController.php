@@ -489,12 +489,25 @@ class HomeController extends Controller
                                     'name'=> $n_variedad,
                                     'especie_id='=> $espec->id
                                 ]);
+
                             }else{
-                                Variedad::create([
+                                $varie=Variedad::create([
                                     'name'=> $n_variedad,
                                     'especie_id'=>$espec->id
                                 ]);
+
                             }
+
+                            if(!IS_NULL($user)){
+                                if($varie){
+                                    if($varie->comercializado->contains($user->id)){
+
+                                    }else{
+                                        $varie->comercializado()->attach($user->id);
+                                    }
+                                }
+                            }
+
                         }else{
                             $especie=Especie::create([
                             'name'=> $n_especie
@@ -514,10 +527,20 @@ class HomeController extends Controller
                                     'especie_id='=> $especie->id
                                 ]);
                             }else{
-                                Variedad::create([
+                                $varie=Variedad::create([
                                     'name'=> $n_variedad,
                                     'especie_id'=>$especie->id
                                 ]);
+                            }
+
+                            if(!IS_NULL($user)){
+                                if($varie){
+                                    if($varie->comercializado->contains($user->id)){
+
+                                    }else{
+                                        $varie->comercializado()->attach($user->id);
+                                    }
+                                }
                             }
                         }
                     
