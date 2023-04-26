@@ -190,11 +190,22 @@ class ProductionCc extends Component
                             
                             'type'=>'template',
                                 'template'=>[
-                                    'name'=>'informe_recepcion',
+                                    'name'=>'recepcion',
                                     'language'=>[
                                         'code'=>'es'],
                                     'components'=>[ 
-                                        
+                                        [
+                                            'type'=>'header',
+                                            'parameters'=>[
+                                                [
+                                                    'type'=>'document',
+                                                    'document'=> [
+                                                        'link'=>$link,
+                                                        'filename'=> 'Archivo.pdf'
+                                                        ]
+                                                ]
+                                            ]
+                                        ],
                                         [
                                             'type'=>'body',
                                             'parameters'=>[
@@ -205,10 +216,6 @@ class ProductionCc extends Component
                                                 [
                                                     'type'=>'text',
                                                     'text'=> 'Manzanas'
-                                                ],
-                                                [
-                                                    'type'=>'text',
-                                                    'text'=> 'https://appgreenex.cl/download/recepcion/1.pdf'
                                                 ]
                                             ]
                                         ]
@@ -218,7 +225,7 @@ class ProductionCc extends Component
                             
                         ];
                         
-                   //     Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+                      Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
                     }
             }    
         }
