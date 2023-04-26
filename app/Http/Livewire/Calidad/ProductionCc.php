@@ -180,7 +180,7 @@ class ProductionCc extends Component
                         //TOKEN QUE NOS DA FACEBOOK
                         $token = env('WS_TOKEN');
                         $phoneid= env('WS_PHONEID');
-                        $link= 'https://appgreenex.cl/download/recepcion/'.$recepcion->id.'.pdf';
+                        $link= 'https://appgreenex.cl/download/1529.pdf';
                         $version='v16.0';
                         $url="https://appgreenex.cl/";
                         $payload=[

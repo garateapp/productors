@@ -50,24 +50,28 @@ class HomeController extends Controller
 
     public function proceso_upload(Request $request)
     {   
-        //$nombre = $request->file('file')->getClientOriginalName();
+    
         $file = $request->file('file');
+        //obtener Nombre del archivo
         $name = $file->getClientOriginalName();
-        //$proceso=Proceso::find(explode("-",$name)[0]);
-
+        
+        //Con dicho nombre, encontrar el proceso correspondiente al archivo
         $proceso=Proceso::where('n_proceso',explode("-",$name)[0])->first();
         
+
         if($proceso){
+            //si existe el proceso, guardar el archivo, si no existe, no lo guarda
             $nombre = $request->file('file')->storeAs(
                 'pdf-procesos', $name
             );
+            //una vez guardado el archivo, se asocia al proceso
             $proceso->update([
                 'informe'=>$nombre
             ]);
-
+            //luego se busca al productor que tiene el nombre de la agricola del proceso
             $user=User::where('name',$proceso->agricola)->first();
             if($user){
-            
+            //en caso que exista el usuarioo consultar si tiene telefonos registrados
             if($user->telefonos->count()){
                 foreach($user->telefonos as $telefono){
                 $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
