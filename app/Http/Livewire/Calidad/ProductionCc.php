@@ -196,19 +196,23 @@ class ProductionCc extends Component
                                         'code'=>'es'],
                                     'components'=>[ 
                                         [
+                                            'type'=>'header',
+                                            'parameters'=>[
+                                                [
+                                                    'type'=>'document',
+                                                    'document'=> [
+                                                        'link'=>$link,
+                                                        'filename'=>'informe Recepcion'
+                                                        ]
+                                                ]
+                                            ]
+                                        ],
+                                        [
                                             'type'=>'body',
                                             'parameters'=>[
                                                 [
                                                     'type'=>'text',
-                                                    'text'=> '100'
-                                                ],
-                                                [
-                                                    'type'=>'text',
-                                                    'text'=> 'Manzanas'
-                                                ],
-                                                [
-                                                    'type'=>'text',
-                                                    'text'=> 'https://appgreenex.cl'
+                                                    'text'=> '10'
                                                 ]
                                             ]
                                         ]
