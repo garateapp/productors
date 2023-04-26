@@ -22,4 +22,8 @@ class ProcesoSearch extends Component
 
         return view('livewire.procesos.proceso-search',compact('procesos'));
     }
+
+    public function limpiar_page(){
+        $this->resetPage();
+    }
 }
