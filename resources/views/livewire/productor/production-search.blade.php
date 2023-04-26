@@ -113,12 +113,12 @@
             <table class="min-w-full divide-y divide-gray-200 mb-20 pb-20">
     
                 <thead class="bg-gray-50 rounded-full">
-                    <th>ID</th>
+                    <th>Lote</th>
                     <th>Agricola</th>
                     <th>Especie</th>
                     <th>Variedad</th>
                     <th class="text-center">Fecha</th>
-                    <th class="text-center">Lote</th>
+                    
                     <th class="text-center">Guia</th>
                     <th class="text-center">Cantidad</th>
                     <th>Kilos</th>
@@ -147,19 +147,17 @@
                                     --}}  
                         {{-- comment  --}}    
                         <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
-                            <td class="text-center">
-                            <p class="text-base font-medium leading-none text-gray-700 mr-2">
+                            <td class="pl-5 text-center">
+                                <p class="text-base flex font-medium leading-none text-gray-700">
 
                             
 
-                                    
-                                @if ($recepcion->id_g_recepcion)
-                                    {{$recepcion->id_g_recepcion}}
-                                @endif 
+                                        @if ($recepcion->numero_g_recepcion)
+                                        {{$recepcion->numero_g_recepcion}}
+                                        @endif
+                                        
+                                </p>
                                 
-                                    
-                            </p>
-                            
                             </td>
                             <td class="text-center">
                                 <p class="text-base font-medium leading-none text-gray-700 mr-2">
@@ -215,18 +213,7 @@
                                 </p>
                             
                             </td>
-                            <td class="pl-5 whitespace-nowrap">
-                                <p class="whitespace-nowrap  text-base flex font-medium leading-none text-gray-700 mr-2">
-
                             
-
-                                        @if ($recepcion->numero_g_recepcion)
-                                        {{$recepcion->numero_g_recepcion}}
-                                        @endif
-                                        
-                                </p>
-                                
-                            </td>
                             <td class="pl-5 whitespace-nowrap">
                                 <p class="whitespace-nowrap  text-base flex font-medium leading-none text-gray-700 mr-2">
 
