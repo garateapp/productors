@@ -14,12 +14,12 @@ class ProductionPropia extends Component
     public $search, $ctd=25,$espec, $especieid, $especiename, $varie, $variedadid;
 
     public function render()
-    {   $recepcions=Recepcion::where('r_emisor',auth()->user()->rut)
+    {   $recepcions=Recepcion::where('n_emisor',auth()->user()->name)
         ->latest('id')->paginate($this->ctd);
-        $allsubrecepcions=Recepcion::where('r_emisor',auth()->user()->rut)
+        $allsubrecepcions=Recepcion::where('n_emisor',auth()->user()->name)
         ->where('n_especie','LIKE','%'. $this->search .'%')
         ->latest('id')->get();
-        $allrecepcions=Recepcion::where('r_emisor',auth()->user()->rut)
+        $allrecepcions=Recepcion::where('n_emisor',auth()->user()->name)
         ->latest('id')->get();
         $sync=Sync::where('entidad','RECEPCIONES')
         ->orderby('id','DESC')
