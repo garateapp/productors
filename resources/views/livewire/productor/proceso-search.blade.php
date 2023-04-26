@@ -64,7 +64,7 @@
     </div>
     <div class="mx-2 sm:mx-12">
       
-      <figure class="highcharts-figure mx-14" wire:ignore>
+      <figure class="highcharts-figure mx-14 mt-6" wire:ignore>
          <div id="grafico" wire:ignore>
             
          </div>
@@ -323,7 +323,7 @@
            allowDecimals: false,
            min: 0,
            title: {
-               text: 'Count medals'
+               text: 'Kilos'
            }
        },
 

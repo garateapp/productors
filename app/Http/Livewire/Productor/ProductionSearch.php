@@ -62,6 +62,7 @@ class ProductionSearch extends Component
         $this->varie =NULL;
         $this->espec=Especie::find($this->especieid);
         $this->search=$this->espec->name;
+        
     }
 
     public function set_varie($id){
