@@ -172,7 +172,7 @@ class ProductionCc extends Component
         $recepcion->n_estado='CERRADO';
         $recepcion->save();
         
-        $user=User::where('rut',$recepcion->r_emisor)->first();
+        $user=User::where('name',$recepcion->agricola)->first();
         if($user){
             
             if($user->telefonos->count()){
@@ -191,7 +191,7 @@ class ProductionCc extends Component
                             
                             'type'=>'template',
                                 'template'=>[
-                                    'name'=>'informe_recepcion',
+                                    'name'=>'recepcion',
                                     'language'=>[
                                         'code'=>'es'],
                                     'components'=>[ 
@@ -213,6 +213,10 @@ class ProductionCc extends Component
                                                 [
                                                     'type'=>'text',
                                                     'text'=> '10'
+                                                ],
+                                                [
+                                                    'type'=>'text',
+                                                    'text'=> 'Peras'
                                                 ]
                                             ]
                                         ]
