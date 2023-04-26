@@ -12,6 +12,7 @@ use App\Models\Valor;
 use Carbon\Carbon;
 use Livewire\Component;
 use PDF;
+use Illuminate\Support\Facades\Http;
 use Livewire\WithPagination;
 
 
