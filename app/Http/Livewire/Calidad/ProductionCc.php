@@ -172,7 +172,7 @@ class ProductionCc extends Component
         $recepcion->n_estado='CERRADO';
         $recepcion->save();
         
-        $user=User::where('idprod',$recepcion->id_emisor)->first();
+        $user=User::where('name',$recepcion->n_emisor)->first();
         if($user){
             
             if($user->telefonos->count()){
