@@ -191,22 +191,10 @@ class ProductionCc extends Component
                             
                             'type'=>'template',
                                 'template'=>[
-                                    'name'=>'recepcion',
+                                    'name'=>'informe_recepcion',
                                     'language'=>[
                                         'code'=>'es'],
                                     'components'=>[ 
-                                        [
-                                            'type'=>'header',
-                                            'parameters'=>[
-                                                [
-                                                    'type'=>'document',
-                                                    'document'=> [
-                                                        'link'=>$link,
-                                                        'filename'=> 'Archivo.pdf'
-                                                        ]
-                                                ]
-                                            ]
-                                        ],
                                         [
                                             'type'=>'body',
                                             'parameters'=>[
@@ -217,6 +205,10 @@ class ProductionCc extends Component
                                                 [
                                                     'type'=>'text',
                                                     'text'=> 'Manzanas'
+                                                ],
+                                                [
+                                                    'type'=>'text',
+                                                    'text'=> 'https://appgreenex.cl/download/1529.pdf'
                                                 ]
                                             ]
                                         ]
