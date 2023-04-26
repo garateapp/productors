@@ -474,7 +474,7 @@ class HomeController extends Controller
                                 'name'=> $n_especie
                             ]);
 
-                            $user=User::where('idprod',$id_emisor)->first();
+                            $user=User::where('name',$n_emisor)->first();
                             if(!IS_NULL($user)){
                                 if($espec->comercializado->contains($user->id)){
 
@@ -499,7 +499,7 @@ class HomeController extends Controller
                             $especie=Especie::create([
                             'name'=> $n_especie
                             ]);
-                            $user=User::where('idprod',$id_emisor)->first();
+                            $user=User::where('name',$n_emisor)->first();
                             if(!IS_NULL($user)){
                                 if($especie->comercializado->contains($user->id)){
 
