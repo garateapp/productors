@@ -26,4 +26,6 @@ class ProcesoSearch extends Component
     public function limpiar_page(){
         $this->resetPage();
     }
+
+    
 }

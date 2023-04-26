@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MensajeController;
 use App\Http\Controllers\ProcesoController;
@@ -83,3 +84,5 @@ Route::get('download/{proceso}.pdf', [HomeController::class,'download_proceso'])
 Route::delete('delete/proceso/{proceso}',[HomeController::class,'proceso_destroy'])->name('delete.proceso');
 
 Route::resource('mensaje', MensajeController::class)->middleware('auth')->names('mensajes');
+
+Route::post('procesos/all', [AjaxController::class,'all'])->name('procesos.all');

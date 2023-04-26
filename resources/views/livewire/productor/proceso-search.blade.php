@@ -1,9 +1,53 @@
 <div>
+     
+   <script src="https://code.highcharts.com/highcharts.js"></script>
+   <script src="https://code.highcharts.com/modules/series-label.js"></script>
+   <script src="https://code.highcharts.com/modules/exporting.js"></script>
+   <script src="https://code.highcharts.com/modules/export-data.js"></script>
+   <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+   
     <div class="flex justify-between my-2 items-center content-center mx-12"> 
         
             <button  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
                 <p class="text-sm font-medium leading-none text-white">Descargar Excel</p>
             </button>
+
+            <div class="mx-2 sm:mx-12 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-x-2 gap-y-4 justify-center content-center">
+               @if ($espec)
+                   <button wire:click="espec_clean"   class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 hover:bg-gray-500 focus:outline-none rounded content-center" style="background-color: #FF8000;">
+                       <p class="text-sm font-medium leading-none text-white">{{$espec->name}}</p>
+                   </button>
+               
+                   @if ($variedades)
+   
+                       @if ($varie)
+                           <button wire:click="varie_clean"  class="mx-4 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                               <p class="text-sm font-medium leading-none text-white">{{$varie->name}}</p>
+                           </button>
+                       @else
+                           @foreach ($variedades as $variedad)
+                               @if ($variedad->especie_id==$espec->id)
+                                   <button wire:click="set_varie({{$variedad->id}})"  class="mx-4 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                                       <p class="text-sm font-medium leading-none text-white">{{$variedad->name}}</p>
+                                   </button>
+                               @endif
+                           @endforeach
+                       @endif
+   
+                     
+                   @endif
+               @else
+                   @foreach ($especies as $especie)
+                   <div class="justify-center ">
+                       <button wire:click="set_especie({{$especie->id}})"  class="mx-4 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                           <p class="text-sm font-medium leading-none text-white">{{$especie->name}}</p>
+                       </button>
+                   </div>
+                   @endforeach
+                   
+               @endif
+           
+           </div>
 
          
              
@@ -19,6 +63,13 @@
 
     </div>
     <div class="mx-2 sm:mx-12">
+      
+      <figure class="highcharts-figure mx-14" wire:ignore>
+         <div id="grafico" wire:ignore>
+            
+         </div>
+     </figure>
+
       <div class="px-6 py-4">
          <input wire:keydown="limpiar_page" wire:model="search"  class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" placeholder="Ingrese el variedad, especie o lote de la recepción" autocomplete="off">
       </div>
@@ -251,5 +302,63 @@
          
    </div>
    </div>         
-   
+   <script>
+      // Data retrieved from https://en.wikipedia.org/wiki/Winter_Olympic_Games
+       Highcharts.chart('grafico', {
+
+       chart: {
+           type: 'column'
+       },
+
+       title: {
+           text: 'Olympic Games all-time medal table, grouped by continent',
+           align: 'left'
+       },
+
+       xAxis: {
+           categories: ['Gold', 'Silver', 'Bronze']
+       },
+
+       yAxis: {
+           allowDecimals: false,
+           min: 0,
+           title: {
+               text: 'Count medals'
+           }
+       },
+
+       tooltip: {
+           formatter: function () {
+               return '<b>' + this.x + '</b><br/>' +
+                   this.series.name + ': ' + this.y + '<br/>' +
+                   'Total: ' + this.point.stackTotal;
+           }
+       },
+
+       plotOptions: {
+           column: {
+               stacking: 'normal'
+           }
+       },
+
+       series: [{
+           name: 'Norway',
+           data: [148, 133, 124],
+           stack: 'Europe'
+       }, {
+           name: 'Germany',
+           data: [102, 98, 65],
+           stack: 'Europe'
+       }, {
+           name: 'United States',
+           data: [113, 122, 95],
+           stack: 'North America'
+       }, {
+           name: 'Canada',
+           data: [77, 72, 80],
+           stack: 'North America'
+       }]
+       });
+               
+   </script>  
 </div>
