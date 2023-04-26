@@ -208,7 +208,7 @@ class ProductionCc extends Component
                                                 ],
                                                 [
                                                     'type'=>'text',
-                                                    'text'=> 'https://appgreenex.cl/download/1529.pdf'
+                                                    'text'=> 'https://appgreenex.cl'
                                                 ]
                                             ]
                                         ]
