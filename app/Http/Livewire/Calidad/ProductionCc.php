@@ -202,7 +202,7 @@ class ProductionCc extends Component
                                                     'type'=>'document',
                                                     'document'=> [
                                                         'link'=>$link,
-                                                        'filename'=>'Informe'
+                                                        'filename'=>$recepcion->id_g_recepcion.'-'.$recepcion->id_emisor.'.pdf'
                                                         ]
                                                 ]
                                             ]
