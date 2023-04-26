@@ -191,7 +191,7 @@ class ProductionCc extends Component
                             
                             'type'=>'template',
                                 'template'=>[
-                                    'name'=>'proceso',
+                                    'name'=>'recepcion',
                                     'language'=>[
                                         'code'=>'es'],
                                     'components'=>[ 
@@ -213,6 +213,10 @@ class ProductionCc extends Component
                                                 [
                                                     'type'=>'text',
                                                     'text'=> $recepcion->id
+                                                ],
+                                                [
+                                                    'type'=>'text',
+                                                    'text'=> $recepcion->n_especie
                                                 ]
                                             ]
                                         ]
