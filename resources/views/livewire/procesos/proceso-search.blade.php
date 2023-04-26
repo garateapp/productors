@@ -1,5 +1,5 @@
 <div>
-    <div class="flex justify-center my-2 items-center content-center"> 
+    <div class="flex justify-end my-2 items-center content-end "> 
         <a href="{{route('proceso.refresh')}}">
             <button  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
                 <p class="text-sm font-medium leading-none text-white">PROCESO IMPORT</p>
