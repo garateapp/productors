@@ -136,6 +136,7 @@
                  <th class="text-center">%<br>Comercial</th>
                  <th class="text-center">%<br>Desecho</th>
                  <th class="text-center">%<br>Merma</th>
+                 <th class="text-center">Informe</th>
                  <th> </th>
                
                 
@@ -293,25 +294,37 @@
                         
                      </td>
                             
-                            <td class="pl-5">
+                     <td class="pl-5">
+                                          
+                        <div class="content-center">
+                           @if ($proceso->informe)
+                              <a href="{{route('download.proceso',$proceso)}}" target="_blank" class="h-10 m-2 w-full mr-2 items-center content-center">   
+                                 <img class="h-10 m-2 w-full mr-2" src="{{asset('image/pdf_icon2.png')}}" title="Descargar" alt="">
+                              </a>
+                           
+                              
+                           @else
+                              
+                           @endif
+                        
+                        
+                        </div>                            
+                  
+               
+                  
+               
+                  </td>
+                  <td class="pl-5">
+                  
+                           <div class="block w-full">
                             
-                           <div class="block md:flex">
-                              @if ($proceso->informe)
-                                 <a href="{{route('download.proceso',$proceso)}}" target="_blank" >   
-                                    <img class="w-10 my-2 mr-2" src="{{asset('image/pdf_icon2.png')}}" title="Descargar" alt="">
-                                 </a>
-                                
-                              @else
-                                  
-                              @endif
-                             
-                            
+                           
                            </div>                            
-                            
-                         
-                            
-                         
-                            </td>
+                     
+                  
+                     
+                  
+                     </td>
                          
                             
                          
