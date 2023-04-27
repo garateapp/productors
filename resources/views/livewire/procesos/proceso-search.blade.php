@@ -278,9 +278,9 @@
                                  
                                  <td class="pl-5">
                                  
-                                       <div class="block w-full">
+                                       <div class="block w-full my-auto">
                                           @if ($proceso->informe)
-                                             <a href="{{route('download.proceso',$proceso)}}" target="_blank" class="h-10 m-2 w-full mr-2">   
+                                             <a href="{{route('download.proceso',$proceso)}}" target="_blank" class="h-10 m-2 w-full mr-2 items-center content-center">   
                                                 <img class="h-10 m-2 w-full mr-2" src="{{asset('image/pdf_icon2.png')}}" title="Descargar" alt="">
                                              </a>
                                            
