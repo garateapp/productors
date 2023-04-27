@@ -247,50 +247,36 @@ class HomeController extends Controller
                         }else{
                             
                             if($estado=='Finalizado'){
-                                if($categoria=='Sin Procesar'){
-                                    $rec=Proceso::create([
-                                        'agricola' => $agricola,//1
-                                        'n_proceso' => $n_proceso,//2
-                                        'especie' => $especie,//3
-                                        'variedad' => $variedad,//4
-                                        'fecha' => $fecha,//5
-                                        'kilos_netos' => $kilos_netos,//6
-                                        'exp' => 0,//6
-                                        'comercial' => 0,//6
-                                        'desecho' => 0,//6
-                                        'merma' => 0,//6
-                                        'id_empresa' => $id_empresa,//8
-                                    ]);
-                                }elseif($categoria=='Exportacion'){
-                                    $rec=Proceso::create([
-                                        'agricola' => $agricola,//1
-                                        'n_proceso' => $n_proceso,//2
-                                        'especie' => $especie,//3
-                                        'variedad' => $variedad,//4
-                                        'fecha' => $fecha,//5
-                                        'kilos_netos' => 0,//6
-                                        'exp' => $kilos_netos,//6
-                                        'comercial' => 0,//6
-                                        'desecho' => 0,//6
-                                        'merma' => 0,//6
-                                        'id_empresa' => $id_empresa,//8
-                                    ]);
-                                }elseif($categoria=='Mercado Interno'){
-                                    $rec=Proceso::create([
-                                        'agricola' => $agricola,//1
-                                        'n_proceso' => $n_proceso,//2
-                                        'especie' => $especie,//3
-                                        'variedad' => $variedad,//4
-                                        'fecha' => $fecha,//5
-                                        'kilos_netos' => 0,//6
-                                        'exp' => 0,
-                                        'comercial' => $kilos_netos,//6
-                                        'desecho' => 0,//6
-                                        'merma' => 0,//6
-                                        'id_empresa' => $id_empresa,//8
-                                    ]);
-                                }elseif($categoria=='Desecho'){
-                                        
+                                if($kilos_netos>0){
+                                    if($categoria=='Sin Procesar'){
+                                        $rec=Proceso::create([
+                                            'agricola' => $agricola,//1
+                                            'n_proceso' => $n_proceso,//2
+                                            'especie' => $especie,//3
+                                            'variedad' => $variedad,//4
+                                            'fecha' => $fecha,//5
+                                            'kilos_netos' => $kilos_netos,//6
+                                            'exp' => 0,//6
+                                            'comercial' => 0,//6
+                                            'desecho' => 0,//6
+                                            'merma' => 0,//6
+                                            'id_empresa' => $id_empresa,//8
+                                        ]);
+                                    }elseif($categoria=='Exportacion'){
+                                        $rec=Proceso::create([
+                                            'agricola' => $agricola,//1
+                                            'n_proceso' => $n_proceso,//2
+                                            'especie' => $especie,//3
+                                            'variedad' => $variedad,//4
+                                            'fecha' => $fecha,//5
+                                            'kilos_netos' => 0,//6
+                                            'exp' => $kilos_netos,//6
+                                            'comercial' => 0,//6
+                                            'desecho' => 0,//6
+                                            'merma' => 0,//6
+                                            'id_empresa' => $id_empresa,//8
+                                        ]);
+                                    }elseif($categoria=='Mercado Interno'){
                                         $rec=Proceso::create([
                                             'agricola' => $agricola,//1
                                             'n_proceso' => $n_proceso,//2
@@ -299,13 +285,29 @@ class HomeController extends Controller
                                             'fecha' => $fecha,//5
                                             'kilos_netos' => 0,//6
                                             'exp' => 0,
-                                            'comercial' => 0,//6
-                                            'desecho' => $kilos_netos,//6
+                                            'comercial' => $kilos_netos,//6
+                                            'desecho' => 0,//6
                                             'merma' => 0,//6
                                             'id_empresa' => $id_empresa,//8
                                         ]);
-                                        
-                                }	
+                                    }elseif($categoria=='Desecho'){
+                                            
+                                            $rec=Proceso::create([
+                                                'agricola' => $agricola,//1
+                                                'n_proceso' => $n_proceso,//2
+                                                'especie' => $especie,//3
+                                                'variedad' => $variedad,//4
+                                                'fecha' => $fecha,//5
+                                                'kilos_netos' => 0,//6
+                                                'exp' => 0,
+                                                'comercial' => 0,//6
+                                                'desecho' => $kilos_netos,//6
+                                                'merma' => 0,//6
+                                                'id_empresa' => $id_empresa,//8
+                                            ]);
+                                            
+                                    }	
+                                }
                             }
                         }
                     
@@ -335,7 +337,7 @@ class HomeController extends Controller
         $prop_recep=Recepcion::where('r_emisor',auth()->user()->rut)
         ->latest('id')->get();
 
-        
+
 
         return view('dashboard',compact('users','recepcions','prop_recep'));
     }

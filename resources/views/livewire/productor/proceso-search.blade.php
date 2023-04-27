@@ -391,16 +391,13 @@
        },
 
        tooltip: {
-           formatter: function () {
-               return '<b>' + this.x + '</b><br/>' +
-                   this.series.name + ': ' + this.y + '<br/>' +
-                   'Total: ' + this.point.stackTotal;
-           }
-       },
+        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+        shared: true
+      },
 
        plotOptions: {
            column: {
-               stacking: 'normal'
+               stacking: 'percent'
            }
        },
 
