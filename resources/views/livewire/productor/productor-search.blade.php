@@ -72,8 +72,7 @@
                                 <th>EMAIL</th>
                                 <th>ACTUALIZAR</th>
                                 <th>ULTIMA <br>MODIFICACIÓN</th>
-                                
-                               <th>ESPECIE</th> 
+                               
                             </thead>
                             <tbody>
                                 @php
@@ -245,7 +244,7 @@
                                             </div>
                                         </td>
                                   
-                                        <td class="pl-5 py-2">
+                                        <td class="hidden pl-5 py-2">
                                            
                                                 @foreach ($user->especies_comercializas()->get() as $especie)
                                                     <div class="flex justify-center">
