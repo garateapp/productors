@@ -325,7 +325,7 @@
        },
 
        xAxis: {
-           categories: ['Gold', 'Silver', 'Bronze']
+           categories: ['Membrillo', 'Apple', 'Pears', 'Plums', 'Paltas', 'Orange','Peaches','Nectarines','Cherries']
        },
 
        yAxis: {
@@ -352,20 +352,20 @@
 
        series: [{
            name: 'Exportacion',
-           data: [148, 133, 124],
-           stack: 'Europe'
+           data: [1480, 1330, 1240, 1330, 1240, 1330, 1240, 1330, 1240],
+           stack: 'variedades'
        }, {
            name: 'Nacional',
-           data: [102, 98, 65],
-           stack: 'Europe'
+           data: [102, 98, 65, 133, 124, 133, 124, 133, 124],
+           stack: 'variedades'
        }, {
            name: 'Desecho',
-           data: [113, 122, 95],
-           stack: 'North America'
+           data: [113, 122, 95, 133, 124, 133, 124, 133, 124],
+           stack: 'variedades'
        }, {
            name: 'Merma',
-           data: [77, 72, 80],
-           stack: 'North America'
+           data: [77, 72, 80, 133, 124, 133, 124, 133, 124],
+           stack: 'variedades'
        }]
        });
                
