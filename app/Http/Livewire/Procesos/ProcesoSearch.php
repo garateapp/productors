@@ -11,7 +11,7 @@ use Livewire\WithPagination;
 class ProcesoSearch extends Component
 {   use WithPagination;
 
-    public $search, $espec, $ctd=25, $especieid, $especiename, $varie, $variedadid, $titulo='Grafico por Especies';
+    public $search, $espec, $ctd=25, $especieid, $especiename, $varie, $variedadid, $titulo='Gráfico por Especies';
 
     public function render()
     {   
