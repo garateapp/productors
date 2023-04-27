@@ -280,7 +280,9 @@
                                        <div class="block md:flex w-full">
                                           @if ($proceso->informe)
                                              <a href="{{route('download.proceso',$proceso)}}" target="_blank" >   
-                                                <img class="h-10 objet-contain my-2 mr-2" src="{{asset('image/pdf_icon2.png')}}" title="Descargar" alt="">
+                                                <div class="justify-center">
+                                                   <img class="w-10 my-2 mr-2" src="{{asset('image/pdf_icon2.png')}}" title="Descargar" alt="">
+                                                </div>
                                              </a>
                                             
                                              
