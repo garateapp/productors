@@ -38,7 +38,7 @@
                  @else
                      @foreach ($variedades as $variedad)
                          @if ($variedad->especie_id==$espec->id)
-                             <button wire:click="set_varie({{$variedad->id}})"  class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-2 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                             <button wire:click="set_varie({{$variedad->id}})"  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-2 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
                                  <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$variedad->name}}</p>
                              </button>
                          @endif
@@ -49,11 +49,11 @@
              @endif
          @else
              @foreach ($especies as $especie)
-             
+             <div class="justify-center ">
                  <button wire:click="set_especie({{$especie->id}})"  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-4 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
                      <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$especie->name}}</p>
                  </button>
-          
+             </div>
              @endforeach
              
          @endif
