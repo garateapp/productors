@@ -132,6 +132,7 @@
                      <th class="text-center">%<br>Desecho</th>
                      <th class="text-center">%<br>Merma</th>
                      <th> </th>
+                     <th> </th>
                      
                      
                   </thead>
