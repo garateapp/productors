@@ -23,7 +23,7 @@
    
  </div>
 
-      <div class="mx-2 sm:mx-12 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-x-2 gap-y-4 justify-center content-center">
+      <div class="mx-2 sm:mx-12 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-y-4 gap-x-2 justify-center content-center">
          @if ($espec)
              <button wire:click="espec_clean"   class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 hover:bg-gray-500 focus:outline-none rounded content-center" style="background-color: #FF8000;">
                  <p class="text-sm font-medium leading-none text-white">{{$espec->name}}</p>
@@ -32,13 +32,13 @@
              @if ($variedades)
 
                  @if ($varie)
-                     <button wire:click="varie_clean"  class="mx-4 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                     <button wire:click="varie_clean"  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
                          <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$varie->name}}</p>
                      </button>
                  @else
                      @foreach ($variedades as $variedad)
                          @if ($variedad->especie_id==$espec->id)
-                             <button wire:click="set_varie({{$variedad->id}})"  class="mx-4 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                             <button wire:click="set_varie({{$variedad->id}})"  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
                                  <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$variedad->name}}</p>
                              </button>
                          @endif
@@ -50,7 +50,7 @@
          @else
              @foreach ($especies as $especie)
              <div class="justify-center ">
-                 <button wire:click="set_especie({{$especie->id}})"  class="mx-4 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                 <button wire:click="set_especie({{$especie->id}})"  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
                      <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$especie->name}}</p>
                  </button>
              </div>
