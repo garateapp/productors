@@ -132,7 +132,6 @@
                      <th class="text-center">%<br>Desecho</th>
                      <th class="text-center">%<br>Merma</th>
                      <th> </th>
-                     <th> </th>
                      
                      
                   </thead>
@@ -278,10 +277,10 @@
                                  
                                  <td class="pl-5">
                                  
-                                       <div class="block md:grid grid-cols-2 w-full">
+                                       <div class="block md:flex w-full">
                                           @if ($proceso->informe)
                                              <a href="{{route('download.proceso',$proceso)}}" target="_blank" >   
-                                                <img class="h-10 w-10 my-2 mr-2" src="{{asset('image/pdf_icon2.png')}}" title="Descargar" alt="">
+                                                <img class="h-10 objet-contain my-2 mr-2" src="{{asset('image/pdf_icon2.png')}}" title="Descargar" alt="">
                                              </a>
                                              <form action="{{route('delete.proceso',$proceso)}}" method="POST">
                                                 @csrf
