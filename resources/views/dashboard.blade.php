@@ -38,7 +38,7 @@
             <div class="flex items-center">
                <div class="flex-shrink-0">
                   <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900"><h1 class="block text-2xl font-bold">% Exportacion<br>{{number_format(77)}}%</h1></span>
-                  <h3 class="text-base font-normal text-gray-500">Administrador</h3>
+                
                </div>
                
             </div>
@@ -46,8 +46,8 @@
          <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
             <div class="flex items-center">
                <div class="flex-shrink-0">
-                  <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900"><h1 class="block text-2xl font-bold">Kilos Procesados<br>{{number_format(77)}}%</h1></span>
-                  <h3 class="text-base font-normal text-gray-500">Administrador</h3>
+                  <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900"><h1 class="block text-2xl font-bold">Kilos Procesados<br>{{number_format($cant)}}</h1></span>
+                
                </div>
                
             </div>
