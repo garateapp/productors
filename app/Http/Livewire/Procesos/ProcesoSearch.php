@@ -37,7 +37,7 @@ class ProcesoSearch extends Component
         }
         
         
-        $especies=Especie::all();
+        $especies=Especie::where('id','>',1)->latest('id')->get();
         $variedades=Variedad::all();
 
         return view('livewire.procesos.proceso-search',compact('procesos','variedades','especies'));
