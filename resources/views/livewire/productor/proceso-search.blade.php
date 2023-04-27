@@ -358,12 +358,12 @@
        },
 
        title: {
-           text: 'Olympic Games all-time medal table, grouped by continent',
-           align: 'left'
+           text: titulo,
+           align: 'center'
        },
 
        xAxis: {
-           categories: ['Gold', 'Silver', 'Bronze']
+           categories: variedades
        },
 
        yAxis: {

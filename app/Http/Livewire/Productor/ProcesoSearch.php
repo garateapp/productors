@@ -25,6 +25,9 @@ class ProcesoSearch extends Component
                         $procesos=Proceso::where('agricola',auth()->user()->name)
                             ->where('especie','LIKE', $this->search)
                              ->latest('n_proceso')->paginate($this->ctd);
+                        $procesosall=Proceso::where('agricola',auth()->user()->name)
+                            ->where('especie','LIKE', $this->search)
+                             ->latest('n_proceso')->get();
                 }
     
             }else{
