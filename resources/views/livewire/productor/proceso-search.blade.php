@@ -70,7 +70,7 @@
          
              @foreach ($especies as $especie)
                <div class="justify-center ">
-                  <a href="{{route('procesos.admin.especie',$especie)}}">
+                  <a href="{{route('procesos.productor.especie',$especie)}}">
                      <button  class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-4 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
                            <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$especie->name}}</p>
                      </button>

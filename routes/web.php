@@ -73,6 +73,8 @@ Route::get('procesos', [HomeController::class,'procesos'])->middleware('auth')->
 
 Route::get('procesos/productor', [ProcesoController::class,'index'])->middleware('auth')->name('procesos.productor.index');
 
+Route::get('procesos/productor/{especie}', [ProcesoController::class,'productorespecie'])->middleware('auth')->name('procesos.productor.especie');
+
 Route::get('procesos/{especie}', [ProcesoController::class,'especie'])->middleware('auth')->name('procesos.admin.especie');
 
 Route::get('proceso/refresh', [HomeController::class,'sync_proces'])->middleware('auth')->name('proceso.refresh');

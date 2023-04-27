@@ -22,6 +22,11 @@ class ProcesoController extends Controller
         return view('proceso.procesoespecie',compact('especie'));
     }
 
+    public function productorespecie(Especie $especie)
+    {
+        return view('productors.procesoespecie',compact('especie'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
