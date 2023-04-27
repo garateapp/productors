@@ -11,7 +11,7 @@ use Livewire\WithPagination;
 class ProcesoSearch extends Component
 {   use WithPagination;
 
-    public $search, $espec, $ctd=25, $especieid, $especiename, $varie, $variedadid;
+    public $search, $espec, $ctd=25, $especieid, $especiename, $varie, $variedadid, $titulo='Gráfico por Especies';
 
     public function render()
     {       
@@ -30,6 +30,8 @@ class ProcesoSearch extends Component
             }else{
                 $procesos=Proceso::where('agricola',auth()->user()->name)
                 ->latest('n_proceso')->paginate($this->ctd);
+                $procesosall=Proceso::where('agricola',auth()->user()->name)
+                ->latest('n_proceso')->get();
             }
             
             if($this->varie){
@@ -43,7 +45,7 @@ class ProcesoSearch extends Component
             }
         $especies=auth()->user()->especies_comercializas()->get();
         $variedades=auth()->user()->variedades_comercializas()->get();
-        return view('livewire.productor.proceso-search',compact('procesos','especies','variedades'));
+        return view('livewire.productor.proceso-search',compact('procesosall','procesos','especies','variedades'));
     }
 
     public function set_especie($id){

@@ -13,15 +13,22 @@
             </button>
 
             <div class="mx-2 sm:mx-12 md:mx-14 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-y-4 gap-x-3 justify-between  content-center">
+               @php
+                    $varieds=[];
+                    $exportacion=[];
+                    $comercial=[];
+                    $desecho=[];
+                    $merma=[];
+                @endphp
                @if ($espec)
-                   <button wire:click="espec_clean"   class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded content-center" style="background-color: #FF8000;">
+                   <button wire:click="espec_clean"   class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded content-center" style="background-color: #FF8000;">
                        <p class="text-sm font-medium leading-none text-white">{{$espec->name}}</p>
                    </button>
                
                    @if ($variedades)
       
                        @if ($varie)
-                           <button wire:click="varie_clean"  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                           <button wire:click="varie_clean"  class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
                                <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$varie->name}}</p>
                            </button>
                        @else
@@ -32,19 +39,51 @@
                                        <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$variedad->name}}</p>
                                    </button>
                                  </div>
+                                 @php
+                                    $varieds[]=$variedad->name;
+                                 @endphp
                                @endif
                            @endforeach
+                           
                        @endif
       
                      
                    @endif
                @else
+               
                    @foreach ($especies as $especie)
-                   <div class="justify-center ">
-                       <button wire:click="set_especie({{$especie->id}})"  class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-4 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
-                           <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$especie->name}}</p>
-                       </button>
-                   </div>
+                     <div class="justify-center ">
+                        <a href="{{route('procesos.admin.especie',$especie)}}">
+                           <button  class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-4 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                                 <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$especie->name}}</p>
+                           </button>
+                        </a>
+                     </div>
+                     @php
+                     
+                                  $export=0;
+                                  $comerc=0;
+                                  $desec=0;
+                                  $mer=0;
+                                  foreach ($procesosall as $proceso) {
+                                      
+                                      if ($proceso->especie==$especie->name) {
+                                          $export+=$proceso->exp;
+                                          $comerc+=$proceso->comercial;
+                                          $desec+=$proceso->desecho;
+                                          $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+      
+                                      }
+      
+                                  }
+                                     
+                                     $exportacion[]=$export;
+                                     $comercial[]=$comerc;
+                                     $desecho[]=$desec;
+                                     $merma[]=$mer;
+                                  
+                                    $varieds[]=$especie->name;
+                     @endphp
                    @endforeach
                    
                @endif
@@ -305,6 +344,12 @@
    </div>
    </div>         
    <script>
+       var titulo = <?php echo json_encode($titulo) ?>;
+      var variedades = <?php echo json_encode($varieds) ?>;
+       var exportacion = <?php echo json_encode($exportacion) ?>;
+       var comercial = <?php echo json_encode($comercial) ?>;
+       var desecho = <?php echo json_encode($desecho) ?>;
+       var merma = <?php echo json_encode($merma) ?>;
       // Data retrieved from https://en.wikipedia.org/wiki/Winter_Olympic_Games
        Highcharts.chart('grafico', {
 
@@ -344,23 +389,23 @@
        },
 
        series: [{
-           name: 'Exportacion',
-           data: [148, 133, 124],
-           stack: 'Europe'
-       }, {
-           name: 'Nacional',
-           data: [102, 98, 65],
-           stack: 'Europe'
-       }, {
-           name: 'Desecho',
-           data: [113, 122, 95],
-           stack: 'North America'
-       }, {
-           name: 'Merma',
-           data: [77, 72, 80],
-           stack: 'North America'
-       }]
-       });
+            name: 'Exportacion',
+            data: exportacion,
+            stack: 'variedades'
+        }, {
+            name: 'Nacional',
+            data: comercial,
+            stack: 'variedades'
+        }, {
+            name: 'Desecho',
+            data: desecho,
+            stack: 'variedades'
+        }, {
+            name: 'Merma',
+            data: merma,
+            stack: 'variedades'
+        }]
+        });
                
    </script>  
 </div>
