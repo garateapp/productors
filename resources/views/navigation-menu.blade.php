@@ -45,6 +45,11 @@
                             {{ __('Procesos') }}
                         </x-jet-nav-link>
                     @endcan
+                    @can('Ver procesos_propios')
+                        <x-jet-nav-link href="{{ route('mensajes.index') }}" :active="request()->routeIs('mensajes.index')">
+                            {{ __('Información Técnica') }}
+                        </x-jet-nav-link>
+                    @endcan
                 </div>
             </div>
 
