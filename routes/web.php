@@ -73,6 +73,8 @@ Route::get('procesos', [HomeController::class,'procesos'])->middleware('auth')->
 
 Route::get('procesos/productor', [ProcesoController::class,'index'])->middleware('auth')->name('procesos.productor.index');
 
+Route::get('procesos/{especie}', [ProcesoController::class,'especie'])->middleware('auth')->name('procesos.admin.especie');
+
 Route::get('proceso/refresh', [HomeController::class,'sync_proces'])->middleware('auth')->name('proceso.refresh');
 
 Route::get('subir-proceso', [HomeController::class,'subir_procesos'])->middleware('auth')->name('subir.procesos');
@@ -86,3 +88,4 @@ Route::delete('delete/proceso/{proceso}',[HomeController::class,'proceso_destroy
 Route::resource('mensaje', MensajeController::class)->middleware('auth')->names('mensajes');
 
 Route::post('procesos/all', [AjaxController::class,'all'])->name('procesos.all');
+

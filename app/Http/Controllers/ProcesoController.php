@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Especie;
 use Illuminate\Http\Request;
 
 class ProcesoController extends Controller
@@ -14,6 +15,11 @@ class ProcesoController extends Controller
     public function index()
     {
         return view('productors.procesosproductor');
+    }
+
+    public function especie(Especie $especie)
+    {
+        return view('proceso.procesoespecie',compact('especie'));
     }
 
     /**

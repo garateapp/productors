@@ -24,15 +24,18 @@
  </div>
 
       <div class="mx-2 sm:mx-12 md:mx-14 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-y-4 gap-x-3 justify-between  content-center">
+         @php
+             $varieds=[];
+         @endphp
          @if ($espec)
-             <button wire:click="espec_clean"   class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded content-center" style="background-color: #FF8000;">
+             <button wire:click="espec_clean"   class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded content-center" style="background-color: #FF8000;">
                  <p class="text-sm font-medium leading-none text-white">{{$espec->name}}</p>
              </button>
          
              @if ($variedades)
 
                  @if ($varie)
-                     <button wire:click="varie_clean"  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                     <button wire:click="varie_clean"  class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
                          <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$varie->name}}</p>
                      </button>
                  @else
@@ -43,19 +46,29 @@
                                  <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$variedad->name}}</p>
                              </button>
                            </div>
+                           @php
+                              $varieds[]=$variedad->name;
+                           @endphp
                          @endif
                      @endforeach
+                     
                  @endif
 
                
              @endif
          @else
+         
              @foreach ($especies as $especie)
-             <div class="justify-center ">
-                 <button wire:click="set_especie({{$especie->id}})"  class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-4 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
-                     <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$especie->name}}</p>
-                 </button>
-             </div>
+               <div class="justify-center ">
+                  <a href="{{route('procesos.admin.especie',$especie)}}">
+                     <button  class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-4 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                           <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$especie->name}}</p>
+                     </button>
+                  </a>
+               </div>
+               @php
+                  $varieds[]=$especie->name;
+               @endphp
              @endforeach
              
          @endif
@@ -102,21 +115,7 @@
                      @endphp
                   
                         @foreach ($procesos as $proceso)
-                           {{-- comment        {{$n.') '.$proceso}}<br>
-                                             @php
-                                                $m=1;
-                                                $n+=1;
-                                             @endphp
-                                          
-                                       @foreach ($proceso as $item)
-                                       {{$m}}) {{$item}}<br>
-                                             
-                                                @php
-                                                      $m+=1;
-                                                @endphp
-                                          @endforeach
-                                          --}}  
-                              {{-- comment  --}}    
+                         
                               <tr class="h-16 border border-gray-100 rounded">
                               
                                  <td class="text-center">
@@ -311,7 +310,8 @@
        
    </div>   
    <script>
-      var ventas = <?php echo json_encode($titulo) ?>;
+      var titulo = <?php echo json_encode($titulo) ?>;
+      var variedades = <?php echo json_encode($varieds) ?>;
       // Data retrieved from https://en.wikipedia.org/wiki/Winter_Olympic_Games
        Highcharts.chart('grafico', {
 
@@ -320,12 +320,12 @@
        },
 
        title: {
-           text: ventas,
+           text: titulo,
            align: 'center'
        },
 
        xAxis: {
-           categories: ['Membrillo', 'Apple', 'Pears', 'Plums', 'Paltas', 'Orange','Peaches','Nectarines','Cherries']
+           categories: variedades
        },
 
        yAxis: {
