@@ -30,7 +30,7 @@ class ProcesoEspecie extends Component
                              ->latest('n_proceso')->get();
                 }else{
                         $procesos=Proceso::where('agricola',auth()->user()->name)
-                            ->where('especie','LIKE', $this->search)
+                            ->where('especie',$this->espec->name)
                              ->latest('n_proceso')->paginate($this->ctd);
                         $procesosall=Proceso::where('agricola',auth()->user()->name)
                             ->where('especie','LIKE', $this->search)
@@ -44,15 +44,7 @@ class ProcesoEspecie extends Component
                 ->latest('n_proceso')->get();
             }
             
-            if($this->varie){
-                $procesos=Proceso::where('agricola',auth()->user()->name)
-                ->where('variedad','LIKE', $this->search)
-                ->latest('n_proceso')->paginate($this->ctd);
-            }else{
-                $procesos=Proceso::where('agricola',auth()->user()->name)
-                ->where('especie','LIKE', $this->search)
-                 ->latest('n_proceso')->paginate($this->ctd);
-            }
+           
         $especies=auth()->user()->especies_comercializas()->get();
         $variedades=auth()->user()->variedades_comercializas()->get();
 
