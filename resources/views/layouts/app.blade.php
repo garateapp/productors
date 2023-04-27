@@ -17,6 +17,7 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 -->
         <!-- Styles -->
+        <link rel="stylesheet" href="{{asset('fontawesome-free-5.15.4-web/css/all.min.css')}}">
         @livewireStyles
         @yield('css')
     </head>

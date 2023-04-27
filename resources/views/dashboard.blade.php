@@ -5,6 +5,7 @@
        foreach($recepcions as $recepcion){
            $cant+=$recepcion->peso_neto;
        }
+       
       
 
    @endphp
@@ -23,6 +24,7 @@
             </div>
 
         </section>
+
    
    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="mt-2 sm:mt-4 mb-4 w-full grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-x-4 gap-y-2 items-center content-center">
@@ -42,29 +44,44 @@
             </div>
          </div>
          <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
+            <div class="flex-shrink-0">
+               <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                  <h1 class="block my-2 text-xl font-bold text-cyan-500">% EXPORTACION</h1>
+                  
+                  
+               </span>
+            </div>
             <div class="flex items-center">
-               <div class="flex-shrink-0">
-                  <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
-                     <h1 class="block my-2 text-xl font-bold text-cyan-500">% EXPORTACION</h1>
-                     <h1 class="block my-2 text-xl font-bold">{{number_format(77)}}%</h1>
-                  </span>
-                
-               </div>
+               
+               <h1 class="block my-2 text-xl font-bold">{{number_format(77)}}%</h1>
+                  <div class="relative py-2 w-full mx-4">
+                     <div class="w-full overflow-hidden h-4 text-4xl flex rounded bg-gray-200">
+                       <div style="width: 77%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500">
+                         </div>
+                     </div>
+                 </div>
+
+                <i class="fas fa-ship fa-2x mb-4 text-blue-500"></i>
+               
                
             </div>
          </div>
          <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
-            <div class="flex items-center">
-               <div class="flex-shrink-0">
-                  <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
-                     <h1 class="block my-2 text-xl font-bold text-green-500">KILOS RECIBIDOS</h1>
-                     <h1 class="block my-2 text-xl font-bold">{{number_format($cant)}}</h1>
-                  </span>
+            <div class="flex-shrink-0">
+               <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                  <h1 class="block my-2 text-xl font-bold text-green-500">KILOS RECIBIDOS</h1>
                 
-               </div>
-               
+               </span>
+             
+            </div>
+            <div class="flex items-center justify-between">
+             
+
+               <h1 class="block my-2 text-xl font-bold">{{number_format($cant)}}</h1>
+               <i class="fas fa-truck fa-2x mb-4 text-green-500 justify-end fa-flip-horizontal"></i>
             </div>
          </div>
+
             {{--   @can('Ver productores')
                   <a href="{{ route('productors.index') }}">
                      <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-2 mx-4">

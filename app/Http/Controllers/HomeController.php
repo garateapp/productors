@@ -337,8 +337,7 @@ class HomeController extends Controller
         $prop_recep=Recepcion::where('r_emisor',auth()->user()->rut)
         ->latest('id')->get();
 
-
-
+        
         return view('dashboard',compact('users','recepcions','prop_recep'));
     }
 
