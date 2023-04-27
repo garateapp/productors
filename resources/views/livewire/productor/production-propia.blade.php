@@ -20,35 +20,37 @@
             <input wire:keydown="limpiar_page" wire:model="search"  class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" placeholder="Ingrese el variedad, especie o lote de la recepción" autocomplete="off">
         </div>
 
-        <div class="mx-2 sm:mx-12 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-x-2 gap-y-4">
+        <div class="mx-2 sm:mx-12 md:mx-14 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-y-4 gap-x-3 justify-between  content-center">
             @if ($espec)
-                <button wire:click="espec_clean"   class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #FF8000;">
+                <button wire:click="espec_clean"   class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded content-center" style="background-color: #FF8000;">
                     <p class="text-sm font-medium leading-none text-white">{{$espec->name}}</p>
                 </button>
             
                 @if ($variedades)
-
+   
                     @if ($varie)
-                        <button wire:click="varie_clean"  class="mx-4 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
-                            <p class="text-sm font-medium leading-none text-white">{{$varie->name}}</p>
+                        <button wire:click="varie_clean"  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                            <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$varie->name}}</p>
                         </button>
                     @else
                         @foreach ($variedades as $variedad)
                             @if ($variedad->especie_id==$espec->id)
-                                <button wire:click="set_varie({{$variedad->id}})"  class="mx-4 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
-                                    <p class="text-sm font-medium leading-none text-white">{{$variedad->name}}</p>
+                              <div class="flex justify-center">
+                                <button wire:click="set_varie({{$variedad->id}})"  class=" w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-2 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                                    <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$variedad->name}}</p>
                                 </button>
+                              </div>
                             @endif
                         @endforeach
                     @endif
-
+   
                   
                 @endif
             @else
                 @foreach ($especies as $especie)
-                <div>
-                    <button wire:click="set_especie({{$especie->id}})"  class="mx-4 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
-                        <p class="text-sm font-medium leading-none text-white">{{$especie->name}}</p>
+                <div class="justify-center ">
+                    <button wire:click="set_especie({{$especie->id}})"  class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-4 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                        <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$especie->name}}</p>
                     </button>
                 </div>
                 @endforeach
