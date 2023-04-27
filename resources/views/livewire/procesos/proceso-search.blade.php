@@ -277,7 +277,7 @@
                                  
                                  <td class="pl-5">
                                  
-                                       <div class="block md:flex w-full">
+                                       <div class="block lg:flex w-full">
                                           @if ($proceso->informe)
                                              <a href="{{route('download.proceso',$proceso)}}" target="_blank" class="h-10 m-2 w-full my-2 mr-2">   
                                                 <img class="h-10 m-2 w-full my-2 mr-2" src="{{asset('image/pdf_icon2.png')}}" title="Descargar" alt="">
