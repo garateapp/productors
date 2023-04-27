@@ -6,7 +6,7 @@
    <script src="https://code.highcharts.com/modules/export-data.js"></script>
    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
    
-    <div class="flex justify-between my-2 items-center content-center mx-12"> 
+         <div class="flex justify-between my-2 items-center content-center mx-12"> 
         
             <button  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
                 <p class="text-sm font-medium leading-none text-white">Descargar Excel</p>
