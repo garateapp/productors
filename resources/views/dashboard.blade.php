@@ -30,7 +30,13 @@
             <div class="flex items-center">
                <div class="flex-shrink-0">
                   <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900"><h1 class="block text-2xl font-bold">Hola<br> {{Auth()->user()->name}}</h1></span>
-                  <h3 class="text-base font-normal text-gray-500">Administrador</h3>
+                 
+                     @foreach (auth()->user()->roles as $role)
+                        <h3 class="text-base font-normal text-gray-500">
+                           {{$role->name}}
+                        </h3>
+                     @endforeach
+                  
                </div>
                
             </div>
