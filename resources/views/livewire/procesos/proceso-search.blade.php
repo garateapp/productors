@@ -386,8 +386,8 @@
        tooltip: {
            formatter: function () {
                return '<b>' + this.x + '</b><br/>' +
-                   this.series.name + ': ' + this.y + 'Kg <br/>' +
-                   'Total: ' + this.point.stackTotal + 'kg';
+                   this.series.name + ': ' + this.y + ' Kg <br/>' +
+                   'Total: ' + this.point.stackTotal + ' kg';
            }
        },
 
