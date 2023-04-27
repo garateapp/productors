@@ -344,19 +344,19 @@
        },
 
        series: [{
-           name: 'Norway',
+           name: 'Exportacion',
            data: [148, 133, 124],
            stack: 'Europe'
        }, {
-           name: 'Germany',
+           name: 'Nacional',
            data: [102, 98, 65],
            stack: 'Europe'
        }, {
-           name: 'United States',
+           name: 'Desecho',
            data: [113, 122, 95],
            stack: 'North America'
        }, {
-           name: 'Canada',
+           name: 'Merma',
            data: [77, 72, 80],
            stack: 'North America'
        }]
