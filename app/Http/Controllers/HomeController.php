@@ -571,7 +571,7 @@ class HomeController extends Controller
                             }
                             }
                         else{
-                            if($n_estado=='Finalizado'){
+                            
                                 $rec=Recepcion::create([
                                     'id_g_recepcion' => $id_g_recepcion,//1
                                     'tipo_g_recepcion' => $tipo_g_recepcion,//2
@@ -593,7 +593,7 @@ class HomeController extends Controller
                                 Calidad::create([
                                     'recepcion_id'=>$rec->id
                                 ]);
-                            }
+                            
                         }
                     
                 }
