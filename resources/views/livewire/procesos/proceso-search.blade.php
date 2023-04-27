@@ -109,6 +109,7 @@
                      
                      
                   </thead>
+
                   <tbody>
                      @php
                            $n=1;
@@ -116,7 +117,7 @@
                   
                         @foreach ($procesos as $proceso)
                          
-                              <tr class="h-16 border border-gray-100 rounded">
+                           <tr class="h-16 border border-gray-100 rounded">
                               
                                  <td class="text-center">
                                     <p class="text-base font-medium  text-gray-700">
@@ -244,31 +245,31 @@
                                     
                                  
                                     
-                              </p>
+                                    </p>
                               
-                           </td>
+                                 </td>
                                  
                                  <td class="pl-5">
                                  
-                                 <div class="block md:flex">
-                                    @if ($proceso->informe)
-                                       <a href="{{route('download.proceso',$proceso)}}" target="_blank" >   
-                                          <img class="w-10 my-2 mr-2" src="{{asset('image/pdf_icon2.png')}}" title="Descargar" alt="">
-                                       </a>
-                                       <form action="{{route('delete.proceso',$proceso)}}" method="POST">
-                                          @csrf
-                                          @method('delete')
-                        
-                                          <button class="font-bold py-1 px-3 mt-2 rounded-full bg-red-500 text-white text-2xl" type="submit" title="Eliminar">x</button>
-                                          
-                                    </form>
+                                       <div class="block md:flex">
+                                          @if ($proceso->informe)
+                                             <a href="{{route('download.proceso',$proceso)}}" target="_blank" >   
+                                                <img class="w-10 my-2 mr-2" src="{{asset('image/pdf_icon2.png')}}" title="Descargar" alt="">
+                                             </a>
+                                             <form action="{{route('delete.proceso',$proceso)}}" method="POST">
+                                                @csrf
+                                                @method('delete')
+                              
+                                                <button class="font-bold py-1 px-3 mt-2 rounded-full bg-red-500 text-white text-2xl" type="submit" title="Eliminar">x</button>
+                                                
+                                          </form>
+                                             
+                                          @else
+                                             
+                                          @endif
                                        
-                                    @else
                                        
-                                    @endif
-                                 
-                                 
-                                 </div>                            
+                                       </div>                            
                                  
                               
                                  
@@ -278,11 +279,8 @@
                                  
                               
                               
-                              </tr>
+                           </tr>
                         
-                     
-                              
-         
                         @endforeach
          
                   
