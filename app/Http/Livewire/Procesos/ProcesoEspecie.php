@@ -21,11 +21,14 @@ class ProcesoEspecie extends Component
     {
         if($this->espec){
             if($this->varie){
-                $procesos=Proceso::where('variedad','LIKE', $this->varie->name)
+                $procesos=Proceso::where('variedad', $this->varie->name)
                          ->latest('n_proceso')->paginate($this->ctd);
+                
             }else{
                     $procesos=Proceso::where('especie',$this->espec->name)
                          ->latest('n_proceso')->paginate($this->ctd);
+                    $procesosall=Proceso::where('especie', $this->espec->name)
+                         ->latest('n_proceso')->get();
             }
 
         }else{
@@ -42,7 +45,7 @@ class ProcesoEspecie extends Component
         $especies=Especie::where('id','>=',1)->latest('id')->get();
         $variedades=Variedad::all();
 
-        return view('livewire.procesos.proceso-especie',compact('procesos','variedades','especies'));
+        return view('livewire.procesos.proceso-especie',compact('procesosall','procesos','variedades','especies'));
     }
 
     

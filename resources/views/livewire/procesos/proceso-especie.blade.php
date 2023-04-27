@@ -56,7 +56,7 @@
                             $comerc=0;
                             $desec=0;
                             $mer=0;
-                            foreach ($procesos as $proceso) {
+                            foreach ($procesosall as $proceso) {
                                 
                                 if ($proceso->variedad==$variedad->name) {
                                     $export+=$proceso->exp;
