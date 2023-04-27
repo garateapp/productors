@@ -23,7 +23,7 @@ class ProcesoEspecie extends Component
             if($this->espec){
                 if($this->varie){
                     $procesos=Proceso::where('agricola',auth()->user()->name)
-                                ->where('variedad','LIKE', $this->search)
+                                ->where('variedad', $this->varie->name)
                              ->latest('n_proceso')->paginate($this->ctd);
                     $procesosall=Proceso::where('agricola',auth()->user()->name)
                                 ->where('variedad','LIKE', $this->search)
