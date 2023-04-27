@@ -199,6 +199,18 @@
                     {{ __('Recepciones') }}
                 </x-jet-responsive-nav-link>
             @endcan
+            @can('Ver produccion_cc')
+                <x-jet-responsive-nav-link href="{{ route('productioncc.index') }}" :active="request()->routeIs('productioncc.index')">
+                    {{ __('Recepciones CC') }}
+                </x-jet-responsive-nav-link>
+            @endcan
+            @can('Ver produccion_cc')
+                <x-jet-responsive-nav-link href="{{ route('procesos.index') }}" :active="request()->routeIs('procesos.index')">
+                    {{ __('Procesos') }}
+                </x-jet-responsive-nav-link>
+            @endcan
+
+          
         </div>
 
         <!-- Responsive Settings Options -->
