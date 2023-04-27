@@ -10,14 +10,15 @@
    @endphp
            <section class="bg-cover bg-center" style="background-image: url({{asset('image/bg_intranet_admin.jpg'); }})">
 
-            <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-8 pt-64 pb-8">
+            <div class="mx-auto pt-64">
                 
-                    <h1 class="text-white font-fold text-4xl text-center font-bold">BIENVENIDO A GREENEX</h1>
+               <div class="w-full">
+                    <h1 class="text-white font-fold text-4xl text-center font-bold w-full py-4" style="background-color: rgb(0,0,0,0.5); border-bottom: 5px solid #45ac01;">BIENVENIDO A GREENEX</h1>
                     
                         <!-- component -->
                         <!-- This is an example component -->
                 
-                    
+               </div>
                 
             </div>
 
