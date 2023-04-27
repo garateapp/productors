@@ -131,6 +131,7 @@
                      <th class="text-center">%<br>Comercial</th>
                      <th class="text-center">%<br>Desecho</th>
                      <th class="text-center">%<br>Merma</th>
+                     <th class="text-center">Informe</th>
                      <th> </th>
                      
                      
@@ -282,13 +283,7 @@
                                              <a href="{{route('download.proceso',$proceso)}}" target="_blank" class="h-10 m-2 w-full my-2 mr-2">   
                                                 <img class="h-10 m-2 w-full mr-2" src="{{asset('image/pdf_icon2.png')}}" title="Descargar" alt="">
                                              </a>
-                                             <form action="{{route('delete.proceso',$proceso)}}" method="POST">
-                                                @csrf
-                                                @method('delete')
-                              
-                                                <button class="font-bold py-1 px-3 rounded-full bg-red-500 text-white text-xl" type="submit" title="Eliminar">x</button>
-                                                
-                                          </form>
+                                           
                                              
                                           @else
                                              
@@ -301,6 +296,30 @@
                                  
                               
                                  </td>
+                                 <td class="pl-5">
+                                 
+                                    <div class="block w-full">
+                                       @if ($proceso->informe)
+                                         
+                                          <form action="{{route('delete.proceso',$proceso)}}" method="POST">
+                                             @csrf
+                                             @method('delete')
+                           
+                                             <button class="font-bold py-1 px-3 rounded-full bg-red-500 text-white text-xl" type="submit" title="Eliminar">x</button>
+                                             
+                                       </form>
+                                          
+                                       @else
+                                          
+                                       @endif
+                                    
+                                    
+                                    </div>                            
+                              
+                           
+                              
+                           
+                              </td>
                               
                                  
                               
