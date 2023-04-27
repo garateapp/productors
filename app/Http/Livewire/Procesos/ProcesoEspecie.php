@@ -11,10 +11,11 @@ use Livewire\WithPagination;
 class ProcesoEspecie extends Component
 {   use WithPagination;
 
-    public $search, $espec, $ctd=25, $especieid, $especiename, $varie, $variedadid, $titulo='Grafico por Especies';
+    public $search, $espec, $ctd=25, $especieid, $especiename, $varie, $variedadid;
     
     public function mount(Especie $especie){
         $this->espec=$especie;
+        $this->titulo='Grafico por Variedades de '.$especie->name;
     }
     
     public function render()
@@ -23,6 +24,8 @@ class ProcesoEspecie extends Component
             if($this->varie){
                 $procesos=Proceso::where('variedad', $this->varie->name)
                          ->latest('n_proceso')->paginate($this->ctd);
+                $procesosall=Proceso::where('variedad', $this->varie->name)
+                         ->latest('n_proceso')->get();
                 
             }else{
                     $procesos=Proceso::where('especie',$this->espec->name)
