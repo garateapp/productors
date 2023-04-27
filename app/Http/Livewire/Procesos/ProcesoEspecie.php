@@ -15,7 +15,7 @@ class ProcesoEspecie extends Component
     
     public function mount(Especie $especie){
         $this->espec=$especie;
-        $this->titulo='Grafico por Variedades de '.$especie->name;
+        $this->titulo='Gráfico por Variedades de '.$especie->name;
     }
     
     public function render()
