@@ -23,7 +23,7 @@
    
  </div>
 
-      <div class="mx-2 sm:mx-12 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-y-4 gap-x-3 justify-center content-center">
+      <div class="mx-2 sm:mx-12 md:mx-14 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-y-4 gap-x-3 justify-between  content-center">
          @if ($espec)
              <button wire:click="espec_clean"   class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded content-center" style="background-color: #FF8000;">
                  <p class="text-sm font-medium leading-none text-white">{{$espec->name}}</p>
@@ -49,11 +49,11 @@
              @endif
          @else
              @foreach ($especies as $especie)
-             <div class="justify-center ">
+             
                  <button wire:click="set_especie({{$especie->id}})"  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-4 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
                      <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$especie->name}}</p>
                  </button>
-             </div>
+          
              @endforeach
              
          @endif
