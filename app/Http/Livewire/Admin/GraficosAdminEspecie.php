@@ -12,11 +12,12 @@ use Livewire\WithPagination;
 class GraficosAdminEspecie extends Component
 {   use WithPagination;
 
-    public $search, $espec, $ctd=25, $especieid, $especiename, $varie, $variedadid,$cant;
+    public $search, $espec, $ctd=25, $especieid, $especiename, $varie, $variedadid, $recepcions, $cant;
     
     public function mount(Especie $especie){
         $this->espec=$especie;
         $this->titulo='Gráfico por Variedades de '.$especie->name;
+        $this->recepcions=Recepcion::where('n_especie',$this->espec->name)->get();
     }
 
     public function render()
@@ -48,9 +49,9 @@ class GraficosAdminEspecie extends Component
             $especies=Especie::where('id','>=',1)->latest('id')->get();
             $variedades=Variedad::all();
 
-            $recepcions=Recepcion::where('n_especie',$this->espec->name)->get();
+            
 
-        return view('livewire.admin.graficos-admin-especie',compact('recepcions','procesosall','procesos','variedades','especies'));
+        return view('livewire.admin.graficos-admin-especie',compact('procesosall','procesos','variedades','especies'));
     }
 
     public function set_especie($id){
@@ -65,7 +66,7 @@ class GraficosAdminEspecie extends Component
     public function set_varie($id){
         $this->variedadid=$id;
         $this->varie=Variedad::find($this->variedadid);
-        
+        $this->recepcions=Recepcion::where('n_variedad',$this->varie->name)->get();
     }
 
     public function limpiar_page(){
@@ -82,7 +83,7 @@ class GraficosAdminEspecie extends Component
         $this->variedadid=NULL;
         $this->varie =NULL;
         $this->search=$this->espec->name;
-
+        $this->recepcions=Recepcion::where('n_especie',$this->espec->name)->get();
     }
 
 }
