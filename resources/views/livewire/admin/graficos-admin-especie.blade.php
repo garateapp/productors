@@ -191,122 +191,123 @@
             
         </div>
      </div>
-     
-       <div class="mx-2 sm:mx-12 md:mx-14 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-y-4 gap-x-3 justify-between  content-center">
-          @php
-               $varieds=[];
-               $exportacion=[];
-               $comercial=[];
-               $desecho=[];
-               $merma=[];
-           @endphp
-          @if ($espec)
-                    <a href="{{route('dashboard')}}">
-                     <button class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded content-center" style="background-color: #FF8000;">
-                           <p class="text-sm font-medium leading-none text-white">{{$espec->name}}</p>
-                     </button>
-                    </a>
-              @if ($variedades)
- 
-                  @if ($varie)
-                      <button wire:click="varie_clean"  class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
-                          <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$varie->name}}</p>
-                      </button>
-                  @else
+     <div class="flex justify-center">
+         <div class="max-w-7xl mx-2 sm:mx-12 md:mx-14 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-y-4 gap-x-3 justify-between  content-center">
+            @php
+                  $varieds=[];
+                  $exportacion=[];
+                  $comercial=[];
+                  $desecho=[];
+                  $merma=[];
+            @endphp
+            @if ($espec)
+                     <a href="{{route('dashboard')}}">
+                        <button class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded content-center" style="background-color: #FF8000;">
+                              <p class="text-sm font-medium leading-none text-white">{{$espec->name}}</p>
+                        </button>
+                     </a>
+               @if ($variedades)
+   
+                     @if ($varie)
+                        <button wire:click="varie_clean"  class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                           <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$varie->name}}</p>
+                        </button>
+                     @else
 
-                  @php
-                        $exp_total=0;
-                        $Com_total=0;
-                        $des_total=0;
-                        $merm_total=0;
-                  @endphp
+                     @php
+                           $exp_total=0;
+                           $Com_total=0;
+                           $des_total=0;
+                           $merm_total=0;
+                     @endphp
 
-                      @foreach ($variedades as $variedad)
-                          @if ($variedad->especie_id==$espec->id)
-                            <div class="flex justify-center">
-                                
-                                    <button wire:click="set_varie({{$variedad->id}})" class=" w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-2 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
-                                        <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$variedad->name}}</p>
-                                    </button>
-                               
-                            </div>
-                            @php
-                            $export=0;
-                            $comerc=0;
-                            $desec=0;
-                            $mer=0;
-                           
-                           
-                            foreach ($procesosall as $proceso) {
-                                
-                                if ($proceso->variedad==$variedad->name) {
-                                    $export+=$proceso->exp;
-                                    $comerc+=$proceso->comercial;
-                                    $desec+=$proceso->desecho;
-                                    $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
-
-                                }
-
-                            }
-                               $varieds[]=$variedad->name;
-                               $exportacion[]=$export;
-                               $comercial[]=$comerc;
-                               $desecho[]=$desec;
-                               $merma[]=$mer;
-                           
-                              $exp_total+=$export;
-                              $Com_total+=$comerc;
-                              $des_total+=$desec;
-                              $merm_total+=$mer;
-
-
-                            @endphp
-                          @endif
-                      @endforeach
-                      
-                  @endif
- 
-                
-              @endif
-          @else
-          
-              @foreach ($especies as $especie)
-                <div class="justify-center ">
-                   
-                      <button wire:click="set_especie({{$especie->id}})" class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-4 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
-                            <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$especie->name}}</p>
-                      </button>
-                   
-                </div>
-                @php
-                
-                             $export=0;
-                             $comerc=0;
-                             $desec=0;
-                             $mer=0;
-                             foreach ($procesosall as $proceso) {
+                        @foreach ($variedades as $variedad)
+                           @if ($variedad->especie_id==$espec->id)
+                              <div class="flex justify-center">
                                  
-                                 if ($proceso->especie==$especie->name) {
-                                     $export+=$proceso->exp;
-                                     $comerc+=$proceso->comercial;
-                                     $desec+=$proceso->desecho;
-                                     $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
- 
+                                       <button wire:click="set_varie({{$variedad->id}})" class=" w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-2 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                                          <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$variedad->name}}</p>
+                                       </button>
+                                 
+                              </div>
+                              @php
+                              $export=0;
+                              $comerc=0;
+                              $desec=0;
+                              $mer=0;
+                              
+                              
+                              foreach ($procesosall as $proceso) {
+                                 
+                                 if ($proceso->variedad==$variedad->name) {
+                                       $export+=$proceso->exp;
+                                       $comerc+=$proceso->comercial;
+                                       $desec+=$proceso->desecho;
+                                       $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+
                                  }
- 
-                             }
-                                
-                                $exportacion[]=$export;
-                                $comercial[]=$comerc;
-                                $desecho[]=$desec;
-                                $merma[]=$mer;
-                             
-                               $varieds[]=$especie->name;
-                @endphp
-              @endforeach
-              
-          @endif
-      
+
+                              }
+                                 $varieds[]=$variedad->name;
+                                 $exportacion[]=$export;
+                                 $comercial[]=$comerc;
+                                 $desecho[]=$desec;
+                                 $merma[]=$mer;
+                              
+                                 $exp_total+=$export;
+                                 $Com_total+=$comerc;
+                                 $des_total+=$desec;
+                                 $merm_total+=$mer;
+
+
+                              @endphp
+                           @endif
+                        @endforeach
+                        
+                     @endif
+   
+                  
+               @endif
+            @else
+            
+               @foreach ($especies as $especie)
+                  <div class="justify-center ">
+                     
+                        <button wire:click="set_especie({{$especie->id}})" class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-4 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                              <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$especie->name}}</p>
+                        </button>
+                     
+                  </div>
+                  @php
+                  
+                              $export=0;
+                              $comerc=0;
+                              $desec=0;
+                              $mer=0;
+                              foreach ($procesosall as $proceso) {
+                                    
+                                    if ($proceso->especie==$especie->name) {
+                                       $export+=$proceso->exp;
+                                       $comerc+=$proceso->comercial;
+                                       $desec+=$proceso->desecho;
+                                       $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+   
+                                    }
+   
+                              }
+                                 
+                                 $exportacion[]=$export;
+                                 $comercial[]=$comerc;
+                                 $desecho[]=$desec;
+                                 $merma[]=$mer;
+                              
+                                 $varieds[]=$especie->name;
+                  @endphp
+               @endforeach
+               
+            @endif
+         
+         </div>
       </div>
      
     <div class="mx-2 sm:mx-12">
