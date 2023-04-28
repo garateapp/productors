@@ -62,7 +62,7 @@ class AgregarCc extends Component
     }
     public function updatedselectedparametro($parametro){
         
-        $this->valores = Valor::where('parametro_id',$parametro)->get();
+        $this->valores = Valor::where('parametro_id',$parametro)->where('especie',$this->recep->n_especie)->get();
         $this->reset(['detalle']);
     }
 
