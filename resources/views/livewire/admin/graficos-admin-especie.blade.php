@@ -62,11 +62,11 @@
               </div>
               <div class="flex items-center">
                  
-                 <h1 class="block my-2 text-xl font-bold">{{number_format($exp_total*100/$cant)}}%</h1>
+                 <h1 class="block my-2 text-xl font-bold">{{number_format($exp_total*100/($exp_total+$Com_total+$des_total+$merm_total),1)}}%</h1>
                 
                     <div class="relative py-2 w-full mx-4">
                        <div class="w-full overflow-hidden h-4 text-4xl flex rounded bg-gray-200">
-                         <div style="width: {{$exp_total*100/$cant}}%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500">
+                         <div style="width: {{$exp_total*100/($exp_total+$Com_total+$des_total+$merm_total)}}%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500">
                            </div>
                        </div>
                    </div>
