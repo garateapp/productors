@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Especie;
 use App\Models\Proceso;
+use App\Models\Recepcion;
 use App\Models\Variedad;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -11,7 +12,7 @@ use Livewire\WithPagination;
 class GraficosAdminEspecie extends Component
 {   use WithPagination;
 
-    public $search, $espec, $ctd=25, $especieid, $especiename, $varie, $variedadid;
+    public $search, $espec, $ctd=25, $especieid, $especiename, $varie, $variedadid,$cant;
     
     public function mount(Especie $especie){
         $this->espec=$especie;
@@ -20,8 +21,8 @@ class GraficosAdminEspecie extends Component
 
     public function render()
     {   if($this->espec){
-        if($this->varie){
-            $procesos=Proceso::where('variedad', $this->varie->name)
+            if($this->varie){
+                $procesos=Proceso::where('variedad', $this->varie->name)
                             ->latest('n_proceso')->paginate($this->ctd);
                     $procesosall=Proceso::where('variedad', $this->varie->name)
                             ->latest('n_proceso')->get();
@@ -33,7 +34,7 @@ class GraficosAdminEspecie extends Component
                             ->latest('n_proceso')->get();
                 }
 
-            }else{
+        }else{
                 $procesos=Proceso::where('agricola','LIKE','%'. $this->search .'%')
                     ->orwhere('n_proceso','LIKE','%'. $this->search .'%')
                     ->orwhere('especie','LIKE','%'. $this->search .'%')
@@ -47,7 +48,9 @@ class GraficosAdminEspecie extends Component
             $especies=Especie::where('id','>=',1)->latest('id')->get();
             $variedades=Variedad::all();
 
-        return view('livewire.admin.graficos-admin-especie',compact('procesosall','procesos','variedades','especies'));
+            $recepcions=Recepcion::where('n_especie',$this->espec->name)->get();
+
+        return view('livewire.admin.graficos-admin-especie',compact('recepcions','procesosall','procesos','variedades','especies'));
     }
 
     public function set_especie($id){
