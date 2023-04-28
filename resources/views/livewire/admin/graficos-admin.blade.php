@@ -170,7 +170,7 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
  
-    <div class="flex justify-center mb-4 max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="flex justify-center mb-2 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="max-w-7xl w-full sm:px-6 lg:px-8 bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
            <h1 class="font-bold">Buscador: </h1>
            <div class="px-6 py-4">
@@ -259,7 +259,7 @@
       
     <div class="mx-2 sm:mx-12">
  
-       <figure class="highcharts-figure mx-1 mt-6" wire:ignore>
+       <figure class="highcharts-figure mx-1 mt-4" wire:ignore>
           <div id="grafico" wire:ignore>
              
           </div>

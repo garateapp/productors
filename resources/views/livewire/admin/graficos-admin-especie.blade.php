@@ -36,7 +36,7 @@
     @endphp
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="mt-2 sm:mt-4 mb-4 w-full grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-x-2 gap-y-2 items-center content-center">
+        <div class="mt-2 sm:mt-4 mb-2 w-full grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-x-2 gap-y-2 items-center content-center">
            <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-2u">
               <div class="flex items-center">
                  <div class="flex-shrink-0">
@@ -184,7 +184,7 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
  
-    <div class="flex justify-center mb-4 max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="flex justify-center mb-2 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="max-w-7xl w-full sm:px-6 lg:px-8 bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
            <h1 class="font-bold">Buscador: </h1>
               <input wire:keydown="limpiar_page" wire:model="search"  class="form-input w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" placeholder="Ingrese el variedad, especie o lote de la recepción" autocomplete="off">
@@ -311,7 +311,7 @@
      
     <div class="mx-2 sm:mx-12">
  
-       <figure class="highcharts-figure mx-1 mt-6" wire:ignore>
+       <figure class="highcharts-figure mx-1 mt-4" wire:ignore>
           <div id="grafico" wire:ignore>
              
           </div>
