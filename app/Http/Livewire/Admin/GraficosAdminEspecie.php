@@ -51,7 +51,7 @@ class GraficosAdminEspecie extends Component
 
             
 
-        return view('livewire.admin.graficos-admin-especie',compact('procesosall','procesos','variedades','especies'));
+        return view('livewire.admin.graficos-admin-especie',compact('procesosall','procesos','variedades','especies'))->section('graf');
     }
 
     public function set_especie($id){

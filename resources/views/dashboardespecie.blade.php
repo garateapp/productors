@@ -25,11 +25,11 @@
 
         </section>
 
-
-   @can('Ver produccion_total') 
-      @livewire('admin.graficos-admin-especie', ['especie' => $especie], key($especie->id))
-   @endcan
-
+   
+      @can('Ver produccion_total') 
+         @livewire('admin.graficos-admin-especie', ['especie' => $especie], key($especie->id))
+      @endcan
+   
    @can('Ver produccion_propia')
       @livewire('productor.production-show')
    @endcan
