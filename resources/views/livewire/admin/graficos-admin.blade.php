@@ -6,6 +6,27 @@
             $cant+=$recepcion->peso_neto;
         }
         
+            
+                $export=0;
+                $comerc=0;
+                $desec=0;
+                $mer=0;
+                foreach ($procesosall as $proceso) {
+                    
+                    if ($proceso->especie==$espec->name) {
+                        $export+=$proceso->exp;
+                        $comerc+=$proceso->comercial;
+                        $desec+=$proceso->desecho;
+                        $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+
+                    }
+
+                }
+                $exp_total=$export;
+               $Com_total=$comerc;
+               $des_total=$desec;
+               $merm_total=$mer; 
+                  
        
  
     @endphp
