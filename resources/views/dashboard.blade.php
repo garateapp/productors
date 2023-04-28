@@ -158,6 +158,9 @@
          comment --}}
       </div>
    </div>
+   
+
+
    @can('Ver produccion_total') 
       @livewire('admin.graficos-admin')
    @endcan

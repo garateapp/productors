@@ -35,7 +35,7 @@
                             {{ __('Recepciones') }}
                         </x-jet-nav-link>
                     @endcan
-                    @can('Ver produccion_cc')
+                    @can('Ver produccion_total')
                         <x-jet-nav-link href="{{ route('procesos.index') }}" :active="request()->routeIs('procesos.index')">
                             {{ __('Procesos') }}
                         </x-jet-nav-link>
@@ -209,7 +209,7 @@
                     {{ __('Recepciones CC') }}
                 </x-jet-responsive-nav-link>
             @endcan
-            @can('Ver produccion_cc')
+            @can('Ver produccion_total')
                 <x-jet-responsive-nav-link href="{{ route('procesos.index') }}" :active="request()->routeIs('procesos.index')">
                     {{ __('Procesos') }}
                 </x-jet-responsive-nav-link>

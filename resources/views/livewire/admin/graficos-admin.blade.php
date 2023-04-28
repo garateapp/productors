@@ -5,6 +5,13 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
  
+    <div class="flex justify-center">
+        <div class="max-w-7xl w-full sm:px-6 lg:px-8 bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
+           <h1>Buscador: </h1>
+              <input wire:keydown="limpiar_page" wire:model="search"  class="form-input w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" placeholder="Ingrese el variedad, especie o lote de la recepción" autocomplete="off">
+            
+        </div>
+     </div>
      
        <div class="mx-2 sm:mx-12 md:mx-14 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-y-4 gap-x-3 justify-between  content-center">
           @php
@@ -47,11 +54,11 @@
           
               @foreach ($especies as $especie)
                 <div class="justify-center ">
-                   <a href="">
-                      <button  class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-4 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                   
+                      <button wire:click="set_especie({{$especie->id}})" class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-4 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
                             <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$especie->name}}</p>
                       </button>
-                   </a>
+                   
                 </div>
                 @php
                 
