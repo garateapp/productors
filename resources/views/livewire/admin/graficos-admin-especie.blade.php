@@ -6,6 +6,31 @@
             $cant+=$recepcion->peso_neto;
         }
         
+        
+                
+                $export=0;
+                $comerc=0;
+                $desec=0;
+                $mer=0;
+                foreach ($procesosall as $proceso) {
+                    
+                    if ($proceso->especie==$espec->name) {
+                        $export+=$proceso->exp;
+                        $comerc+=$proceso->comercial;
+                        $desec+=$proceso->desecho;
+                        $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+
+                    }
+
+                }
+                $exp_total=$export;
+               $Com_total=$comerc;
+               $des_total=$desec;
+               $merm_total=$mer; 
+                  
+                
+               
+
        
  
     @endphp
@@ -37,7 +62,8 @@
               </div>
               <div class="flex items-center">
                  
-                 <h1 class="block my-2 text-xl font-bold">{{number_format(77)}}%</h1>
+                 <h1 class="block my-2 text-xl font-bold">{{number_format($exp_total*100/$cant)}}%</h1>
+                
                     <div class="relative py-2 w-full mx-4">
                        <div class="w-full overflow-hidden h-4 text-4xl flex rounded bg-gray-200">
                          <div style="width: 77%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500">
@@ -54,7 +80,6 @@
               <div class="flex-shrink-0">
                  <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
                     <h1 class="block my-2 text-xl font-bold text-green-500">KILOS RECIBIDOS DE {{strtoupper($espec->name)}}</h1>
-                  
                  </span>
                
               </div>
@@ -178,6 +203,14 @@
                           <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$varie->name}}</p>
                       </button>
                   @else
+
+                  @php
+                        $exp_total=0;
+                        $Com_total=0;
+                        $des_total=0;
+                        $merm_total=0;
+                  @endphp
+
                       @foreach ($variedades as $variedad)
                           @if ($variedad->especie_id==$espec->id)
                             <div class="flex justify-center">
@@ -192,6 +225,8 @@
                             $comerc=0;
                             $desec=0;
                             $mer=0;
+                           
+                           
                             foreach ($procesosall as $proceso) {
                                 
                                 if ($proceso->variedad==$variedad->name) {
@@ -208,6 +243,13 @@
                                $comercial[]=$comerc;
                                $desecho[]=$desec;
                                $merma[]=$mer;
+                           
+                              $exp_total+=$export;
+                              $Com_total+=$comerc;
+                              $des_total+=$desec;
+                              $merm_total+=$mer;
+
+
                             @endphp
                           @endif
                       @endforeach
@@ -256,7 +298,7 @@
           @endif
       
       </div>
-      
+     
     <div class="mx-2 sm:mx-12">
  
        <figure class="highcharts-figure mx-1 mt-6" wire:ignore>
