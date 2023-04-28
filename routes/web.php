@@ -37,6 +37,9 @@ Route::middleware([
 Route::get('/dashboard',[HomeController::class,'dashboard'])->name('dashboard');
 });
 
+Route::get('/dashboard/especie/{especie}',[HomeController::class,'dashboard_especie'])->name('dashboard.especie');
+
+
 Route::get('productores', [HomeController::class,'index'])->middleware('auth')->name('productors.index');
 
 Route::get('recepcion', [HomeController::class,'production'])->middleware('auth')->name('production.index');

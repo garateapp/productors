@@ -8,9 +8,8 @@
     <div class="flex justify-center">
         <div class="max-w-7xl w-full sm:px-6 lg:px-8 bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
            <h1>Buscador: </h1>
-           <div class="px-6 py-4">
-            <input wire:keydown="limpiar_page" wire:model="search"  class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" placeholder="Ingrese el nombre, rut o csg del productor" autocomplete="off">
-        </div>
+              <input wire:keydown="limpiar_page" wire:model="search"  class="form-input w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" placeholder="Ingrese el variedad, especie o lote de la recepción" autocomplete="off">
+            
         </div>
      </div>
      
@@ -23,10 +22,11 @@
                $merma=[];
            @endphp
           @if ($espec)
-              <button wire:click="espec_clean"   class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded content-center" style="background-color: #FF8000;">
-                  <p class="text-sm font-medium leading-none text-white">{{$espec->name}}</p>
-              </button>
-          
+                    <a href="{{route('dashboard')}}">
+                    <button wire:click="espec_clean"   class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded content-center" style="background-color: #FF8000;">
+                        <p class="text-sm font-medium leading-none text-white">{{$espec->name}}</p>
+                    </button>
+                    </a>
               @if ($variedades)
  
                   @if ($varie)
@@ -37,12 +37,33 @@
                       @foreach ($variedades as $variedad)
                           @if ($variedad->especie_id==$espec->id)
                             <div class="flex justify-center">
-                              <button wire:click="set_varie({{$variedad->id}})"  class=" w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-2 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
-                                  <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$variedad->name}}</p>
-                              </button>
+                                
+                                    <button wire:click="set_varie({{$variedad->id}})" class=" w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-2 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                                        <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$variedad->name}}</p>
+                                    </button>
+                               
                             </div>
                             @php
+                            $export=0;
+                            $comerc=0;
+                            $desec=0;
+                            $mer=0;
+                            foreach ($procesosall as $proceso) {
+                                
+                                if ($proceso->variedad==$variedad->name) {
+                                    $export+=$proceso->exp;
+                                    $comerc+=$proceso->comercial;
+                                    $desec+=$proceso->desecho;
+                                    $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+
+                                }
+
+                            }
                                $varieds[]=$variedad->name;
+                               $exportacion[]=$export;
+                               $comercial[]=$comerc;
+                               $desecho[]=$desec;
+                               $merma[]=$mer;
                             @endphp
                           @endif
                       @endforeach
@@ -55,11 +76,11 @@
           
               @foreach ($especies as $especie)
                 <div class="justify-center ">
-                    <a href="{{route('dashboard.especie',$especie)}}">
-                      <button class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-4 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                   
+                      <button wire:click="set_especie({{$especie->id}})" class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-4 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
                             <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$especie->name}}</p>
                       </button>
-                    </a>
+                   
                 </div>
                 @php
                 

@@ -334,11 +334,19 @@ class HomeController extends Controller
     public function dashboard () {
         $users=User::all();
         $recepcions=Recepcion::all();
-        $prop_recep=Recepcion::where('r_emisor',auth()->user()->rut)
-        ->latest('id')->get();
+      
 
         
-        return view('dashboard',compact('users','recepcions','prop_recep'));
+        return view('dashboard',compact('users','recepcions'));
+    }
+
+    public function dashboard_especie (Especie $especie) {
+        $users=User::all();
+        $recepcions=Recepcion::all();
+
+
+        
+        return view('dashboardespecie',compact('users','recepcions','especie'));
     }
 
     public function downloadpdf(Recepcion $recepcion) {
