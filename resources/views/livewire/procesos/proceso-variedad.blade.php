@@ -382,7 +382,7 @@
         },
  
         title: {
-            text: titulo,
+            text: 'Gráfico de Barras',
             align: 'center'
         },
  
@@ -434,7 +434,7 @@
         type: 'bar'
     },
     title: {
-        text: 'Kilos Por Categoría',
+        text: titulo,
         align: 'left'
     },
     xAxis: {

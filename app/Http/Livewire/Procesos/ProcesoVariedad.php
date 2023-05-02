@@ -16,7 +16,7 @@ class ProcesoVariedad extends Component
     public function mount(Variedad $variedad){
         $this->espec=$variedad->especie;
         $this->varie=$variedad;
-        $this->titulo='Gráfico de Barras';
+        $this->titulo='Kilos de '.$this->espec->name.' '.$this->varie->name.' Por Categoría';
     }
 
     public function render()
