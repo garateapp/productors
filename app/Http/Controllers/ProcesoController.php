@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Especie;
+use App\Models\Variedad;
 use Illuminate\Http\Request;
 
 class ProcesoController extends Controller
@@ -20,6 +21,11 @@ class ProcesoController extends Controller
     public function especie(Especie $especie)
     {
         return view('proceso.procesoespecie',compact('especie'));
+    }
+
+    public function variedad(Variedad $variedad)
+    {
+        return view('proceso.procesovariedad',compact('variedad'));
     }
 
     public function productorespecie(Especie $especie)

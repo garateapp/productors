@@ -32,7 +32,7 @@
               $merma=[];
           @endphp
           @if ($espec)
-                <a href="{{route('procesos.index')}}">
+                <a href="{{route('procesos.admin.especie',$espec)}}">
                     <button class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded content-center" style="background-color: #FF8000;">
                         <p class="text-sm font-medium leading-none text-white">{{$espec->name}}</p>
                     </button>
@@ -43,24 +43,14 @@
                       <button wire:click="varie_clean"  class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
                           <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$varie->name}}</p>
                       </button>
-                  @else
-                      @foreach ($variedades as $variedad)
-                          @if ($variedad->especie_id==$espec->id)
-                                <div class="flex justify-center">
-                                 <a href="{{route('procesos.admin.variedad',$variedad)}}">
-                                    <button  class=" w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-2 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
-                                          <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$variedad->name}}</p>
-                                    </button>
-                                 </a>
-                                </div>
-                            @php
+                        @php
                             $export=0;
                             $comerc=0;
                             $desec=0;
                             $mer=0;
                             foreach ($procesosall as $proceso) {
                                 
-                                if ($proceso->variedad==$variedad->name) {
+                                if ($proceso->variedad==$varie->name) {
                                     $export+=$proceso->exp;
                                     $comerc+=$proceso->comercial;
                                     $desec+=$proceso->desecho;
@@ -69,12 +59,21 @@
                                 }
 
                             }
-                               $varieds[]=$variedad->name;
+                               $varieds[]=$varie->name;
                                $exportacion[]=$export;
                                $comercial[]=$comerc;
                                $desecho[]=$desec;
                                $merma[]=$mer;
-                            @endphp
+                        @endphp
+                  @else
+                      @foreach ($variedades as $variedad)
+                          @if ($variedad->especie_id==$espec->id)
+                                <div class="flex justify-center">
+                                <button wire:click="set_varie({{$variedad->id}})"  class=" w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-2 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                                    <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$variedad->name}}</p>
+                                </button>
+                                </div>
+                            
                           @endif
                       @endforeach
                       
@@ -100,12 +99,27 @@
       </div>
       
     <div class="mx-2 sm:mx-12">
- 
-       <figure class="highcharts-figure mx-1 mt-6" wire:ignore>
-          <div id="grafico" wire:ignore>
-             
-          </div>
-      </figure>
+        
+        <div class="grid grid-cols-3">
+            <figure class="highcharts-figure mx-1 mt-6" wire:ignore>
+                <div id="grafico" wire:ignore>
+                   
+                </div>
+            </figure>
+            <figure class="highcharts-figure mx-1 mt-6 col-span-2" wire:ignore>
+                <div id="container" wire:ignore>
+                   
+                </div>
+            </figure>
+
+        </div>
+        <figure class="highcharts-figure" wire:ignore>
+            <div id="barras" wire:ignore>
+               
+            </div>
+        </figure>
+       
+      
  
           <div class="px-6 py-4">
              <input wire:keydown="limpiar_page" wire:model="search"  class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" placeholder="Ingrese el variedad, especie o lote de la recepción" autocomplete="off">
@@ -353,6 +367,7 @@
         
     </div>   
     <script>
+        
        var titulo = <?php echo json_encode($titulo) ?>;
        var variedades = <?php echo json_encode($varieds) ?>;
        var exportacion = <?php echo json_encode($exportacion) ?>;
@@ -412,7 +427,140 @@
             stack: 'variedades'
         }]
         });
+
+        // Data retrieved from: https://www.uefa.com/uefachampionsleague/history/
+    Highcharts.chart('barras', {
+    chart: {
+        type: 'bar'
+    },
+    title: {
+        text: 'Kilos Por Categoría',
+        align: 'left'
+    },
+    xAxis: {
+        categories: variedades,
+        title: {
+            text: null
+        },
+        gridLineWidth: 1,
+        lineWidth: 0
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Kilos',
+            align: 'high'
+        },
+        labels: {
+            overflow: 'justify'
+        },
+        gridLineWidth: 0
+    },
+    tooltip: {
+        valueSuffix: ' Kg'
+    },
+    plotOptions: {
+        bar: {
+            borderRadius: '50%',
+            dataLabels: {
+                enabled: true
+            },
+            groupPadding: 0.1
+        }
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top',
+        x: -40,
+        y: 80,
+        floating: true,
+        borderWidth: 1,
+        backgroundColor:
+            Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+        shadow: true
+    },
+    credits: {
+        enabled: false
+    },
+    series: [{
+            name: 'Exportacion',
+            data: exportacion,
+            stack: 'variedades'
+        }, {
+            name: 'Nacional',
+            data: comercial,
+            stack: 'variedades'
+        }, {
+            name: 'Desecho',
+            data: desecho,
+            stack: 'variedades'
+        }, {
+            name: 'Merma',
+            data: merma,
+            stack: 'variedades'
+        }]
+});
+             
                 
     </script>  
+
+    <script>
+        var titulo = <?php echo json_encode($titulo) ?>;
+       var variedades = <?php echo json_encode($varieds) ?>;
+       var exportacion = <?php echo json_encode($export) ?>;
+       var comercial = <?php echo json_encode($comerc) ?>;
+       var desecho = <?php echo json_encode($desec) ?>;
+       var merma = <?php echo json_encode($mer) ?>;
+        Highcharts.chart('container', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Gráfico Circular',
+        align: 'left'
+    },
+    tooltip: {
+        pointFormat: '<b><b>{point.y}</b>({point.percentage:.0f}%)<br/>',
+    },
+    accessibility: {
+        point: {
+            valueSuffix: '%'
+        }
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true
+        }
+    },
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{
+            name: 'Exportacion',
+            y: exportacion,
+            sliced: true,
+            selected: true
+        },  {
+            name: 'Comercial',
+            y: comercial
+        },  {
+            name: 'Desecho',
+            y: desecho
+        }, {
+            name: 'Merma',
+            y: merma
+        }]
+    }]
+});
+    </script>
  </div>
  
