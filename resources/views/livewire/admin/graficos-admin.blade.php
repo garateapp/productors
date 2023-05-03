@@ -1,7 +1,7 @@
 <div>
     @php
     $cant=0;
- 
+   
         foreach($recepcions as $recepcion){
             $cant+=$recepcion->peso_neto;
         }
@@ -107,6 +107,7 @@
             <div class="mx-2 sm:mx-12 md:mx-14 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-y-4 gap-x-3 justify-between  content-center">
                @php
                      $varieds=[];
+                     $series=[];
                      $exportacion=[];
                      $comercial=[];
                      $desecho=[];
@@ -152,7 +153,7 @@
                         </a>
                      </div>
                      @php
-                     
+                                
                                  $export=0;
                                  $comerc=0;
                                  $desec=0;
@@ -169,14 +170,32 @@
       
                                  }
 
-                                 $kilos=0;
-
-                                 foreach($recepcions as $recepcion){
-                                       if ($recepcion->n_especie==$especie->name) {
-                                          $kilos+=$recepcion->peso_neto;
-                                       } 
-                                    }
+                                 $inicio=date('W', strtotime($recepcions->first()->fecha_g_recepcion));
+                                 $final=date('W', strtotime($now));
+                                 
+                                 $name=$especie->name;
+                                 $array=[];
+                                 
+                                 foreach (range($inicio,($final+52)) as $number) {
+                                    $kilos=0;
+                                    if($number>52){
+                                       $nro=($number-52);
+                                    }else{
+                                       $nro=$number;
+                                    }  
+                                    foreach($recepcions as $recepcion){
+                                       
+                                          if ($recepcion->n_especie==$especie->name) {
+                                             if (date('W', strtotime($recepcion->fecha_g_recepcion))==$nro) {
+                                                $kilos+=$recepcion->peso_neto;
+                                             }
+                                           } 
+                                       }
+                                    $array[]=$kilos; 
+                                 }
                                     
+                                    $series[]=['name' =>$name,
+                                             'data'=> $array];
                                     
                                     $exportacion[]=$export;
                                     $comercial[]=$comerc;
@@ -190,7 +209,19 @@
                @endif
             
             </div>
+            @php
+               $semenas=[];
+                foreach (range($inicio,($final+52)) as $number) {
+                  if($number>52){
+                     $semanas[]='Semana '.($number-52);
+                  }else{
+                     $semanas[]='Semana '.$number;
+                  }  
+               }
 
+            @endphp
+             
+              
     <div class="mx-2 sm:mx-12">
  
        <figure class="highcharts-figure mx-1 mt-4" wire:ignore>
@@ -220,6 +251,8 @@
     <script>
        var titulo = <?php echo json_encode($titulo) ?>;
        var variedades = <?php echo json_encode($varieds) ?>;
+       var semanas = <?php echo json_encode($semanas) ?>;
+       var series = <?php echo json_encode($series) ?>;
         var exportacion = <?php echo json_encode($exportacion) ?>;
         var comercial = <?php echo json_encode($comercial) ?>;
         var desecho = <?php echo json_encode($desecho) ?>;
@@ -285,7 +318,7 @@
                align: 'left'
             },
             xAxis: {
-               categories: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4', 'Semana 5', 'Semana 6', 'Semana 7', 'Semana 8', 'Semana 9', 'Semana 9', 'Semana 11', 'Semana 12']
+               categories: semanas
             },
             yAxis: {
                title: {
@@ -303,27 +336,8 @@
                
             },
 
-            series: [{
-               name: 'Installation & Developers',
-               data: [43934, 48656, 65165, 81827, 112143, 142383,
-                  171533, 165174, 155157, 161454, 154610]
-            }, {
-               name: 'Manufacturing',
-               data: [24916, 37941, 29742, 29851, 32490, 30282,
-                  38121, 36885, 33726, 34243, 31050]
-            }, {
-               name: 'Sales & Distribution',
-               data: [11744, 30000, 16005, 19771, 20185, 24377,
-                  32147, 30912, 29243, 29213, 25663]
-            }, {
-               name: 'Operations & Maintenance',
-               data: [null, null, null, null, null, null, null,
-                  null, 11164, 11218, 10077]
-            }, {
-               name: 'Other',
-               data: [21908, 5548, 8105, 11248, 8989, 11816, 18274,
-                  17300, 13053, 11906, 10073]
-            }],
+            series: series
+            ,
 
             responsive: {
                rules: [{

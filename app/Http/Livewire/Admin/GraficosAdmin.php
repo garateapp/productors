@@ -6,6 +6,7 @@ use App\Models\Especie;
 use App\Models\Proceso;
 use App\Models\Recepcion;
 use App\Models\Variedad;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -13,9 +14,11 @@ class GraficosAdmin extends Component
 {   use WithPagination;
 
     public $search, $espec, $ctd=25, $especieid, $especiename, $varie, $variedadid, $titulo='Gráfico por Especies',$cant;
+    
 
     public function render()
     {   
+        $now = Carbon::now();
         if($this->espec){
             if($this->varie){
                 $procesos=Proceso::where('variedad','LIKE', $this->varie->name)
@@ -41,7 +44,7 @@ class GraficosAdmin extends Component
         $variedades=Variedad::all();
 
         $recepcions=Recepcion::all();
-        return view('livewire.admin.graficos-admin',compact('recepcions','procesosall','procesos','variedades','especies'));
+        return view('livewire.admin.graficos-admin',compact('now','recepcions','procesosall','procesos','variedades','especies'));
     }
     
     public function set_especie($id){
