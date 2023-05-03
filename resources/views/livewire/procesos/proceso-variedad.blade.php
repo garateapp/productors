@@ -115,7 +115,7 @@
             </figure>
 
         </div>
-        <figure class="highcharts-figure" wire:ignore>
+        <figure class="highcharts-figure mt-2" wire:ignore>
             <div id="barras" wire:ignore>
                
             </div>
