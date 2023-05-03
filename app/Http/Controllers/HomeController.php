@@ -333,24 +333,24 @@ class HomeController extends Controller
 
     public function dashboard () {
         $users=User::all();
-        $recepcions=Recepcion::all();
+
       
 
         
-        return view('dashboard',compact('users','recepcions'));
+        return view('dashboard',compact('users'));
     }
 
     public function dashboard_especie (Especie $especie) {
         $users=User::all();
-        $recepcions=Recepcion::all();
+        
 
-        return view('dashboardespecie',compact('users','recepcions','especie'));
+        return view('dashboardespecie',compact('users','especie'));
     }
     public function dashboard_variedad (Variedad $variedad) {
         $users=User::all();
-        $recepcions=Recepcion::all();
+        
 
-        return view('dashboardvariedad',compact('users','recepcions','variedad'));
+        return view('dashboardvariedad',compact('users','variedad'));
     }
 
     public function downloadpdf(Recepcion $recepcion) {

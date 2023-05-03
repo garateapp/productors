@@ -1,14 +1,5 @@
 <x-app-layout>
-   @php
-   $cant=0;
 
-       foreach($recepcions as $recepcion){
-           $cant+=$recepcion->peso_neto;
-       }
-       
-      
-
-   @endphp
            <section class="bg-cover bg-center" style="background-image: url({{asset('image/bg_intranet_admin.jpg'); }})">
 
             <div class="mx-auto pt-64">
@@ -112,7 +103,7 @@
                                  <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8  2xl:col-span-2">
                                     <div class="flex items-center justify-between mb-4">
                                        <div class="flex-shrink-0">
-                                          <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($cant)}}</span>
+                                          <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">100</span>
                                           <h3 class="text-base font-normal text-gray-500">Kilos Recibidos</h3>
                                        </div>
                                        <div class="flex items-center justify-end flex-1 text-green-500 text-base font-bold">
