@@ -90,7 +90,7 @@
            <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
               <div class="flex-shrink-0">
                  <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
-                    <h1 class="block my-2 text-xl font-bold text-green-500">KILOS RECIBIDOS DE {{strtoupper($espec->name.' Var: '.$varie->name)}}</h1>
+                    <h1 class="block my-2 text-xl font-bold text-green-500">KILOS RECIBIDOS DE {{strtoupper($espec->name.' - '.$varie->name)}}</h1>
                  </span>
                
               </div>
