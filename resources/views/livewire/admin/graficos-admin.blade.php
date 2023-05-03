@@ -239,7 +239,7 @@
          </div>
          <div>
             <figure class="highcharts-figure mx-1 mt-4" wire:ignore>
-               <div id="container" wire:ignore>
+               <div id="circular" wire:ignore>
                   
                </div>
             </figure>
@@ -355,7 +355,67 @@
             }
 
             });
+         </script>  
+    
+            <script>
+        var titulo = <?php echo json_encode($titulo) ?>;
+       var variedades = <?php echo json_encode($varieds) ?>;
+       var exportacion = <?php echo json_encode($exp_total) ?>;
+       var comercial = <?php echo json_encode($com_total) ?>;
+       var desecho = <?php echo json_encode($des_total) ?>;
+       var merma = <?php echo json_encode($merm_total) ?>;
+
+        Highcharts.chart('circular', {
+            chart: {
+               plotBackgroundColor: null,
+               plotBorderWidth: null,
+               plotShadow: false,
+               type: 'pie'
+            },
+            title: {
+               text: 'Gráfico Circular',
+               align: 'left'
+            },
+            tooltip: {
+               pointFormat: '<b><b>{point.y}</b>({point.percentage:.0f}%)<br/>',
+            },
+            accessibility: {
+               point: {
+                     valueSuffix: '%'
+               }
+            },
+            plotOptions: {
+               pie: {
+                     allowPointSelect: true,
+                     cursor: 'pointer',
+                     dataLabels: {
+                        enabled: false
+                     },
+                     showInLegend: true
+               }
+            },
+            series: [{
+               name: 'Brands',
+               colorByPoint: true,
+               data: [{
+                     name: 'Exportacion',
+                     y: exportacion,
+                     sliced: true,
+                     selected: true
+               },  {
+                     name: 'Comercial',
+                     y: comercial
+               },  {
+                     name: 'Desecho',
+                     y: desecho
+               }, {
+                     name: 'Merma',
+                     y: merma
+               }]
+            }]
+         });
+    </script>
                      
-    </script>  
+   
  </div>
  
