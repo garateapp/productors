@@ -46,7 +46,7 @@
                   @else
                       @foreach ($variedades as $variedad)
                           @if ($variedad->especie_id==$espec->id)
-                                <div class="flex justify-center">
+                                <div class="justify-center">
                                  <button wire:click="set_varie({{$variedad->id}})"  class=" w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-2 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
                                        <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$variedad->name}}</p>
                                  </button>

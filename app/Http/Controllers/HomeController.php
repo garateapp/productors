@@ -344,9 +344,13 @@ class HomeController extends Controller
         $users=User::all();
         $recepcions=Recepcion::all();
 
-
-        
         return view('dashboardespecie',compact('users','recepcions','especie'));
+    }
+    public function dashboard_variedad (Variedad $variedad) {
+        $users=User::all();
+        $recepcions=Recepcion::all();
+
+        return view('dashboardvariedad',compact('users','recepcions','variedad'));
     }
 
     public function downloadpdf(Recepcion $recepcion) {

@@ -191,8 +191,7 @@
             
         </div>
      </div>
-     <div class="flex justify-center">
-         <div>
+
             <div class="mx-2 sm:mx-12 md:mx-14 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-y-4 gap-x-3 justify-between  content-center">
                @php
                      $varieds=[];
@@ -224,12 +223,12 @@
 
                            @foreach ($variedades as $variedad)
                               @if ($variedad->especie_id==$espec->id)
-                                 <div class="flex justify-center">
-                                    
-                                          <button wire:click="set_varie({{$variedad->id}})" class=" w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-2 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                                 <div class="justify-center">
+                                    <a href="{{route('dashboard.variedad',$variedad)}}">
+                                          <button class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-2 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
                                              <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$variedad->name}}</p>
                                           </button>
-                                    
+                                    </a>
                                  </div>
                                  @php
                                  $export=0;
@@ -309,8 +308,7 @@
                @endif
             
             </div>
-         </div>
-      </div>
+
      
     <div class="mx-2 sm:mx-12">
  
