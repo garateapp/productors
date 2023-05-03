@@ -18,11 +18,9 @@
                         $comerc+=$proceso->comercial;
                         $desec+=$proceso->desecho;
                         $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+                     }
 
-                    
-
-                }
-                $exp_total=$export;
+               $exp_total=$export;
                $com_total=$comerc;
                $des_total=$desec;
                $merm_total=$mer; 
@@ -172,6 +170,7 @@
                                  }
 
                                  $kilos=0;
+
                                  foreach($recepcions as $recepcion){
                                        if ($recepcion->n_especie==$especie->name) {
                                           $kilos+=$recepcion->peso_neto;
@@ -290,16 +289,12 @@
                text: 'Source: <a href="https://irecusa.org/programs/solar-jobs-census/" target="_blank">IREC</a>',
                align: 'left'
             },
-
+            xAxis: {
+               categories: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4', 'Semana 5', 'Semana 6', 'Semana 7', 'Semana 8', 'Semana 9', 'Semana 9', 'Semana 11', 'Semana 12']
+            },
             yAxis: {
                title: {
-                  text: 'Number of Employees'
-               }
-            },
-
-            xAxis: {
-               accessibility: {
-                  rangeDescription: 'Range: 2010 to 2020'
+                  text: 'Temperature (°C)'
                }
             },
 
@@ -310,12 +305,7 @@
             },
 
             plotOptions: {
-               series: {
-                  label: {
-                        connectorAllowed: false
-                  },
-                  pointStart: 2010
-               }
+               
             },
 
             series: [{
