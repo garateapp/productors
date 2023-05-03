@@ -79,6 +79,8 @@ Route::get('procesos/productor', [ProcesoController::class,'index'])->middleware
 
 Route::get('procesos/productor/{especie}', [ProcesoController::class,'productorespecie'])->middleware('auth')->name('procesos.productor.especie');
 
+Route::get('procesos/productor/variedad/{variedad}', [ProcesoController::class,'productorvariedad'])->middleware('auth')->name('procesos.productor.variedad');
+
 Route::get('procesos/{especie}', [ProcesoController::class,'especie'])->middleware('auth')->name('procesos.admin.especie');
 
 Route::get('procesos/variedad/{variedad}', [ProcesoController::class,'variedad'])->middleware('auth')->name('procesos.admin.variedad');

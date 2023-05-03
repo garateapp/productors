@@ -33,6 +33,11 @@ class ProcesoController extends Controller
         return view('productors.procesoespecie',compact('especie'));
     }
 
+    public function productorvariedad(Variedad $variedad)
+    {
+        return view('productors.procesovariedad',compact('variedad'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
