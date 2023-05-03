@@ -117,6 +117,7 @@
        <div class="mx-2 sm:mx-12 md:mx-14 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-y-4 gap-x-3 justify-between  content-center">
           @php
               $varieds=[];
+              $series=[];
               $exportacion=[];
               $comercial=[];
               $desecho=[];

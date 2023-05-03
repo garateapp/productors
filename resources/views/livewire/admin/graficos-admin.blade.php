@@ -172,11 +172,14 @@
 
                                  $inicio=date('W', strtotime($recepcions->first()->fecha_g_recepcion));
                                  $final=date('W', strtotime($now));
-                                 
+                                 if ($inicio>$final) {
+                                    $final=$final+52;
+                                 }
+
                                  $name=$especie->name;
                                  $array=[];
                                  
-                                 foreach (range($inicio,($final+52)) as $number) {
+                                 foreach (range($inicio,($final)) as $number) {
                                     $kilos=0;
                                     if($number>52){
                                        $nro=($number-52);

@@ -121,6 +121,7 @@
             <div class="mx-2 sm:mx-12 md:mx-14 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-y-4 gap-x-3 justify-between  content-center">
                @php
                      $varieds=[];
+                     $series=[];
                      $exportacion=[];
                      $comercial=[];
                      $desecho=[];
@@ -177,11 +178,15 @@
 
                                  $inicio=date('W', strtotime($recepcions->first()->fecha_g_recepcion));
                                  $final=date('W', strtotime($now));
+
+                                 if ($inicio>$final) {
+                                    $final=$final+52;
+                                 }
                                  
                                  $name=$variedad->name;
                                  $array=[];
                                  
-                                 foreach (range($inicio,($final+52)) as $number) {
+                                 foreach (range($inicio,($final)) as $number) {
                                     $kilos=0;
                                     if($number>52){
                                        $nro=($number-52);
