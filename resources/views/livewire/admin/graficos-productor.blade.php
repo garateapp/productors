@@ -254,7 +254,7 @@
       </div>
  
        
-       <figure class="highcharts-figure mx-14 mt-6" wire:ignore>
+       <figure class="highcharts-figure mx-14 my-6" wire:ignore>
           <div id="grafico" wire:ignore>
              
           </div>

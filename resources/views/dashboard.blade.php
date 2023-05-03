@@ -30,7 +30,9 @@
    @endcan
 
    @can('Ver produccion_propia')
-      @livewire('productor.production-show')
+      <div class="mx-2 sm:mx-12">
+         @livewire('productor.production-show')
+      </div>
    @endcan
    
 
