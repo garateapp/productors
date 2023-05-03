@@ -6,6 +6,7 @@ use App\Models\Especie;
 use App\Models\Proceso;
 use App\Models\Recepcion;
 use App\Models\Variedad;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -17,10 +18,11 @@ class GraficosProductorEspecie extends Component
     public function mount(Especie $especie){
         $this->espec=$especie;
         $this->titulo='Gráfico por Variedades de '.$especie->name;
+        $this->titulo_circular='Gráfico Circular de '.$especie->name;
     }
 
     public function render()
-    {   
+    {    $now = Carbon::now();
         if($this->espec){
             if($this->varie){
                 $procesos=Proceso::where('agricola',auth()->user()->name)
@@ -50,9 +52,8 @@ class GraficosProductorEspecie extends Component
         $variedades=auth()->user()->variedades_comercializas()->get();
 
         $recepcions=Recepcion::where('n_emisor',auth()->user()->name)
-        ->where('n_especie',$this->espec->name)
-        ->latest('id')->get();
-        return view('livewire.admin.graficos-productor-especie',compact('recepcions','procesosall','procesos','variedades','especies'));
+        ->where('n_especie',$this->espec->name)->get();
+        return view('livewire.admin.graficos-productor-especie',compact('now','recepcions','procesosall','procesos','variedades','especies'));
     }
     
     public function set_especie($id){

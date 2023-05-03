@@ -271,7 +271,7 @@
             </div>
             @php
             $semenas=[];
-             foreach (range($inicio,($final+52)) as $number) {
+             foreach (range($inicio,($final)) as $number) {
                if($number>52){
                   $semanas[]='Semana '.($number-52);
                }else{
@@ -419,7 +419,7 @@
                 
     </script> 
     <script>
-        var titulo = <?php echo json_encode($titulo) ?>;
+      var titulo_circular = <?php echo json_encode($titulo_circular) ?>;
        var variedades = <?php echo json_encode($varieds) ?>;
        var exportacion = <?php echo json_encode($exp_total) ?>;
        var comercial = <?php echo json_encode($Com_total) ?>;
@@ -434,7 +434,7 @@
                type: 'pie'
             },
             title: {
-               text: 'Gráfico Circular',
+               text: titulo_circular,
                align: 'left'
             },
             tooltip: {

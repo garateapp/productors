@@ -18,6 +18,7 @@ class GraficosAdminEspecie extends Component
     public function mount(Especie $especie){
         $this->espec=$especie;
         $this->titulo='Gráfico por Variedades de '.$especie->name;
+        $this->titulo_circular='Gráfico Circular de '.$especie->name;
         $this->recepcions=Recepcion::where('n_especie',$this->espec->name)->get();
     }
 

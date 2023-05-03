@@ -177,6 +177,7 @@
        <div class="mx-2 mt-4 sm:mx-12 md:mx-14 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-y-4 gap-x-3 justify-between  content-center">
           @php
               $varieds=[];
+              $series=[];
               $exportacion=[];
               $comercial=[];
               $desecho=[];
@@ -220,6 +221,38 @@
                                 }
 
                             }
+
+                                 $inicio=date('W', strtotime($recepcions->first()->fecha_g_recepcion));
+                                 $final=date('W', strtotime($now));
+
+                                 if ($inicio>$final) {
+                                    $final=$final+52;
+                                 }
+                                 
+                                 $name=$variedad->name;
+                                 $array=[];
+                                 
+                                 foreach (range($inicio,($final)) as $number) {
+                                    $kilos=0;
+                                    if($number>52){
+                                       $nro=($number-52);
+                                    }else{
+                                       $nro=$number;
+                                    }  
+                                    foreach($recepcions as $recepcion){
+                                       
+                                          if ($recepcion->n_variedad==$variedad->name) {
+                                             if (date('W', strtotime($recepcion->fecha_g_recepcion))==$nro) {
+                                                $kilos+=$recepcion->peso_neto;
+                                             }
+                                           } 
+                                       }
+                                    $array[]=$kilos; 
+                                 }
+                                    
+                                    $series[]=['name' =>$name,
+                                             'data'=> $array];
+
                                $varieds[]=$variedad->name;
                                $exportacion[]=$export;
                                $comercial[]=$comerc;
@@ -249,6 +282,17 @@
           @endif
       
       </div>
+      @php
+      $semenas=[];
+       foreach (range($inicio,($final)) as $number) {
+         if($number>52){
+            $semanas[]='Semana '.($number-52);
+         }else{
+            $semanas[]='Semana '.$number;
+         }  
+      }
+
+      @endphp
       
     <div class="mx-2 sm:mx-12">
  
@@ -258,12 +302,32 @@
           </div>
       </figure>
  
+      <div class="grid grid-cols-3">
+         <div class="col-span-2">
+            <figure class="highcharts-figure mx-1 mt-4" wire:ignore>
+               <div id="container" wire:ignore>
+                  
+               </div>
+            </figure>
+         </div>
+         <div>
+            <figure class="highcharts-figure mx-1 mt-4" wire:ignore>
+               <div id="circular" wire:ignore>
+                  
+               </div>
+            </figure>
+         </div>
+        
          
+      </div>
         
     </div>   
     <script>
        var titulo = <?php echo json_encode($titulo) ?>;
+       
        var variedades = <?php echo json_encode($varieds) ?>;
+       var semanas = <?php echo json_encode($semanas) ?>;
+       var series = <?php echo json_encode($series) ?>;
        var exportacion = <?php echo json_encode($exportacion) ?>;
        var comercial = <?php echo json_encode($comercial) ?>;
        var desecho = <?php echo json_encode($desecho) ?>;
@@ -321,7 +385,110 @@
             stack: 'variedades'
         }]
         });
+        Highcharts.chart('container', {
+
+         title: {
+            text: 'Kilos Recibidos Por Semana',
+            align: 'left'
+         },
+         xAxis: {
+            categories: semanas
+         },
+         yAxis: {
+            title: {
+               text: 'Kilos'
+            }
+         },
+
+         legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+         },
+
+         plotOptions: {
+            
+         },
+
+         series: series
+         ,
+
+         responsive: {
+            rules: [{
+               condition: {
+                     maxWidth: 500
+               },
+               chartOptions: {
+                     legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                     }
+               }
+            }]
+         }
+
+         });
                 
     </script>  
+    <script>
+       
+        var titulo_circular = <?php echo json_encode($titulo_circular) ?>;
+       var variedades = <?php echo json_encode($varieds) ?>;
+       var exportacion = <?php echo json_encode($exp_total) ?>;
+       var comercial = <?php echo json_encode($com_total) ?>;
+       var desecho = <?php echo json_encode($des_total) ?>;
+       var merma = <?php echo json_encode($merm_total) ?>;
+
+        Highcharts.chart('circular', {
+            chart: {
+               plotBackgroundColor: null,
+               plotBorderWidth: null,
+               plotShadow: false,
+               type: 'pie'
+            },
+            title: {
+               text: titulo_circular,
+               align: 'left'
+            },
+            tooltip: {
+               pointFormat: '<b><b>{point.y}</b>({point.percentage:.0f}%)<br/>',
+            },
+            accessibility: {
+               point: {
+                     valueSuffix: '%'
+               }
+            },
+            plotOptions: {
+               pie: {
+                     allowPointSelect: true,
+                     cursor: 'pointer',
+                     dataLabels: {
+                        enabled: false
+                     },
+                     showInLegend: true
+               }
+            },
+            series: [{
+               name: 'Brands',
+               colorByPoint: true,
+               data: [{
+                     name: 'Exportacion',
+                     y: exportacion,
+                     sliced: true,
+                     selected: true
+               },  {
+                     name: 'Comercial',
+                     y: comercial
+               },  {
+                     name: 'Desecho',
+                     y: desecho
+               }, {
+                     name: 'Merma',
+                     y: merma
+               }]
+            }]
+         });
+    </script>
  </div>
  

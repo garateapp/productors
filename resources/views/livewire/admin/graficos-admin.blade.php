@@ -214,7 +214,7 @@
             </div>
             @php
                $semenas=[];
-                foreach (range($inicio,($final+52)) as $number) {
+                foreach (range($inicio,($final)) as $number) {
                   if($number>52){
                      $semanas[]='Semana '.($number-52);
                   }else{
