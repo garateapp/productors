@@ -281,7 +281,7 @@
          Highcharts.chart('container', {
 
             title: {
-               text: 'U.S Solar Employment Growth by Job Category, 2010-2020',
+               text: 'Kilos Recibidos Por Semana',
                align: 'left'
             },
 
@@ -294,7 +294,7 @@
             },
             yAxis: {
                title: {
-                  text: 'Temperature (°C)'
+                  text: 'Kilos'
                }
             },
 
