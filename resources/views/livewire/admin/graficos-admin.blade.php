@@ -284,11 +284,6 @@
                text: 'Kilos Recibidos Por Semana',
                align: 'left'
             },
-
-            subtitle: {
-               text: 'Source: <a href="https://irecusa.org/programs/solar-jobs-census/" target="_blank">IREC</a>',
-               align: 'left'
-            },
             xAxis: {
                categories: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4', 'Semana 5', 'Semana 6', 'Semana 7', 'Semana 8', 'Semana 9', 'Semana 9', 'Semana 11', 'Semana 12']
             },
