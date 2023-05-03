@@ -34,7 +34,7 @@ class GraficosProductorEspecie extends Component
                         ->where('especie',$this->espec->name)
                          ->latest('n_proceso')->paginate($this->ctd);
                     $procesosall=Proceso::where('agricola',auth()->user()->name)
-                        ->where('especie','LIKE', $this->search)
+                        ->where('especie', $this->espec->name)
                          ->latest('n_proceso')->get();
             }
 
