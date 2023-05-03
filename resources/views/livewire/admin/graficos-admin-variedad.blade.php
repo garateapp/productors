@@ -395,7 +395,7 @@
         layout: 'horizontal',
         align: 'right',
         verticalAlign: 'top',
-        x: -40,
+        x: -10,
         y: 250,
         floating: true,
         borderWidth: 1,
