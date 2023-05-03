@@ -36,12 +36,12 @@
                         </x-jet-nav-link>
                     @endcan
                     @can('Ver produccion_total')
-                        <x-jet-nav-link href="{{ route('procesos.index') }}" :active="request()->routeIs('procesos.index')">
+                        <x-jet-nav-link href="{{ route('procesos.index') }}" :active="request()->routeIs('procesos.*')">
                             {{ __('Procesos') }}
                         </x-jet-nav-link>
                     @endcan
                     @can('Ver procesos_propios')
-                        <x-jet-nav-link href="{{ route('procesos.productor.index') }}" :active="request()->routeIs('procesos.productor.index')">
+                        <x-jet-nav-link href="{{ route('procesos.productor.index') }}" :active="request()->routeIs('procesos.*')">
                             {{ __('Procesos') }}
                         </x-jet-nav-link>
                     @endcan
@@ -191,7 +191,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard.*')">
                 {{ __('Inicio') }}
             </x-jet-responsive-nav-link>
             @can('Ver productores')
@@ -210,7 +210,7 @@
                 </x-jet-responsive-nav-link>
             @endcan
             @can('Ver produccion_total')
-                <x-jet-responsive-nav-link href="{{ route('procesos.index') }}" :active="request()->routeIs('procesos.index')">
+                <x-jet-responsive-nav-link href="{{ route('procesos.index') }}" :active="request()->routeIs('procesos.*')">
                     {{ __('Procesos') }}
                 </x-jet-responsive-nav-link>
             @endcan

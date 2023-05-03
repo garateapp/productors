@@ -40,9 +40,11 @@
               @if ($variedades)
  
                   @if ($varie)
-                      <button wire:click="varie_clean"  class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
-                          <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$varie->name}}</p>
-                      </button>
+                    <a href="{{route('procesos.admin.especie',$espec)}}">
+                        <button class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                            <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$varie->name}}</p>
+                        </button>
+                    </a>
                         @php
                             $export=0;
                             $comerc=0;
