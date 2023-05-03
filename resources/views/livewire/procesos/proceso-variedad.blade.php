@@ -477,7 +477,7 @@
         align: 'right',
         verticalAlign: 'center',
         x: -10,
-        y: 250,
+        y: 290,
         floating: true,
         borderWidth: 1,
         backgroundColor:
