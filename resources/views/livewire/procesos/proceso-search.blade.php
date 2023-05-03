@@ -5,9 +5,11 @@
    <script src="https://code.highcharts.com/modules/export-data.js"></script>
    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-    <div class="flex justify-end  my-2 items-center content-end mx-4 md:mx-12 "> 
+   <div class="flex justify-between my-2 items-center content-end mx-4 md:mx-12 "> 
 
-      
+   <h1 class="text-center text-sm my-4 mx-6"><b>Ultima Sincronizacion:</b> {{date('d M Y g:i a', strtotime($sync->fecha))}} <b>Tipo:</b> {{$sync->tipo}} <b>Cantidad:</b> {{$sync->cantidad}}</h1>
+
+   <div>
       <a href="{{route('proceso.refresh')}}">
          <button  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
              <p class="text-sm font-medium leading-none text-white">PROCESO IMPORT</p>
@@ -19,7 +21,7 @@
                <p class="text-sm font-medium leading-none text-white">SUBIR PROCESO</p>
             </button>
       </a>
-        
+   </div>
    
  </div>
 

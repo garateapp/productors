@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Procesos;
 
 use App\Models\Especie;
 use App\Models\Proceso;
+use App\Models\Sync;
 use App\Models\Variedad;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -47,7 +48,12 @@ class ProcesoVariedad extends Component
         
         $especies=Especie::where('id','>=',1)->latest('id')->get();
         $variedades=Variedad::all();
-        return view('livewire.procesos.proceso-variedad',compact('procesosall','procesos','variedades','especies'));
+
+        $sync=Sync::where('entidad','PROCESOS')
+        ->orderby('id','DESC')
+        ->first();
+
+        return view('livewire.procesos.proceso-variedad',compact('sync','procesosall','procesos','variedades','especies'));
     }
 
     public function set_especie($id){

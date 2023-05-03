@@ -392,11 +392,11 @@
         }
     },
     legend: {
-        layout: 'vertical',
+        layout: 'horizontal',
         align: 'right',
         verticalAlign: 'top',
         x: -40,
-        y: 80,
+        y: 250,
         floating: true,
         borderWidth: 1,
         backgroundColor:
