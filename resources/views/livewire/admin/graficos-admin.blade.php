@@ -87,80 +87,7 @@
               </div>
            </div>
   
-              {{--   @can('Ver productores')
-                    <a href="{{ route('productors.index') }}">
-                       <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-2 mx-4">
-                          <div class="flex items-center">
-                             <div class="flex-shrink-0">
-                                <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($users->count())}}</span>
-                                <h3 class="text-base font-normal text-gray-500">Productores</h3>
-                             </div>
-                             <div class="ml-5 w-0 flex items-center justify-end flex-1 text-green-500 text-base font-bold cursor-pointer">
-                                VER TODOS
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                   <path fill-rule="evenodd" d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                                </svg>
-                             </div>
-                          </div>
-                       </div>
-                    </a>
-                 @endcan
-                 @can('Ver produccion_total')
-                    <a href="{{ route('production.index') }}">
-                       <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-2 mx-4">
-                          <div class="flex items-center">
-                             <div class="flex-shrink-0">
-                                <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($recepcions->count())}}</span>
-                                <h3 class="text-base font-normal text-gray-500">Recepciones</h3>
-                             </div>
-                             <div class="ml-5 w-0 flex items-center justify-end flex-1 text-green-500 text-base font-bold cursor-pointer">
-                                VER TODOS
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                   <path fill-rule="evenodd" d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                                </svg>
-                             </div>
-                          </div>
-                       </div>
-                    </a>
-                 @endcan
-                 @can('Ver produccion_cc')
-                    <a href="{{ route('productioncc.index') }}">
-                       <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-2 mx-4">
-                          <div class="flex items-center">
-                             <div class="flex-shrink-0">
-                                <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($recepcions->count())}}</span>
-                                <h3 class="text-base font-normal text-gray-500">Recepciones CC</h3>
-                             </div>
-                             <div class="ml-5 w-0 flex items-center justify-end flex-1 text-green-500 text-base font-bold cursor-pointer">
-                                VER TODOS
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                   <path fill-rule="evenodd" d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                                </svg>
-                             </div>
-                          </div>
-                       </div>
-                    </a>
-                 @endcan
-                 @can('Ver produccion_propia')
-                    <a href="{{ route('productionpropia.index') }}">
-                       <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-2 mx-4">
-                          <div class="flex items-center">
-                             <div class="flex-shrink-0">
-                                <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($prop_recep->count())}}</span>
-                                <h3 class="text-base font-normal text-gray-500">Recepciones</h3>
-                             </div>
-                             <div class="ml-5 w-0 flex items-center justify-end flex-1 text-green-500 text-base font-bold cursor-pointer">
-                                VER TODOS
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                   <path fill-rule="evenodd" d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                                </svg>
-                             </div>
-                          </div>
-                       </div>
-                    </a>
-                 @endcan
-           
-           comment --}}
+       
         </div>
      </div>
 
@@ -243,6 +170,14 @@
                                        }
       
                                  }
+
+                                 $kilos=0;
+                                 foreach($recepcions as $recepcion){
+                                       if ($recepcion->n_especie==$especie->name) {
+                                          $kilos+=$recepcion->peso_neto;
+                                       } 
+                                    }
+                                    
                                     
                                     $exportacion[]=$export;
                                     $comercial[]=$comerc;
@@ -264,6 +199,23 @@
              
           </div>
       </figure>
+      <div class="grid grid-cols-3">
+         <div class="col-span-2">
+            <figure class="highcharts-figure mx-1 mt-4" wire:ignore>
+               <div id="container" wire:ignore>
+                  
+               </div>
+            </figure>
+         </div>
+         <div>
+            <figure class="highcharts-figure mx-1 mt-4" wire:ignore>
+               <div id="container" wire:ignore>
+                  
+               </div>
+            </figure>
+         </div>
+         
+      </div>
         
     </div>   
     <script>
@@ -326,7 +278,85 @@
              stack: 'variedades'
          }]
          });
-                
+
+         Highcharts.chart('container', {
+
+            title: {
+               text: 'U.S Solar Employment Growth by Job Category, 2010-2020',
+               align: 'left'
+            },
+
+            subtitle: {
+               text: 'Source: <a href="https://irecusa.org/programs/solar-jobs-census/" target="_blank">IREC</a>',
+               align: 'left'
+            },
+
+            yAxis: {
+               title: {
+                  text: 'Number of Employees'
+               }
+            },
+
+            xAxis: {
+               accessibility: {
+                  rangeDescription: 'Range: 2010 to 2020'
+               }
+            },
+
+            legend: {
+               layout: 'vertical',
+               align: 'right',
+               verticalAlign: 'middle'
+            },
+
+            plotOptions: {
+               series: {
+                  label: {
+                        connectorAllowed: false
+                  },
+                  pointStart: 2010
+               }
+            },
+
+            series: [{
+               name: 'Installation & Developers',
+               data: [43934, 48656, 65165, 81827, 112143, 142383,
+                  171533, 165174, 155157, 161454, 154610]
+            }, {
+               name: 'Manufacturing',
+               data: [24916, 37941, 29742, 29851, 32490, 30282,
+                  38121, 36885, 33726, 34243, 31050]
+            }, {
+               name: 'Sales & Distribution',
+               data: [11744, 30000, 16005, 19771, 20185, 24377,
+                  32147, 30912, 29243, 29213, 25663]
+            }, {
+               name: 'Operations & Maintenance',
+               data: [null, null, null, null, null, null, null,
+                  null, 11164, 11218, 10077]
+            }, {
+               name: 'Other',
+               data: [21908, 5548, 8105, 11248, 8989, 11816, 18274,
+                  17300, 13053, 11906, 10073]
+            }],
+
+            responsive: {
+               rules: [{
+                  condition: {
+                        maxWidth: 500
+                  },
+                  chartOptions: {
+                        legend: {
+                           layout: 'horizontal',
+                           align: 'center',
+                           verticalAlign: 'bottom'
+                        }
+                  }
+               }]
+            }
+
+            });
+                     
     </script>  
  </div>
  
