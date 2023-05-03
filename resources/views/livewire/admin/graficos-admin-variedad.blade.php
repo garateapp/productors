@@ -1,27 +1,192 @@
 <div>
+    @php
+    $cant=0;
+ 
+        foreach($recepcions as $recepcion){
+            $cant+=$recepcion->peso_neto;
+        }
+        
+        
+                
+                $export=0;
+                $comerc=0;
+                $desec=0;
+                $mer=0;
+                foreach ($procesosall as $proceso) {
+                    
+                    if ($proceso->especie==$espec->name) {
+                        $export+=$proceso->exp;
+                        $comerc+=$proceso->comercial;
+                        $desec+=$proceso->desecho;
+                        $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+
+                    }
+
+                }
+                $exp_total=$export;
+               $Com_total=$comerc;
+               $des_total=$desec;
+               $merm_total=$mer; 
+                  
+                
+               
+
+       
+ 
+    @endphp
+
+<section id="graf">   
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="mt-2 mb-2 w-full grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-x-2 gap-y-2 items-center content-center">
+           <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-2u">
+              <div class="flex items-center">
+                 <div class="flex-shrink-0">
+                    <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900"><h1 class="block text-2xl font-bold">Hola<br> {{Auth()->user()->name}}</h1></span>
+                   
+                       @foreach (auth()->user()->roles as $role)
+                          <h3 class="text-base font-normal text-gray-500">
+                             {{$role->name}}
+                          </h3>
+                       @endforeach
+                    
+                 </div>
+                 
+              </div>
+           </div>
+           <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
+              <div class="flex-shrink-0">
+                 <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                    <h1 class="block my-2 text-xl font-bold text-cyan-500">% EXPORTACION</h1>
+                    
+                    
+                 </span>
+              </div>
+              <div class="flex items-center">
+                 @if (($exp_total+$Com_total+$des_total+$merm_total)==0)
+                     <h1 class="block my-2 text-xl font-bold">0%</h1>
+                     <div class="relative py-2 w-full mx-4">
+                        <div class="w-full overflow-hidden h-4 text-4xl flex rounded bg-gray-200">
+                           <div style="width: 0%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500">
+                              </div>
+                        </div>
+                     </div>
+                     <i class="fas fa-ship fa-2x mb-4 text-blue-500"></i>
+                     
+                 @else
+                     <h1 class="block my-2 text-xl font-bold">{{number_format($exp_total*100/($exp_total+$Com_total+$des_total+$merm_total),1)}}%</h1>
+                     <div class="relative py-2 w-full mx-4">
+                        <div class="w-full overflow-hidden h-4 text-4xl flex rounded bg-gray-200">
+                           <div style="width: {{$exp_total*100/($exp_total+$Com_total+$des_total+$merm_total)}}%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500">
+                              </div>
+                        </div>
+                     </div>
+                     <i class="fas fa-ship fa-2x mb-4 text-blue-500"></i>
+                 @endif
+                
+                 
+                 
+              </div>
+           </div>
+           <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
+              <div class="flex-shrink-0">
+                 <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                    <h1 class="block my-2 text-xl font-bold text-green-500">KILOS RECIBIDOS DE {{strtoupper($espec->name.' Var: '.$varie->name)}}</h1>
+                 </span>
+               
+              </div>
+              <div class="flex items-center justify-between">
+               
+  
+                 <h1 class="block my-2 text-xl font-bold">{{number_format($cant)}}</h1>
+                 <i class="fas fa-truck fa-2x mb-4 text-green-500 justify-end fa-flip-horizontal"></i>
+              </div>
+           </div>
+  
+              {{--   @can('Ver productores')
+                    <a href="{{ route('productors.index') }}">
+                       <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-2 mx-4">
+                          <div class="flex items-center">
+                             <div class="flex-shrink-0">
+                                <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($users->count())}}</span>
+                                <h3 class="text-base font-normal text-gray-500">Productores</h3>
+                             </div>
+                             <div class="ml-5 w-0 flex items-center justify-end flex-1 text-green-500 text-base font-bold cursor-pointer">
+                                VER TODOS
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                   <path fill-rule="evenodd" d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                             </div>
+                          </div>
+                       </div>
+                    </a>
+                 @endcan
+                 @can('Ver produccion_total')
+                    <a href="{{ route('production.index') }}">
+                       <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-2 mx-4">
+                          <div class="flex items-center">
+                             <div class="flex-shrink-0">
+                                <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($recepcions->count())}}</span>
+                                <h3 class="text-base font-normal text-gray-500">Recepciones</h3>
+                             </div>
+                             <div class="ml-5 w-0 flex items-center justify-end flex-1 text-green-500 text-base font-bold cursor-pointer">
+                                VER TODOS
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                   <path fill-rule="evenodd" d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                             </div>
+                          </div>
+                       </div>
+                    </a>
+                 @endcan
+                 @can('Ver produccion_cc')
+                    <a href="{{ route('productioncc.index') }}">
+                       <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-2 mx-4">
+                          <div class="flex items-center">
+                             <div class="flex-shrink-0">
+                                <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($recepcions->count())}}</span>
+                                <h3 class="text-base font-normal text-gray-500">Recepciones CC</h3>
+                             </div>
+                             <div class="ml-5 w-0 flex items-center justify-end flex-1 text-green-500 text-base font-bold cursor-pointer">
+                                VER TODOS
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                   <path fill-rule="evenodd" d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                             </div>
+                          </div>
+                       </div>
+                    </a>
+                 @endcan
+                 @can('Ver produccion_propia')
+                    <a href="{{ route('productionpropia.index') }}">
+                       <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-2 mx-4">
+                          <div class="flex items-center">
+                             <div class="flex-shrink-0">
+                                <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($prop_recep->count())}}</span>
+                                <h3 class="text-base font-normal text-gray-500">Recepciones</h3>
+                             </div>
+                             <div class="ml-5 w-0 flex items-center justify-end flex-1 text-green-500 text-base font-bold cursor-pointer">
+                                VER TODOS
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                   <path fill-rule="evenodd" d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                             </div>
+                          </div>
+                       </div>
+                    </a>
+                 @endcan
+           
+           comment --}}
+        </div>
+     </div>
+</section>
+
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/series-label.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
  
-     <div class="flex justify-end  my-2 items-center content-end mx-4 md:mx-12 "> 
- 
-       
-       <a href="{{route('proceso.refresh')}}">
-          <button  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
-              <p class="text-sm font-medium leading-none text-white">PROCESO IMPORT</p>
-          </button>
-      </a>
- 
-       <a href="{{route('subir.procesos')}}">
-             <button  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-green-500 hover:bg-green-600 focus:outline-none rounded ml-2">
-                <p class="text-sm font-medium leading-none text-white">SUBIR PROCESO</p>
-             </button>
-       </a>
-         
     
-  </div>
  
        <div class="mx-2 sm:mx-12 md:mx-14 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-y-4 gap-x-3 justify-between  content-center">
           @php
@@ -258,7 +423,7 @@
             data: merma,
             stack: 'variedades'
         }]
-});
+    });
              
                 
     </script>  

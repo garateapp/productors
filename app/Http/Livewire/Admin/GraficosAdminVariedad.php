@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Especie;
 use App\Models\Proceso;
+use App\Models\Recepcion;
 use App\Models\Variedad;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -11,13 +12,16 @@ use Livewire\WithPagination;
 class GraficosAdminVariedad extends Component
 {   use WithPagination;
 
-    public $search, $espec, $ctd=25, $especieid, $especiename, $varie, $variedadid;
+    public $search, $espec, $ctd=25, $especieid, $especiename, $varie, $variedadid, $recepcions;
     
     public function mount(Variedad $variedad){
         $this->espec=$variedad->especie;
         $this->varie=$variedad;
         $this->titulo='Kilos de '.$this->espec->name.' '.$this->varie->name.' Por Categoría';
+        $this->recepcions=Recepcion::where('n_variedad',$this->varie->name)->get();
     }
+
+
 
     public function render()
     {    if($this->espec){
