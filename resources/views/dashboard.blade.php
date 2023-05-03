@@ -35,6 +35,10 @@
    @endcan
 
    @can('Ver produccion_propia')
+      @livewire('admin.graficos-productor')
+   @endcan
+
+   @can('Ver produccion_propia')
       @livewire('productor.production-show')
    @endcan
    
