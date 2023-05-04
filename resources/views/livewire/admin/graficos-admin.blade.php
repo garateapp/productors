@@ -253,74 +253,83 @@
                 $espec=[];
             @endphp
       <div x-data="setup()">
-         <ul class="flex justify-center items-center my-4">
-            <template x-for="(tab, index) in tabs" :key="index">
-                <li class="cursor-pointer py-3 px-4 rounded transition"
-                    :class="activeTab===index ? 'bg-red-500 text-white' : ' text-gray-500'" @click="activeTab = index"
-                    x-text="tab"></li>
-            </template>
         
-        </ul>
             
-            <div class="flex justify-center mb-2 max-w-7xl mx-auto sm:px-6 lg:px-8">
-               <div class="max-w-7xl w-full sm:px-6 lg:px-8 bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
-                  @foreach ($especies as $especie)
-                     @php
-                         $espec[]=$especie->name;
-                     @endphp
-                     <div x-show="activeTab==={{$especie->id-1}}">
-                        @foreach ($especie->variedads as $variedad)
+            <div class="flex justify-center my-2 max-w-7xl mx-auto sm:px-6 lg:px-8">
+               
+               <div class="max-w-7xl w-full bg-white shadow rounded-lg my-2 mx-4">
+                  <div class="max-w-7xl w-full sm:px-6 lg:px-8 bg-gray-100 shadow rounded-lg px-4 py-2 sm:p-6 xl:p-4">
+                     <h6 class="font-bold text-green-500">Kilos Exportables por Variedades</h6>
+                  </div>
+                  <div class="sm:px-6 lg:px-8  px-4 py-2 sm:p-6 xl:p-4">
+                    
+                     <ul class="flex justify-center items-center mb-6 mt-2">
+                        <template x-for="(tab, index) in tabs" :key="index">
+                           <li class="cursor-pointer py-3 px-4 rounded transition"
+                              :class="activeTab===index ? 'bg-red-500 text-white' : ' text-gray-500'" @click="activeTab = index"
+                              x-text="tab"></li>
+                        </template>
+                  
+                     </ul>
 
-                           @php
-                                 $export=0;
-                                 $comerc=0;
-                                 $desec=0;
-                                 $mer=0;
-                                 foreach ($procesosall as $proceso) {
+
+                     @foreach ($especies as $especie)
+                        @php
+                           $espec[]=$especie->name;
+                        @endphp
+                        <div x-show="activeTab==={{$especie->id-1}}">
+                           @foreach ($especie->variedads as $variedad)
+
+                              @php
+                                    $export=0;
+                                    $comerc=0;
+                                    $desec=0;
+                                    $mer=0;
+                                    foreach ($procesosall as $proceso) {
+                                       
+                                          if ($proceso->variedad==$variedad->name) {
+                                             $export+=$proceso->exp;
+                                             $comerc+=$proceso->comercial;
+                                             $desec+=$proceso->desecho;
+                                             $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+                                          }
+
+                                          }
+
                                     
-                                       if ($proceso->variedad==$variedad->name) {
-                                          $export+=$proceso->exp;
-                                          $comerc+=$proceso->comercial;
-                                          $desec+=$proceso->desecho;
-                                          $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
-                                       }
-
-                                       }
-
                                  
-                               
-                           @endphp
+                              @endphp
 
 
 
 
-                           <h1>{{$variedad->name}}</h1>
-                              @if (($export+$comerc+$desec+$mer)==0)
-                                 <div class="relative py-2 w-full">
-                                    <div class="w-full overflow-hidden h-5 text-4xl flex rounded bg-gray-200">
-                                       <div style="width: 0%" class="shadow-none flex flex-col text-center whitespace-nowrap p-1 text-white justify-center bg-blue-500 transition-all duration-500">
-                                       <p class="text-base font-bold p-1">0%</p> 
+                              <p>{{$variedad->name}} -> <b>{{number_format($export)}} de {{number_format(($export+$comerc+$desec+$mer))}} Kilos</b> </p>
+                                 @if (($export+$comerc+$desec+$mer)==0)
+                                    <div class="relative py-2 w-full">
+                                       <div class="w-full overflow-hidden h-5 text-4xl flex rounded bg-gray-200">
+                                          <div style="width: 0%" class="shadow-none flex flex-col text-center whitespace-nowrap p-1 text-white justify-center bg-blue-500 transition-all duration-500">
+                                          <p class="text-base font-bold p-1">0%</p> 
+                                          </div>
                                        </div>
-                                    </div>
-                                 </div>  
-                              @else
-                                 <div class="relative py-2 w-full">
-                                    <div class="w-full overflow-hidden h-5 text-4xl flex rounded bg-gray-200">
-                                       <div style="width: {{$export*100/($export+$comerc+$desec+$mer)}}%" class="shadow-none flex flex-col text-center whitespace-nowrap p-1 text-white justify-center bg-blue-500 transition-all duration-500">
-                                       <p class="text-base font-bold p-1">{{number_format($export*100/($export+$comerc+$desec+$mer),1)}}%</p> 
+                                    </div>  
+                                 @else
+                                    <div class="relative py-2 w-full">
+                                       <div class="w-full overflow-hidden h-5 text-4xl flex rounded bg-gray-200">
+                                          <div style="width: {{$export*100/($export+$comerc+$desec+$mer)}}%" class="shadow-none flex flex-col text-center whitespace-nowrap p-1 text-white justify-center bg-blue-500 transition-all duration-500">
+                                          <p class="text-base font-bold p-1">{{number_format($export*100/($export+$comerc+$desec+$mer),1)}}%</p> 
+                                          </div>
                                        </div>
-                                    </div>
-                                 </div>  
-                                    
-                              @endif
-                        @endforeach
+                                    </div>  
+                                       
+                                 @endif
+                           @endforeach
 
-                     </div>
+                        </div>
 
-                  @endforeach
-                  
+                     @endforeach
+                     
 
-                  
+                  </div>
                </div>
             </div>
          
