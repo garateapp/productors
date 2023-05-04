@@ -249,6 +249,12 @@
          </div>
          
       </div>
+      
+      <figure class="highcharts-figure mx-1 mt-4" wire:ignore>
+         <div id="exportacion" wire:ignore>
+            
+         </div>
+     </figure>
         
     </div>   
     <script>
@@ -415,6 +421,45 @@
                      name: 'Merma',
                      y: merma
                }]
+            }]
+         });
+        
+         Highcharts.chart('exportacion', {
+            chart: {
+               type: 'bar'
+            },
+            title: {
+               text: 'Kilos Exportables Por Variedad'
+            },
+            xAxis: {
+               categories: variedades
+            },
+            yAxis: {
+               min: 0,
+               title: {
+                     text: 'Goals'
+               }
+            },
+            legend: {
+               reversed: true
+            },
+            plotOptions: {
+               series: {
+                     stacking: 'normal',
+                     dataLabels: {
+                        enabled: true
+                     }
+               }
+            },
+            series: [{
+               name: 'Cristiano Ronaldo',
+               data: [4, 4, 6, 15, 12]
+            }, {
+               name: 'Lionel Messi',
+               data: [5, 3, 12, 6, 11]
+            }, {
+               name: 'Robert Lewandowski',
+               data: [5, 15, 8, 5, 8]
             }]
          });
     </script>
