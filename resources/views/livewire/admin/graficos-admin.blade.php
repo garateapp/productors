@@ -255,7 +255,7 @@
       <div x-data="setup()">
         
             
-            <div class="flex justify-center my-2 max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="flex justify-center mb-2 mt-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
                
                <div class="max-w-7xl w-full bg-white shadow rounded-lg my-2 mx-4">
                   <div class="max-w-7xl w-full sm:px-6 lg:px-8 bg-gray-100 shadow rounded-lg px-4 py-2 sm:p-6 xl:p-4">
