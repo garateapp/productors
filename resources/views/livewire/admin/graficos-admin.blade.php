@@ -311,7 +311,7 @@
         var comercial = <?php echo json_encode($comercial) ?>;
         var desecho = <?php echo json_encode($desecho) ?>;
         var merma = <?php echo json_encode($merma) ?>;
-       // Data retrieved from https://en.wikipedia.org/wiki/Winter_Olympic_Games
+      
         Highcharts.chart('grafico', {
  
         chart: {
