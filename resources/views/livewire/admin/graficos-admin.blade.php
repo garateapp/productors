@@ -250,12 +250,50 @@
          
       </div>
       
-      <figure class="highcharts-figure mx-1 mt-4" wire:ignore>
-         <div id="exportacion" wire:ignore>
-            
-         </div>
-     </figure>
+      <div x-data="setup()">
+         <ul class="flex justify-center items-center my-4">
+            <template x-for="(tab, index) in tabs" :key="index">
+                <li class="cursor-pointer py-3 px-4 rounded transition"
+                    :class="activeTab===index ? 'bg-red-500 text-white' : ' text-gray-500'" @click="activeTab = index"
+                    x-text="tab"></li>
+            </template>
         
+        </ul>
+
+            <div class="flex justify-center mb-2 max-w-7xl mx-auto sm:px-6 lg:px-8">
+               <div class="max-w-7xl w-full sm:px-6 lg:px-8 bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
+                  <div x-show="activeTab===0">
+                     <h1>Cerezas</h1>  
+                     <div class="relative py-2 w-full">
+                        <div class="w-full overflow-hidden h-5 text-4xl flex rounded bg-gray-200">
+                           <div style="width: 77%" class="shadow-none flex flex-col text-center whitespace-nowrap p-1 text-white justify-center bg-blue-500 transition-all duration-500">
+                           <p class="text-base font-bold p-1">77,5%</p> 
+                           </div>
+                        </div>
+                    </div>     
+         
+
+
+                  </div>
+                  <div x-show="activeTab===1">
+                     Membrillos
+                  </div>
+               </div>
+            </div>
+         
+        
+      </div>
+      <script>
+            function setup() {
+               return {
+               activeTab: 0,
+               tabs: [
+                  "Cerezas",
+                  "Membrillos"
+               ]
+               };
+         };
+      </script>
     </div>   
     <script>
        var titulo = <?php echo json_encode($titulo) ?>;
@@ -424,44 +462,6 @@
             }]
          });
         
-         Highcharts.chart('exportacion', {
-            chart: {
-               type: 'bar'
-            },
-            title: {
-               text: 'Kilos Exportables Por Variedad'
-            },
-            xAxis: {
-               categories: variedades
-            },
-            yAxis: {
-               min: 0,
-               title: {
-                     text: 'Goals'
-               }
-            },
-            legend: {
-               reversed: true
-            },
-            plotOptions: {
-               series: {
-                     stacking: 'normal',
-                     dataLabels: {
-                        enabled: true
-                     }
-               }
-            },
-            series: [{
-               name: 'Cristiano Ronaldo',
-               data: [4, 4, 6, 15, 12]
-            }, {
-               name: 'Lionel Messi',
-               data: [5, 3, 12, 6, 11]
-            }, {
-               name: 'Robert Lewandowski',
-               data: [5, 15, 8, 5, 8]
-            }]
-         });
     </script>
                      
    
