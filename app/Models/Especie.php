@@ -14,4 +14,8 @@ class Especie extends Model
     public function comercializado(){
         return $this->BelongsToMany('App\Models\User');
     }
+
+    public function variedads(){
+        return $this->hasMany('App\Models\Variedad');
+    }
 }

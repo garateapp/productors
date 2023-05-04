@@ -49,7 +49,7 @@ class GraficosAdminEspecie extends Component
             }
             
             
-            $especies=Especie::where('id','>=',1)->latest('id')->get();
+            $especies=Especie::where('id','>=',1)->get();
             $variedades=Variedad::all();
 
             

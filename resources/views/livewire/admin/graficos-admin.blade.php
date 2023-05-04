@@ -249,7 +249,9 @@
          </div>
          
       </div>
-      
+            @php
+                $espec=[];
+            @endphp
       <div x-data="setup()">
          <ul class="flex justify-center items-center my-4">
             <template x-for="(tab, index) in tabs" :key="index">
@@ -259,38 +261,43 @@
             </template>
         
         </ul>
-
+            
             <div class="flex justify-center mb-2 max-w-7xl mx-auto sm:px-6 lg:px-8">
                <div class="max-w-7xl w-full sm:px-6 lg:px-8 bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
-                  <div x-show="activeTab===0">
-                     <h1>Cerezas</h1>  
-                     <div class="relative py-2 w-full">
-                        <div class="w-full overflow-hidden h-5 text-4xl flex rounded bg-gray-200">
-                           <div style="width: 77%" class="shadow-none flex flex-col text-center whitespace-nowrap p-1 text-white justify-center bg-blue-500 transition-all duration-500">
-                           <p class="text-base font-bold p-1">77,5%</p> 
-                           </div>
-                        </div>
-                    </div>     
-         
+                  @foreach ($especies as $especie)
+                     @php
+                         $espec[]=$especie->name;
+                     @endphp
+                     <div x-show="activeTab==={{$especie->id-1}}">
+                        @foreach ($especie->variedads as $variedad)
+                           <h1>{{$variedad->name}}</h1>
+                           <div class="relative py-2 w-full">
+                              <div class="w-full overflow-hidden h-5 text-4xl flex rounded bg-gray-200">
+                                 <div style="width: 77%" class="shadow-none flex flex-col text-center whitespace-nowrap p-1 text-white justify-center bg-blue-500 transition-all duration-500">
+                                 <p class="text-base font-bold p-1">77,5%</p> 
+                                 </div>
+                              </div>
+                           </div>  
 
+                        @endforeach
 
-                  </div>
-                  <div x-show="activeTab===1">
-                     Membrillos
-                  </div>
+                     </div>
+
+                  @endforeach
+                  
+
+                  
                </div>
             </div>
          
         
       </div>
       <script>
+         var espec = <?php echo json_encode($espec) ?>;
             function setup() {
                return {
                activeTab: 0,
-               tabs: [
-                  "Cerezas",
-                  "Membrillos"
-               ]
+               tabs: espec
                };
          };
       </script>
