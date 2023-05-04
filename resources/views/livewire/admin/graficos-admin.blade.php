@@ -270,15 +270,49 @@
                      @endphp
                      <div x-show="activeTab==={{$especie->id-1}}">
                         @foreach ($especie->variedads as $variedad)
-                           <h1>{{$variedad->name}}</h1>
-                           <div class="relative py-2 w-full">
-                              <div class="w-full overflow-hidden h-5 text-4xl flex rounded bg-gray-200">
-                                 <div style="width: 77%" class="shadow-none flex flex-col text-center whitespace-nowrap p-1 text-white justify-center bg-blue-500 transition-all duration-500">
-                                 <p class="text-base font-bold p-1">77,5%</p> 
-                                 </div>
-                              </div>
-                           </div>  
 
+                           @php
+                                 $export=0;
+                                 $comerc=0;
+                                 $desec=0;
+                                 $mer=0;
+                                 foreach ($procesosall as $proceso) {
+                                    
+                                       if ($proceso->variedad==$variedad->name) {
+                                          $export+=$proceso->exp;
+                                          $comerc+=$proceso->comercial;
+                                          $desec+=$proceso->desecho;
+                                          $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+                                       }
+
+                                       }
+
+                                 
+                               
+                           @endphp
+
+
+
+
+                           <h1>{{$variedad->name}}</h1>
+                              @if (($export+$comerc+$desec+$mer)==0)
+                                 <div class="relative py-2 w-full">
+                                    <div class="w-full overflow-hidden h-5 text-4xl flex rounded bg-gray-200">
+                                       <div style="width: 0%" class="shadow-none flex flex-col text-center whitespace-nowrap p-1 text-white justify-center bg-blue-500 transition-all duration-500">
+                                       <p class="text-base font-bold p-1">0%</p> 
+                                       </div>
+                                    </div>
+                                 </div>  
+                              @else
+                                 <div class="relative py-2 w-full">
+                                    <div class="w-full overflow-hidden h-5 text-4xl flex rounded bg-gray-200">
+                                       <div style="width: {{$export*100/($export+$comerc+$desec+$mer)}}%" class="shadow-none flex flex-col text-center whitespace-nowrap p-1 text-white justify-center bg-blue-500 transition-all duration-500">
+                                       <p class="text-base font-bold p-1">{{number_format($export*100/($export+$comerc+$desec+$mer),1)}}%</p> 
+                                       </div>
+                                    </div>
+                                 </div>  
+                                    
+                              @endif
                         @endforeach
 
                      </div>
