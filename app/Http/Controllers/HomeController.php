@@ -369,6 +369,9 @@ class HomeController extends Controller
          $pdf = PDF::loadView('productors.informe', ['recepcion' => $recepcion]);
  
          return $pdf->stream($recepcion->id_g_recepcion.'-'.$recepcion->id_emisor.'.pdf');
+         
+         //return view('productors.informe',compact('recepcion'));
+         
     }
 
     public function production()
