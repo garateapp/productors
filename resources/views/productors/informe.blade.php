@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Reporte de la empresa</title>
+	<title>Informe de Recepción Nro° {{$recepcion->numero_g_recepcion}}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -224,7 +224,7 @@
 						
 					<tr>
 						<td style="vertical-align: text-top;font-size: 14px;">
-							@if ($d_calidad)
+							@if ($d_calidad->count())
 								@foreach ($d_calidad as $item)
 									<div> <div style="display: inline;"> {{$item->detalle_item}}  </div>			<div style="display: inline; text-align: right; justify-items: end;">{{$item->cantidad}}%</div></div>
 								@endforeach
@@ -234,7 +234,7 @@
 							@endif
 						</td>
 						<td style="vertical-align: text-top;font-size: 14px;">
-							@if ($d_condicion)
+							@if ($d_condicion->count())
 								@foreach ($d_condicion as $item)
 									<div> <div style="display: inline;"> {{$item->detalle_item}}  </div>			<div style="display: inline; text-align: right; justify-items: end;">{{$item->cantidad}}%</div></div>
 								@endforeach
@@ -244,7 +244,7 @@
 							@endif
 						</td>
 						<td style="vertical-align: text-top;font-size: 14px;">
-							@if ($d_plaga)
+							@if ($d_plaga->count())
 								@foreach ($d_plaga as $item)
 									<div> <div style="display: inline;"> {{$item->detalle_item}}  </div>			<div style="display: inline; text-align: right; justify-items: end;">{{$item->cantidad}}%</div></div>
 								@endforeach
@@ -256,16 +256,39 @@
 						<td style="vertical-align: text-top;font-size: 12px;">
 							<table>
 								<tr>
-									<td>Materia Vegetal </td> <td style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px "> SI </td>
+									<td>Materia Vegetal </td> <td style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px ">  
+									@if ($recepcion->calidad->materia_vegetal==NULL)
+										-
+									@else
+										{{$recepcion->calidad->materia_vegetal}}
+									@endif </td>
 								</tr>
 								<tr>
-									<td> Presencia de Piedras </td> <td style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px "> SI </td>
+									<td> Presencia de Piedras </td> <td style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px "> 
+										@if ($recepcion->calidad->piedras==NULL)
+											-
+										@else
+											{{$recepcion->calidad->piedras}}
+										@endif
+									</td>
 								</tr>
 								<tr>
-									<td>Precencia de Barro y/o <br> Polvo </td> <td style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px "> SI </td>
+									<td>Precencia de Barro y/o <br> Polvo </td> <td style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px ">
+										@if ($recepcion->calidad->barro==NULL)
+											-
+										@else
+											{{$recepcion->calidad->barro}}
+										@endif
+									</td>
 								</tr>
 								<tr>
-									<td>Llenado de Bins y/o Tottes  </td> <td style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px "> CORRECTO </td>
+									<td>Llenado de Bins y/o Tottes  </td> <td style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px "> 
+										@if ($recepcion->calidad->esponjas==NULL)
+											-
+										@else
+											{{$recepcion->calidad->esponjas}}
+										@endif
+									 </td>
 								</tr>
 							</table>
 							
