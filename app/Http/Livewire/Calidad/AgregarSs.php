@@ -114,7 +114,8 @@ class AgregarSs extends Component
     public function ss_store(){
         $rules = [
             'valor'=>'required',
-            'detalle'=>'required'
+            'detalle'=>'required',
+            'temperatura'=>'required'
             
             ];
       

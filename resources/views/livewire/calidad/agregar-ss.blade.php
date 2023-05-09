@@ -183,6 +183,9 @@
                         @if ($tipo_control=='ss')
                             <p class="font-bold">Temperatura: </p> 
                             <input wire:model="temperatura" type="number" placeholder="20.9" class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" autocomplete="off">
+                            @error('temperatura')
+                                <span class="text-sm text-red-500">{{$message}}</span>
+                            @enderror
                         @endif
                         
                         
