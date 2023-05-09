@@ -56,7 +56,7 @@
 			background-color:#ececec;
 		}
 		table{
-			background-color:#ececec;
+			
 			border-spacing: 5px;
 			border-radius: 5px;
 		}
@@ -94,10 +94,21 @@
 
 	
 	<div class="container">
-		<img src="{{asset('image/logogreenex.png')}}" alt="Logo de la empresa" class="logo">
+		<table style="width:100%;">
+			<tr>
+				<td>
+					<img src="{{asset('image/logogreenex.png')}}" alt="Logo de la empresa" class="logo">
+				</td>
+				<td>
+					<h1>{{$recepcion->n_emisor}}</h1>
+	
+				</td>
+			</tr>
+		</table>
+		
 		<h1>Informe de Recepcion Guia N° {{$recepcion->numero_g_recepcion}} | {{$recepcion->n_especie}} | <br> {{$recepcion->n_variedad}} | CSG {{$recepcion->id_emisor}} </h1>
 	</div>
-		<table style="width:100%">
+		<table style="width:100%; background-color:#ececec;">
   
 			<tr style="padding-top: 10px;
 			padding-bottom: 10px;
@@ -241,6 +252,23 @@
 							@else
 							-
 							@endif
+						</td>
+						<td style="vertical-align: text-top;font-size: 12px;">
+							<table>
+								<tr>
+									<td>Materia Vegetal </td> <td style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px "> SI </td>
+								</tr>
+								<tr>
+									<td> Presencia de Piedras </td> <td style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px "> SI </td>
+								</tr>
+								<tr>
+									<td>Precencia de Barro y/o <br> Polvo </td> <td style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px "> SI </td>
+								</tr>
+								<tr>
+									<td>Llenado de Bins y/o Tottes  </td> <td style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px "> CORRECTO </td>
+								</tr>
+							</table>
+							
 						</td>
 					</tr>
 
