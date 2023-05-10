@@ -4,6 +4,7 @@
 	<title>Informe de Recepción Nro° {{$recepcion->numero_g_recepcion}}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 	<style>
@@ -15,12 +16,42 @@
 
 	
 	
-	
+	<div style="width: 100%; margin: auto;">
+        <canvas id="myChart"></canvas>
+    </div>
 				
-				<div>
-		            <div id="grafico" style="width: 100%; max-width:1000px; height: 800px; "></div>
-				</div>
-		
+			
+        <script>
+            const labels = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+];
+
+const data = {
+    labels: labels,
+    datasets: [{
+        label: 'My First dataset',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: [0, 10, 5, 2, 20, 30, 45],
+    }]
+};
+
+const config = {
+    type: 'line',
+    data: data,
+    options: {}
+};
+
+new Chart(
+    document.getElementById('myChart'),
+    config
+);
+        </script>
 	<script type="text/javascript">
 		google.charts.load('current', { 'packages': ['corechart'] });
 		google.charts.setOnLoadCallback(dibujarGrafico);
