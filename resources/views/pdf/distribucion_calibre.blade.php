@@ -16,7 +16,7 @@
 
 	
 	
-	<div style="width: 100%; margin: auto;">
+	<div style="width: 100%; margin: auto; margin-top: 30px;">
         <canvas id="myChart"></canvas>
     </div>
 				
