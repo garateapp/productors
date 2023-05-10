@@ -12,21 +12,17 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 	<style>
-		#container {
-        height: 700px;
-    }
+		/* Estilos CSS para la página */
 
 	</style>
 </head>
 <body>
 
-    <figure class="highcharts-figure mx-1 mt-4 h-screen">
-        <div id="container">
-           
-        </div>
-     </figure>
 	
 	
+	<div style="width: 100%; margin: auto; margin-top: 30px;">
+        <canvas id="myChart"></canvas>
+    </div>
 				
 			
         <script>
