@@ -99,3 +99,4 @@ Route::resource('mensaje', MensajeController::class)->middleware('auth')->names(
 
 Route::post('procesos/all', [AjaxController::class,'all'])->name('procesos.all');
 
+Route::get('calibre/{recepcion}.html', [HomeController::class,'distribucion_calibre'])->name('distribucion.calibre');

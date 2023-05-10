@@ -19,6 +19,7 @@ use Spatie\Permission\Models\Role;
 use PDF;
 use Illuminate\support\Str;
 use Illuminate\Support\Facades\Storage;
+use ConsoleTVs\Charts\Facades\Charts;
 
 class HomeController extends Controller
 {
@@ -133,6 +134,8 @@ class HomeController extends Controller
 
         return response()->download(storage_path('app/'.$proceso->informe));
     }
+
+    
 
     public function proceso_destroy(Proceso $proceso) {
         Storage::delete($proceso->informe);
@@ -362,15 +365,22 @@ class HomeController extends Controller
          return $pdf->download($recepcion->id_g_recepcion.'-'.$recepcion->id_emisor.'.pdf');
     }
 
+    public function distribucion_calibre(Recepcion $recepcion) {
+
+        return view('pdf.distribucion_calibre',compact('recepcion'));
+    }
+
     public function viewpdf(Recepcion $recepcion) {
 
-        view()->share('productors.informe',$recepcion);
+        $distribucion_calibre=http::get('https://v1.nocodeapi.com/gonzapv23/screen/FwcFBxzLACvOLnlo/screenshot?url=http://appgreenex.cl/calibre/3256.html');
+
+        //view()->share('productors.informe',$recepcion,$distribucion_calibre);
  
-         $pdf = PDF::loadView('productors.informe', ['recepcion' => $recepcion]);
- 
+         $pdf = PDF::loadView('productors.informe', ['recepcion' => $recepcion,
+                                                     'distribucion_calibre'=>$distribucion_calibre]);
          return $pdf->stream($recepcion->id_g_recepcion.'-'.$recepcion->id_emisor.'.pdf');
          
-         //return view('productors.informe',compact('recepcion'));
+         //return view('productors.informe',compact('recepcion','distribucion_calibre'));
          
     }
 

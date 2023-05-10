@@ -5,41 +5,39 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+	<script type="text/javascript" >
+		google.charts.load('current', { 'packages': ['corechart'] });
+		google.charts.setOnLoadCallback(dibujarGrafico);
 
-      // Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
+		function dibujarGrafico() {
+		var datos = google.visualization.arrayToDataTable([
+		['Task', 'Hours per Day'],
+		['Work', 8],
+		['Eat', 2],
+		['Sleep', 8],
+		['Other', 6]
+		]);
 
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
+		var opciones = {
+		title: 'Actividades diarias',
+		pieHole: 0.4
+		};
 
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawChart() {
+		var chart_area=document.getElementById('grafico');
+		var chart = new google.visualization.PieChart(chart_area);
 
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
-        data.addRows([
-          ['Mushrooms', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
-        ]);
+		google.visualization.events.addListener(chart, 'ready', function(){
+		chart_area.innerHTML = '<img src="' + chart.getImageURI() + '" class="img-responsive">';
+		});
 
-        // Set chart options
-        var options = {'title':'How Much Pizza I Ate Last Night',
-                       'width':400,
-                       'height':300};
+		chart.draw(datos, opciones);
 
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>
+
+			let output = chart.getImageURI();
+			$("imageinfo").val(output);
+
+		}
+	</script>
 	<style>
 		/* Estilos CSS para la página */
 		@page {
@@ -176,32 +174,16 @@
 			</tr>
 		</table>
 
-		  <table style="width:100%">
-  
-			<tr>
-			  <td>
-				<div>
-					<div id="chart_div">
-						
-					</div>
-				</div>
-			  </td>
-			  
-			  <td>
-				
-				<div>
-					<figure class="highcharts-figure mx-1 mt-4">
-					   <div id="container">
-						  
-					   </div>
-					</figure>
-				</div>
-			  </td>
-			  
-			</tr>
-		  </table>
-			
+		<img src="" alt="" id="imageinfo">
 
+		<div>
+			<div id="grafico" style="width: 100%; max-width:900px; height: 500px; z-index: 1; "></div>
+		</div>
+
+		
+
+		{{$distribucion_calibre}}
+	
 		  <div class="page-break"></div>
 		
 		  <table style="width:100%;  font-size: 12px; border-spacing: 2px;">
@@ -355,151 +337,9 @@
 	<div style="background-color:#47ac34; color: white; font-size: 12px; padding-left: 3px; border-top: 1px solid white;"> <div style="text-align: center;"><b> OBSERVACIONES: </b></div>		</div>
 	<div style="background-color:#bad047; color: white; font-size: 12px; padding-left: 3px; border-bottom: 5px solid #47ac34;"> <div style="text-align: center;"><img src="{{asset('image/logogreenex.png')}}" alt="Logo de la empresa" class="logo"></div>		</div>
 	
-	<script>
-	Highcharts.chart('grafico', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Monthly Average Rainfall'
-    },
-    subtitle: {
-        text: 'Source: WorldClimate.com'
-    },
-    xAxis: {
-        categories: [
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'May',
-            'Jun',
-            'Jul',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec'
-        ],
-        crosshair: true
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            text: 'Rainfall (mm)'
-        }
-    },
-    tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
-        }
-    },
-    series: [{
-        name: 'Tokyo',
-        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4,
-            194.1, 95.6, 54.4]
-
-    }, {
-        name: 'New York',
-        data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5,
-            106.6, 92.3]
-
-    }, {
-        name: 'London',
-        data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3,
-            51.2]
-
-    }, {
-        name: 'Berlin',
-        data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8,
-            51.1]
-
-    }]
-});
-              
-              
-	</script>
-	<script>
-		Highcharts.chart('container', {
-		chart: {
-			type: 'column'
-		},
-		title: {
-			text: 'Monthly Average Rainfall'
-		},
-		subtitle: {
-			text: 'Source: WorldClimate.com'
-		},
-		xAxis: {
-			categories: [
-				'Jan',
-				'Feb',
-				'Mar',
-				'Apr',
-				'May',
-				'Jun',
-				'Jul',
-				'Aug',
-				'Sep',
-				'Oct',
-				'Nov',
-				'Dec'
-			],
-			crosshair: true
-		},
-		yAxis: {
-			min: 0,
-			title: {
-				text: 'Rainfall (mm)'
-			}
-		},
-		tooltip: {
-			headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-			pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-				'<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-			footerFormat: '</table>',
-			shared: true,
-			useHTML: true
-		},
-		plotOptions: {
-			column: {
-				pointPadding: 0.2,
-				borderWidth: 0
-			}
-		},
-		series: [{
-			name: 'Tokyo',
-			data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4,
-				194.1, 95.6, 54.4]
+			
 	
-		}, {
-			name: 'New York',
-			data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5,
-				106.6, 92.3]
+
 	
-		}, {
-			name: 'London',
-			data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3,
-				51.2]
-	
-		}, {
-			name: 'Berlin',
-			data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8,
-				51.1]
-	
-		}]
-	});
-				  
-				  
-		</script>
 </body>
 </html>
