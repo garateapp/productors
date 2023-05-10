@@ -12,17 +12,21 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 	<style>
-		/* Estilos CSS para la página */
+		#container {
+        height: 700px;
+    }
 
 	</style>
 </head>
 <body>
 
+    <figure class="highcharts-figure mx-1 mt-4 h-screen">
+        <div id="container">
+           
+        </div>
+     </figure>
 	
 	
-	<div style="width: 100%; margin: auto; margin-top: 30px;">
-        <canvas id="myChart"></canvas>
-    </div>
 				
 			
         <script>
@@ -91,11 +95,9 @@ new Chart(
         type: 'column'
     },
     title: {
-        text: 'Monthly Average Rainfall'
+        text: 'Distribucion de Calibre'
     },
-    subtitle: {
-        text: 'Source: WorldClimate.com'
-    },
+   
     xAxis: {
         categories: [
             'Jan',
