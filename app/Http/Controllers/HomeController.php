@@ -372,7 +372,7 @@ class HomeController extends Controller
 
     public function viewpdf(Recepcion $recepcion) {
 
-        $distribucion_calibre='https://v1.nocodeapi.com/gonzapv23/screen/FwcFBxzLACvOLnlo/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x800';
+        $distribucion_calibre='https://v1.nocodeapi.com/gonzapv23/screen/FwcFBxzLACvOLnlo/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x400';
 
         //view()->share('productors.informe',$recepcion,$distribucion_calibre);
  
