@@ -6,19 +6,27 @@
 	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 	<style>
-		/* Estilos CSS para la página */
+		#container {
+        height: 700px;
+    }
 
 	</style>
 </head>
 <body>
 
+    <figure class="highcharts-figure mx-1 mt-4 h-screen">
+        <div id="container">
+           
+        </div>
+     </figure>
 	
 	
-	<div style="width: 100%; margin: auto; margin-top: 30px;">
-        <canvas id="myChart"></canvas>
-    </div>
 				
 			
         <script>
@@ -81,5 +89,61 @@ new Chart(
 
 		}
 	  </script>
+      <script>
+        Highcharts.chart('container', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Monthly Average Rainfall'
+    },
+    subtitle: {
+        text: 'Source: WorldClimate.com'
+    },
+    xAxis: {
+        categories: [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Rainfall (mm)'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'Tokyo',
+        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4,
+            194.1, 95.6, 54.4]
+
+    }]
+});
+      </script>
 </body>
 </html>
