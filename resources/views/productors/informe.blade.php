@@ -33,9 +33,6 @@
 		chart.draw(datos, opciones);
 
 
-			let output = chart.getImageURI();
-			$("imageinfo").val(output);
-
 		}
 	</script>
 	<style>
@@ -174,7 +171,7 @@
 			</tr>
 		</table>
 
-		<img src="" alt="" id="imageinfo">
+		<img src="{{$distribucion_calibre}}" alt="" >
 
 		<div>
 			<div id="grafico" style="width: 100%; max-width:900px; height: 500px; z-index: 1; "></div>
