@@ -172,7 +172,7 @@
 		</table>
 
 		<img src="{{$distribucion_calibre}}" alt="" >
-
+		{{$distribucion_calibre}}
 		<div>
 			<div id="grafico" style="width: 100%; max-width:900px; height: 500px; z-index: 1; "></div>
 		</div>
