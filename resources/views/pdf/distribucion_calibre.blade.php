@@ -18,7 +18,7 @@
 	
 				
 				<div>
-		            <div id="grafico" style="width: 100%; max-width:900px; height: 500px; "></div>
+		            <div id="grafico" style="width: 100%;"></div>
 				</div>
 		
 	<script type="text/javascript">
