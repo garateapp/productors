@@ -175,9 +175,7 @@
 			<td>
 				<img style="width:100%;" src="{{$distribucion_calibre}}" alt="" >
 			</td>
-			<td>
-				<img style="width:100%;" src="{{$distribucion_calibre}}" alt="" >
-			</td>
+			
 		</tr>
 	</table>
 
