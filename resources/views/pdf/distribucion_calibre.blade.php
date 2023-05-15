@@ -13,7 +13,7 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 	<style>
 		#container {
-        height: 550px;
+        height: 350px;
     }
 
 	</style>
@@ -57,7 +57,11 @@
     title: {
         text: 'Distribucion de Calibre'
     },
-   
+    legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle'
+            },
     xAxis: {
         categories: categories,
         crosshair: true
