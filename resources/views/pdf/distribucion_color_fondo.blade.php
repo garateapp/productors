@@ -61,7 +61,7 @@
          },
          title: {
             text: 'DISTRIBUCIÓN DE COLOR DE FONDO',
-            align: 'center'
+            align: 'left'
          },
          tooltip: {
             pointFormat: '<b><b>{point.y}</b>({point.percentage:.0f}%)<br/>',

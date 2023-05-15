@@ -64,7 +64,7 @@
                     },
             xAxis: {
                 categories: categories,
-                crosshair: true
+                crosshair: false
             },
             yAxis: {
                 min: 0,
