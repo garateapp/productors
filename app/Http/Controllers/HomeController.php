@@ -397,7 +397,7 @@ class HomeController extends Controller
 
     public function viewpdf(Recepcion $recepcion) {
 
-        $distribucion_calibre='https://v1.nocodeapi.com/juarez50/screen/DksDhNhixGecQDib/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x790';
+        $distribucion_calibre='https://v1.nocodeapi.com/juarez50/screen/DksDhNhixGecQDib/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x400';
 
         $nombreArchivo = Str::random(10). '.jpg';
         Storage::url('archivos/',$nombreArchivo);
