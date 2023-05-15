@@ -370,9 +370,39 @@ class HomeController extends Controller
         return view('pdf.distribucion_calibre',compact('recepcion'));
     }
 
+    public function distribucion_color(Recepcion $recepcion) {
+
+        return view('pdf.distribucion_color',compact('recepcion'));
+    }
+
+    public function promedio_firmeza(Recepcion $recepcion) {
+
+        return view('pdf.promedio_firmeza',compact('recepcion'));
+    }
+
+    public function promedio_brix(Recepcion $recepcion) {
+
+        return view('pdf.promedio_brix',compact('recepcion'));
+    }
+
+    public function porcentaje_firmeza(Recepcion $recepcion) {
+
+        return view('pdf.porcentaje_firmeza',compact('recepcion'));
+    }
+
+    public function distribucion_color_fondo(Recepcion $recepcion) {
+
+        return view('pdf.distribucion_color_fondo',compact('recepcion'));
+    }
+
     public function viewpdf(Recepcion $recepcion) {
 
         $distribucion_calibre='https://v1.nocodeapi.com/juarez50/screen/DksDhNhixGecQDib/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x790';
+
+        $nombreArchivo = Str::random(10). '.jpg';
+        Storage::url('archivos/',$nombreArchivo);
+        //$url= $imageData->store('archivos');
+
 
         //view()->share('productors.informe',$recepcion,$distribucion_calibre);
  

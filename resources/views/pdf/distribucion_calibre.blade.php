@@ -13,83 +13,43 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 	<style>
 		#container {
-        height: 700px;
+        height: 550px;
     }
 
 	</style>
 </head>
 <body>
 
-    <figure class="highcharts-figure mx-1 mt-4 h-screen">
+    <figure class="highcharts-figure mx-1 mt-4">
         <div id="container">
            
         </div>
      </figure>
+
+
+    
 	
-	
-				
-			
-        <script>
-            const labels = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-];
+     @php
+        $categories=[];
+        $series=[];
+    @endphp
 
-const data = {
-    labels: labels,
-    datasets: [{
-        label: 'My First dataset',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: [0, 10, 5, 2, 20, 30, 45],
-    }]
-};
-
-const config = {
-    type: 'line',
-    data: data,
-    options: {}
-};
-
-new Chart(
-    document.getElementById('myChart'),
-    config
-);
-        </script>
-	<script type="text/javascript">
-		google.charts.load('current', { 'packages': ['corechart'] });
-		google.charts.setOnLoadCallback(dibujarGrafico);
-	  
-		function dibujarGrafico() {
-		  var datos = google.visualization.arrayToDataTable([
-			['Task', 'Hours per Day'],
-			['Work', 8],
-			['Eat', 2],
-			['Sleep', 8],
-			['Other', 6]
-		  ]);
-	  
-		  var opciones = {
-			title: 'Actividades diarias',
-			pieHole: 0.4
-		  };
-
-          var chart_area=document.getElementById('grafico');
-		  var chart = new google.visualization.PieChart(chart_area);
+    @if ($recepcion->calidad->detalles)
+        @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES') as $detalle)
           
-          google.visualization.events.addListener(chart, 'ready', function(){
-            chart_area.innerHTML = '<img src="' + chart.getImageURI() + '" class="img-responsive">';
-            });
-
-		  chart.draw(datos, opciones);
-
-		}
-	  </script>
+                @php
+                    $categories[]=$detalle->detalle_item;
+                    $series[]=$detalle->porcentaje_muestra;
+                @endphp
+         
+        @endforeach
+    @endif
+                    
+	
       <script>
+    var categories = <?php echo json_encode($categories) ?>;
+    var series = <?php echo json_encode($series) ?>;
+
         Highcharts.chart('container', {
     chart: {
         type: 'column'
@@ -99,35 +59,20 @@ new Chart(
     },
    
     xAxis: {
-        categories: [
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'May',
-            'Jun',
-            'Jul',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec'
-        ],
+        categories: categories,
         crosshair: true
     },
     yAxis: {
         min: 0,
         title: {
-            text: 'Rainfall (mm)'
+            text: '%'
         }
     },
+    colors: ['#788527'],
     tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-        footerFormat: '</table>',
         shared: true,
-        useHTML: true
+        headerFormat: '<span style="font-size: 15px">{point.point.name}</span><br/>',
+        pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y} %</b><br/>'
     },
     plotOptions: {
         column: {
@@ -136,9 +81,16 @@ new Chart(
         }
     },
     series: [{
-        name: 'Tokyo',
-        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4,
-            194.1, 95.6, 54.4]
+        name: 'Distribución: ',
+        data: series,
+        dataLabels: [{
+            enabled: true,
+            inside: true,
+            style: {
+                fontSize: '16px'
+            },
+            format: '{point.y:.1f}%'
+        }]
 
     }]
 });

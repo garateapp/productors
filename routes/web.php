@@ -100,3 +100,13 @@ Route::resource('mensaje', MensajeController::class)->middleware('auth')->names(
 Route::post('procesos/all', [AjaxController::class,'all'])->name('procesos.all');
 
 Route::get('calibre/{recepcion}.html', [HomeController::class,'distribucion_calibre'])->name('distribucion.calibre');
+
+Route::get('color/{recepcion}.html', [HomeController::class,'distribucion_color'])->name('distribucion.color');
+
+Route::get('firmeza/{recepcion}.html', [HomeController::class,'promedio_firmeza'])->name('promedio.firmeza');
+
+Route::get('brix/{recepcion}.html', [HomeController::class,'promedio_brix'])->name('promedio.brix');
+
+Route::get('porcentaje/firmeza/{recepcion}.html', [HomeController::class,'porcentaje_firmeza'])->name('porcentaje.firmeza');
+
+Route::get('color/fondo/{recepcion}.html', [HomeController::class,'distribucion_color_fondo'])->name('distribucion.color.fondo');
