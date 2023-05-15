@@ -67,6 +67,11 @@
             tooltip: {
                pointFormat: '<b><b>{point.y}</b>({point.percentage:.0f}%)<br/>',
             },
+            legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle'
+                    },
             accessibility: {
                point: {
                      valueSuffix: '%'
@@ -78,10 +83,15 @@
                      allowPointSelect: true,
                      cursor: 'pointer',
                      dataLabels: {
-                        enabled: false
+                        enabled: true,
+                        inside: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        distance: -50,
                      },
                      showInLegend: true
                }
+              
+
             },
             series: [{
                name: 'Brands',

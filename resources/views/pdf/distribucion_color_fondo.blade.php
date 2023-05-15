@@ -71,16 +71,24 @@
                   valueSuffix: '%'
             }
          }, 
+         legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle'
+                    },
          colors: ['#24a745','#96AE51','#f9e8cf','#ffd700'],
          plotOptions: {
             pie: {
-                  allowPointSelect: false,
-                  cursor: 'pointer',
-                  dataLabels: {
-                     enabled: false
-                  },
-                  showInLegend: true
-            }
+                     allowPointSelect: true,
+                     cursor: 'pointer',
+                     dataLabels: {
+                        enabled: true,
+                        inside: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        distance: -50,
+                     },
+                     showInLegend: true
+               }
          },
          series: [{
             name: 'Brands',
