@@ -170,6 +170,7 @@
 			border-radius: 5px;"><h3  style="color: teal;">Estimación<br> Exportación</h3></td>
 			</tr>
 		</table>
+		
 	<table style="width:100%;">
 		<tr>
 			<td>
@@ -178,6 +179,7 @@
 		
 		</tr>
 	</table>
+
 	<table style="width:100%;">
 		<tr>
 			<td>
