@@ -74,7 +74,7 @@
          colors: ['#24a745','#96AE51','#f9e8cf','#ffd700'],
          plotOptions: {
             pie: {
-                  allowPointSelect: true,
+                  allowPointSelect: false,
                   cursor: 'pointer',
                   dataLabels: {
                      enabled: false
