@@ -21,7 +21,7 @@
 <body>
 
     <figure class="highcharts-figure mx-1 mt-4 h-screen">
-        <div id="container">
+        <div id="circular">
            
         </div>
      </figure>
@@ -29,19 +29,7 @@
 	
 				
 			
-     @php
-     $categories=[];
- @endphp
 
- @if ($recepcion->calidad->detalles)
-     @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE COLOR') as $detalle)
-         
-             @php
-                 $categories[]=$detalle->detalle_item;
-             @endphp
-     
-     @endforeach
- @endif
              
          
     @php
@@ -62,7 +50,6 @@
              } 
     @endphp
    <script>
- var categories = <?php echo json_encode($categories) ?>;
  var series = <?php echo json_encode($series) ?>;
  
  Highcharts.chart('circular', {
@@ -74,7 +61,7 @@
          },
          title: {
             text: 'Distribución Color',
-            align: 'left'
+            align: 'center'
          },
          tooltip: {
             pointFormat: '<b><b>{point.y}</b>({point.percentage:.0f}%)<br/>',
