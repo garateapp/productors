@@ -46,58 +46,58 @@
     @endif
                     
 	
-      <script>
-    var categories = <?php echo json_encode($categories) ?>;
-    var series = <?php echo json_encode($series) ?>;
+    <script>
+        var categories = <?php echo json_encode($categories) ?>;
+        var series = <?php echo json_encode($series) ?>;
 
-        Highcharts.chart('container', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Distribucion de Calibre'
-    },
-    legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'middle'
+                Highcharts.chart('container', {
+            chart: {
+                type: 'column'
             },
-    xAxis: {
-        categories: categories,
-        crosshair: true
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            text: '%'
-        }
-    },
-    colors: ['#788527'],
-    tooltip: {
-        shared: true,
-        headerFormat: '<span style="font-size: 15px">{point.point.name}</span><br/>',
-        pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y} %</b><br/>'
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0,
-            borderWidth: 0
-        }
-    },
-    series: [{
-        name: 'Distribución: ',
-        data: series,
-        dataLabels: [{
-            enabled: true,
-            inside: true,
-            style: {
-                fontSize: '16px'
+            title: {
+                text: 'Distribucion de Calibre'
             },
-            format: '{point.y:.1f}%'
-        }]
+            legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle'
+                    },
+            xAxis: {
+                categories: categories,
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '%'
+                }
+            },
+            colors: ['#24a745'],
+            tooltip: {
+                shared: true,
+                headerFormat: '<span style="font-size: 15px">{point.point.name}</span><br/>',
+                pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y} %</b><br/>'
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Distribución: ',
+                data: series,
+                dataLabels: [{
+                    enabled: true,
+                    inside: true,
+                    style: {
+                        fontSize: '16px'
+                    },
+                    format: '{point.y:.1f}%'
+                }]
 
-    }]
-});
+            }]
+        });
       </script>
 </body>
 </html>

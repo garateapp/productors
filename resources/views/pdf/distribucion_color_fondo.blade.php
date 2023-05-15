@@ -29,119 +29,79 @@
 	
 				
 			
-        <script>
-            const labels = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-];
+     @php
+     $categories=[];
+ @endphp
 
-const data = {
-    labels: labels,
-    datasets: [{
-        label: 'My First dataset',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: [0, 10, 5, 2, 20, 30, 45],
-    }]
-};
+ @if ($recepcion->calidad->detalles)
+     @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE COLOR') as $detalle)
+         
+             @php
+                 $categories[]=$detalle->detalle_item;
+             @endphp
+     
+     @endforeach
+ @endif
+             
+         
+    @php
+        $series=[];
 
-const config = {
-    type: 'line',
-    data: data,
-    options: {}
-};
+         if ($recepcion->calidad->detalles){
 
-new Chart(
-    document.getElementById('myChart'),
-    config
-);
-        </script>
-	<script type="text/javascript">
-		google.charts.load('current', { 'packages': ['corechart'] });
-		google.charts.setOnLoadCallback(dibujarGrafico);
-	  
-		function dibujarGrafico() {
-		  var datos = google.visualization.arrayToDataTable([
-			['Task', 'Hours per Day'],
-			['Work', 8],
-			['Eat', 2],
-			['Sleep', 8],
-			['Other', 6]
-		  ]);
-	  
-		  var opciones = {
-			title: 'Actividades diarias',
-			pieHole: 0.4
-		  };
+    
+             foreach ($recepcion->calidad->detalles->where('tipo_item','COLOR DE FONDO') as $detalle){
+                
+                //$categories[]=$detalle->detalle_item;
+                //$series[]=$detalle->porcentaje_muestra;
+                             $name=$detalle->detalle_item;
 
-          var chart_area=document.getElementById('grafico');
-		  var chart = new google.visualization.PieChart(chart_area);
-          
-          google.visualization.events.addListener(chart, 'ready', function(){
-            chart_area.innerHTML = '<img src="' + chart.getImageURI() + '" class="img-responsive">';
-            });
-
-		  chart.draw(datos, opciones);
-
-		}
-	  </script>
-      <script>
-        Highcharts.chart('container', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Distribucion de Calibre'
-    },
-   
-    xAxis: {
-        categories: [
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'May',
-            'Jun',
-            'Jul',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec'
-        ],
-        crosshair: true
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            text: 'Rainfall (mm)'
-        }
-    },
-    tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
-        }
-    },
-    series: [{
-        name: 'Tokyo',
-        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4,
-            194.1, 95.6, 54.4]
-
-    }]
-});
-      </script>
+                             $series[]=['name' =>$name,
+                                          'y' => $detalle->porcentaje_muestra];
+                 }
+             } 
+    @endphp
+   <script>
+ var categories = <?php echo json_encode($categories) ?>;
+ var series = <?php echo json_encode($series) ?>;
+ 
+ Highcharts.chart('circular', {
+         chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+         },
+         title: {
+            text: 'Distribución Color',
+            align: 'left'
+         },
+         tooltip: {
+            pointFormat: '<b><b>{point.y}</b>({point.percentage:.0f}%)<br/>',
+         },
+         accessibility: {
+            point: {
+                  valueSuffix: '%'
+            }
+         }, 
+         colors: ['#24a745','#96AE51','#f9e8cf','#ffd700'],
+         plotOptions: {
+            pie: {
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  dataLabels: {
+                     enabled: false
+                  },
+                  showInLegend: true
+            }
+         },
+         series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: series
+         }]
+      });
+      
+   </script>
 </body>
 </html>

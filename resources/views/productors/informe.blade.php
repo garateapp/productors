@@ -175,7 +175,17 @@
 			<td>
 				<img style="width:100%;" src="{{$distribucion_calibre}}" alt="" >
 			</td>
-			
+		
+		</tr>
+	</table>
+	<table style="width:100%;">
+		<tr>
+			<td>
+				<img style="width:100%;" src="{{$distribucion_color}}" alt="" >
+			</td>
+			<td>
+				<img style="width:100%;" src="{{$distribucion_color_fondo}}" alt="" >
+			</td>
 		</tr>
 	</table>
 

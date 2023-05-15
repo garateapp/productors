@@ -397,7 +397,10 @@ class HomeController extends Controller
 
     public function viewpdf(Recepcion $recepcion) {
 
-        $distribucion_calibre='https://v1.nocodeapi.com/juarez50/screen/DksDhNhixGecQDib/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x400';
+        $distribucion_calibre='https://v1.nocodeapi.com/juarez50/screen/DksDhNhixGecQDib/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x350';
+        $distribucion_color='https://v1.nocodeapi.com/juarez50/screen/DksDhNhixGecQDib/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html&viewport=800x400';
+        $distribucion_color_fondo='https://v1.nocodeapi.com/juarez50/screen/DksDhNhixGecQDib/screenshot?url=https://appgreenex.cl/color/fondo/'.$recepcion->id.'.html&viewport=800x400';
+
 
         $nombreArchivo = Str::random(10). '.jpg';
         Storage::url('archivos/',$nombreArchivo);
@@ -407,7 +410,9 @@ class HomeController extends Controller
         //view()->share('productors.informe',$recepcion,$distribucion_calibre);
  
          $pdf = PDF::loadView('productors.informe', ['recepcion' => $recepcion,
-                                                     'distribucion_calibre'=>$distribucion_calibre]);
+                                                     'distribucion_calibre'=>$distribucion_calibre,
+                                                     'distribucion_color'=>$distribucion_color,
+                                                    'distribucion_color_fondo'=> $distribucion_color_fondo]);
          return $pdf->stream($recepcion->id_g_recepcion.'-'.$recepcion->id_emisor.'.pdf');
          
          //return view('productors.informe',compact('recepcion','distribucion_calibre'));
