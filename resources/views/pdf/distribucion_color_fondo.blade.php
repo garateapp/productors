@@ -60,7 +60,7 @@
             type: 'pie'
          },
          title: {
-            text: 'Distribución Color',
+            text: 'DISTRIBUCIÓN DE COLOR DE FONDO',
             align: 'center'
          },
          tooltip: {

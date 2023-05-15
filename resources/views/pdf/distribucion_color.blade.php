@@ -61,7 +61,7 @@
                type: 'pie'
             },
             title: {
-               text: 'Distribución Color',
+               text: 'DISTRIBUCIÓN DE COLOR DE CUBRIMIENTO',
                align: 'left'
             },
             tooltip: {
