@@ -280,10 +280,10 @@
                                  
                                  <td class="pl-5">
                                  
-                                       <div class="content-center">
+                                       <div class="flex content-center items-center">
                                           @if ($proceso->informe)
-                                             <a href="{{route('download.proceso',$proceso)}}" target="_blank" class="h-10 m-2 w-full mr-2 items-center content-center">   
-                                                <img class="h-10 m-2 w-full mr-2" src="{{asset('image/pdf_icon2.png')}}" title="Descargar" alt="">
+                                             <a href="{{route('download.proceso',$proceso)}}" target="_blank" class="items-center content-center">   
+                                                <img class="h-8 object-contain mx-2" src="{{asset('image/pdf_icon2.png')}}" title="Descargar" alt="">
                                              </a>
                                            
                                              
@@ -298,7 +298,7 @@
                                  
                               
                                  </td>
-                                 <td class="pl-5">
+                                 <td class="mr-2">
                                  
                                     <div class="block w-full">
                                        @if ($proceso->informe)

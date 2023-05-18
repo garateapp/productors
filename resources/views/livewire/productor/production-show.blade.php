@@ -7,6 +7,7 @@
           <thead class="bg-gray-50 rounded-full">
        
              <th>Agricola</th>
+             <th>Lote</th>
              <th>Especie</th>
              <th>Variedad</th>
              <th class="text-center">Fecha</th>
@@ -53,6 +54,18 @@
                            </p>
                         
                         </td>
+                        <td class="pl-5 text-center">
+                           <p class="text-base flex font-medium leading-none text-gray-700">
+
+                       
+
+                                   @if ($recepcion->numero_g_recepcion)
+                                   {{$recepcion->numero_g_recepcion}}
+                                   @endif
+                                   
+                           </p>
+                           
+                       </td>
                         <td class="">
                            <div class="flex items-center pl-5">
                                  <p class="text-base font-medium leading-none text-gray-700 mr-2">
