@@ -185,12 +185,17 @@
 
 	<table style="width:100%;">
 		<tr>
-			<td>
-				<img style="width:100%;" src="{{$distribucion_color}}" alt="" >
-			</td>
-			<td>
-				<img style="width:100%;" src="{{$distribucion_color_fondo}}" alt="" >
-			</td>
+			@if ($distribucion_color)
+				<td>
+					<img style="width:100%;" src="{{$distribucion_color}}" alt="" >
+				</td>
+			@endif
+			@if ($distribucion_color_fondo)
+				<td>
+					<img style="width:100%;" src="{{$distribucion_color_fondo}}" alt="" >
+				</td>
+			@endif
+			
 		</tr>
 	</table>
 
