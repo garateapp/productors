@@ -357,10 +357,16 @@ class HomeController extends Controller
     }
 
     public function downloadpdf(Recepcion $recepcion) {
+        $distribucion_calibre='https://v1.nocodeapi.com/juarez50/screen/DksDhNhixGecQDib/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x300';
+        $distribucion_color='https://v1.nocodeapi.com/juarez50/screen/DksDhNhixGecQDib/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html&viewport=800x400';
+        $distribucion_color_fondo='https://v1.nocodeapi.com/juarez50/screen/DksDhNhixGecQDib/screenshot?url=https://appgreenex.cl/color/fondo/'.$recepcion->id.'.html&viewport=800x400';
 
         view()->share('productors.informe',$recepcion);
  
-         $pdf = PDF::loadView('productors.informe', ['recepcion' => $recepcion]);
+         $pdf = PDF::loadView('productors.informe', ['recepcion' => $recepcion,
+                                                    'distribucion_calibre'=>$distribucion_calibre,
+                                                    'distribucion_color'=>$distribucion_color,
+                                                    'distribucion_color_fondo'=> $distribucion_color_fondo]);
  
          return $pdf->download($recepcion->id_g_recepcion.'-'.$recepcion->id_emisor.'.pdf');
     }

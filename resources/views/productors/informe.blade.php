@@ -173,7 +173,7 @@
 		
 	<table style="width:100%;">
 		<tr>
-			@if ($distribucion_calibre)
+			@isset($distribucion_calibre)
 				<td>
 					<img style="width:100%;" src="{{$distribucion_calibre}}" alt="" >
 				</td>
@@ -185,12 +185,12 @@
 
 	<table style="width:100%;">
 		<tr>
-			@if ($distribucion_color)
+			@isset($distribucion_color)
 				<td>
 					<img style="width:100%;" src="{{$distribucion_color}}" alt="" >
 				</td>
 			@endif
-			@if ($distribucion_color_fondo)
+			@isset($distribucion_color_fondo)
 				<td>
 					<img style="width:100%;" src="{{$distribucion_color_fondo}}" alt="" >
 				</td>
