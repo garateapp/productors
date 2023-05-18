@@ -4,11 +4,13 @@ namespace App\Http\Livewire\Calidad;
 
 use App\Models\Calidad;
 use App\Models\Detalle;
+use App\Models\Especie;
 use App\Models\Parametro;
 use App\Models\Recepcion;
 use App\Models\Sync;
 use App\Models\User;
 use App\Models\Valor;
+use App\Models\Variedad;
 use Carbon\Carbon;
 use Livewire\Component;
 use PDF;
@@ -20,7 +22,7 @@ class ProductionCc extends Component
 {   use WithPagination;
 
 
-    public $search, $ctd=25, $recep, $materia_vegetal, $temperatura, $valor, $tipo_control, $fecha, $embalaje=1, $cantidad, $detalle, $porcentaje_muestra, $total_muestra=100, $detalles, $recepcion_id, $calidad, $nro_muestra, $parametros, $valores, $selectedparametro, $selectedvalor;
+    public $search, $ctd=25,$espec, $varie, $variedadid, $recep, $especieid, $materia_vegetal, $temperatura, $valor, $tipo_control, $fecha, $embalaje=1, $cantidad, $detalle, $porcentaje_muestra, $total_muestra=100, $detalles, $recepcion_id, $calidad, $nro_muestra, $parametros, $valores, $selectedparametro, $selectedvalor;
     public function render()
     {   
         $recepcions=Recepcion::where('id_g_recepcion','LIKE','%'. $this->search .'%')
@@ -56,9 +58,24 @@ class ProductionCc extends Component
         $sync=Sync::where('entidad','RECEPCIONES')
         ->orderby('id','DESC')
         ->first();
+        $especies=Especie::all();
+        $variedades=Variedad::all();
 
         
-        return view('livewire.calidad.production-cc',compact('recepcions','allrecepcions','allsubrecepcions','sync'));
+        return view('livewire.calidad.production-cc',compact('especies','variedades','recepcions','allrecepcions','allsubrecepcions','sync'));
+    }
+
+    public function espec_clean(){
+        $this->especieid=NULL;
+        $this->espec=NULL;
+        $this->search=NULL;
+
+    }
+    public function varie_clean(){
+        $this->variedadid=NULL;
+        $this->varie =NULL;
+        $this->search=$this->espec->name;
+
     }
 
     public function updatedselectedparametro($parametro){
@@ -149,6 +166,23 @@ class ProductionCc extends Component
         $this->total_muestra=100;
         $this->porcentaje_muestra=$this->cantidad*100/$this->total_muestra;
     }
+
+    public function set_especie($id){
+        $this->especieid=$id;
+        $this->variedadid=NULL;
+        $this->varie =NULL;
+        $this->espec=Especie::find($this->especieid);
+        $this->search=$this->espec->name;
+        
+    }
+
+    public function set_varie($id){
+        $this->variedadid=$id;
+        $this->varie=Variedad::find($this->variedadid);
+        $this->search=$this->varie->name;
+    }
+
+    
     
     public function limpiar_page(){
         $this->resetPage();
