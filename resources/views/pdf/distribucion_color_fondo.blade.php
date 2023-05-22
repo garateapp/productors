@@ -22,7 +22,7 @@
 
    <table style="width:100%;">
 		<tr>
-			@isset($distribucion_color)
+		
 				<td>
                <figure class="highcharts-figure mx-1 mt-4 h-screen">
                   <div id="circular">
@@ -30,8 +30,8 @@
                   </div>
                </figure>
 				</td>
-			@endif
-			@isset($distribucion_color_fondo)
+		
+			
 				<td>
                <figure class="highcharts-figure mx-1 mt-4 h-screen">
                   <div id="fondo">
@@ -39,7 +39,7 @@
                   </div>
                </figure>
 				</td>
-			@endif
+			
 			
 		</tr>
 	</table>
