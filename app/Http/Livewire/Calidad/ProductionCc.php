@@ -236,7 +236,7 @@ class ProductionCc extends Component
                                                     'type'=>'document',
                                                     'document'=> [
                                                         'link'=>$link,
-                                                        'filename'=>$recepcion->id_g_recepcion.'-'.$recepcion->id_emisor.'.pdf'
+                                                        'filename'=>$recepcion->numero_g_recepcion.'-'.$recepcion->id_emisor.'.pdf'
                                                         ]
                                                 ]
                                             ]
@@ -246,7 +246,7 @@ class ProductionCc extends Component
                                             'parameters'=>[
                                                 [
                                                     'type'=>'text',
-                                                    'text'=> $recepcion->id_g_recepcion
+                                                    'text'=> $recepcion->numero_g_recepcion
                                                 ],
                                                 [
                                                     'type'=>'text',
