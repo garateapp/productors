@@ -88,7 +88,7 @@
                         format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                         distance: -50,
                         style: {
-                            fontSize: '28px'
+                            fontSize: '30px'
                         },
                      },
                      showInLegend: true
