@@ -449,14 +449,22 @@
 				@endif
 			</td>
 			<td style="background-color:#47ac34; color: white;"><b>PRECALIBRE:  </b>
-				@if ($recepcion->calidad->detalles->where('detalle_item','PRECALIBRE')->first())
-					{{$recepcion->calidad->detalles->where('detalle_item','PRECALIBRE')->first()->cantidad}} %
+				@if ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','PRECALIBRE')->first())
+					{{$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','PRECALIBRE')->first()->cantidad}} %
 				@else
 				-
 				@endif
 				
 			</td>
-			<td style="background-color:#47ac34; color: white;"><b>FUEREA DE COLOR:  </b>
+			<td style="background-color:#47ac34; color: white;"><b>SOBRECALIBRE:  </b>
+				@if ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','SOBRECALIBRE')->first())
+					{{$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','SOBRECALIBRE')->first()->cantidad}} %
+				@else
+				-
+				@endif
+				
+			</td>
+			<td style="background-color:#47ac34; color: white;"><b>FUERA DE COLOR:  </b>
 				@if ($recepcion->calidad->detalles->where('detalle_item','FUERA DE COLOR')->first())
 					{{$recepcion->calidad->detalles->where('detalle_item','FUERA DE COLOR')->first()->cantidad}} %
 				@else
