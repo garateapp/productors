@@ -221,13 +221,24 @@
 		
 		</tr>
 	</table>
+	<table style="width:100%;">
+		<tr>
+			@isset($firmezas_chica)
+				<td>
+					<img style="width:100%;" src="{{$firmezas_chica}}" alt="" >
+				</td>
+			@endif
+		
+		
+		</tr>
+	</table>
 	
 		
 
 		
-	
+	{{-- comment
 		  <div class="page-break"></div>
-		
+		 --}}
 		  <table style="width:100%;  font-size: 12px; border-spacing: 2px;">
   
 			<tr>

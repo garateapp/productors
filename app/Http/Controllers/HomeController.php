@@ -391,7 +391,7 @@ class HomeController extends Controller
     }
     //PERAS // MANZANAS //CEREZAS //DAGEN
     public function firmeza_chico(Recepcion $recepcion) {
-        return view('pdf.distribucion_color',compact('recepcion'));
+        return view('pdf.firmeza_chica',compact('recepcion'));
     }
     //
 
