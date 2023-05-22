@@ -246,7 +246,7 @@ class ProductionCc extends Component
                                             'parameters'=>[
                                                 [
                                                     'type'=>'text',
-                                                    'text'=> $recepcion->id
+                                                    'text'=> $recepcion->id_g_recepcion
                                                 ],
                                                 [
                                                     'type'=>'text',

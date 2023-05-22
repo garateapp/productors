@@ -360,13 +360,20 @@ class HomeController extends Controller
         $distribucion_calibre='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x300';
         $distribucion_color='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html&viewport=800x400';
         $distribucion_color_fondo='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/fondo/'.$recepcion->id.'.html&viewport=800x400';
+        
+        $firmezas_grande='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/grande/'.$recepcion->id.'.html&viewport=800x220';
+        $firmezas_mediana='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/mediana/'.$recepcion->id.'.html&viewport=800x220';
+        $firmezas_chica='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/chica/'.$recepcion->id.'.html&viewport=800x220';
 
         view()->share('productors.informe',$recepcion);
  
-         $pdf = PDF::loadView('productors.informe', ['recepcion' => $recepcion,
-                                                    'distribucion_calibre'=>$distribucion_calibre,
-                                                    'distribucion_color'=>$distribucion_color,
-                                                    'distribucion_color_fondo'=> $distribucion_color_fondo]);
+        $pdf = PDF::loadView('productors.informe', ['recepcion' => $recepcion,
+                                    'distribucion_calibre'=>$distribucion_calibre,
+                                    'distribucion_color'=>$distribucion_color,
+                                    'distribucion_color_fondo'=> $distribucion_color_fondo,
+                                    'firmezas_grande'=>$firmezas_grande,
+                                    'firmezas_mediana'=>$firmezas_mediana,
+                                    'firmezas_chica'=>$firmezas_chica]);
  
          return $pdf->download($recepcion->id_g_recepcion.'-'.$recepcion->id_emisor.'.pdf');
     }
@@ -425,11 +432,6 @@ class HomeController extends Controller
         $firmezas_grande='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/grande/'.$recepcion->id.'.html&viewport=800x220';
         $firmezas_mediana='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/mediana/'.$recepcion->id.'.html&viewport=800x220';
         $firmezas_chica='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/chica/'.$recepcion->id.'.html&viewport=800x220';
-
-        $nombreArchivo = Str::random(10). '.jpg';
-        Storage::url('archivos/',$nombreArchivo);
-        //$url= $imageData->store('archivos');
-
 
         //view()->share('productors.informe',$recepcion,$distribucion_calibre);
  
