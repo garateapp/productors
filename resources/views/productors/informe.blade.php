@@ -201,9 +201,9 @@
 	
 	<table style="width:100%;">
 		<tr>
-			@isset($firmeza_grande)
+			@isset($firmezas_grande)
 				<td>
-					<img style="width:100%;" src="{{$firmeza_grande}}" alt="" >
+					<img style="width:100%;" src="{{$firmezas_grande}}" alt="" >
 				</td>
 			@endif
 		
