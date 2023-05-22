@@ -210,6 +210,17 @@
 		
 		</tr>
 	</table>
+	<table style="width:100%;">
+		<tr>
+			@isset($firmezas_mediana)
+				<td>
+					<img style="width:100%;" src="{{$firmezas_mediana}}" alt="" >
+				</td>
+			@endif
+		
+		
+		</tr>
+	</table>
 	
 		
 
