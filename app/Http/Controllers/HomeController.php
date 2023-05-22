@@ -357,6 +357,9 @@ class HomeController extends Controller
     }
 
     public function downloadpdf(Recepcion $recepcion) {
+
+        return response()->download(storage_path('app/'.$recepcion->informe));
+        /*
         $distribucion_calibre='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x300';
         $distribucion_color='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html&viewport=800x400';
         $distribucion_color_fondo='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/fondo/'.$recepcion->id.'.html&viewport=800x400';
@@ -375,7 +378,7 @@ class HomeController extends Controller
                                     'firmezas_mediana'=>$firmezas_mediana,
                                     'firmezas_chica'=>$firmezas_chica]);
  
-         return $pdf->download($recepcion->id_g_recepcion.'-'.$recepcion->id_emisor.'.pdf');
+         return $pdf->download($recepcion->numero_g_recepcion.'-'.$recepcion->id_emisor.'.pdf');*/
     }
     //PERAS // MANZANAS //CEREZAS //DAGEN
     public function distribucion_calibre(Recepcion $recepcion) {
@@ -442,7 +445,17 @@ class HomeController extends Controller
                                                     'firmezas_grande'=>$firmezas_grande,
                                                     'firmezas_mediana'=>$firmezas_mediana,
                                                     'firmezas_chica'=>$firmezas_chica]);
-         return $pdf->stream($recepcion->id_g_recepcion.'-'.$recepcion->id_emisor.'.pdf');
+        $pdfContent = $pdf->output();
+        $filename = $recepcion->numero_g_recepcion.'-'.$recepcion->id_emisor.'.pdf';
+                                                    
+        Storage::put('pdf-recepciones/' . $filename, $pdfContent);
+
+        $recepcion->update([
+            'informe'=>'pdf-recepciones/'.$filename
+        ]);
+
+
+         return $pdf->stream($recepcion->numero_g_recepcion.'-'.$recepcion->id_emisor.'.pdf');
          
          //return view('productors.informe',compact('recepcion','distribucion_calibre'));
          

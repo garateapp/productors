@@ -205,8 +205,10 @@ class ProductionCc extends Component
     public function validar_informe(Recepcion $recepcion) {
         $recepcion->n_estado='CERRADO';
         $recepcion->save();
-        
         $user=User::where('name',$recepcion->n_emisor)->first();
+
+        
+
         if($user){
             
             if($user->telefonos->count()){
