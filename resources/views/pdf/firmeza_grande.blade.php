@@ -55,7 +55,7 @@
                 type: 'column'
             },
             title: {
-                text: 'Distribucion de Calibre'
+                text: 'FIRMEZAS (lb) y BRIX / GRANDE (48 al 80)'
             },
             legend: {
                         layout: 'vertical',
