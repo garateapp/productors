@@ -296,7 +296,8 @@
 										-
 									@else
 										{{$recepcion->calidad->materia_vegetal}}
-									@endif </td>
+									@endif 
+								</td>
 								</tr>
 								<tr>
 									<td> Presencia de Piedras </td> <td style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px "> 
