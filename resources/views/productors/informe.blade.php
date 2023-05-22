@@ -248,7 +248,11 @@
 			Leve
 		</td>
 		<td style="border:1px solid black;  border-collapse: collapse;">
-
+			@if ($recepcion->calidad->detalles->where('tipo_item','CARAZÓN ACUOSO')->where('detalle_item','Leve')->first())
+				{{$recepcion->calidad->detalles->where('tipo_item','CARAZÓN ACUOSO')->where('detalle_item','Leve')->first()->valor_ss}} %
+			@else
+			-
+			@endif
 		</td>
 		<td style="border:1px solid black;  border-collapse: collapse;">
 			Leve
