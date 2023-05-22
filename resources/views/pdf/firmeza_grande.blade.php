@@ -39,7 +39,7 @@
           
                 @php
                     $categories[]=$detalle->detalle_item;
-                    $series[]=$detalle->porcentaje_muestra;
+                    $series[]=$detalle->valor_ss;
                 @endphp
          
         @endforeach
