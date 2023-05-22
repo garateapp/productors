@@ -20,61 +20,20 @@
 </head>
 <body>
 
-   <table style="width:100%;">
-		<tr>
-		
-				<td style="width:50%;">
-               <figure class="highcharts-figure mx-1 mt-4 h-screen">
-                  <div id="circular">
-                     
-                  </div>
-               </figure>
-				</td>
-		
-			
-				<td style="width:50%;">
-               <figure class="highcharts-figure mx-1 mt-4 h-screen">
-                  <div id="fondo">
-                     
-                  </div>
-               </figure>
-				</td>
-			
-			
-		</tr>
-	</table>
-   
+    <figure class="highcharts-figure mx-1 mt-4 h-screen">
+        <div id="circular">
+           
+        </div>
+     </figure>
 	
 	
 				
 			
-     @php
-     $series=[];
 
-         if ($recepcion->calidad->detalles){
-
-    
-             foreach ($recepcion->calidad->detalles->where('tipo_item','COLOR DE CUBRIMIENTO') as $detalle){
-       
-          
-                 //$categories[]=$detalle->detalle_item;
-                 //$series[]=$detalle->porcentaje_muestra;
-  
-                             $name=$detalle->detalle_item;
-
-                             $series[]=['name' =>$name,
-                                          'y' => $detalle->porcentaje_muestra];
-                 }
-             }
-
-      
-         
- @endphp
-  
              
          
     @php
-        $series2=[];
+        $series=[];
 
          if ($recepcion->calidad->detalles){
 
@@ -90,64 +49,10 @@
                  }
              } 
     @endphp
-     <script>
-      var series = <?php echo json_encode($series) ?>;
-      
-      Highcharts.chart('circular', {
-              chart: {
-                 plotBackgroundColor: null,
-                 plotBorderWidth: null,
-                 plotShadow: false,
-                 type: 'pie'
-              },
-              title: {
-                 text: 'DISTRIBUCIÓN DE COLOR DE CUBRIMIENTO',
-                 align: 'left'
-              },
-              tooltip: {
-                 pointFormat: '<b><b>{point.y}</b>({point.percentage:.0f}%)<br/>',
-              },
-              legend: {
-                          layout: 'vertical',
-                          align: 'right',
-                          verticalAlign: 'middle'
-                      },
-              accessibility: {
-                 point: {
-                       valueSuffix: '%'
-                 }
-              }, 
-              colors: ['#24a745','#96AE51','#f9e8cf','#ffd700'],
-              plotOptions: {
-                 pie: {
-                       allowPointSelect: true,
-                       cursor: 'pointer',
-                       dataLabels: {
-                          enabled: true,
-                          inside: true,
-                          format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                          distance: -50,
-                          style: {
-                              fontSize: '16px'
-                          },
-                       },
-                       showInLegend: true
-                 }
-                
-     
-              },
-              series: [{
-                 name: 'Brands',
-                 colorByPoint: true,
-                 data: series
-              }]
-           });
-           
-        </script>
    <script>
- var series = <?php echo json_encode($series2) ?>;
+ var series = <?php echo json_encode($series) ?>;
  
- Highcharts.chart('fondo', {
+ Highcharts.chart('circular', {
          chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
