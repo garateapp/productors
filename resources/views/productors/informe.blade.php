@@ -258,7 +258,11 @@
 			Leve
 		</td>
 		<td style="border:1px solid black;  border-collapse: collapse;">
-			
+			@if ($recepcion->calidad->detalles->where('tipo_item','CORAZÓN MOHOSO')->where('detalle_item','Leve')->first())
+				{{$recepcion->calidad->detalles->where('tipo_item','CORAZÓN MOHOSO')->where('detalle_item','Leve')->first()->valor_ss}} %
+			@else
+			-
+			@endif
 		</td>
 	</tr>
 	<tr style="border:1px solid black;">
@@ -266,13 +270,21 @@
 			Moderado
 		</td>
 		<td style="border:1px solid black;  border-collapse: collapse;">
-
+			@if ($recepcion->calidad->detalles->where('tipo_item','CARAZÓN ACUOSO')->where('detalle_item','Moderado')->first())
+				{{$recepcion->calidad->detalles->where('tipo_item','CARAZÓN ACUOSO')->where('detalle_item','Moderado')->first()->valor_ss}} %
+			@else
+			-
+			@endif
 		</td>
 		<td style="border:1px solid black;  border-collapse: collapse;">
 			Moderado
 		</td>
 		<td style="border:1px solid black;  border-collapse: collapse;">
-			
+			@if ($recepcion->calidad->detalles->where('tipo_item','CORAZÓN MOHOSO')->where('detalle_item','Moderado')->first())
+				{{$recepcion->calidad->detalles->where('tipo_item','CORAZÓN MOHOSO')->where('detalle_item','Moderado')->first()->valor_ss}} %
+			@else
+			-
+			@endif
 		</td>
 	</tr>
 	<tr style="border:1px solid black;  border-collapse: collapse;">
@@ -280,13 +292,21 @@
 			Severo
 		</td>
 		<td style="border:1px solid black;  border-collapse: collapse;">
-
+			@if ($recepcion->calidad->detalles->where('tipo_item','CARAZÓN ACUOSO')->where('detalle_item','Severo')->first())
+				{{$recepcion->calidad->detalles->where('tipo_item','CARAZÓN ACUOSO')->where('detalle_item','Severo')->first()->valor_ss}} %
+			@else
+			-
+			@endif
 		</td>
 		<td style="border:1px solid black;  border-collapse: collapse;">
 			Severo
 		</td>
 		<td style="border:1px solid black;  border-collapse: collapse;">
-			
+			@if ($recepcion->calidad->detalles->where('tipo_item','CORAZÓN MOHOSO')->where('detalle_item','Severo')->first())
+				{{$recepcion->calidad->detalles->where('tipo_item','CORAZÓN MOHOSO')->where('detalle_item','Severo')->first()->valor_ss}} %
+			@else
+			-
+			@endif
 		</td>
 	</tr>
 </table>
