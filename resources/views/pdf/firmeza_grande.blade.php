@@ -35,7 +35,7 @@
     @endphp
 
     @if ($recepcion->calidad->detalles)
-        @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES') as $detalle)
+        @foreach ($recepcion->calidad->detalles->where('tipo_item','GRANDE') as $detalle)
           
                 @php
                     $categories[]=$detalle->detalle_item;
