@@ -387,7 +387,7 @@ class HomeController extends Controller
     }
     //PERAS // MANZANAS //CEREZAS //DAGEN
     public function firmeza_mediano(Recepcion $recepcion) {
-        return view('pdf.distribucion_color',compact('recepcion'));
+        return view('pdf.firmeza_mediana',compact('recepcion'));
     }
     //PERAS // MANZANAS //CEREZAS //DAGEN
     public function firmeza_chico(Recepcion $recepcion) {
@@ -423,7 +423,7 @@ class HomeController extends Controller
         $distribucion_color_fondo='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/fondo/'.$recepcion->id.'.html&viewport=800x400';
         
         $firmezas_grande='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/grande/'.$recepcion->id.'.html&viewport=800x220';
-        $firmezas_mediana='';
+        $firmezas_mediana='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/mediana/'.$recepcion->id.'.html&viewport=800x220';
         $firmezas_chica='';
 
         $nombreArchivo = Str::random(10). '.jpg';
@@ -437,7 +437,8 @@ class HomeController extends Controller
                                                      'distribucion_calibre'=>$distribucion_calibre,
                                                      'distribucion_color'=>$distribucion_color,
                                                     'distribucion_color_fondo'=> $distribucion_color_fondo,
-                                                    'firmezas_grande'=>$firmezas_grande]);
+                                                    'firmezas_grande'=>$firmezas_grande,
+                                                    'firmezas_mediana'=>$firmezas_mediana]);
          return $pdf->stream($recepcion->id_g_recepcion.'-'.$recepcion->id_emisor.'.pdf');
          
          //return view('productors.informe',compact('recepcion','distribucion_calibre'));
