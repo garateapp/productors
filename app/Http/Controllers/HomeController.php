@@ -436,7 +436,8 @@ class HomeController extends Controller
          $pdf = PDF::loadView('productors.informe', ['recepcion' => $recepcion,
                                                      'distribucion_calibre'=>$distribucion_calibre,
                                                      'distribucion_color'=>$distribucion_color,
-                                                    'distribucion_color_fondo'=> $distribucion_color_fondo]);
+                                                    'distribucion_color_fondo'=> $distribucion_color_fondo,
+                                                    'firmezas_grande'=>$firmezas_grande]);
          return $pdf->stream($recepcion->id_g_recepcion.'-'.$recepcion->id_emisor.'.pdf');
          
          //return view('productors.informe',compact('recepcion','distribucion_calibre'));
