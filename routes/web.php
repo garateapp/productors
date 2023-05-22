@@ -103,6 +103,13 @@ Route::get('calibre/{recepcion}.html', [HomeController::class,'distribucion_cali
 
 Route::get('color/{recepcion}.html', [HomeController::class,'distribucion_color'])->name('distribucion.color');
 
+//firmeza grande
+Route::get('firmeza/grande/{recepcion}.html', [HomeController::class,'firmeza_grande'])->name('firmeza.grande');
+//firmezza mediana
+Route::get('firmeza/mediana/{recepcion}.html', [HomeController::class,'firmeza_mediano'])->name('firmeza.mediana');
+//firmeza chica
+Route::get('firmeza/chica/{recepcion}.html', [HomeController::class,'firmeza_chico'])->name('firmeza.chica');
+
 Route::get('firmeza/{recepcion}.html', [HomeController::class,'promedio_firmeza'])->name('promedio.firmeza');
 
 Route::get('brix/{recepcion}.html', [HomeController::class,'promedio_brix'])->name('promedio.brix');

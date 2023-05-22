@@ -370,32 +370,47 @@ class HomeController extends Controller
  
          return $pdf->download($recepcion->id_g_recepcion.'-'.$recepcion->id_emisor.'.pdf');
     }
-
+    //PERAS // MANZANAS //CEREZAS //DAGEN
     public function distribucion_calibre(Recepcion $recepcion) {
 
         return view('pdf.distribucion_calibre',compact('recepcion'));
     }
-
+    //PERAS // MANZANAS //CEREZAS //DAGEN
     public function distribucion_color(Recepcion $recepcion) {
-
         return view('pdf.distribucion_color',compact('recepcion'));
     }
 
+    //
+    //PERAS // MANZANAS //CEREZAS //DAGEN
+    public function firmeza_grande(Recepcion $recepcion) {
+        return view('pdf.firmeza_grande',compact('recepcion'));
+    }
+    //PERAS // MANZANAS //CEREZAS //DAGEN
+    public function firmeza_mediano(Recepcion $recepcion) {
+        return view('pdf.distribucion_color',compact('recepcion'));
+    }
+    //PERAS // MANZANAS //CEREZAS //DAGEN
+    public function firmeza_chico(Recepcion $recepcion) {
+        return view('pdf.distribucion_color',compact('recepcion'));
+    }
+    //
+
+    //CEREZAS //DAGEN
     public function promedio_firmeza(Recepcion $recepcion) {
 
         return view('pdf.promedio_firmeza',compact('recepcion'));
     }
-
+    //CEREZAS //DAGEN
     public function promedio_brix(Recepcion $recepcion) {
 
         return view('pdf.promedio_brix',compact('recepcion'));
     }
-
+    //CEREZAS //DAGEN
     public function porcentaje_firmeza(Recepcion $recepcion) {
 
         return view('pdf.porcentaje_firmeza',compact('recepcion'));
     }
-
+    //PERAS // MANZANAS //CEREZAS //DAGEN
     public function distribucion_color_fondo(Recepcion $recepcion) {
 
         return view('pdf.distribucion_color_fondo',compact('recepcion'));
@@ -406,7 +421,10 @@ class HomeController extends Controller
         $distribucion_calibre='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x300';
         $distribucion_color='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html&viewport=800x400';
         $distribucion_color_fondo='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/fondo/'.$recepcion->id.'.html&viewport=800x400';
-
+        
+        $firmezas_grande='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/grande/'.$recepcion->id.'.html&viewport=800x400';
+        $firmezas_mediana='';
+        $firmezas_chica='';
 
         $nombreArchivo = Str::random(10). '.jpg';
         Storage::url('archivos/',$nombreArchivo);

@@ -198,7 +198,18 @@
 			
 		</tr>
 	</table>
-
+	
+	<table style="width:100%;">
+		<tr>
+			@isset($distribucion_calibre)
+				<td>
+					<img style="width:100%;" src="{{$distribucion_calibre}}" alt="" >
+				</td>
+			@endif
+		
+		
+		</tr>
+	</table>
 	
 		
 
