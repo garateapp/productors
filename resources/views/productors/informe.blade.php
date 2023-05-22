@@ -234,11 +234,64 @@
 	</table>
 	
 		
+<table style="width:100%; border:1px solid black;  border-collapse: collapse;  text-align: center;">
+	<tr style="width:100%; border:1px solid black;  border-collapse: collapse;">
+		<th colspan="2" style="border:1px solid black;  border-collapse: collapse;">
+			Corazon Acuoso
+		</th>
+		<th colspan="2" style="border:1px solid black;  border-collapse: collapse;">
+			Corazon Mohoso
+		</th>
+	</tr>
+	<tr style="border:1px solid black;">
+		<td style="border:1px solid black;  border-collapse: collapse;">
+			Leve
+		</td>
+		<td style="border:1px solid black;  border-collapse: collapse;">
 
+		</td>
+		<td style="border:1px solid black;  border-collapse: collapse;">
+			Leve
+		</td>
+		<td style="border:1px solid black;  border-collapse: collapse;">
+			
+		</td>
+	</tr>
+	<tr style="border:1px solid black;">
+		<td style="border:1px solid black;  border-collapse: collapse;">
+			Moderado
+		</td>
+		<td style="border:1px solid black;  border-collapse: collapse;">
+
+		</td>
+		<td style="border:1px solid black;  border-collapse: collapse;">
+			Moderado
+		</td>
+		<td style="border:1px solid black;  border-collapse: collapse;">
+			
+		</td>
+	</tr>
+	<tr style="border:1px solid black;  border-collapse: collapse;">
+		<td style="border:1px solid black;  border-collapse: collapse;">
+			Severo
+		</td>
+		<td style="border:1px solid black;  border-collapse: collapse;">
+
+		</td>
+		<td style="border:1px solid black;  border-collapse: collapse;">
+			Severo
+		</td>
+		<td style="border:1px solid black;  border-collapse: collapse;">
+			
+		</td>
+	</tr>
+</table>
 		
 	{{-- comment
 		  <div class="page-break"></div>
 		 --}}
+
+
 		  <table style="width:100%;  font-size: 12px; border-spacing: 2px;">
   
 			<tr>
