@@ -424,7 +424,7 @@ class HomeController extends Controller
     public function viewpdf(Recepcion $recepcion) {
 
         $distribucion_calibre='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x300';
-        $distribucion_color='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html&viewport=800x400';
+        //$distribucion_color='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html&viewport=800x400';
         $distribucion_color_fondo='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/fondo/'.$recepcion->id.'.html&viewport=800x400';
         
         $firmezas_grande='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/grande/'.$recepcion->id.'.html&viewport=800x220';
@@ -435,7 +435,7 @@ class HomeController extends Controller
  
          $pdf = PDF::loadView('productors.informe', ['recepcion' => $recepcion,
                                                      'distribucion_calibre'=>$distribucion_calibre,
-                                                     'distribucion_color'=>$distribucion_color,
+                                                     //'distribucion_color'=>$distribucion_color,
                                                     'distribucion_color_fondo'=> $distribucion_color_fondo,
                                                     'firmezas_grande'=>$firmezas_grande,
                                                     'firmezas_mediana'=>$firmezas_mediana,
