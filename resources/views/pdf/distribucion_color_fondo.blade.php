@@ -23,7 +23,7 @@
    <table style="width:100%;">
 		<tr>
 		
-				<td>
+				<td style="width:50%;">
                <figure class="highcharts-figure mx-1 mt-4 h-screen">
                   <div id="circular">
                      
@@ -32,7 +32,7 @@
 				</td>
 		
 			
-				<td>
+				<td style="width:50%;">
                <figure class="highcharts-figure mx-1 mt-4 h-screen">
                   <div id="fondo">
                      
