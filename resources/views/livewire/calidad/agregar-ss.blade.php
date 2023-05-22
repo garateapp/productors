@@ -165,8 +165,8 @@
                         @enderror
                     </div>
                     <div>
-                        <p class="font-bold">Fecha </p> 
-                        <input type="date" wire:model="fecha" class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" >
+                        <p class="font-bold hidden ">Fecha </p> 
+                        <input type="date" wire:model="fecha" class=" hidden form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" >
                     
                         
                     </div>
