@@ -372,7 +372,7 @@ class HomeController extends Controller
                                     'distribucion_color'=>$distribucion_color,
                                     'distribucion_color_fondo'=> $distribucion_color_fondo,
                                     'firmezas_grande'=>$firmezas_grande,
-                                    ]);
+                                    'firmezas_mediana'=>$firmezas_mediana]);
  
          return $pdf->download($recepcion->id_g_recepcion.'-'.$recepcion->id_emisor.'.pdf');
     }
