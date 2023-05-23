@@ -85,7 +85,7 @@
                 }
             },
             series: [{
-                name: 'Distribución: ',
+                name: '% Según muestra',
                 data: series,
                 dataLabels: [{
                     enabled: true,
