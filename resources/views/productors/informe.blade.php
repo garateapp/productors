@@ -198,7 +198,9 @@
 			padding-left: 10px;
 			padding-right: 10px;
 			border-radius: 5px;"><h3  style="color: teal;">Estimación<br> Exportación</h3>
-			{{$total;}}
+			{{$total+$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','PRECALIBRE')->first()->cantidad+$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','SOBRECALIBRE')->first()->cantidad+$recepcion->calidad->detalles->where('tipo_item','COLOR DE CUBRIMIENTO')->first()->cantidad}} %
+			
+				
 		</td>
 			</tr>
 		</table>
