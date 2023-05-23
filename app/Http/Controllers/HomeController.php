@@ -9,6 +9,7 @@ use App\Models\Proceso;
 use App\Models\Recepcion;
 use App\Models\Sync;
 use App\Models\User;
+use App\Models\Valor;
 use App\Models\Variedad;
 use Carbon\Carbon;
 use Exception;
@@ -438,6 +439,7 @@ class HomeController extends Controller
 
         //view()->share('productors.informe',$recepcion,$distribucion_calibre);
  
+        $presiones=Valor::where('parametro_id',16)->where('especie',$recepcion->n_especie)->get();
         
          $pdf = PDF::loadView('productors.informe', ['recepcion' => $recepcion,
                                                      'distribucion_calibre'=>$distribucion_calibre,
@@ -445,7 +447,8 @@ class HomeController extends Controller
                                                     'distribucion_color_fondo'=> $distribucion_color_fondo,
                                                     'firmezas_grande'=>$firmezas_grande,
                                                     'firmezas_mediana'=>$firmezas_mediana,
-                                                    'firmezas_chica'=>$firmezas_chica]);
+                                                    'firmezas_chica'=>$firmezas_chica,
+                                                    'presiones'=>$presiones]);
 
         $pdfContent = $pdf->output();
         $filename = $recepcion->numero_g_recepcion.'-'.$recepcion->id_emisor.'.pdf';
