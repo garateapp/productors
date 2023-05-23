@@ -86,6 +86,36 @@
 	</style>
 </head>
 <body>
+			@php
+				$d_calidad=$recepcion->calidad->detalles->where('tipo_item','DEFECTOS DE CALIDAD');
+				$d_condicion=$recepcion->calidad->detalles->where('tipo_item','DEFECTOS DE CONDICIÓN');
+				$d_plaga=$recepcion->calidad->detalles->where('tipo_item','DAÑO DE PLAGA');
+			@endphp
+
+			@php
+			$total=0;
+			@endphp
+			@if ($d_calidad)
+			@foreach ($d_calidad as $item)
+				@php
+					$total+=$item->cantidad;
+				@endphp	
+			@endforeach
+			@endif
+			@if ($d_condicion)
+			@foreach ($d_condicion as $item)
+				@php
+					$total+=$item->cantidad;
+				@endphp	
+			@endforeach
+			@endif
+			@if ($d_plaga)
+			@foreach ($d_plaga as $item)
+				@php
+					$total+=$item->cantidad;
+				@endphp	
+			@endforeach
+			@endif
 
 	
 	<div class="container">
@@ -167,7 +197,9 @@
 			padding-bottom: 10px;
 			padding-left: 10px;
 			padding-right: 10px;
-			border-radius: 5px;"><h3  style="color: teal;">Estimación<br> Exportación</h3></td>
+			border-radius: 5px;"><h3  style="color: teal;">Estimación<br> Exportación</h3>
+			{{$total;}}
+		</td>
 			</tr>
 		</table>
 		
@@ -386,11 +418,7 @@
 				<td style="background-color:#47ac34; color: white; padding-left: 5px;"><b>CALIDAD DE LLEGADA</b> </td>
 			  
 			</tr>
-			@php
-				$d_calidad=$recepcion->calidad->detalles->where('tipo_item','DEFECTOS DE CALIDAD');
-				$d_condicion=$recepcion->calidad->detalles->where('tipo_item','DEFECTOS DE CONDICIÓN');
-				$d_plaga=$recepcion->calidad->detalles->where('tipo_item','DAÑO DE PLAGA');
-			@endphp
+		
 			
 
 				
@@ -491,31 +519,7 @@
 		<table style="width:100%;  font-size: 12px; background-color:#47ac34; border-spacing: 0px; ">	
 		  <tr>
 			<td style="background-color:#47ac34; color: white; padding-left: 5px;"><b>TOTAL DEFECTOS: </b>
-				@php
-					$total=0;
-				@endphp
-				@if ($d_calidad)
-					@foreach ($d_calidad as $item)
-						@php
-							$total+=$item->cantidad;
-						@endphp	
-					@endforeach
-				@endif
-				@if ($d_condicion)
-					@foreach ($d_condicion as $item)
-						@php
-							$total+=$item->cantidad;
-						@endphp	
-					@endforeach
-				@endif
-				@if ($d_plaga)
-					@foreach ($d_plaga as $item)
-						@php
-							$total+=$item->cantidad;
-						@endphp	
-					@endforeach
-				@endif
-
+			
 
 
 				@if ($total>0)
