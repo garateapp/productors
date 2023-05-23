@@ -416,31 +416,49 @@
 						
 					<tr>
 						<td style="vertical-align: text-top;font-size: 14px;">
+							@php
+								$totalcalidad=0;
+							@endphp
 							@if ($d_calidad->count())
 								@foreach ($d_calidad as $item)
 									<div> <div style="display: inline;"> {{$item->detalle_item}}  </div>			<div style="display: inline; text-align: right; justify-items: end;">{{$item->cantidad}}%</div></div>
+									@php
+										$totalcalidad+=$item->cantidad;
+									@endphp
 								@endforeach
-								<div style="background-color:#47ac34; color: white; font-size: 12px; padding-left: 3px;"> <div style=""><b> TOTAL DEFECTOS DE CALIDAD </b></div>			<div style="text-align: left; justify-items: end;"><b>{{$item->cantidad}}%</b></div></div>
+								<div style="background-color:#47ac34; color: white; font-size: 12px; padding-left: 3px;"> <div style=""><b> TOTAL DEFECTOS DE CALIDAD </b></div>			<div style="text-align: left; justify-items: end;"><b>{{$totalcalidad}}%</b></div></div>
 							@else
 							-
 							@endif
 						</td>
 						<td style="vertical-align: text-top;font-size: 14px;">
+							@php
+								$totalcondicion=0;
+							@endphp
 							@if ($d_condicion->count())
 								@foreach ($d_condicion as $item)
 									<div> <div style="display: inline;"> {{$item->detalle_item}}  </div>			<div style="display: inline; text-align: right; justify-items: end;">{{$item->cantidad}}%</div></div>
+									@php
+										$totalcondicion+=$item->cantidad;
+									@endphp	
 								@endforeach
-								<div style="background-color:#47ac34; color: white; font-size: 12px; padding-left: 3px;"> <div style=""> <b>TOTAL DEFECTOS DE CONDICIÓN </b></div>			<div style="text-align: left; justify-items: end;"><b>{{$item->cantidad}}%</b></div></div>
+								<div style="background-color:#47ac34; color: white; font-size: 12px; padding-left: 3px;"> <div style=""> <b>TOTAL DEFECTOS DE CONDICIÓN </b></div>			<div style="text-align: left; justify-items: end;"><b>{{$totalcondicion}}%</b></div></div>
 							@else
 							-
 							@endif
 						</td>
 						<td style="vertical-align: text-top;font-size: 14px;">
+							@php
+								$totalplaga=0;
+							@endphp
 							@if ($d_plaga->count())
 								@foreach ($d_plaga as $item)
 									<div> <div style="display: inline;"> {{$item->detalle_item}}  </div>			<div style="display: inline; text-align: right; justify-items: end;">{{$item->cantidad}}%</div></div>
+									@php
+										$totalplaga+=$item->cantidad;
+									@endphp	
 								@endforeach
-								<div style="background-color:#47ac34; color: white; font-size: 12px; padding-left: 3px;"> <div style=""><b> TOTAL DAÑOS DE PLAGA </b></div>			<div style="text-align: left; justify-items: end;"><b>{{$item->cantidad}}%</b></div></div>
+								<div style="background-color:#47ac34; color: white; font-size: 12px; padding-left: 3px;"> <div style=""><b> TOTAL DAÑOS DE PLAGA </b></div>			<div style="text-align: left; justify-items: end;"><b>{{$totalplaga}}%</b></div></div>
 							@else
 							-
 							@endif
