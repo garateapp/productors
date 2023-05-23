@@ -333,8 +333,8 @@
 		@foreach ($presiones as $item)
 			<td style="border:1px solid black;  border-collapse: collapse;">
 				
-				@if ($recepcion->calidad->detalles->where('tipo_item','PRESIONES')->first())
-					{{$recepcion->calidad->detalles->where('tipo_item','PRESIONES')->first()->valor_ss}} %
+				@if ($recepcion->calidad->detalles->where('tipo_item','PRESIONES')->where('detalle_item',$item->name)->first())
+					{{$recepcion->calidad->detalles->where('tipo_item','PRESIONES')->where('detalle_item',$item->name)->first()->valor_ss}} %
 				@else
 					-
 				@endif
@@ -351,7 +351,7 @@
 		 --}}
 
 
-		  <table style="width:100%;  font-size: 12px; border-spacing: 2px;">
+		<table style="width:100%;  font-size: 12px; border-spacing: 2px;">
   
 			<tr>
 			  	<td style="background-color:#47ac34; color: white; padding-left: 5px;"><b>DEFECTOS DE CALIDAD</b> </td>
