@@ -198,17 +198,22 @@
 			padding-left: 10px;
 			padding-right: 10px;
 			border-radius: 5px;"><h3  style="color: teal;">Estimación<br> Exportación</h3>
-			{{$total+
+			@php
+				$a=0;
+				$b=0;
+				$c=0;
+			
 			if ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','PRECALIBRE')->first()) {
-				$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','PRECALIBRE')->first()->cantidad+
+				$a=$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','PRECALIBRE')->first()->cantidad;
 			}
 			if ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','SOBRECALIBRE')->first()) {
-				$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','SOBRECALIBRE')->first()->cantidad+
+				$b=$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','SOBRECALIBRE')->first()->cantidad
 			}	
 			if ($recepcion->calidad->detalles->where('tipo_item','COLOR DE CUBRIMIENTO')->first()) {
-				$recepcion->calidad->detalles->where('tipo_item','COLOR DE CUBRIMIENTO')->first()->cantidad
+				$c=$recepcion->calidad->detalles->where('tipo_item','COLOR DE CUBRIMIENTO')->first()->cantidad;
 			}
-			}} %
+			@endphp
+			{{$total+$a+$b+$c}} %
 			
 				
 		</td>
