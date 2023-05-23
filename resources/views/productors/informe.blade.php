@@ -319,7 +319,7 @@
 <table style="width:100%; border:1px solid black;  border-collapse: collapse;  text-align: center;">
 	<tr style="width:100%; border:1px solid black;  border-collapse: collapse;">
 		<th colspan="2" style="border:1px solid black;  border-collapse: collapse;">
-			Corazon Acuoso
+			% Distribución de Presiones (Lbs)
 		</th>
 	</tr>
 	<tr style="border:1px solid black;">

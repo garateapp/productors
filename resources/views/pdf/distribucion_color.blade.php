@@ -85,7 +85,7 @@
                      dataLabels: {
                         enabled: true,
                         inside: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        format: '{point.percentage:.1f} %',
                         distance: -50,
                         style: {
                             fontSize: '30px'

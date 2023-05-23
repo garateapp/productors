@@ -438,6 +438,7 @@ class HomeController extends Controller
 
         //view()->share('productors.informe',$recepcion,$distribucion_calibre);
  
+        
          $pdf = PDF::loadView('productors.informe', ['recepcion' => $recepcion,
                                                      'distribucion_calibre'=>$distribucion_calibre,
                                                      'distribucion_color'=>$distribucion_color,
@@ -445,6 +446,7 @@ class HomeController extends Controller
                                                     'firmezas_grande'=>$firmezas_grande,
                                                     'firmezas_mediana'=>$firmezas_mediana,
                                                     'firmezas_chica'=>$firmezas_chica]);
+
         $pdfContent = $pdf->output();
         $filename = $recepcion->numero_g_recepcion.'-'.$recepcion->id_emisor.'.pdf';
                                                     
