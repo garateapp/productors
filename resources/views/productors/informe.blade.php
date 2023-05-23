@@ -207,7 +207,7 @@
 				$a=$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','PRECALIBRE')->first()->cantidad;
 			}
 			if ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','SOBRECALIBRE')->first()) {
-				$b=$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','SOBRECALIBRE')->first()->cantidad
+				$b=$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','SOBRECALIBRE')->first()->cantidad;
 			}	
 			if ($recepcion->calidad->detalles->where('tipo_item','COLOR DE CUBRIMIENTO')->first()) {
 				$c=$recepcion->calidad->detalles->where('tipo_item','COLOR DE CUBRIMIENTO')->first()->cantidad;
