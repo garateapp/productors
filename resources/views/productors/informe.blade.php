@@ -321,6 +321,12 @@
 		<th colspan="{{$presiones->count()}}" style="border:1px solid black;  border-collapse: collapse;">
 			% Distribución de Presiones (Lbs)
 		</th>
+		@if ($almidons->count())
+			<th colspan="{{$almidons->count()}}" style="border:1px solid black;  border-collapse: collapse;">
+				% Distribución Almidón
+			</th>
+		@endif
+
 	</tr>
 	<tr style="border:1px solid black;">
 		@foreach ($presiones as $item)
@@ -328,6 +334,13 @@
 				{{$item->name}}
 			</td>
 		@endforeach
+		@if ($almidons->count())
+			@foreach ($almidons as $item)
+				<td style="border:1px solid black;  border-collapse: collapse;">
+					{{$item->name}}
+				</td>
+			@endforeach
+		@endif
 	</tr>
 	<tr style="border:1px solid black;">
 		@foreach ($presiones as $item)
@@ -341,6 +354,19 @@
 			
 			</td>
 		@endforeach
+		@if ($almidons->count())
+			@foreach ($almidons as $item)
+				<td style="border:1px solid black;  border-collapse: collapse;">
+					
+					@if ($recepcion->calidad->detalles->where('tipo_item','ALMIDON')->where('detalle_item',$item->name)->first())
+						{{$recepcion->calidad->detalles->where('tipo_item','ALMIDON')->where('detalle_item',$item->name)->first()->valor_ss}} %
+					@else
+						0 %
+					@endif
+				
+				</td>
+			@endforeach
+		@endif
 	</tr>
 
 </table>

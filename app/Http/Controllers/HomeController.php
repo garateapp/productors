@@ -440,6 +440,7 @@ class HomeController extends Controller
         //view()->share('productors.informe',$recepcion,$distribucion_calibre);
  
         $presiones=Valor::where('parametro_id',16)->where('especie',$recepcion->n_especie)->orderby('id','ASC')->get();
+        $almidons=Valor::where('parametro_id',8)->where('especie',$recepcion->n_especie)->orderby('id','ASC')->get();
 
          $pdf = PDF::loadView('productors.informe', ['recepcion' => $recepcion,
                                                      'distribucion_calibre'=>$distribucion_calibre,
@@ -448,7 +449,8 @@ class HomeController extends Controller
                                                     'firmezas_grande'=>$firmezas_grande,
                                                     'firmezas_mediana'=>$firmezas_mediana,
                                                     'firmezas_chica'=>$firmezas_chica,
-                                                    'presiones'=>$presiones]);
+                                                    'presiones'=>$presiones,
+                                                    'almidons'=>$almidons]);
 
         $pdfContent = $pdf->output();
         $filename = $recepcion->numero_g_recepcion.'-'.$recepcion->id_emisor.'.pdf';
