@@ -74,7 +74,7 @@ class AgregarCc extends Component
     public function set_recepcion_cc($id){
         $this->recepcion_id=$id;
         $this->recep=Recepcion::find($this->recepcion_id);
-        $this->parametros=Parametro::where('tipo',"cc")->get();
+        $this->parametros=Parametro::where('tipo',"cc")->orderby('name','ASC')->get();
         $this->tipo_control='cc';
         
     }
