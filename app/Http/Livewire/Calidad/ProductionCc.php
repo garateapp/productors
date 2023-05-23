@@ -97,6 +97,19 @@ class ProductionCc extends Component
         
     }
 
+    public function set_recep($id){
+        $this->recepcion_id=$id;
+        $this->recep=Recepcion::find($this->recepcion_id);
+        
+    }
+
+    public function clean_recep($id){
+      
+        $this->reset(['recepcion_id','recep']);
+    }
+
+    
+
     public function set_recepcion_ss($id){
         $this->recepcion_id=$id;
         $this->recep=Recepcion::find($this->recepcion_id);
