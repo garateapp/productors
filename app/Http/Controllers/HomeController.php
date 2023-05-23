@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\Fortify\CreateNewUser;
 use App\Models\Calidad;
+use App\Models\Detalle;
 use App\Models\Especie;
 use App\Models\Proceso;
 use App\Models\Recepcion;
@@ -425,6 +426,19 @@ class HomeController extends Controller
     public function distribucion_color_fondo(Recepcion $recepcion) {
 
         return view('pdf.distribucion_color_fondo',compact('recepcion'));
+    }
+
+    public function observacion_externa(Recepcion $recepcion) {
+
+        return view('calidad.observacionext',compact('recepcion'));
+    }
+
+    public function detalle_update(Calidad $calidad, Request $request) {
+        $calidad->update([
+            'obs_ext'=>$request->obs_ext
+        ]);
+
+        return redirect()->back();
     }
 
     public function viewpdf(Recepcion $recepcion) {

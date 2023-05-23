@@ -552,7 +552,15 @@
 		
 	  </tr>
 	</table>
-	<div style="background-color:#47ac34; color: white; font-size: 12px; padding-left: 3px; border-top: 1px solid white;"> <div style="text-align: center;"><b> OBSERVACIONES: </b></div>		</div>
+	<div style="background-color:#47ac34; color: white; font-size: 12px; padding-left: 3px; border-top: 1px solid white;"> 
+		<div style="text-align: center;"><b> OBSERVACIONES: </b> 
+			@if ($recepcion->calidad->obs_ext)
+				{{$recepcion->calidad->obs_ext}} 
+			@else
+			-
+			@endif
+		</div>		
+	</div>
 	<div style="background-color:#bad047; color: white; font-size: 12px; padding-left: 3px; border-bottom: 5px solid #47ac34;"> <div style="text-align: center;"><img src="{{asset('image/logogreenex.png')}}" alt="Logo de la empresa" class="logo"></div>		</div>
 	
 			

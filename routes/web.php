@@ -117,3 +117,7 @@ Route::get('brix/{recepcion}.html', [HomeController::class,'promedio_brix'])->na
 Route::get('porcentaje/firmeza/{recepcion}.html', [HomeController::class,'porcentaje_firmeza'])->name('porcentaje.firmeza');
 
 Route::get('color/fondo/{recepcion}.html', [HomeController::class,'distribucion_color_fondo'])->name('distribucion.color.fondo');
+
+Route::get('obervacion/externa/{recepcion}', [HomeController::class,'observacion_externa'])->name('observacion.externa');
+
+Route::put('update/{calidad}',[HomeController::class,'detalle_update'])->name('detalle.update');
