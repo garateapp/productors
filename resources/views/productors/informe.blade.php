@@ -338,7 +338,7 @@
 				@else
 					-
 				@endif
-				1 %
+			
 			</td>
 		@endforeach
 	</tr>
