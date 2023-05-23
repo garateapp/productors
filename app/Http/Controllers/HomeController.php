@@ -439,7 +439,7 @@ class HomeController extends Controller
 
         //view()->share('productors.informe',$recepcion,$distribucion_calibre);
  
-        $presiones=Valor::where('parametro_id',16)->where('especie',$recepcion->n_especie)->orderby('name','ASC')->get();
+        $presiones=Valor::where('parametro_id',16)->where('especie',$recepcion->n_especie)->orderby('id','ASC')->get();
 
          $pdf = PDF::loadView('productors.informe', ['recepcion' => $recepcion,
                                                      'distribucion_calibre'=>$distribucion_calibre,
