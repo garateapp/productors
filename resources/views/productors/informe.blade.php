@@ -332,6 +332,12 @@
 	<tr style="border:1px solid black;">
 		@foreach ($presiones as $item)
 			<td style="border:1px solid black;  border-collapse: collapse;">
+				
+				@if ($recepcion->calidad->detalles->where('tipo_item','PRESIONES')->first())
+					{{$recepcion->calidad->detalles->where('tipo_item','PRESIONES')->first()}}
+				@else
+					-
+				@endif
 				1 %
 			</td>
 		@endforeach
