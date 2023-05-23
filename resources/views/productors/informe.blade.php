@@ -336,7 +336,7 @@
 				@if ($recepcion->calidad->detalles->where('tipo_item','PRESIONES')->where('detalle_item',$item->name)->first())
 					{{$recepcion->calidad->detalles->where('tipo_item','PRESIONES')->where('detalle_item',$item->name)->first()->valor_ss}} %
 				@else
-					-
+					0 %
 				@endif
 			
 			</td>
