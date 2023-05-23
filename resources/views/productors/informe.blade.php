@@ -542,8 +542,8 @@
 				
 			</td>
 			<td style="background-color:#47ac34; color: white;"><b>FUERA DE COLOR:  </b>
-				@if ($recepcion->calidad->detalles->where('detalle_item','FUERA DE COLOR')->first())
-					{{$recepcion->calidad->detalles->where('detalle_item','FUERA DE COLOR')->first()->cantidad}} %
+				@if ($recepcion->calidad->detalles->where('tipo_item','COLOR DE CUBRIMIENTO')->orderby('id','ASC')->first())
+					{{$recepcion->calidad->detalles->where('tipo_item','COLOR DE CUBRIMIENTO')->orderby('id','ASC')->first()->cantidad}} %
 				@else
 				-
 				@endif
