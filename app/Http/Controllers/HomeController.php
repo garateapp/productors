@@ -455,9 +455,9 @@ class HomeController extends Controller
         ]);
 
 
-         //return $pdf->stream($recepcion->numero_g_recepcion.'-'.$recepcion->id_emisor.'.pdf');
+         return $pdf->stream($recepcion->numero_g_recepcion.'-'.$recepcion->id_emisor.'.pdf');
          
-         return view('productors.informe',compact('recepcion','distribucion_calibre'));
+         //return view('productors.informe',compact('recepcion','distribucion_calibre'));
          
     }
 
