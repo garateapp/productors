@@ -213,7 +213,7 @@
 				$c=$recepcion->calidad->detalles->where('tipo_item','COLOR DE CUBRIMIENTO')->first()->cantidad;
 			}
 			@endphp
-			{{$recepcion->peso_neto*($total+$a+$b+$c/100)}} %
+			{{$recepcion->peso_neto*($total+$a+$b+$c/100)}} Kgs
 			
 				
 		</td>
