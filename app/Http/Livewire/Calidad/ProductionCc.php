@@ -103,7 +103,7 @@ class ProductionCc extends Component
         
     }
 
-    public function clean_recep($id){
+    public function clean_recep(){
       
         $this->reset(['recepcion_id','recep']);
     }
