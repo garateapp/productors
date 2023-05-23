@@ -199,40 +199,45 @@
 		</tr>
 	</table>
 	
-	<table style="width:100%;">
-		<tr>
-			@isset($firmezas_grande)
-				<td>
-					<img style="width:100%;" src="{{$firmezas_grande}}" alt="" >
-				</td>
-			@endif
-		
-		
-		</tr>
-	</table>
-	<table style="width:100%;">
-		<tr>
-			@isset($firmezas_mediana)
-				<td>
-					<img style="width:100%;" src="{{$firmezas_mediana}}" alt="" >
-				</td>
-			@endif
-		
-		
-		</tr>
-	</table>
-	<table style="width:100%;">
-		<tr>
-			@isset($firmezas_chica)
-				<td>
-					<img style="width:100%;" src="{{$firmezas_chica}}" alt="" >
-				</td>
-			@endif
-		
-		
-		</tr>
-	</table>
-	
+	@if ($recepcion->calidad->detalles->where('tipo_item','GRANDE')->first())
+		<table style="width:100%;">
+			<tr>
+				@isset($firmezas_grande)
+					<td>
+						<img style="width:100%;" src="{{$firmezas_grande}}" alt="" >
+					</td>
+				@endif
+			
+			
+			</tr>
+		</table>
+	@endif
+	@if ($recepcion->calidad->detalles->where('tipo_item','MEDIANO')->first())
+		<table style="width:100%;">
+			<tr>
+				@isset($firmezas_mediana)
+					<td>
+						<img style="width:100%;" src="{{$firmezas_mediana}}" alt="" >
+					</td>
+				@endif
+			
+			
+			</tr>
+		</table>
+	@endif
+	@if ($recepcion->calidad->detalles->where('tipo_item','CHICO')->first())
+		<table style="width:100%;">
+			<tr>
+				@isset($firmezas_chica)
+					<td>
+						<img style="width:100%;" src="{{$firmezas_chica}}" alt="" >
+					</td>
+				@endif
+			
+			
+			</tr>
+		</table>
+	@endif
 		
 <table style="width:100%; border:1px solid black;  border-collapse: collapse;  text-align: center;">
 	<tr style="width:100%; border:1px solid black;  border-collapse: collapse;">
