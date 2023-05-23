@@ -334,7 +334,7 @@
 			<td style="border:1px solid black;  border-collapse: collapse;">
 				
 				@if ($recepcion->calidad->detalles->where('tipo_item','PRESIONES')->first())
-					{{$recepcion->calidad->detalles->where('tipo_item','PRESIONES')->first()->valor_ss}}
+					{{$recepcion->calidad->detalles->where('tipo_item','PRESIONES')->first()->valor_ss}} %
 				@else
 					-
 				@endif
