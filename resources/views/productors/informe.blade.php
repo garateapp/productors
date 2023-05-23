@@ -316,7 +316,7 @@
 	</tr>
 </table>
 
-<table style="width:100%; border:1px solid black;  border-collapse: collapse;  text-align: center;">
+<table style="width:100%; border:1px solid black;  border-collapse: collapse;  text-align: center; margin-top: 30px; ">
 	<tr style="width:100%; border:1px solid black;  border-collapse: collapse;">
 		<th colspan="{{$presiones->count()}}" style="border:1px solid black;  border-collapse: collapse;">
 			% Distribución de Presiones (Lbs)
