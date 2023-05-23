@@ -438,7 +438,7 @@ class HomeController extends Controller
             'obs_ext'=>$request->obs_ext
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('info','La observación fue agregada con éxito.');
     }
 
     public function viewpdf(Recepcion $recepcion) {
