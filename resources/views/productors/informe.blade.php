@@ -525,11 +525,20 @@
 									</td>
 								</tr>
 								<tr>
-									<td>Llenado de Bins y/o Tottes  </td> <td style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px "> 
+									<td>Humedad Esponjas  </td> <td style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px "> 
 										@if ($recepcion->calidad->esponjas==NULL)
 											-
 										@else
 											{{$recepcion->calidad->esponjas}}
+										@endif
+									 </td>
+								</tr>
+								<tr>
+									<td>Llenado de Bins y/o Tottes  </td> <td style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px "> 
+										@if ($recepcion->calidad->llenado_tottes==NULL)
+											-
+										@else
+											{{$recepcion->calidad->llenado_tottes}}
 										@endif
 									 </td>
 								</tr>

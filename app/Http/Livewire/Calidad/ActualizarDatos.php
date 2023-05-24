@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class ActualizarDatos extends Component
 {   
-    public $materia_vegetal, $recepcion, $piedras, $barro, $pedicelo_largo, $racimo, $esponjas, $h_esponjas;
+    public $materia_vegetal, $recepcion, $piedras, $barro, $pedicelo_largo, $racimo, $esponjas, $h_esponjas,$llenado_tottes;
 
     public function mount(Recepcion $recepcion){
         $this->recepcion=$recepcion;
