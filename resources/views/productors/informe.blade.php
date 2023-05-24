@@ -187,12 +187,17 @@
 			padding-left: 10px;
 			padding-right: 10px;
 			border-radius: 5px;"><h3  style="color: teal;">Nota<br> Calidad</h3>  
+															@if ($recepcion->calidad->detalles->where('detalle_item','EXTERNA')->first())
+																{{$recepcion->calidad->detalles->where('detalle_item','EXTERNA')->first()->cantidad}}
+															@else
 																	@if ($recepcion->nota_calidad==0)   
 																		S/N
 																	@elseif($recepcion->nota_calidad)
 																		{{number_format($recepcion->nota_calidad)}}
 																	@endif
-																</td>
+																@endif
+
+					</td>
 			  <td style="background-color:#ffffff;padding-top: 10px;
 			padding-bottom: 10px;
 			padding-left: 10px;
