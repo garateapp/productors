@@ -178,8 +178,9 @@
         @else
             <select wire:change='actualizar_datos' wire:model="llenado_tottes" class="mx-auto w-20 block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                 <option value="" class="text-center"> - </option>
-                <option value="NO" class="text-center mx-4">NO</option>
-                <option value="SI" class="text-center mx-4">SI</option>
+                <option value="NO" class="text-center mx-4">EXCESIVO</option>
+                <option value="SI" class="text-center mx-4">CORRECTO</option>
+                <option value="SI" class="text-center mx-4">CORRECTO</option>
             </select> 
         @endif
     
