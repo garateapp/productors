@@ -181,7 +181,7 @@
                 <option value="" class="text-center"> - </option>
                 <option value="NO" class="text-center mx-4">EXCESIVO</option>
                 <option value="SI" class="text-center mx-4">CORRECTO</option>
-                <option value="SI" class="text-center mx-4">CORRECTO</option>
+                <option value="SI" class="text-center mx-4">BAJO</option>
             </select> 
         @endif
     
