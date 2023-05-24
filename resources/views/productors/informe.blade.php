@@ -219,7 +219,7 @@
 			}
 			@endphp
 			
-			{{number_format((($total+$a+$b+$c)),0)}} Kgs
+			{{number_format((($total+$a+$b+$c)),0)}} %
 			
 				
 		</td>
