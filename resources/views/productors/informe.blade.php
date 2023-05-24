@@ -219,7 +219,7 @@
 			}
 			@endphp
 			
-			{{number_format((($total+$a+$b+$c)),0)}} %
+			{{number_format((100-($total+$a+$b+$c)),0)}} %
 			
 				
 		</td>
