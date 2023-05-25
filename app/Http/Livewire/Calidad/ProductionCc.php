@@ -430,39 +430,66 @@ class ProductionCc extends Component
 
         $this->firmpro=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/BuscarRecepcionCloud?Numero_recepcion='.$recepcion->numero_g_recepcion);
         $this->firmpro = $this->firmpro->json();
-    
+        $subpromedio_light=0;
+        $subpromedio_dark=0;
+        $subpromedio_black=0;
+        $rojo=0;
         $rojocaoba=0;
         $santina=0;
         $caobaoscuro=0;
         $negro=0;
+
         foreach ($this->firmpro as $items){              
             $n=1;   
+
+                //CADA REGISTRO:
                 foreach ($items as $item){
                     if($n==4){
                         $firmeza=$item;
+                       
                     }
                     if($n==5){
                         $calibre=$item;
                     }
                     if($n==13){
                         $color=$item;
-                        if($color=='Santina'){
-                            $santina+=1;
-                        }
-                        if($color=='Caoba oscuro'){
-                            $caobaoscuro+=1;
-                        }
-                        if($color=='Negro'){
-                            $negro+=1;
+                        if($color=='Rojo'){
+                            $rojo+=1;
+                            $subpromedio_light+=$firmeza;
                         }
                         if($color=='Rojo caoba'){
                             $rojocaoba+=1;
+                            $subpromedio_dark+=$firmeza;
                         }
+                        if($color=='Santina'){
+                            $santina+=1;
+                            $subpromedio_dark+=$firmeza;
+                        }
+                        if($color=='Caoba oscuro'){
+                            $caobaoscuro+=1;
+                            $subpromedio_black+=$firmeza;
+                        }
+                        if($color=='Negro'){
+                            $negro+=1;
+                            $subpromedio_black+=$firmeza;
+                        }
+                       
                     }
                     $n+=1;
                 }                                              
 
         }
+            if($rojo>0){
+                Detalle::create([
+                    'calidad_id'=>$this->recep->calidad->id,
+                    'embalaje'=>$this->embalaje,
+                    'valor_ss'=>$negro*100/$cantidad_frutos,
+                    'tipo_item'=>'COLOR DE CUBRIMIENTO',
+                    'tipo_detalle'=>'cc',
+                    'detalle_item'=>'ROJO',
+                    'fecha'=>$this->fecha                
+                ]);
+            }
             if($rojocaoba>0){
                 Detalle::create([
                     'calidad_id'=>$this->recep->calidad->id,
@@ -507,7 +534,35 @@ class ProductionCc extends Component
                     'fecha'=>$this->fecha                
                 ]);
             }
+
             
+            Detalle::create([
+                'calidad_id'=>$this->recep->calidad->id,
+                'embalaje'=>$this->embalaje,
+                'valor_ss'=>$subpromedio_light*100/$rojo,
+                'tipo_item'=>'FIRMEZAS',
+                'tipo_detalle'=>'ss',
+                'detalle_item'=>'LIGHT',
+                'fecha'=>$this->fecha                
+            ]);
+            Detalle::create([
+                'calidad_id'=>$this->recep->calidad->id,
+                'embalaje'=>$this->embalaje,
+                'valor_ss'=>$subpromedio_dark*100/($rojocaoba+$santina),
+                'tipo_item'=>'FIRMEZAS',
+                'tipo_detalle'=>'ss',
+                'detalle_item'=>'DARK',
+                'fecha'=>$this->fecha                
+            ]);
+            Detalle::create([
+                'calidad_id'=>$this->recep->calidad->id,
+                'embalaje'=>$this->embalaje,
+                'valor_ss'=>$subpromedio_dark*100/($negro+$caobaoscuro),
+                'tipo_item'=>'FIRMEZAS',
+                'tipo_detalle'=>'ss',
+                'detalle_item'=>'BLACK',
+                'fecha'=>$this->fecha                
+            ]);
  
     
 }
