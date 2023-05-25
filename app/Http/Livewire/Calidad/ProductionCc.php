@@ -433,6 +433,9 @@ class ProductionCc extends Component
         $subpromedio_light=0;
         $subpromedio_dark=0;
         $subpromedio_black=0;
+        $subpromedio_light2=0;
+        $subpromedio_dark2=0;
+        $subpromedio_black2=0;
         $rojo=0;
         $rojocaoba=0;
         $santina=0;
@@ -456,22 +459,27 @@ class ProductionCc extends Component
                         if($color=='Rojo'){
                             $rojo+=1;
                             $subpromedio_light+=$firmeza;
+                            $subpromedio_light2+=$calibre;
                         }
                         if($color=='Rojo caoba'){
                             $rojocaoba+=1;
                             $subpromedio_dark+=$firmeza;
+                            $subpromedio_dark2+=$calibre;
                         }
                         if($color=='Santina'){
                             $santina+=1;
                             $subpromedio_dark+=$firmeza;
+                            $subpromedio_dark2+=$calibre;
                         }
                         if($color=='Caoba oscuro'){
                             $caobaoscuro+=1;
                             $subpromedio_black+=$firmeza;
+                            $subpromedio_black2+=$calibre;
                         }
                         if($color=='Negro'){
                             $negro+=1;
                             $subpromedio_black+=$firmeza;
+                            $subpromedio_black2+=$calibre;
                         }
                        
                     }
@@ -545,7 +553,16 @@ class ProductionCc extends Component
                     'detalle_item'=>'LIGHT',
                     'fecha'=>$this->fecha                
                 ]);
-            }else{
+                Detalle::create([
+                    'calidad_id'=>$this->recep->calidad->id,
+                    'embalaje'=>$this->embalaje,
+                    'valor_ss'=>$subpromedio_light2/$rojo,
+                    'tipo_item'=>'BRIX DAGEN',
+                    'tipo_detalle'=>'ss',
+                    'detalle_item'=>'SLIGHT',
+                    'fecha'=>$this->fecha                
+                ]);
+                }else{
                 Detalle::create([
                     'calidad_id'=>$this->recep->calidad->id,
                     'embalaje'=>$this->embalaje,
@@ -554,6 +571,14 @@ class ProductionCc extends Component
                     'tipo_detalle'=>'ss',
                     'detalle_item'=>'LIGHT',
                     'fecha'=>$this->fecha   ]);
+                    Detalle::create([
+                        'calidad_id'=>$this->recep->calidad->id,
+                        'embalaje'=>$this->embalaje,
+                        'valor_ss'=>0,
+                        'tipo_item'=>'BRIX DAGEN',
+                        'tipo_detalle'=>'ss',
+                        'detalle_item'=>'SLIGHT',
+                        'fecha'=>$this->fecha   ]);
             }
             if (($rojocaoba+$santina)>0) {
                 Detalle::create([
@@ -565,7 +590,16 @@ class ProductionCc extends Component
                     'detalle_item'=>'DARK',
                     'fecha'=>$this->fecha                
                 ]);
-            } else {
+                Detalle::create([
+                    'calidad_id'=>$this->recep->calidad->id,
+                    'embalaje'=>$this->embalaje,
+                    'valor_ss'=>$subpromedio_dark2/($rojocaoba+$santina),
+                    'tipo_item'=>'BRIX DAGEN',
+                    'tipo_detalle'=>'ss',
+                    'detalle_item'=>'SDARK',
+                    'fecha'=>$this->fecha                
+                ]);
+                } else {
                 Detalle::create([
                     'calidad_id'=>$this->recep->calidad->id,
                     'embalaje'=>$this->embalaje,
@@ -573,6 +607,15 @@ class ProductionCc extends Component
                     'tipo_item'=>'FIRMEZAS',
                     'tipo_detalle'=>'ss',
                     'detalle_item'=>'DARK',
+                    'fecha'=>$this->fecha                
+                ]);
+                Detalle::create([
+                    'calidad_id'=>$this->recep->calidad->id,
+                    'embalaje'=>$this->embalaje,
+                    'valor_ss'=>0,
+                    'tipo_item'=>'BRIX DAGEN',
+                    'tipo_detalle'=>'ss',
+                    'detalle_item'=>'SDARK',
                     'fecha'=>$this->fecha                
                 ]);
             }
@@ -587,7 +630,16 @@ class ProductionCc extends Component
                     'detalle_item'=>'BLACK',
                     'fecha'=>$this->fecha                
                 ]);
-            } else {
+                Detalle::create([
+                    'calidad_id'=>$this->recep->calidad->id,
+                    'embalaje'=>$this->embalaje,
+                    'valor_ss'=>$subpromedio_black2/($negro+$caobaoscuro),
+                    'tipo_item'=>'BRIX DAGEN',
+                    'tipo_detalle'=>'ss',
+                    'detalle_item'=>'SBLACK',
+                    'fecha'=>$this->fecha                
+                ]);
+                } else {
                 Detalle::create([
                     'calidad_id'=>$this->recep->calidad->id,
                     'embalaje'=>$this->embalaje,
@@ -595,6 +647,15 @@ class ProductionCc extends Component
                     'tipo_item'=>'FIRMEZAS',
                     'tipo_detalle'=>'ss',
                     'detalle_item'=>'BLACK',
+                    'fecha'=>$this->fecha                
+                ]);
+                Detalle::create([
+                    'calidad_id'=>$this->recep->calidad->id,
+                    'embalaje'=>$this->embalaje,
+                    'valor_ss'=>0,
+                    'tipo_item'=>'BRIX DAGEN',
+                    'tipo_detalle'=>'ss',
+                    'detalle_item'=>'SBLACK',
                     'fecha'=>$this->fecha                
                 ]);
             }

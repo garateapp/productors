@@ -261,14 +261,27 @@
 					</td>
 				@endif
 			@endif
-			@isset($distribucion_color_fondo)
-				<td>
-					<img style="width:100%;" src="{{$distribucion_color_fondo}}" alt="" >
-				</td>
+			@if ($recepcion->n_especie=='Cherries')
+				@isset($promedio_brix)
+					<td>
+						<img style="width:100%;" src="{{$promedio_brix}}" alt="" >
+					</td>
+				@endif
+				
+			@else
+				@isset($distribucion_color_fondo)
+					<td>
+						<img style="width:100%;" src="{{$distribucion_color_fondo}}" alt="" >
+					</td>
+				@endif
 			@endif
+
+			
 			
 		</tr>
 	</table>
+
+	
 	
 	@if ($recepcion->calidad->detalles->where('tipo_item','GRANDE')->first())
 		<table style="width:100%;">
@@ -309,139 +322,150 @@
 			</tr>
 		</table>
 	@endif
-		
-<table style="width:100%; border:1px solid black;  border-collapse: collapse;  text-align: center;">
-	<tr style="width:100%; border:1px solid black;  border-collapse: collapse;">
-		<th colspan="2" style="border:1px solid black;  border-collapse: collapse;">
-			Corazon Acuoso
-		</th>
-		<th colspan="2" style="border:1px solid black;  border-collapse: collapse;">
-			Corazon Mohoso
-		</th>
-	</tr>
-	<tr style="border:1px solid black;">
-		<td style="border:1px solid black;  border-collapse: collapse;">
-			Leve
-		</td>
-		<td style="border:1px solid black;  border-collapse: collapse;">
-			@if ($recepcion->calidad->detalles->where('tipo_item','CARAZÓN ACUOSO')->where('detalle_item','Leve')->first())
-				{{$recepcion->calidad->detalles->where('tipo_item','CARAZÓN ACUOSO')->where('detalle_item','Leve')->first()->valor_ss}} %
-			@else
-			-
-			@endif
-		</td>
-		<td style="border:1px solid black;  border-collapse: collapse;">
-			Leve
-		</td>
-		<td style="border:1px solid black;  border-collapse: collapse;">
-			@if ($recepcion->calidad->detalles->where('tipo_item','CORAZÓN MOHOSO')->where('detalle_item','Leve')->first())
-				{{$recepcion->calidad->detalles->where('tipo_item','CORAZÓN MOHOSO')->where('detalle_item','Leve')->first()->valor_ss}} %
-			@else
-			-
-			@endif
-		</td>
-	</tr>
-	<tr style="border:1px solid black;">
-		<td style="border:1px solid black;  border-collapse: collapse;">
-			Moderado
-		</td>
-		<td style="border:1px solid black;  border-collapse: collapse;">
-			@if ($recepcion->calidad->detalles->where('tipo_item','CARAZÓN ACUOSO')->where('detalle_item','Moderado')->first())
-				{{$recepcion->calidad->detalles->where('tipo_item','CARAZÓN ACUOSO')->where('detalle_item','Moderado')->first()->valor_ss}} %
-			@else
-			-
-			@endif
-		</td>
-		<td style="border:1px solid black;  border-collapse: collapse;">
-			Moderado
-		</td>
-		<td style="border:1px solid black;  border-collapse: collapse;">
-			@if ($recepcion->calidad->detalles->where('tipo_item','CORAZÓN MOHOSO')->where('detalle_item','Moderado')->first())
-				{{$recepcion->calidad->detalles->where('tipo_item','CORAZÓN MOHOSO')->where('detalle_item','Moderado')->first()->valor_ss}} %
-			@else
-			-
-			@endif
-		</td>
-	</tr>
-	<tr style="border:1px solid black;  border-collapse: collapse;">
-		<td style="border:1px solid black;  border-collapse: collapse;">
-			Severo
-		</td>
-		<td style="border:1px solid black;  border-collapse: collapse;">
-			@if ($recepcion->calidad->detalles->where('tipo_item','CARAZÓN ACUOSO')->where('detalle_item','Severo')->first())
-				{{$recepcion->calidad->detalles->where('tipo_item','CARAZÓN ACUOSO')->where('detalle_item','Severo')->first()->valor_ss}} %
-			@else
-			-
-			@endif
-		</td>
-		<td style="border:1px solid black;  border-collapse: collapse;">
-			Severo
-		</td>
-		<td style="border:1px solid black;  border-collapse: collapse;">
-			@if ($recepcion->calidad->detalles->where('tipo_item','CORAZÓN MOHOSO')->where('detalle_item','Severo')->first())
-				{{$recepcion->calidad->detalles->where('tipo_item','CORAZÓN MOHOSO')->where('detalle_item','Severo')->first()->valor_ss}} %
-			@else
-			-
-			@endif
-		</td>
-	</tr>
-</table>
-
-<table style="width:100%; border:1px solid black;  border-collapse: collapse;  text-align: center; margin-top: 30px; ">
-	<tr style="width:100%; border:1px solid black;  border-collapse: collapse;">
-		<th colspan="{{$presiones->count()}}" style="border:1px solid black;  border-collapse: collapse;">
-			% Distribución de Presiones (Lbs)
-		</th>
-		@if ($almidons->count())
-			<th colspan="{{$almidons->count()}}" style="border:1px solid black;  border-collapse: collapse;">
-				% Distribución Almidón
-			</th>
-		@endif
-
-	</tr>
-	<tr style="border:1px solid black;">
-		@foreach ($presiones as $item)
-			<td style="border:1px solid black;  border-collapse: collapse;">
-				{{$item->name}}
-			</td>
-		@endforeach
-		@if ($almidons->count())
-			@foreach ($almidons as $item)
-				<td style="border:1px solid black;  border-collapse: collapse;">
-					{{$item->name}}
-				</td>
-			@endforeach
-		@endif
-	</tr>
-	<tr style="border:1px solid black;">
-		@foreach ($presiones as $item)
-			<td style="border:1px solid black;  border-collapse: collapse;">
-				
-				@if ($recepcion->calidad->detalles->where('tipo_item','PRESIONES')->where('detalle_item',$item->name)->first())
-					{{$recepcion->calidad->detalles->where('tipo_item','PRESIONES')->where('detalle_item',$item->name)->first()->valor_ss}} %
-				@else
-					0 %
+	@if ($recepcion->n_especie=='Cherries')
+		<table style="width:100%;">
+			<tr>
+				@isset($porcentaje_firmeza)
+					<td>
+						<img style="width:100%;" src="{{$porcentaje_firmeza}}" alt="" >
+					</td>
 				@endif
-			
-			</td>
-		@endforeach
-		@if ($almidons->count())
-			@foreach ($almidons as $item)
-				<td style="border:1px solid black;  border-collapse: collapse;">
-					
-					@if ($recepcion->calidad->detalles->where('tipo_item','ALMIDON')->where('detalle_item',$item->name)->first())
-						{{$recepcion->calidad->detalles->where('tipo_item','ALMIDON')->where('detalle_item',$item->name)->first()->valor_ss}} %
-					@else
-						0 %
-					@endif
 				
+			</tr>
+		</table>
+	@else
+		<table style="width:100%; border:1px solid black;  border-collapse: collapse;  text-align: center;">
+			<tr style="width:100%; border:1px solid black;  border-collapse: collapse;">
+				<th colspan="2" style="border:1px solid black;  border-collapse: collapse;">
+					Corazon Acuoso
+				</th>
+				<th colspan="2" style="border:1px solid black;  border-collapse: collapse;">
+					Corazon Mohoso
+				</th>
+			</tr>
+			<tr style="border:1px solid black;">
+				<td style="border:1px solid black;  border-collapse: collapse;">
+					Leve
 				</td>
-			@endforeach
-		@endif
-	</tr>
+				<td style="border:1px solid black;  border-collapse: collapse;">
+					@if ($recepcion->calidad->detalles->where('tipo_item','CARAZÓN ACUOSO')->where('detalle_item','Leve')->first())
+						{{$recepcion->calidad->detalles->where('tipo_item','CARAZÓN ACUOSO')->where('detalle_item','Leve')->first()->valor_ss}} %
+					@else
+					-
+					@endif
+				</td>
+				<td style="border:1px solid black;  border-collapse: collapse;">
+					Leve
+				</td>
+				<td style="border:1px solid black;  border-collapse: collapse;">
+					@if ($recepcion->calidad->detalles->where('tipo_item','CORAZÓN MOHOSO')->where('detalle_item','Leve')->first())
+						{{$recepcion->calidad->detalles->where('tipo_item','CORAZÓN MOHOSO')->where('detalle_item','Leve')->first()->valor_ss}} %
+					@else
+					-
+					@endif
+				</td>
+			</tr>
+			<tr style="border:1px solid black;">
+				<td style="border:1px solid black;  border-collapse: collapse;">
+					Moderado
+				</td>
+				<td style="border:1px solid black;  border-collapse: collapse;">
+					@if ($recepcion->calidad->detalles->where('tipo_item','CARAZÓN ACUOSO')->where('detalle_item','Moderado')->first())
+						{{$recepcion->calidad->detalles->where('tipo_item','CARAZÓN ACUOSO')->where('detalle_item','Moderado')->first()->valor_ss}} %
+					@else
+					-
+					@endif
+				</td>
+				<td style="border:1px solid black;  border-collapse: collapse;">
+					Moderado
+				</td>
+				<td style="border:1px solid black;  border-collapse: collapse;">
+					@if ($recepcion->calidad->detalles->where('tipo_item','CORAZÓN MOHOSO')->where('detalle_item','Moderado')->first())
+						{{$recepcion->calidad->detalles->where('tipo_item','CORAZÓN MOHOSO')->where('detalle_item','Moderado')->first()->valor_ss}} %
+					@else
+					-
+					@endif
+				</td>
+			</tr>
+			<tr style="border:1px solid black;  border-collapse: collapse;">
+				<td style="border:1px solid black;  border-collapse: collapse;">
+					Severo
+				</td>
+				<td style="border:1px solid black;  border-collapse: collapse;">
+					@if ($recepcion->calidad->detalles->where('tipo_item','CARAZÓN ACUOSO')->where('detalle_item','Severo')->first())
+						{{$recepcion->calidad->detalles->where('tipo_item','CARAZÓN ACUOSO')->where('detalle_item','Severo')->first()->valor_ss}} %
+					@else
+					-
+					@endif
+				</td>
+				<td style="border:1px solid black;  border-collapse: collapse;">
+					Severo
+				</td>
+				<td style="border:1px solid black;  border-collapse: collapse;">
+					@if ($recepcion->calidad->detalles->where('tipo_item','CORAZÓN MOHOSO')->where('detalle_item','Severo')->first())
+						{{$recepcion->calidad->detalles->where('tipo_item','CORAZÓN MOHOSO')->where('detalle_item','Severo')->first()->valor_ss}} %
+					@else
+					-
+					@endif
+				</td>
+			</tr>
+		</table>
 
-</table>
+		<table style="width:100%; border:1px solid black;  border-collapse: collapse;  text-align: center; margin-top: 30px; ">
+			<tr style="width:100%; border:1px solid black;  border-collapse: collapse;">
+				<th colspan="{{$presiones->count()}}" style="border:1px solid black;  border-collapse: collapse;">
+					% Distribución de Presiones (Lbs)
+				</th>
+				@if ($almidons->count())
+					<th colspan="{{$almidons->count()}}" style="border:1px solid black;  border-collapse: collapse;">
+						% Distribución Almidón
+					</th>
+				@endif
 
+			</tr>
+			<tr style="border:1px solid black;">
+				@foreach ($presiones as $item)
+					<td style="border:1px solid black;  border-collapse: collapse;">
+						{{$item->name}}
+					</td>
+				@endforeach
+				@if ($almidons->count())
+					@foreach ($almidons as $item)
+						<td style="border:1px solid black;  border-collapse: collapse;">
+							{{$item->name}}
+						</td>
+					@endforeach
+				@endif
+			</tr>
+			<tr style="border:1px solid black;">
+				@foreach ($presiones as $item)
+					<td style="border:1px solid black;  border-collapse: collapse;">
+						
+						@if ($recepcion->calidad->detalles->where('tipo_item','PRESIONES')->where('detalle_item',$item->name)->first())
+							{{$recepcion->calidad->detalles->where('tipo_item','PRESIONES')->where('detalle_item',$item->name)->first()->valor_ss}} %
+						@else
+							0 %
+						@endif
+					
+					</td>
+				@endforeach
+				@if ($almidons->count())
+					@foreach ($almidons as $item)
+						<td style="border:1px solid black;  border-collapse: collapse;">
+							
+							@if ($recepcion->calidad->detalles->where('tipo_item','ALMIDON')->where('detalle_item',$item->name)->first())
+								{{$recepcion->calidad->detalles->where('tipo_item','ALMIDON')->where('detalle_item',$item->name)->first()->valor_ss}} %
+							@else
+								0 %
+							@endif
+						
+						</td>
+					@endforeach
+				@endif
+			</tr>
+
+		</table>
+	@endif
 		
 	{{-- comment
 		  <div class="page-break"></div>

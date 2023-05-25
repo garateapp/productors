@@ -34,8 +34,8 @@
         $series=[];
     @endphp
 
-    @if ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES'))
-        @foreach ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES') as $detalle)
+    @if ($recepcion->calidad->detalles->where('tipo_item','BRIX DAGEN'))
+        @foreach ($recepcion->calidad->detalles->where('tipo_item','BRIX DAGEN') as $detalle)
           
                 @php
                     $categories[]=$detalle->detalle_item;

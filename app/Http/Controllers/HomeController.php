@@ -453,6 +453,12 @@ class HomeController extends Controller
 
         if ($recepcion->n_especie="Cherries") {
             $promedio_firmeza='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/'.$recepcion->id.'.html&viewport=800x400';
+            $promedio_brix='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/brix/'.$recepcion->id.'.html&viewport=800x400';
+            $porcentaje_firmeza='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/porcentaje/firmeza/'.$recepcion->id.'.html&viewport=800x300';
+        }else{
+            $promedio_firmeza=NULL;
+            $promedio_brix=NULL;
+            $porcentaje_firmeza=NULL;
         }
         //view()->share('productors.informe',$recepcion,$distribucion_calibre);
  
@@ -468,6 +474,8 @@ class HomeController extends Controller
                                                     'firmezas_chica'=>$firmezas_chica,
                                                     'presiones'=>$presiones,
                                                     'promedio_firmeza'=>$promedio_firmeza,
+                                                    'promedio_brix'=>$promedio_brix,
+                                                    'porcentaje_firmeza'=>$porcentaje_firmeza,
                                                     'almidons'=>$almidons]);
 
         $pdfContent = $pdf->output();
