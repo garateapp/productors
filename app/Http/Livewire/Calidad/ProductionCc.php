@@ -22,7 +22,7 @@ class ProductionCc extends Component
 {   use WithPagination;
 
 
-    public $firmpro, $search, $ctd=25,$espec, $varie, $variedadid, $recep, $especieid, $materia_vegetal, $temperatura, $valor, $tipo_control, $fecha, $embalaje=1, $cantidad, $detalle, $porcentaje_muestra, $total_muestra=100, $detalles, $recepcion_id, $calidad, $nro_muestra, $parametros, $valores, $selectedparametro, $selectedvalor;
+    public $firmpro, $calibres, $search, $ctd=25,$espec, $varie, $variedadid, $recep, $especieid, $materia_vegetal, $temperatura, $valor, $tipo_control, $fecha, $embalaje=1, $cantidad, $detalle, $porcentaje_muestra, $total_muestra=100, $detalles, $recepcion_id, $calidad, $nro_muestra, $parametros, $valores, $selectedparametro, $selectedvalor;
     public function render()
     {   
         $recepcions=Recepcion::where('id_g_recepcion','LIKE','%'. $this->search .'%')
@@ -284,11 +284,11 @@ class ProductionCc extends Component
     }
 
     public function cargar_firmpro(Recepcion $recepcion){
-        $this->firmpro=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/BuscarConsolidadoFruitCloud?Numero_recepcion='.$recepcion->numero_g_recepcion);
-        $this->firmpro = $this->firmpro->json();
+        $this->calibres=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/BuscarConsolidadoFruitCloud?Numero_recepcion='.$recepcion->numero_g_recepcion);
+        $this->calibres = $this->calibres->json();
 
 
-        foreach ($this->firmpro as $items){              
+        foreach ($this->calibres as $items){              
             $n=1;        
                 foreach ($items as $item){
                     if($n==5){
@@ -428,6 +428,91 @@ class ProductionCc extends Component
 
             }
 
+        $this->firmpro=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/BuscarRecepcionCloud?Numero_recepcion='.$recepcion->numero_g_recepcion);
+        $this->firmpro = $this->firmpro->json();
+    
+        $rojocaoba=0;
+        $santina=0;
+        $caobaoscuro=0;
+        $negro=0;
+        foreach ($this->firmpro as $items){              
+            $n=1;   
+                foreach ($items as $item){
+                    if($n==4){
+                        $firmeza=$item;
+                    }
+                    if($n==5){
+                        $calibre=$item;
+                    }
+                    if($n==13){
+                        $color=$item;
+                        if($color=='Santina'){
+                            $santina+=1;
+                        }
+                        if($color=='Caoba oscuro'){
+                            $caobaoscuro+=1;
+                        }
+                        if($color=='Negro'){
+                            $negro+=1;
+                        }
+                        if($color=='Rojo caoba'){
+                            $rojocaoba+=1;
+                        }
+                    }
+                    $n+=1;
+                }                                              
+
+        }
+            if($rojocaoba>0){
+                Detalle::create([
+                    'calidad_id'=>$this->recep->calidad->id,
+                    'embalaje'=>$this->embalaje,
+                    'valor_ss'=>$rojocaoba*100/$cantidad_frutos,
+                   
+                    'tipo_item'=>'COLOR DE CUBRIMIENTO',
+                    'tipo_detalle'=>'cc',
+                    'detalle_item'=>'ROJO CAOBA',
+                    'fecha'=>$this->fecha                
+                ]);
+            }
+            if($santina>0){
+                Detalle::create([
+                    'calidad_id'=>$this->recep->calidad->id,
+                    'embalaje'=>$this->embalaje,
+                    'valor_ss'=>$santina*100/$cantidad_frutos,
+                  
+                    'tipo_item'=>'COLOR DE CUBRIMIENTO',
+                    'tipo_detalle'=>'cc',
+                    'detalle_item'=>'SANTINA',
+                    'fecha'=>$this->fecha                
+                ]);
+            }
+            if($caobaoscuro>0){
+                Detalle::create([
+                    'calidad_id'=>$this->recep->calidad->id,
+                    'embalaje'=>$this->embalaje,
+                    'valor_ss'=>$caobaoscuro*100/$cantidad_frutos,
+                    
+                    'tipo_item'=>'COLOR DE CUBRIMIENTO',
+                    'tipo_detalle'=>'cc',
+                    'detalle_item'=>'CAOBA OSCURO',
+                    'fecha'=>$this->fecha                
+                ]);
+            }
+             if($negro>0){
+                Detalle::create([
+                    'calidad_id'=>$this->recep->calidad->id,
+                    'embalaje'=>$this->embalaje,
+                    'valor_ss'=>$negro*100/$cantidad_frutos,
+                  
+                    'tipo_item'=>'COLOR DE CUBRIMIENTO',
+                    'tipo_detalle'=>'cc',
+                    'detalle_item'=>'NEGRO',
+                    'fecha'=>$this->fecha                
+                ]);
+            }
+            
+ 
     
 }
 }
