@@ -581,7 +581,7 @@ class ProductionCc extends Component
                 Detalle::create([
                     'calidad_id'=>$this->recep->calidad->id,
                     'embalaje'=>$this->embalaje,
-                    'valor_ss'=>$subpromedio_dark/($negro+$caobaoscuro),
+                    'valor_ss'=>$subpromedio_black/($negro+$caobaoscuro),
                     'tipo_item'=>'FIRMEZAS',
                     'tipo_detalle'=>'ss',
                     'detalle_item'=>'BLACK',
