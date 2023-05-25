@@ -419,8 +419,10 @@ class HomeController extends Controller
     }
     //CEREZAS //DAGEN
     public function porcentaje_firmeza(Recepcion $recepcion) {
+        $firmpro=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/BuscarRecepcionCloud?Numero_recepcion='.$recepcion->numero_g_recepcion);
+        $firmpro = $firmpro->json();
 
-        return view('pdf.porcentaje_firmeza',compact('recepcion'));
+        return view('pdf.porcentaje_firmeza',compact('recepcion','firmpro'));
     }
     //PERAS // MANZANAS //CEREZAS //DAGEN
     public function distribucion_color_fondo(Recepcion $recepcion) {

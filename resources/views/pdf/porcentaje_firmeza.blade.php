@@ -32,7 +32,14 @@
      @php
         $categories=[];
         $series=[];
+        $rango1=[];
     @endphp
+    @foreach ($firmpro as $items)
+        @foreach ($items as $item)
+           <p>{{$item}}</p> <br>
+        @endforeach
+        
+    @endforeach
 
     @if ($recepcion->calidad->detalles)
         @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES') as $detalle)
@@ -41,8 +48,10 @@
                     $categories[]=$detalle->detalle_item;
                     if ($recepcion->n_especie=='Cherries') {
                         $series[]=$detalle->valor_ss;
+                        $rango1[]=$detalle->valor_ss;
                     }else {
                         $series[]=$detalle->porcentaje_muestra;
+                        $rango1[]=$detalle->porcentaje_muestra;
                     }
                     
                 @endphp
@@ -54,6 +63,7 @@
     <script>
         var categories = <?php echo json_encode($categories) ?>;
         var series = <?php echo json_encode($series) ?>;
+        var rango1 = <?php echo json_encode($rango1) ?>;
 
                 Highcharts.chart('container', {
             chart: {
@@ -68,7 +78,7 @@
                         verticalAlign: 'middle'
                     },
             xAxis: {
-                categories: categories,
+                categories: ['RANGO 1','RANGO 2','RANGO 3','RANGO 4',],
                 crosshair: false
             },
             yAxis: {
@@ -89,8 +99,20 @@
                     borderWidth: 0
                 }
             },
-            series: [{
-                name: '% Según muestra',
+            series: [
+                {
+                name: 'RANGO 1',
+                data: rango1,
+                dataLabels: [{
+                    enabled: true,
+                    inside: true,
+                    style: {
+                        fontSize: '16px'
+                    },
+                    format: '{point.y:.2f}%'
+                }]}
+                ,{
+                name: 'RANGO 2',
                 data: series,
                 dataLabels: [{
                     enabled: true,
@@ -99,9 +121,30 @@
                         fontSize: '16px'
                     },
                     format: '{point.y:.2f}%'
-                }]
-
-            }]
+                }]}
+                ,{
+                name: 'RANGO 3',
+                data: series,
+                dataLabels: [{
+                    enabled: true,
+                    inside: true,
+                    style: {
+                        fontSize: '16px'
+                    },
+                    format: '{point.y:.2f}%'
+                }]}
+                ,{
+                name: 'RANGO 4',
+                data: series,
+                dataLabels: [{
+                    enabled: true,
+                    inside: true,
+                    style: {
+                        fontSize: '16px'
+                    },
+                    format: '{point.y:.2f}%'
+                }]}
+            ]
         });
       </script>
 </body>
