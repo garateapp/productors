@@ -233,17 +233,33 @@
 					<img style="width:100%;" src="{{$distribucion_calibre}}" alt="" >
 				</td>
 			@endif
-		
+			
+			@if ($recepcion->n_especie=='Cherries')
+				@isset($distribucion_color)
+					<td>
+						<img style="width:100%;" src="{{$distribucion_color}}" alt="" >
+					</td>
+				@endif
+			@endif
 		
 		</tr>
 	</table>
 
 	<table style="width:100%;">
 		<tr>
-			@isset($distribucion_color)
-				<td>
-					<img style="width:100%;" src="{{$distribucion_color}}" alt="" >
-				</td>
+			@if ($recepcion->n_especie=='Cherries')
+				@isset($distribucion_calibre)
+					<td>
+						<img style="width:100%;" src="{{$distribucion_calibre}}" alt="" >
+					</td>
+				@endif
+				
+			@else
+				@isset($distribucion_color)
+					<td>
+						<img style="width:100%;" src="{{$distribucion_color}}" alt="" >
+					</td>
+				@endif
 			@endif
 			@isset($distribucion_color_fondo)
 				<td>
