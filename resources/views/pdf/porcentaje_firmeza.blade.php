@@ -32,15 +32,65 @@
      @php
         $categories=[];
         $series=[];
-        $rango1=[];
+        $rangos=[279,219,179,1];
+        $l=[];
+        $d=[];
+        $b=[];
+        $light=0;
+        $dark=0;
+        $black=0;
     @endphp
-    @foreach ($firmpro as $items)
-        @foreach ($items as $item)
-           <p>{{$item}}</p> <br>
-        @endforeach
-        
-    @endforeach
+    @foreach ($rangos as $rango)
+        @foreach ($firmpro as $items)
+            @php
+                $n=1;
+            @endphp
+            @foreach ($items as $item)
+            <p>{{$n.')'.$item}}</p> <br>
+            
+            @php
+                if ($n==4) {
+                    $firmeza=$item;
+                }
+                if ($n==13) {
+                    $color=$item;
+                }
+                if ($n==14) {
+                            
 
+                    if ($firmeza>$rango) {
+                            if($color=='Rojo'){
+                                $light+=1;
+                            }
+                            if($color=='Rojo caoba'){
+                                $dark+=1;
+                            }
+                            if($color=='Santina'){
+                                $dark+=1;
+                            }
+                            if($color=='Caoba oscuro'){
+                                $black+=1;
+                            }
+                            if($color=='Negro'){
+                                $black+=1;
+                            }
+                    }
+                   
+
+
+                }
+                $n+=1;
+            @endphp
+            @endforeach
+           
+            
+        @endforeach
+        @php
+            $l[]=$light;
+            $d[]=$dark;
+            $b[]=$black;
+        @endphp
+    @endforeach
     @if ($recepcion->calidad->detalles)
         @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES') as $detalle)
           
@@ -62,8 +112,9 @@
 	
     <script>
         var categories = <?php echo json_encode($categories) ?>;
-        var series = <?php echo json_encode($series) ?>;
-        var rango1 = <?php echo json_encode($rango1) ?>;
+        var l = <?php echo json_encode($l) ?>;
+        var d = <?php echo json_encode($d) ?>;
+        var b = <?php echo json_encode($b) ?>;
 
                 Highcharts.chart('container', {
             chart: {
@@ -101,8 +152,8 @@
             },
             series: [
                 {
-                name: 'RANGO 1',
-                data: rango1,
+                name: 'LIGHT',
+                data: l,
                 dataLabels: [{
                     enabled: true,
                     inside: true,
@@ -112,8 +163,8 @@
                     format: '{point.y:.2f}%'
                 }]}
                 ,{
-                name: 'RANGO 2',
-                data: series,
+                name: 'DARK',
+                data: d,
                 dataLabels: [{
                     enabled: true,
                     inside: true,
@@ -123,8 +174,8 @@
                     format: '{point.y:.2f}%'
                 }]}
                 ,{
-                name: 'RANGO 3',
-                data: series,
+                name: 'BLACK',
+                data: b,
                 dataLabels: [{
                     enabled: true,
                     inside: true,
@@ -133,17 +184,7 @@
                     },
                     format: '{point.y:.2f}%'
                 }]}
-                ,{
-                name: 'RANGO 4',
-                data: series,
-                dataLabels: [{
-                    enabled: true,
-                    inside: true,
-                    style: {
-                        fontSize: '16px'
-                    },
-                    format: '{point.y:.2f}%'
-                }]}
+                
             ]
         });
       </script>
