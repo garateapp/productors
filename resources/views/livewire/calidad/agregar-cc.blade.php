@@ -377,11 +377,17 @@
                                         <td class="pl-5 whitespace-nowrap">
                                             <p class="whitespace-nowrap  text-base flex font-medium leading-none text-gray-700 mr-2">
 
-                                        
-                                                @if ($detalle->porcentaje_muestra)
-                                                    {{$detalle->porcentaje_muestra}}
-                                                    
+                                                @if ($recepcion->n_especie=='Cherries') 
+                                                    @if ($detalle->valor_ss)
+                                                        {{$detalle->valor_ss}}
+                                                    @endif
+                                                @else
+                                            
+                                                    @if ($detalle->porcentaje_muestra)
+                                                        {{$detalle->porcentaje_muestra}}
+                                                    @endif
                                                 @endif
+                                               
                                                     
                                             </p>
                                             
@@ -390,11 +396,16 @@
                                                 <p class="whitespace-nowrap  text-base flex font-medium leading-none text-gray-700 mr-2">
                 
                                                 
-                
-                                                    @if ($detalle->cantidad)
-                                                        {{$detalle->cantidad}}
+                                                    @if ($recepcion->n_especie=='Cherries') 
+                                                        @if ($detalle->valor_ss)
+                                                            {{$detalle->valor_ss}}
+                                                        @endif
+                                                    @else
+                                                   
+                                                        @if ($detalle->cantidad)
+                                                            {{$detalle->cantidad}}
+                                                        @endif
                                                     @endif
-                                                
                                             </p>
                                             
                                         </td>
