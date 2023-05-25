@@ -22,7 +22,7 @@ class ProductionCc extends Component
 {   use WithPagination;
 
 
-    public $search, $ctd=25,$espec, $varie, $variedadid, $recep, $especieid, $materia_vegetal, $temperatura, $valor, $tipo_control, $fecha, $embalaje=1, $cantidad, $detalle, $porcentaje_muestra, $total_muestra=100, $detalles, $recepcion_id, $calidad, $nro_muestra, $parametros, $valores, $selectedparametro, $selectedvalor;
+    public $firmpro, $search, $ctd=25,$espec, $varie, $variedadid, $recep, $especieid, $materia_vegetal, $temperatura, $valor, $tipo_control, $fecha, $embalaje=1, $cantidad, $detalle, $porcentaje_muestra, $total_muestra=100, $detalles, $recepcion_id, $calidad, $nro_muestra, $parametros, $valores, $selectedparametro, $selectedvalor;
     public function render()
     {   
         $recepcions=Recepcion::where('id_g_recepcion','LIKE','%'. $this->search .'%')
@@ -283,6 +283,151 @@ class ProductionCc extends Component
        return redirect()->route('productioncc.index');
     }
 
-   
+    public function cargar_firmpro(Recepcion $recepcion){
+        $this->firmpro=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/BuscarConsolidadoFruitCloud?Numero_recepcion='.$recepcion->numero_g_recepcion);
+        $this->firmpro = $this->firmpro->json();
+
+
+        foreach ($this->firmpro as $items){              
+            $n=1;        
+                foreach ($items as $item){
+                    if($n==5){
+                        $cantidad_frutos=$item;
+                    }
+                    if ($n==24) {
+                        if($item==0){
+                            
+                        }else{
+                            Detalle::create([
+                                'calidad_id'=>$this->recep->calidad->id,
+                                'embalaje'=>$this->embalaje,
+                                'valor_ss'=>$item,
+                                'porcentaje_muestra'=>$item,
+                                'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                'tipo_detalle'=>'cc',
+                                'detalle_item'=>'PRECALIBRE',
+                                'fecha'=>$this->fecha                
+                            ]);
+                        }
+                    }
+                    if ($n==25) {
+                        if($item==0){
+                            
+                        }else{
+                            Detalle::create([
+                                'calidad_id'=>$this->recep->calidad->id,
+                                'embalaje'=>$this->embalaje,
+                                'valor_ss'=>$item,
+                                'porcentaje_muestra'=>$item,
+                                'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                'tipo_detalle'=>'cc',
+                                'detalle_item'=>'L',
+                                'fecha'=>$this->fecha                
+                            ]);
+                        }
+                    }
+                    if ($n==26) {
+                        if($item==0){
+                            
+                        }else{
+                            Detalle::create([
+                                'calidad_id'=>$this->recep->calidad->id,
+                                'embalaje'=>$this->embalaje,
+                                'valor_ss'=>$item,
+                                'porcentaje_muestra'=>$item,
+                                'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                'tipo_detalle'=>'cc',
+                                'detalle_item'=>'XL',
+                                'fecha'=>$this->fecha                
+                            ]);
+                        }
+                    }
+                    if ($n==27) {
+                        if($item==0){
+                            
+                        }else{
+                            Detalle::create([
+                                'calidad_id'=>$this->recep->calidad->id,
+                                'embalaje'=>$this->embalaje,
+                                'valor_ss'=>$item,
+                                'porcentaje_muestra'=>$item,
+                                'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                'tipo_detalle'=>'cc',
+                                'detalle_item'=>'J',
+                                'fecha'=>$this->fecha                
+                            ]);
+                        }
+                    }
+                    if ($n==28) {
+                        if($item==0){
+                            
+                        }else{
+                           Detalle::create([
+                                'calidad_id'=>$this->recep->calidad->id,
+                                'embalaje'=>$this->embalaje,
+                                'valor_ss'=>$item,
+                                'porcentaje_muestra'=>$item,
+                                'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                'tipo_detalle'=>'cc',
+                                'detalle_item'=>'2J',
+                                'fecha'=>$this->fecha                
+                            ]);
+                        }
+                    }
+                    if ($n==29) {
+                        if($item==0){
+                            
+                        }else{
+                          Detalle::create([
+                                'calidad_id'=>$this->recep->calidad->id,
+                                'embalaje'=>$this->embalaje,
+                                'valor_ss'=>$item,
+                                'porcentaje_muestra'=>$item,
+                                'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                'tipo_detalle'=>'cc',
+                                'detalle_item'=>'3J',
+                                'fecha'=>$this->fecha                
+                            ]);
+                        }
+                    }
+                    if ($n==30) {
+                        if($item==0){
+                            
+                        }else{
+                         Detalle::create([
+                                'calidad_id'=>$this->recep->calidad->id,
+                                'embalaje'=>$this->embalaje,
+                                'valor_ss'=>$item,
+                                'porcentaje_muestra'=>$item,
+                                'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                'tipo_detalle'=>'cc',
+                                'detalle_item'=>'4J',
+                                'fecha'=>$this->fecha                
+                            ]);
+                        }
+                    }
+                    if ($n==31) {
+                        if($item==0){
+                            
+                        }else{
+                          Detalle::create([
+                                'calidad_id'=>$this->recep->calidad->id,
+                                'embalaje'=>$this->embalaje,
+                                'valor_ss'=>$item,
+                                'porcentaje_muestra'=>$item,
+                                'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                'tipo_detalle'=>'cc',
+                                'detalle_item'=>'5J',
+                                'fecha'=>$this->fecha                
+                            ]);
+                        }
+                    }
+                    $n+=1;
+
+                }                                              
+
+            }
+
     
+}
 }

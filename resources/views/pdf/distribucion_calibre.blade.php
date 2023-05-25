@@ -39,7 +39,12 @@
           
                 @php
                     $categories[]=$detalle->detalle_item;
-                    $series[]=$detalle->porcentaje_muestra;
+                    if ($recepcion->n_especie=='Cherries') {
+                        $series[]=$detalle->valor_ss;
+                    }else {
+                        $series[]=$detalle->porcentaje_muestra;
+                    }
+                    
                 @endphp
          
         @endforeach

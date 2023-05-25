@@ -507,9 +507,48 @@
                                                         
                                                         </td>
                                                         <td class="pl-5 whitespace-nowrap">
-                                                            <button class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
+                                                            <button wire:click="cargar_firmpro({{$recepcion->id}})" class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
                                                             CARGAR FIMPRO
                                                             </button>
+
+                                                            @if ($firmpro) 
+                                                          
+                                                                @foreach ($firmpro as $items)
+                                                                    @php
+                                                                        $n=1;
+                                                                    @endphp
+                                                                    @foreach ($items as $item)
+                                                                        {{$n.')'.$item.' / '}}
+                                                                        @php
+                                                                            if ($n==24) {
+                                                                                $precalibre=$item;
+                                                                            }
+                                                                            if ($n==25) {
+                                                                                $l=$item;
+                                                                            }
+                                                                            if ($n==26) {
+                                                                                $xl=$item;
+                                                                            }
+                                                                            if ($n==27) {
+                                                                                $j=$item;
+                                                                            }
+                                                                            if ($n==28) {
+                                                                                $jj=$item;
+                                                                            }
+                                                                            if ($n==29) {
+                                                                                $jjj=$item;
+                                                                            }
+                                                                            if ($n==30) {
+                                                                                $jjjj=$item;
+                                                                            }
+                                                                            if ($n==31) {
+                                                                                $jjjjj=$item;
+                                                                            }
+                                                                            $n+=1;
+                                                                        @endphp
+                                                                    @endforeach
+                                                                @endforeach
+                                                            @endif
                                                         
                                                             
                                                         </td>
