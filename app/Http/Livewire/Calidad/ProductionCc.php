@@ -468,7 +468,6 @@ class ProductionCc extends Component
                     'calidad_id'=>$this->recep->calidad->id,
                     'embalaje'=>$this->embalaje,
                     'valor_ss'=>$rojocaoba*100/$cantidad_frutos,
-                   
                     'tipo_item'=>'COLOR DE CUBRIMIENTO',
                     'tipo_detalle'=>'cc',
                     'detalle_item'=>'ROJO CAOBA',
@@ -480,7 +479,6 @@ class ProductionCc extends Component
                     'calidad_id'=>$this->recep->calidad->id,
                     'embalaje'=>$this->embalaje,
                     'valor_ss'=>$santina*100/$cantidad_frutos,
-                  
                     'tipo_item'=>'COLOR DE CUBRIMIENTO',
                     'tipo_detalle'=>'cc',
                     'detalle_item'=>'SANTINA',
@@ -492,7 +490,6 @@ class ProductionCc extends Component
                     'calidad_id'=>$this->recep->calidad->id,
                     'embalaje'=>$this->embalaje,
                     'valor_ss'=>$caobaoscuro*100/$cantidad_frutos,
-                    
                     'tipo_item'=>'COLOR DE CUBRIMIENTO',
                     'tipo_detalle'=>'cc',
                     'detalle_item'=>'CAOBA OSCURO',
@@ -504,7 +501,6 @@ class ProductionCc extends Component
                     'calidad_id'=>$this->recep->calidad->id,
                     'embalaje'=>$this->embalaje,
                     'valor_ss'=>$negro*100/$cantidad_frutos,
-                  
                     'tipo_item'=>'COLOR DE CUBRIMIENTO',
                     'tipo_detalle'=>'cc',
                     'detalle_item'=>'NEGRO',

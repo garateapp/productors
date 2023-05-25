@@ -42,8 +42,13 @@
      
                                 $name=$detalle->detalle_item;
 
-                                $series[]=['name' =>$name,
-                                             'y' => $detalle->porcentaje_muestra];
+                                if ($recepcion->n_especie=='Cherries') {
+                                    $series[]=['name' =>$name,
+                                    'y' => $detalle->valor_ss];
+                                }else {
+                                    $series[]=['name' =>$name,
+                                    'y' => $detalle->porcentaje_muestra];
+                                }
                     }
                 }
 
