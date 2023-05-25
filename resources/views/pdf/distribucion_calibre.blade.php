@@ -98,7 +98,7 @@
                     style: {
                         fontSize: '16px'
                     },
-                    format: '{point.y:.1f}%'
+                    format: '{point.y:.2f}%'
                 }]
 
             }]
