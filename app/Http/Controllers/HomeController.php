@@ -451,6 +451,9 @@ class HomeController extends Controller
         $firmezas_mediana='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/mediana/'.$recepcion->id.'.html&viewport=800x220';
         $firmezas_chica='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/chica/'.$recepcion->id.'.html&viewport=800x220';
 
+        if ($recepcion->n_especie="Cherries") {
+            $promedio_firmeza='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/'.$recepcion->id.'.html&viewport=800x400';
+        }
         //view()->share('productors.informe',$recepcion,$distribucion_calibre);
  
         $presiones=Valor::where('parametro_id',16)->where('especie',$recepcion->n_especie)->orderby('id','ASC')->get();
@@ -464,6 +467,7 @@ class HomeController extends Controller
                                                     'firmezas_mediana'=>$firmezas_mediana,
                                                     'firmezas_chica'=>$firmezas_chica,
                                                     'presiones'=>$presiones,
+                                                    'promedio_firmeza'=>$promedio_firmeza,
                                                     'almidons'=>$almidons]);
 
         $pdfContent = $pdf->output();

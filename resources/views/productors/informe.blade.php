@@ -248,9 +248,9 @@
 	<table style="width:100%;">
 		<tr>
 			@if ($recepcion->n_especie=='Cherries')
-				@isset($distribucion_calibre)
+				@isset($promedio_firmeza)
 					<td>
-						<img style="width:100%;" src="{{$distribucion_calibre}}" alt="" >
+						<img style="width:100%;" src="{{$promedio_firmeza}}" alt="" >
 					</td>
 				@endif
 				
