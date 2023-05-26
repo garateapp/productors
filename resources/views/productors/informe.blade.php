@@ -269,12 +269,10 @@
 				@endif
 				
 			@else
-				@if ($recepcion->calidad->detalles->where('tipo_item','COLOR DE FONDO'))
-					@isset($distribucion_color_fondo)
-						<td>
-							<img style="width:100%;" src="{{$distribucion_color_fondo}}" alt="" >
-						</td>
-					@endif
+				@isset($distribucion_color_fondo)
+					<td>
+						<img style="width:100%;" src="{{$distribucion_color_fondo}}" alt="" >
+					</td>
 				@endif
 			@endif
 
