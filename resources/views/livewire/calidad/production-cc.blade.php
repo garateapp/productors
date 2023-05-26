@@ -669,7 +669,7 @@
                                                                         $n=1;
                                                                     @endphp
                                                                     @foreach ($items as $item)
-                                                                        {{$n.')'.$item.' / '}}
+                                                                        
                                                                         @php
                                                                             if ($n==24) {
                                                                                 $precalibre=$item;
@@ -698,7 +698,11 @@
                                                                             $n+=1;
                                                                         @endphp
                                                                     @endforeach
+                                                                    
                                                                 @endforeach
+
+                                                                Datos Cargados Exitosamente!
+
                                                             @endif
                                                         
                                                             
