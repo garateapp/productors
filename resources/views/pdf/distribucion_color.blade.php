@@ -31,7 +31,7 @@
     @php
         $series=[];
 
-            if ($recepcion->calidad->detalles){
+            if ($recepcion->calidad->detalles->where('tipo_item','COLOR DE CUBRIMIENTO')){
 
        
                 foreach ($recepcion->calidad->detalles->where('tipo_item','COLOR DE CUBRIMIENTO') as $detalle){
