@@ -11,12 +11,20 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-	<style>
-		#container {
-        height: 280px;
-    }
-
-	</style>
+	@if ($recepcion->n_especie=='Cherries')
+        <style>
+            #container {
+            height: 350px;
+        }
+        </style>
+    @else
+        <style>
+            #container {
+            height: 280px;
+        }
+        </style>
+    @endif
+   
 </head>
 <body>
 
