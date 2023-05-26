@@ -233,8 +233,8 @@
             },
             plotOptions: {
                 column: {
-                    pointPadding: 0.001,
-                    borderWidth: 1.5
+                    pointPadding: 0.01,
+                    borderWidth: 0.1
                 }
             },
             series: [
