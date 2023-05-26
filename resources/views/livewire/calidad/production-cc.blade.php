@@ -151,305 +151,456 @@
                                         <td></td>
 
                                     </tr>
-                                     @if ($recep)
-                                        <tr tabindex="0" wire:click="clean_recep()" class="cursor-pointer focus:outline-none h-16 border border-gray-100 rounded text-white" style="background-color: #008d39;">
-                                            <td class="text-center">
-                                            
-                                                    <p class="text-base font-medium leading-none  mr-2" >
+                                        @if ($recep)
+                                            @if ($recep->id==$recepcion->id)
+                                                <tr tabindex="0" wire:click="clean_recep()" class="cursor-pointer focus:outline-none h-16 border border-gray-100 rounded text-white" style="background-color: #008d39;">
+                                                    <td class="text-center">
+                                                    
+                                                            <p class="text-base font-medium leading-none  mr-2" >
 
-                                        
-                                        
+                                                
+                                                
+                                                    
+
+                                                            
+                                                        @if ($recepcion->numero_g_recepcion)
+                                                    Lote: {{$recepcion->numero_g_recepcion}}
+                                                        @endif 
+                                                        
+                                                            
+                                                    </p>
+                                                    
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <p class="text-base font-medium leading-none  mr-2">
+                            
+                                                        
+                            
+                                                            @if ($recepcion->n_emisor)
+                                                                {{$recepcion->n_emisor}}
+                                                                
+                                                            @endif
+                                                        
+                                                            
+                                                        </p>
+                                                    
+                                                    </td>
+                                                    <td class="">
+                                                        <div class="flex items-center pl-5">
+                                                            <p class="text-base font-medium leading-none  mr-2">
+                            
+                                                            
+                                                                @if ($recepcion->n_especie)
+                                                                {{$recepcion->n_especie}}
+                                                                
+                                                                @endif
+                                                            
+                                                                
+                                                            </p>
+                                                        
+                                                        </div>
+                                                    </td>
+                                                    <td class="pl-5">
+                                                        <div class="whitespace-nowrap flex items-center text-center">
+                                                            
+                                                            <p class="whitespace-nowrap text-sm leading-none  ml-2">
+                                                        
+                                                                @if ($recepcion->n_variedad)
+                                                                    {{$recepcion->n_variedad}}
+                                                                    
+                                                                @endif
+                                                            </p>
+                                                        </div>
+                                                    </td>
+                                                    <td class="pl-5 text-center whitespace-nowrap">
+                                                        <p class="whitespace-nowrap text-base text-center font-medium leading-none  mr-2">
+                            
+                                                    
+                                                        @if ($recepcion->fecha_g_recepcion)
+                                                                {{date('d M Y g:i a', strtotime($recepcion->fecha_g_recepcion))}}
+                                                                
+                                                                
+                                                            @endif
+                                                        
+                                                        </p>
+                                                    
+                                                    </td>
+                                                
+                                                    <td class="text-center">
                                             
+                                                        <p class="text-base ">
 
                                                     
-                                                @if ($recepcion->numero_g_recepcion)
-                                            Lote: {{$recepcion->numero_g_recepcion}}
-                                                @endif 
-                                                
-                                                    
-                                            </p>
-                                            
-                                            </td>
-                                            <td class="text-center">
-                                                <p class="text-base font-medium leading-none  mr-2">
-                    
-                                                
-                    
-                                                    @if ($recepcion->n_emisor)
-                                                        {{$recepcion->n_emisor}}
+
+                                                                @if ($recepcion->numero_documento_recepcion)
+                                                                {{$recepcion->numero_documento_recepcion}}
+                                                                @endif
+                                                                
+                                                        </p>
                                                         
-                                                    @endif
-                                                
-                                                    
-                                                </p>
-                                            
-                                            </td>
-                                            <td class="">
-                                                <div class="flex items-center pl-5">
-                                                    <p class="text-base font-medium leading-none  mr-2">
-                    
-                                                    
-                                                        @if ($recepcion->n_especie)
-                                                        {{$recepcion->n_especie}}
+                                                    </td>
+                                                        <td class="pl-5 whitespace-nowrap">
+                                                            <p class="whitespace-nowrap  text-base flex font-medium leading-none  mr-2">
+                            
+                                                            
+                            
+                                                            @if ($recepcion->cantidad)
+                                                                {{number_format($recepcion->cantidad)}}
+                                                            @endif
+                                                            
+                                                        </p>
                                                         
+                                                    </td>
+                                                    
+                                                    <td class="pl-5">
+                                                    
+                            
+                                                        @if ($recepcion->peso_neto)
+                                                            {{number_format($recepcion->peso_neto)}}
                                                         @endif
                                                     
-                                                        
-                                                    </p>
-                                                
-                                                </div>
-                                            </td>
-                                            <td class="pl-5">
-                                                <div class="whitespace-nowrap flex items-center text-center">
+                                                            
                                                     
-                                                    <p class="whitespace-nowrap text-sm leading-none  ml-2">
                                                 
-                                                        @if ($recepcion->n_variedad)
-                                                            {{$recepcion->n_variedad}}
+                                                    
+                                                
+                                                    </td>
+                                                
+                                                    <td class="pl-5 text-center">
+                                                        
+                                                        @if ($recepcion->nota_calidad==0)   
+                                                                S/N
+                                                        @elseif($recepcion->nota_calidad)
+                                                            {{number_format($recepcion->nota_calidad)}}
+                                                        @endif
+                                                
+                                                    
+                                                                                                    
+                                                    </td>
+                                                    
+                                                                
+                                                
+                                                    <td>
+                                                        <div class="relative px-2 pt-2">
+                                                            <button class="focus:ring-2 rounded-md focus:outline-none" onclick="dropdownFunction(this)" role="button" aria-label="option">
+                                                                <svg class="dropbtn" onclick="dropdownFunction(this)" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                                    <path d="M4.16667 10.8332C4.62691 10.8332 5 10.4601 5 9.99984C5 9.5396 4.62691 9.1665 4.16667 9.1665C3.70643 9.1665 3.33334 9.5396 3.33334 9.99984C3.33334 10.4601 3.70643 10.8332 4.16667 10.8332Z" stroke="#9CA3AF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                    <path d="M10 10.8332C10.4602 10.8332 10.8333 10.4601 10.8333 9.99984C10.8333 9.5396 10.4602 9.1665 10 9.1665C9.53976 9.1665 9.16666 9.5396 9.16666 9.99984C9.16666 10.4601 9.53976 10.8332 10 10.8332Z" stroke="#9CA3AF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                    <path d="M15.8333 10.8332C16.2936 10.8332 16.6667 10.4601 16.6667 9.99984C16.6667 9.5396 16.2936 9.1665 15.8333 9.1665C15.3731 9.1665 15 9.5396 15 9.99984C15 10.4601 15.3731 10.8332 15.8333 10.8332Z" stroke="#9CA3AF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                </svg>
+                                                            </button>
+                                                            <div class="dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 hidden">
+                                                                <div tabindex="0" class="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
+                                                                    <p>Edit</p>
+                                                                </div>
+                                                                <div tabindex="0" class="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
+                                                                    <p>Delete</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                
+                                                </tr>
+                                            @else
+                                                <tr tabindex="0" wire:click="set_recep({{$recepcion->id}})" class="cursor-pointer focus:outline-none h-16 border border-gray-100 rounded text-white" style="background-color: #008d39;">
+                                                    <td class="text-center">
+                                                    
+                                                            <p class="text-base font-medium leading-none  mr-2" >
+
+                                                
+                                                
+                                                    
+
+                                                            
+                                                        @if ($recepcion->numero_g_recepcion)
+                                                    Lote: {{$recepcion->numero_g_recepcion}}
+                                                        @endif 
+                                                        
+                                                            
+                                                    </p>
+                                                    
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <p class="text-base font-medium leading-none  mr-2">
+                            
+                                                        
+                            
+                                                            @if ($recepcion->n_emisor)
+                                                                {{$recepcion->n_emisor}}
+                                                                
+                                                            @endif
+                                                        
+                                                            
+                                                        </p>
+                                                    
+                                                    </td>
+                                                    <td class="">
+                                                        <div class="flex items-center pl-5">
+                                                            <p class="text-base font-medium leading-none  mr-2">
+                            
+                                                            
+                                                                @if ($recepcion->n_especie)
+                                                                {{$recepcion->n_especie}}
+                                                                
+                                                                @endif
+                                                            
+                                                                
+                                                            </p>
+                                                        
+                                                        </div>
+                                                    </td>
+                                                    <td class="pl-5">
+                                                        <div class="whitespace-nowrap flex items-center text-center">
+                                                            
+                                                            <p class="whitespace-nowrap text-sm leading-none  ml-2">
+                                                        
+                                                                @if ($recepcion->n_variedad)
+                                                                    {{$recepcion->n_variedad}}
+                                                                    
+                                                                @endif
+                                                            </p>
+                                                        </div>
+                                                    </td>
+                                                    <td class="pl-5 text-center whitespace-nowrap">
+                                                        <p class="whitespace-nowrap text-base text-center font-medium leading-none  mr-2">
+                            
+                                                    
+                                                        @if ($recepcion->fecha_g_recepcion)
+                                                                {{date('d M Y g:i a', strtotime($recepcion->fecha_g_recepcion))}}
+                                                                
+                                                                
+                                                            @endif
+                                                        
+                                                        </p>
+                                                    
+                                                    </td>
+                                                
+                                                    <td class="text-center">
+                                            
+                                                        <p class="text-base ">
+
+                                                    
+
+                                                                @if ($recepcion->numero_documento_recepcion)
+                                                                {{$recepcion->numero_documento_recepcion}}
+                                                                @endif
+                                                                
+                                                        </p>
+                                                        
+                                                    </td>
+                                                        <td class="pl-5 whitespace-nowrap">
+                                                            <p class="whitespace-nowrap  text-base flex font-medium leading-none  mr-2">
+                            
+                                                            
+                            
+                                                            @if ($recepcion->cantidad)
+                                                                {{number_format($recepcion->cantidad)}}
+                                                            @endif
+                                                            
+                                                        </p>
+                                                        
+                                                    </td>
+                                                    
+                                                    <td class="pl-5">
+                                                    
+                            
+                                                        @if ($recepcion->peso_neto)
+                                                            {{number_format($recepcion->peso_neto)}}
+                                                        @endif
+                                                    
+                                                            
+                                                    
+                                                
+                                                    
+                                                
+                                                    </td>
+                                                
+                                                    <td class="pl-5 text-center">
+                                                        
+                                                        @if ($recepcion->nota_calidad==0)   
+                                                                S/N
+                                                        @elseif($recepcion->nota_calidad)
+                                                            {{number_format($recepcion->nota_calidad)}}
+                                                        @endif
+                                                
+                                                    
+                                                                                                    
+                                                    </td>
+                                                    
+                                                                
+                                                
+                                                    <td>
+                                                        <div class="relative px-2 pt-2">
+                                                            <button class="focus:ring-2 rounded-md focus:outline-none" onclick="dropdownFunction(this)" role="button" aria-label="option">
+                                                                <svg class="dropbtn" onclick="dropdownFunction(this)" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                                    <path d="M4.16667 10.8332C4.62691 10.8332 5 10.4601 5 9.99984C5 9.5396 4.62691 9.1665 4.16667 9.1665C3.70643 9.1665 3.33334 9.5396 3.33334 9.99984C3.33334 10.4601 3.70643 10.8332 4.16667 10.8332Z" stroke="#9CA3AF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                    <path d="M10 10.8332C10.4602 10.8332 10.8333 10.4601 10.8333 9.99984C10.8333 9.5396 10.4602 9.1665 10 9.1665C9.53976 9.1665 9.16666 9.5396 9.16666 9.99984C9.16666 10.4601 9.53976 10.8332 10 10.8332Z" stroke="#9CA3AF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                    <path d="M15.8333 10.8332C16.2936 10.8332 16.6667 10.4601 16.6667 9.99984C16.6667 9.5396 16.2936 9.1665 15.8333 9.1665C15.3731 9.1665 15 9.5396 15 9.99984C15 10.4601 15.3731 10.8332 15.8333 10.8332Z" stroke="#9CA3AF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                </svg>
+                                                            </button>
+                                                            <div class="dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 hidden">
+                                                                <div tabindex="0" class="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
+                                                                    <p>Edit</p>
+                                                                </div>
+                                                                <div tabindex="0" class="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
+                                                                    <p>Delete</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                
+                                                </tr>
+                                            @endif
+                                        @else
+                                            <tr tabindex="0" wire:click="set_recep({{$recepcion->id}})" class="cursor-pointer focus:outline-none h-16 border border-gray-100 rounded text-white" style="background-color: #008d39;">
+                                                <td class="text-center">
+                                                
+                                                        <p class="text-base font-medium leading-none  mr-2" >
+
+                                            
+                                            
+                                                
+
+                                                        
+                                                    @if ($recepcion->numero_g_recepcion)
+                                                Lote: {{$recepcion->numero_g_recepcion}}
+                                                    @endif 
+                                                    
+                                                        
+                                                </p>
+                                                
+                                                </td>
+                                                <td class="text-center">
+                                                    <p class="text-base font-medium leading-none  mr-2">
+                        
+                                                    
+                        
+                                                        @if ($recepcion->n_emisor)
+                                                            {{$recepcion->n_emisor}}
                                                             
                                                         @endif
+                                                    
+                                                        
                                                     </p>
-                                                </div>
-                                            </td>
-                                            <td class="pl-5 text-center whitespace-nowrap">
-                                                <p class="whitespace-nowrap text-base text-center font-medium leading-none  mr-2">
-                    
-                                            
-                                                @if ($recepcion->fecha_g_recepcion)
-                                                        {{date('d M Y g:i a', strtotime($recepcion->fecha_g_recepcion))}}
-                                                        
-                                                        
-                                                    @endif
                                                 
-                                                </p>
-                                            
-                                            </td>
-                                        
-                                            <td class="text-center">
-                                    
-                                                <p class="text-base ">
-
-                                            
-
-                                                        @if ($recepcion->numero_documento_recepcion)
-                                                        {{$recepcion->numero_documento_recepcion}}
-                                                        @endif
+                                                </td>
+                                                <td class="">
+                                                    <div class="flex items-center pl-5">
+                                                        <p class="text-base font-medium leading-none  mr-2">
+                        
                                                         
-                                                </p>
-                                                
-                                            </td>
-                                                <td class="pl-5 whitespace-nowrap">
-                                                    <p class="whitespace-nowrap  text-base flex font-medium leading-none  mr-2">
-                    
+                                                            @if ($recepcion->n_especie)
+                                                            {{$recepcion->n_especie}}
+                                                            
+                                                            @endif
+                                                        
+                                                            
+                                                        </p>
                                                     
-                    
-                                                    @if ($recepcion->cantidad)
-                                                        {{number_format($recepcion->cantidad)}}
-                                                    @endif
-                                                    
-                                                </p>
-                                                
-                                            </td>
-                                            
-                                            <td class="pl-5">
-                                            
-                    
-                                                @if ($recepcion->peso_neto)
-                                                    {{number_format($recepcion->peso_neto)}}
-                                                @endif
-                                            
-                                                    
-                                            
-                                        
-                                            
-                                        
-                                            </td>
-                                        
-                                            <td class="pl-5 text-center">
-                                                
-                                                @if ($recepcion->nota_calidad==0)   
-                                                        S/N
-                                                @elseif($recepcion->nota_calidad)
-                                                    {{number_format($recepcion->nota_calidad)}}
-                                                @endif
-                                        
-                                            
-                                                                                            
-                                            </td>
-                                            
-                                                        
-                                        
-                                            <td>
-                                                <div class="relative px-2 pt-2">
-                                                    <button class="focus:ring-2 rounded-md focus:outline-none" onclick="dropdownFunction(this)" role="button" aria-label="option">
-                                                        <svg class="dropbtn" onclick="dropdownFunction(this)" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                            <path d="M4.16667 10.8332C4.62691 10.8332 5 10.4601 5 9.99984C5 9.5396 4.62691 9.1665 4.16667 9.1665C3.70643 9.1665 3.33334 9.5396 3.33334 9.99984C3.33334 10.4601 3.70643 10.8332 4.16667 10.8332Z" stroke="#9CA3AF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                            <path d="M10 10.8332C10.4602 10.8332 10.8333 10.4601 10.8333 9.99984C10.8333 9.5396 10.4602 9.1665 10 9.1665C9.53976 9.1665 9.16666 9.5396 9.16666 9.99984C9.16666 10.4601 9.53976 10.8332 10 10.8332Z" stroke="#9CA3AF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                            <path d="M15.8333 10.8332C16.2936 10.8332 16.6667 10.4601 16.6667 9.99984C16.6667 9.5396 16.2936 9.1665 15.8333 9.1665C15.3731 9.1665 15 9.5396 15 9.99984C15 10.4601 15.3731 10.8332 15.8333 10.8332Z" stroke="#9CA3AF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <div class="dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 hidden">
-                                                        <div tabindex="0" class="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
-                                                            <p>Edit</p>
-                                                        </div>
-                                                        <div tabindex="0" class="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
-                                                            <p>Delete</p>
-                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        
-                                        </tr>
-                                    @else
-                                        <tr tabindex="0" wire:click="set_recep({{$recepcion->id}})" class="cursor-pointer focus:outline-none h-16 border border-gray-100 rounded text-white" style="background-color: #008d39;">
-                                            <td class="text-center">
-                                            
-                                                    <p class="text-base font-medium leading-none  mr-2" >
-
-                                        
-                                        
-                                            
-
-                                                    
-                                                @if ($recepcion->numero_g_recepcion)
-                                            Lote: {{$recepcion->numero_g_recepcion}}
-                                                @endif 
-                                                
-                                                    
-                                            </p>
-                                            
-                                            </td>
-                                            <td class="text-center">
-                                                <p class="text-base font-medium leading-none  mr-2">
-                    
-                                                
-                    
-                                                    @if ($recepcion->n_emisor)
-                                                        {{$recepcion->n_emisor}}
+                                                </td>
+                                                <td class="pl-5">
+                                                    <div class="whitespace-nowrap flex items-center text-center">
                                                         
-                                                    @endif
+                                                        <p class="whitespace-nowrap text-sm leading-none  ml-2">
+                                                    
+                                                            @if ($recepcion->n_variedad)
+                                                                {{$recepcion->n_variedad}}
+                                                                
+                                                            @endif
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                                <td class="pl-5 text-center whitespace-nowrap">
+                                                    <p class="whitespace-nowrap text-base text-center font-medium leading-none  mr-2">
+                        
                                                 
-                                                    
-                                                </p>
-                                            
-                                            </td>
-                                            <td class="">
-                                                <div class="flex items-center pl-5">
-                                                    <p class="text-base font-medium leading-none  mr-2">
-                    
-                                                    
-                                                        @if ($recepcion->n_especie)
-                                                        {{$recepcion->n_especie}}
-                                                        
-                                                        @endif
-                                                    
-                                                        
-                                                    </p>
-                                                
-                                                </div>
-                                            </td>
-                                            <td class="pl-5">
-                                                <div class="whitespace-nowrap flex items-center text-center">
-                                                    
-                                                    <p class="whitespace-nowrap text-sm leading-none  ml-2">
-                                                
-                                                        @if ($recepcion->n_variedad)
-                                                            {{$recepcion->n_variedad}}
+                                                    @if ($recepcion->fecha_g_recepcion)
+                                                            {{date('d M Y g:i a', strtotime($recepcion->fecha_g_recepcion))}}
+                                                            
                                                             
                                                         @endif
+                                                    
                                                     </p>
-                                                </div>
-                                            </td>
-                                            <td class="pl-5 text-center whitespace-nowrap">
-                                                <p class="whitespace-nowrap text-base text-center font-medium leading-none  mr-2">
-                    
-                                            
-                                                @if ($recepcion->fecha_g_recepcion)
-                                                        {{date('d M Y g:i a', strtotime($recepcion->fecha_g_recepcion))}}
-                                                        
-                                                        
-                                                    @endif
                                                 
-                                                </p>
+                                                </td>
                                             
-                                            </td>
+                                                <td class="text-center">
                                         
-                                            <td class="text-center">
-                                    
-                                                <p class="text-base ">
+                                                    <p class="text-base ">
 
-                                            
+                                                
 
-                                                        @if ($recepcion->numero_documento_recepcion)
-                                                        {{$recepcion->numero_documento_recepcion}}
+                                                            @if ($recepcion->numero_documento_recepcion)
+                                                            {{$recepcion->numero_documento_recepcion}}
+                                                            @endif
+                                                            
+                                                    </p>
+                                                    
+                                                </td>
+                                                    <td class="pl-5 whitespace-nowrap">
+                                                        <p class="whitespace-nowrap  text-base flex font-medium leading-none  mr-2">
+                        
+                                                        
+                        
+                                                        @if ($recepcion->cantidad)
+                                                            {{number_format($recepcion->cantidad)}}
                                                         @endif
                                                         
-                                                </p>
-                                                
-                                            </td>
-                                                <td class="pl-5 whitespace-nowrap">
-                                                    <p class="whitespace-nowrap  text-base flex font-medium leading-none  mr-2">
-                    
+                                                    </p>
                                                     
-                    
-                                                    @if ($recepcion->cantidad)
-                                                        {{number_format($recepcion->cantidad)}}
+                                                </td>
+                                                
+                                                <td class="pl-5">
+                                                
+                        
+                                                    @if ($recepcion->peso_neto)
+                                                        {{number_format($recepcion->peso_neto)}}
                                                     @endif
-                                                    
-                                                </p>
                                                 
-                                            </td>
-                                            
-                                            <td class="pl-5">
-                                            
-                    
-                                                @if ($recepcion->peso_neto)
-                                                    {{number_format($recepcion->peso_neto)}}
-                                                @endif
-                                            
-                                                    
-                                            
-                                        
-                                            
-                                        
-                                            </td>
-                                        
-                                            <td class="pl-5 text-center">
-                                                
-                                                @if ($recepcion->nota_calidad==0)   
-                                                        S/N
-                                                @elseif($recepcion->nota_calidad)
-                                                    {{number_format($recepcion->nota_calidad)}}
-                                                @endif
-                                        
-                                            
-                                                                                            
-                                            </td>
-                                            
                                                         
-                                        
-                                            <td>
-                                                <div class="relative px-2 pt-2">
-                                                    <button class="focus:ring-2 rounded-md focus:outline-none" onclick="dropdownFunction(this)" role="button" aria-label="option">
-                                                        <svg class="dropbtn" onclick="dropdownFunction(this)" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                            <path d="M4.16667 10.8332C4.62691 10.8332 5 10.4601 5 9.99984C5 9.5396 4.62691 9.1665 4.16667 9.1665C3.70643 9.1665 3.33334 9.5396 3.33334 9.99984C3.33334 10.4601 3.70643 10.8332 4.16667 10.8332Z" stroke="#9CA3AF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                            <path d="M10 10.8332C10.4602 10.8332 10.8333 10.4601 10.8333 9.99984C10.8333 9.5396 10.4602 9.1665 10 9.1665C9.53976 9.1665 9.16666 9.5396 9.16666 9.99984C9.16666 10.4601 9.53976 10.8332 10 10.8332Z" stroke="#9CA3AF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                            <path d="M15.8333 10.8332C16.2936 10.8332 16.6667 10.4601 16.6667 9.99984C16.6667 9.5396 16.2936 9.1665 15.8333 9.1665C15.3731 9.1665 15 9.5396 15 9.99984C15 10.4601 15.3731 10.8332 15.8333 10.8332Z" stroke="#9CA3AF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <div class="dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 hidden">
-                                                        <div tabindex="0" class="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
-                                                            <p>Edit</p>
-                                                        </div>
-                                                        <div tabindex="0" class="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
-                                                            <p>Delete</p>
+                                                
+                                            
+                                                
+                                            
+                                                </td>
+                                            
+                                                <td class="pl-5 text-center">
+                                                    
+                                                    @if ($recepcion->nota_calidad==0)   
+                                                            S/N
+                                                    @elseif($recepcion->nota_calidad)
+                                                        {{number_format($recepcion->nota_calidad)}}
+                                                    @endif
+                                            
+                                                
+                                                                                                
+                                                </td>
+                                                
+                                                            
+                                            
+                                                <td>
+                                                    <div class="relative px-2 pt-2">
+                                                        <button class="focus:ring-2 rounded-md focus:outline-none" onclick="dropdownFunction(this)" role="button" aria-label="option">
+                                                            <svg class="dropbtn" onclick="dropdownFunction(this)" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                                <path d="M4.16667 10.8332C4.62691 10.8332 5 10.4601 5 9.99984C5 9.5396 4.62691 9.1665 4.16667 9.1665C3.70643 9.1665 3.33334 9.5396 3.33334 9.99984C3.33334 10.4601 3.70643 10.8332 4.16667 10.8332Z" stroke="#9CA3AF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                <path d="M10 10.8332C10.4602 10.8332 10.8333 10.4601 10.8333 9.99984C10.8333 9.5396 10.4602 9.1665 10 9.1665C9.53976 9.1665 9.16666 9.5396 9.16666 9.99984C9.16666 10.4601 9.53976 10.8332 10 10.8332Z" stroke="#9CA3AF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                <path d="M15.8333 10.8332C16.2936 10.8332 16.6667 10.4601 16.6667 9.99984C16.6667 9.5396 16.2936 9.1665 15.8333 9.1665C15.3731 9.1665 15 9.5396 15 9.99984C15 10.4601 15.3731 10.8332 15.8333 10.8332Z" stroke="#9CA3AF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            </svg>
+                                                        </button>
+                                                        <div class="dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 hidden">
+                                                            <div tabindex="0" class="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
+                                                                <p>Edit</p>
+                                                            </div>
+                                                            <div tabindex="0" class="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
+                                                                <p>Delete</p>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        
-                                        </tr>
-                                    @endif
+                                                </td>
+                                            
+                                            </tr>
+                                        @endif
                                  
                                     @if ($recep)
                                         
@@ -624,7 +775,7 @@
                                                 </tr>
                                             @endif
                                         @endif
-                                    @else
+                                    @endif
                                         <tr class="text-white h-5" style="background-color: #ffffff;">
                                             <td class="my-4 text-white">
                                             {{-- Agregar: --}} 
@@ -653,7 +804,7 @@
 
                                         </tr>
                                         
-                                    @endif
+                                    
                                     
                                 
                             
