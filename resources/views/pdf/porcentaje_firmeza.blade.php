@@ -234,7 +234,7 @@
             plotOptions: {
                 column: {
                     pointPadding: 0.05,
-                    borderWidth: 0.1
+                    borderWidth: 0
                 }
             },
             series: [
@@ -245,7 +245,7 @@
                     enabled: true,
                     inside: true,
                     style: {
-                        fontSize: '16px'
+                        fontSize: '12px'
                     },
                     format: '{point.y:.2f}%'
                 }]}
@@ -256,7 +256,7 @@
                     enabled: true,
                     inside: true,
                     style: {
-                        fontSize: '16px'
+                        fontSize: '12px'
                     },
                     format: '{point.y:.2f}%'
                 }]}
@@ -267,7 +267,7 @@
                     enabled: true,
                     inside: true,
                     style: {
-                        fontSize: '16px'
+                        fontSize: '12px'
                     },
                     format: '{point.y:.2f}%'
                 }]}
