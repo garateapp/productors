@@ -58,10 +58,19 @@
         @endforeach
     @endif
                     
-	
+	@if ($recepcion->n_especie=='Cherries')
+        @php
+            $colors=['#7f1710'];
+        @endphp
+    @else
+        @php
+            $colors=['#24a745'];
+        @endphp
+    @endif
     <script>
         var categories = <?php echo json_encode($categories) ?>;
         var series = <?php echo json_encode($series) ?>;
+        var col = <?php echo json_encode($colors) ?>;
 
                 Highcharts.chart('container', {
             chart: {
@@ -85,7 +94,7 @@
                     text: '%'
                 }
             },
-            colors: ['#24a745'],
+            colors: col,
             tooltip: {
                 shared: true,
                 headerFormat: '<span style="font-size: 15px">{point.point.name}</span><br/>',
