@@ -196,9 +196,18 @@
         @endforeach
     @endif
                     
-	
+	@if ($recepcion->n_especie=='Cherries')
+        @php
+            $colors=['#7f1710'];
+        @endphp
+    @else
+        @php
+            $colors=['#24a745'];
+        @endphp
+    @endif
     <script>
         var categories = <?php echo json_encode($categories) ?>;
+        var col = <?php echo json_encode($colors) ?>;
         var l = <?php echo json_encode($l) ?>;
         var d = <?php echo json_encode($d) ?>;
         var b = <?php echo json_encode($b) ?>;
@@ -225,7 +234,7 @@
                     text: '%'
                 }
             },
-            colors: ['#24a745'],
+            colors: col,
             tooltip: {
                 shared: true,
                 headerFormat: '<span style="font-size: 15px">{point.point.name}</span><br/>',
