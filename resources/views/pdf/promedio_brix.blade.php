@@ -13,7 +13,7 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 	<style>
 		#container {
-        height: 350px;
+        height: 200px;
     }
 
 	</style>
@@ -34,8 +34,8 @@
         $series=[];
     @endphp
 
-    @if ($recepcion->calidad->detalles->where('tipo_item','BRIX DAGEN'))
-        @foreach ($recepcion->calidad->detalles->where('tipo_item','BRIX DAGEN') as $detalle)
+    @if ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES'))
+        @foreach ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES') as $detalle)
           
                 @php
                     $categories[]=$detalle->detalle_item;
