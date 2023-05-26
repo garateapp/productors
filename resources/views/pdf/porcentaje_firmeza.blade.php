@@ -13,7 +13,7 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 	<style>
 		#container {
-        height: 280px;
+        height: 300px;
     }
 
 	</style>
@@ -233,8 +233,8 @@
             },
             plotOptions: {
                 column: {
-                    pointPadding: 0,
-                    borderWidth: 0
+                    pointPadding: 0.05,
+                    borderWidth: 0.1
                 }
             },
             series: [
