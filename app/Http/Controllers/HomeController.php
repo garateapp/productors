@@ -449,6 +449,8 @@ class HomeController extends Controller
         $distribucion_color='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html&delay=1&viewport=800x400';
         if ($recepcion->calidad->detalles->where('tipo_item','COLOR DE FONDO')) {
             $distribucion_color_fondo='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/fondo/'.$recepcion->id.'.html&delay=2&viewport=800x400';
+        }else{
+            $distribucion_color_fondo=NULL;
         }
            
         $firmezas_grande='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/grande/'.$recepcion->id.'.html&viewport=800x220';
