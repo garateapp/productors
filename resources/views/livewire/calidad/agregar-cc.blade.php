@@ -231,13 +231,7 @@
             </div>
 
             <div class="flex justify-center gap-2 mt-4">
-                <a href="{{route('productioncc.index')}}">
-                    <button class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-600 rounded hover:bg-red-500 focus:outline-none">
-                    <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
-                        Cancelar
-                    </h1>
-                    </button>
-                </a>
+              
                 @if ($tipo_control=='cc')
                     <button wire:click="detalle_store" class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-green-300 text-sm leading-none text-green-600 py-3 px-5 bg-green-600 rounded hover:bg-green-500 focus:outline-none">
 
@@ -256,6 +250,13 @@
                         </h1>
                     </button>
                 @endif
+                <a href="{{route('productioncc.index')}}">
+                    <button class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-600 rounded hover:bg-red-500 focus:outline-none">
+                    <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
+                        Cancelar
+                    </h1>
+                    </button>
+                </a>
             
             </div>
 
