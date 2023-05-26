@@ -234,7 +234,7 @@
             plotOptions: {
                 column: {
                     pointPadding: 0.05,
-                    borderWidth: 0
+                    borderWidth: 0.1
                 }
             },
             series: [
