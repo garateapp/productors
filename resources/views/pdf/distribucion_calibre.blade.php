@@ -14,7 +14,7 @@
 	@if ($recepcion->n_especie=='Cherries')
         <style>
             #container {
-            height: 350px;
+            height: 360px;
         }
         </style>
     @else
