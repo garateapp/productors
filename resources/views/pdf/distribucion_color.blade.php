@@ -55,8 +55,18 @@
          
             
     @endphp
+    @if ($recepcion->n_especie=='Cherries')
+        @php
+            $colors=['#dc0c15','#82130d','#71160e','#2b1d16'];
+        @endphp
+    @else
+        @php
+            $colors=['#24a745','#96AE51','#f9e8cf','#ffd700'];
+        @endphp
+    @endif
       <script>
     var series = <?php echo json_encode($series) ?>;
+    var col = <?php echo json_encode($colors) ?>;
     
     Highcharts.chart('circular', {
             chart: {
@@ -82,7 +92,7 @@
                      valueSuffix: '%'
                }
             }, 
-            colors: ['#24a745','#96AE51','#f9e8cf','#ffd700'],
+            colors: col,
             plotOptions: {
                pie: {
                      allowPointSelect: true,

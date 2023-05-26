@@ -198,7 +198,7 @@
                     
 	@if ($recepcion->n_especie=='Cherries')
         @php
-            $colors=['#71160e','#2b1d16'];
+            $colors=['#dc0c15','#71160e','#2b1d16'];
         @endphp
     @else
         @php
