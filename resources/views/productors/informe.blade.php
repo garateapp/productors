@@ -413,65 +413,67 @@
 			</table>
 		@endif
 
-		<table style="width:100%; border:1px solid black;  border-collapse: collapse;  text-align: center; margin-top: 30px; ">
-			<tr style="width:100%; border:1px solid black;  border-collapse: collapse;">
-				<th colspan="{{$presiones->count()}}" style="border:1px solid black;  border-collapse: collapse;">
-					% Distribución de Presiones (Lbs)
-				</th>
-				@if ($recepcion->n_especie=='Apples')
-					@if ($almidons->count())
-						<th colspan="{{$almidons->count()}}" style="border:1px solid black;  border-collapse: collapse;">
-							% Distribución Almidón
-						</th>
-					@endif
-				@endif
-			</tr>
-			<tr style="border:1px solid black;">
-				@foreach ($presiones as $item)
-					<td style="border:1px solid black;  border-collapse: collapse;">
-						{{$item->name}}
-					</td>
-				@endforeach
-				@if ($recepcion->n_especie=='Apples')
-					@if ($almidons->count())
-						@foreach ($almidons as $item)
-							<td style="border:1px solid black;  border-collapse: collapse;">
-								{{$item->name}}
-							</td>
-						@endforeach
-					@endif
-				@endif
-			</tr>
-			<tr style="border:1px solid black;">
-				@foreach ($presiones as $item)
-					<td style="border:1px solid black;  border-collapse: collapse;">
-						
-						@if ($recepcion->calidad->detalles->where('tipo_item','PRESIONES')->where('detalle_item',$item->name)->first())
-							{{$recepcion->calidad->detalles->where('tipo_item','PRESIONES')->where('detalle_item',$item->name)->first()->valor_ss}} %
-						@else
-							0 %
+		@if ($recepcion->n_especie=='Apples' || $recepcion->n_especie=='Pears')
+			<table style="width:100%; border:1px solid black;  border-collapse: collapse;  text-align: center; margin-top: 30px; ">
+				<tr style="width:100%; border:1px solid black;  border-collapse: collapse;">
+					<th colspan="{{$presiones->count()}}" style="border:1px solid black;  border-collapse: collapse;">
+						% Distribución de Presiones (Lbs)
+					</th>
+					@if ($recepcion->n_especie=='Apples')
+						@if ($almidons->count())
+							<th colspan="{{$almidons->count()}}" style="border:1px solid black;  border-collapse: collapse;">
+								% Distribución Almidón
+							</th>
 						@endif
-					
-					</td>
-				@endforeach
-				@if ($recepcion->n_especie=='Apples')
-					@if ($almidons->count())
-						@foreach ($almidons as $item)
-							<td style="border:1px solid black;  border-collapse: collapse;">
-								
-								@if ($recepcion->calidad->detalles->where('tipo_item','ALMIDON')->where('detalle_item',$item->name)->first())
-									{{$recepcion->calidad->detalles->where('tipo_item','ALMIDON')->where('detalle_item',$item->name)->first()->valor_ss}} %
-								@else
-									0 %
-								@endif
-							
-							</td>
-						@endforeach
 					@endif
-				@endif
-			</tr>
+				</tr>
+				<tr style="border:1px solid black;">
+					@foreach ($presiones as $item)
+						<td style="border:1px solid black;  border-collapse: collapse;">
+							{{$item->name}}
+						</td>
+					@endforeach
+					@if ($recepcion->n_especie=='Apples')
+						@if ($almidons->count())
+							@foreach ($almidons as $item)
+								<td style="border:1px solid black;  border-collapse: collapse;">
+									{{$item->name}}
+								</td>
+							@endforeach
+						@endif
+					@endif
+				</tr>
+				<tr style="border:1px solid black;">
+					@foreach ($presiones as $item)
+						<td style="border:1px solid black;  border-collapse: collapse;">
+							
+							@if ($recepcion->calidad->detalles->where('tipo_item','PRESIONES')->where('detalle_item',$item->name)->first())
+								{{$recepcion->calidad->detalles->where('tipo_item','PRESIONES')->where('detalle_item',$item->name)->first()->valor_ss}} %
+							@else
+								0 %
+							@endif
+						
+						</td>
+					@endforeach
+					@if ($recepcion->n_especie=='Apples')
+						@if ($almidons->count())
+							@foreach ($almidons as $item)
+								<td style="border:1px solid black;  border-collapse: collapse;">
+									
+									@if ($recepcion->calidad->detalles->where('tipo_item','ALMIDON')->where('detalle_item',$item->name)->first())
+										{{$recepcion->calidad->detalles->where('tipo_item','ALMIDON')->where('detalle_item',$item->name)->first()->valor_ss}} %
+									@else
+										0 %
+									@endif
+								
+								</td>
+							@endforeach
+						@endif
+					@endif
+				</tr>
 
-		</table>
+			</table>
+		@endif
 	@endif
 		
 	
