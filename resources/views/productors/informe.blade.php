@@ -154,7 +154,7 @@
 			padding-bottom: 10px;
 			padding-left: 10px;
 			padding-right: 10px;
-			border-radius: 5px;"><h3 style="color: #47ac34;">Kilos <br>Recibidos</h3> {{number_format($recepcion->peso_neto)}}</td>
+			border-radius: 5px;"><h3 style="color: #47ac34;">Kilos <br>Recibidos</h3> {{number_format($recepcion->peso_neto,0, '.','.')}}</td>
 			  <td style="background-color:#ffffff;padding-top: 10px;
 			padding-bottom: 10px;
 			padding-left: 10px;
