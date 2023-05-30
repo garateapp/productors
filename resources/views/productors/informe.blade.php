@@ -221,26 +221,26 @@
 				foreach ($recepcion->calidad->detalles->where('tipo_item','COLOR DE CUBRIMIENTO') as $item) {
 					if ($recepcion->n_especie=='Apples') {
 						if ($recepcion->n_variedad=='Pink Lady' || $recepcion->n_variedad=='Rossy Glo') {
-							if ($item->informe<40) {
+							if ($item->tipo_item=='<40') {
 								$col+=$item->porcentaje_muestra;
 							}
 						}
-						if ($item->informe<50) {
+						if ($item->tipo_item=='<50') {
 							$col+=$item->porcentaje_muestra;
 						}
 					}
 					if ($recepcion->n_especie=='Mandarinas') {
-						if ($item->informe<30) {
+						if ($item->tipo_item=='<30') {
 							$col+=$item->porcentaje_muestra;
 						}
 					}
 					if ($recepcion->n_especie=='Orange') {
-						if ($item->informe<30) {
+						if ($item->tipo_item=='<30') {
 							$col+=$item->porcentaje_muestra;
 						}
 					}
 					if ($recepcion->n_especie=='Pears') {
-						if ($item->informe<40) {
+						if ($item->tipo_item=='<40') {
 							$col+=$item->porcentaje_muestra;
 						}
 					}
