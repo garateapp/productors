@@ -18,6 +18,7 @@ class ActualizarDatos extends Component
         $this->racimo=$recepcion->calidad->racimo;
         $this->esponjas=$recepcion->calidad->esponjas;
         $this->h_esponjas=$recepcion->calidad->h_esponjas;
+        $this->llenado_tottes=$recepcion->calidad->llenado_tottes;
     }
 
     public function render()
