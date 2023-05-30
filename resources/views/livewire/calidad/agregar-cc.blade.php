@@ -382,12 +382,12 @@
                                                     @if ($detalle->valor_ss)
                                                         {{$detalle->valor_ss}}
                                                     @endif
-                                                @else
+                                                @endif
                                             
                                                     @if ($detalle->porcentaje_muestra)
                                                         {{$detalle->porcentaje_muestra}}
                                                     @endif
-                                                @endif
+                                                
                                                
                                                     
                                             </p>
@@ -401,12 +401,12 @@
                                                         @if ($detalle->valor_ss)
                                                             {{$detalle->valor_ss}}
                                                         @endif
-                                                    @else
+                                                    @endif
                                                    
                                                         @if ($detalle->cantidad)
                                                             {{$detalle->cantidad}}
                                                         @endif
-                                                    @endif
+                                                    
                                             </p>
                                             
                                         </td>
