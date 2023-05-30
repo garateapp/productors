@@ -61,6 +61,11 @@ class ActualizarDatos extends Component
                 'h_esponjas'=>$this->h_esponjas
             ]);
         }
+        if($this->llenado_tottes){
+            $this->recepcion->calidad->update([
+                'llenado_tottes'=>$this->llenado_tottes
+            ]);
+        }
         
     }
 
