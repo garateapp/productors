@@ -155,9 +155,9 @@
         @else
             <select wire:change='actualizar_datos' wire:model="h_esponjas" class="mx-auto w-20 block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                 <option value="" class="text-center"> - </option>
-                <option value="NO" class="text-center mx-4">BUENO</option>
-                <option value="SI" class="text-center mx-4">REGULAR</option>
-                <option value="SI" class="text-center mx-4">MALO</option>
+                <option value="BUENO" class="text-center mx-4">BUENO</option>
+                <option value="REGULAR" class="text-center mx-4">REGULAR</option>
+                <option value="MALO" class="text-center mx-4">MALO</option>
             </select> 
         @endif
     
@@ -179,9 +179,9 @@
         @else
             <select wire:change='actualizar_datos' wire:model="llenado_tottes" class="mx-auto w-20 block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                 <option value="" class="text-center"> - </option>
-                <option value="NO" class="text-center mx-4">EXCESIVO</option>
-                <option value="SI" class="text-center mx-4">CORRECTO</option>
-                <option value="SI" class="text-center mx-4">BAJO</option>
+                <option value="EXCESIVO" class="text-center mx-4">EXCESIVO</option>
+                <option value="CORRECTO" class="text-center mx-4">CORRECTO</option>
+                <option value="BAJO" class="text-center mx-4">BAJO</option>
             </select> 
         @endif
     
