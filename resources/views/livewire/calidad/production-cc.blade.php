@@ -128,7 +128,7 @@
                                            {{-- Agregar: --}} 
                                         </td>
                                         <td class="flex justify-center items-center content-center pb-1">
-                                            <a href="{{route('observacion.externa',$recepcion)}}">
+                                            <a href="{{route('observacion.externa',$recepcion)}}" target="_blank">
                                                 <div class="text-center cursor-pointer focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-xs leading-none text-gray-600 py-1 px-2 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none mb-1 mt-1">
                                                     Observación
                                                 </div>
@@ -648,10 +648,7 @@
                                                         <td class="text-center">
                                                         <a href="{{route('agregar.cc',$recepcion)}}" target="_blank" >
                                                             <button  class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
-                                                            
-                                                                    AGREGAR CC
-                                                                    
-
+                                                                AGREGAR CC
                                                             </button>
                                                         </a>
                                                         </td>
