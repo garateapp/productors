@@ -130,7 +130,7 @@
                                         <td class="items-center content-center pb-1">
                                             <div class="flex justify-center ">
                                                 <a href="{{route('observacion.externa',$recepcion)}}" target="_blank">
-                                                    <div class="text-center cursor-pointer focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-xs leading-none text-gray-600 py-1 px-2 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none mb-1 mt-1">
+                                                    <div class="text-center cursor-pointer focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-xs leading-none text-gray-600 py-1 px-2 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none mt-1">
                                                         Observación
                                                     </div>
                                                 </a>
