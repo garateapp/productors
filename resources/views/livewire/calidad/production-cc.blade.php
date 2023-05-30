@@ -138,7 +138,7 @@
                                             @if ($recepcion->calidad->obs_ext)
                                                 <div class="flex justify-center ">
                                                     <div class="mx-12 text-center cursor-pointer focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-xs leading-none text-gray-600 py-1 px-2 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none mb-1 mt-1">
-                                                        {{$recepcion->calidad->obs_ext}}
+                                                        {{Str::limit($recepcion->calidad->obs_ext,30)}}
                                                     </div>
                                                 </div>
                                             @endif
