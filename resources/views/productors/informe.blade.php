@@ -222,26 +222,26 @@
 					if ($recepcion->n_especie=='Apples') {
 						if ($recepcion->n_variedad=='Pink Lady' || $recepcion->n_variedad=='Rossy Glo') {
 							if ($item->informe<40) {
-								$col+=$item->informe;
+								$col+=$item->porcentaje_muestra;
 							}
 						}
 						if ($item->informe<50) {
-							$col+=$item->informe;
+							$col+=$item->porcentaje_muestra;
 						}
 					}
 					if ($recepcion->n_especie=='Mandarinas') {
 						if ($item->informe<30) {
-							$col+=$item->informe;
+							$col+=$item->porcentaje_muestra;
 						}
 					}
 					if ($recepcion->n_especie=='Orange') {
 						if ($item->informe<30) {
-							$col+=$item->informe;
+							$col+=$item->porcentaje_muestra;
 						}
 					}
 					if ($recepcion->n_especie=='Pears') {
 						if ($item->informe<40) {
-							$col+=$item->informe;
+							$col+=$item->porcentaje_muestra;
 						}
 					}
 					
