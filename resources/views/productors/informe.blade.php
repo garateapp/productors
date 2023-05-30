@@ -219,7 +219,33 @@
 				$col=0;
 
 				foreach ($recepcion->calidad->detalles->where('tipo_item','COLOR DE CUBRIMIENTO') as $item) {
-					$col+=$item->cantidad;
+					if ($recepcion->n_especie=='Apples') {
+						if ($recepcion->n_variedad=='Pink Lady' || $recepcion->n_variedad=='Rossy Glo') {
+							if ($item->cantidad<40) {
+								$col+=$item->cantidad;
+							}
+						}
+						if ($item->cantidad<50) {
+							$col+=$item->cantidad;
+						}
+					}
+					if ($recepcion->n_especie=='Mandarinas') {
+						if ($item->cantidad<30) {
+							$col+=$item->cantidad;
+						}
+					}
+					if ($recepcion->n_especie=='Orange') {
+						if ($item->cantidad<30) {
+							$col+=$item->cantidad;
+						}
+					}
+					if ($recepcion->n_especie=='Pears') {
+						if ($item->cantidad<40) {
+							$col+=$item->cantidad;
+						}
+					}
+					
+
 				}
 
 			}
