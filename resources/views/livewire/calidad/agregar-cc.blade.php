@@ -383,11 +383,11 @@
                                                         {{$detalle->valor_ss}}
                                                     @endif
                                                 @endif
-                                                @if ($recepcion->n_especie!='Cherries') {
+                                                @if ($recepcion->n_especie!='Cherries') 
                                                     @if ($detalle->porcentaje_muestra)
                                                         {{$detalle->porcentaje_muestra}}
                                                     @endif
-                                                }
+                                                @endif
                                                
                                                     
                                             </p>
