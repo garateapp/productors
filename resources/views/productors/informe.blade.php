@@ -214,12 +214,18 @@
 			if ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','SOBRECALIBRE')->first()) {
 				$b=$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','SOBRECALIBRE')->first()->cantidad;
 			}	
-			if ($recepcion->calidad->detalles->where('tipo_item','COLOR DE CUBRIMIENTO')->first()) {
-				$c=$recepcion->calidad->detalles->where('tipo_item','COLOR DE CUBRIMIENTO')->first()->cantidad;
+			if ($recepcion->calidad->detalles->where('tipo_item','COLOR DE CUBRIMIENTO')) {
+
+				$col=0;
+
+				foreach ($recepcion->calidad->detalles->where('tipo_item','COLOR DE CUBRIMIENTO') as $item) {
+					$col+=$item->cantidad;
+				}
+
 			}
 			@endphp
 			
-			{{number_format((100-($total+$a+$b+$c)),0)}} %
+			{{number_format((100-($total+$a+$b+$col)),0)}} %
 			
 				
 		</td>
@@ -627,8 +633,8 @@
 				
 			</td>
 			<td style="background-color:#47ac34; color: white;"><b>FUERA DE COLOR:  </b>
-				@if ($recepcion->calidad->detalles->where('tipo_item','COLOR DE CUBRIMIENTO')->first())
-					{{$recepcion->calidad->detalles->where('tipo_item','COLOR DE CUBRIMIENTO')->first()->cantidad}} %
+				@if ($col>0)
+					{{$col}}
 				@else
 				-
 				@endif
