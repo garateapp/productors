@@ -127,12 +127,20 @@
                                         <td class="my-4 text-white">
                                            {{-- Agregar: --}} 
                                         </td>
-                                        <td class="flex justify-center items-center content-center pb-1">
-                                            <a href="{{route('observacion.externa',$recepcion)}}" target="_blank">
-                                                <div class="text-center cursor-pointer focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-xs leading-none text-gray-600 py-1 px-2 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none mb-1 mt-1">
-                                                    Observación
+                                        <td class="items-center content-center pb-1">
+                                            <div class="flex justify-center ">
+                                                <a href="{{route('observacion.externa',$recepcion)}}" target="_blank">
+                                                    <div class="text-center cursor-pointer focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-xs leading-none text-gray-600 py-1 px-2 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none mb-1 mt-1">
+                                                        Observación
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            @if ($recepcion->calidad->obs_ext)
+                                                <div class="mx-12 text-center cursor-pointer focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-xs leading-none text-gray-600 py-1 px-2 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none mb-1 mt-1">
+                                                    {{$recepcion->calidad->obs_ext}}
                                                 </div>
-                                            </a>
+                                            @endif
+                                           
                                         </td>
                                         <td class="justify-center items-center content-center pb-1">
                                             <div class="text-center cursor-pointer focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-xs leading-none text-gray-600 py-1 px-2 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none mb-1 mt-1 mx-6">
@@ -141,7 +149,7 @@
 
                                         </td>
                                         <td>
-
+                                           
                                         </td>
                                         <td></td>
                                         <td></td>
