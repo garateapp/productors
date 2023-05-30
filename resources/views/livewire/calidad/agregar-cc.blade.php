@@ -384,10 +384,11 @@
                                                     @endif
                                                 @endif
                                                 
+                                                @if ($detalle->tipo_item!='DISTRIBUCIÓN DE CALIBRES')
                                                     @if ($detalle->porcentaje_muestra)
                                                         {{$detalle->porcentaje_muestra}}
                                                     @endif
-                                                
+                                                @endif
                                                
                                                     
                                             </p>
