@@ -378,7 +378,7 @@
                                         <td class="pl-5 whitespace-nowrap">
                                             <p class="whitespace-nowrap  text-base flex font-medium leading-none text-gray-700 mr-2">
 
-                                                @if ($recepcion->n_especie=='Cherries') 
+                                                @if ($recep->n_especie=='Cherries') 
                                                     @if ($detalle->valor_ss)
                                                         {{$detalle->valor_ss}}
                                                     @endif
@@ -388,7 +388,7 @@
                                                     @if ($detalle->porcentaje_muestra)
                                                         {{$detalle->porcentaje_muestra}}
                                                     @endif
-                                                @elseif($recepcion->n_especie=='Orange')
+                                                @elseif($recep->n_especie=='Orange')
                                                     @if ($detalle->porcentaje_muestra)
                                                         {{$detalle->porcentaje_muestra}}
                                                     @endif
