@@ -40,8 +40,24 @@
      @php
         $categories=[];
         $series=[];
+        $cantidad=0;
     @endphp
 
+        @if ($recepcion->calidad->detalles)
+                @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES') as $detalle)
+                
+                        @php
+                            $categories[]=$detalle->detalle_item;
+                            if ($recepcion->n_especie=='Cherries') {
+                                $cantidad+=$detalle->cantidad;
+                            }else {
+                                $cantidad+=$detalle->cantidad;
+                            }
+                            
+                        @endphp
+                
+                @endforeach
+        @endif
     @if ($recepcion->calidad->detalles)
         @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES') as $detalle)
           
@@ -50,7 +66,7 @@
                     if ($recepcion->n_especie=='Cherries') {
                         $series[]=$detalle->valor_ss;
                     }else {
-                        $series[]=$detalle->porcentaje_muestra;
+                        $series[]=$detalle->porcentaje_muestra*100/$cantidad;
                     }
                     
                 @endphp
