@@ -47,7 +47,7 @@
                 @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES') as $detalle)
                 
                         @php
-                            $categories[]=$detalle->detalle_item;
+                           
                             if ($recepcion->n_especie=='Cherries') {
                                 $cantidad+=$detalle->cantidad;
                             }else {
