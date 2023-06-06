@@ -61,8 +61,12 @@ class AgregarCc extends Component
         return view('livewire.calidad.agregar-cc',compact('recepcions','allrecepcions','allsubrecepcions','sync'));
     }
     public function updatedselectedparametro($parametro){
-        
-        $this->valores = Valor::where('parametro_id',$parametro)->where('especie',$this->recep->n_especie)->orderby('name','ASC')->get();
+        if($this->recep->n_variedad=='Dagen'){
+            $this->valores = Valor::where('parametro_id',$parametro)->where('especie',$this->recep->n_variedad)->orderby('name','ASC')->get();
+        }else{
+            $this->valores = Valor::where('parametro_id',$parametro)->where('especie',$this->recep->n_especie)->orderby('name','ASC')->get();
+        }
+            
         $this->reset(['detalle']);
     }
 
