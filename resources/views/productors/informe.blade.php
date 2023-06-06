@@ -508,9 +508,9 @@
 		@endif
 	@endif
 		
-	
+	@if ($recep->n_especie!='Apples') 
 		  <div class="page-break"></div>
-		
+	@endif
 
 
 		<table style="width:100%;  font-size: 12px; border-spacing: 2px;">
