@@ -35,6 +35,7 @@
                                 <h3 class="text-base font-normal text-gray-500">{{$recep->n_emisor}}</h3>
                                 <h3 class="text-base font-normal text-gray-500">Guia: {{$recep->numero_documento_recepcion}}</h3>
                                 <h3 class="text-base font-normal text-gray-500">Especie: {{$recep->n_especie}}</h3>
+                                <h3 class="text-base font-normal text-gray-500">Variedad: {{$recep->n_variedad}}</h3>
                             </div>
                             
                         </div>
