@@ -105,7 +105,7 @@
                         filter: {
                             property: 'y',
                             operator: '>',
-                            value: 2
+                            value: 5
                         },
                         style: {
                             fontSize: '30px'
