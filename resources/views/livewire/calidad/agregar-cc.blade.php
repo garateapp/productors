@@ -388,7 +388,7 @@
                                                     @if ($detalle->porcentaje_muestra)
                                                         {{$detalle->porcentaje_muestra}}
                                                     @endif
-                                                @elseif($recep->n_especie=='Orange' || $recep->n_especie=='Peaches' || $recep->n_especie=='Apples' || $recep->n_especie=='Pears' || $recep->n_especie=='Nectarines' || $recep->n_especie=='Plums')
+                                                @elseif($recep->n_especie=='Orange' || $recep->n_especie=='Peaches' || $recep->n_especie=='Apples' || $recep->n_especie=='Pears' || $recep->n_especie=='Nectarines' || $recep->n_especie=='Plums' || $recep->n_especie=='Mandarinas')
                                                     @if ($detalle->porcentaje_muestra)
                                                         {{$detalle->porcentaje_muestra}}
                                                     @endif
