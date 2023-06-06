@@ -86,6 +86,11 @@
                         inside: true,
                         format: '{point.percentage:.1f} %',
                         distance: -50,
+                        filter: {
+                            property: 'y',
+                            operator: '>',
+                            value: 5
+                        },
                         style: {
                             fontSize: '30px'
                         },
