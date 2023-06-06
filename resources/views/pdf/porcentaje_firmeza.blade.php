@@ -256,7 +256,7 @@
                     style: {
                         fontSize: '12px'
                     },
-                    format: '{point.y:.2f}%'
+                    format: '{point.y:.1f}%'
                 }]}
                 ,{
                 name: 'DARK',
@@ -267,7 +267,7 @@
                     style: {
                         fontSize: '12px'
                     },
-                    format: '{point.y:.2f}%'
+                    format: '{point.y:.1f}%'
                 }]}
                 ,{
                 name: 'BLACK',
@@ -278,7 +278,7 @@
                     style: {
                         fontSize: '12px'
                     },
-                    format: '{point.y:.2f}%'
+                    format: '{point.y:.1f}%'
                 }]}
                 
             ]
