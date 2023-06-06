@@ -20,7 +20,7 @@
 
             <div class="flex justify-between">
                 @if ($recep)
-                    <div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 mr-2 ml-12">
+                    <div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-4 xl:p-4 my-4 mr-2 ml-12">
                     <div class="flex items-center justify-center">
                         <div class="flex-shrink-0 text-center">
                             <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900"> {{$recep->numero_g_recepcion}}</span>
@@ -29,7 +29,7 @@
                         
                     </div>
                     </div>
-                    <div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 mr-2 ml-12">
+                    <div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-4 xl:p-4 my-4 mr-2 ml-12">
                         <div class="flex items-center justify-center">
                             <div class="flex-shrink-0 text-left">
                                 <h3 class="text-base font-normal text-gray-500">{{$recep->n_emisor}}</h3>
