@@ -388,6 +388,10 @@
                                                     @if ($detalle->porcentaje_muestra)
                                                         {{$detalle->porcentaje_muestra}}
                                                     @endif
+                                                @elseif($recepcion->n_especie=='Orange')
+                                                    @if ($detalle->porcentaje_muestra)
+                                                        {{$detalle->porcentaje_muestra}}
+                                                    @endif
                                                 @endif
                                                
                                                     
