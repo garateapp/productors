@@ -66,7 +66,13 @@
                     if ($recepcion->n_especie=='Cherries') {
                         $series[]=$detalle->valor_ss;
                     }else {
-                        $series[]=$detalle->porcentaje_muestra*100/$cantidad;
+                        if ($cantidad>0) {
+                            $series[]=$detalle->porcentaje_muestra*100/$cantidad;
+                        } else {
+                            $series[]=$detalle->porcentaje_muestra;
+                        }
+                        
+                        
                     }
                     
                 @endphp
