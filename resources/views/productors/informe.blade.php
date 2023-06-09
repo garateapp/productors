@@ -234,6 +234,11 @@
 							$col+=$item->porcentaje_muestra;
 						}
 					}
+					if ($recepcion->n_especie=='Membrillos') {
+						if ($item->detalle_item=='<7' || $item->detalle_item=='>9') {
+							$col+=$item->porcentaje_muestra;
+						}
+					}
 					if ($recepcion->n_especie=='Orange') {
 						if ($item->detalle_item=='<30') {
 							$col+=$item->porcentaje_muestra;
@@ -508,7 +513,7 @@
 		@endif
 	@endif
 		
-	@if ($recepcion->n_especie!='Pears' && $recepcion->n_especie!='Peaches' && $recepcion->n_especie!='Apples'&& $recepcion->n_especie!='Nectarines' && $recepcion->n_especie!='Plums') 
+	@if ($recepcion->n_especie!='Pears' && $recepcion->n_especie!='Peaches' && $recepcion->n_especie!='Apples'&& $recepcion->n_especie!='Nectarines' && $recepcion->n_especie!='Plums' && $recepcion->n_especie!='Membrillos') 
 		  <div class="page-break"></div>
 	@endif
 
