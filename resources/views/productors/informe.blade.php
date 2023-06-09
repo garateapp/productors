@@ -508,7 +508,7 @@
 		@endif
 	@endif
 		
-	@if ($recepcion->n_especie!='Pears') 
+	@if ($recepcion->n_especie!='Pears' || $recepcion->n_especie!='Peaches') 
 		  <div class="page-break"></div>
 	@endif
 
