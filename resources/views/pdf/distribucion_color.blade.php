@@ -107,13 +107,13 @@
             colors: col,
             plotOptions: {
                pie: {
-                     allowPointSelect: false,
+                     allowPointSelect: true,
                      cursor: 'pointer',
                      dataLabels: {
                         enabled: true,
                         inside: true,
                         format: '{point.percentage:.1f} %',
-                        distance: -5,
+                        distance: -50,
                         filter: {
                             property: 'y',
                             operator: '>',
