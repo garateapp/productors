@@ -200,6 +200,10 @@
         @php
             $colors=['#dc0c15','#71160e','#2b1d16'];
         @endphp
+    @elseif($recepcion->n_especie=='Apples')
+        @php
+            $colors=['#831816'];
+        @endphp
     @else
         @php
             $colors=['#24a745'];

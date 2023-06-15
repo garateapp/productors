@@ -84,6 +84,10 @@
         @php
             $colors=['#7f1710'];
         @endphp
+    @elseif($recepcion->n_especie=='Apples')
+        @php
+            $colors=['#831816'];
+        @endphp
     @else
         @php
             $colors=['#24a745'];
