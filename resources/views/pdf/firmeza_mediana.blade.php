@@ -108,7 +108,7 @@
                 }
             },
             series: [{
-                name: 'Distribución: ',
+                name: '%',
                 data: series,
                 dataLabels: [{
                     enabled: true,
