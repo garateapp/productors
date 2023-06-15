@@ -109,29 +109,24 @@
                }
             }, 
             colors: col,
-            plotOptions: {
-               pie: {
-                     allowPointSelect: true,
-                     cursor: 'pointer',
-                     dataLabels: {
-                        enabled: true,
-                        inside: true,
-                        format: '{point.percentage:.1f} %',
-                        distance: -50,
-                        filter: {
-                            property: 'y',
-                            operator: '>',
-                            value: 5
-                        },
-                        style: {
-                            fontSize: '30px'
-                        },
-                     },
-                     showInLegend: true
-               }
-              
-
-            },
+            ,
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            borderRadius: 5,
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b><br>{point.percentage:.1f} %',
+                distance: -50,
+                filter: {
+                    property: 'percentage',
+                    operator: '>',
+                    value: 4
+                }
+            }
+        }
+    },
             series: [{
                name: 'Brands',
                colorByPoint: true,
