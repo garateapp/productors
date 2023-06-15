@@ -222,7 +222,7 @@
                                           
          
                                           @if ($proceso->kilos_netos)
-                                             {{$proceso->kilos_netos}}
+                                             {{number_format($proceso->kilos_netos)}}
                                           @endif
                                                             
                                           </p>
