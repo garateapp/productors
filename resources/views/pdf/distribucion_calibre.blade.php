@@ -96,6 +96,10 @@
         @php
             $colors=['#fddf09'];
         @endphp
+    @elseif($recepcion->n_especie=='Orange')
+        @php
+            $colors=['#f18515'];
+        @endphp
     @else 
         @php
             $colors=['#24a745'];
