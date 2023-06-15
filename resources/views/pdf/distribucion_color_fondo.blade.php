@@ -49,8 +49,31 @@
                  }
              } 
     @endphp
+
+   @if ($recepcion->n_especie=='Cherries')
+      @php
+         $colors=['#24a745','#96AE51','#f9e8cf','#ffd700'];
+      @endphp
+   @elseif($recepcion->n_especie=='Apples')
+      @php
+         $colors=['#24a745','#96AE51','#f9e8cf','#ffd700'];
+      @endphp
+   @elseif($recepcion->n_especie=='Pears')
+      @php
+         $colors=['#24a745','#96AE51','#f9e8cf','#ffd700'];
+      @endphp
+   @elseif($recepcion->n_especie=='Membrillos')
+      @php
+         $colors=['#efe770','#abaa3b','#dadf5a','#ffd700'];
+      @endphp
+   @else 
+      @php
+         $colors=['#24a745','#96AE51','#f9e8cf','#ffd700'];
+      @endphp
+   @endif
    <script>
  var series = <?php echo json_encode($series) ?>;
+ var col = <?php echo json_encode($colors) ?>;
  
  Highcharts.chart('circular', {
          chart: {
@@ -76,7 +99,7 @@
                         align: 'right',
                         verticalAlign: 'middle'
                     },
-         colors: ['#24a745','#96AE51','#f9e8cf','#ffd700'],
+         colors: col,
          plotOptions: {
             pie: {
                      allowPointSelect: true,
