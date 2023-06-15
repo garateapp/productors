@@ -66,6 +66,10 @@
       @php
          $colors=['#efe770','#abaa3b','#dadf5a','#ffd700'];
       @endphp
+  @elseif($recepcion->n_variedad=='Dagen')
+      @php
+         $colors=['#70444d','#90595b','#56343b'];
+      @endphp
    @else 
       @php
          $colors=['#24a745','#96AE51','#f9e8cf','#ffd700'];
