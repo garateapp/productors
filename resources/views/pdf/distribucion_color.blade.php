@@ -113,7 +113,7 @@
                         enabled: true,
                         inside: true,
                         format: '{point.percentage:.1f} %',
-                        distance: -10,
+                        distance: -5,
                         filter: {
                             property: 'y',
                             operator: '>',
