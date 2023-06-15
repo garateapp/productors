@@ -100,6 +100,10 @@
         @php
             $colors=['#f18515'];
         @endphp
+    @elseif($recepcion->n_variedad=='Dagen')
+        @php
+            $colors=['#56343b'];
+        @endphp
     @else 
         @php
             $colors=['#24a745'];
