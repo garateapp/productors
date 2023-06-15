@@ -67,7 +67,11 @@
         @php
             $colors=['#788527'];
         @endphp
-    @else
+    @elseif($recepcion->n_especie=='Membrillos')
+        @php
+            $colors=['#fddf09'];
+        @endphp
+    @else 
         @php
             $colors=['#24a745','#96AE51','#f9e8cf','#ffd700'];
         @endphp
