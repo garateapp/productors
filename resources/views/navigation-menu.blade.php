@@ -134,7 +134,7 @@
                             @endcan
 
                             @can('Ver produccion_total')
-                                <x-jet-dropdown-link href="{{ route('admin.roles.index') }}">
+                                <x-jet-dropdown-link href="{{ route('documentacion') }}">
                                     {{ __('Documentación') }}
                                 </x-jet-dropdown-link>
                             @endcan
@@ -235,7 +235,7 @@
                 @endcan
 
                 @can('Ver produccion_total')
-                    <x-jet-responsive-nav-link href="{{ route('admin.roles.index') }}" :active="request()->routeIs('admin.roles.index')">
+                    <x-jet-responsive-nav-link href="{{ route('documentacion') }}" :active="request()->routeIs('documentacion')">
                         {{ __('Documentación') }}
                     </x-jet-responsive-nav-link>
                 @endcan

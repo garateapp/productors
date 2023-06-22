@@ -121,3 +121,5 @@ Route::get('color/fondo/{recepcion}.html', [HomeController::class,'distribucion_
 Route::get('obervacion/externa/{recepcion}', [HomeController::class,'observacion_externa'])->name('observacion.externa');
 
 Route::put('update/{calidad}',[HomeController::class,'detalle_update'])->name('detalle.update');
+
+Route::get('documentacion', [HomeController::class,'documentacion'])->name('documentacion');

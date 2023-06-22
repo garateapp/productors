@@ -435,6 +435,11 @@ class HomeController extends Controller
         return view('calidad.observacionext',compact('recepcion'));
     }
 
+    public function documentacion() {
+
+        return view('admin.documentacion');
+    }
+
     public function detalle_update(Calidad $calidad, Request $request) {
         $calidad->update([
             'obs_ext'=>$request->obs_ext
