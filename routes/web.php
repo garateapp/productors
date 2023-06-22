@@ -123,3 +123,7 @@ Route::get('obervacion/externa/{recepcion}', [HomeController::class,'observacion
 Route::put('update/{calidad}',[HomeController::class,'detalle_update'])->name('detalle.update');
 
 Route::get('documentacion', [HomeController::class,'documentacion'])->name('documentacion');
+
+Route::get('user/create', [HomeController::class,'user_create'])->name('user.create');
+
+Route::post('user/admin/store', [HomeController::class,'user_store'])->name('user.store');

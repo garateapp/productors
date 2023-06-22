@@ -22,6 +22,9 @@ use PDF;
 use Illuminate\support\Str;
 use Illuminate\Support\Facades\Storage;
 use ConsoleTVs\Charts\Facades\Charts;
+use Illuminate\Support\Facades\Validator;
+use Laravel\Jetstream\Jetstream;
+use Laravel\Fortify\Contracts\CreatesNewUsers;
 
 class HomeController extends Controller
 {
@@ -438,6 +441,27 @@ class HomeController extends Controller
     public function documentacion() {
 
         return view('admin.documentacion');
+    }
+
+    public function user_create() {
+
+        return view('admin.users.create');
+    }
+
+    public function user_store(Request $request) {
+
+        if($request['password']==$request['password_confirmation']){
+            User::create([
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'password' => Hash::make($request['password']),
+            ]);
+    
+            return redirect()->back()->with('info','El usuario fue creado con éxito.');
+        }else{
+            return redirect()->back()->with('fail','La Contraseña no coincide');
+        }
+        
     }
 
     public function detalle_update(Calidad $calidad, Request $request) {
