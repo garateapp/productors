@@ -132,6 +132,12 @@
                                     {{ __('Roles') }}
                                 </x-jet-dropdown-link>
                             @endcan
+
+                            @can('Ver produccion_total')
+                                <x-jet-dropdown-link href="{{ route('admin.roles.index') }}">
+                                    {{ __('Documentación') }}
+                                </x-jet-dropdown-link>
+                            @endcan
                            
                             <x-jet-dropdown-link href="{{ route('mensajes.index') }}">
                                 {{ __('Bandeja de Entrada') }}
@@ -225,6 +231,12 @@
                 @can('Ver produccion_total')
                     <x-jet-responsive-nav-link href="{{ route('admin.roles.index') }}" :active="request()->routeIs('admin.roles.index')">
                         {{ __('Roles') }}
+                    </x-jet-responsive-nav-link>
+                @endcan
+
+                @can('Ver produccion_total')
+                    <x-jet-responsive-nav-link href="{{ route('admin.roles.index') }}" :active="request()->routeIs('admin.roles.index')">
+                        {{ __('Documentación') }}
                     </x-jet-responsive-nav-link>
                 @endcan
                
