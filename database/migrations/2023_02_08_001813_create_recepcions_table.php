@@ -32,6 +32,7 @@ return new class extends Migration
             $table->integer('peso_neto');
             $table->integer('nota_calidad');
             $table->string('n_estado');
+            $table->string('informe')->nullable();
 
             $table->timestamps();
         });

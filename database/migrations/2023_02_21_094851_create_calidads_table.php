@@ -73,6 +73,8 @@ return new class extends Migration
             $table->integer('sin_pedicelo')->nullable();
             $table->integer('ramaleo')->nullable();
             $table->integer('pre_calibre')->nullable();
+            $table->string('obs_ext')->nullable();
+            $table->string('obs_int')->nullable();
 
             $table->timestamps();
         });
