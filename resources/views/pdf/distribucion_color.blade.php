@@ -65,7 +65,7 @@
         @endphp
     @elseif($recepcion->n_especie=='Pears')
         @php
-            $colors=['#78851b','#bec31f','#ed3f3f'];
+            $colors=['#78851b','#bec31f','#d9e53d'];
         @endphp
     @elseif($recepcion->n_especie=='Membrillos')
         @php
