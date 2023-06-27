@@ -73,7 +73,7 @@
         @endphp
     @elseif($recepcion->n_especie=='Orange')
         @php
-            $colors=['#c5d30e'];
+             $colors=['#c6d406','#f8d34c','#fcad03','#fb8603'];
         @endphp
    @elseif($recepcion->n_variedad=='Dagen')
         @php
