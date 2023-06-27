@@ -13,7 +13,7 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 	<style>
 		#container {
-        height: 700px;
+        height: 500px;
     }
 
 	</style>
