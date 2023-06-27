@@ -13,19 +13,19 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 	<style>
 		#container {
-        height: 350px;
+        height: 250px;
     }
 
 	</style>
 </head>
 <body>
-
-    <figure class="highcharts-figure mx-1 mt-4 h-screen">
+    <div class="container">
+    <figure class="highcharts-figure mx-1 mt-4">
         <div id="circular">
            
         </div>
      </figure>
-	
+	</div>
 				
 			
     @php
