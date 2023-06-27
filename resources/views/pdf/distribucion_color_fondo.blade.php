@@ -64,7 +64,7 @@
       @endphp
    @elseif($recepcion->n_especie=='Membrillos')
       @php
-         $colors=['#efe770','#abaa3b','#dadf5a','#ffd700'];
+         $colors=['#abab3b','#dff95d','#f0e770','#e8da20'];
       @endphp
   @elseif($recepcion->n_variedad=='Dagen')
       @php
