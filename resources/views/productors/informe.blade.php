@@ -294,21 +294,21 @@
 			@else
 				@isset($distribucion_color)
 					<td>
-						<img src="{{$distribucion_color}}" alt="" >
+						<img style="width:100%;" src="{{$distribucion_color}}" alt="" >
 					</td>
 				@endif
 			@endif
 			@if ($recepcion->n_especie=='Cherries')
 				@isset($promedio_brix)
 					<td>
-						<img  src="{{$promedio_brix}}" alt="" >
+						<img style="width:100%;" src="{{$promedio_brix}}" alt="" >
 					</td>
 				@endif
 				
 			@else
 				@isset($distribucion_color_fondo)
 					<td>
-						<img src="{{$distribucion_color_fondo}}" alt="" >
+						<img style="width:100%;" src="{{$distribucion_color_fondo}}" alt="" >
 					</td>
 				@endif
 			@endif

@@ -12,20 +12,20 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 	<style>
-		#circular {
-        height: 250px;
+		#container {
+        height: 700px;
     }
 
 	</style>
 </head>
 <body>
 
-    <figure class="highcharts-figure mx-1 mt-4">
+    <figure class="highcharts-figure mx-1 mt-4 h-screen">
         <div id="circular">
            
         </div>
      </figure>
-
+	
 				
 			
     @php
@@ -128,7 +128,7 @@
                             value: 5
                         },
                         style: {
-                            fontSize: '15px'
+                            fontSize: '30px'
                         },
                      },
                      showInLegend: true
