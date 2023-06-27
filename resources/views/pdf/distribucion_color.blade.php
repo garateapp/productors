@@ -12,20 +12,20 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 	<style>
-		#container {
+		#circular {
         height: 250px;
     }
 
 	</style>
 </head>
 <body>
-    <div class="container">
+
     <figure class="highcharts-figure mx-1 mt-4">
         <div id="circular">
            
         </div>
      </figure>
-	</div>
+
 				
 			
     @php
