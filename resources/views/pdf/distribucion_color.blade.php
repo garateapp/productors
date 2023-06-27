@@ -128,7 +128,7 @@
                             value: 5
                         },
                         style: {
-                            fontSize: '30px'
+                            fontSize: '15px'
                         },
                      },
                      showInLegend: true
