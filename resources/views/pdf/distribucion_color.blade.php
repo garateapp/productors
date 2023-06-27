@@ -69,7 +69,7 @@
         @endphp
     @elseif($recepcion->n_especie=='Membrillos')
         @php
-            $colors=['#fddf09'];
+            $colors=['#fedf00','#bec31f','#d9eb00'];
         @endphp
     @elseif($recepcion->n_especie=='Orange')
         @php
