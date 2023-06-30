@@ -41,14 +41,16 @@
                 
                     @php
                         $categories[]=$detalle->detalle_item;
-                        $series[]=$detalle->valor_ss;
+                        $series[]=  ['name' =>$detalle->detalle_item,
+                                    'data'=> $detalle->valor_ss];
                     @endphp
                 
             @endforeach
         @else
                     @php
                         $categories[]=$item;
-                        $series[]=0;
+                        $series[]=['name' =>$item,
+                                'data'=> 0];
                     @endphp
         @endif
     @endforeach
@@ -105,19 +107,7 @@
                     borderWidth: 0
                 }
             },
-            series: [{
-                name: 'Distribución: ',
-                data: series,
-                dataLabels: [{
-                    enabled: true,
-                    inside: true,
-                    style: {
-                        fontSize: '16px'
-                    },
-                    format: '{point.y:.1f}%'
-                }]
-
-            }]
+            series: series
         });
       </script>
 </body>
