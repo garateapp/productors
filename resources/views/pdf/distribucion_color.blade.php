@@ -63,6 +63,11 @@
         @php
             $colors=['#830d13','#E01620','#ED3F3F'];
         @endphp
+     @elseif($recepcion->n_especie=='Peaches')
+        @php
+            $colors=['#e3e014','#722a1c','#722a1c'];
+        @endphp
+ 
     @elseif($recepcion->n_especie=='Pears')
         @php
             $colors=['#78851b','#bec31f','#d9e53d'];
