@@ -41,18 +41,21 @@
                 
                     @php
                         $categories[]=$detalle->detalle_item;
-                        $series[]=  ['name' =>$detalle->detalle_item,
-                                    'data'=> $detalle->valor_ss];
+                        $array[]=$detalle->valor_ss;
                     @endphp
                 
             @endforeach
         @else
                     @php
                         $categories[]=$item;
-                        $series[]=['name' =>$item,
-                                'data'=> 0];
+                        $array[]=0;
                     @endphp
         @endif
+
+        @php
+            $series[]=['name' =>$item,
+                'data'=> $array];
+        @endphp
     @endforeach
                     
     @if ($recepcion->n_especie=='Cherries')
@@ -107,7 +110,19 @@
                     borderWidth: 0
                 }
             },
-            series: series
+            series: [{
+                name: 'Distribución: ',
+                data: series,
+                dataLabels: [{
+                    enabled: true,
+                    inside: true,
+                    style: {
+                        fontSize: '16px'
+                    },
+                    format: '{point.y:.1f}%'
+                }]
+
+            }]
         });
       </script>
 </body>
