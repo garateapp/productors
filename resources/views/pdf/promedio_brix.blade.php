@@ -113,19 +113,7 @@
                     borderWidth: 0
                 }
             },
-            series: [{
-                name: 'Distribución: ',
-                data: series,
-                dataLabels: [{
-                    enabled: true,
-                    inside: true,
-                    style: {
-                        fontSize: '16px'
-                    },
-                    format: '{point.y:.1f}%'
-                }]
-
-            }]
+            series: series
         });
       </script>
 </body>
