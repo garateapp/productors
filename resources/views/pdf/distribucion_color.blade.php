@@ -57,7 +57,7 @@
     @endphp
     @if ($recepcion->n_especie=='Cherries')
         @php
-            $colors=['#dc0c15','#82130d','#71160e','#2b1d16'];
+            $colors=['#800000','#600000','#400000','#000000'];
         @endphp
     @elseif($recepcion->n_especie=='Apples')
         @php
