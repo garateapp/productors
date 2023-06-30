@@ -131,7 +131,7 @@
                             value: 5
                         },
                         style: {
-                            fontSize: '15px'
+                            fontSize: '30px'
                         },
                      },
                      showInLegend: true
