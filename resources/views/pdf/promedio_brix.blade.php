@@ -37,21 +37,21 @@
 
     @foreach ($items as $item)
     @php
-        $array=0;
+        $array=[];
     @endphp
         @if ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES')->where('detalle_item',$item)->count()>0)
             @foreach ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES')->where('detalle_item',$item) as $detalle)
                 
                     @php
                         $categories[]=$detalle->detalle_item;
-                        $array=$detalle->valor_ss;
+                        $array[]=$detalle->valor_ss;
                     @endphp
                 
             @endforeach
         @else
                     @php
                         $categories[]=$item;
-                        $array=0;
+                        $array[]=0;
                     @endphp
         @endif
 
