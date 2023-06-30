@@ -51,7 +51,7 @@
     @endif
                     
     @if ($recepcion->n_especie=='Cherries')
-        @php
+         @php
             $colors=['#600000','#400000','#000000'];
         @endphp
     @elseif($recepcion->n_variedad=='Dagen')

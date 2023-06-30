@@ -63,7 +63,7 @@
         @endphp
     @else 
         @php
-            $colors=['#24a745'];
+            $colors=['#600000','#400000','#000000'];
         @endphp
     @endif
     <script>
