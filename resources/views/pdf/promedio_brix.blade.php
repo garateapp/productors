@@ -37,7 +37,7 @@
 
     @foreach ($items as $item)
         @if ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES')->where('detalle_item',$item))
-            @foreach ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES') as $detalle)
+            @foreach ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES')->where('detalle_item',$item) as $detalle)
                 
                     @php
                         $categories[]=$detalle->detalle_item;
