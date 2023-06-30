@@ -92,8 +92,7 @@
                 title: {
                     text: '%'
                 }
-            },
-            colors: col,
+            }
             tooltip: {
                 shared: true,
                 headerFormat: '<span style="font-size: 15px">{point.point.name}</span><br/>',
@@ -108,6 +107,8 @@
             series: [{
                 name: 'Distribución: ',
                 data: series,
+                
+            colors: col,
                 dataLabels: [{
                     enabled: true,
                     inside: true,
