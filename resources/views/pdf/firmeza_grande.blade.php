@@ -53,7 +53,7 @@
         @php
             $colors=['#831816'];
         @endphp
-    @elseif($recepcion->n_especie=='Peaches')
+    @elseif($recepcion->n_especie=='Peaches' || $recepcion->n_especie=='Nectarines')
         @php
             $colors=['#730000'];
         @endphp
