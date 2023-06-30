@@ -92,6 +92,10 @@
         @php
             $colors=['#788527'];
         @endphp
+    @elseif($recepcion->n_especie=='Paltas')
+        @php
+            $colors=['#5e6c28'];
+        @endphp
     @elseif($recepcion->n_especie=='Membrillos')
         @php
             $colors=['#fddf09'];
