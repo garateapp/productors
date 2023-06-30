@@ -45,6 +45,11 @@
                     @endphp
                 
             @endforeach
+        @else
+                    @php
+                        $categories[]=$item;
+                        $series[]=0;
+                    @endphp
         @endif
     @endforeach
                     
