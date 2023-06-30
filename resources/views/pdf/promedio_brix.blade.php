@@ -109,6 +109,7 @@
             series: [{
                 name: 'Distribución: ',
                 data: series,
+                colorByPoint: true,
                 dataLabels: [{
                     enabled: true,
                     inside: true,
