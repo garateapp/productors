@@ -109,8 +109,8 @@
             },
             plotOptions: {
                 column: {
-                    pointPadding: 0,
-                    borderWidth: 0
+                    pointPadding: 0.9,
+                    borderWidth: 0.9
                 }
             },
             series: series
