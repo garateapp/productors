@@ -114,6 +114,9 @@
             }, 
             colors: col,
             plotOptions: {
+                series: {
+                animation: false // Desactivar la animación de carga
+                },
                pie: {
                      allowPointSelect: true,
                      cursor: 'pointer',
