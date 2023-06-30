@@ -13,7 +13,7 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 	<style>
 		#circular {
-        height: 700px;
+        height: 250px;
     }
 
 	</style>
