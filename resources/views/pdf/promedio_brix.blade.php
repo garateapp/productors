@@ -36,6 +36,9 @@
     @endphp
 
     @foreach ($items as $item)
+    @php
+        $array=[];
+    @endphp
         @if ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES')->where('detalle_item',$item)->count()>0)
             @foreach ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES')->where('detalle_item',$item) as $detalle)
                 
