@@ -71,7 +71,7 @@
         @php
             $colors=['#fedf00','#bec31f','#d9eb00'];
         @endphp
-    @elseif($recepcion->n_especie=='Orange')
+    @elseif($recepcion->n_especie=='Orange' || $recepcion->n_especie=='Mandarinas')
         @php
              $colors=['#c6d406','#f8d34c','#fcad03','#fb8603'];
         @endphp

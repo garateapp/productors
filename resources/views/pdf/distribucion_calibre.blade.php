@@ -96,7 +96,7 @@
         @php
             $colors=['#fddf09'];
         @endphp
-    @elseif($recepcion->n_especie=='Orange')
+    @elseif($recepcion->n_especie=='Orange'  || $recepcion->n_especie=='Mandarinas')
         @php
             $colors=['#f18515'];
         @endphp

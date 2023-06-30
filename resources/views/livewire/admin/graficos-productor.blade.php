@@ -173,9 +173,17 @@
  
                                  }
  
-                             }
-                                 $inicio=date('W', strtotime($recepcions->first()->fecha_g_recepcion));
+                             }   
+                                 if ($recepcions->count()) {
+                                    $inicio=date('W', strtotime($recepcions->first()->fecha_g_recepcion));
+                                 } else {
+                                    $inicio=date('W', strtotime($now));
+                                 }
+                                 
+                                    
+
                                  $final=date('W', strtotime($now));
+
                                  if ($inicio>$final) {
                                     $final=$final+52;
                                  }
@@ -218,6 +226,16 @@
       
       </div>
       @php
+         if ($recepcions->count()) {
+            $inicio=date('W', strtotime($recepcions->first()->fecha_g_recepcion));
+         } else {
+            $inicio=date('W', strtotime($now));
+         }
+         $final=date('W', strtotime($now));
+
+         if ($inicio>$final) {
+            $final=$final+52;
+         }
          $semenas=[];
          foreach (range($inicio,($final)) as $number) {
             if($number>52){
@@ -346,6 +364,13 @@
 
          
       </div>   
+      @isset ($series)
+         
+      @else
+         @php
+             $series=[];
+         @endphp 
+      @endif
     <script>
       var espec = <?php echo json_encode($espec) ?>;
          function setup() {
@@ -354,7 +379,8 @@
             tabs: espec
             };
       };
-   </script>      
+   </script>
+   
     <script>
         var titulo = <?php echo json_encode($titulo) ?>;
        var variedades = <?php echo json_encode($varieds) ?>;
