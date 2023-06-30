@@ -122,7 +122,7 @@
                             value: 5
                         },
                         style: {
-                            fontSize: '30px'
+                            fontSize: '22px'
                         },
                      },
                      showInLegend: true
