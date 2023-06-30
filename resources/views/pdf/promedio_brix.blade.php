@@ -36,7 +36,7 @@
     @endphp
 
     @foreach ($items as $item)
-        @if ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES')->where('detalle_item',$item))
+        @if ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES')->where('detalle_item',$item)->count()>0)
             @foreach ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES')->where('detalle_item',$item)->get() as $detalle)
                 
                     @php
