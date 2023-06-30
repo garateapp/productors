@@ -32,22 +32,25 @@
     @php
         $categories=[];
         $series=[];
+        $items=['LIGHT','DARK','BLACK'];
     @endphp
 
-    @if ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES'))
-        @foreach ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES') as $detalle)
-          
-                @php
-                    $categories[]=$detalle->detalle_item;
-                    $series[]=$detalle->valor_ss;
-                @endphp
-         
-        @endforeach
-    @endif
+    @foreach ($items as $item)
+        @if ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES'))
+            @foreach ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES')->where('detalle_item',$item) as $detalle)
+                
+                    @php
+                        $categories[]=$detalle->detalle_item;
+                        $series[]=$detalle->valor_ss;
+                    @endphp
+                
+            @endforeach
+        @endif
+    @endforeach
                     
     @if ($recepcion->n_especie=='Cherries')
         @php
-            $colors=['#71160e','#2b1d16'];
+            $colors=['#600000','#400000','#000000'];
         @endphp
     @elseif($recepcion->n_variedad=='Dagen')
         @php

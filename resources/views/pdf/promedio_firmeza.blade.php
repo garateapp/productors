@@ -52,7 +52,7 @@
                     
     @if ($recepcion->n_especie=='Cherries')
         @php
-            $colors=['#71160e','#2b1d16'];
+            $colors=[,'#600000','#400000','#000000'];
         @endphp
     @elseif($recepcion->n_variedad=='Dagen')
         @php
