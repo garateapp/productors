@@ -121,14 +121,14 @@
                         enabled: true,
                         inside: true,
                         format: '{point.percentage:.1f} %',
-                        distance: -5,
+                        distance: -50,
                         filter: {
                             property: 'y',
                             operator: '>',
                             value: 5
                         },
                         style: {
-                            fontSize: '10px'
+                            fontSize: '15px'
                         },
                      },
                      showInLegend: true
