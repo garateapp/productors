@@ -105,6 +105,7 @@
             series: [{
                 name: '% Según muestra',
                 data: series,
+                colorByPoint: true,
                 dataLabels: [{
                     enabled: true,
                     inside: true,
