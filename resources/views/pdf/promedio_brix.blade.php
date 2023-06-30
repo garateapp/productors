@@ -36,21 +36,29 @@
     @endphp
 
     @foreach ($items as $item)
+    @php
+        $array=[];
+    @endphp
         @if ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES')->where('detalle_item',$item)->count()>0)
             @foreach ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES')->where('detalle_item',$item) as $detalle)
                 
                     @php
                         $categories[]=$detalle->detalle_item;
-                        $series[]=$detalle->valor_ss;
+                        $array[]=$detalle->valor_ss;
                     @endphp
                 
             @endforeach
         @else
                     @php
                         $categories[]=$item;
-                        $series[]=0;
+                        $array[]=0;
                     @endphp
         @endif
+
+        @php
+            $series[]=['name' =>$item,
+                'data'=> $array];
+        @endphp
     @endforeach
                     
     @if ($recepcion->n_especie=='Cherries')
@@ -105,19 +113,7 @@
                     borderWidth: 0
                 }
             },
-            series: [{
-                name: 'Distribución: ',
-                data: series,
-                dataLabels: [{
-                    enabled: true,
-                    inside: true,
-                    style: {
-                        fontSize: '16px'
-                    },
-                    format: '{point.y:.1f}%'
-                }]
-
-            }]
+            series: series
         });
       </script>
 </body>
