@@ -61,7 +61,10 @@
         @php
             $colors=['#70444d','#90595b','#56343b'];
         @endphp
-    
+    @else 
+        @php
+            $colors=['#24a745'];
+        @endphp
     @endif
     <script>
         var categories = <?php echo json_encode($categories) ?>;
