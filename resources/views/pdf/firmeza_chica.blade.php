@@ -94,7 +94,8 @@
                 crosshair: false
             },
             yAxis: {
-                max: 25,
+                min:0,
+                max: 21,
                 title: {
                     text: '%'
                 }
