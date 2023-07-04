@@ -93,71 +93,75 @@
                                                 
                                     
                                     <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
-                                        <td class="text-center">
-                                            <p class="text-base font-medium leading-none text-gray-700 mr-2">
+                                  
+                                            <td class="text-center">
+                                                <a href="{{route('dashboard.productor',$user->id)}}">
+                                                    <p class="text-base font-medium leading-none text-gray-700 mr-2">
+
+                                                    
+
+                                                        @if ($user->idprod)
+                                                            {{$user->idprod}}
+                                                            
+                                                        @endif
+                                                    
+                                                        
+                                                    </p>
+                                                </a>
+                                            </td>
+                                            <td class="">
+                                                <a href="{{route('dashboard.productor',$user->id)}}">
+                                                
+                                                    <div class="flex items-center pl-5">
+                                                        <p class="text-base font-medium leading-none text-gray-700 mr-2">
+
+                                                        
+                                                            @if ($user->name)
+                                                            {{$user->name}}
+                                                            
+                                                            @endif
+                                                        
+                                                            
+                                                        </p>
+                                                    
+                                                    </div>
+                                                </a>
+                                            </td>
+                                            <td class="pl-5">
+                                                <div class="whitespace-nowrap flex items-center text-center">
+                                                    <a href="{{route('dashboard.productor',$user->id)}}">
+                                                        <p class="whitespace-nowrap text-sm leading-none text-gray-600 ml-2">
+                                                    
+                                                            @if ($user->rut)
+                                                                {{$user->rut}}
+                                                                
+                                                            @endif
+                                                        </p>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td class="pl-5 text-center">
+                                                <a href="{{route('dashboard.productor',$user->id)}}">
+                                                <p class="text-base text-center font-medium leading-none text-gray-700 mr-2">
 
                                             
-
-                                                @if ($user->idprod)
-                                                    {{$user->idprod}}
-                                                    
-                                                @endif
-                                            
-                                                
-                                            </p>
-                                        
-                                        </td>
-                                        <td class="">
-                                            <div class="flex items-center pl-5">
-                                                <p class="text-base font-medium leading-none text-gray-700 mr-2">
-
-                                                
-                                                    @if ($user->name)
-                                                    {{$user->name}}
-                                                    
-                                                    @endif
-                                                
-                                                    
-                                                </p>
-                                            
-                                            </div>
-                                        </td>
-                                        <td class="pl-5">
-                                            <div class="whitespace-nowrap flex items-center text-center">
-                                                
-                                                <p class="whitespace-nowrap text-sm leading-none text-gray-600 ml-2">
-                                            
-                                                    @if ($user->rut)
-                                                        {{$user->rut}}
+                                                @if ($user->csg)
+                                                        {{$user->csg}}
                                                         
                                                     @endif
+                                                
                                                 </p>
-                                            </div>
-                                        </td>
-                                        <td class="pl-5 text-center">
-                                            <p class="text-base text-center font-medium leading-none text-gray-700 mr-2">
-
-                                        
-                                            @if ($user->csg)
-                                                    {{$user->csg}}
-                                                    
-                                                @endif
-                                            
-                                            </p>
-                                        
-                                        </td>
+                                                </a>
+                                            </td>
                                             <td class="pl-5 whitespace-nowrap">
-                                                <p class="whitespace-nowrap  text-base flex font-medium leading-none text-gray-700 mr-2">
-
-                                                
-
-                                                @if ($user->user)
-                                                    {{$user->user}}
-                                                @endif
-                                                
-                                            </p>
-                                            
-                                        </td>
+                                                <a href="{{route('dashboard.productor',$user->id)}}">
+                                                    <p class="whitespace-nowrap  text-base flex font-medium leading-none text-gray-700 mr-2">
+                                                        @if ($user->user)
+                                                            {{$user->user}}
+                                                        @endif
+                                                    </p>
+                                                </a>
+                                            </td>
                                         
                                         <td class="pl-5">
                                         
