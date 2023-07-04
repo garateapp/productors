@@ -248,7 +248,7 @@
                                             </div>
                                         </td>
                                   
-                                        <td class="hidden pl-5 py-2">
+                                        <td class="pl-5 py-2">
                                            
                                                 @foreach ($user->especies_comercializas()->get() as $especie)
                                                     <div class="flex justify-center">
