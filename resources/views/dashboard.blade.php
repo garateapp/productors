@@ -19,21 +19,32 @@
    
    
    
+@isset($user)
 
+   @livewire('admin.graficos-productor', ['user' => $user], ($user->id))
 
+   <div class="mx-2 sm:mx-12">
+      @livewire('productor.production-show', ['user' => $user], ($user->id))
+   </div>
+
+@else
    @can('Ver produccion_total') 
       @livewire('admin.graficos-admin')
    @endcan
 
    @can('Ver produccion_propia')
-      @livewire('admin.graficos-productor')
+      @livewire('admin.graficos-productor', ['user' => auth()->user()], key(auth()->user()->id))
    @endcan
 
    @can('Ver produccion_propia')
       <div class="mx-2 sm:mx-12">
-         @livewire('productor.production-show')
+         @livewire('productor.production-show', ['user' => auth()->user()], key(auth()->user()->id))
       </div>
    @endcan
+
+@endisset
+
+  
    
 
     <div class="pb-12 pt-4">

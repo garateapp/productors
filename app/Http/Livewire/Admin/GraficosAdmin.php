@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin;
 use App\Models\Especie;
 use App\Models\Proceso;
 use App\Models\Recepcion;
+use App\Models\User;
 use App\Models\Variedad;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -13,7 +14,7 @@ use Livewire\WithPagination;
 class GraficosAdmin extends Component
 {   use WithPagination;
 
-    public $search, $espec, $ctd=25, $especieid, $especiename, $varie, $variedadid, $titulo='Gráfico por Especies',$cant;
+    public  $search, $espec, $ctd=25, $especieid, $especiename, $varie, $variedadid, $titulo='Gráfico por Especies',$cant;
     
 
     public function render()
@@ -44,7 +45,14 @@ class GraficosAdmin extends Component
         $variedades=Variedad::all();
 
         $recepcions=Recepcion::all();
-        return view('livewire.admin.graficos-admin',compact('now','recepcions','procesosall','procesos','variedades','especies'));
+        $productors=User::where('rut','LIKE','%'. $this->search .'%')
+                        ->orwhere('email','LIKE','%'. $this->search .'%')
+                        ->orwhere('name','LIKE','%'. $this->search .'%')
+                        ->orwhere('csg','LIKE','%'. $this->search .'%')
+                        ->orwhere('idprod','LIKE','%'. $this->search .'%')
+                        ->orwhere('user','LIKE','%'. $this->search .'%')
+                        ->latest('id')->paginate(5);
+        return view('livewire.admin.graficos-admin',compact('productors','now','recepcions','procesosall','procesos','variedades','especies'));
     }
     
     public function set_especie($id){

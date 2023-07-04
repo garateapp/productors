@@ -354,11 +354,15 @@ class HomeController extends Controller
 
         return view('dashboardespecie',compact('users','especie'));
     }
+
     public function dashboard_variedad (Variedad $variedad) {
         $users=User::all();
-        
-
         return view('dashboardvariedad',compact('users','variedad'));
+    }
+
+    public function dashboard_productor (User $user) {
+        $users=User::all();
+        return view('dashboard',compact('users','user'));
     }
 
     public function downloadpdf(Recepcion $recepcion) {

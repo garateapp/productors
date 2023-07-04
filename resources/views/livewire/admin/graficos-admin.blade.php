@@ -108,7 +108,24 @@
            <h1 class="font-bold">Buscador: </h1>
            <div class="px-6 py-4">
             <input wire:keydown="limpiar_page" wire:model="search"  class="form-input flex-1 w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" placeholder="Ingrese el nombre, rut o csg del productor" autocomplete="off">
-        </div>
+           
+            @if ($search)
+                  <ul class="relative z-1 left-0 w-full bg-white mt-1 rounded-lg overflow-hidden px-4">
+                     @foreach ($productors as $productor)
+                        <li class="leading-10 px-5 text-sm cursor-pointer hover:bg-gray-300">
+                              <a href="{{route('dashboard.productor',$productor->id)}}">{{$productor->name}}</a>
+                        </li>
+                    
+
+                     @endforeach
+                  
+                     
+                  </ul>
+         
+          
+                  
+            @endif
+         </div>
         </div>
      </div>
 

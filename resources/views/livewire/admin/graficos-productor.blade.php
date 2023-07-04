@@ -36,7 +36,12 @@
         <div class="mt-2 mb-4 w-full grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-x-2 gap-y-2 items-center content-center">
            <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
               <div class="flex items-center">
-               <p class="text-2xl font-bold text-justify">Hola<br> {{Auth()->user()->name}}</p>
+               @if ($user)
+                  <p class="text-2xl font-bold text-justify">Productor:<br> {{$user->name}}</p>
+               @else
+                  <p class="text-2xl font-bold text-justify">Hola<br> {{Auth()->user()->name}}</p>
+               @endif
+              
                
               
                  
