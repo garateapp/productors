@@ -495,7 +495,7 @@
                type: 'pie'
             },
             title: {
-               text: 'Gráfico Circular',
+               text: 'Distribución Por Categoría',
                align: 'left'
             },
             tooltip: {
