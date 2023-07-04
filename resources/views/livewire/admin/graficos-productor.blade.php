@@ -527,7 +527,8 @@
                      allowPointSelect: true,
                      cursor: 'pointer',
                      dataLabels: {
-                        enabled: false
+                        enabled: false,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
                      },
                      showInLegend: true
                }
