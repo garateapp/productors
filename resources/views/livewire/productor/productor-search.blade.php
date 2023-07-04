@@ -91,8 +91,12 @@
                                                         @endphp
                                                 @endforeach
                                                 
-                                    
+                                @if ($user->especies_comercializas()->count()>0)
+                                    <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded bg-green-200">
+                                @else
                                     <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
+                                @endif                
+                                   
                                   
                                             <td class="text-center">
                                                 <a href="{{route('dashboard.productor',$user->id)}}">
@@ -262,6 +266,7 @@
                                         </td>
                                          
                                     </tr>
+
                                 @if ($cellid==$user->id)
 
                                     <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
