@@ -46,7 +46,6 @@ class GraficosAdmin extends Component
 
         $recepcions=Recepcion::all();
         $productors=User::where('rut','LIKE','%'. $this->search .'%')
-                        ->orwhere('email','LIKE','%'. $this->search .'%')
                         ->orwhere('name','LIKE','%'. $this->search .'%')
                         ->orwhere('csg','LIKE','%'. $this->search .'%')
                         ->orwhere('idprod','LIKE','%'. $this->search .'%')
