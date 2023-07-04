@@ -95,7 +95,7 @@
             },
             yAxis: {
                 min:0,
-                max: 21,
+                max: 20,
                 title: {
                     text: '%'
                 }
