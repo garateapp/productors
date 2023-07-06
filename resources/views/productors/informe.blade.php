@@ -49,7 +49,7 @@
 			margin-right: 15px;
 		}
 		body {
-			font-family: 'Roboto';
+			font-family: 'Roboto', 'Segoe UI', Tahoma, sans-serif;
 			width: 100%;
 			margin: 0;
 			padding: 0;
@@ -65,7 +65,7 @@
 		}
 
 		.container {
-			
+			max-width: 100%;
 			margin: 0 0;
 			padding: 10px;
 			background-image: url({{asset('image/bg_intranet_admin.jpg'); }});
@@ -77,7 +77,7 @@
 			text-align: center;
 			color: white;
 			margin-bottom: 20px;
-			font-size: 1.6rem;
+			font-size: 1.5rem;
 			background-color: rgb(0,0,0,0.5);
 		}
 	
