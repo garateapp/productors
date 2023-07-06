@@ -49,7 +49,7 @@
 			margin-right: 15px;
 		}
 		body {
-			font-family: 'Roboto','sans-serif';
+			font-family: 'Roboto';
 			width: 100%;
 			margin: 0;
 			padding: 0;
