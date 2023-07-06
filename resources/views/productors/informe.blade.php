@@ -147,33 +147,39 @@
 			padding-bottom: 10px;
 			padding-left: 10px;
 			padding-right: 10px;
-			border-radius: 5px;">
+			border-radius: 5px;
+			font-family: 'Roboto';">
 			  <td style="background-color:#ffffff;padding-top: 10px;
 			padding-bottom: 10px;
 			padding-left: 10px;
 			padding-right: 10px;
-			border-radius: 5px;"><h3 style="color: #47ac34;">Fecha</h3> {{date('d M Y', strtotime($recepcion->fecha_g_recepcion))}}</td>
+			border-radius: 5px;
+			font-family: 'Roboto';"><h3 style="color: #47ac34;">Fecha</h3> {{date('d M Y', strtotime($recepcion->fecha_g_recepcion))}}</td>
 			  <td style="background-color:#ffffff;padding-top: 10px;
 			padding-bottom: 10px;
 			padding-left: 10px;
 			padding-right: 10px;
-			border-radius: 5px;"><h3 style="color: #47ac34;">N° <br>Lote</h3>  {{$recepcion->numero_g_recepcion}}</td>
+			border-radius: 5px;
+			font-family: 'Roboto';"><h3 style="color: #47ac34;">N° <br>Lote</h3>  {{$recepcion->numero_g_recepcion}}</td>
 			  <td style="background-color:#ffffff;padding-top: 10px;
 			padding-bottom: 10px;
 			padding-left: 10px;
 			padding-right: 10px;
-			border-radius: 5px;"><h3 style="color: #47ac34;">Kilos <br>Recibidos</h3> {{number_format($recepcion->peso_neto,0, '.','.')}}</td>
+			border-radius: 5px;
+			font-family: 'Roboto';"><h3 style="color: #47ac34;">Kilos <br>Recibidos</h3> {{number_format($recepcion->peso_neto,0, '.','.')}}</td>
 			  <td style="background-color:#ffffff;padding-top: 10px;
 			padding-bottom: 10px;
 			padding-left: 10px;
 			padding-right: 10px;
-			border-radius: 5px;"><h3 style="color: #47ac34;">N°<br> Envases</h3>{{number_format($recepcion->cantidad,0, '.','.')}}</td>
+			border-radius: 5px;
+			font-family: 'Roboto';"><h3 style="color: #47ac34;">N°<br> Envases</h3>{{number_format($recepcion->cantidad,0, '.','.')}}</td>
 			  	@if ($recepcion->calidad->detalles->where('tipo_detalle','ss')->first())
 					<td style="background-color:#ffffff;padding-top: 10px;
 			padding-bottom: 10px;
 			padding-left: 10px;
 			padding-right: 10px;
-			border-radius: 5px;"><h3  style="color: teal;">T°<br> Pulpa</h3>
+			border-radius: 5px;
+			font-family: 'Roboto';"><h3  style="color: teal;">T°<br> Pulpa</h3>
 					
 						{{$recepcion->calidad->detalles->where('tipo_detalle','ss')->where('temperatura','>',0)->first()->temperatura}}°C
 					</td>
