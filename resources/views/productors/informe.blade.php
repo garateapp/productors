@@ -49,7 +49,7 @@
 			margin-right: 15px;
 		}
 		body {
-			font-family: 'Roboto', 'Segoe UI', Tahoma, sans-serif;
+			font-family: 'Roboto','sans-serif';
 			width: 100%;
 			margin: 0;
 			padding: 0;
