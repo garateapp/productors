@@ -77,7 +77,7 @@
 			text-align: center;
 			color: white;
 			margin-bottom: 20px;
-			font-size: 2.5rem;
+			font-size: 1.8rem;
 			background-color: rgb(0,0,0,0.5);
 		}
 	
