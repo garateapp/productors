@@ -75,7 +75,7 @@
 			color: white;
 			margin-bottom: 20px;
 			font-size: 1.5rem;
-			background-color: rgb(0,0,0,0.5);
+			
 		}
 	
 		.logo {
@@ -135,7 +135,7 @@
 			</tr>
 		</table>
 		
-		<h1>Informe de Recepcion Guia N° {{$recepcion->numero_g_recepcion}} | {{$recepcion->n_especie}} | <br> {{$recepcion->n_variedad}} | CSG {{$recepcion->id_emisor}} </h1>
+		<h1 style="background-color: rgb(0,0,0,0.5);" >Informe de Recepcion Guia N° {{$recepcion->numero_g_recepcion}} | {{$recepcion->n_especie}} | <br> {{$recepcion->n_variedad}} | CSG {{$recepcion->id_emisor}} </h1>
 	</div>
 		<table style="width:100%; background-color:#ececec;">
   
