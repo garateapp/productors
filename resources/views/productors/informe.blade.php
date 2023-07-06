@@ -666,6 +666,8 @@
 			<td style="background-color:#47ac34; color: white;"><b>PRECALIBRE:  </b>
 				@if ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','PRECALIBRE')->first())
 					{{$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','PRECALIBRE')->first()->cantidad}} %
+				@elseif($recepcion->n_especie=='Orange')
+					{{$a}}
 				@else
 				-
 				@endif
@@ -674,6 +676,8 @@
 			<td style="background-color:#47ac34; color: white;"><b>SOBRECALIBRE:  </b>
 				@if ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','SOBRECALIBRE')->first())
 					{{$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','SOBRECALIBRE')->first()->cantidad}} %
+				@elseif($recepcion->n_especie=='Orange')
+					{{$b}}
 				@else
 				-
 				@endif
