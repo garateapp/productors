@@ -74,6 +74,7 @@
 			background-position: center; 
 		}
 		h1 {
+			font-family: 'Roboto';
 			text-align: center;
 			color: white;
 			margin-bottom: 20px;
