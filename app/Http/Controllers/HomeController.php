@@ -594,13 +594,11 @@ class HomeController extends Controller
             $peso_neto=Null;//15
             $nota_calidad=Null;//16
             $n_estado=Null;//17
-            $id_empresa=Null;//17
+         
             $m=1;
             foreach ($production as $item){
                 
-                if($m==2){
-                    $id_empresa=$item;
-                }
+               
 
                 if($m==2){
                     $id_g_recepcion=$item;
@@ -745,8 +743,7 @@ class HomeController extends Controller
                                 'cantidad' => $cantidad,
                                 'peso_neto' => $peso_neto,
                                 'nota_calidad' => $nota_calidad,
-                                'n_estado' => $n_estado,
-                                'id_empresa' => $id_empresa
+                                'n_estado' => $n_estado
                                 
                             ])->save();
                             if(IS_NULL($cont->calidad)){
@@ -773,8 +770,7 @@ class HomeController extends Controller
                                     'cantidad' => $cantidad,
                                     'peso_neto' => $peso_neto,
                                     'nota_calidad' => $nota_calidad,
-                                    'n_estado' => $n_estado,
-                                    'id_empresa' => $id_empresa
+                                    'n_estado' => $n_estado
                                     
                                 ]);
                                 Calidad::create([
