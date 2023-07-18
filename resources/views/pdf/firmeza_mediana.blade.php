@@ -84,6 +84,9 @@
             title: {
                 text: 'FIRMEZAS (lb) y BRIX / MEDIANO (90 al 120)'
             },
+            legend: {
+                enabled: false 
+                    },
             xAxis: {
                 categories: categories,
                 crosshair: false

@@ -87,6 +87,9 @@
                 categories: categories,
                 crosshair: false
             },
+            legend: {
+                enabled: false 
+                    },
             yAxis: {
                 min:0,
                 max: 20,
