@@ -91,7 +91,7 @@
                 min:0,
                 max: 20,
                 title: {
-                    text: 'Lbs'
+                    text: 'Lbs/°Brix'
                 }
             },
             colors: col,

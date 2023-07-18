@@ -91,7 +91,7 @@
             yAxis: {
                
                 title: {
-                    text: 'Lbs'
+                    text: 'Lbs/°Brix'
                 }
             },
             colors: col,
