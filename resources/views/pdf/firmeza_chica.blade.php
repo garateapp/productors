@@ -96,7 +96,7 @@
             yAxis: {
                
                 title: {
-                    text: '%'
+                    text: 'Lbs'
                 }
             },
             colors: col,

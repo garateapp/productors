@@ -91,7 +91,7 @@
             yAxis: {
                 min: 0,
                 title: {
-                    text: '%'
+                    text: '°Brix'
                 }
             },
             colors: col,

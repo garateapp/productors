@@ -96,7 +96,7 @@
                 min:0,
                 max: 20,
                 title: {
-                    text: '%'
+                    text: 'Lbs'
                 }
             },
             colors: col,

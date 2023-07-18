@@ -123,7 +123,7 @@
                 type: 'column'
             },
             title: {
-                text: 'Distribucion de Calibre'
+                text: '% Distribucion de Calibre'
             },
             legend: {
                         layout: 'vertical',
@@ -161,7 +161,7 @@
                     style: {
                         fontSize: '16px'
                     },
-                    format: '{point.y:.1f}%'
+                    format: '{point.y:.1f}'
                 }]
 
             }]
