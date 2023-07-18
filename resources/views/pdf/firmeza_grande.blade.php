@@ -83,11 +83,6 @@
             title: {
                 text: 'FIRMEZAS (lb) y BRIX / GRANDE (48 al 80)'
             },
-            legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle'
-                    },
             xAxis: {
                 categories: categories,
                 crosshair: false

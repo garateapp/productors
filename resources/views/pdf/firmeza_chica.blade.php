@@ -84,11 +84,6 @@
             title: {
                 text: 'FIRMEZAS (lb) y BRIX / CHICO (125 al 216)'
             },
-            legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle'
-                    },
             xAxis: {
                 categories: categories,
                 crosshair: false
