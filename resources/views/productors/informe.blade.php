@@ -201,7 +201,7 @@
 																{{$recepcion->calidad->detalles->where('detalle_item','EXTERNA')->first()->cantidad}}
 															@else
 																	@if ($recepcion->nota_calidad==0)   
-																		S/N
+																		N/A
 																	@elseif($recepcion->nota_calidad)
 																		{{number_format($recepcion->nota_calidad)}}
 																	@endif
