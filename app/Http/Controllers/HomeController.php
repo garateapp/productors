@@ -727,6 +727,7 @@ class HomeController extends Controller
                     
                         $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->first();
                         if($cont){
+                            /*
                             $cont->forceFill([
                                 'id_g_recepcion' => $id_g_recepcion,//1
                                 'tipo_g_recepcion' => $tipo_g_recepcion,//2
@@ -750,7 +751,7 @@ class HomeController extends Controller
                                 Calidad::create([
                                     'recepcion_id'=>$cont->id
                                 ]);
-                            }
+                            }*/
                             }
                         else{
                             

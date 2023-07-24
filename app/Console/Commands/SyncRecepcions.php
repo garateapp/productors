@@ -151,7 +151,7 @@ class SyncRecepcions extends Command
                 
                     $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->first();
                     if($cont){
-                        $cont->forceFill([
+                       /* $cont->forceFill([
                             'id_g_recepcion' => $id_g_recepcion,//1
                             'tipo_g_recepcion' => $tipo_g_recepcion,//2
                             'numero_g_recepcion' => $numero_g_recepcion,//3
@@ -174,8 +174,8 @@ class SyncRecepcions extends Command
                                 'recepcion_id'=>$cont->id
                             ]);
                         }
-                        }
-                    else{
+                        */
+                    }else{
                         if($n_estado=='Finalizado'){
                             $rec=Recepcion::create([
                                 'id_g_recepcion' => $id_g_recepcion,//1
