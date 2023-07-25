@@ -702,7 +702,7 @@
 			</td>
 			<td style="background-color:#47ac34; color: white;"><b>FUERA DE COLOR:  </b>
 				@if ($col>0)
-					{{$col}}
+					{{$col}}%
 				@else
 				-
 				@endif
