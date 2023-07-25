@@ -89,7 +89,7 @@
             },
             legend: {
                 enabled: false 
-                    },
+                    } ,
             yAxis: {
                 min:0,
                 max: 20,
