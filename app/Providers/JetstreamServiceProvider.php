@@ -32,8 +32,8 @@ class JetstreamServiceProvider extends ServiceProvider
         $this->configurePermissions();
         
         Fortify::authenticateUsing(function (Request $request) {
-        $user = User::where('user', $request->user)
-                    ->orwhere('email', $request->user)->orderby('id','ASC')->first();
+        $user = User::where('email', $request->user)
+                    ->orwhere('user', $request->user)->first();
 
         if ($user &&
             Hash::check($request->password, $user->password)) {
