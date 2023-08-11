@@ -66,7 +66,7 @@
                                 <th>Empresa</th>
                                 <th>RUT Empresa</th>
                                 <th class="text-center">CSG</th>
-                                <th class="text-center">Usurio</th>
+                                <th class="text-center">Usuario</th>
                                 <th class="text-center">Pass</th>
                                 <th>CELULAR</th>
                                 <th>EMAIL</th>
