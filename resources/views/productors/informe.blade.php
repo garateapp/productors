@@ -229,7 +229,9 @@
 
 			}elseif($recepcion->n_especie=='Mandarinas'){
 				if ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','<47mm')->first()) {
-					$a=$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','<47mm')->first()->cantidad;
+
+					//$a=$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','<47mm')->first()->cantidad;
+				
 				}
 				if ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','>80mm')->first()) {
 					$b=$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','>80mm')->first()->cantidad;
