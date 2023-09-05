@@ -150,7 +150,7 @@
 			padding-left: 10px;
 			padding-right: 10px;
 			border-radius: 5px;
-			font-family: 'Roboto';"><h3 style="color: #47ac34;">Fecha</h3> {{date('d M Y', strtotime($recepcion->fecha_g_recepcion))}}</td>
+			font-family: 'Roboto';"><h3 style="color: #47ac34;">Fecha<br></h3> {{date('d M Y', strtotime($recepcion->fecha_g_recepcion))}}</td>
 			  <td style="background-color:#ffffff;padding-top: 10px;
 			padding-bottom: 10px;
 			padding-left: 10px;
