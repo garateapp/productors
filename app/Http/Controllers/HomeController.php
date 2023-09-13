@@ -158,6 +158,8 @@ class HomeController extends Controller
         return view('productors.procesos');
     }
 
+
+    //Sincrinización proceso temporada "Actual"
     public function sync_proces()
     {       
         $procesos=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Produccion/ObtenerProduccion');

@@ -17,13 +17,24 @@ class ProductorSearch extends Component
     public $search, $cellid, $phone, $user, $ctd=25;
 
     public function render()
-    {   $users=User::where('rut','LIKE','%'. $this->search .'%')
-                ->orwhere('email','LIKE','%'. $this->search .'%')
-                ->orwhere('name','LIKE','%'. $this->search .'%')
-                ->orwhere('csg','LIKE','%'. $this->search .'%')
-                ->orwhere('idprod','LIKE','%'. $this->search .'%')
-                ->orwhere('user','LIKE','%'. $this->search .'%')
-                ->latest('id')->paginate($this->ctd);
+    {   $users=User::select('users.id', 'users.name', 'users.rut', 'users.email', 'users.csg', 'users.idprod', 'users.user')
+                    ->selectRaw('COUNT(especie_user.id) as especies_comercializadas')
+                    ->leftJoin('especie_user', 'users.id', '=', 'especie_user.user_id')
+                    ->where(function ($query) {
+                        $query->where('rut', 'LIKE', '%' . $this->search . '%')
+                            ->orWhere('email', 'LIKE', '%' . $this->search . '%')
+                            ->orWhere('name', 'LIKE', '%' . $this->search . '%')
+                            ->orWhere('csg', 'LIKE', '%' . $this->search . '%')
+                            ->orWhere('idprod', 'LIKE', '%' . $this->search . '%')
+                            ->orWhere('user', 'LIKE', '%' . $this->search . '%');
+                    })
+                    ->groupBy('users.id', 'users.name', 'users.rut', 'users.email', 'users.csg', 'users.idprod', 'users.user')
+                    ->orderByDesc('especies_comercializadas')
+                    ->latest('users.id')
+                    ->paginate($this->ctd);
+    
+    
+    
         $allusers=User::all();
         $sync=Sync::where('entidad','PRODUCTORES')
         ->orderby('id','DESC')
