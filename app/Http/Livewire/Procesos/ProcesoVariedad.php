@@ -24,14 +24,18 @@ class ProcesoVariedad extends Component
     {   if($this->espec){
             if($this->varie){
                 $procesos=Proceso::where('variedad', $this->varie->name)
+                        ->where('agricola','LIKE','%'. $this->search .'%')
                         ->latest('n_proceso')->paginate($this->ctd);
                 $procesosall=Proceso::where('variedad', $this->varie->name)
+                        ->where('agricola','LIKE','%'. $this->search .'%')
                         ->latest('n_proceso')->get();
                 
             }else{
                     $procesos=Proceso::where('especie',$this->espec->name)
+                        ->where('agricola','LIKE','%'. $this->search .'%')
                         ->latest('n_proceso')->paginate($this->ctd);
                     $procesosall=Proceso::where('especie', $this->espec->name)
+                        ->where('agricola','LIKE','%'. $this->search .'%')
                         ->latest('n_proceso')->get();
             }
 
