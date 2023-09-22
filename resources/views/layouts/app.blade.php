@@ -141,59 +141,7 @@
                 </p>
                 </div>
                 <!-- Products section -->
-                <div class="">
-                <h6
-                    class="mb-4 flex justify-center font-semibold uppercase md:justify-start">
-                    Products
-                </h6>
-                <p class="mb-4">
-                    <a href="#!" class="text-neutral-600 dark:text-neutral-200"
-                    >Angular</a
-                    >
-                </p>
-                <p class="mb-4">
-                    <a href="#!" class="text-neutral-600 dark:text-neutral-200"
-                    >React</a
-                    >
-                </p>
-                <p class="mb-4">
-                    <a href="#!" class="text-neutral-600 dark:text-neutral-200"
-                    >Vue</a
-                    >
-                </p>
-                <p>
-                    <a href="#!" class="text-neutral-600 dark:text-neutral-200"
-                    >Laravel</a
-                    >
-                </p>
-                </div>
-                <!-- Useful links section -->
-                <div class="">
-                <h6
-                    class="mb-4 flex justify-center font-semibold uppercase md:justify-start">
-                    Useful links
-                </h6>
-                <p class="mb-4">
-                    <a href="#!" class="text-neutral-600 dark:text-neutral-200"
-                    >Pricing</a
-                    >
-                </p>
-                <p class="mb-4">
-                    <a href="#!" class="text-neutral-600 dark:text-neutral-200"
-                    >Settings</a
-                    >
-                </p>
-                <p class="mb-4">
-                    <a href="#!" class="text-neutral-600 dark:text-neutral-200"
-                    >Orders</a
-                    >
-                </p>
-                <p>
-                    <a href="#!" class="text-neutral-600 dark:text-neutral-200"
-                    >Help</a
-                    >
-                </p>
-                </div>
+              
                 <!-- Contact section -->
                 <div>
                 <h6
