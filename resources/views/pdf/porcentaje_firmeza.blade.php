@@ -173,9 +173,20 @@
             }else{
                 $l[]=0;
             }
-            
-            $d[]=$dark*100/$tdark;
-            $b[]=$black*100/$tblack;
+
+            if ($tdark>0) {
+                $d[]=$dark*100/$tdark;
+            }else{
+                $d[]=0;
+            }
+
+            if ($tblack>0) {
+                $b[]=$black*100/$tblack;
+            }else{
+                $b[]=0;
+            }
+        
+          
         @endphp
     @endforeach
     @if ($recepcion->calidad->detalles)
