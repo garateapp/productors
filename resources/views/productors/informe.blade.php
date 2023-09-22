@@ -189,7 +189,7 @@
 			padding-left: 10px;
 			padding-right: 10px;
 			border-radius: 5px;"><h3  style="color: teal;">Seteo <br> Camión</h3>
-						{{$recepcion->calidad->detalles->where('detalle_item','SETEO CAMION')->first()->cantidad}}
+						{{$recepcion->calidad->detalles->where('detalle_item','SETEO CAMION')->first()->cantidad}}°C
 					</td>
 				@endif
 			  <td style="background-color:#ffffff;padding-top: 10px;

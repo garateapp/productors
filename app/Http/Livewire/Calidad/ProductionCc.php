@@ -494,7 +494,7 @@ class ProductionCc extends Component
 
                 }                                              
 
-            }
+        }
 
         $this->firmpro=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/BuscarRecepcionCloud?Numero_recepcion='.$recepcion->numero_g_recepcion);
         $this->firmpro = $this->firmpro->json();
