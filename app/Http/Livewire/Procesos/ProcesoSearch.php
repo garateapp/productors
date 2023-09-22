@@ -54,10 +54,6 @@ class ProcesoSearch extends Component
 
     public function reenviar_informe(Proceso $proceso) {
 
-
-        
-        //Con dicho nombre, encontrar el proceso correspondiente al archivo
-        $proceso=Proceso::where('n_proceso',explode("-",$name)[0])->first();
         
 
         if($proceso){

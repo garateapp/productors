@@ -287,7 +287,7 @@
                                                 <img class="h-8 object-contain mx-2" src="{{asset('image/pdf_icon2.png')}}" title="Descargar" alt="">
                                              </a>
                                           </div>
-                                             <button wire:click="reenviar_informe({{$proceso->id}})" class="font-bold py-1 px-3 mt-2 rounded-full bg-green-500 text-white text-xs mb-2" type="submit" title="Reenviar Whatsapp">Reenviar Whatsapp</button>
+                                             <button wire:click="reenviar_informe({{$proceso}})" class="font-bold py-1 px-3 mt-2 rounded-full bg-green-500 text-white text-xs mb-2" type="submit" title="Reenviar Whatsapp">Reenviar Whatsapp</button>
            
                                            
                                              
