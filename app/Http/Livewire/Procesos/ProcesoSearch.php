@@ -54,7 +54,7 @@ class ProcesoSearch extends Component
 
     public function reenviar_informe(Proceso $proceso) {
 
-        
+
 
         if($proceso){
             //si existe el proceso, guardar el archivo, si no existe, no lo guarda
@@ -118,6 +118,7 @@ class ProcesoSearch extends Component
             }
         }
 
+        return redirect()->route('procesos.index')->with('info','Informe Reenviado con Éxito.');
     }
 
     public function set_especie($id){
