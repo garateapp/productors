@@ -6,7 +6,9 @@ use App\Models\Detalle;
 use App\Models\Especie;
 use App\Models\Recepcion;
 use App\Models\Sync;
+use App\Models\User;
 use App\Models\Variedad;
+use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -54,6 +56,73 @@ class ProductionSearch extends Component
         $variedades=Variedad::all();
         
         return view('livewire.productor.production-search',compact('variedades','especies','recepcions','allrecepcions','allsubrecepcions','sync'));
+    }
+
+    public function reenviar_informe(Recepcion $recepcion) {
+    
+        $user=User::where('name',$recepcion->n_emisor)->first();
+
+        
+
+        if($user){
+            
+            if($user->telefonos->count()){
+                    foreach($user->telefonos as $telefono){
+                        $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
+                        //TOKEN QUE NOS DA FACEBOOK
+                        $token = env('WS_TOKEN');
+                        $phoneid= env('WS_PHONEID');
+                        $link= 'https://appgreenex.cl/download/recepcion/'.$recepcion->id.'.pdf';
+                        $version='v16.0';
+                        $url="https://appgreenex.cl/";
+                        $payload=[
+                            'messaging_product' => 'whatsapp',
+                            "preview_url"=> false,
+                            'to'=>$fono,
+                            
+                            'type'=>'template',
+                                'template'=>[
+                                    'name'=>'recepcion',
+                                    'language'=>[
+                                        'code'=>'es'],
+                                    'components'=>[ 
+                                        [
+                                            'type'=>'header',
+                                            'parameters'=>[
+                                                [
+                                                    'type'=>'document',
+                                                    'document'=> [
+                                                        'link'=>$link,
+                                                        'filename'=>$recepcion->numero_g_recepcion.'-'.$recepcion->id_emisor.'.pdf'
+                                                        ]
+                                                ]
+                                            ]
+                                        ],
+                                        [
+                                            'type'=>'body',
+                                            'parameters'=>[
+                                                [
+                                                    'type'=>'text',
+                                                    'text'=> $recepcion->numero_g_recepcion
+                                                ],
+                                                [
+                                                    'type'=>'text',
+                                                    'text'=> $recepcion->n_especie
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                                
+                            
+                        ];
+                        
+                      Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+                    }
+            }    
+        }
+
+       return redirect()->route('production.index');
     }
     
     public function set_especie($id){

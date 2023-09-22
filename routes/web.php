@@ -57,6 +57,8 @@ Route::get('recepcion/{recepcion}/ss', [HomeController::class,'productionss'])->
 
 Route::get('production/refresh', [HomeController::class,'production_refresh'])->middleware('auth')->name('production.refresh');
 
+Route::get('production/refresh/anterior', [HomeController::class,'production_refresh_anterior'])->middleware('auth')->name('production.refresh.anterior');
+
 Route::get('productores/refresh', [HomeController::class,'productor_refresh'])->middleware('auth')->name('productor.refresh');
 
 Route::get('download/recepcion/{recepcion}.pdf', [HomeController::class,'downloadpdf'])->name('informe.download');
@@ -91,7 +93,11 @@ Route::get('proceso/refresh', [HomeController::class,'sync_proces'])->middleware
 
 Route::get('subir-proceso', [HomeController::class,'subir_procesos'])->middleware('auth')->name('subir.procesos');
 
+Route::get('subir-recepciones', [HomeController::class,'subir_recepciones'])->middleware('auth')->name('subir.recepciones');
+
 Route::post('archivo/procesos', [HomeController::class,'proceso_upload'])->name('proceso.upload');
+
+Route::post('archivo/recepcions', [HomeController::class,'recepcion_upload'])->name('recepcion.upload');
 
 Route::get('download/{proceso}.pdf', [HomeController::class,'download_proceso'])->name('download.proceso');
 

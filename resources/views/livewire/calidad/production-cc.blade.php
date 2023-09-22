@@ -297,7 +297,7 @@
                                                                 <img class="w-10 my-2 mx-auto" src="{{asset('image/pdf_icon2.png')}}" title="Descargar" alt="">
                                                             </a>
                                                             
-                                                                                                        
+                                                                                                             
                                                         </td>
                                                     @else    
                                                         <td>
@@ -456,6 +456,7 @@
                                                             <a href="{{route('informe.download',$recepcion)}}" target="_blank" >   
                                                                 <img class="w-10 my-2 mx-auto" src="{{asset('image/pdf_icon2.png')}}" title="Descargar" alt="">
                                                             </a>
+                                                            
                                                             
                                                                                                         
                                                         </td>
@@ -617,6 +618,8 @@
                                                             <img class="w-10 my-2 mx-auto" src="{{asset('image/pdf_icon2.png')}}" title="Descargar" alt="">
                                                         </a>
                                                         
+                                                        <button wire:click="reenviar_informe({{$recepcion->id}})" class="font-bold py-1 px-3 mt-2 rounded-full bg-green-500 text-white text-xs mb-2" type="submit" title="Reenviar Whatsapp">Reenviar Whatsapp</button>
+           
                                                                                                     
                                                     </td>
                                                 @else    

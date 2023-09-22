@@ -4,8 +4,11 @@ namespace App\Http\Livewire\Procesos;
 
 use App\Models\Especie;
 use App\Models\Proceso;
+use App\Models\Recepcion;
 use App\Models\Sync;
+use App\Models\User;
 use App\Models\Variedad;
+use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -47,6 +50,64 @@ class ProcesoSearch extends Component
         ->first();
 
         return view('livewire.procesos.proceso-search',compact('sync','procesosall','procesos','variedades','especies'));
+    }
+
+    public function reenviar_informe(Proceso $proceso) {
+    
+        $user=User::where('name',$proceso->agricola)->first();
+        if($user){
+                //en caso que exista el usuarioo consultar si tiene telefonos registrados
+                if($user->telefonos->count()){
+                    foreach($user->telefonos as $telefono){
+                    $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
+                    //TOKEN QUE NOS DA FACEBOOK
+                    $token = env('WS_TOKEN');
+                    $phoneid= env('WS_PHONEID');
+                    $link= 'https://appgreenex.cl/download/'.$proceso->id.'.pdf';
+                    $version='v16.0';
+                    $url="https://appgreenex.cl/";
+                    $payload=[
+                        'messaging_product' => 'whatsapp',
+                        "preview_url"=> false,
+                        'to'=>$fono,
+                        
+                        'type'=>'template',
+                            'template'=>[
+                                'name'=>'proceso',
+                                'language'=>[
+                                    'code'=>'es'],
+                                'components'=>[ 
+                                    [
+                                        'type'=>'header',
+                                        'parameters'=>[
+                                            [
+                                                'type'=>'document',
+                                                'document'=> [
+                                                    'link'=>$link,
+                                                    'filename'=>'Informe Proceso Nro:',$proceso->n_proceso
+                                                    ]
+                                            ]
+                                        ]
+                                    ],
+                                    [
+                                        'type'=>'body',
+                                        'parameters'=>[
+                                            [
+                                                'type'=>'text',
+                                                'text'=> $proceso->n_proceso
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                            
+                        
+                    ];
+                    
+                    Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+                }
+            }    
+        }
     }
 
     public function set_especie($id){

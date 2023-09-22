@@ -152,6 +152,9 @@
                                 <x-jet-dropdown-link href="{{ route('subir.procesos') }}">
                                     {{ __('Subir Procesos') }}
                                 </x-jet-dropdown-link>
+                                <x-jet-dropdown-link href="{{ route('subir.recepciones') }}">
+                                    {{ __('Subir Informes Recepción') }}
+                                </x-jet-dropdown-link>
 
                                 <x-jet-dropdown-link href="{{ route('envio.masivo') }}">
                                     {{ __('Envio Masivo') }}
@@ -258,6 +261,9 @@
                 @can('Ver produccion_total')
                     <x-jet-responsive-nav-link href="{{ route('subir.procesos') }}" :active="request()->routeIs('subir.procesos')">
                         {{ __('Subir Procesos') }}
+                    </x-jet-responsive-nav-link>
+                    <x-jet-responsive-nav-link href="{{ route('subir.procesos') }}" :active="request()->routeIs('subir.recepciones')">
+                        {{ __('Subir Informes Recepción') }}
                     </x-jet-responsive-nav-link>
                     <x-jet-responsive-nav-link href="{{ route('envio.masivo') }}" :active="request()->routeIs('envio.masivo')">
                         {{ __('Envio Masivo') }}

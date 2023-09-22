@@ -280,11 +280,15 @@
                                  
                                  <td class="pl-5">
                                  
-                                       <div class="flex content-center items-center">
+                                       <div class="content-center items-center">
                                           @if ($proceso->informe)
-                                             <a href="{{route('download.proceso',$proceso)}}" target="_blank" class="items-center content-center">   
+                                          <div class="flex justify-center">
+                                             <a href="{{route('download.proceso',$proceso)}}" target="_blank" class="items-center content-center justify-center mx-auto">   
                                                 <img class="h-8 object-contain mx-2" src="{{asset('image/pdf_icon2.png')}}" title="Descargar" alt="">
                                              </a>
+                                          </div>
+                                             <button wire:click="reenviar_informe({{$proceso->id}})" class="font-bold py-1 px-3 mt-2 rounded-full bg-green-500 text-white text-xs mb-2" type="submit" title="Reenviar Whatsapp">Reenviar Whatsapp</button>
+           
                                            
                                              
                                           @else

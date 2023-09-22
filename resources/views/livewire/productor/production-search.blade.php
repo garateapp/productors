@@ -94,11 +94,24 @@
                 
                 
             <div class="flex justify-center mb-2 items-center content-center"> 
-                <a href="{{route('production.refresh')}}">
-                    <button  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
-                        <p class="text-sm font-medium leading-none text-white">FX IMPORT</p>
-                    </button>
-                </a>
+                <div>
+                    <div>
+                        <a href="{{route('production.refresh')}}">
+                            <button  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
+                                <p class="text-sm font-medium leading-none text-white">FX IMPORT</p>
+                                <p class="text-xs font-medium leading-none text-white">ACTUAL</p>
+                            </button>
+                        </a>
+                    </div>
+                    <div class="mt-2">
+                        <a href="{{route('production.refresh.anterior')}}">
+                            <button  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
+                                <p class="text-sm font-medium leading-none text-white">FX IMPORT</p>
+                                <p class="text-xs font-medium leading-none text-white">ANTERIOR</p>
+                            </button>
+                        </a>
+                    </div>
+                </div>
                 <select wire:model="ctd" class="max-w-xl  mx-2 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-6 rounded focus:outline-none focus:bg-white focus:border-gray-500">
                     <option value="25" class="text-left px-10">25 </option>
                     <option value="50" class="text-left px-10">50 </option>
@@ -275,6 +288,9 @@
                                     <a href="{{route('informe.view',$recepcion)}}" target="_blank" >   
                                         <img class="w-10 my-2 mx-auto" src="{{asset('image/pdf_icon2.png')}}" title="Descargar" alt="">
                                     </a>
+
+                                    <button wire:click="reenviar_informe({{$recepcion->id}})" class="font-bold py-1 px-3 mt-2 rounded-full bg-green-500 text-white text-xs mb-2" type="submit" title="Reenviar Whatsapp">Reenviar Whatsapp</button>
+           
 
                                 @else
                                     <div class="relative px-5 pt-2">

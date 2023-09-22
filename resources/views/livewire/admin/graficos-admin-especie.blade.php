@@ -1,4 +1,4 @@
-<div>
+<div x-data="temporadas()">
     @php
     $cant=0;
  
@@ -104,213 +104,442 @@
         </div>
      </div>
   </section>
+
+   <ul class="flex justify-center items-center mb-6 mt-2">
+      <template x-for="(tab, index) in tabs" :key="index">
+         <li class="cursor-pointer py-3 px-4 rounded transition"
+            :class="activeTab===index ? 'bg-red-500 text-white' : ' text-gray-500'" @click="activeTab = index"
+            x-text="tab"></li>
+      </template>
+
+   </ul>
+
+
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/series-label.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
  
-    <div class="flex justify-center mb-2 max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="max-w-7xl w-full sm:px-6 lg:px-8 bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
-           <h1 class="font-bold">Buscador: </h1>
-              <input wire:keydown="limpiar_page" wire:model="search"  class="form-input w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" placeholder="Ingrese la variedad, especie o lote de la recepción" autocomplete="off">
+   <div x-show="activeTab===0">
+         <div class="flex justify-center mb-2 max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl w-full sm:px-6 lg:px-8 bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
+               <h1 class="font-bold">Buscador Temporada Actual: </h1>
+                  <input wire:keydown="limpiar_page" wire:model="search"  class="form-input w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" placeholder="Ingrese la variedad, especie o lote de la recepción" autocomplete="off">
 
-           
+               
 
-        </div>
-     </div>
+            </div>
+         </div>
 
-            <div class="mx-2 sm:mx-12 md:mx-14 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-y-4 gap-x-3 justify-between  content-center">
-               @php
-                     $varieds=[];
-                     $series=[];
-                     $exportacion=[];
-                     $comercial=[];
-                     $desecho=[];
-                     $merma=[];
-               @endphp
-               @if ($espec)
-                        <a href="{{route('dashboard')}}">
-                           <button class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded content-center" style="background-color: #FF8000;">
-                                 <p class="text-sm font-medium leading-none text-white">{{$espec->name}}</p>
-                           </button>
-                        </a>
-                  @if ($variedades)
+                  <div class="mx-2 sm:mx-12 md:mx-14 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-y-4 gap-x-3 justify-between  content-center">
+                     @php
+                           $varieds=[];
+                           $series=[];
+                           $exportacion=[];
+                           $comercial=[];
+                           $desecho=[];
+                           $merma=[];
+                     @endphp
+                     @if ($espec)
+                              <a href="{{route('dashboard')}}">
+                                 <button class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded content-center" style="background-color: #FF8000;">
+                                       <p class="text-sm font-medium leading-none text-white">{{$espec->name}}</p>
+                                 </button>
+                              </a>
+                        @if ($variedades)
+            
+                              @if ($varie)
+                                 <button wire:click="varie_clean"  class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                                    <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$varie->name}}</p>
+                                 </button>
+                              @else
+
+                              @php
+                                    $exp_total=0;
+                                    $Com_total=0;
+                                    $des_total=0;
+                                    $merm_total=0;
+                              @endphp
+
+                                 @foreach ($variedades as $variedad)
+                                    @if ($variedad->especie_id==$espec->id)
+                                       <div class="justify-center">
+                                          <a href="{{route('dashboard.variedad',$variedad)}}">
+                                                <button class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-2 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                                                   <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$variedad->name}}</p>
+                                                </button>
+                                          </a>
+                                       </div>
+                                       @php
+                                       $export=0;
+                                       $comerc=0;
+                                       $desec=0;
+                                       $mer=0;
+                                       
+                                       
+                                       foreach ($procesosall as $proceso) {
+                                          
+                                          if ($proceso->variedad==$variedad->name) {
+                                                $export+=$proceso->exp;
+                                                $comerc+=$proceso->comercial;
+                                                $desec+=$proceso->desecho;
+                                                $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+
+                                          }
+
+                                       }
+
+                                       $inicio=date('W', strtotime($recepcions->first()->fecha_g_recepcion));
+                                       $final=date('W', strtotime($now));
+
+                                       if ($inicio>$final) {
+                                          $final=$final+52;
+                                       }
+                                       
+                                       $name=$variedad->name;
+                                       $array=[];
+                                       
+                                       foreach (range($inicio,($final)) as $number) {
+                                          $kilos=0;
+                                          if($number>52){
+                                             $nro=($number-52);
+                                          }else{
+                                             $nro=$number;
+                                          }  
+                                          foreach($recepcions as $recepcion){
+                                             
+                                                if ($recepcion->n_variedad==$variedad->name) {
+                                                   if (date('W', strtotime($recepcion->fecha_g_recepcion))==$nro) {
+                                                      $kilos+=$recepcion->peso_neto;
+                                                   }
+                                                } 
+                                             }
+                                          $array[]=$kilos; 
+                                       }
+                                          
+                                          $series[]=['name' =>$name,
+                                                   'data'=> $array];
+
+                                          $varieds[]=$variedad->name;
+                                          $exportacion[]=$export;
+                                          $comercial[]=$comerc;
+                                          $desecho[]=$desec;
+                                          $merma[]=$mer;
+                                       
+                                          $exp_total+=$export;
+                                          $Com_total+=$comerc;
+                                          $des_total+=$desec;
+                                          $merm_total+=$mer;
+
+
+                                       @endphp
+                                    @endif
+                                 @endforeach
+                                 
+                              @endif
+            
+                           
+                        @endif
+                     @else
+                     
+                        @foreach ($especies as $especie)
+                           <div class="justify-center ">
+                              
+                                 <button wire:click="set_especie({{$especie->id}})" class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-4 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                                       <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$especie->name}}</p>
+                                 </button>
+                              
+                           </div>
+                           @php
+                           
+                                       $export=0;
+                                       $comerc=0;
+                                       $desec=0;
+                                       $mer=0;
+                                       foreach ($procesosall as $proceso) {
+                                             
+                                             if ($proceso->especie==$especie->name) {
+                                                $export+=$proceso->exp;
+                                                $comerc+=$proceso->comercial;
+                                                $desec+=$proceso->desecho;
+                                                $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+            
+                                             }
+            
+                                       }
+                                       
+                                       
+                                          
+                                          $exportacion[]=$export;
+                                          $comercial[]=$comerc;
+                                          $desecho[]=$desec;
+                                          $merma[]=$mer;
+                                       
+                                          $varieds[]=$especie->name;
+                           @endphp
+                        @endforeach
+                        
+                     @endif
+                  
+                  </div>
+                  @php
+                  $semenas=[];
+                  foreach (range($inicio,($final)) as $number) {
+                     if($number>52){
+                        $semanas[]='Semana '.($number-52);
+                     }else{
+                        $semanas[]='Semana '.$number;
+                     }  
+                  }
+
+                  @endphp
+         
+         <div class="mx-2 sm:mx-12">
       
-                        @if ($varie)
-                           <button wire:click="varie_clean"  class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
-                              <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$varie->name}}</p>
-                           </button>
-                        @else
+            <figure class="highcharts-figure mx-1 mt-4" wire:ignore>
+               <div id="grafico" wire:ignore>
+                  
+               </div>
+            </figure>
 
-                        @php
-                              $exp_total=0;
-                              $Com_total=0;
-                              $des_total=0;
-                              $merm_total=0;
-                        @endphp
+            <div class="grid grid-cols-3">
+               <div class="col-span-2">
+                  <figure class="highcharts-figure mx-1 mt-4" wire:ignore>
+                     <div id="container" wire:ignore>
+                        
+                     </div>
+                  </figure>
+               </div>
+               <div>
+                  <figure class="highcharts-figure mx-1 mt-4" wire:ignore>
+                     <div id="circular" wire:ignore>
+                        
+                     </div>
+                  </figure>
+               </div>
+            
+               
+            </div>
+            
+         </div>
+   </div>
+   <div x-show="activeTab===1">
+      <div class="flex justify-center mb-2 max-w-7xl mx-auto sm:px-6 lg:px-8">
+         <div class="max-w-7xl w-full sm:px-6 lg:px-8 bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
+            <h1 class="font-bold">Buscador Temporada Anterior: </h1>
+               <input wire:keydown="limpiar_page" wire:model="search"  class="form-input w-full shadow-sm  border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none" placeholder="Ingrese la variedad, especie o lote de la recepción" autocomplete="off">
 
-                           @foreach ($variedades as $variedad)
-                              @if ($variedad->especie_id==$espec->id)
-                                 <div class="justify-center">
-                                    <a href="{{route('dashboard.variedad',$variedad)}}">
-                                          <button class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-2 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
-                                             <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$variedad->name}}</p>
-                                          </button>
-                                    </a>
-                                 </div>
-                                 @php
-                                 $export=0;
-                                 $comerc=0;
-                                 $desec=0;
-                                 $mer=0;
-                                 
-                                 
-                                 foreach ($procesosall as $proceso) {
+            
+
+         </div>
+      </div>
+
+               <div class="mx-2 sm:mx-12 md:mx-14 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-y-4 gap-x-3 justify-between  content-center">
+                  @php
+                        $varieds=[];
+                        $series=[];
+                        $exportacion=[];
+                        $comercial=[];
+                        $desecho=[];
+                        $merma=[];
+                  @endphp
+                  @if ($espec)
+                           <a href="{{route('dashboard')}}">
+                              <button class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded content-center" style="background-color: #FF8000;">
+                                    <p class="text-sm font-medium leading-none text-white">{{$espec->name}}</p>
+                              </button>
+                           </a>
+                     @if ($variedades)
+         
+                           @if ($varie)
+                              <button wire:click="varie_clean"  class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-3 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                                 <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$varie->name}}</p>
+                              </button>
+                           @else
+
+                           @php
+                                 $exp_total=0;
+                                 $Com_total=0;
+                                 $des_total=0;
+                                 $merm_total=0;
+                           @endphp
+
+                              @foreach ($variedades as $variedad)
+                                 @if ($variedad->especie_id==$espec->id)
+                                    <div class="justify-center">
+                                       <a href="{{route('dashboard.variedad',$variedad)}}">
+                                             <button class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-2 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                                                <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$variedad->name}}</p>
+                                             </button>
+                                       </a>
+                                    </div>
+                                    @php
+                                    $export=0;
+                                    $comerc=0;
+                                    $desec=0;
+                                    $mer=0;
                                     
-                                    if ($proceso->variedad==$variedad->name) {
-                                          $export+=$proceso->exp;
-                                          $comerc+=$proceso->comercial;
-                                          $desec+=$proceso->desecho;
-                                          $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+                                    
+                                    foreach ($procesosall as $proceso) {
+                                       
+                                       if ($proceso->variedad==$variedad->name) {
+                                             $export+=$proceso->exp;
+                                             $comerc+=$proceso->comercial;
+                                             $desec+=$proceso->desecho;
+                                             $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+
+                                       }
 
                                     }
 
-                                 }
+                                    $inicio=date('W', strtotime($recepcions->first()->fecha_g_recepcion));
+                                    $final=date('W', strtotime($now));
 
-                                 $inicio=date('W', strtotime($recepcions->first()->fecha_g_recepcion));
-                                 $final=date('W', strtotime($now));
-
-                                 if ($inicio>$final) {
-                                    $final=$final+52;
-                                 }
-                                 
-                                 $name=$variedad->name;
-                                 $array=[];
-                                 
-                                 foreach (range($inicio,($final)) as $number) {
-                                    $kilos=0;
-                                    if($number>52){
-                                       $nro=($number-52);
-                                    }else{
-                                       $nro=$number;
-                                    }  
-                                    foreach($recepcions as $recepcion){
-                                       
-                                          if ($recepcion->n_variedad==$variedad->name) {
-                                             if (date('W', strtotime($recepcion->fecha_g_recepcion))==$nro) {
-                                                $kilos+=$recepcion->peso_neto;
-                                             }
-                                           } 
-                                       }
-                                    $array[]=$kilos; 
-                                 }
+                                    if ($inicio>$final) {
+                                       $final=$final+52;
+                                    }
                                     
-                                    $series[]=['name' =>$name,
-                                             'data'=> $array];
+                                    $name=$variedad->name;
+                                    $array=[];
+                                    
+                                    foreach (range($inicio,($final)) as $number) {
+                                       $kilos=0;
+                                       if($number>52){
+                                          $nro=($number-52);
+                                       }else{
+                                          $nro=$number;
+                                       }  
+                                       foreach($recepcions as $recepcion){
+                                          
+                                             if ($recepcion->n_variedad==$variedad->name) {
+                                                if (date('W', strtotime($recepcion->fecha_g_recepcion))==$nro) {
+                                                   $kilos+=$recepcion->peso_neto;
+                                                }
+                                             } 
+                                          }
+                                       $array[]=$kilos; 
+                                    }
+                                       
+                                       $series[]=['name' =>$name,
+                                                'data'=> $array];
 
-                                    $varieds[]=$variedad->name;
-                                    $exportacion[]=$export;
-                                    $comercial[]=$comerc;
-                                    $desecho[]=$desec;
-                                    $merma[]=$mer;
-                                 
-                                    $exp_total+=$export;
-                                    $Com_total+=$comerc;
-                                    $des_total+=$desec;
-                                    $merm_total+=$mer;
+                                       $varieds[]=$variedad->name;
+                                       $exportacion[]=$export;
+                                       $comercial[]=$comerc;
+                                       $desecho[]=$desec;
+                                       $merma[]=$mer;
+                                    
+                                       $exp_total+=$export;
+                                       $Com_total+=$comerc;
+                                       $des_total+=$desec;
+                                       $merm_total+=$mer;
 
 
-                                 @endphp
-                              @endif
-                           @endforeach
+                                    @endphp
+                                 @endif
+                              @endforeach
+                              
+                           @endif
+         
+                        
+                     @endif
+                  @else
+                  
+                     @foreach ($especies as $especie)
+                        <div class="justify-center ">
                            
-                        @endif
-      
+                              <button wire:click="set_especie({{$especie->id}})" class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-4 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                                    <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$especie->name}}</p>
+                              </button>
+                           
+                        </div>
+                        @php
+                        
+                                    $export=0;
+                                    $comerc=0;
+                                    $desec=0;
+                                    $mer=0;
+                                    foreach ($procesosall as $proceso) {
+                                          
+                                          if ($proceso->especie==$especie->name) {
+                                             $export+=$proceso->exp;
+                                             $comerc+=$proceso->comercial;
+                                             $desec+=$proceso->desecho;
+                                             $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+         
+                                          }
+         
+                                    }
+                                    
+                                    
+                                       
+                                       $exportacion[]=$export;
+                                       $comercial[]=$comerc;
+                                       $desecho[]=$desec;
+                                       $merma[]=$mer;
+                                    
+                                       $varieds[]=$especie->name;
+                        @endphp
+                     @endforeach
                      
                   @endif
-               @else
                
-                  @foreach ($especies as $especie)
-                     <div class="justify-center ">
-                        
-                           <button wire:click="set_especie({{$especie->id}})" class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-4 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
-                                 <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$especie->name}}</p>
-                           </button>
-                        
-                     </div>
-                     @php
-                     
-                                 $export=0;
-                                 $comerc=0;
-                                 $desec=0;
-                                 $mer=0;
-                                 foreach ($procesosall as $proceso) {
-                                       
-                                       if ($proceso->especie==$especie->name) {
-                                          $export+=$proceso->exp;
-                                          $comerc+=$proceso->comercial;
-                                          $desec+=$proceso->desecho;
-                                          $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+               </div>
+               @php
+               $semenas=[];
+               foreach (range($inicio,($final)) as $number) {
+                  if($number>52){
+                     $semanas[]='Semana '.($number-52);
+                  }else{
+                     $semanas[]='Semana '.$number;
+                  }  
+               }
+
+               @endphp
       
-                                       }
-      
-                                 }
-                                 
-                                 
-                                    
-                                    $exportacion[]=$export;
-                                    $comercial[]=$comerc;
-                                    $desecho[]=$desec;
-                                    $merma[]=$mer;
-                                 
-                                    $varieds[]=$especie->name;
-                     @endphp
-                  @endforeach
-                  
-               @endif
-            
+      <div class="mx-2 sm:mx-12">
+   
+         <figure class="highcharts-figure mx-1 mt-4" wire:ignore>
+            <div id="graficos" wire:ignore>
+               
             </div>
-            @php
-            $semenas=[];
-             foreach (range($inicio,($final)) as $number) {
-               if($number>52){
-                  $semanas[]='Semana '.($number-52);
-               }else{
-                  $semanas[]='Semana '.$number;
-               }  
-            }
+         </figure>
 
-            @endphp
-     
-    <div class="mx-2 sm:mx-12">
- 
-       <figure class="highcharts-figure mx-1 mt-4" wire:ignore>
-          <div id="grafico" wire:ignore>
-             
-          </div>
-      </figure>
-
-      <div class="grid grid-cols-3">
-         <div class="col-span-2">
-            <figure class="highcharts-figure mx-1 mt-4" wire:ignore>
-               <div id="container" wire:ignore>
-                  
-               </div>
-            </figure>
+         <div class="grid grid-cols-3">
+            <div class="col-span-2">
+               <figure class="highcharts-figure mx-1 mt-4" wire:ignore>
+                  <div id="containers" wire:ignore>
+                     
+                  </div>
+               </figure>
+            </div>
+            <div>
+               <figure class="highcharts-figure mx-1 mt-4" wire:ignore>
+                  <div id="circulars" wire:ignore>
+                     
+                  </div>
+               </figure>
+            </div>
+         
+            
          </div>
-         <div>
-            <figure class="highcharts-figure mx-1 mt-4" wire:ignore>
-               <div id="circular" wire:ignore>
-                  
-               </div>
-            </figure>
-         </div>
-        
          
       </div>
-        
-    </div>   
+   </div>
+    
+    <script>
+         function temporadas() {
+            return {
+            activeTab: 0,
+            tabs: [
+                                 "Temporada Actual",
+                                 "Temporada Anterior"
+                           ]
+                           };
+      };
+    </script>
+
     <script>
        var titulo = <?php echo json_encode($titulo) ?>;
        var variedades = <?php echo json_encode($varieds) ?>;
@@ -429,6 +658,174 @@
        var merma = <?php echo json_encode($merm_total) ?>;
 
         Highcharts.chart('circular', {
+            chart: {
+               plotBackgroundColor: null,
+               plotBorderWidth: null,
+               plotShadow: false,
+               type: 'pie'
+            },
+            title: {
+               text: titulo_circular,
+               align: 'left'
+            },
+            tooltip: {
+               pointFormat: '<b><b>{point.y}</b>({point.percentage:.0f}%)<br/>',
+            },
+            accessibility: {
+               point: {
+                     valueSuffix: '%'
+               }
+            },
+            plotOptions: {
+               pie: {
+                     allowPointSelect: true,
+                     cursor: 'pointer',
+                     dataLabels: {
+                        enabled: false
+                     },
+                     showInLegend: true
+               }
+            },
+            series: [{
+               name: 'Brands',
+               colorByPoint: true,
+               data: [{
+                     name: 'Exportacion',
+                     y: exportacion,
+                     sliced: true,
+                     selected: true
+               },  {
+                     name: 'Comercial',
+                     y: comercial
+               },  {
+                     name: 'Desecho',
+                     y: desecho
+               }, {
+                     name: 'Merma',
+                     y: merma
+               }]
+            }]
+         });
+    </script>
+    
+    <script>
+       var titulo = <?php echo json_encode($titulo) ?>;
+       var variedades = <?php echo json_encode($varieds) ?>;
+       var semanas = <?php echo json_encode($semanas) ?>;
+       var series = <?php echo json_encode($series) ?>;
+        var exportacion = <?php echo json_encode($exportacion) ?>;
+        var comercial = <?php echo json_encode($comercial) ?>;
+        var desecho = <?php echo json_encode($desecho) ?>;
+        var merma = <?php echo json_encode($merma) ?>;
+       // Data retrieved from https://en.wikipedia.org/wiki/Winter_Olympic_Games
+        Highcharts.chart('graficos', {
+ 
+        chart: {
+            type: 'column'
+        },
+ 
+        title: {
+            text: titulo,
+            align: 'center'
+        },
+ 
+        xAxis: {
+            categories: variedades
+        },
+ 
+        yAxis: {
+            allowDecimals: false,
+            min: 0,
+            title: {
+                text: 'Kilos / %'
+            }
+        },
+ 
+        tooltip: {
+         pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+         shared: true
+       },
+ 
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+ 
+        series: [{
+             name: 'Exportacion',
+             data: exportacion,
+             stack: 'variedades'
+         }, {
+             name: 'Nacional',
+             data: comercial,
+             stack: 'variedades'
+         }, {
+             name: 'Desecho',
+             data: desecho,
+             stack: 'variedades'
+         }, {
+             name: 'Merma',
+             data: merma,
+             stack: 'variedades'
+         }]
+         });
+
+         Highcharts.chart('containers', {
+
+         title: {
+            text: 'Kilos Recibidos Por Semana',
+            align: 'left'
+         },
+         xAxis: {
+            categories: semanas
+         },
+         yAxis: {
+            title: {
+               text: 'Kilos'
+            }
+         },
+
+         legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+         },
+
+         plotOptions: {
+            
+         },
+
+         series: series
+         ,
+
+         responsive: {
+            rules: [{
+               condition: {
+                     maxWidth: 500
+               },
+               chartOptions: {
+                     legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                     }
+               }
+            }]
+         }
+
+         });
+                
+    </script> 
+    <script>
+      var titulo_circular = <?php echo json_encode($titulo_circular) ?>;
+       var variedades = <?php echo json_encode($varieds) ?>;
+       var exportacion = <?php echo json_encode($exp_total) ?>;
+       var comercial = <?php echo json_encode($Com_total) ?>;
+       var desecho = <?php echo json_encode($des_total) ?>;
+       var merma = <?php echo json_encode($merm_total) ?>;
+
+        Highcharts.chart('circulars', {
             chart: {
                plotBackgroundColor: null,
                plotBorderWidth: null,
