@@ -1,5 +1,5 @@
 <div>
-   <div class="flex justify-center max-w-3xl">
+   <div class="flex justify-center max-w-4xl my-2">
       @if (session('info'))
          <div x-data="{open: true}">
             <div x-show="open"  class="bg-white border border-gray-400 text-gray-700 px-4 py-3 rounded relative" role="alert">
