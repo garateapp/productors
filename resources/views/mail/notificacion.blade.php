@@ -2,45 +2,38 @@
 <html>
 <head>
 <style>
-  /* Estilos generales */
+  /* Agrega estilos CSS personalizados aquí */
   body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50vh;
   }
-  #contenido {
-    width: 100%; /* Por defecto, ocupa el 100% del ancho */
-    max-width: 50%; /* Máximo del 50% del ancho en tabletas y computadoras */
-    text-align: left;
+  #header {
+    text-align: center;
+    background-color: #f0f0f0;
     padding: 20px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-  }
-  #contenido ul {
-    list-style: none;
-    padding-left: 0;
   }
   #header img {
-    max-width: 100%; /* Asegura que la imagen del logo se ajuste al ancho del contenedor */
+    max-width: 200px;
+  }
+  #contenido {
+    margin: 20px;
   }
 
-  /* Estilos específicos para dispositivos móviles */
-  @media screen and (max-width: 768px) {
+  /* Agrega un pequeño margen en tablets y escritorio */
+  @media screen and (min-width: 768px) {
     #contenido {
-      max-width: 100%; /* Ocupa el 100% del ancho en dispositivos móviles */
+      margin: 20px auto;
+      max-width: 1000px; /* Ancho máximo del contenido */
     }
   }
 </style>
 </head>
 <body>
+<div id="header">
+  <img src="https://ci4.googleusercontent.com/proxy/MAJtem7NbZNvs5m-i010IY7iYfIvSnyMTNXIRKVwfFMgUEkjOhwA6jz07aXm-77GcKgDr1tqBkPDzi9vHdTroCa1=s0-d-e1-ft#https://cogrowers.cl/greenex/images/logocyl.png" alt="Logo de Greenex">
+</div>
 <div id="contenido">
-  <div id="header">
-    <img src="https://appgreenex.cl/image/logogreenex.png" alt="Logo de Greenex">
-  </div>
   <p>Estimado Productor,</p>
   <p>Hemos procesado la siguiente fruta en nuestra planta:</p>
   <ul>
