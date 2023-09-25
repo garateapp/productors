@@ -33,6 +33,7 @@ class User extends Authenticatable
         'csg',
         'user',
         'password',
+        'emnotification',
     ];
 
     /**

@@ -224,7 +224,7 @@
                                             @endif
                                                                                         
                                         </td>
-                                        <td class="w-full">
+                                        <td class="w-full flex">
                                         
                                             
                                            
@@ -232,7 +232,17 @@
                                                 {!! Form::model($user, ['route'=>['productor.users.update',$user],'method' => 'put', 'autocomplete'=>'off']) !!}                
                                                 {!! Form::email('email', null , ['class' => 'mt-1 block w-full']) !!}
                                                     
-                                                   
+                                                    @if ($user->emnotification==true)
+                                                        <div class="flex justify-center items-center mt-1">
+                                                            <p class="text-xd mr-2">Notificaciones </p><input type="checkbox"  wire:click="toggleEmailNotification({{ $user->id }})" checked >
+                                                        </div>
+                                                    @else
+                                                        <div class="flex justify-center items-center mt-1">
+                                                            <p class="text-xd mr-2">Notificaciones </p> <input type="checkbox"  wire:click="toggleEmailNotification({{ $user->id }})">
+                                                        </div>
+                                                    @endif
+                                               
+                                   
                                                
                                             
                                         </td>

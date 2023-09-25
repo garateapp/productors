@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Http;
 class ProductorSearch extends Component
 {   use WithPagination;
 
-    public $search, $cellid, $phone, $user, $ctd=25;
+    public $search, $cellid, $phone, $user, $ctd=25; 
 
     public function render()
-    {   $users=User::select('users.id', 'users.name', 'users.rut', 'users.email', 'users.csg', 'users.idprod', 'users.user')
+    {   $users=User::select('users.id', 'users.name', 'users.rut', 'users.email', 'users.csg', 'users.idprod', 'users.user', 'users.emnotification')
                     ->selectRaw('COUNT(especie_user.id) as especies_comercializadas')
                     ->leftJoin('especie_user', 'users.id', '=', 'especie_user.user_id')
                     ->where(function ($query) {
@@ -28,7 +28,7 @@ class ProductorSearch extends Component
                             ->orWhere('idprod', 'LIKE', '%' . $this->search . '%')
                             ->orWhere('user', 'LIKE', '%' . $this->search . '%');
                     })
-                    ->groupBy('users.id', 'users.name', 'users.rut', 'users.email', 'users.csg', 'users.idprod', 'users.user')
+                    ->groupBy('users.id', 'users.name', 'users.rut', 'users.email', 'users.csg', 'users.idprod', 'users.user', 'users.emnotification')
                     ->orderByDesc('especies_comercializadas')
                     ->latest('users.id')
                     ->paginate($this->ctd);
@@ -43,6 +43,18 @@ class ProductorSearch extends Component
         return view('livewire.productor.productor-search',compact('users','allusers','sync'));
     }
 
+    public function toggleEmailNotification($userId)
+    {
+        $user = User::find($userId);
+        
+        if ($user->emnotification==true) {
+            $user->update(['emnotification' => false]);
+        }else{
+            $user->update(['emnotification' => true]);
+        }
+        
+      
+    }
 
     public function limpiar_page(){
         $this->resetPage();
