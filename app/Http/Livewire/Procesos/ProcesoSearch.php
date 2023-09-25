@@ -63,7 +63,11 @@ class ProcesoSearch extends Component
            
             //luego se busca al productor que tiene el nombre de la agricola del proceso
             $user=User::where('name',$proceso->agricola)->first();
-            Mail::to($user->email)->send(new NotificacionMailable);
+
+            if($user->emnotification==TRUE){
+                Mail::to($user->email)->send(new NotificacionMailable);
+            }
+            
             if($user){
                     //en caso que exista el usuarioo consultar si tiene telefonos registrados
                     if($user->telefonos->count()){
