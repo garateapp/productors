@@ -555,6 +555,8 @@ class ProductionCc extends Component
                 }                                              
 
         }
+
+        
             if($rojo>0){
                 Detalle::create([
                     'calidad_id'=>$this->recep->calidad->id,

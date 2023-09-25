@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Procesos;
 
+use App\Mail\NotificacionMailable;
 use App\Models\Especie;
 use App\Models\Proceso;
 use App\Models\Recepcion;
@@ -9,6 +10,7 @@ use App\Models\Sync;
 use App\Models\User;
 use App\Models\Variedad;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -54,7 +56,7 @@ class ProcesoSearch extends Component
 
     public function reenviar_informe(Proceso $proceso) {
 
-
+        Mail::to('gonzaloenmundo@gmail.com')->send(new NotificacionMailable($proceso));
 
         if($proceso){
             //si existe el proceso, guardar el archivo, si no existe, no lo guarda
