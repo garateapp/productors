@@ -15,16 +15,13 @@ class NotificacionMailable extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $proceso;
-
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Proceso $proceso)
+    public function __construct()
     {
-        $this->proceso= $proceso;
     }
 
     /**
