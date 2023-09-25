@@ -24,14 +24,14 @@
   @media screen and (min-width: 768px) {
     #contenido {
       margin: 20px auto;
-      max-width: 1000px; /* Ancho máximo del contenido */
+      max-width: 600px; /* Ancho máximo del contenido */
     }
   }
 </style>
 </head>
 <body>
 <div id="header">
-  <img src="https://ci4.googleusercontent.com/proxy/MAJtem7NbZNvs5m-i010IY7iYfIvSnyMTNXIRKVwfFMgUEkjOhwA6jz07aXm-77GcKgDr1tqBkPDzi9vHdTroCa1=s0-d-e1-ft#https://cogrowers.cl/greenex/images/logocyl.png" alt="Logo de Greenex">
+  <img src="https://appgreenex.cl/image/logogreenex.png" alt="Logo de Greenex">
 </div>
 <div id="contenido">
   <p>Estimado Productor,</p>
