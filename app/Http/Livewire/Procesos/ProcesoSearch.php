@@ -56,7 +56,7 @@ class ProcesoSearch extends Component
 
     public function reenviar_informe(Proceso $proceso) {
 
-        Mail::to('gonzaloenmundo@gmail.com')->send(new NotificacionMailable($proceso));
+        Mail::to('gonzaloenmundo@gmail.com')->send(new NotificacionMailable);
 
         if($proceso){
             //si existe el proceso, guardar el archivo, si no existe, no lo guarda
