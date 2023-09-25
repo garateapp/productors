@@ -25,7 +25,7 @@
     padding-left: 0;
   }
   #header img {
-    max-width: 200px;
+    max-width: 100%; /* Asegura que la imagen del logo se ajuste al ancho del contenedor */
   }
 
   /* Estilos específicos para dispositivos móviles */
