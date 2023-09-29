@@ -107,7 +107,7 @@
                 }
             },
             series: [{
-                name: 'Distribución: ',
+                name: '',
                 data: series,
                 colorByPoint: true,
                 dataLabels: [{
