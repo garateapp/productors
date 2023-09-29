@@ -552,6 +552,18 @@
 		  <div class="page-break"></div>
 	@endif
 
+		@if ($recepcion->n_especie=='Orange'  || $recepcion->n_especie=='Mandarinas')
+			<table style="width:100%;">
+				<tr>
+					@isset($calibrix)
+						<td>
+							<img style="width:100%;" src="{{$calibrix}}" alt="" >
+						</td>
+					@endif
+					
+				</tr>
+			</table>
+		@endif
 
 		<table style="width:100%;  font-size: 12px; border-spacing: 2px;">
   

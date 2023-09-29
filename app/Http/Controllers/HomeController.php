@@ -639,6 +639,11 @@ class HomeController extends Controller
             $promedio_brix=NULL;
             $porcentaje_firmeza=NULL;
         }
+        if ($recepcion->n_especie=='Orange'  || $recepcion->n_especie=='Mandarinas') {
+            $calibrix='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibrix/'.$recepcion->id.'.html&viewport=800x380';
+        }else{
+            $calibrix=NULL;
+        }
         //view()->share('productors.informe',$recepcion,$distribucion_calibre);
  
         $presiones=Valor::where('parametro_id',16)->where('especie',$recepcion->n_especie)->orderby('id','ASC')->get();
@@ -655,7 +660,8 @@ class HomeController extends Controller
                                                     'promedio_firmeza'=>$promedio_firmeza,
                                                     'promedio_brix'=>$promedio_brix,
                                                     'porcentaje_firmeza'=>$porcentaje_firmeza,
-                                                    'almidons'=>$almidons]);
+                                                    'almidons'=>$almidons,
+                                                    'calibrix'=>$calibrix]);
 
         $pdfContent = $pdf->output();
         $filename = $recepcion->numero_g_recepcion.'-'.$recepcion->id_emisor.'.pdf';
