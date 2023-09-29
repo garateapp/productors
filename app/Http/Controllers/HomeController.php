@@ -552,6 +552,11 @@ class HomeController extends Controller
 
         return view('pdf.promedio_firmeza',compact('recepcion'));
     }
+     //NARANJAS
+     public function calibre_brix(Recepcion $recepcion) {
+
+        return view('pdf.calibre_brix',compact('recepcion'));
+    }
     //CEREZAS //DAGEN
     public function promedio_brix(Recepcion $recepcion) {
 

@@ -120,6 +120,8 @@ Route::get('firmeza/chica/{recepcion}.html', [HomeController::class,'firmeza_chi
 
 Route::get('firmeza/{recepcion}.html', [HomeController::class,'promedio_firmeza'])->name('promedio.firmeza');
 
+Route::get('calibrix/{recepcion}.html', [HomeController::class,'calibre_brix'])->name('calibre.brix');
+
 Route::get('brix/{recepcion}.html', [HomeController::class,'promedio_brix'])->name('promedio.brix');
 
 Route::get('porcentaje/firmeza/{recepcion}.html', [HomeController::class,'porcentaje_firmeza'])->name('porcentaje.firmeza');

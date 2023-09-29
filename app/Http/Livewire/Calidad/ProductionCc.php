@@ -351,6 +351,227 @@ class ProductionCc extends Component
     }
 
     public function cargar_firmpro(Recepcion $recepcion){
+        
+        $firmpro1=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/BuscarRecepcionCloud?Numero_recepcion='.$recepcion->numero_g_recepcion);
+        
+        $firmpro1 = $firmpro1->json();
+
+     $categories=[];
+     $series=[];
+     $rangos=[279,219,179,1];
+     $l=[];
+     $d=[];
+     $b=[];
+     
+    
+        foreach ($rangos as $rango){
+        
+                $light=0;
+                $dark=0;
+                $black=0;
+                $tlight=0;
+                $tdark=0;
+                $tblack=0;
+        
+                foreach ($firmpro1 as $items){
+                
+                        $n=1;
+                
+                    foreach ($items as $item){
+                
+                    
+                
+                        if ($n==4) {
+                            $firmeza=$item;
+                        }
+                        if ($n==13) {
+                            $color=$item;
+                        }
+                        if ($n==14) {
+                            
+                                    if($color=='Rojo'){
+                                        $tlight+=1;
+                                    }
+                                    if($color=='Rojo caoba'){
+                                        $tdark+=1;
+                                    }
+                                    if($color=='Santina'){
+                                        $tdark+=1;
+                                    }
+                                    if($color=='Caoba oscuro'){
+                                        $tblack+=1;
+                                    }
+                                    if($color=='Negro'){
+                                        $tblack+=1;
+                                    }
+                                    
+
+                                if ($rango==279) {
+                                    if ($firmeza>=280) {
+                                        if($color=='Rojo'){
+                                            $light+=1;
+                                        }
+                                            if($color=='Rojo caoba'){
+                                                $dark+=1;
+                                            }
+                                            if($color=='Santina'){
+                                                $dark+=1;
+                                            }
+                                            if($color=='Caoba oscuro'){
+                                                $black+=1;
+                                            }
+                                            if($color=='Negro'){
+                                                $black+=1;
+                                        }
+                                    }      
+                                }
+                                if ($rango==219) {
+                                    if ($firmeza>=220 && $firmeza<280) {
+                                        if($color=='Rojo'){
+                                            $light+=1;
+                                        }
+                                            if($color=='Rojo caoba'){
+                                                $dark+=1;
+                                            }
+                                            if($color=='Santina'){
+                                                $dark+=1;
+                                            }
+                                            if($color=='Caoba oscuro'){
+                                                $black+=1;
+                                            }
+                                            if($color=='Negro'){
+                                                $black+=1;
+                                        }
+                                    }      
+                                }
+                                if ($rango==179) {
+                                    if ($firmeza>=180 && $firmeza<220) {
+                                        if($color=='Rojo'){
+                                            $light+=1;
+                                        }
+                                            if($color=='Rojo caoba'){
+                                                $dark+=1;
+                                            }
+                                            if($color=='Santina'){
+                                                $dark+=1;
+                                            }
+                                            if($color=='Caoba oscuro'){
+                                                $black+=1;
+                                            }
+                                            if($color=='Negro'){
+                                                $black+=1;
+                                        }
+                                    }      
+                                }
+                                if ($rango==1) {
+                                    if ($firmeza>=1 && $firmeza<180) {
+                                            if($color=='Rojo'){
+                                                $light+=1;
+                                            }
+                                            if($color=='Rojo caoba'){
+                                                $dark+=1;
+                                            }
+                                            if($color=='Santina'){
+                                                $dark+=1;
+                                            }
+                                            if($color=='Caoba oscuro'){
+                                                $black+=1;
+                                            }
+                                            if($color=='Negro'){
+                                                $black+=1;
+                                        }
+                                    }      
+                                }
+                                
+
+
+                        }
+                            
+                            $n+=1;
+                
+                        }
+                }
+                
+            
+                if ($tlight>0) {
+                    Detalle::create([
+                        'calidad_id'=>$this->recep->calidad->id,
+                        'embalaje'=>$this->embalaje,
+                        'valor_ss'=>$light*100/$tlight,
+                        'porcentaje_muestra'=>$light*100/$tlight,
+                        'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
+                        'tipo_detalle'=>'cc',
+                        'detalle_item'=>'LIGHT',
+                        'fecha'=>$this->fecha                
+                    ]);
+                    //$l[]=$light*100/$tlight;
+                }else{
+                    Detalle::create([
+                        'calidad_id'=>$this->recep->calidad->id,
+                        'embalaje'=>$this->embalaje,
+                        'valor_ss'=>0,
+                        'porcentaje_muestra'=>0,
+                        'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
+                        'tipo_detalle'=>'cc',
+                        'detalle_item'=>'LIGHT',
+                        'fecha'=>$this->fecha                
+                    ]);
+                }
+
+                if ($tdark>0) {  
+                    Detalle::create([
+                    'calidad_id'=>$this->recep->calidad->id,
+                    'embalaje'=>$this->embalaje,
+                    'valor_ss'=>$dark*100/$tdark,
+                    'porcentaje_muestra'=>$dark*100/$tdark,
+                    'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
+                    'tipo_detalle'=>'cc',
+                    'detalle_item'=>'DARK',
+                    'fecha'=>$this->fecha                
+                ]);
+                    //$d[]=$dark*100/$tdark;
+                }else{
+                    Detalle::create([
+                        'calidad_id'=>$this->recep->calidad->id,
+                        'embalaje'=>$this->embalaje,
+                        'valor_ss'=>0,
+                        'porcentaje_muestra'=>0,
+                        'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
+                        'tipo_detalle'=>'cc',
+                        'detalle_item'=>'DARK',
+                        'fecha'=>$this->fecha                
+                    ]);
+                    //$d[]=0;
+                }
+
+                if ($tblack>0) {
+                    Detalle::create([
+                        'calidad_id'=>$this->recep->calidad->id,
+                        'embalaje'=>$this->embalaje,
+                        'valor_ss'=>$black*100/$tblack,
+                        'porcentaje_muestra'=>$black*100/$tblack,
+                        'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
+                        'tipo_detalle'=>'cc',
+                        'detalle_item'=>'BLACK',
+                        'fecha'=>$this->fecha                
+                    ]);
+                    //$b[]=$black*100/$tblack;
+                }else{
+                    Detalle::create([
+                        'calidad_id'=>$this->recep->calidad->id,
+                        'embalaje'=>$this->embalaje,
+                        'valor_ss'=>0,
+                        'porcentaje_muestra'=>0,
+                        'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
+                        'tipo_detalle'=>'cc',
+                        'detalle_item'=>'BLACK',
+                        'fecha'=>$this->fecha                
+                    ]);
+                   // $b[]=0;
+                }
+            
+        
+        }
 
         $this->calibres=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/BuscarConsolidadoFruitCloud?Numero_recepcion='.$recepcion->numero_g_recepcion);
         $this->calibres = $this->calibres->json();

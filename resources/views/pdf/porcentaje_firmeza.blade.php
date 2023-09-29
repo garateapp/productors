@@ -168,6 +168,7 @@
             
         @endforeach
         @php
+
             if ($tlight>0) {
                 $l[]=$light*100/$tlight;
             }else{
@@ -190,7 +191,7 @@
         @endphp
     @endforeach
     @if ($recepcion->calidad->detalles)
-        @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES') as $detalle)
+        @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA') as $detalle)
           
                 @php
                     $categories[]=$detalle->detalle_item;
