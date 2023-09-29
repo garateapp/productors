@@ -64,7 +64,7 @@
         @endphp
     @else 
         @php
-            $colors=['#600000','#400000','#000000'];
+            $colors=['#f18515'];
         @endphp
     @endif
     <script>
@@ -107,7 +107,7 @@
                 }
             },
             series: [{
-                name: '',
+                name: '°BRIX',
                 data: series,
                 colorByPoint: true,
                 dataLabels: [{
