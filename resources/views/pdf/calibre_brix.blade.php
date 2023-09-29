@@ -32,12 +32,12 @@
     @php
         $categories=[];
         $series=[];
-        $items=['LIGHT','DARK','BLACK'];
+        //$items=['LIGHT','DARK','BLACK'];
     @endphp
 
-    @foreach ($items as $item)
-        @if ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES')->where('detalle_item',$item)->count()>0)
-            @foreach ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES')->where('detalle_item',$item) as $detalle)
+    
+        @if ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES')->count()>0)
+            @foreach ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES') as $detalle)
                 
                     @php
                         $categories[]=$detalle->detalle_item;
@@ -47,12 +47,12 @@
             @endforeach
         @else
                     @php
-                        $categories[]=$item;
+                        $categories[]='NONAME';
                         $series[]=0;
                     @endphp
         @endif
         
-    @endforeach
+    
                     
     @if ($recepcion->n_especie=='Cherries')
         @php
@@ -77,7 +77,7 @@
                 type: 'column'
             },
             title: {
-                text: 'PROMEDIO BRIX'
+                text: 'CALIBRE VS BRIX'
             },
             legend: {
                         layout: 'vertical',
