@@ -10,7 +10,7 @@
          
       
         <ul  class="mt-6 w-full">
-            @foreach ($mensajes as $item)
+            @foreach ($items as $item)
                
                
                     <li class="py-5 border-b px-3 transition hover:bg-indigo-100">
