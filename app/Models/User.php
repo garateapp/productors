@@ -37,6 +37,7 @@ class User extends Authenticatable
         'kilos_netos',
         'comercial',
         'desecho',
+        'exp',
         'merma'
     ];
 

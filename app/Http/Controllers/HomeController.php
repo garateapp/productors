@@ -486,6 +486,40 @@ class HomeController extends Controller
 
     }
 
+    public function sync_consolidado()
+    {   $users=User::all();
+        foreach ($users as $user){
+
+            $procesos=Proceso::where('agricola',$user->name)->latest('n_proceso')->get();
+            
+            $kilos_netos=0;
+            $exportacion=0;
+            $comercial=0;
+            $desecho=0;
+            $merma=0;
+
+            foreach ($procesos as $proceso){
+            
+                $kilos_netos+=$proceso->kilos_netos;
+                $exportacion+=$proceso->exp;
+                $comercial+=$proceso->comercial;
+                $desecho=+$proceso->desecho;
+                $merma+=($proceso->kilos_netos-$proceso->exp-$proceso->comercial-$proceso->desecho);
+            
+            }
+
+            $user->update(['kilos_netos'=>$kilos_netos,
+                            'comercial'=>$comercial,
+                            'desecho'=>$desecho,
+                            'merma'=>$merma,
+                            'exp'=>$exportacion]);
+        }
+      
+
+        return redirect()->route('productors.index');
+
+    }
+
     public function dashboard () {
         $users=User::all();
 

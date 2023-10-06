@@ -94,6 +94,8 @@ Route::get('procesos/variedad/{variedad}', [ProcesoController::class,'variedad']
 
 Route::get('proceso/refresh', [HomeController::class,'sync_proces'])->middleware('auth')->name('proceso.refresh');
 
+Route::get('consolidado/refresh', [HomeController::class,'sync_consolidado'])->middleware('auth')->name('consolidado.refresh');
+
 Route::get('subir-proceso', [HomeController::class,'subir_procesos'])->middleware('auth')->name('subir.procesos');
 
 Route::get('subir-recepciones', [HomeController::class,'subir_recepciones'])->middleware('auth')->name('subir.recepciones');

@@ -32,6 +32,11 @@
                             <p class="text-sm font-medium leading-none text-white">FX IMPORT</p>
                         </button>
                     </a>
+                    <a href="{{route('consolidado.refresh')}}">
+                        <button  class="ml-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
+                            <p class="text-sm font-medium leading-none text-white">CONSOLIDADO UP</p>
+                        </button>
+                    </a>
                     <select wire:model="ctd" class="max-w-xl  mx-2 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-6 rounded focus:outline-none focus:bg-white focus:border-gray-500">
                         <option value="25" class="text-left px-10">25 </option>
                         <option value="50" class="text-left px-10">50 </option>
@@ -74,6 +79,7 @@
                                 <th>ULTIMA <br>MODIFICACIÓN</th>
                                 <th>ESPECIES</th>
                                 <th>KILOS</th>
+                                <th>EXPORTACIÓN</th>
                                 <th>COMERCIAL</th>
                                 <th>DESECHO</th>
                                 <th>MERMA</th>
@@ -84,7 +90,7 @@
                                     $n=1;
                                 @endphp
                                 
-                                @foreach ($users->reverse() as $user)
+                                @foreach ($users as $user)
                                                     @php
                                                         $m=1;
                                                     @endphp
@@ -286,8 +292,8 @@
                                             <p class="text-base text-center font-medium leading-none text-gray-700 mr-2">
 
                                         
-                                                @if ($user->kilos_netos)
-                                                    {{$user->kilos_netos}}
+                                                @if (number_format($user->kilos_netos)>0)
+                                                    {{number_format($user->kilos_netos)}}
                                                 @else
                                                 N/A
                                                 @endif
@@ -300,8 +306,22 @@
                                             <p class="text-base text-center font-medium leading-none text-gray-700 mr-2">
 
                                         
-                                                @if ($user->comercial)
-                                                    {{$user->comercial}}
+                                                @if ($user->exp>0)
+                                                    {{number_format($user->exp)}}
+                                                @else
+                                                    N/A
+                                                @endif
+                                            
+                                            </p>
+                                            </a>
+                                        </td>
+                                        <td class="pl-5 text-center">
+                                            <a href="{{route('dashboard.productor',$user->id)}}">
+                                            <p class="text-base text-center font-medium leading-none text-gray-700 mr-2">
+
+                                        
+                                                @if ($user->comercial>0)
+                                                    {{number_format($user->comercial)}}
                                                 @else
                                                 N/A
                                                 @endif
@@ -314,8 +334,8 @@
                                             <p class="text-base text-center font-medium leading-none text-gray-700 mr-2">
 
                                         
-                                                @if ($user->desecho)
-                                                    {{$user->desecho}}
+                                                @if ($user->desecho>0)
+                                                    {{number_format($user->desecho)}}
                                                 @else
                                                 N/A
                                                 @endif
@@ -328,8 +348,8 @@
                                             <p class="text-base text-center font-medium leading-none text-gray-700 mr-2">
 
                                         
-                                                @if ($user->merma)
-                                                    {{$user->merma}}
+                                                @if ($user->merma>0)
+                                                    {{number_format($user->merma)}}
                                                 @else
                                                 N/A
                                                 @endif

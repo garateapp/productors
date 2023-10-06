@@ -6,6 +6,7 @@ use App\Models\Sync;
 use App\Models\Telefono;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Http;
@@ -17,8 +18,22 @@ class ProductorSearch extends Component
     public $search, $cellid, $phone, $user, $ctd=25; 
 
     public function render()
-    {   $users=User::select('users.id', 'users.name', 'users.rut', 'users.email', 'users.csg', 'users.idprod', 'users.user', 'users.emnotification')
-                    ->selectRaw('COUNT(especie_user.id) as especies_comercializadas')
+    {   $users = User::select(
+        'users.id',
+        'users.name',
+        'users.rut',
+        'users.email',
+        'users.csg',
+        'users.idprod',
+        'users.user',
+        'users.kilos_netos',
+        'users.comercial',
+        'users.desecho',
+        'users.merma',
+        'users.exp',
+        'users.emnotification',
+        DB::raw('COUNT(especie_user.id) as especies_comercializadas')
+                    )
                     ->leftJoin('especie_user', 'users.id', '=', 'especie_user.user_id')
                     ->where(function ($query) {
                         $query->where('rut', 'LIKE', '%' . $this->search . '%')
@@ -28,8 +43,8 @@ class ProductorSearch extends Component
                             ->orWhere('idprod', 'LIKE', '%' . $this->search . '%')
                             ->orWhere('user', 'LIKE', '%' . $this->search . '%');
                     })
-                    ->groupBy('users.id', 'users.name', 'users.rut', 'users.email', 'users.csg', 'users.idprod', 'users.user', 'users.emnotification')
-                    ->orderByDesc('especies_comercializadas')
+                    ->groupBy('users.id', 'users.name', 'users.rut', 'users.email', 'users.csg', 'users.idprod', 'users.user','users.kilos_netos','users.comercial', 'users.desecho', 'users.merma','users.exp', 'users.emnotification')
+                    ->orderByDesc(DB::raw('SUM(users.kilos_netos)'))
                     ->latest('users.id')
                     ->paginate($this->ctd);
     
