@@ -177,7 +177,14 @@
               @else
                   <li class="py-5 border-b px-3 transition hover:bg-indigo-100" wire:click="changemensaje({{$item->id}})">
                       <a class="flex justify-between items-center">
-                      <h3 class="text-lg font-semibold">{{$item->tipo}} del Usuario {{$emisor->name}}</h3>
+                      <h3 class="text-lg font-semibold">{{$item->tipo}} del Usuario 
+                        @foreach ($users as $user)
+                            @if ($user->id==$item->emisor_id)
+                                {{$user->name}}
+                            @endif
+                            
+                        @endforeach
+                    </h3>
                       <p class="text-md text-gray-400">{{$item->created_at->format('d/m/Y')}}</p>
                       </a>
                       @if ($item->status==1)

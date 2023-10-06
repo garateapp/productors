@@ -33,8 +33,8 @@ class Soporte extends Component
     public function render()
     {    $mensajes=Ticket::all();
         $mensajespendientes=Ticket::where('status',1)->get();
-        
-        return view('livewire.admin.soporte',compact('mensajes','mensajespendientes'));
+        $users=User::all();
+        return view('livewire.admin.soporte',compact('mensajes','mensajespendientes','users'));
        
     }
 
