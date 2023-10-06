@@ -79,8 +79,8 @@
                                 <th>ULTIMA <br>MODIFICACIÓN</th>
                                 <th>ESPECIES</th>
                                 <th>KILOS</th>
-                                <th>EXPORTACIÓN</th>
-                                <th>COMERCIAL</th>
+                                <th>EXPORT</th>
+                                <th>MI</th>
                                 <th>DESECHO</th>
                                 <th>MERMA</th>
                                

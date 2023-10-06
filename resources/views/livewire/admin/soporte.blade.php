@@ -90,6 +90,13 @@
                         </div>
                     </div>
                     <div>
+
+                        <div>
+                        <a href="">     
+                            <button class="font-bold py-1 px-3 mt-2 rounded-full bg-green-500 text-white text-xs mb-2" type="submit" title="Reenviar Whatsapp">Whatsapp</button>
+                        </a>
+                        
+                        </div>
                     <ul class="flex text-gray-400 space-x-4">
                         <li class="w-6 h-6">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
