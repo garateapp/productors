@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Especie;
-use App\Models\Estadisticas;
-use App\Models\Variedad;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 
-class ProcesoController extends Controller
+class TicketController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,31 +13,8 @@ class ProcesoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {     $estadistica = Estadisticas::create([
-        'type'=> 'vistaprocesoproductor',
-        'user_id'=>auth()->user()->id
-    ]);
-        return view('productors.procesosproductor');
-    }
-
-    public function especie(Especie $especie)
     {
-        return view('proceso.procesoespecie',compact('especie'));
-    }
-
-    public function variedad(Variedad $variedad)
-    {
-        return view('proceso.procesovariedad',compact('variedad'));
-    }
-
-    public function productorespecie(Especie $especie)
-    {
-        return view('productors.procesoespecie',compact('especie'));
-    }
-
-    public function productorvariedad(Variedad $variedad)
-    {
-        return view('productors.procesovariedad',compact('variedad'));
+        //
     }
 
     /**
@@ -59,8 +34,17 @@ class ProcesoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+        {$request->validate([
+            'file'=>'observacion'
+            ]);
+        $mensaje=Ticket::create([
+            'observacion'=>$request->observacion,
+            'tipo'=>'Consulta',
+            'emisor_id'=>auth()->user()->id
+        ]);
+
+        return redirect()->back();
+
     }
 
     /**
@@ -92,9 +76,14 @@ class ProcesoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Ticket $ticket)
     {
-        //
+        $ticket->status = 2;
+        $ticket->receptor_id = auth()->user()->id;
+        $ticket->respuesta = $request->respuesta;
+        $ticket->save();
+
+        return redirect()->back();
     }
 
     /**

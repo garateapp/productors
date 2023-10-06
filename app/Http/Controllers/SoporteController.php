@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Especie;
-use App\Models\Estadisticas;
-use App\Models\Variedad;
+use App\Models\Soporte;
 use Illuminate\Http\Request;
 
-class ProcesoController extends Controller
+class SoporteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,31 +13,8 @@ class ProcesoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {     $estadistica = Estadisticas::create([
-        'type'=> 'vistaprocesoproductor',
-        'user_id'=>auth()->user()->id
-    ]);
-        return view('productors.procesosproductor');
-    }
-
-    public function especie(Especie $especie)
     {
-        return view('proceso.procesoespecie',compact('especie'));
-    }
-
-    public function variedad(Variedad $variedad)
-    {
-        return view('proceso.procesovariedad',compact('variedad'));
-    }
-
-    public function productorespecie(Especie $especie)
-    {
-        return view('productors.procesoespecie',compact('especie'));
-    }
-
-    public function productorvariedad(Variedad $variedad)
-    {
-        return view('productors.procesovariedad',compact('variedad'));
+        //
     }
 
     /**
@@ -92,9 +67,12 @@ class ProcesoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Soporte $soporte)
     {
-        //
+        
+        $soporte->update($request->all());
+
+        return redirect()->back();
     }
 
     /**

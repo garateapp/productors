@@ -112,7 +112,7 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
    
-   <div x-show="activeTab===0">
+   <div >
       <div class="flex justify-center mb-2 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="max-w-7xl w-full sm:px-6 lg:px-8 bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
            <h1 class="font-bold">Buscador Temporada Actual: </h1>
@@ -376,6 +376,7 @@
       </div> 
 
    </div>
+   {{-- comment 
    <div x-show="activeTab===1">
 
       <div class="flex justify-center mb-2 max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -641,18 +642,7 @@
       </div> 
 
    </div>
-
-
-    <script>
-      var espec = <?php echo json_encode($espec) ?>;
-         function setup() {
-            return {
-            activeTab: 0,
-            tabs: espec
-            };
-      };
-   </script>
-   <script>
+      <script>
          function temporadas() {
             return {
             activeTab: 0,
@@ -663,6 +653,19 @@
                              };
       };
    </script>
+--}}
+
+    <script>
+      var espec = <?php echo json_encode($espec) ?>;
+         function setup() {
+            return {
+            activeTab: 0,
+            tabs: espec
+            };
+      };
+   </script>
+
+
     <script>
        var titulo = <?php echo json_encode($titulo) ?>;
        var variedades = <?php echo json_encode($varieds) ?>;
@@ -832,7 +835,7 @@
          });
         
     </script>
-   
+    {{-- comment 
     <script>
        var titulo = <?php echo json_encode($titulo) ?>;
        var variedades = <?php echo json_encode($varieds) ?>;
@@ -1002,6 +1005,6 @@
          });
         
    </script>        
-   
+   --}}
  </div>
  

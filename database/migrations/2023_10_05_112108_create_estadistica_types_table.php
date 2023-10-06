@@ -13,17 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('valors', function (Blueprint $table) {
+        Schema::create('estadistica_types', function (Blueprint $table) {
             $table->id();
 
             $table->string('name');
 
-            $table->foreignId('parametro_id')
-                ->constrained()
-                ->onDelete('cascade');
+            $table->string('search');
 
             $table->timestamps();
-            
         });
     }
 
@@ -34,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('valors');
+        Schema::dropIfExists('estadistica_types');
     }
 };

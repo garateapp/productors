@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Especie;
+use App\Models\Estadisticas;
 use App\Models\Mensaje;
 use Illuminate\Http\Request;
 use Illuminate\support\Str;
@@ -15,7 +16,11 @@ class MensajeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {   $estadistica = Estadisticas::create([
+            'type'=> 'infotecnicaproductor',
+            'user_id'=>auth()->user()->id
+        ]);
+        
         return view('productors.mensaje');
     }
 

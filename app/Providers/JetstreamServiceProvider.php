@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Actions\Jetstream\DeleteUser;
+use App\Models\Estadisticas;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
 use App\Models\User;
@@ -35,11 +36,19 @@ class JetstreamServiceProvider extends ServiceProvider
         $user = User::where('email', $request->user)
                     ->orwhere('user', $request->user)->latest()->first();
 
-        if ($user &&
-            Hash::check($request->password, $user->password)) {
-            return $user;
-        }
-    });
+            if ($user && Hash::check($request->password, $user->password)) {
+
+                $estadistica = Estadisticas::create([
+                        'type'=> 'login',
+                        'user_id'=>$user->id
+                    ]);
+                    
+                return $user;
+                
+            }   
+
+            
+        });
         
 
         Jetstream::deleteUsersUsing(DeleteUser::class);

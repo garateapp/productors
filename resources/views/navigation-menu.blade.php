@@ -138,6 +138,17 @@
                                     {{ __('Documentación') }}
                                 </x-jet-dropdown-link>
                             @endcan
+                            @can('Ver produccion_total')
+                                <x-jet-dropdown-link href="{{ route('estadisticas') }}">
+                                    {{ __('Estadisticas de Uso') }}
+                                </x-jet-dropdown-link>
+                            @endcan
+
+                            @can('Soporte')
+                                <x-jet-dropdown-link href="{{ route('contacto') }}">
+                                    {{ __('Contacto y Soporte') }}
+                                </x-jet-dropdown-link>
+                            @endcan
 
                             @can('Ver produccion_total')
                                 <x-jet-dropdown-link href="{{ route('user.create') }}">

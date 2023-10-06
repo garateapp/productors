@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Estadisticas;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -28,6 +29,9 @@ class AuthenticationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
+
+       
+
         $response->assertRedirect(RouteServiceProvider::HOME);
     }
 

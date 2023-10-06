@@ -72,6 +72,11 @@
                                 <th>EMAIL</th>
                                 <th>ACTUALIZAR</th>
                                 <th>ULTIMA <br>MODIFICACIÓN</th>
+                                <th>ESPECIES</th>
+                                <th>KILOS</th>
+                                <th>COMERCIAL</th>
+                                <th>DESECHO</th>
+                                <th>MERMA</th>
                                
                             </thead>
                             <tbody>
@@ -256,7 +261,8 @@
                                                 <p class="text-base leading-none text-gray-700 mr-2">
                                                     @if ($user->updated_at!=$user->created_at)
                                                         {{date('d M Y g:i a', strtotime($user->updated_at))}}
-                            
+                                                    @else
+                                                        -
                                                     @endif
                                                 </p>
                                             </div>
@@ -273,6 +279,63 @@
                                            
                                                 
 
+                                        </td>
+
+                                        <td class="pl-5 text-center">
+                                            <a href="{{route('dashboard.productor',$user->id)}}">
+                                            <p class="text-base text-center font-medium leading-none text-gray-700 mr-2">
+
+                                        
+                                                @if ($user->kilos_netos)
+                                                    {{$user->kilos_netos}}
+                                                @else
+                                                N/A
+                                                @endif
+                                            
+                                            </p>
+                                            </a>
+                                        </td>
+                                        <td class="pl-5 text-center">
+                                            <a href="{{route('dashboard.productor',$user->id)}}">
+                                            <p class="text-base text-center font-medium leading-none text-gray-700 mr-2">
+
+                                        
+                                                @if ($user->comercial)
+                                                    {{$user->comercial}}
+                                                @else
+                                                N/A
+                                                @endif
+                                            
+                                            </p>
+                                            </a>
+                                        </td>
+                                        <td class="pl-5 text-center">
+                                            <a href="{{route('dashboard.productor',$user->id)}}">
+                                            <p class="text-base text-center font-medium leading-none text-gray-700 mr-2">
+
+                                        
+                                                @if ($user->desecho)
+                                                    {{$user->desecho}}
+                                                @else
+                                                N/A
+                                                @endif
+                                            
+                                            </p>
+                                            </a>
+                                        </td>
+                                        <td class="pl-5 text-center">
+                                            <a href="{{route('dashboard.productor',$user->id)}}">
+                                            <p class="text-base text-center font-medium leading-none text-gray-700 mr-2">
+
+                                        
+                                                @if ($user->merma)
+                                                    {{$user->merma}}
+                                                @else
+                                                N/A
+                                                @endif
+                                            
+                                            </p>
+                                            </a>
                                         </td>
                                          
                                     </tr>

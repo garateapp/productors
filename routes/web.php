@@ -6,7 +6,9 @@ use App\Http\Controllers\MensajeController;
 use App\Http\Controllers\ProcesoController;
 use App\Http\Controllers\Productor\UserController as ProductorUserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SoporteController;
 use App\Http\Controllers\TelefonoController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use App\Models\Recepcion;
 use App\Models\User;
@@ -34,7 +36,8 @@ Route::middleware([
 ])->group(function () {
     
 
-Route::get('/dashboard',[HomeController::class,'dashboard'])->name('dashboard');
+    Route::get('/dashboard',[HomeController::class,'dashboard'])->name('dashboard');
+    
 });
 
 Route::get('/dashboard/especie/{especie}',[HomeController::class,'dashboard_especie'])->name('dashboard.especie');
@@ -134,6 +137,16 @@ Route::put('update/{calidad}',[HomeController::class,'detalle_update'])->name('d
 
 Route::get('documentacion', [HomeController::class,'documentacion'])->name('documentacion');
 
+Route::get('estadisticas', [HomeController::class,'estadisticas'])->name('estadisticas');
+
+Route::get('soporte/tecnico', [HomeController::class,'contacto'])->name('contacto');
+
+Route::get('estadistica/{estadistica_type}', [HomeController::class,'estadistica_type'])->name('estadistica.type');
+
 Route::get('user/create', [HomeController::class,'user_create'])->name('user.create');
 
 Route::post('user/admin/store', [HomeController::class,'user_store'])->name('user.store');
+
+Route::resource('soporte', SoporteController::class)->names('soportes');
+
+Route::resource('ticket', TicketController::class)->names('tickets');

@@ -34,6 +34,10 @@ class User extends Authenticatable
         'user',
         'password',
         'emnotification',
+        'kilos_netos',
+        'comercial',
+        'desecho',
+        'merma'
     ];
 
     /**
@@ -68,6 +72,10 @@ class User extends Authenticatable
 
     public function telefonos(){
         return $this->hasMany('App\Models\Telefono');
+    }
+
+    public function estadisticas(){
+        return $this->hasMany('App\Models\Estadistica');
     }
 
     public function especies_comercializas(){

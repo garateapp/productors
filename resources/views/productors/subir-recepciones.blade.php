@@ -14,7 +14,7 @@
                   <img class="h-16 my-4" src="{{asset('image/logogreenex.png')}}" alt="">
               </div>  
               <h1 class="text-center text-2xl py-12">Cargar Archivos de Recepciones</h1>
-                <form action="{{route('proceso.upload')}}"
+                <form action="{{route('recepcion.upload')}}"
                 method="POST"
                 class="dropzone"
                 id="my-awesome-dropzone">

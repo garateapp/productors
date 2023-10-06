@@ -13,17 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('valors', function (Blueprint $table) {
-            $table->id();
-
-            $table->string('name');
-
-            $table->foreignId('parametro_id')
-                ->constrained()
-                ->onDelete('cascade');
-
-            $table->timestamps();
+        Schema::table('mensajes', function (Blueprint $table) {
             
+            $table->string('numero');
+            $table->string('mensaje');
+            $table->string('type')->default('recibido');
+
         });
     }
 
@@ -34,6 +29,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('valors');
+        Schema::table('mensajes', function (Blueprint $table) {
+            //
+        });
     }
 };

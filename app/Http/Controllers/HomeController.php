@@ -6,8 +6,11 @@ use App\Actions\Fortify\CreateNewUser;
 use App\Models\Calidad;
 use App\Models\Detalle;
 use App\Models\Especie;
+use App\Models\Estadistica_type;
+use App\Models\Estadisticas;
 use App\Models\Proceso;
 use App\Models\Recepcion;
+use App\Models\Soporte;
 use App\Models\Sync;
 use App\Models\User;
 use App\Models\Valor;
@@ -22,6 +25,7 @@ use PDF;
 use Illuminate\support\Str;
 use Illuminate\Support\Facades\Storage;
 use ConsoleTVs\Charts\Facades\Charts;
+use DateTime;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
@@ -29,7 +33,10 @@ use Laravel\Fortify\Contracts\CreatesNewUsers;
 class HomeController extends Controller
 {
     public function index()
-    {
+    {   $estadistica = Estadisticas::create([
+            'type'=> 'vistaproductoradmin',
+            'user_id'=>auth()->user()->id
+        ]);
         return view('productors.index');
     }
     
@@ -193,77 +200,81 @@ class HomeController extends Controller
         $name = $file->getClientOriginalName();
         
         //Con dicho nombre, encontrar el proceso correspondiente al archivo
-        $proceso=Proceso::where('n_proceso',explode("-",$name)[0])->first();
+        $recepcion=Recepcion::where('numero_g_recepcion',explode("-",$name)[1])->first();
         
 
-        if($proceso){
+        if($recepcion){
             //si existe el proceso, guardar el archivo, si no existe, no lo guarda
             $nombre = $request->file('file')->storeAs(
-                'pdf-procesos', $name
+                'pdf-recepciones', $name
             );
             //una vez guardado el archivo, se asocia al proceso
-            $proceso->update([
+            $recepcion->update([
                 'informe'=>$nombre
             ]);
+
+            $recepcion->n_estado='CERRADO';
+            $recepcion->save();
             //luego se busca al productor que tiene el nombre de la agricola del proceso
-            $user=User::where('name',$proceso->agricola)->first();
+            /*
+            $user=User::where('name',$recepcion->n_emisor)->first();
             if($user){
-            //en caso que exista el usuarioo consultar si tiene telefonos registrados
-            if($user->telefonos->count()){
-                foreach($user->telefonos as $telefono){
-                $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
-                //TOKEN QUE NOS DA FACEBOOK
-                $token = env('WS_TOKEN');
-                $phoneid= env('WS_PHONEID');
-                $link= 'https://appgreenex.cl/download/'.$proceso->id.'.pdf';
-                $version='v16.0';
-                $url="https://appgreenex.cl/";
-                $payload=[
-                    'messaging_product' => 'whatsapp',
-                    "preview_url"=> false,
-                    'to'=>$fono,
-                    
-                    'type'=>'template',
-                        'template'=>[
-                            'name'=>'proceso',
-                            'language'=>[
-                                'code'=>'es'],
-                            'components'=>[ 
-                                [
-                                    'type'=>'header',
-                                    'parameters'=>[
+                //en caso que exista el usuarioo consultar si tiene telefonos registrados   
+                if($user->telefonos->count()){
+                    foreach($user->telefonos as $telefono){
+                        $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
+                        //TOKEN QUE NOS DA FACEBOOK
+                        $token = env('WS_TOKEN');
+                        $phoneid= env('WS_PHONEID');
+                        $link= 'https://appgreenex.cl/download/'.$proceso->id.'.pdf';
+                        $version='v16.0';
+                        $url="https://appgreenex.cl/";
+                        $payload=[
+                            'messaging_product' => 'whatsapp',
+                            "preview_url"=> false,
+                            'to'=>$fono,
+                            
+                            'type'=>'template',
+                                'template'=>[
+                                    'name'=>'proceso',
+                                    'language'=>[
+                                        'code'=>'es'],
+                                    'components'=>[ 
                                         [
-                                            'type'=>'document',
-                                            'document'=> [
-                                                'link'=>$link,
-                                                'filename'=>$name
+                                            'type'=>'header',
+                                            'parameters'=>[
+                                                [
+                                                    'type'=>'document',
+                                                    'document'=> [
+                                                        'link'=>$link,
+                                                        'filename'=>$name
+                                                        ]
                                                 ]
-                                        ]
-                                    ]
-                                ],
-                                [
-                                    'type'=>'body',
-                                    'parameters'=>[
+                                            ]
+                                        ],
                                         [
-                                            'type'=>'text',
-                                            'text'=> $proceso->n_proceso
+                                            'type'=>'body',
+                                            'parameters'=>[
+                                                [
+                                                    'type'=>'text',
+                                                    'text'=> $proceso->n_proceso
+                                                ]
+                                            ]
                                         ]
                                     ]
                                 ]
-                            ]
-                        ]
+                                
+                            
+                        ];
                         
-                    
-                ];
-                
-                Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
-            }
-        }    
-        }
+                        Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+                    }
+                }    
+            }*/
         }
 
 
-        return view('productors.subir-proceso')->with('info','Archivo subido con exito');
+        return view('productors.subir-recepciones')->with('info','Archivo subido con exito');
     }
 
     public function download_proceso(Proceso $proceso) {
@@ -285,7 +296,10 @@ class HomeController extends Controller
     }
 
     public function procesos()
-    {    
+    {    $estadistica = Estadisticas::create([
+            'type'=> 'vistaprocesoadmin',
+            'user_id'=>auth()->user()->id
+        ]);
         return view('productors.procesos');
     }
 
@@ -586,6 +600,54 @@ class HomeController extends Controller
         return view('admin.documentacion');
     }
 
+    public function contacto() {
+        $soportes=Soporte::all();
+        return view('admin.soporte',compact('soportes'));
+    }
+
+    public function estadisticas() {
+
+        $estadisticas=Estadisticas::all();
+        $e1=null;
+        foreach($estadisticas as $estadistica){
+            if($e1){
+                $fecha_e1 = new DateTime($e1->created_at);
+                $fecha_item = new DateTime($estadistica->created_at);
+
+                $intervalo = $fecha_e1->diff($fecha_item);
+
+                if($intervalo->s<10 && $e1->type==$estadistica->type){
+                    $e1->delete();
+                }
+            }
+
+            $e1=$estadistica;
+        }
+
+        $sus30=Estadisticas::where('created_at', '>=', now()->subDays(30))->get();
+        $sustot=Estadisticas::all();
+
+        // Obtén la fecha actual
+       $estadistica_types=Estadistica_type::all();
+
+
+        return view('admin.estadisticas',compact('sus30','sustot','estadistica_types'));
+    }
+
+    public function estadistica_type(Estadistica_type $estadistica_type) {
+
+       
+
+        $estadisticas=Estadisticas::where('type',$estadistica_type->search)->paginate(50);
+        $usuarios = Estadisticas::selectRaw('user_id, COUNT(*) as repeticiones')
+        ->where('type', $estadistica_type->search)
+        ->groupBy('user_id')
+        ->get();
+       
+
+        return view('admin.estadistica_type',compact('estadisticas','estadistica_type','usuarios'));
+    }
+
     public function user_create() {
 
         return view('admin.users.create');
@@ -686,35 +748,51 @@ class HomeController extends Controller
     }
 
     public function production()
-    {  
-        $recepcions=Recepcion::all();
-        
+    {  $estadistica = Estadisticas::create([
+            'type'=> 'vistarecepcionadmin',
+            'user_id'=>auth()->user()->id
+        ]);
 
+        $recepcions=Recepcion::all();
         return view('productors.production',compact('recepcions'));
     }
 
     public function productionpropia()
     {  
         //$recepcions = $recepcions->json();
+        $estadistica = Estadisticas::create([
+            'type'=> 'vistarecepcionproductor',
+            'user_id'=>auth()->user()->id
+        ]);
 
         return view('productors.productionpropia');
     }
 
     public function productionccindex()
-    {  
+    {   $estadistica = Estadisticas::create([
+                'type'=> 'recepcioncc',
+                'user_id'=>auth()->user()->id
+            ]);
+            
         //$recepcions = $recepcions->json();
 
         return view('productors.productioncc');
     }
 
     public function productioncc(Recepcion $recepcion)
-    {  
+    {  $estadistica = Estadisticas::create([
+            'type'=> 'agregarcc',
+            'user_id'=>auth()->user()->id
+        ]);
         //$recepcions = $recepcions->json();
 
         return view('productors.agregarcc',compact('recepcion'));
     }
     public function productionss(Recepcion $recepcion)
-    {  
+    {  $estadistica = Estadisticas::create([
+                'type'=> 'agregarss',
+                'user_id'=>auth()->user()->id
+            ]);
         //$recepcions = $recepcions->json();
 
         return view('productors.agregarss',compact('recepcion'));

@@ -13,17 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('valors', function (Blueprint $table) {
+        Schema::create('soportes', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name');
+            $table->string('item');
 
-            $table->foreignId('parametro_id')
-                ->constrained()
-                ->onDelete('cascade');
+            $table->string('info');
+
+            $table->text('text')->nullable();
 
             $table->timestamps();
-            
         });
     }
 
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('valors');
+        Schema::dropIfExists('soportes');
     }
 };

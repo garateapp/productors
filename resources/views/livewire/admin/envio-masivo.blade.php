@@ -45,44 +45,86 @@
                         <span class="text-sm text-red-500">{{$message}}</span>
                     @enderror
                 </div>
-                <div class="col-span-2 text-center mt-4" wire:ignore>
-                   
-                    
-                  
-                         
-                
+                            <div class="col-span-2 text-center mt-4" wire:ignore>
+                            
+                                
+                            
+                                    
+                            
 
 
-                        {!! Form::label('observacion', 'Mensaje', ['class'=>'font-bold text-center']) !!}
-                        {!! Form::textarea('observacion', null , ['class' => 'form-input block w-full mt-1 h-max']) !!}
+                                    {!! Form::label('observacion', 'Mensaje', ['class'=>'font-bold text-center']) !!}
+                                    {!! Form::textarea('observacion', null , ['class' => 'form-input block w-full mt-1 h-max']) !!}
+                                    
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        @isset ($tipo)
+                            <h1 class="text-center mt-4">Selecciona un archivo {{$tipo}}</h1>
+                        @endisset
                         
+                    </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 w-max-7xl mt-4 ">
+                    <div>
+                        
+                    </div>
+                    {!! Form::label('file', 'Archivo', ['class'=>'font-bold text-center hidden']) !!}
                     
+                    {!! Form::file('file', ['class'=>'form-input w-full'.($errors->has('file')?' border-red-600':''), 'id'=>'file','accept'=>'file/*']) !!}
                 </div>
-            </div>
-          </div>
-          <div>
-            @isset ($tipo)
-                <h1 class="text-center mt-4">Selecciona un archivo {{$tipo}}</h1>
-            @endisset
-            
-          </div>
-      <div class="grid grid-cols-1 sm:grid-cols-3 w-max-7xl mt-4 ">
-        <div>
-            
-        </div>
-        {!! Form::label('file', 'Archivo', ['class'=>'font-bold text-center hidden']) !!}
-        
-        {!! Form::file('file', ['class'=>'form-input w-full'.($errors->has('file')?' border-red-600':''), 'id'=>'file','accept'=>'file/*']) !!}
-     </div>
-      <div class="flex justify-center mt-4">
-       
-            <div class="flex justify-end">
-                {!! Form::submit('ENVIAR', ['class'=>'text-center text-white font-bold inline w-full mx-4 focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded cursor-pointer']) !!}
-            </div>
+                <div class="flex justify-center mt-4">
+                
+                        <div class="flex justify-end">
+                            {!! Form::submit('ENVIAR', ['class'=>'text-center text-white font-bold inline w-full mx-4 focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded cursor-pointer']) !!}
+                        </div>
 
-        {!! Form::close() !!}
-      </div>
-        
+                    {!! Form::close() !!}
+                </div>
+        <h1 class="hidden text-center font-bold text-2xl mt-6">Historial de envios</h1>
+        <section class="hidden flex justify-center pt-3 w-8/12 mx-auto bg-gray-50 h-full overflow-y-scroll">
+         
+      
+            <ul  class="mt-6 w-full">
+                @foreach ($mensajes as $item)
+                   
+                    @if ($mensaje)
+                        @if ($mensaje->id==$item->id)
+                            <li class="py-5 border-b px-3 bg-indigo-600 text-white">
+                                <a href="#" class="flex justify-between items-center">
+                                <h3 class="text-lg font-semibold">{{$item->observacion}}</h3>
+                                <p class="text-md">23m ago</p>
+                                </a>
+                                <div class="text-md">You have been invited!</div>
+                            </li>
+                        @else
+                            <li wire:click="set_mensaje({{$item->id}})" class="py-5 border-b px-3 transition hover:bg-indigo-100">
+                                <a href="#" class="flex justify-between items-center">
+                                <h3 class="text-lg font-semibold">{{$item->observacion}}</h3>
+                                <p class="text-md text-gray-400">23m ago</p>
+                                </a>
+                                <div class="text-md italic text-gray-400">You have been invited!</div>
+                            </li>
+                        @endif
+                      
+
+
+                    @else
+                        <li wire:click="set_mensaje({{$item->id}})" class="py-5 border-b px-3 transition hover:bg-indigo-100">
+                            <a href="#" class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold">{{$item->observacion}}</h3>
+                            <p class="text-md text-gray-400">23m ago</p>
+                            </a>
+                            <div class="text-md italic text-gray-400">You have been invited!</div>
+                        </li>
+                    @endif
+                   
+                @endforeach
+              
+             
+            </ul>
+          </section>
         </div>
     </div>
 

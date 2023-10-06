@@ -709,7 +709,7 @@
             }]
          });
     </script>
-
+    {{-- comment 
     <script>
         var titulo = <?php echo json_encode($titulo) ?>;
        var variedades = <?php echo json_encode($varieds) ?>;
@@ -878,6 +878,7 @@
             }]
          });
     </script>
+    --}}
     <script>
          var espec = <?php echo json_encode($espec) ?>;
             function setup() {
@@ -887,6 +888,7 @@
                };
          };
       </script>
+      {{-- comment 
    <script>
          function temporadas() {
             return {
@@ -898,4 +900,5 @@
                            };
       };
    </script>
+   --}}
  </div> 

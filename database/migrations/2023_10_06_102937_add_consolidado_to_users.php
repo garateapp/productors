@@ -13,17 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('valors', function (Blueprint $table) {
-            $table->id();
-
-            $table->string('name');
-
-            $table->foreignId('parametro_id')
-                ->constrained()
-                ->onDelete('cascade');
-
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
             
+            $table->integer('kilos_netos')->nullable();
+            $table->integer('comercial')->nullable();
+            $table->integer('desecho')->nullable();
+            $table->integer('merma')->nullable();
+
         });
     }
 
@@ -34,6 +30,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('valors');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };
