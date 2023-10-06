@@ -27,7 +27,7 @@
                         </a>
                         <div class="text-md italic text-gray-400">
                             @foreach ($users as $user)
-                                @if ($user->id==$item->emisor_id)
+                                @if ($user->id==$item->receptor_id)
                                     {{$user->name}}
                                 @endif
                             @endforeach

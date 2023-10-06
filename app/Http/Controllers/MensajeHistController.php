@@ -58,7 +58,7 @@ class MensajeHistController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Mensaje_hist $current)
-    {   $mensajes=Mensaje::where('Mensaje_hist_id',$current->id)->get();
+    {   $mensajes=Mensaje::where('mensaje_hist_id',$current->id)->get();
         $users=User::all();
         $emisor=User::where('id',$current->emisor_id)->first();
 
