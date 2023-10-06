@@ -3,6 +3,7 @@
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MensajeController;
+use App\Http\Controllers\MensajeHistController;
 use App\Http\Controllers\ProcesoController;
 use App\Http\Controllers\Productor\UserController as ProductorUserController;
 use App\Http\Controllers\RoleController;
@@ -152,3 +153,5 @@ Route::post('user/admin/store', [HomeController::class,'user_store'])->name('use
 Route::resource('soporte', SoporteController::class)->names('soportes');
 
 Route::resource('ticket', TicketController::class)->names('tickets');
+
+Route::resource('mensaje_hist', MensajeHistController::class)->names('mensaje_hists');

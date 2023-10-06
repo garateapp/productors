@@ -82,8 +82,8 @@
 
                     {!! Form::close() !!}
                 </div>
-        <h1 class="hidden text-center font-bold text-2xl mt-6">Historial de envios</h1>
-        <section class="hidden flex justify-center pt-3 w-8/12 mx-auto bg-gray-50 h-full overflow-y-scroll">
+        <h1 class="text-center font-bold text-2xl mt-6">Historial de envios</h1>
+        <section class="flex justify-center pt-3 w-8/12 mx-auto bg-gray-50 h-full overflow-y-scroll">
          
       
             <ul  class="mt-6 w-full">
@@ -92,17 +92,17 @@
                     @if ($mensaje)
                         @if ($mensaje->id==$item->id)
                             <li class="py-5 border-b px-3 bg-indigo-600 text-white">
-                                <a href="#" class="flex justify-between items-center">
-                                <h3 class="text-lg font-semibold">{{$item->observacion}}</h3>
+                                <a href="{{route('mensaje_hists.edit',$item)}}" class="flex justify-between items-center">
+                                <h3 class="text-lg font-semibold">{{$item->tipo}} Para Productores De {{$item->especie}}</h3>
                                 <p class="text-md">23m ago</p>
                                 </a>
                                 <div class="text-md">You have been invited!</div>
                             </li>
                         @else
-                            <li wire:click="set_mensaje({{$item->id}})" class="py-5 border-b px-3 transition hover:bg-indigo-100">
-                                <a href="#" class="flex justify-between items-center">
-                                <h3 class="text-lg font-semibold">{{$item->observacion}}</h3>
-                                <p class="text-md text-gray-400">23m ago</p>
+                            <li class="py-5 border-b px-3 transition hover:bg-indigo-100">
+                                <a href="{{route('mensaje_hists.edit',$item)}}" class="flex justify-between items-center">
+                                <h3 class="text-lg font-semibold">{{$item->tipo}} Para Productores De {{$item->especie}}</h3>
+                                <p class="text-md text-gray-400">{{$item->created_at->format('d/m/Y')}}</p>
                                 </a>
                                 <div class="text-md italic text-gray-400">You have been invited!</div>
                             </li>
@@ -111,12 +111,18 @@
 
 
                     @else
-                        <li wire:click="set_mensaje({{$item->id}})" class="py-5 border-b px-3 transition hover:bg-indigo-100">
-                            <a href="#" class="flex justify-between items-center">
-                            <h3 class="text-lg font-semibold">{{$item->observacion}}</h3>
-                            <p class="text-md text-gray-400">23m ago</p>
+                        <li class="py-5 border-b px-3 transition hover:bg-indigo-100">
+                            <a href="{{route('mensaje_hists.edit',$item)}}" class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold">{{$item->tipo}} Para Productores De {{$item->especie}}</h3>
+                            <p class="text-md text-gray-400">{{$item->created_at->format('d/m/Y')}}</p>
                             </a>
-                            <div class="text-md italic text-gray-400">You have been invited!</div>
+                            <div class="text-md italic text-gray-400">
+                                @foreach ($users as $user)
+                                    @if ($user->id==$item->emisor_id)
+                                        {{$user->name}}
+                                    @endif
+                                @endforeach
+                            </div>
                         </li>
                     @endif
                    

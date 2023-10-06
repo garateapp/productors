@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Especie;
 use App\Models\Estadisticas;
 use App\Models\Mensaje;
+use App\Models\Mensaje_hist;
 use Illuminate\Http\Request;
 use Illuminate\support\Str;
 
@@ -53,6 +54,13 @@ class MensajeController extends Controller
             'app/archivos', $name
         );
         
+        $mensaje_hist=Mensaje_hist::create([
+            'observacion'=>$request->observacion,
+            'especie'=>$especie->name,
+            'tipo'=>$request->tipo,
+            'archivo'=>$url,
+            'emisor_id'=>auth()->user()->id
+        ]);
 
         foreach($productors as $productor){
             $mensaje=Mensaje::create([
@@ -61,7 +69,8 @@ class MensajeController extends Controller
                 'tipo'=>$request->tipo,
                 'archivo'=>$url,
                 'emisor_id'=>auth()->user()->id,
-                'receptor_id'=>$productor->id
+                'receptor_id'=>$productor->id,
+                'mensaje_hist_id'=>$mensaje_hist->id
             ]);
         }
 

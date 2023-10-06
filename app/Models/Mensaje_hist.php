@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Mensaje_hist extends Model
 {
     use HasFactory;
+    
+    protected $guarded = ['id'];
+
+    const ENVIADO =1;
+    const LEIDO =2;
 }

@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::table('mensajes', function (Blueprint $table) {
             
-            $table->string('numero');
-            $table->string('mensaje');
-            $table->string('type')->default('recibido');
+         
+            $table->foreignId('mensaje_hist_id')->nullable();
+
 
         });
     }
