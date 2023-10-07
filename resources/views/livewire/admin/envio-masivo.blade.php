@@ -119,7 +119,7 @@
                             <div class="text-md italic text-gray-400">
                                 @foreach ($users as $user)
                                     @if ($user->id==$item->emisor_id)
-                                        {{$user->name}}
+                                      Enviado por  {{$user->name}}
                                     @endif
                                 @endforeach
                             </div>
