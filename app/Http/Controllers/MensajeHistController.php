@@ -57,12 +57,12 @@ class MensajeHistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mensaje_hist $current)
-    {   $items=Mensaje::where('mensaje_hist_id',$current->id)->get();
+    public function edit(Mensaje_hist $mensaje_hist)
+    {   $items=Mensaje::where('mensaje_hist_id',$mensaje_hist->id)->get();
         $users=User::all();
-        $emisor=User::where('id',$current->emisor_id)->first();
+        $emisor=User::where('id',$mensaje_hist->emisor_id)->first();
 
-        return view('productors.envio-masivoedit',compact('current','items','users','emisor'));
+        return view('productors.envio-masivoedit',compact('mensaje_hist','items','users','emisor'));
     }
 
     /**
