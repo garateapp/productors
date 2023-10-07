@@ -14,7 +14,7 @@
                
                
                     <li class="py-5 border-b px-3 transition hover:bg-indigo-100">
-                        <a href="{{route('mensaje_hists.edit',$item)}}" class="flex justify-between items-center">
+                        <div class="flex justify-between items-center">
                         <h3 class="text-lg font-semibold">{{$item->tipo}} Para Productores De {{$item->especie}}</h3>
                         <div>
                             <p class="text-md text-gray-400 text-center">{{$item->created_at->format('d/m/Y')}}</p>
@@ -24,7 +24,7 @@
                                 <div class="text-md">Mensaje leido!</div>
                             @endif
                         </div>
-                        </a>
+                    </div>
                         <div class="text-md italic text-gray-400">
                             @foreach ($users as $user)
                                 @if ($user->id==$item->receptor_id)
