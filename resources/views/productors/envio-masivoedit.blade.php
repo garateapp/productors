@@ -1,8 +1,5 @@
 <x-app-layout>
-  
-    @section('css')
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css" integrity="sha512-3g+prZHHfmnvE1HBLwUnVuunaPOob7dpksI7/v6UnF/rnKGwHf/GdEq9K7iEN7qTtW+S0iivTcGpeTBqqB04wA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    @endsection
+ 
     
     <div class="my-12 inset-0 flex items-center justify-center">
         <div class="w-45 px-5 py-4 bg-white shadow-menu border-b-4 border-wedges-pink-500">
@@ -34,11 +31,13 @@
                 </ul>
                 </div>
           </div>
+           {!! Form::model($mensaje_hist, ['route'=>['mensaje_hists.update',$mensaje_hist],'method' => 'put', 'files'=> true , 'autocomplete'=>'off']) !!}   
+               
           <section>
             <h1 class="font-bold text-2xl">{{$mensaje_hist->tipo}} Para Productores De {{$mensaje_hist->especie}}</h1>
             <article class="mt-8 text-gray-500 leading-7 tracking-wider">
-                {!! Form::model($mensaje_hist, ['route'=>['mensaje_hists.update',$mensaje_hist],'method' => 'put', 'files'=> true , 'autocomplete'=>'off']) !!}   
-                    
+                {!! Form::label('observacion', 'Mensaje', ['class'=>'font-bold text-center']) !!}
+                         
                 {!! Form::textarea('observacion', null , ['class' => 'mt-1 block w-full']) !!}
                   
                 
@@ -135,8 +134,7 @@
         </ul>
       </section>
       <x-slot name="js">
-
-        <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
         <script>
         ClassicEditor
             .create( document.querySelector( '#observacion'), {

@@ -59,7 +59,14 @@
                      }
                  }
                  list.classList.toggle("hidden");
-             }</script>
+                }
+            </script>
+            
+            @isset($js)
+
+              {{$js}}
+  
+          @endisset
  
         </div>
 
@@ -67,11 +74,7 @@
 
         @livewireScripts
 
-        @isset($js)
-
-            {{$js}}
-
-        @endisset
+      
         
     </body>
 </html>

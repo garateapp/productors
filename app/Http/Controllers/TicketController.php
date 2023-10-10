@@ -35,10 +35,10 @@ class TicketController extends Controller
      */
     public function store(Request $request)
         {$request->validate([
-            'file'=>'obs'
+            'file'=>'informacion'
             ]);
         $mensaje=Ticket::create([
-            'observacion'=>$request->obs,
+            'observacion'=>$request->informacion,
             'tipo'=>'Consulta',
             'emisor_id'=>auth()->user()->id
         ]);
