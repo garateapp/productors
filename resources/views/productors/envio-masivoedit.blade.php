@@ -81,7 +81,7 @@
                         @endif
                     </div>
                 </div>
-                <div>
+                <div class="ml-4">
                           
                     {!! Form::file('file', ['class'=>'form-input w-full'.($errors->has('file')?' border-red-600':''), 'id'=>'file','accept'=>'file/*']) !!}
               
@@ -89,7 +89,7 @@
                
             </div>
             <div class="flex justify-center mt-2">
-                {!! Form::submit('Responder', ['class'=>'hover:bg-green-500 bg-green-600 text-white px-6 py-2 rounded-xl']) !!}
+                {!! Form::submit('Actualizar', ['class'=>'hover:bg-green-500 bg-green-600 text-white px-6 py-2 rounded-xl']) !!}
             </div>
         </div>
          

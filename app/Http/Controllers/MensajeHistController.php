@@ -6,6 +6,7 @@ use App\Models\Mensaje;
 use App\Models\Mensaje_hist;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\support\Str;
 
 class MensajeHistController extends Controller
 {
@@ -79,8 +80,19 @@ class MensajeHistController extends Controller
      */
     public function update(Request $request, Mensaje_hist $mensaje_hist)
     {
-          
-        $mensaje_hist->update($request->all());
+        if($request->file('file')){
+            $name = Str::random(5).$request->file('file')->getClientOriginalName();
+            $url = $request->file('file')->storeAs(
+                'app/archivos', $name
+            );
+        }else{
+            $url=$mensaje_hist->archivo;
+        }
+
+        $mensaje_hist->update([
+            'observacion'=>$request->observacion,
+            'archivo'=>$url
+        ]);
 
         return redirect()->back();
     }
