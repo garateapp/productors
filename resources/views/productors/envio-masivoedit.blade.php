@@ -65,7 +65,7 @@
           
     
             <div class="relative flex justify-between items-center mt-3">
-                <div>
+                <div class="flex">
                     <img class="block w-6 h-6 rounded-full" src="https://d29lra7z8g0m3a.cloudfront.net/e3faf733-c579-4c89-81cb-972135bef85d/img/testimonials/avatar-james.jpg" alt="">
                     <div class="ml-2">
                         @if ($emisor)
@@ -83,13 +83,19 @@
                     </div>
                 </div>
                 <div>
-                    {!! Form::submit('Responder', ['class'=>'hover:bg-green-500 bg-green-600 text-white px-6 py-2 ml-auto rounded-xl']) !!}
+                          
+                    {!! Form::file('file', ['class'=>'form-input w-full'.($errors->has('file')?' border-red-600':''), 'id'=>'file','accept'=>'file/*']) !!}
+              
                 </div>
-                
-              {!! Form::close() !!}
+               
             </div>
-
+            <div class="flex justify-center mt-2">
+                {!! Form::submit('Responder', ['class'=>'hover:bg-green-500 bg-green-600 text-white px-6 py-2 rounded-xl']) !!}
+            </div>
         </div>
+         
+                
+        {!! Form::close() !!}
     </div>
     
     <section class="flex justify-center pt-3 w-8/12 mx-auto bg-gray-50 h-full overflow-y-scroll">
