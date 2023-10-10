@@ -37,10 +37,11 @@
           <section>
             <h1 class="font-bold text-2xl">{{$mensaje_hist->tipo}} Para Productores De {{$mensaje_hist->especie}}</h1>
             <article class="mt-8 text-gray-500 leading-7 tracking-wider">
-                {!! Form::model($mensaje_hist, ['route'=>['mensaje_hists.update',$mensaje_hist],'method' => 'put', 'autocomplete'=>'off']) !!}   
+                {!! Form::model($mensaje_hist, ['route'=>['mensaje_hists.update',$mensaje_hist],'method' => 'put', 'files'=> true , 'autocomplete'=>'off']) !!}   
                     
                 {!! Form::textarea('observacion', null , ['class' => 'mt-1 block w-full']) !!}
-                     <p>{!!$mensaje_hist->observacion!!}</p>
+                  
+                
              
               <footer class="mt-12">
                 <p>Atte. Administración</p>
@@ -132,7 +133,7 @@
         <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
         <script>
         ClassicEditor
-            .create( document.querySelector( '#observacion' ), {
+            .create( document.querySelector( '#observacion'), {
                     toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'blockQuote' ],
                     heading: {
                     options: [
