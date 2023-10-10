@@ -48,7 +48,7 @@
             <ul class="flex justify-center space-x-4 mt-4">
                 <a href="{{route('download.mensaje_hist',$mensaje_hist)}}" target="_blank">  
                     <li class="w-max-3xl content-center my-auto flex h-10 border rounded-lg p-1 justify-between cursor-pointer transition duration-200 text-indigo-600 hover:bg-blue-100" >
-                        <h1 class="content-center my-auto">DESCARGAR ARCHIVO ({{$mensaje_hist->archivo}})</h1>
+                        <h1 class="content-center my-auto">DESCARGAR ARCHIVO</h1>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-10">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
                             d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
