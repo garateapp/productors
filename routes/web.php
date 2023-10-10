@@ -155,3 +155,5 @@ Route::resource('soporte', SoporteController::class)->names('soportes');
 Route::resource('ticket', TicketController::class)->names('tickets');
 
 Route::resource('mensaje_hist', MensajeHistController::class)->names('mensaje_hists');
+
+Route::get('download/mensaje/{mensaje_hist}.pdf', [MensajeHistController::class,'download'])->name('download.mensaje_hist');

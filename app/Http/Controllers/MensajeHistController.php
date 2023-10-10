@@ -19,6 +19,11 @@ class MensajeHistController extends Controller
         //
     }
 
+    public function download(Mensaje_hist $mensaje_hist)
+    {
+        return response()->download(storage_path('app/'.$mensaje_hist->informe));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
