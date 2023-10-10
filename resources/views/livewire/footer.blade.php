@@ -145,8 +145,8 @@
             <div>
                 {!! Form::open(['route'=>'tickets.store']) !!}
                 <div class="mb-4">
-                    {!! Form::label('observacion', '¿Necesitas Ayuda?',['class'=>'block mb-2 text-sm font-medium text-gray-900 dark:text-white']) !!}
-                    {!! Form::textarea('observacion', null , ['class' => 'block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', 'placeholder' => 'Escribe una pequeña explicación de lo que necesitas y te contactaremos a la brevedad']) !!}
+                    {!! Form::label('obs', '¿Necesitas Ayuda?',['class'=>'block mb-2 text-sm font-medium text-gray-900 dark:text-white']) !!}
+                    {!! Form::textarea('obs', null , ['class' => 'block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', 'placeholder' => 'Escribe una pequeña explicación de lo que necesitas y te contactaremos a la brevedad']) !!}
                     <div class="flex justify-center p-2">
                         {!! Form::submit('Enviar', ['class'=>'bg-transparent hover:bg-gray-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-500 hover:border-transparent rounded']) !!}
                     </div>

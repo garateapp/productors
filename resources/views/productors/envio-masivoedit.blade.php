@@ -37,7 +37,10 @@
           <section>
             <h1 class="font-bold text-2xl">{{$mensaje_hist->tipo}} Para Productores De {{$mensaje_hist->especie}}</h1>
             <article class="mt-8 text-gray-500 leading-7 tracking-wider">
-              <p>{!!$mensaje_hist->observacion!!}</p>
+                {!! Form::model($mensaje_hist, ['route'=>['mensaje_hists.update',$mensaje_hist],'method' => 'put', 'autocomplete'=>'off']) !!}   
+                    
+                {!! Form::textarea('observacion', null , ['class' => 'mt-1 block w-full']) !!}
+                     <p>{!!$mensaje_hist->observacion!!}</p>
              
               <footer class="mt-12">
                 <p>Atte. Administración</p>
@@ -60,23 +63,31 @@
           
           
     
-            <div class="relative flex items-center mt-3">
-                <img class="block w-6 h-6 rounded-full" src="https://d29lra7z8g0m3a.cloudfront.net/e3faf733-c579-4c89-81cb-972135bef85d/img/testimonials/avatar-james.jpg" alt="">
-                <div class="ml-2">
-                    @if ($emisor)
-                        <h4 class="text-16 font-medium">{{$emisor->name}}</h4>
-                    
-                    
-                        <span class="text-wedges-gray-500">
-                            @foreach ($emisor->roles as $role)
+            <div class="relative flex justify-between items-center mt-3">
+                <div>
+                    <img class="block w-6 h-6 rounded-full" src="https://d29lra7z8g0m3a.cloudfront.net/e3faf733-c579-4c89-81cb-972135bef85d/img/testimonials/avatar-james.jpg" alt="">
+                    <div class="ml-2">
+                        @if ($emisor)
+                            <h4 class="text-16 font-medium">{{$emisor->name}}</h4>
+                        
+                        
+                            <span class="text-wedges-gray-500">
+                                @foreach ($emisor->roles as $role)
+                                    
+                                        {{$role->name}}
                                 
-                                    {{$role->name}}
-                              
-                            @endforeach
-                        </span>
-                    @endif
+                                @endforeach
+                            </span>
+                        @endif
+                    </div>
                 </div>
+                <div>
+                    {!! Form::submit('Responder', ['class'=>'hover:bg-green-500 bg-green-600 text-white px-6 py-2 ml-auto rounded-xl']) !!}
+                </div>
+                
+              {!! Form::close() !!}
             </div>
+
         </div>
     </div>
     
@@ -116,5 +127,29 @@
          
         </ul>
       </section>
+      <x-slot name="js">
+
+        <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+        <script>
+        ClassicEditor
+            .create( document.querySelector( '#observacion' ), {
+                    toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'blockQuote' ],
+                    heading: {
+                    options: [
+                            { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                            { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                            { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+                        ]
+                    }
+                } )
+                .catch( error => {
+                    console.log( error );
+                    } );
+             
+              
+          
+        </script>
+  
+      </x-slot>
   
 </x-app-layout>
