@@ -16,6 +16,7 @@ class ProductionSearch extends Component
 {   use WithPagination;
     public $search, $ctd=25, $espec, $especieid, $especiename, $varie, $variedadid, $temporada;
     
+    
 
     public function render()
     {   
