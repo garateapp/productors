@@ -149,9 +149,9 @@ class SyncRecepcions extends Command
                         }
                     }*/
                 
-                    $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->first();
+                    $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->where('temporada','actual')->first();
                     if($cont){
-                       /* $cont->forceFill([
+                     $cont->forceFill([
                             'id_g_recepcion' => $id_g_recepcion,//1
                             'tipo_g_recepcion' => $tipo_g_recepcion,//2
                             'numero_g_recepcion' => $numero_g_recepcion,//3
@@ -168,8 +168,10 @@ class SyncRecepcions extends Command
                             'peso_neto' => $peso_neto,
                             'nota_calidad' => $nota_calidad,
                             'n_estado' => $n_estado,
+                            'temporada'=>'actual'
                         ])->save();
-                        if(IS_NULL($cont->calidad)){
+
+                        /*   if(IS_NULL($cont->calidad)){
                             Calidad::create([
                                 'recepcion_id'=>$cont->id
                             ]);
@@ -194,6 +196,7 @@ class SyncRecepcions extends Command
                                 'peso_neto' => $peso_neto,
                                 'nota_calidad' => $nota_calidad,
                                 'n_estado' => $n_estado,
+                                'temporada'=>'actual'
                             ]);
                             Calidad::create([
                                 'recepcion_id'=>$rec->id
