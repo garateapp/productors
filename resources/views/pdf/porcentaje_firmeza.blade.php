@@ -28,7 +28,7 @@
 
 
     
-	
+	{{-- comment 
      @php
         $categories=[];
         $series=[];
@@ -167,25 +167,9 @@
            
             
         @endforeach
-        @php
-
-         
-            if ($tdark>0) {
-                $d[]=$dark*100/$tdark;
-            }else{
-                $d[]=0;
-            }
-
-            if ($tblack>0) {
-                $b[]=$black*100/$tblack;
-            }else{
-                $b[]=0;
-            }
-        
-          
-        @endphp
+       
     @endforeach
- 
+ --}}
 
     @if ($recepcion->calidad->detalles)
         @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','LIGHT') as $detalle)
@@ -195,6 +179,28 @@
                         $l[]=$detalle->valor_ss;
                     }else{
                         $l[]=0;
+                    }
+                @endphp
+         
+        @endforeach
+        @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','DARK') as $detalle)
+          
+                @php
+                     if ($detalle->valor_ss>0) {
+                        $d[]=$detalle->valor_ss;
+                    }else{
+                        $d[]=0;
+                    }
+                @endphp
+         
+        @endforeach
+        @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','BLACK') as $detalle)
+          
+                @php
+                     if ($detalle->valor_ss>0) {
+                        $b[]=$detalle->valor_ss;
+                    }else{
+                        $b[]=0;
                     }
                 @endphp
          
