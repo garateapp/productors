@@ -23,6 +23,11 @@ class ProductionCc extends Component
 
 
     public $firmpro, $temporada, $calibres, $search, $ctd=25,$espec, $varie, $variedadid, $recep, $especieid, $materia_vegetal, $temperatura, $valor, $tipo_control, $fecha, $embalaje=1, $cantidad, $detalle, $porcentaje_muestra, $total_muestra=100, $detalles, $recepcion_id, $calidad, $nro_muestra, $parametros, $valores, $selectedparametro, $selectedvalor;
+    
+    public function mount($temporada){
+        $this->temporada=$temporada;
+    }
+    
     public function render()
     {   
         $recepcions=Recepcion::where('temporada', $this->temporada ) // Agregar esta condición

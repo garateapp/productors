@@ -791,6 +791,17 @@ class HomeController extends Controller
         return view('productors.production',compact('recepcions'));
     }
 
+    public function productionanterior()
+    {  $estadistica = Estadisticas::create([
+            'type'=> 'vistarecepcionadminanterior',
+            'user_id'=>auth()->user()->id
+        ]);
+
+        $recepcions=Recepcion::all();
+
+        return view('productors.productionanterior',compact('recepcions'));
+    }
+
     public function productionpropia()
     {  
         //$recepcions = $recepcions->json();
@@ -811,6 +822,17 @@ class HomeController extends Controller
         //$recepcions = $recepcions->json();
 
         return view('productors.productioncc');
+    }
+    public function productionccindexanterior()
+    {   
+        $estadistica = Estadisticas::create([
+                'type'=> 'recepcionccanterior',
+                'user_id'=>auth()->user()->id
+            ]);
+            
+        //$recepcions = $recepcions->json();
+
+        return view('productors.productionccanterior');
     }
 
     public function productioncc(Recepcion $recepcion)

@@ -19,10 +19,13 @@
                             <p class="text-sm font-medium leading-none text-white">ACTUAL</p>
                         </button>
                     @else
-                        <button wire:click="update_temporada" class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded">
+                    <a href="{{route('productioncc.index')}}">
+                        <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded">
                             <p class="text-sm font-medium leading-none text-white">ACTUAL</p>
                         </button>
+                    </a>
                     @endif
+
                    
                 </div>
                 <div>
@@ -31,9 +34,11 @@
                             <p class="text-sm font-medium leading-none text-white">ANTERIOR</p>
                         </button>
                     @else
-                        <button wire:click="update_temporada" class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded">
-                            <p class="text-sm font-medium leading-none text-white">ANTERIOR</p>
-                        </button>
+                        <a href="{{route('productioncc.index.anterior')}}">
+                            <button  class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded">
+                                <p class="text-sm font-medium leading-none text-white">ANTERIOR</p>
+                            </button>
+                        </a>
                     @endif
                 </div>
             </div>

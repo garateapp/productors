@@ -4,8 +4,7 @@
     </x-slot>
 
 
-    @livewire('productor.production-search',['temporada'=>'actual'])  
-
+    @livewire('productor.production-search',['temporada'=>'anterior'])              
      
 
 </x-app-layout>

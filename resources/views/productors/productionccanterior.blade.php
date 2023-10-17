@@ -3,9 +3,8 @@
        
     </x-slot>
 
-
-    @livewire('productor.production-search',['temporada'=>'actual'])  
-
+    @livewire('calidad.production-cc',['temporada'=>'anterior'])
+           
      
 
 </x-app-layout>

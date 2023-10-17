@@ -3,7 +3,7 @@
        
     </x-slot>
 
-    @livewire('calidad.production-cc')           
+    @livewire('calidad.production-cc',['temporada'=>'actual'])     
      
 
 </x-app-layout>
