@@ -28,7 +28,7 @@
 
 
     
-	{{-- comment
+	
      @php
         $categories=[];
         $series=[];
@@ -190,7 +190,7 @@
           
         @endphp
     @endforeach
- --}}
+ 
 
     @if ($recepcion->calidad->detalles)
         @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA') as $detalle)

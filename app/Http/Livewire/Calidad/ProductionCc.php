@@ -368,7 +368,7 @@ class ProductionCc extends Component
     }
 
     public function cargar_firmpro(Recepcion $recepcion){
-        
+        /*
         $firmpro1=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/BuscarRecepcionCloud?Numero_recepcion='.$recepcion->numero_g_recepcion);
         
         $firmpro1 = $firmpro1->json();
@@ -391,122 +391,122 @@ class ProductionCc extends Component
                 $tblack=0;
         
                 foreach ($firmpro1 as $items){
-                
                         $n=1;
                 
                     foreach ($items as $item){
                 
                     
-                
-                        if ($n==4) {
-                            $firmeza=$item;
-                        }
-                        if ($n==13) {
-                            $color=$item;
-                        }
-                        if ($n==14) {
-                            
-                                    if($color=='Rojo'){
-                                        $tlight+=1;
-                                    }
-                                    if($color=='Rojo caoba'){
-                                        $tdark+=1;
-                                    }
-                                    if($color=='Santina'){
-                                        $tdark+=1;
-                                    }
-                                    if($color=='Caoba oscuro'){
-                                        $tblack+=1;
-                                    }
-                                    if($color=='Negro'){
-                                        $tblack+=1;
-                                    }
-                                    
+                    
+                            if ($n==4) {
+                                $firmeza=$item;
+                            }
+                            if ($n==13) {
+                                $color=$item;
+                            }
+                            if ($n==14) {
+                                
+                                        if($color=='Rojo'){
+                                            $tlight+=1;
+                                        }
+                                        if($color=='Rojo caoba'){
+                                            $tdark+=1;
+                                        }
+                                        if($color=='Santina'){
+                                            $tdark+=1;
+                                        }
+                                        if($color=='Caoba oscuro'){
+                                            $tblack+=1;
+                                        }
+                                        if($color=='Negro'){
+                                            $tblack+=1;
+                                        }
+                                        
 
-                                if ($rango==279) {
-                                    if ($firmeza>=280) {
-                                        if($color=='Rojo'){
-                                            $light+=1;
-                                        }
-                                            if($color=='Rojo caoba'){
-                                                $dark+=1;
-                                            }
-                                            if($color=='Santina'){
-                                                $dark+=1;
-                                            }
-                                            if($color=='Caoba oscuro'){
-                                                $black+=1;
-                                            }
-                                            if($color=='Negro'){
-                                                $black+=1;
-                                        }
-                                    }      
-                                }
-                                if ($rango==219) {
-                                    if ($firmeza>=220 && $firmeza<280) {
-                                        if($color=='Rojo'){
-                                            $light+=1;
-                                        }
-                                            if($color=='Rojo caoba'){
-                                                $dark+=1;
-                                            }
-                                            if($color=='Santina'){
-                                                $dark+=1;
-                                            }
-                                            if($color=='Caoba oscuro'){
-                                                $black+=1;
-                                            }
-                                            if($color=='Negro'){
-                                                $black+=1;
-                                        }
-                                    }      
-                                }
-                                if ($rango==179) {
-                                    if ($firmeza>=180 && $firmeza<220) {
-                                        if($color=='Rojo'){
-                                            $light+=1;
-                                        }
-                                            if($color=='Rojo caoba'){
-                                                $dark+=1;
-                                            }
-                                            if($color=='Santina'){
-                                                $dark+=1;
-                                            }
-                                            if($color=='Caoba oscuro'){
-                                                $black+=1;
-                                            }
-                                            if($color=='Negro'){
-                                                $black+=1;
-                                        }
-                                    }      
-                                }
-                                if ($rango==1) {
-                                    if ($firmeza>=1 && $firmeza<180) {
+                                    if ($rango==279) {
+                                        if ($firmeza>=280) {
                                             if($color=='Rojo'){
                                                 $light+=1;
                                             }
-                                            if($color=='Rojo caoba'){
-                                                $dark+=1;
+                                                if($color=='Rojo caoba'){
+                                                    $dark+=1;
+                                                }
+                                                if($color=='Santina'){
+                                                    $dark+=1;
+                                                }
+                                                if($color=='Caoba oscuro'){
+                                                    $black+=1;
+                                                }
+                                                if($color=='Negro'){
+                                                    $black+=1;
                                             }
-                                            if($color=='Santina'){
-                                                $dark+=1;
+                                        }      
+                                    }
+                                    if ($rango==219) {
+                                        if ($firmeza>=220 && $firmeza<280) {
+                                            if($color=='Rojo'){
+                                                $light+=1;
                                             }
-                                            if($color=='Caoba oscuro'){
-                                                $black+=1;
+                                                if($color=='Rojo caoba'){
+                                                    $dark+=1;
+                                                }
+                                                if($color=='Santina'){
+                                                    $dark+=1;
+                                                }
+                                                if($color=='Caoba oscuro'){
+                                                    $black+=1;
+                                                }
+                                                if($color=='Negro'){
+                                                    $black+=1;
                                             }
-                                            if($color=='Negro'){
-                                                $black+=1;
-                                        }
-                                    }      
-                                }
+                                        }      
+                                    }
+                                    if ($rango==179) {
+                                        if ($firmeza>=180 && $firmeza<220) {
+                                            if($color=='Rojo'){
+                                                $light+=1;
+                                            }
+                                                if($color=='Rojo caoba'){
+                                                    $dark+=1;
+                                                }
+                                                if($color=='Santina'){
+                                                    $dark+=1;
+                                                }
+                                                if($color=='Caoba oscuro'){
+                                                    $black+=1;
+                                                }
+                                                if($color=='Negro'){
+                                                    $black+=1;
+                                            }
+                                        }      
+                                    }
+                                    if ($rango==1) {
+                                        if ($firmeza>=1 && $firmeza<180) {
+                                                if($color=='Rojo'){
+                                                    $light+=1;
+                                                }
+                                                if($color=='Rojo caoba'){
+                                                    $dark+=1;
+                                                }
+                                                if($color=='Santina'){
+                                                    $dark+=1;
+                                                }
+                                                if($color=='Caoba oscuro'){
+                                                    $black+=1;
+                                                }
+                                                if($color=='Negro'){
+                                                    $black+=1;
+                                            }
+                                        }      
+                                    }
+                                    
+
+
+                            }
                                 
-
-
-                        }
-                            
-                            $n+=1;
+                                $n+=1;
                 
-                        }
+                    }
+
                 }
                 
             
@@ -589,7 +589,7 @@ class ProductionCc extends Component
             
         
         }
-
+*/
         $this->calibres=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/BuscarConsolidadoFruitCloud?Numero_recepcion='.$recepcion->numero_g_recepcion);
         $this->calibres = $this->calibres->json();
 
