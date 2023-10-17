@@ -990,7 +990,7 @@ class HomeController extends Controller
                     
                         $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->first();
                         if($cont){
-                            /*
+                            
                             $cont->forceFill([
                                 'id_g_recepcion' => $id_g_recepcion,//1
                                 'tipo_g_recepcion' => $tipo_g_recepcion,//2
@@ -1007,10 +1007,11 @@ class HomeController extends Controller
                                 'cantidad' => $cantidad,
                                 'peso_neto' => $peso_neto,
                                 'nota_calidad' => $nota_calidad,
-                                'n_estado' => $n_estado
+                                'n_estado' => $n_estado,
+                                'temporada'=>'actual'
                                 
                             ])->save();
-                            if(IS_NULL($cont->calidad)){
+                          /*  if(IS_NULL($cont->calidad)){
                                 Calidad::create([
                                     'recepcion_id'=>$cont->id
                                 ]);
@@ -1034,7 +1035,8 @@ class HomeController extends Controller
                                     'cantidad' => $cantidad,
                                     'peso_neto' => $peso_neto,
                                     'nota_calidad' => $nota_calidad,
-                                    'n_estado' => $n_estado
+                                    'n_estado' => $n_estado,
+                                    'temporada'=>'actual'
                                     
                                 ]);
                                 Calidad::create([
@@ -1066,7 +1068,7 @@ class HomeController extends Controller
 
     public function production_refresh_anterior()
     {        
-        $productions=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/ObtenerRecepcion');
+        $productions=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/ObtenerRecepcionTemporadaPasada?IdTemporadaPasada=8');
         $productions = $productions->json();
         $ri=Recepcion::all();
         $totali=$ri->count();
@@ -1222,7 +1224,7 @@ class HomeController extends Controller
                     
                         $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->first();
                         if($cont){
-                            /*
+                            
                             $cont->forceFill([
                                 'id_g_recepcion' => $id_g_recepcion,//1
                                 'tipo_g_recepcion' => $tipo_g_recepcion,//2
@@ -1239,10 +1241,11 @@ class HomeController extends Controller
                                 'cantidad' => $cantidad,
                                 'peso_neto' => $peso_neto,
                                 'nota_calidad' => $nota_calidad,
-                                'n_estado' => $n_estado
+                                'n_estado' => $n_estado,
+                                'temporada'=>'anterior'
                                 
                             ])->save();
-                            if(IS_NULL($cont->calidad)){
+                          /*  if(IS_NULL($cont->calidad)){
                                 Calidad::create([
                                     'recepcion_id'=>$cont->id
                                 ]);
@@ -1266,7 +1269,8 @@ class HomeController extends Controller
                                     'cantidad' => $cantidad,
                                     'peso_neto' => $peso_neto,
                                     'nota_calidad' => $nota_calidad,
-                                    'n_estado' => $n_estado
+                                    'n_estado' => $n_estado,
+                                    'temporada'=>'anterior'
                                     
                                 ]);
                                 Calidad::create([
