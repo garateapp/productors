@@ -731,7 +731,7 @@
                                                         </td>
                                                         <td class="pl-5 whitespace-nowrap">
                                                             
-                                                                 @if ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA'))
+                                                                 @if ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->count())
                                                                     <button class="mb-4 focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-red-600 py-3 px-5 bg-red-100 rounded hover:bg-red-200 focus:outline-none">
                                                                         FIRMPRO CARGADO
                                                                     </button>
