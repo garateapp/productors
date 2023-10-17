@@ -1010,7 +1010,7 @@ class HomeController extends Controller
                             }
                         }
                     
-                        $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->first();
+                        $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->where('temporada','actual')->first();
                         if($cont){
                             
                             $cont->forceFill([
