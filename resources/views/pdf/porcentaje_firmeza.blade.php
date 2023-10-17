@@ -169,6 +169,11 @@
         @endforeach
         @php
 
+            if ($tlight>0) {
+                $l[]=$light*100/$tlight;
+            }else{
+                $l[]=0;
+            }
 
             if ($tdark>0) {
                 $d[]=$dark*100/$tdark;
@@ -191,11 +196,12 @@
         @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','LIGHT') as $detalle)
           
                 @php
+                /*
                      if ($detalle->valor_ss>0) {
                         $l[]=$detalle->valor_ss;
                     }else{
                         $l[]=0;
-                    }
+                    }*/
                 @endphp
          
         @endforeach
