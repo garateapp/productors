@@ -368,7 +368,7 @@ class ProductionCc extends Component
     }
 
     public function cargar_firmpro(Recepcion $recepcion){
-        /*
+        
         $firmpro1=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/BuscarRecepcionCloud?Numero_recepcion='.$recepcion->numero_g_recepcion);
         
         $firmpro1 = $firmpro1->json();
@@ -589,7 +589,7 @@ class ProductionCc extends Component
             
         
         }
-*/
+
         $this->calibres=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/BuscarConsolidadoFruitCloud?Numero_recepcion='.$recepcion->numero_g_recepcion);
         $this->calibres = $this->calibres->json();
 

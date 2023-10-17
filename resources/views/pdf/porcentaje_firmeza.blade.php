@@ -169,11 +169,6 @@
         @endforeach
         @php
 
-            if ($tlight>0) {
-                $l[]=$light*100/$tlight;
-            }else{
-                $l[]=0;
-            }
 
             if ($tdark>0) {
                 $d[]=$dark*100/$tdark;
@@ -193,18 +188,14 @@
  
 
     @if ($recepcion->calidad->detalles)
-        @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA') as $detalle)
+        @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','LIGHT') as $detalle)
           
                 @php
-                    $categories[]=$detalle->detalle_item;
-                    if ($recepcion->n_especie=='Cherries') {
-                        $series[]=$detalle->valor_ss;
-                        $rango1[]=$detalle->valor_ss;
-                    }else {
-                        $series[]=$detalle->porcentaje_muestra;
-                        $rango1[]=$detalle->porcentaje_muestra;
+                     if ($detalle->valor_ss>0) {
+                        $l[]=$detalle->valor_ss;
+                    }else{
+                        $l[]=0;
                     }
-                    
                 @endphp
          
         @endforeach
@@ -232,7 +223,6 @@
         @endphp
     @endif
     <script>
-        var categories = <?php echo json_encode($categories) ?>;
         var col = <?php echo json_encode($colors) ?>;
         var l = <?php echo json_encode($l) ?>;
         var d = <?php echo json_encode($d) ?>;
