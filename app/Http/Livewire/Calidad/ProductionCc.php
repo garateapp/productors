@@ -22,23 +22,27 @@ class ProductionCc extends Component
 {   use WithPagination;
 
 
-    public $firmpro, $calibres, $search, $ctd=25,$espec, $varie, $variedadid, $recep, $especieid, $materia_vegetal, $temperatura, $valor, $tipo_control, $fecha, $embalaje=1, $cantidad, $detalle, $porcentaje_muestra, $total_muestra=100, $detalles, $recepcion_id, $calidad, $nro_muestra, $parametros, $valores, $selectedparametro, $selectedvalor;
+    public $firmpro, $temporada, $calibres, $search, $ctd=25,$espec, $varie, $variedadid, $recep, $especieid, $materia_vegetal, $temperatura, $valor, $tipo_control, $fecha, $embalaje=1, $cantidad, $detalle, $porcentaje_muestra, $total_muestra=100, $detalles, $recepcion_id, $calidad, $nro_muestra, $parametros, $valores, $selectedparametro, $selectedvalor;
     public function render()
     {   
-        $recepcions=Recepcion::where('id_g_recepcion','LIKE','%'. $this->search .'%')
-        ->orwhere('tipo_g_recepcion','LIKE','%'. $this->search .'%')
-        ->orwhere('numero_g_recepcion','LIKE','%'. $this->search .'%')
-        ->orwhere('fecha_g_recepcion','LIKE','%'. $this->search .'%')
-        ->orwhere('id_emisor','LIKE','%'. $this->search .'%')
-        ->orwhere('r_emisor','LIKE','%'. $this->search .'%')
-        ->orwhere('n_emisor','LIKE','%'. $this->search .'%')
-        ->orwhere('Codigo_Sag_emisor','LIKE','%'. $this->search .'%')
-        ->orwhere('tipo_documento_recepcion','LIKE','%'. $this->search .'%')
-        ->orwhere('numero_documento_recepcion','LIKE','%'. $this->search .'%')
-        ->orwhere('n_especie','LIKE','%'. $this->search .'%')
-        ->orwhere('n_variedad','LIKE','%'. $this->search .'%')
-        ->orwhere('n_estado','LIKE','%'. $this->search .'%')
-        ->latest('id')->paginate($this->ctd);
+        $recepcions=Recepcion::where('temporada', $this->temporada ) // Agregar esta condición
+                ->where(function($query) {
+                    $query->where('id_g_recepcion','LIKE','%'. $this->search .'%')
+                        ->orwhere('tipo_g_recepcion','LIKE','%'. $this->search .'%')
+                        ->orwhere('numero_g_recepcion','LIKE','%'. $this->search .'%')
+                        ->orwhere('fecha_g_recepcion','LIKE','%'. $this->search .'%')
+                        ->orwhere('id_emisor','LIKE','%'. $this->search .'%')
+                        ->orwhere('r_emisor','LIKE','%'. $this->search .'%')
+                        ->orwhere('n_emisor','LIKE','%'. $this->search .'%')
+                        ->orwhere('Codigo_Sag_emisor','LIKE','%'. $this->search .'%')
+                        ->orwhere('tipo_documento_recepcion','LIKE','%'. $this->search .'%')
+                        ->orwhere('numero_documento_recepcion','LIKE','%'. $this->search .'%')
+                        ->orwhere('n_especie','LIKE','%'. $this->search .'%')
+                        ->orwhere('n_variedad','LIKE','%'. $this->search .'%')
+                        ->orwhere('n_estado','LIKE','%'. $this->search .'%');
+                })
+                ->latest('id')
+                ->paginate($this->ctd);
 
         $allsubrecepcions=Recepcion::where('id_g_recepcion','LIKE','%'. $this->search .'%')
         ->orwhere('tipo_g_recepcion','LIKE','%'. $this->search .'%')
@@ -63,6 +67,14 @@ class ProductionCc extends Component
 
         
         return view('livewire.calidad.production-cc',compact('especies','variedades','recepcions','allrecepcions','allsubrecepcions','sync'));
+    }
+
+    public function update_temporada(){
+        if($this->temporada=='actual'){
+            $this->temporada='anterior';
+        }else{
+            $this->temporada='actual';
+        }
     }
 
     public function espec_clean(){

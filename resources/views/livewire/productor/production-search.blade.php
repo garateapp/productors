@@ -12,7 +12,7 @@
     @endphp
     <div class="pb-12">
         <div class="sm:px-6 w-full">
-            <div class="flex justify-center my-4">
+            <div class="flex justify-center mt-2">
                 <div>
                     @if ($temporada=='actual')
                         <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:red-green-500 sm:mt-0 px-6 py-3 bg-red-500 hover:bg-red-500 focus:outline-none rounded">
