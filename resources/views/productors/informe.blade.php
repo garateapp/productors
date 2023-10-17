@@ -176,8 +176,11 @@
 			padding-right: 10px;
 			border-radius: 5px;
 			font-family: 'Roboto';"><h3  style="color: teal;">T°<br> Pulpa</h3>
-					
+					@if ($recepcion->calidad->detalles->where('tipo_detalle','ss')->where('temperatura','>',0)->first())
+						
 						{{$recepcion->calidad->detalles->where('tipo_detalle','ss')->where('temperatura','>',0)->first()->temperatura}}°C
+					@endif
+				
 					</td>
 				@endif
 
