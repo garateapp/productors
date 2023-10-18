@@ -793,7 +793,7 @@ class ProductionCc extends Component
                     }
                     $n+=1;
                 } 
-            if ($totalfrutos==$cantidad_frutos) {
+            if ($totalfrutos>=$cantidad_frutos) {
                 break;
             }                                             
             
