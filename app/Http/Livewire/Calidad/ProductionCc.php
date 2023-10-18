@@ -939,7 +939,7 @@ class ProductionCc extends Component
                     'detalle_item'=>'BLACK',
                     'fecha'=>$this->fecha                
                 ]);
-                Detalle::create([
+             /*   Detalle::create([
                     'calidad_id'=>$this->recep->calidad->id,
                     'embalaje'=>$this->embalaje,
                     'valor_ss'=>$subpromedio_black2/($negro+$caobaoscuro),
@@ -947,7 +947,7 @@ class ProductionCc extends Component
                     'tipo_detalle'=>'ss',
                     'detalle_item'=>'SBLACK',
                     'fecha'=>$this->fecha                
-                ]);
+                ]);*/
                 } else {
                 Detalle::create([
                     'calidad_id'=>$this->recep->calidad->id,
@@ -958,7 +958,7 @@ class ProductionCc extends Component
                     'detalle_item'=>'BLACK',
                     'fecha'=>$this->fecha                
                 ]);
-                Detalle::create([
+            /*    Detalle::create([
                     'calidad_id'=>$this->recep->calidad->id,
                     'embalaje'=>$this->embalaje,
                     'valor_ss'=>0,
@@ -966,7 +966,7 @@ class ProductionCc extends Component
                     'tipo_detalle'=>'ss',
                     'detalle_item'=>'SBLACK',
                     'fecha'=>$this->fecha                
-                ]);
+                ]);*/
             }
 
            
