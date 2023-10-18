@@ -749,7 +749,7 @@ class ProductionCc extends Component
         $caobaoscuro=0;
         $negro=0;
         $totalfrutos=0;
-        foreach ($this->firmpro as $items){    
+        foreach ($this->firmpro->reverse() as $items){    
             $totalfrutos+=1;   
             $n=1;   
 
