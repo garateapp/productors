@@ -748,8 +748,9 @@ class ProductionCc extends Component
         $santina=0;
         $caobaoscuro=0;
         $negro=0;
-
-        foreach ($this->firmpro as $items){              
+        $totalfrutos=0;
+        foreach ($this->firmpro as $items){    
+            $totalfrutos+=1;   
             $n=1;   
 
                 //CADA REGISTRO:
@@ -800,7 +801,7 @@ class ProductionCc extends Component
                 Detalle::create([
                     'calidad_id'=>$this->recep->calidad->id,
                     'embalaje'=>$this->embalaje,
-                    'valor_ss'=>$rojo*100/$cantidad_frutos,
+                    'valor_ss'=>$rojo*100/$totalfrutos,
                     'tipo_item'=>'COLOR DE CUBRIMIENTO',
                     'tipo_detalle'=>'cc',
                     'detalle_item'=>'ROJO',
@@ -811,7 +812,7 @@ class ProductionCc extends Component
                 Detalle::create([
                     'calidad_id'=>$this->recep->calidad->id,
                     'embalaje'=>$this->embalaje,
-                    'valor_ss'=>$rojocaoba*100/$cantidad_frutos,
+                    'valor_ss'=>$rojocaoba*100/$totalfrutos,
                     'tipo_item'=>'COLOR DE CUBRIMIENTO',
                     'tipo_detalle'=>'cc',
                     'detalle_item'=>'ROJO CAOBA',
@@ -822,7 +823,7 @@ class ProductionCc extends Component
                 Detalle::create([
                     'calidad_id'=>$this->recep->calidad->id,
                     'embalaje'=>$this->embalaje,
-                    'valor_ss'=>$santina*100/$cantidad_frutos,
+                    'valor_ss'=>$santina*100/$totalfrutos,
                     'tipo_item'=>'COLOR DE CUBRIMIENTO',
                     'tipo_detalle'=>'cc',
                     'detalle_item'=>'SANTINA',
@@ -833,7 +834,7 @@ class ProductionCc extends Component
                 Detalle::create([
                     'calidad_id'=>$this->recep->calidad->id,
                     'embalaje'=>$this->embalaje,
-                    'valor_ss'=>$caobaoscuro*100/$cantidad_frutos,
+                    'valor_ss'=>$caobaoscuro*100/$totalfrutos,
                     'tipo_item'=>'COLOR DE CUBRIMIENTO',
                     'tipo_detalle'=>'cc',
                     'detalle_item'=>'CAOBA OSCURO',
@@ -844,7 +845,7 @@ class ProductionCc extends Component
                 Detalle::create([
                     'calidad_id'=>$this->recep->calidad->id,
                     'embalaje'=>$this->embalaje,
-                    'valor_ss'=>$negro*100/$cantidad_frutos,
+                    'valor_ss'=>$negro*100/$totalfrutos,
                     'tipo_item'=>'COLOR DE CUBRIMIENTO',
                     'tipo_detalle'=>'cc',
                     'detalle_item'=>'NEGRO',
