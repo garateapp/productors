@@ -728,10 +728,10 @@ class ProductionCc extends Component
                             ]);
                         }
                     }
-                    
-                    break;
+                    $n+=1;
 
-                }                                              
+                }    
+                break;                                          
 
         }
 
