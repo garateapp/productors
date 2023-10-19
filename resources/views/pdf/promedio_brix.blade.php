@@ -98,7 +98,7 @@
             tooltip: {
                 shared: true,
                 headerFormat: '<span style="font-size: 15px">{point.point.name}</span><br/>',
-                pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y} %</b><br/>'
+                pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y} °Brix</b><br/>'
             },
             plotOptions: {
                 column: {
@@ -107,7 +107,7 @@
                 }
             },
             series: [{
-                name: 'Distribución: ',
+                name: '',
                 data: series,
                 colorByPoint: true,
                 dataLabels: [{
