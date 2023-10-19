@@ -280,7 +280,7 @@
 					}
 					if ($recepcion->n_especie=='Cherries') {
 						if ($item->detalle_item=='Fuera de Color') {
-							$col+=$item->porcentaje_muestra;
+							$col+=$item->valor_ss;
 						}
 					}
 					if ($recepcion->n_especie=='Pears') {
