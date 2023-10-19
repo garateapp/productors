@@ -300,6 +300,13 @@ class ProductionCc extends Component
        return redirect()->route('productioncc.index');
     }
 
+    public function revalidar_informe(Recepcion $recepcion) {
+        $recepcion->n_estado='CERRADO';
+        $recepcion->save();
+       
+       return redirect()->route('productioncc.index');
+    }
+
     public function reenviar_informe(Recepcion $recepcion) {
     
         $user=User::where('name',$recepcion->n_emisor)->first();

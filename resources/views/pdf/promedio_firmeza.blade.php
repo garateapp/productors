@@ -87,14 +87,14 @@
             yAxis: {
                 min: 0,
                 title: {
-                    text: '%'
+                    text: '(gf/mm)'
                 }
             },
             colors: col,
             tooltip: {
                 shared: true,
                 headerFormat: '<span style="font-size: 15px">{point.point.name}</span><br/>',
-                pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y} %</b><br/>'
+                pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y}</b><br/>'
             },
             plotOptions: {
                 column: {
@@ -103,7 +103,7 @@
                 }
             },
             series: [{
-                name: '% Según muestra',
+                name: '',
                 data: series,
                 colorByPoint: true,
                 dataLabels: [{
@@ -112,7 +112,7 @@
                     style: {
                         fontSize: '16px'
                     },
-                    format: '{point.y:.2f}%'
+                    format: '{point.y:.1f}'
                 }]
 
             }]
