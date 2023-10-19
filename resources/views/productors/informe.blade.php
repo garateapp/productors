@@ -278,6 +278,11 @@
 							$col+=$item->porcentaje_muestra;
 						}
 					}
+					if ($recepcion->n_especie=='Cherries') {
+						if ($item->detalle_item=='Fuera de Color') {
+							$col+=$item->porcentaje_muestra;
+						}
+					}
 					if ($recepcion->n_especie=='Pears') {
 						if ($item->detalle_item=='<40') {
 							$col+=$item->porcentaje_muestra;
