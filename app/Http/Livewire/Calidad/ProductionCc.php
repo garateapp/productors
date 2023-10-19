@@ -755,6 +755,7 @@ class ProductionCc extends Component
         $santina=0;
         $caobaoscuro=0;
         $negro=0;
+        $fueradecolor=0;
         $totalfrutos=0;
         foreach ($this->firmpro as $items){    
             $totalfrutos+=1;   
@@ -771,6 +772,9 @@ class ProductionCc extends Component
                     }
                     if($n==13){
                         $color=$item;
+                        if($color=='Fuera color'){
+                            $fueradecolor+=1;
+                        }
                         if($color=='Rojo'){
                             $rojo+=1;
                             $subpromedio_light+=$firmeza;
@@ -806,7 +810,17 @@ class ProductionCc extends Component
             
         }
 
-        
+            if($fueradecolor>0){
+                Detalle::create([
+                    'calidad_id'=>$this->recep->calidad->id,
+                    'embalaje'=>$this->embalaje,
+                    'valor_ss'=>$fueradecolor*100/$totalfrutos,
+                    'tipo_item'=>'COLOR DE CUBRIMIENTO',
+                    'tipo_detalle'=>'cc',
+                    'detalle_item'=>'Fuera de Color',
+                    'fecha'=>$this->fecha                
+                ]);
+            }
             if($rojo>0){
                 Detalle::create([
                     'calidad_id'=>$this->recep->calidad->id,
