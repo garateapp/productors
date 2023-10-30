@@ -704,7 +704,7 @@
 			</td>
 			<td style="background-color:#47ac34; color: white;"><b>PRECALIBRE:  </b>
 				@if ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','PRECALIBRE')->first())
-					{{$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','PRECALIBRE')->first()->cantidad}} %
+					{{$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','PRECALIBRE')->first()->porcentaje_muestra}} %
 				@elseif($recepcion->n_especie=='Orange' || $recepcion->n_especie=='Mandarinas')
 					{{$a}}%
 				@else
