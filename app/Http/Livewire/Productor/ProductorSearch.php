@@ -101,7 +101,7 @@ class ProductorSearch extends Component
         $this->user->ForceFill([
             'updated_at'=> Carbon::now()
         ])->save();
-        
+
         $this->user = User::find($this->cellid);
       /* 
         $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
@@ -136,8 +136,8 @@ class ProductorSearch extends Component
         ];
         
         Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
-
-*/
+    */
+    
     }
     public function phone_destroy(Telefono $telefono){
         $telefono->delete();
