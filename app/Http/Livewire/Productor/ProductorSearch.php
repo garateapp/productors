@@ -101,6 +101,7 @@ class ProductorSearch extends Component
         $this->user->ForceFill([
             'updated_at'=> Carbon::now()
         ])->save();
+        
         $this->user = User::find($this->cellid);
       /* 
         $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
