@@ -247,7 +247,7 @@
                         verticalAlign: 'middle'
                     },
             xAxis: {
-                categories: ['Muy Firme >280 - 1000 <br>Durofel >75','Firme 200 - 279 <br> Durofel 72 - 74.9','Sensible 180 - 199 <br> Durofel 65 - 69.9','Blando 0,1 - 179<br>  Durofel <654'],
+                categories: ['Muy Firme >280 - 1000 <br>Durofel >75','Firme 200 - 279 <br> Durofel 72 - 74.9','Sensible 180 - 199 <br> Durofel 65 - 69.9','Blando 0,1 - 179<br>  Durofel <65,4'],
                 crosshair: false
             },
             yAxis: {
