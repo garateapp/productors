@@ -39,7 +39,7 @@
                                     @csrf
                                     {!! Form::hidden('profile_photo_path', null) !!}
                             
-                                <div class=" mt-2">
+                                <div class="flex justify-center mt-2">
                                     <button  class="my-4 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
                                         <p class="text-sm font-medium leading-none text-white">Eliminar</p>
                                     </button>
