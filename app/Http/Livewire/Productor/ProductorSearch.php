@@ -21,6 +21,7 @@ class ProductorSearch extends Component
     {   $users = User::select(
         'users.id',
         'users.name',
+        'users.profile_photo_path',
         'users.rut',
         'users.email',
         'users.csg',
@@ -43,7 +44,7 @@ class ProductorSearch extends Component
                             ->orWhere('idprod', 'LIKE', '%' . $this->search . '%')
                             ->orWhere('user', 'LIKE', '%' . $this->search . '%');
                     })
-                    ->groupBy('users.id', 'users.name', 'users.rut', 'users.email', 'users.csg', 'users.idprod', 'users.user','users.kilos_netos','users.comercial', 'users.desecho', 'users.merma','users.exp', 'users.emnotification')
+                    ->groupBy('users.id', 'users.name','users.profile_photo_path', 'users.rut', 'users.email', 'users.csg', 'users.idprod', 'users.user','users.kilos_netos','users.comercial', 'users.desecho', 'users.merma','users.exp', 'users.emnotification')
                     ->orderByDesc(DB::raw('SUM(users.kilos_netos)'))
                     ->latest('users.id')
                     ->paginate($this->ctd);

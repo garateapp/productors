@@ -263,7 +263,14 @@
                                             {!! Form::close() !!}
                                         </td>
                                         <td class="pl-5 text-white ">
-                                            <a href="{{route('create.logo',$user)}}" class=" mt-2 whitespace-nowrap mx-4 text-xs focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">Agregar Logo</a>
+                                            @if ($user->profile_photo_path)
+                                                <a href="{{route('create.logo',$user)}}" class=" mt-2 whitespace-nowrap mx-4 text-xs focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 inline-flex items-start justify-start px-3 py-2 bg-red-500 hover:bg-red-600 focus:outline-none rounded">Ver Logo</a>
+                                        
+                                            @else
+                                                <a href="{{route('create.logo',$user)}}" class=" mt-2 whitespace-nowrap mx-4 text-xs focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">Agregar Logo</a>
+                                        
+                                            @endif
+                                                
                                         </td>
                                         <td class="pl-5">
                                             <div class="flex items-center">
