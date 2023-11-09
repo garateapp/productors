@@ -79,7 +79,7 @@
 		}
 	
 		.logo {
-			max-width: 200px;
+			max-width: 150px;
 			margin: 0 auto;
 			display: block;
 		}
