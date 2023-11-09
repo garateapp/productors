@@ -75,6 +75,12 @@ Route::get('informe/{recepcion}', [HomeController::class,'viewpdf'])->name('info
 
 Route::post('pass/{user}', [UserController::class,'password_rec'])->middleware('auth')->name('recuperar.contrasena');
 
+Route::get('createlogo/{user}', [UserController::class,'logo_create'])->middleware('auth')->name('create.logo');
+
+Route::post('updatelogo/{user}', [UserController::class,'logo_update'])->middleware('auth')->name('update.logo');
+
+Route::post('deletelogo/{user}', [UserController::class,'logo_delete'])->middleware('auth')->name('delete.logo');
+
 Route::resource('telefono', TelefonoController::class)->names('telefonos');
 
 Route::resource('role', RoleController::class)->names('admin.roles');

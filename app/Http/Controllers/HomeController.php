@@ -747,6 +747,7 @@ class HomeController extends Controller
             $calibrix=NULL;
         }
         //view()->share('productors.informe',$recepcion,$distribucion_calibre);
+        $user=User::where('name',$recepcion->n_emisor)->first();
  
         $presiones=Valor::where('parametro_id',16)->where('especie',$recepcion->n_especie)->orderby('id','ASC')->get();
         $almidons=Valor::where('parametro_id',8)->where('especie',$recepcion->n_especie)->orderby('id','ASC')->get();
@@ -763,7 +764,8 @@ class HomeController extends Controller
                                                     'promedio_brix'=>$promedio_brix,
                                                     'porcentaje_firmeza'=>$porcentaje_firmeza,
                                                     'almidons'=>$almidons,
-                                                    'calibrix'=>$calibrix]);
+                                                    'calibrix'=>$calibrix,
+                                                    'user'=>$user]);
 
         $pdfContent = $pdf->output();
         $filename = $recepcion->numero_g_recepcion.'-'.$recepcion->id_emisor.'.pdf';

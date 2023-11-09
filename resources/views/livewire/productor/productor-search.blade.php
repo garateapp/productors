@@ -76,6 +76,7 @@
                                 <th>CELULAR</th>
                                 <th>EMAIL</th>
                                 <th>ACTUALIZAR</th>
+                                <th>LOGO</th>
                                 <th>ULTIMA <br>MODIFICACIÓN</th>
                                 <th>ESPECIES</th>
                                 <th>KILOS</th>
@@ -242,8 +243,8 @@
                                                 
                                                 {!! Form::model($user, ['route'=>['productor.users.update',$user],'method' => 'put', 'autocomplete'=>'off']) !!}                
                                                 {!! Form::email('email', null , ['class' => 'mt-1 block w-full']) !!}
-                                                    
-                                                    @if ($user->emnotification==true)
+
+                                                @if ($user->emnotification==true)
                                                         <div class="flex justify-center items-center mt-1">
                                                             <p class="text-xd mr-2">Notificaciones </p><input type="checkbox"  wire:click="toggleEmailNotification({{ $user->id }})" checked >
                                                         </div>
@@ -257,9 +258,12 @@
                                                
                                             
                                         </td>
-                                        <td class="pl-5 text-white">
+                                        <td class="pl-5 text-white ">
                                             {!! Form::submit('Actualizar', ['class'=>'mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
                                             {!! Form::close() !!}
+                                        </td>
+                                        <td class="pl-5 text-white ">
+                                            <a href="{{route('create.logo',$user)}}" class=" mt-2 whitespace-nowrap mx-4 text-xs focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">Agregar Logo</a>
                                         </td>
                                         <td class="pl-5">
                                             <div class="flex items-center">

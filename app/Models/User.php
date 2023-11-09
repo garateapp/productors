@@ -38,6 +38,7 @@ class User extends Authenticatable
         'comercial',
         'desecho',
         'exp',
+        'profile_photo_path',
         'merma'
     ];
 
