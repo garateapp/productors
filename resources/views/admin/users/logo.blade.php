@@ -35,11 +35,13 @@
                                 <figure class="flex justify-center">               
                                     <img id="picture" class="w-20 h-20 object-cover object-center"src="{{$user->profile_photo_url}}" alt="">
                                 </figure>
-                                {!! Form::model($user, ['route'=>['productor.users.update',$user],'files'=>true ,'method' => 'put', 'autocomplete'=>'off']) !!}                
+                                {!! Form::model($user, ['route'=>['productor.users.update',$user] ,'method' => 'put', 'autocomplete'=>'off']) !!}                
                                     @csrf
-                                    {!! Form::hidden('profile_photo_path', null) !!}
+                                   
                             
                                 <div class="flex justify-center mt-2">
+                                    {!! Form::file('profile_photo_path', ['class'=>'hidden form-input w-full'.($errors->has('file')?' border-red-600':''), 'id'=>'file','accept'=>'image/*']) !!}
+                            
                                     <button  class="my-4 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
                                         <p class="text-sm font-medium leading-none text-white">Eliminar</p>
                                     </button>
