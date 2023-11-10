@@ -734,7 +734,13 @@
 				-
 				@endif
 			</td>
-		  	<td style="background-color:#47ac34; color: white;"><b>FRUTA BLANDA: </b></td>
+		  	<td style="background-color:#47ac34; color: white;"><b>FRUTA BLANDA: </b>
+				@if ($recepcion->calidad->detalles->where('tipo_item','FIRMEZAS')->where('detalle_item','FRUTA BLANDA')->first())
+					{{$recepcion->calidad->detalles->where('tipo_item','FIRMEZAS')->where('detalle_item','FRUTA BLANDA')->first()->porcentaje_muestra}} %
+				@else
+				-
+				@endif
+		</td>
 		
 	  </tr>
 	</table>
