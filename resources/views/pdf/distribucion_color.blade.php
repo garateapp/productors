@@ -134,17 +134,17 @@
                         enabled: true,
                         inside: false,
                         format: '{point.percentage:.1f} %',
-                        distance: -50,
+                        distance: 20,
                         filter: {
                             property: 'y',
                             operator: '>',
                             value: 1
                         },
                         style: {
-                            fontSize: '22px'
+                            fontSize: '18px'
                         },
                      },
-                     showInLegend: true
+                     showInLegend: false
                }
               
 
