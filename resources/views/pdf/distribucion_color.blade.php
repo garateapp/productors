@@ -144,7 +144,7 @@
                             fontSize: '18px'
                         },
                      },
-                     showInLegend: false
+                     showInLegend: true
                }
               
 
