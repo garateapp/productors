@@ -256,14 +256,14 @@
             column: {
                 dataLabels: {
                     enabled: true,
-                    inside: false,
+                    inside: true,
                     style: {
                         fontSize: '9px'
                     },
                     format: '{point.y:.1f}%'
                 },
                 pointPadding: 0.01,
-                borderWidth: 1.4
+                borderWidth: 1.6
             }
         },
             series: [
@@ -272,7 +272,7 @@
                 data: l,
                 dataLabels: [{
                     enabled: true,
-                    inside: false,
+                    inside: true,
                     style: {
                         fontSize: '9px'
                     },
@@ -283,7 +283,7 @@
                 data: d,
                 dataLabels: [{
                     enabled: true,
-                    inside: false,
+                    inside: true,
                     style: {
                         fontSize: '9px'
                     },
@@ -294,7 +294,7 @@
                 data: b,
                 dataLabels: [{
                     enabled: true,
-                    inside: false,
+                    inside: true,
                     style: {
                         fontSize: '9px'
                     },
