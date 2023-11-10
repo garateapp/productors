@@ -225,6 +225,7 @@
 				$a=0;
 				$b=0;
 				$c=0;
+				$e=0;
 			
 			if ($recepcion->n_especie=='Orange') {
 
@@ -298,9 +299,16 @@
 				}
 
 			}
-			@endphp
 			
-			{{number_format((100-($total+$a+$b+$col)),0)}} %
+			@endphp
+			@if ($recepcion->calidad->detalles->where('tipo_item','FIRMEZAS')->where('detalle_item','FRUTA BLANDA')->first())
+				@php
+					$e=	$recepcion->calidad->detalles->where('tipo_item','FIRMEZAS')->where('detalle_item','FRUTA BLANDA')->first()->porcentaje_muestra;
+				@endphp
+		
+			@endif
+			
+			{{number_format((100-($total+$a+$b+$col+$e)),0)}} %
 			
 				
 		</td>
