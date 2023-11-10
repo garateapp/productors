@@ -132,13 +132,13 @@
                      cursor: 'pointer',
                      dataLabels: {
                         enabled: true,
-                        inside: true,
+                        inside: false,
                         format: '{point.percentage:.1f} %',
                         distance: -50,
                         filter: {
                             property: 'y',
                             operator: '>',
-                            value: 5
+                            value: 1
                         },
                         style: {
                             fontSize: '22px'
