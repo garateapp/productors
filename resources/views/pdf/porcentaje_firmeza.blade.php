@@ -263,11 +263,19 @@
                 pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y} %</b><br/>'
             },
             plotOptions: {
-                column: {
-                    pointPadding: 0.01,
-                    borderWidth: 0.1
-                }
-            },
+            column: {
+                dataLabels: {
+                    enabled: true,
+                    inside: true,
+                    style: {
+                        fontSize: '12px'
+                    },
+                    format: '{point.y:.1f}%'
+                },
+                pointPadding: 0.01,
+                borderWidth: 0.1
+            }
+        },
             series: [
                 {
                 name: 'LIGHT',
