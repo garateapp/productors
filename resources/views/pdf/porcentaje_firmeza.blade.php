@@ -256,7 +256,7 @@
             column: {
                 dataLabels: {
                     enabled: true,
-                    inside: true,
+                    inside: false,
                     style: {
                         fontSize: '9px'
                     },
@@ -273,7 +273,7 @@
                 data: l,
                 dataLabels: [{
                     enabled: true,
-                    inside: true,
+                    inside: false,
                     style: {
                         fontSize: '9px'
                     },
@@ -284,7 +284,7 @@
                 data: d,
                 dataLabels: [{
                     enabled: true,
-                    inside: true,
+                    inside: false,
                     style: {
                         fontSize: '9px'
                     },
@@ -295,7 +295,7 @@
                 data: b,
                 dataLabels: [{
                     enabled: true,
-                    inside: true,
+                    inside: false,
                     style: {
                         fontSize: '9px'
                     },
