@@ -225,7 +225,8 @@
 
                 Highcharts.chart('container', {
             chart: {
-                type: 'column'
+                type: 'column',
+                  overflow: 'none'
             },
             title: {
                 text: '% Distribución de Firmezas por Segregación de Color'
@@ -261,7 +262,7 @@
                     },
                     format: '{point.y:.1f}%'
                 },
-                pointPadding: 0.01,
+                pointPadding: 0.2,
                 borderWidth: 0.1
             }
         },
