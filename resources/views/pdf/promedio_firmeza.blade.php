@@ -36,7 +36,7 @@
 
     @if ($recepcion->calidad->detalles)
         @foreach ($recepcion->calidad->detalles->where('tipo_item','FIRMEZAS') as $detalle)
-          
+            @if ($detalle->detalle_item=='LIGHT' || $detalle->detalle_item=='DARK' || $detalle->detalle_item=='BLACK')
                 @php
                     $categories[]=$detalle->detalle_item;
                     if ($recepcion->n_especie=='Cherries') {
@@ -46,7 +46,7 @@
                     }
                     
                 @endphp
-         
+            @endif
         @endforeach
     @endif
                     

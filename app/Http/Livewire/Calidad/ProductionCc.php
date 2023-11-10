@@ -607,6 +607,23 @@ class ProductionCc extends Component
                     if($n==5){
                         $cantidad_frutos=$item;
                     }
+                    if ($n==14) {
+                        if($item==0){
+                            
+                        }else{
+                          
+                            Detalle::create([
+                                'calidad_id'=>$this->recep->calidad->id,
+                                'embalaje'=>$this->embalaje,
+                                'valor_ss'=>floatval($item)*100,
+                                'porcentaje_muestra'=>floatval($item)*100,
+                                'tipo_item'=>'FIRMEZAS',
+                                'tipo_detalle'=>'ss',
+                                'detalle_item'=>'FRUTA BLANDA',
+                                'fecha'=>$this->fecha                
+                            ]);
+                        }
+                    }
                     if ($n==24) {
                         if($item==0){
                             
