@@ -258,12 +258,12 @@
                     enabled: true,
                     inside: false,
                     style: {
-                        fontSize: '10px'
+                        fontSize: '9px'
                     },
                     format: '{point.y:.1f}%'
                 },
                 pointPadding: 0.01,
-                borderWidth: 0.8
+                borderWidth: 0.9
             }
         },
             series: [
@@ -274,7 +274,7 @@
                     enabled: true,
                     inside: false,
                     style: {
-                        fontSize: '10px'
+                        fontSize: '9px'
                     },
                     format: '{point.y:.1f}%'
                 }]}
@@ -285,7 +285,7 @@
                     enabled: true,
                     inside: false,
                     style: {
-                        fontSize: '10px'
+                        fontSize: '9px'
                     },
                     format: '{point.y:.1f}%'
                 }]}
@@ -296,7 +296,7 @@
                     enabled: true,
                     inside: false,
                     style: {
-                        fontSize: '10px'
+                        fontSize: '9px'
                     },
                     format: '{point.y:.1f}%'
                 }]}
