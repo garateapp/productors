@@ -256,7 +256,7 @@
             column: {
                 dataLabels: {
                     enabled: true,
-                    inside: true,
+                    inside: false,
                     style: {
                         fontSize: '12px'
                     },
