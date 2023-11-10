@@ -263,7 +263,7 @@
                     format: '{point.y:.1f}%'
                 },
                 pointPadding: 0.01,
-                borderWidth: 0.4
+                borderWidth: 0.5
             }
         },
             series: [
@@ -272,7 +272,7 @@
                 data: l,
                 dataLabels: [{
                     enabled: true,
-                    inside: true,
+                    inside: false,
                     style: {
                         fontSize: '12px'
                     },
@@ -283,7 +283,7 @@
                 data: d,
                 dataLabels: [{
                     enabled: true,
-                    inside: true,
+                    inside: false,
                     style: {
                         fontSize: '12px'
                     },
@@ -294,7 +294,7 @@
                 data: b,
                 dataLabels: [{
                     enabled: true,
-                    inside: true,
+                    inside: false,
                     style: {
                         fontSize: '12px'
                     },
