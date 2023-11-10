@@ -263,8 +263,7 @@
                     format: '{point.y:.1f}%'
                 },
                 pointPadding: 0.01,
-                borderWidth: 1.6
-            }
+                borderWidth: 1.9            }
         },
             series: [
                 {
