@@ -140,7 +140,7 @@
 			</tr>
 		</table>
 		
-		<h1 style="background-color: rgb(0,0,0,0.5);" >Informe de Recepcion Guia N° {{$recepcion->numero_g_recepcion}} | {{$recepcion->n_especie}} | <br> {{$recepcion->n_variedad}} | Cuartel GE001 | CSG <br> {{$recepcion->Codigo_Zag_emisor}} </h1>
+		<h1 style="background-color: rgb(0,0,0,0.5);" >Informe de Recepcion Guia N° {{$recepcion->numero_g_recepcion}} | {{$recepcion->n_especie}} | <br> {{$recepcion->n_variedad}} | Cuartel GE001 | CSG <br> {{$recepcion->Codigo_Sag_emisor}} </h1>
 	</div>
 		<table style="width:100%; background-color:#ececec;">
   
