@@ -656,7 +656,7 @@
 --}}
 
     <script>
-      var espec = <?php echo json_encode($espec) ?>;
+      var espec = <?php echo json_encode($espec2) ?>;
          function setup() {
             return {
             activeTab: 0,
