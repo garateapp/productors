@@ -1031,7 +1031,6 @@ class HomeController extends Controller
                                 'cantidad' => $cantidad,
                                 'peso_neto' => $peso_neto,
                                 'nota_calidad' => $nota_calidad,
-                                'n_estado' => $n_estado,
                                 'temporada'=>'actual'
                                 
                             ])->save();
