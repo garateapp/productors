@@ -30,7 +30,7 @@ class SyncProcesos extends Command
      * @return int
      */
     public function handle()
-    {   $procesos=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Produccion/ObtenerProduccion');
+    {   $procesos=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Produccion/ObtenerProduccionTemporadaPasadas?IdTemporadaPasada=9');
         $procesos = $procesos->json();
 
         $ri=Proceso::all();
