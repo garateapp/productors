@@ -350,10 +350,8 @@ class HomeController extends Controller
                 if($m==8){
                     $id_empresa=$item;
                 }
-                if($m==9){
-                    $estado=$item;
-                }
-               if($m==9){
+                
+               if($m==8){
 
                         $cont=Proceso::where('n_proceso',$n_proceso)->first();
                         if($cont){
