@@ -609,7 +609,7 @@
 								@foreach ($d_calidad as $item)
 									<div> <div style="display: inline;"> {{$item->detalle_item}}  </div>			<div style="display: inline; text-align: right; justify-items: end;">{{$item->porcentaje_muestra}}%</div></div>
 									@php
-										$totalcalidad+=$item->cantidad;
+										$totalcalidad+=$item->porcentaje_muestra;
 									@endphp
 								@endforeach
 								<div style="background-color:#47ac34; color: white; font-size: 12px; padding-left: 3px;"> <div style=""><b> TOTAL DEFECTOS DE CALIDAD </b></div>			<div style="text-align: left; justify-items: end;"><b>{{$totalcalidad}}%</b></div></div>
@@ -625,7 +625,7 @@
 								@foreach ($d_condicion as $item)
 									<div> <div style="display: inline;"> {{$item->detalle_item}}  </div>			<div style="display: inline; text-align: right; justify-items: end;">{{$item->porcentaje_muestra}}%</div></div>
 									@php
-										$totalcondicion+=$item->cantidad;
+										$totalcondicion+=$item->porcentaje_muestra;
 									@endphp	
 								@endforeach
 								<div style="background-color:#47ac34; color: white; font-size: 12px; padding-left: 3px;"> <div style=""> <b>TOTAL DEFECTOS DE CONDICIÓN </b></div>			<div style="text-align: left; justify-items: end;"><b>{{$totalcondicion}}%</b></div></div>
