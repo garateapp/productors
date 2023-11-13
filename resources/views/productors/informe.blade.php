@@ -607,7 +607,7 @@
 							@endphp
 							@if ($d_calidad->count())
 								@foreach ($d_calidad as $item)
-									<div> <div style="display: inline;"> {{$item->detalle_item}}  </div>			<div style="display: inline; text-align: right; justify-items: end;">{{$item->cantidad}}%</div></div>
+									<div> <div style="display: inline;"> {{$item->detalle_item}}  </div>			<div style="display: inline; text-align: right; justify-items: end;">{{$item->porcentaje_muestra}}%</div></div>
 									@php
 										$totalcalidad+=$item->cantidad;
 									@endphp
@@ -623,7 +623,7 @@
 							@endphp
 							@if ($d_condicion->count())
 								@foreach ($d_condicion as $item)
-									<div> <div style="display: inline;"> {{$item->detalle_item}}  </div>			<div style="display: inline; text-align: right; justify-items: end;">{{$item->cantidad}}%</div></div>
+									<div> <div style="display: inline;"> {{$item->detalle_item}}  </div>			<div style="display: inline; text-align: right; justify-items: end;">{{$item->porcentaje_muestra}}%</div></div>
 									@php
 										$totalcondicion+=$item->cantidad;
 									@endphp	
