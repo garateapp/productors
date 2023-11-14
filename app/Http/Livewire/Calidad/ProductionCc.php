@@ -449,7 +449,7 @@ class ProductionCc extends Component
                                         }      
                                     }
                                     if ($rango==219) {
-                                        if ($firmeza>=220 && $firmeza<280) {
+                                        if ($firmeza>=200 && $firmeza<280) {
                                             if($color=='Rojo'){
                                                 $light+=1;
                                             }
@@ -468,7 +468,7 @@ class ProductionCc extends Component
                                         }      
                                     }
                                     if ($rango==179) {
-                                        if ($firmeza>=180 && $firmeza<220) {
+                                        if ($firmeza>=180 && $firmeza<200) {
                                             if($color=='Rojo'){
                                                 $light+=1;
                                             }
