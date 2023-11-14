@@ -399,7 +399,7 @@ class HomeController extends Controller
                             
                         }else{
                             
-                            if($estado=='Finalizado'){
+
                                 if($kilos_netos>0){
                                     if($categoria=='Sin Procesar'){
                                         $rec=Proceso::create([
@@ -461,7 +461,7 @@ class HomeController extends Controller
                                             
                                     }	
                                 }
-                            }
+                          
                         }
                     
                 }

@@ -122,7 +122,7 @@ class SyncProcesos extends Command
                             
                         }else{
                             
-                            if($estado=='Finalizado'){
+                        
                                 if($categoria=='Sin Procesar'){
                                     $rec=Proceso::create([
                                         'agricola' => $agricola,//1
@@ -182,7 +182,7 @@ class SyncProcesos extends Command
                                         ]);
                                         
                                 }	
-                            }
+                           
                         }
                     
                 }
