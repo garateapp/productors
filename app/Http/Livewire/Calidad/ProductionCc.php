@@ -382,7 +382,7 @@ class ProductionCc extends Component
 
      $categories=[];
      $series=[];
-     $rangos=[279,199,179,1];
+     $rangos=[279,219,179,1];
      $l=[];
      $d=[];
      $b=[];
