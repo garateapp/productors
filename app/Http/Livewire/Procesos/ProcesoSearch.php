@@ -26,20 +26,23 @@ class ProcesoSearch extends Component
         if($this->espec){
             if($this->varie){
                 $procesos=Proceso::where('variedad','LIKE', $this->varie->name)
-                         ->latest('n_proceso')->paginate($this->ctd);
+                            ->orderBy('n_proceso', 'asc') // Ordenar por ID de forma ascendente
+                            ->paginate($this->ctd);
             }else{
                     $procesos=Proceso::where('especie',$this->espec->name)
-                         ->latest('n_proceso')->paginate($this->ctd);
+                            ->orderBy('n_proceso', 'asc') // Ordenar por ID de forma ascendente
+                            ->paginate($this->ctd);
             }
 
         }else{
-            $procesos=Proceso::where('agricola','LIKE','%'. $this->search .'%')
-                ->orwhere('n_proceso','LIKE','%'. $this->search .'%')
-                ->orwhere('especie','LIKE','%'. $this->search .'%')
-                ->orwhere('variedad','LIKE','%'. $this->search .'%')
-                ->orwhere('fecha','LIKE','%'. $this->search .'%')
-                ->orwhere('id_empresa','LIKE','%'. $this->search .'%')
-                ->latest('n_proceso')->paginate($this->ctd);
+            $procesos=Proceso::where('agricola', 'LIKE', '%' . $this->search . '%')
+            ->orWhere('n_proceso', 'LIKE', '%' . $this->search . '%')
+            ->orWhere('especie', 'LIKE', '%' . $this->search . '%')
+            ->orWhere('variedad', 'LIKE', '%' . $this->search . '%')
+            ->orWhere('fecha', 'LIKE', '%' . $this->search . '%')
+            ->orWhere('id_empresa', 'LIKE', '%' . $this->search . '%')
+            ->orderBy('n_proceso', 'asc') // Ordenar por ID de forma ascendente
+            ->paginate($this->ctd);
         }
         
         $procesosall=Proceso::all();
