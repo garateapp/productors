@@ -565,7 +565,7 @@
 		@endif
 	@endif
 		
-	@if ($recepcion->n_especie!='Pears' && $recepcion->n_especie!='Peaches' && $recepcion->n_especie!='Apples' && $recepcion->n_especie!='Nectarines' && $recepcion->n_especie!='Plums' && $recepcion->n_especie!='Membrillos' && $recepcion->n_especie!='Cherries') 
+	@if ($recepcion->n_especie!='Pears' && $recepcion->n_especie!='Peaches' && $recepcion->n_especie!='Apples' && $recepcion->n_especie!='Nectarines' && $recepcion->n_especie!='Plums' && $recepcion->n_especie!='Membrillos' ) 
 		  <div class="page-break"></div>
 	@endif
 
