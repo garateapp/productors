@@ -807,7 +807,7 @@ class ProductionCc extends Component
                             $subpromedio_dark+=$firmeza;
                             $subpromedio_dark2+=$calibre;
                         }
-                        if($color=='Caoba oscuro'){
+                        if($color=='Caoba oscuro'|| $color=='Caoba Oscuro'){
                             $caobaoscuro+=1;
                             $subpromedio_black+=$firmeza;
                             $subpromedio_black2+=$calibre;
