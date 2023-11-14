@@ -126,11 +126,16 @@
 		<table style="width:100%;">
 			<tr>
 				<td>
-					@if ($user->profile_photo_path)
-						<img src="{{'https://appgreenex.cl/storage/'.$user->profile_photo_path}}" alt="Logo de la empresa" class="logo">
+					@if ($user)
+						@if ($user->profile_photo_path)
+							<img src="{{'https://appgreenex.cl/storage/'.$user->profile_photo_path}}" alt="Logo de la empresa" class="logo">
+						@else
+							<img src="{{asset('image/logogreenex.png')}}" alt="Logo de la empresa" class="logo">
+						@endif
 					@else
 						<img src="{{asset('image/logogreenex.png')}}" alt="Logo de la empresa" class="logo">
 					@endif
+					
 					
 				</td>
 				<td>
@@ -762,11 +767,17 @@
 		</div>		
 	</div>
 	<div style="background-color:#bad047; color: white; font-size: 12px; padding-left: 3px; border-bottom: 5px solid #47ac34;"> <div style="text-align: center;">
-	@if ($user->profile_photo_path)
-		<img src="{{'https://appgreenex.cl/storage/'.$user->profile_photo_path}}" alt="Logo de la empresa" class="logo">
+	
+	@if ($user)
+		@if ($user->profile_photo_path)
+			<img src="{{'https://appgreenex.cl/storage/'.$user->profile_photo_path}}" alt="Logo de la empresa" class="logo">
+		@else
+			<img src="{{asset('image/logogreenex.png')}}" alt="Logo de la empresa" class="logo">
+		@endif
 	@else
 		<img src="{{asset('image/logogreenex.png')}}" alt="Logo de la empresa" class="logo">
 	@endif
+		
 		
 	
 	</div>		</div>
