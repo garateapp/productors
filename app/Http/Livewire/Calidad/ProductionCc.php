@@ -497,7 +497,7 @@ class ProductionCc extends Component
                                                 if($color=='Santina'){
                                                     $dark+=1;
                                                 }
-                                                if($color=='Caoba oscuro'){
+                                                if($color=='Caoba oscuro' || $color=='Caoba Oscuro'){
                                                     $black+=1;
                                                 }
                                                 if($color=='Negro'){
