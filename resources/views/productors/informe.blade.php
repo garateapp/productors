@@ -102,21 +102,21 @@
 			@if ($d_calidad)
 			@foreach ($d_calidad as $item)
 				@php
-					$total+=$item->cantidad;
+					$total+=$item->porcentaje_muestra;
 				@endphp	
 			@endforeach
 			@endif
 			@if ($d_condicion)
 			@foreach ($d_condicion as $item)
 				@php
-					$total+=$item->cantidad;
+					$total+=$item->porcentaje_muestra;
 				@endphp	
 			@endforeach
 			@endif
 			@if ($d_plaga)
 			@foreach ($d_plaga as $item)
 				@php
-					$total+=$item->cantidad;
+					$total+=$item->porcentaje_muestra;
 				@endphp	
 			@endforeach
 			@endif
@@ -639,9 +639,9 @@
 							@endphp
 							@if ($d_plaga->count())
 								@foreach ($d_plaga as $item)
-									<div> <div style="display: inline;"> {{$item->detalle_item}}  </div>			<div style="display: inline; text-align: right; justify-items: end;">{{$item->cantidad}}%</div></div>
+									<div> <div style="display: inline;"> {{$item->detalle_item}}  </div>			<div style="display: inline; text-align: right; justify-items: end;">{{$item->porcentaje_muestra}}%</div></div>
 									@php
-										$totalplaga+=$item->cantidad;
+										$totalplaga+=$item->porcentaje_muestra;
 									@endphp	
 								@endforeach
 								<div style="background-color:#47ac34; color: white; font-size: 12px; padding-left: 3px;"> <div style=""><b> TOTAL DAÑOS DE PLAGA </b></div>			<div style="text-align: left; justify-items: end;"><b>{{$totalplaga}}%</b></div></div>
@@ -727,7 +727,7 @@
 			</td>
 			<td style="background-color:#47ac34; color: white;"><b>SOBRECALIBRE:  </b>
 				@if ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','SOBRECALIBRE')->first())
-					{{$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','SOBRECALIBRE')->first()->cantidad}} %
+					{{$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','SOBRECALIBRE')->first()->porcentaje_muestra}} %
 				@elseif($recepcion->n_especie=='Orange' || $recepcion->n_especie=='Mandarinas')
 					{{$b}}%
 				@else
