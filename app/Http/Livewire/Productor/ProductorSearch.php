@@ -104,7 +104,7 @@ class ProductorSearch extends Component
         ])->save();
 
         $this->user = User::find($this->cellid);
-      /* 
+      
         $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
         //TOKEN QUE NOS DA FACEBOOK
         $token = env('WS_TOKEN');
@@ -137,7 +137,7 @@ class ProductorSearch extends Component
         ];
         
         Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
-    */
+    
     
     }
     public function phone_destroy(Telefono $telefono){
