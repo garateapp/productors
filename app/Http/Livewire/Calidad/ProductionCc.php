@@ -62,7 +62,8 @@ class ProductionCc extends Component
         ->orwhere('n_especie','LIKE','%'. $this->search .'%')
         ->orwhere('n_variedad','LIKE','%'. $this->search .'%')
         ->orwhere('n_estado','LIKE','%'. $this->search .'%')
-        ->latest('id')->get();
+        ->orderby('numero_g_recepcion','desc')
+        ->get();
         $allrecepcions=Recepcion::all();
         $sync=Sync::where('entidad','RECEPCIONES')
         ->orderby('id','DESC')
