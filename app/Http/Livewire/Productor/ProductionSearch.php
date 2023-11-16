@@ -42,6 +42,7 @@ class ProductionSearch extends Component
                 ->paginate($this->ctd);
 
         $allsubrecepcions=Recepcion::where('id_g_recepcion','LIKE','%'. $this->search .'%')
+        ->where('temporada', $this->temporada)
         ->orwhere('tipo_g_recepcion','LIKE','%'. $this->search .'%')
         ->orwhere('numero_g_recepcion','LIKE','%'. $this->search .'%')
         ->orwhere('fecha_g_recepcion','LIKE','%'. $this->search .'%')
