@@ -38,7 +38,7 @@ class ProductionSearch extends Component
                         ->orwhere('n_variedad','LIKE','%'. $this->search .'%')
                         ->orwhere('n_estado','LIKE','%'. $this->search .'%');
                 })
-                ->latest('id')
+                ->orderby('lote','desc')
                 ->paginate($this->ctd);
 
         $allsubrecepcions=Recepcion::where('temporada', $this->temporada)
@@ -55,7 +55,7 @@ class ProductionSearch extends Component
         ->orwhere('n_especie','LIKE','%'. $this->search .'%')
         ->orwhere('n_variedad','LIKE','%'. $this->search .'%')
         ->orwhere('n_estado','LIKE','%'. $this->search .'%')
-        ->latest('id')->get();
+        ->latest('kite')->get();
         
         $allrecepcions=Recepcion::where('temporada', $this->temporada)->get();
         $sync=Sync::where('entidad','RECEPCIONES')
