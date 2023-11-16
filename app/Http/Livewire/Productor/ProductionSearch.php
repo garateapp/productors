@@ -56,7 +56,7 @@ class ProductionSearch extends Component
         ->orwhere('n_estado','LIKE','%'. $this->search .'%')
         ->latest('id')->get();
         
-        $allrecepcions=Recepcion::all();
+        $allrecepcions=Recepcion::where('temporada', $this->temporada)->get();
         $sync=Sync::where('entidad','RECEPCIONES')
         ->orderby('id','DESC')
         ->first();
