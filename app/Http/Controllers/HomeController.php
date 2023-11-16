@@ -1011,7 +1011,7 @@ class HomeController extends Controller
                             }
                         }
                     
-                        $cont=Recepcion::where('numero_g_recepcion',$id_g_recepcion)->where('temporada','actual')->first();
+                        $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->where('temporada','actual')->first();
                         if($cont){
                             
                             $cont->forceFill([
@@ -1244,7 +1244,7 @@ class HomeController extends Controller
                             }
                         }
                     
-                        $cont=Recepcion::where('numero_g_recepcion',$id_g_recepcion)->where('temporada','anterior')->first();
+                        $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->where('temporada','anterior')->first();
                         if($cont){
                             
                             $cont->forceFill([
