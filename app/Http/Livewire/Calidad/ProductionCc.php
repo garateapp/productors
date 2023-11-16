@@ -49,7 +49,8 @@ class ProductionCc extends Component
                 ->latest('id')
                 ->paginate($this->ctd);
 
-        $allsubrecepcions=Recepcion::where('id_g_recepcion','LIKE','%'. $this->search .'%')
+        $allsubrecepcions=Recepcion::where('temporada', $this->temporada )
+        ->where('id_g_recepcion','LIKE','%'. $this->search .'%')
         ->orwhere('tipo_g_recepcion','LIKE','%'. $this->search .'%')
         ->orwhere('numero_g_recepcion','LIKE','%'. $this->search .'%')
         ->orwhere('fecha_g_recepcion','LIKE','%'. $this->search .'%')
