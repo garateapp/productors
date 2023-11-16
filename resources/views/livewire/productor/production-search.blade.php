@@ -107,7 +107,7 @@
                     <div class="flex items-center justify-center">
                         <div class="flex-shrink-0 text-center">
                            <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($cant)}}</span>
-                           <h3 class="text-base font-normal text-gray-500">Kilos</h3>
+                           <h3 class="text-base font-normal text-gray-500">Kilos Totales</h3>
                         </div>
                        
                      </div>

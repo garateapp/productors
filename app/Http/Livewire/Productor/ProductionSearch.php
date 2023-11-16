@@ -41,22 +41,26 @@ class ProductionSearch extends Component
                 ->latest('id')
                 ->paginate($this->ctd);
 
-        $allsubrecepcions=Recepcion::where('id_g_recepcion','LIKE','%'. $this->search .'%')
-        ->orwhere('tipo_g_recepcion','LIKE','%'. $this->search .'%')
-        ->orwhere('numero_g_recepcion','LIKE','%'. $this->search .'%')
-        ->orwhere('fecha_g_recepcion','LIKE','%'. $this->search .'%')
-        ->orwhere('id_emisor','LIKE','%'. $this->search .'%')
-        ->orwhere('r_emisor','LIKE','%'. $this->search .'%')
-        ->orwhere('n_emisor','LIKE','%'. $this->search .'%')
-        ->orwhere('Codigo_Sag_emisor','LIKE','%'. $this->search .'%')
-        ->orwhere('tipo_documento_recepcion','LIKE','%'. $this->search .'%')
-        ->orwhere('numero_documento_recepcion','LIKE','%'. $this->search .'%')
-        ->orwhere('n_especie','LIKE','%'. $this->search .'%')
-        ->orwhere('n_variedad','LIKE','%'. $this->search .'%')
-        ->orwhere('n_estado','LIKE','%'. $this->search .'%')
-        ->latest('id')->get();
+            $allsubrecepcions = Recepcion::where('temporada', $this->temporada)
+                ->where(function ($query) {
+                    $query->where('id_g_recepcion','LIKE','%'. $this->search .'%')
+                        ->orWhere('tipo_g_recepcion','LIKE','%'. $this->search .'%')
+                        ->orWhere('numero_g_recepcion','LIKE','%'. $this->search .'%')
+                        ->orWhere('fecha_g_recepcion','LIKE','%'. $this->search .'%')
+                        ->orWhere('id_emisor','LIKE','%'. $this->search .'%')
+                        ->orWhere('r_emisor','LIKE','%'. $this->search .'%')
+                        ->orWhere('n_emisor','LIKE','%'. $this->search .'%')
+                        ->orWhere('Codigo_Sag_emisor','LIKE','%'. $this->search .'%')
+                        ->orWhere('tipo_documento_recepcion','LIKE','%'. $this->search .'%')
+                        ->orWhere('numero_documento_recepcion','LIKE','%'. $this->search .'%')
+                        ->orWhere('n_especie','LIKE','%'. $this->search .'%')
+                        ->orWhere('n_variedad','LIKE','%'. $this->search .'%')
+                        ->orWhere('n_estado','LIKE','%'. $this->search .'%');
+                })
+                ->latest('id')
+                ->get();
         
-        $allrecepcions=Recepcion::all();
+        $allrecepcions=Recepcion::where('temporada', $this->temporada)->get();
         $sync=Sync::where('entidad','RECEPCIONES')
         ->orderby('id','DESC')
         ->first();
