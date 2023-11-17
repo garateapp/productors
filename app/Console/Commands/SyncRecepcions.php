@@ -149,7 +149,8 @@ class SyncRecepcions extends Command
                         }
                     }*/
                 
-                    $cont=Recepcion::where('numero_g_recepcion',$id_g_recepcion)->where('temporada','actual')->first();
+                    $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->where('temporada','actual')->first();
+          
                     if($cont){
                      $cont->forceFill([
                             'id_g_recepcion' => $id_g_recepcion,//1
