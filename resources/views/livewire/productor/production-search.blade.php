@@ -197,7 +197,7 @@
                             
 
                                         @if ($recepcion->numero_g_recepcion)
-                                        {{$recepcion->id - $recepcion->numero_g_recepcion}}
+                                        {{$recepcion->id.'-'.$recepcion->numero_g_recepcion}}
                                         @endif
                                         
                                 </p>
