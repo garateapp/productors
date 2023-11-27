@@ -37,7 +37,7 @@
   <p>Estimado Productor,</p>
   <p>Hemos procesado la siguiente fruta en nuestra planta:</p>
   <ul>
-    <li>Especie: Manzanas</li>
+    <li>Especie: {{$proceso->especie}}</li>
     <li>Variedad: Royal Gala</li>
     <li>N° Proceso: 1314</li>
     <li>Kilos: 4.415</li>
