@@ -35,15 +35,15 @@
 </div>
 <div id="contenido">
   <p>Estimado Productor,</p>
-  <p>Hemos procesado la siguiente fruta en nuestra planta:</p>
+  <p>Hemos recibido la siguiente fruta en nuestra planta:</p>
   <ul>
-    <li>Especie: {{$proceso->especie}}</li>
-    <li>Variedad: {{$proceso->variedad}}</li>
-    <li>N° Proceso: {{$proceso->n_proceso}}</li>
-    <li>Kilos:  {{number_format($proceso->kilos_netos)}}</li>
-    <li>Fecha Proceso: {{date('d M Y g:i a', strtotime($proceso->fecha))}}</li>
+    <li>Especie: {{$recepcion->n_especie}}</li>
+    <li>Variedad: {{$recepcion->n_variedad}}</li>
+    <li>N° Recepción:   {{$recepcion->numero_g_recepcion}}</li>
+    <li>Kilos: {{number_format($recepcion->peso_neto)}}</li>
+    <li>Fecha Recepción: {{date('d M Y g:i a', strtotime($recepcion->fecha_g_recepcion))}}</li>
   </ul>
-  <p>Adjuntamos informe de proceso, para mayor información ingresar a nuestro portal de productores <a href="http://www.greenex.cl">www.greenex.cl</a>.</p>
+  <p>Adjuntamos informe de recepción, para mayor información ingresar a nuestro portal de productores <a href="http://www.greenex.cl">www.greenex.cl</a>.</p>
   <p>Saludos,</p>
   <p>Equipo Greenex</p>
 </div>

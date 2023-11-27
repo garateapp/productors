@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Models\Proceso;
+use App\Models\Recepcion;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -11,20 +11,20 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class NotificacionMailable extends Mailable
+class RecepcionMailable extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $proceso;
+    public $recepcion;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Proceso $proceso)
+    public function __construct(Recepcion $recepcion)
     {
-        $this->proceso = $proceso;
+        $this->recepcion = $recepcion;
     }
 
     /**
@@ -36,7 +36,7 @@ class NotificacionMailable extends Mailable
     {
         return new Envelope(
             from: new Address('contacto@greenex.cl','Soporte Greenex'),
-            subject: 'Nuevo Proceso',
+            subject: 'Nueva Recepción',
         );
     }
 
@@ -48,7 +48,7 @@ class NotificacionMailable extends Mailable
     public function content()
     {
         return new Content(
-            view: 'mail.notificacion',
+            view: 'mail.recepcion',
         );
     }
 

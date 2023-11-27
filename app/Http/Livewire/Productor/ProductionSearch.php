@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Productor;
 
+use App\Mail\RecepcionMailable;
 use App\Models\Detalle;
 use App\Models\Especie;
 use App\Models\Recepcion;
@@ -9,6 +10,7 @@ use App\Models\Sync;
 use App\Models\User;
 use App\Models\Variedad;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -82,7 +84,9 @@ class ProductionSearch extends Component
     
         $user=User::where('name',$recepcion->n_emisor)->first();
 
-        
+        if($user->emnotification==TRUE){
+            Mail::to($user->email)->send(new RecepcionMailable($recepcion));
+        }
 
         if($user){
             
