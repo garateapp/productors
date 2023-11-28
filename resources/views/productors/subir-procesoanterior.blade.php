@@ -15,22 +15,23 @@
               </div>  
               <div class="flex justify-center mt-2">
                   <div>
-                          <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:red-green-500 sm:mt-0 px-6 py-3 bg-red-500 hover:bg-red-500 focus:outline-none rounded">
-                              <p class="text-sm font-medium leading-none text-white">ACTUAL</p>
-                          </button>
-                     
+                    <a href="{{route('subir.procesos')}}">
+                        <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded">
+                            <p class="text-sm font-medium leading-none text-white">ACTUAL</p>
+                        </button>
+                    </a>
                     
                   </div>
                   <div>
-                          <a href="{{route('subir.procesos.anterior')}}">
-                              <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded">
-                                  <p class="text-sm font-medium leading-none text-white">ANTERIOR</p>
-                              </button>
-                          </a>
+                         
+                            <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:red-green-500 sm:mt-0 px-6 py-3 bg-red-500 hover:bg-red-500 focus:outline-none rounded">
+                                <p class="text-sm font-medium leading-none text-white">ANTERIOR</p>
+                            </button>
+                         
                   </div>
               </div>
-              <h1 class="text-center text-2xl py-12">Cargar Archivos de Procesos Temporada Actual</h1>
-                <form action="{{route('proceso.upload')}}"
+              <h1 class="text-center text-2xl py-12">Cargar Archivos de Procesos Temporada Anterior</h1>
+                <form action="{{route('proceso.upload.anterior')}}"
                 method="POST"
                 class="dropzone"
                 id="my-awesome-dropzone">

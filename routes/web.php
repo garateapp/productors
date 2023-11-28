@@ -113,9 +113,13 @@ Route::get('consolidado/refresh', [HomeController::class,'sync_consolidado'])->m
 
 Route::get('subir-proceso', [HomeController::class,'subir_procesos'])->middleware('auth')->name('subir.procesos');
 
+Route::get('subir-proceso/anterior', [HomeController::class,'subir_procesos_anterior'])->middleware('auth')->name('subir.procesos.anterior');
+
 Route::get('subir-recepciones', [HomeController::class,'subir_recepciones'])->middleware('auth')->name('subir.recepciones');
 
 Route::post('archivo/procesos', [HomeController::class,'proceso_upload'])->name('proceso.upload');
+
+Route::post('archivo/procesos/anterior', [HomeController::class,'proceso_upload_anterior'])->name('proceso.upload.anterior');
 
 Route::post('archivo/recepcions', [HomeController::class,'recepcion_upload'])->name('recepcion.upload');
 

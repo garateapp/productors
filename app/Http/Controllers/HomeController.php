@@ -61,6 +61,11 @@ class HomeController extends Controller
         return view('productors.subir-proceso');
     }
 
+    public function subir_procesos_anterior()
+    {         
+        return view('productors.subir-procesoanterior');
+    }
+
     public function subir_recepciones()
     {         
         return view('productors.subir-recepciones');
@@ -74,7 +79,137 @@ class HomeController extends Controller
         $name = $file->getClientOriginalName();
         
         //Con dicho nombre, encontrar el proceso correspondiente al archivo
-        $proceso=Proceso::where('n_proceso',explode("-",$name)[0])->first();
+        $proceso=Proceso::where('n_proceso',explode("-",$name)[0])->where('temporada','actual')->first();
+        
+
+        if($proceso){
+            //si existe el proceso, guardar el archivo, si no existe, no lo guarda
+            $nombre = $request->file('file')->storeAs(
+                'pdf-procesos', $name
+            );
+            //una vez guardado el archivo, se asocia al proceso
+            $proceso->update([
+                'informe'=>$nombre
+            ]);
+            //luego se busca al productor que tiene el nombre de la agricola del proceso
+            $user=User::where('name',$proceso->agricola)->first();
+
+            /*
+            if(!is_null($user)){
+                    //en caso que exista el usuarioo consultar si tiene telefonos registrados
+                    if($user->telefonos->count()){
+                        foreach($user->telefonos as $telefono){
+                        $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
+                        //TOKEN QUE NOS DA FACEBOOK
+                        $token = env('WS_TOKEN');
+                        $phoneid= env('WS_PHONEID');
+                        $link= 'https://appgreenex.cl/download/'.$proceso->id.'.pdf';
+                        $version='v16.0';
+                        $url="https://appgreenex.cl/";
+                        $payload=[
+                            'messaging_product' => 'whatsapp',
+                            "preview_url"=> false,
+                            'to'=>$fono,
+                            
+                            'type'=>'template',
+                                'template'=>[
+                                    'name'=>'proceso',
+                                    'language'=>[
+                                        'code'=>'es'],
+                                    'components'=>[ 
+                                        [
+                                            'type'=>'header',
+                                            'parameters'=>[
+                                                [
+                                                    'type'=>'document',
+                                                    'document'=> [
+                                                        'link'=>$link,
+                                                        'filename'=>$name
+                                                        ]
+                                                ]
+                                            ]
+                                        ],
+                                        [
+                                            'type'=>'body',
+                                            'parameters'=>[
+                                                [
+                                                    'type'=>'text',
+                                                    'text'=> $proceso->n_proceso
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                                
+                            
+                        ];
+                        
+                        Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+                    
+                        $token = env('WS_TOKEN');
+                        $phoneid= env('WS_PHONEID');
+                        $link= 'https://appgreenex.cl/download/'.$proceso->id.'.pdf';
+                        $version='v16.0';
+                        $url="https://appgreenex.cl/";
+                        $wsload=[
+                            'messaging_product' => 'whatsapp',
+                            "preview_url"=> false,
+                            'to'=>'56939245158',
+                            
+                            'type'=>'template',
+                                'template'=>[
+                                    'name'=>'proceso',
+                                    'language'=>[
+                                        'code'=>'es'],
+                                    'components'=>[ 
+                                        [
+                                            'type'=>'header',
+                                            'parameters'=>[
+                                                [
+                                                    'type'=>'document',
+                                                    'document'=> [
+                                                        'link'=>$link,
+                                                        'filename'=>$name
+                                                        ]
+                                                ]
+                                            ]
+                                        ],
+                                        [
+                                            'type'=>'body',
+                                            'parameters'=>[
+                                                [
+                                                    'type'=>'text',
+                                                    'text'=> $proceso->n_proceso
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                                
+                            
+                        ];
+                        
+                        Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
+                   
+                    }
+                }    
+            }
+            */
+        }
+
+
+        return view('productors.subir-proceso')->with('info','Archivo subido con exito');
+    }
+
+    public function proceso_upload_anterior(Request $request)
+    {   
+    
+        $file = $request->file('file');
+        //obtener Nombre del archivo
+        $name = $file->getClientOriginalName();
+        
+        //Con dicho nombre, encontrar el proceso correspondiente al archivo
+        $proceso=Proceso::where('n_proceso',explode("-",$name)[0])->where('temporada','anterior')->first();
         
 
         if($proceso){
