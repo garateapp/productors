@@ -364,7 +364,7 @@ class HomeController extends Controller
                 
                if($m==8){
 
-                        $cont=Proceso::where('n_proceso',$n_proceso)->first();
+                        $cont=Proceso::where('n_proceso',$n_proceso)->where('temporada','actual')->first();
                         if($cont){
                             if($categoria=='Sin Procesar'){
                                 $cont->forceFill([
