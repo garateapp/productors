@@ -48,7 +48,7 @@ class ProcesoSearch extends Component
                                 ->orWhere('fecha', 'LIKE', '%' . $this->search . '%')
                                 ->orWhere('id_empresa', 'LIKE', '%' . $this->search . '%');
                         })
-                        ->orderBy('n_proceso', 'des')
+                        ->orderBy('n_proceso', 'desc')
                         ->paginate($this->ctd);
         
         }
