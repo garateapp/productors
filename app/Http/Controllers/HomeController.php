@@ -556,46 +556,18 @@ class HomeController extends Controller
                          if($cont){
                              if($categoria=='Sin Procesar'){
                                  $cont->forceFill([
-                                     'agricola' => $agricola,//1
-                                     'n_proceso' => $n_proceso,//2
-                                     'especie' => $especie,//3
-                                     'variedad' => $variedad,//4
-                                     'fecha' => $fecha,//5
-                                     'kilos_netos' => $kilos_netos,//6
-                                     'id_empresa' => $id_empresa,//8
                                       'temporada' => 'anterior'//9
                                  ])->save();
                              }elseif($categoria=='Exportacion'){
                                  $cont->forceFill([
-                                     'agricola' => $agricola,//1
-                                     'n_proceso' => $n_proceso,//2
-                                     'especie' => $especie,//3
-                                     'variedad' => $variedad,//4
-                                     'fecha' => $fecha,//5
-                                     'exp' => $kilos_netos,//6
-                                     'id_empresa' => $id_empresa,//8
                                       'temporada' => 'anterior'//9
                                  ])->save();
                              }elseif($categoria=='Mercado Interno'){
                                  $cont->forceFill([
-                                     'agricola' => $agricola,//1
-                                     'n_proceso' => $n_proceso,//2
-                                     'especie' => $especie,//3
-                                     'variedad' => $variedad,//4
-                                     'fecha' => $fecha,//5
-                                     'comercial' => $kilos_netos,//6
-                                     'id_empresa' => $id_empresa,//8
                                       'temporada' => 'anterior'//9
                                  ])->save();
                              }elseif($categoria=='Desecho'){
                                  $cont->forceFill([
-                                     'agricola' => $agricola,//1
-                                     'n_proceso' => $n_proceso,//2
-                                     'especie' => $especie,//3
-                                     'variedad' => $variedad,//4
-                                     'fecha' => $fecha,//5
-                                     'desecho' => $kilos_netos,//6
-                                     'id_empresa' => $id_empresa,//8
                                       'temporada' => 'anterior'//9
                                  ])->save();
                              }
