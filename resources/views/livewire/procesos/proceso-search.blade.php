@@ -69,11 +69,21 @@
             </a>
          </div>
          <div class="items-center my-auto">
-            <a href="{{route('subir.procesos')}}">
+
+            @if(Route::currentRouteName() == 'procesos.index.anterior')
+               <a href="{{route('subir.procesos.anterior')}}">
                   <button  class="my-1 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-green-500 hover:bg-green-600 focus:outline-none rounded ml-2">
                      <p class="text-sm font-medium leading-none text-white">SUBIR PROCESO</p>
                   </button>
-            </a>
+               </a>
+            @else
+               <a href="{{route('subir.procesos')}}">
+                  <button  class="my-1 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-green-500 hover:bg-green-600 focus:outline-none rounded ml-2">
+                     <p class="text-sm font-medium leading-none text-white">SUBIR PROCESO</p>
+                  </button>
+               </a>
+            @endif
+
          </div>
       </div>
       
