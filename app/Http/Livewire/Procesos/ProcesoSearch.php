@@ -17,7 +17,11 @@ use Livewire\WithPagination;
 class ProcesoSearch extends Component
 {   use WithPagination;
 
-    public $search, $espec, $ctd=25, $especieid, $especiename, $varie, $variedadid, $titulo='Gráfico por Especies';
+    public $search, $espec, $ctd=25, $especieid, $especiename, $varie, $variedadid, $titulo='Gráfico por Especies', $temporada;
+
+    public function mount($temporada){
+        $this->temporada=$temporada;
+    }
 
     public function render()
     {   
@@ -35,14 +39,18 @@ class ProcesoSearch extends Component
             }
 
         }else{
-            $procesos=Proceso::where('agricola', 'LIKE', '%' . $this->search . '%')
-            ->orWhere('n_proceso', 'LIKE', '%' . $this->search . '%')
-            ->orWhere('especie', 'LIKE', '%' . $this->search . '%')
-            ->orWhere('variedad', 'LIKE', '%' . $this->search . '%')
-            ->orWhere('fecha', 'LIKE', '%' . $this->search . '%')
-            ->orWhere('id_empresa', 'LIKE', '%' . $this->search . '%')
-            ->orderBy('n_proceso', 'asc') // Ordenar por ID de forma ascendente
-            ->paginate($this->ctd);
+            $procesos = Proceso::where('temporada', $this->temporada)
+                        ->where(function($query) {
+                            $query->where('agricola', 'LIKE', '%' . $this->search . '%')
+                                ->orWhere('n_proceso', 'LIKE', '%' . $this->search . '%')
+                                ->orWhere('especie', 'LIKE', '%' . $this->search . '%')
+                                ->orWhere('variedad', 'LIKE', '%' . $this->search . '%')
+                                ->orWhere('fecha', 'LIKE', '%' . $this->search . '%')
+                                ->orWhere('id_empresa', 'LIKE', '%' . $this->search . '%');
+                        })
+                        ->orderBy('n_proceso', 'asc')
+                        ->paginate($this->ctd);
+        
         }
         
         $procesosall=Proceso::all();

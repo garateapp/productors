@@ -93,6 +93,8 @@ Route::get('envio-masivo', [HomeController::class,'envio_masivo'])->middleware('
 
 Route::get('procesos', [HomeController::class,'procesos'])->middleware('auth')->name('procesos.index');
 
+Route::get('procesos/anterior', [HomeController::class,'procesos_anterior'])->middleware('auth')->name('procesos.index.anterior');
+
 Route::get('procesos/productor', [ProcesoController::class,'index'])->middleware('auth')->name('procesos.productor.index');
 
 Route::get('procesos/productor/{especie}', [ProcesoController::class,'productorespecie'])->middleware('auth')->name('procesos.productor.especie');
@@ -104,6 +106,8 @@ Route::get('procesos/{especie}', [ProcesoController::class,'especie'])->middlewa
 Route::get('procesos/variedad/{variedad}', [ProcesoController::class,'variedad'])->middleware('auth')->name('procesos.admin.variedad');
 
 Route::get('proceso/refresh', [HomeController::class,'sync_proces'])->middleware('auth')->name('proceso.refresh');
+
+Route::get('proceso/refresh/anterior', [HomeController::class,'sync_proces_anterior'])->middleware('auth')->name('proceso.refresh.anterior');
 
 Route::get('consolidado/refresh', [HomeController::class,'sync_consolidado'])->middleware('auth')->name('consolidado.refresh');
 

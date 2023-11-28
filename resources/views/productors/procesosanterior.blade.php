@@ -3,7 +3,7 @@
        
     </x-slot>
     
-       @livewire('procesos.proceso-search',['temporada'=>'actual'])  
+       @livewire('procesos.proceso-search',['temporada'=>'anterior'])  
              
             
 </x-app-layout>

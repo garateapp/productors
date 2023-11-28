@@ -306,6 +306,14 @@ class HomeController extends Controller
         return view('productors.procesos');
     }
 
+    public function procesos_anterior()
+    {    $estadistica = Estadisticas::create([
+            'type'=> 'vistaprocesoadminanterior',
+            'user_id'=>auth()->user()->id
+        ]);
+        return view('productors.procesosanterior');
+    }
+
 
     //Sincrinización proceso temporada "Actual"
     public function sync_proces()
@@ -356,7 +364,7 @@ class HomeController extends Controller
                 
                if($m==8){
 
-                        $cont=Proceso::where('n_proceso',$n_proceso)->first();
+                        $cont=Proceso::where('n_proceso',$n_proceso)->where('temporada','actual')->first();
                         if($cont){
                             if($categoria=='Sin Procesar'){
                                 $cont->forceFill([
@@ -367,6 +375,7 @@ class HomeController extends Controller
                                     'fecha' => $fecha,//5
                                     'kilos_netos' => $kilos_netos,//6
                                     'id_empresa' => $id_empresa,//8
+                                     'temporada' => 'actual'//9
                                 ])->save();
                             }elseif($categoria=='Exportacion'){
                                 $cont->forceFill([
@@ -377,6 +386,7 @@ class HomeController extends Controller
                                     'fecha' => $fecha,//5
                                     'exp' => $kilos_netos,//6
                                     'id_empresa' => $id_empresa,//8
+                                     'temporada' => 'actual'//9
                                 ])->save();
                             }elseif($categoria=='Mercado Interno'){
                                 $cont->forceFill([
@@ -387,6 +397,7 @@ class HomeController extends Controller
                                     'fecha' => $fecha,//5
                                     'comercial' => $kilos_netos,//6
                                     'id_empresa' => $id_empresa,//8
+                                     'temporada' => 'actual'//9
                                 ])->save();
                             }elseif($categoria=='Desecho'){
                                 $cont->forceFill([
@@ -397,6 +408,7 @@ class HomeController extends Controller
                                     'fecha' => $fecha,//5
                                     'desecho' => $kilos_netos,//6
                                     'id_empresa' => $id_empresa,//8
+                                     'temporada' => 'actual'//9
                                 ])->save();
                             }
                             
@@ -417,6 +429,7 @@ class HomeController extends Controller
                                             'desecho' => 0,//6
                                             'merma' => 0,//6
                                             'id_empresa' => $id_empresa,//8
+                                             'temporada' => 'actual'//9
                                         ]);
                                     }elseif($categoria=='Exportacion'){
                                         $rec=Proceso::create([
@@ -431,6 +444,7 @@ class HomeController extends Controller
                                             'desecho' => 0,//6
                                             'merma' => 0,//6
                                             'id_empresa' => $id_empresa,//8
+                                             'temporada' => 'actual'//9
                                         ]);
                                     }elseif($categoria=='Mercado Interno'){
                                         $rec=Proceso::create([
@@ -445,6 +459,7 @@ class HomeController extends Controller
                                             'desecho' => 0,//6
                                             'merma' => 0,//6
                                             'id_empresa' => $id_empresa,//8
+                                             'temporada' => 'actual'//9
                                         ]);
                                     }elseif($categoria=='Desecho'){
                                             
@@ -460,6 +475,7 @@ class HomeController extends Controller
                                                 'desecho' => $kilos_netos,//6
                                                 'merma' => 0,//6
                                                 'id_empresa' => $id_empresa,//8
+                                                 'temporada' => 'actual'//9
                                             ]);
                                             
                                     }	
@@ -486,6 +502,194 @@ class HomeController extends Controller
         return redirect()->route('procesos.index');
 
     }
+
+     //Sincrinización proceso temporada "Actual"
+     public function sync_proces_anterior()
+     {       
+         $procesos=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Produccion/ObtenerProduccionTemporadaPasadas?IdTemporadaPasada=8');
+         $procesos = $procesos->json();
+ 
+         $ri=Proceso::all();
+         $totali=$ri->count();
+ 
+         foreach ($procesos as $proceso){
+             $agricola=Null;//1
+             $n_proceso=Null;//2
+             $especie=Null;//3
+             $variedad=Null;//4
+             $kilos_netos=Null;//5
+             $categoria=Null;//6
+             //7
+             $id_empresa=Null;//8
+             
+             $m=1;
+             foreach ($proceso as $item){
+                 
+                 if($m==1){
+                     $agricola=$item;
+                 }
+                 if($m==2){
+                     $n_proceso=$item;
+                 }
+                 if($m==3){
+                     $especie=$item;
+                 }
+                 if($m==4){
+                     $variedad=$item;
+                 }
+                 if($m==5){
+                     $fecha=$item;
+                 }
+                 if($m==6){
+                     $kilos_netos=$item;
+                 }
+                 if($m==7){
+                     $categoria=$item;
+                 }
+                 if($m==8){
+                     $id_empresa=$item;
+                 }
+                 
+                if($m==8){
+ 
+                         $cont=Proceso::where('n_proceso',$n_proceso)->first();
+                         if($cont){
+                             if($categoria=='Sin Procesar'){
+                                 $cont->forceFill([
+                                     'agricola' => $agricola,//1
+                                     'n_proceso' => $n_proceso,//2
+                                     'especie' => $especie,//3
+                                     'variedad' => $variedad,//4
+                                     'fecha' => $fecha,//5
+                                     'kilos_netos' => $kilos_netos,//6
+                                     'id_empresa' => $id_empresa,//8
+                                      'temporada' => 'anterior'//9
+                                 ])->save();
+                             }elseif($categoria=='Exportacion'){
+                                 $cont->forceFill([
+                                     'agricola' => $agricola,//1
+                                     'n_proceso' => $n_proceso,//2
+                                     'especie' => $especie,//3
+                                     'variedad' => $variedad,//4
+                                     'fecha' => $fecha,//5
+                                     'exp' => $kilos_netos,//6
+                                     'id_empresa' => $id_empresa,//8
+                                      'temporada' => 'anterior'//9
+                                 ])->save();
+                             }elseif($categoria=='Mercado Interno'){
+                                 $cont->forceFill([
+                                     'agricola' => $agricola,//1
+                                     'n_proceso' => $n_proceso,//2
+                                     'especie' => $especie,//3
+                                     'variedad' => $variedad,//4
+                                     'fecha' => $fecha,//5
+                                     'comercial' => $kilos_netos,//6
+                                     'id_empresa' => $id_empresa,//8
+                                      'temporada' => 'anterior'//9
+                                 ])->save();
+                             }elseif($categoria=='Desecho'){
+                                 $cont->forceFill([
+                                     'agricola' => $agricola,//1
+                                     'n_proceso' => $n_proceso,//2
+                                     'especie' => $especie,//3
+                                     'variedad' => $variedad,//4
+                                     'fecha' => $fecha,//5
+                                     'desecho' => $kilos_netos,//6
+                                     'id_empresa' => $id_empresa,//8
+                                      'temporada' => 'anterior'//9
+                                 ])->save();
+                             }
+                             
+                         }else{
+                             
+ 
+                                 if($kilos_netos>0){
+                                     if($categoria=='Sin Procesar'){
+                                         $rec=Proceso::create([
+                                             'agricola' => $agricola,//1
+                                             'n_proceso' => $n_proceso,//2
+                                             'especie' => $especie,//3
+                                             'variedad' => $variedad,//4
+                                             'fecha' => $fecha,//5
+                                             'kilos_netos' => $kilos_netos,//6
+                                             'exp' => 0,//6
+                                             'comercial' => 0,//6
+                                             'desecho' => 0,//6
+                                             'merma' => 0,//6
+                                             'id_empresa' => $id_empresa,//8
+                                              'temporada' => 'anterior'//9
+                                         ]);
+                                     }elseif($categoria=='Exportacion'){
+                                         $rec=Proceso::create([
+                                             'agricola' => $agricola,//1
+                                             'n_proceso' => $n_proceso,//2
+                                             'especie' => $especie,//3
+                                             'variedad' => $variedad,//4
+                                             'fecha' => $fecha,//5
+                                             'kilos_netos' => 0,//6
+                                             'exp' => $kilos_netos,//6
+                                             'comercial' => 0,//6
+                                             'desecho' => 0,//6
+                                             'merma' => 0,//6
+                                             'id_empresa' => $id_empresa,//8
+                                              'temporada' => 'anterior'//9
+                                         ]);
+                                     }elseif($categoria=='Mercado Interno'){
+                                         $rec=Proceso::create([
+                                             'agricola' => $agricola,//1
+                                             'n_proceso' => $n_proceso,//2
+                                             'especie' => $especie,//3
+                                             'variedad' => $variedad,//4
+                                             'fecha' => $fecha,//5
+                                             'kilos_netos' => 0,//6
+                                             'exp' => 0,
+                                             'comercial' => $kilos_netos,//6
+                                             'desecho' => 0,//6
+                                             'merma' => 0,//6
+                                             'id_empresa' => $id_empresa,//8
+                                              'temporada' => 'anterior'//9
+                                         ]);
+                                     }elseif($categoria=='Desecho'){
+                                             
+                                             $rec=Proceso::create([
+                                                 'agricola' => $agricola,//1
+                                                 'n_proceso' => $n_proceso,//2
+                                                 'especie' => $especie,//3
+                                                 'variedad' => $variedad,//4
+                                                 'fecha' => $fecha,//5
+                                                 'kilos_netos' => 0,//6
+                                                 'exp' => 0,
+                                                 'comercial' => 0,//6
+                                                 'desecho' => $kilos_netos,//6
+                                                 'merma' => 0,//6
+                                                 'id_empresa' => $id_empresa,//8
+                                                  'temporada' => 'anterior'//9
+                                             ]);
+                                             
+                                     }	
+                                 }
+                           
+                         }
+                     
+                 }
+                 $m+=1;
+                 
+             } 
+         }
+ 
+         
+         $rf=Proceso::all();
+         $total=$rf->count()-$ri->count();
+         Sync::create([
+             'tipo'=>'MANUAL',
+             'entidad'=>'PROCESOS',
+             'fecha'=>Carbon::now(),
+             'cantidad'=>$total
+         ]);
+ 
+         return redirect()->route('procesos.index');
+ 
+     }
 
     public function sync_consolidado()
     {   $users=User::all();
