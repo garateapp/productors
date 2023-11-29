@@ -127,7 +127,7 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            @can('Ver produccion_total')
+                            @can('Asignar roles')
                                 <x-jet-dropdown-link href="{{ route('admin.roles.index') }}">
                                     {{ __('Roles') }}
                                 </x-jet-dropdown-link>
@@ -248,7 +248,7 @@
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
-                @can('Ver produccion_total')
+                @can('Asignar roles')
                     <x-jet-responsive-nav-link href="{{ route('admin.roles.index') }}" :active="request()->routeIs('admin.roles.index')">
                         {{ __('Roles') }}
                     </x-jet-responsive-nav-link>
