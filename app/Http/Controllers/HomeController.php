@@ -337,7 +337,7 @@ class HomeController extends Controller
         $name = $file->getClientOriginalName();
         
         //Con dicho nombre, encontrar el proceso correspondiente al archivo
-        $recepcion=Recepcion::where('numero_g_recepcion',explode("-",$name)[0])->first();
+        $recepcion=Recepcion::where('numero_g_recepcion',explode("-",$name)[0])->where('temporada','actual')->first();
         
 
         if($recepcion){
