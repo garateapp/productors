@@ -6,6 +6,15 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
  
      <div class="flex justify-between my-2 items-center content-end mx-4 md:mx-12 "> 
+      <div class="max-w-7xl bg-white shadow rounded-lg p-4 sm:p-4 xl:p-4 my-4 mr-2 ml-12">
+         <div class="flex items-center justify-center">
+            <div class="flex-shrink-0 text-center">
+               <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($procesosall->count())}}</span>
+               <h3 class="text-base font-normal text-gray-500">Procesos</h3>
+            </div>
+           
+         </div>
+      </div>
       
       <h1 class="text-center text-sm my-4 mx-6"><b>Ultima Sincronizacion:</b> {{date('d M Y g:i a', strtotime($sync->fecha))}} <b>Tipo:</b> {{$sync->tipo}} <b>Cantidad:</b> {{$sync->cantidad}}</h1>
 
