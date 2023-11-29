@@ -7,8 +7,18 @@
    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
    
          <div class="flex justify-between my-2 items-center content-center mx-12"> 
-        
-            <button  class="items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
+
+            <div class="max-w-7xl bg-white shadow rounded-lg p-4 sm:p-4 xl:p-4 my-4 mr-2 ml-12">
+               <div class="flex items-center justify-center">
+                  <div class="flex-shrink-0 text-center">
+                     <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($procesosall->count())}}</span>
+                     <h3 class="text-base font-normal text-gray-500">Procesos</h3>
+                  </div>
+                 
+               </div>
+            </div>
+        <div>
+            <button  class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
                 <p class="text-sm font-medium leading-none text-white">Descargar Excel</p>
             </button>
 
@@ -22,7 +32,7 @@
                    <option value="500" class="text-left px-10">500 </option>
                    
                </select>
-         
+         </div>
        
 
     </div>
