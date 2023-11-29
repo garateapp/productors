@@ -114,7 +114,6 @@
                         
                     @endforelse ($roles as $user)
     
-            
                 
                 
             
@@ -122,5 +121,9 @@
             </tbody>
             </table>
         </x-table-responsive>
+        
+        <div class="">
+            {{$users->links()}}
+         </div>
     @endif
 </div>
