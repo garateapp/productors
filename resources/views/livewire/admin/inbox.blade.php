@@ -78,8 +78,11 @@
                             <img src="{{ Auth::user()->profile_photo_url }}" loading="lazy" class="h-full w-full object-cover" />
                         </div>
                         <div class="flex flex-col">
+                          @if ($emisor)
                             <h3 class="font-semibold text-lg">{{$emisor->name}}</h3>
                             <p class="text-light text-gray-400">{{$emisor->email}}</p>
+                          @endif
+                           
                         </div>
                     </div>
                     <div>
