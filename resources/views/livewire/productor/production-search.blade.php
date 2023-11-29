@@ -154,6 +154,12 @@
                         
 
         <div class="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
+            @if ($recepcions->count())
+                <div class="">
+                    {{$recepcions->links()}}
+                </div>
+        
+            @endif 
             <x-table-responsive>   
             <table class="min-w-full divide-y divide-gray-200 mb-20 pb-20">
     
@@ -355,11 +361,11 @@
             </table>
             </x-table-responsive>
             @if ($recepcions->count())
-            <div class="">
-                {{$recepcions->links()}}
-            </div>
-       
-        @endif 
+                <div class="">
+                    {{$recepcions->links()}}
+                </div>
+        
+            @endif 
         </div>
         </div>
     </div>
