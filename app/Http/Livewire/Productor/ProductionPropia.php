@@ -16,29 +16,29 @@ class ProductionPropia extends Component
     public function render()
     {   if($this->espec){
             if($this->varie){
-                $recepcions=Recepcion::where('n_emisor',auth()->user()->name)
+                $recepcions=Recepcion::where('n_emisor',auth()->user()->name)->where('temporada','actual')
                 ->where('n_variedad','LIKE', $this->search)
                 ->latest('id')->paginate($this->ctd);
             }else{
-                $recepcions=Recepcion::where('n_emisor',auth()->user()->name)
+                $recepcions=Recepcion::where('n_emisor',auth()->user()->name)->where('temporada','actual')
                 ->where('n_especie','LIKE', $this->search)
                 ->latest('id')->paginate($this->ctd);
             }
 
         }else{
-            $recepcions=Recepcion::where('n_emisor',auth()->user()->name)
+            $recepcions=Recepcion::where('n_emisor',auth()->user()->name)->where('temporada','actual')
                         ->latest('id')->paginate($this->ctd);
         }
         if($this->varie){
-            $allsubrecepcions=Recepcion::where('n_emisor',auth()->user()->name)
+            $allsubrecepcions=Recepcion::where('n_emisor',auth()->user()->name)->where('temporada','actual')
             ->where('n_variedad','LIKE','%'. $this->search .'%')
             ->latest('id')->get();
         }else{
-            $allsubrecepcions=Recepcion::where('n_emisor',auth()->user()->name)
+            $allsubrecepcions=Recepcion::where('n_emisor',auth()->user()->name)->where('temporada','actual')
             ->where('n_especie','LIKE','%'. $this->search .'%')
             ->latest('id')->get();
         }
-        $allrecepcions=Recepcion::where('n_emisor',auth()->user()->name)
+        $allrecepcions=Recepcion::where('n_emisor',auth()->user()->name)->where('temporada','actual')
         ->latest('id')->get();
         $sync=Sync::where('entidad','RECEPCIONES')
         ->orderby('id','DESC')

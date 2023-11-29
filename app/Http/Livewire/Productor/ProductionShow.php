@@ -18,7 +18,7 @@ class ProductionShow extends Component
 
     public function render()
     {   
-        $recepcions=Recepcion::where('n_emisor',$this->user->name)->latest('id')->paginate(6);
+        $recepcions=Recepcion::where('n_emisor',$this->user->name)->where('temporada','actual')->latest('id')->paginate(6);
         return view('livewire.productor.production-show',compact('recepcions'));
     }
 }
