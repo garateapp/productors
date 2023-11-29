@@ -95,7 +95,8 @@
                       </div>
                      
                    </div>
-                </div><div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 ml-2">
+                </div>
+                <div class="max-w-7xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4 ml-2">
                     @if ($search)
                         <div class="flex items-center justify-center content-center">
                                     <span class="text-xl sm:text-xl leading-none font-bold text-gray-900 content-center">{{number_format($cant2)}}/</span>

@@ -53,7 +53,8 @@ class ProcesoSearch extends Component
         
         }
         
-        $procesosall=Proceso::all();
+        $procesosall = Proceso::where('temporada', $this->temporada)->get();
+
         
         $especies=Especie::where('id','>=',1)->latest('id')->get();
         $variedades=Variedad::all();
