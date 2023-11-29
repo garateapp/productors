@@ -94,7 +94,7 @@ class HomeController extends Controller
             //luego se busca al productor que tiene el nombre de la agricola del proceso
             $user=User::where('name',$proceso->agricola)->first();
 
-            /*
+            
             if(!is_null($user)){
                     //en caso que exista el usuarioo consultar si tiene telefonos registrados
                     if($user->telefonos->count()){
@@ -194,7 +194,7 @@ class HomeController extends Controller
                     }
                 }    
             }
-            */
+            
         }
 
 
@@ -224,7 +224,7 @@ class HomeController extends Controller
             //luego se busca al productor que tiene el nombre de la agricola del proceso
             $user=User::where('name',$proceso->agricola)->first();
 
-            /*
+           
             if(!is_null($user)){
                     //en caso que exista el usuarioo consultar si tiene telefonos registrados
                     if($user->telefonos->count()){
@@ -324,7 +324,7 @@ class HomeController extends Controller
                     }
                 }    
             }
-            */
+           
         }
 
 
