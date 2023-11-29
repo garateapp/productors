@@ -315,7 +315,7 @@
                             <td>
                                 @if ($recepcion->n_estado=='CERRADO')
 
-                                    <a href="{{route('informe.view',$recepcion)}}" target="_blank" >   
+                                    <a href="{{route('informe.download',$recepcion)}}" target="_blank" >   
                                         <img class="w-10 my-2 mx-auto" src="{{asset('image/pdf_icon2.png')}}" title="Descargar" alt="">
                                     </a>
 
