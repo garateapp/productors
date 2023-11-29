@@ -36,7 +36,7 @@ class NotificacionMailable extends Mailable
     {
         return new Envelope(
             from: new Address('contacto@greenex.cl','Soporte Greenex'),
-            subject: 'Nuevo Proceso',
+            subject: 'Proceso n° '.$this->proceso->n_proceso.' en Greenex',
         );
     }
 
