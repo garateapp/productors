@@ -10,6 +10,7 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 
 class NotificacionMailable extends Mailable
 {
@@ -58,7 +59,10 @@ class NotificacionMailable extends Mailable
      * @return array
      */
     public function attachments()
-    {
-        return [];
+    {    $archivoAdjunto = Storage::path($this->proceso->informe);
+
+        return [
+            $archivoAdjunto,
+        ];
     }
 }

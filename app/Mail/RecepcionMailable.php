@@ -10,6 +10,7 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 
 class RecepcionMailable extends Mailable
 {
@@ -36,7 +37,7 @@ class RecepcionMailable extends Mailable
     {
         return new Envelope(
             from: new Address('contacto@greenex.cl','Soporte Greenex'),
-            subject: 'Nueva Recepción',
+            subject: 'Recepcion n° '.$this->recepcion->numero_g_recepcion.' en Greenex',
         );
     }
 
@@ -59,6 +60,10 @@ class RecepcionMailable extends Mailable
      */
     public function attachments()
     {
-        return [];
+        $archivoAdjunto = Storage::path($this->recepcion->informe);
+
+        return [
+            $archivoAdjunto,
+        ];
     }
 }
