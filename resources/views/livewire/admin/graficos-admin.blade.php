@@ -108,23 +108,23 @@
                  
               </div>
               <div class="flex items-center">
-               @if (($exp_total2+$com_total2+$des_total2+$merm_total2)>0)
-                   <h1 class="block my-2 text-xl font-bold">{{number_format($exp_total2*100/($exp_total2+$com_total2+$des_total2+$merm_total2),1)}}%</h1>
-                   <div class="relative py-2 w-full mx-4">
-                      <div class="w-full overflow-hidden h-4 text-4xl flex rounded bg-gray-200">
-                         <div style="width: {{$exp_total2*100/($exp_total2+$com_total2+$des_total2+$merm_total2)}}%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500">
-                            </div>
-                      </div>
-                   </div>
-               @else
-                   <h1 class="block my-2 text-xl font-bold">0%</h1>
-                   <div class="relative py-2 w-full mx-4">
-                      <div class="w-full overflow-hidden h-4 text-4xl flex rounded bg-gray-200">
-                         <div style="width: 0%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500">
-                            </div>
-                      </div>
-                   </div>
-               @endif
+                  @if (($exp_total2+$com_total2+$des_total2+$merm_total2)>0)
+                     <h1 class="block my-2 text-xl font-bold">{{number_format($exp_total2*100/($exp_total2+$com_total2+$des_total2+$merm_total2),1)}}%</h1>
+                     <div class="relative py-2 w-full mx-4">
+                        <div class="w-full overflow-hidden h-4 text-4xl flex rounded bg-gray-200">
+                           <div style="width: {{$exp_total2*100/($exp_total2+$com_total2+$des_total2+$merm_total2)}}%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500">
+                              </div>
+                        </div>
+                     </div>
+                  @else
+                     <h1 class="block my-2 text-xl font-bold">0%</h1>
+                     <div class="relative py-2 w-full mx-4">
+                        <div class="w-full overflow-hidden h-4 text-4xl flex rounded bg-gray-200">
+                           <div style="width: 0%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500">
+                              </div>
+                        </div>
+                     </div>
+                  @endif
                
 
               

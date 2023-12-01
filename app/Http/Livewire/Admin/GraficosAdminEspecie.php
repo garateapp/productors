@@ -13,13 +13,14 @@ use Livewire\WithPagination;
 class GraficosAdminEspecie extends Component
 {   use WithPagination;
 
-    public $search, $espec, $ctd=25, $especieid, $especiename, $varie, $variedadid, $recepcions, $cant;
+    public $search, $espec, $ctd=25, $especieid, $especiename, $varie, $variedadid, $recepcions, $recepcions2, $cant;
     
     public function mount(Especie $especie){
         $this->espec=$especie;
         $this->titulo='Gráfico por Variedades de '.$especie->name;
         $this->titulo_circular='Gráfico Circular de '.$especie->name;
-        $this->recepcions=Recepcion::where('n_especie',$this->espec->name)->get();
+        $this->recepcions=Recepcion::where('n_especie',$this->espec->name)->where('temporada','anterior')->get();
+        $this->recepcions2=Recepcion::where('n_especie',$this->espec->name)->where('temporada','actual')->get();
     }
 
     public function render()
@@ -28,13 +29,17 @@ class GraficosAdminEspecie extends Component
             if($this->varie){
                 $procesos=Proceso::where('variedad', $this->varie->name)
                             ->latest('n_proceso')->paginate($this->ctd);
-                    $procesosall=Proceso::where('variedad', $this->varie->name)
+                    $procesosall=Proceso::where('variedad', $this->varie->name)->where('temporada','anterior')
+                            ->latest('n_proceso')->get();
+                    $procesosall2=Proceso::where('variedad', $this->varie->name)->where('temporada','actual')
                             ->latest('n_proceso')->get();
                     
                 }else{
                         $procesos=Proceso::where('especie',$this->espec->name)
                             ->latest('n_proceso')->paginate($this->ctd);
-                        $procesosall=Proceso::where('especie', $this->espec->name)
+                        $procesosall=Proceso::where('especie', $this->espec->name)->where('temporada','anterior')
+                            ->latest('n_proceso')->get();
+                        $procesosall2=Proceso::where('especie', $this->espec->name)->where('temporada','actual')
                             ->latest('n_proceso')->get();
                 }
 
@@ -54,7 +59,7 @@ class GraficosAdminEspecie extends Component
 
             
 
-        return view('livewire.admin.graficos-admin-especie',compact('now','procesosall','procesos','variedades','especies'))->section('graf');
+        return view('livewire.admin.graficos-admin-especie',compact('now','procesosall','procesosall2','procesos','variedades','especies'))->section('graf');
     }
 
     public function set_especie($id){
