@@ -103,7 +103,11 @@ Route::get('procesos/productor/variedad/{variedad}', [ProcesoController::class,'
 
 Route::get('procesos/{especie}', [ProcesoController::class,'especie'])->middleware('auth')->name('procesos.admin.especie');
 
+Route::get('procesos/{especie}/anterior', [ProcesoController::class,'especie_anterior'])->middleware('auth')->name('procesos.admin.especie.anterior');
+
 Route::get('procesos/variedad/{variedad}', [ProcesoController::class,'variedad'])->middleware('auth')->name('procesos.admin.variedad');
+
+Route::get('procesos/variedad/{variedad}/anterior', [ProcesoController::class,'variedad_anterior'])->middleware('auth')->name('procesos.admin.variedad.anterior');
 
 Route::get('proceso/refresh', [HomeController::class,'sync_proces'])->middleware('auth')->name('proceso.refresh');
 

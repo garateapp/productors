@@ -22,25 +22,25 @@ class ProcesoEspecie extends Component
         {   
             if($this->espec){
                 if($this->varie){
-                    $procesos=Proceso::where('agricola',auth()->user()->name)
+                    $procesos=Proceso::where('agricola',auth()->user()->name)->where('temporada','actual')
                                 ->where('variedad', $this->varie->name)
                              ->latest('n_proceso')->paginate($this->ctd);
-                    $procesosall=Proceso::where('agricola',auth()->user()->name)
+                    $procesosall=Proceso::where('agricola',auth()->user()->name)->where('temporada','actual')
                                 ->where('variedad','LIKE', $this->search)
                              ->latest('n_proceso')->get();
                 }else{
-                        $procesos=Proceso::where('agricola',auth()->user()->name)
+                        $procesos=Proceso::where('agricola',auth()->user()->name)->where('temporada','actual')
                             ->where('especie',$this->espec->name)
                              ->latest('n_proceso')->paginate($this->ctd);
-                        $procesosall=Proceso::where('agricola',auth()->user()->name)
+                        $procesosall=Proceso::where('agricola',auth()->user()->name)->where('temporada','actual')
                             ->where('especie','LIKE', $this->search)
                              ->latest('n_proceso')->get();
                 }
     
             }else{
-                $procesos=Proceso::where('agricola',auth()->user()->name)
+                $procesos=Proceso::where('agricola',auth()->user()->name)->where('temporada','actual')
                 ->latest('n_proceso')->paginate($this->ctd);
-                $procesosall=Proceso::where('agricola',auth()->user()->name)
+                $procesosall=Proceso::where('agricola',auth()->user()->name)->where('temporada','actual')
                 ->latest('n_proceso')->get();
             }
             

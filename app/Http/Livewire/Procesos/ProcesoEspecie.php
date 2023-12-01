@@ -12,10 +12,11 @@ use Livewire\WithPagination;
 class ProcesoEspecie extends Component
 {   use WithPagination;
 
-    public $search, $espec, $ctd=25, $especieid, $especiename, $varie, $variedadid;
+    public $search, $espec, $ctd=25, $especieid, $especiename, $varie, $variedadid, $temporada;
     
-    public function mount(Especie $especie){
+    public function mount(Especie $especie,$temporada){
         $this->espec=$especie;
+        $this->temporada=$temporada;
         $this->titulo='Gráfico por Variedades de '.$especie->name;
     }
     
@@ -24,23 +25,23 @@ class ProcesoEspecie extends Component
         if($this->espec){
             if($this->varie){
                 $procesos=Proceso::where('variedad', $this->varie->name)
-                        ->where('agricola','LIKE','%'. $this->search .'%')
+                        ->where('agricola','LIKE','%'. $this->search .'%')->where('temporada',$this->temporada)
                          ->latest('n_proceso')->paginate($this->ctd);
-                $procesosall=Proceso::where('variedad', $this->varie->name)
+                $procesosall=Proceso::where('variedad', $this->varie->name)->where('temporada',$this->temporada)
                         ->where('agricola','LIKE','%'. $this->search .'%')
                          ->latest('n_proceso')->get();
                 
             }else{
-                    $procesos=Proceso::where('especie',$this->espec->name)
+                    $procesos=Proceso::where('especie',$this->espec->name)->where('temporada',$this->temporada)
                         ->where('agricola','LIKE','%'. $this->search .'%')
                          ->latest('n_proceso')->paginate($this->ctd);
-                    $procesosall=Proceso::where('especie', $this->espec->name)
+                    $procesosall=Proceso::where('especie', $this->espec->name)->where('temporada',$this->temporada)
                     ->where('agricola','LIKE','%'. $this->search .'%')
                          ->latest('n_proceso')->get();
             }
 
         }else{
-            $procesos=Proceso::where('agricola','LIKE','%'. $this->search .'%')
+            $procesos=Proceso::where('agricola','LIKE','%'. $this->search .'%')->where('temporada',$this->temporada)
                 ->orwhere('n_proceso','LIKE','%'. $this->search .'%')
                 ->orwhere('especie','LIKE','%'. $this->search .'%')
                 ->orwhere('variedad','LIKE','%'. $this->search .'%')

@@ -22,23 +22,23 @@ class ProcesoVariedad extends Component
     public function render()
     {   if($this->espec){
         if($this->varie){
-            $procesos=Proceso::where('agricola',auth()->user()->name)
+            $procesos=Proceso::where('agricola',auth()->user()->name)->where('temporada','actual')
                     ->where('variedad', $this->varie->name)
                     ->latest('n_proceso')->paginate($this->ctd);
-            $procesosall=Proceso::where('variedad', $this->varie->name)
+            $procesosall=Proceso::where('variedad', $this->varie->name)->where('temporada','actual')
                     ->latest('n_proceso')->get();
             
         }else{
                 $procesos=Proceso::where('agricola',auth()->user()->name)
-                        ->where('especie',$this->espec->name)
+                        ->where('especie',$this->espec->name)->where('temporada','actual')
                     ->latest('n_proceso')->paginate($this->ctd);
-                $procesosall=Proceso::where('agricola',auth()->user()->name)
+                $procesosall=Proceso::where('agricola',auth()->user()->name)->where('temporada','actual')
                     ->where('especie', $this->espec->name)
                     ->latest('n_proceso')->get();
         }
 
     }else{
-        $procesos=Proceso::where('agricola','LIKE','%'. $this->search .'%')
+        $procesos=Proceso::where('agricola','LIKE','%'. $this->search .'%')->where('temporada','actual')
             ->orwhere('n_proceso','LIKE','%'. $this->search .'%')
             ->orwhere('especie','LIKE','%'. $this->search .'%')
             ->orwhere('variedad','LIKE','%'. $this->search .'%')

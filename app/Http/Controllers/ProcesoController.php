@@ -27,9 +27,18 @@ class ProcesoController extends Controller
         return view('proceso.procesoespecie',compact('especie'));
     }
 
+    public function especie_anterior(Especie $especie)
+    {
+        return view('proceso.procesoespecieanterior',compact('especie'));
+    }
+
     public function variedad(Variedad $variedad)
     {
         return view('proceso.procesovariedad',compact('variedad'));
+    }
+    public function variedad_anterior(Variedad $variedad)
+    {
+        return view('proceso.procesovariedadanterior',compact('variedad'));
     }
 
     public function productorespecie(Especie $especie)

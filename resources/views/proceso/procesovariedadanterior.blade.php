@@ -4,7 +4,7 @@
     </x-slot>
     
       
-       @livewire('procesos.proceso-especie', ['especie' => $especie,'temporada'=>'actual'],key($especie->id))
+       @livewire('procesos.proceso-variedad', ['variedad' => $variedad,'temporada'=>'anterior'],key($variedad->id))
              
             
 </x-app-layout>

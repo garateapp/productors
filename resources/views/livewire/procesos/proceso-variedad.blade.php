@@ -4,24 +4,78 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <div class="flex justify-center mt-2">
+        <div>
+            @if ($temporada=='actual')
+                <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:red-green-500 sm:mt-0 px-6 py-3 bg-red-500 hover:bg-red-500 focus:outline-none rounded">
+                    <p class="text-sm font-medium leading-none text-white">ACTUAL</p>
+                </button>
+            @else
+            <a href="{{route('procesos.admin.variedad',$varie)}}">
+                <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded">
+                    <p class="text-sm font-medium leading-none text-white">ACTUAL</p>
+                </button>
+            </a>
+            @endif
+  
+           
+        </div>
+        <div>
+            @if ($temporada=='anterior')
+                <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:red-green-500 sm:mt-0 px-6 py-3 bg-red-500 hover:bg-red-500 focus:outline-none rounded">
+                    <p class="text-sm font-medium leading-none text-white">ANTERIOR</p>
+                </button>
+            @else
+                <a href="{{route('procesos.admin.variedad.anterior',$varie)}}">
+                    <button  class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded">
+                        <p class="text-sm font-medium leading-none text-white">ANTERIOR</p>
+                    </button>
+                </a>
+            @endif
+        </div>
+    </div>
+   
  
      <div class="flex justify-between   my-2 items-center content-end mx-4 md:mx-12 "> 
+
+        <div class="max-w-7xl bg-white shadow rounded-lg p-4 sm:p-4 xl:p-4 my-4 mr-2 ml-12">
+            <div class="flex items-center justify-center">
+               <div class="flex-shrink-0 text-center">
+                  <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{number_format($procesosall->count())}}</span>
+                  <h3 class="text-base font-normal text-gray-500">Procesos</h3>
+               </div>
+              
+            </div>
+         </div>
         
         <h1 class="text-center text-sm my-4 mx-6"><b>Ultima Sincronizacion:</b> {{date('d M Y g:i a', strtotime($sync->fecha))}} <b>Tipo:</b> {{$sync->tipo}} <b>Cantidad:</b> {{$sync->cantidad}}</h1>
 
-        <div>
-       <a href="{{route('proceso.refresh')}}">
-          <button  class="my-1 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
-              <p class="text-sm font-medium leading-none text-white">PROCESO IMPORT</p>
-          </button>
-        </a>
-    
-        <a href="{{route('subir.procesos')}}">
-                <button  class="my-1 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-green-500 hover:bg-green-600 focus:outline-none rounded ml-2">
-                    <p class="text-sm font-medium leading-none text-white">SUBIR PROCESO</p>
-                </button>
-        </a>
-        </div>
+        <div class="flex">
+            <div class="grid grid-cols-1">
+               <a href="{{route('proceso.refresh')}}">
+                  <button  class="my-1 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
+                     <p class="text-sm font-medium leading-none text-white">PROCESO IMPORT</p>
+                     <p class="text-xs font-medium leading-none text-white">ACTUAL</p>
+                  </button>
+               </a>
+               <a href="{{route('proceso.refresh.anterior')}}">
+                  <button  class="my-1 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
+                     <p class="text-sm font-medium leading-none text-white">PROCESO IMPORT</p>
+                     <p class="text-xs font-medium leading-none text-white">ANTERIOR</p>
+                  </button>
+               </a>
+            </div>
+            <div class="items-center my-auto">
+            
+         
+               <a href="{{route('subir.procesos')}}">
+                     <button  class="my-1 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-green-500 hover:bg-green-600 focus:outline-none rounded ml-2">
+                        <p class="text-sm font-medium leading-none text-white">SUBIR PROCESO</p>
+                     </button>
+               </a>
+            </div>
+         </div>
     
   </div>
  
