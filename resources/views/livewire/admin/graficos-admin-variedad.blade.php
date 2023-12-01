@@ -24,7 +24,7 @@
 
                 }
                 $exp_total=$export;
-               $Com_total=$comerc;
+               $com_total=$comerc;
                $des_total=$desec;
                $merm_total=$mer; 
                   
@@ -34,6 +34,35 @@
        
  
     @endphp
+      @php
+      $cant2=0;
+   
+         foreach($recepcions2 as $recepcion2){
+            $cant2+=$recepcion->peso_neto;
+         }
+         
+            
+                  $export2=0;
+                  $comerc2=0;
+                  $desec2=0;
+                  $mer2=0;
+                  foreach ($procesosall2 as $proceso2) {
+                     
+   
+                        $export2+=$proceso->exp;
+                        $comerc2+=$proceso->comercial;
+                        $desec2+=$proceso->desecho;
+                        $mer2+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+                     }
+   
+               $exp_total2=$export2;
+               $com_total2=$comerc2;
+               $des_total2=$desec2;
+               $merm_total2=$mer2; 
+                  
+         
+   
+      @endphp
 
 <section id="graf">   
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -53,54 +82,82 @@
                  
               </div>
            </div>
-           <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
-              <div class="flex-shrink-0">
-                 <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
-                    <h1 class="block my-2 text-xl font-bold text-cyan-500">% EXPORTACION</h1>
+            <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
+                    <div class="flex justify-between">
+                    <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                        <h1 class="block my-2 text-xl font-bold text-cyan-500">% EXPORTACION</h1>
+                        
                     
+                    </span>
+                    <i class="fas fa-ship fa-2x mb-4 text-blue-500"></i>
+                    </div>
+                    <div class="flex items-center">
+                    @if (($exp_total+$com_total+$des_total+$merm_total)>0)
+                        <h1 class="block my-2 text-xl font-bold">{{number_format($exp_total*100/($exp_total+$com_total+$des_total+$merm_total),1)}}%</h1>
+                        <div class="relative py-2 w-full mx-4">
+                            <div class="w-full overflow-hidden h-4 text-4xl flex rounded bg-gray-200">
+                                <div style="width: {{$exp_total*100/($exp_total+$com_total+$des_total+$merm_total)}}%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500">
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <h1 class="block my-2 text-xl font-bold">0%</h1>
+                        <div class="relative py-2 w-full mx-4">
+                            <div class="w-full overflow-hidden h-4 text-4xl flex rounded bg-gray-200">
+                                <div style="width: 0%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500">
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     
-                 </span>
-              </div>
-              <div class="flex items-center">
-                 @if (($exp_total+$Com_total+$des_total+$merm_total)==0)
-                     <h1 class="block my-2 text-xl font-bold">0%</h1>
-                     <div class="relative py-2 w-full mx-4">
-                        <div class="w-full overflow-hidden h-4 text-4xl flex rounded bg-gray-200">
-                           <div style="width: 0%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500">
-                              </div>
+
+                    
+                    <h1 class="block my-2 text-xl font-bold">T22/23</h1>
+                    
+                    </div>
+                    <div class="flex items-center">
+                    @if (($exp_total2+$com_total2+$des_total2+$merm_total2)>0)
+                        <h1 class="block my-2 text-xl font-bold">{{number_format($exp_total2*100/($exp_total2+$com_total2+$des_total2+$merm_total2),1)}}%</h1>
+                        <div class="relative py-2 w-full mx-4">
+                            <div class="w-full overflow-hidden h-4 text-4xl flex rounded bg-gray-200">
+                                <div style="width: {{$exp_total2*100/($exp_total2+$com_total2+$des_total2+$merm_total2)}}%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500">
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                     <i class="fas fa-ship fa-2x mb-4 text-blue-500"></i>
-                     
-                 @else
-                     <h1 class="block my-2 text-xl font-bold">{{number_format($exp_total*100/($exp_total+$Com_total+$des_total+$merm_total),1)}}%</h1>
-                     <div class="relative py-2 w-full mx-4">
-                        <div class="w-full overflow-hidden h-4 text-4xl flex rounded bg-gray-200">
-                           <div style="width: {{$exp_total*100/($exp_total+$Com_total+$des_total+$merm_total)}}%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500">
-                              </div>
+                    @else
+                        <h1 class="block my-2 text-xl font-bold">0%</h1>
+                        <div class="relative py-2 w-full mx-4">
+                            <div class="w-full overflow-hidden h-4 text-4xl flex rounded bg-gray-200">
+                                <div style="width: 0%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500">
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                     <i class="fas fa-ship fa-2x mb-4 text-blue-500"></i>
-                 @endif
-                
-                 
-                 
-              </div>
-           </div>
-           <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
-              <div class="flex-shrink-0">
-                 <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
-                    <h1 class="block my-2 text-xl font-bold text-green-500">KILOS RECIBIDOS DE {{strtoupper($espec->name.' - '.$varie->name)}}</h1>
-                 </span>
+                    @endif
+                    
+
+                    
+                    <h1 class="block my-2 text-xl font-bold">T23/24</h1>
+                    
+                </div>
+            </div>
+            <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
+                <div class="flex justify-between">
+                   <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                      <h1 class="block my-2 text-xl font-bold text-green-500">KILOS RECIBIDOS</h1>
+                    
+                   </span>
+                   <i class="fas fa-truck fa-2x mb-4 text-green-500 justify-end fa-flip-horizontal"></i>
+                </div>
+                <table class="my-2 text-xl font-bold gap-x-4 w-full">
+                 <tr class="">
+                    <td class="mx-2 text-center">{{number_format($cant)}} </td> <td class="ml-4">  T22/23</td>
+                 </tr>
+                 <tr class="">
+                    <td class="mx-2 text-center">{{number_format($cant2)}} </td> <td class="ml-4">  T23/24</td>
+                 </tr>
+                </table>
                
-              </div>
-              <div class="flex items-center justify-between">
-               
-  
-                 <h1 class="block my-2 text-xl font-bold">{{number_format($cant)}}</h1>
-                 <i class="fas fa-truck fa-2x mb-4 text-green-500 justify-end fa-flip-horizontal"></i>
-              </div>
-           </div>
+             </div>
   
         </div>
      </div>

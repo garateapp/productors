@@ -209,7 +209,7 @@
 
                               @php
                                     $exp_total=0;
-                                    $Com_total=0;
+                                    $com_total=0;
                                     $des_total=0;
                                     $merm_total=0;
                               @endphp
@@ -280,7 +280,7 @@
                                           $merma[]=$mer;
                                        
                                           $exp_total+=$export;
-                                          $Com_total+=$comerc;
+                                          $com_total+=$comerc;
                                           $des_total+=$desec;
                                           $merm_total+=$mer;
 
@@ -696,7 +696,7 @@
       var titulo_circular = <?php echo json_encode($titulo_circular) ?>;
        var variedades = <?php echo json_encode($varieds) ?>;
        var exportacion = <?php echo json_encode($exp_total) ?>;
-       var comercial = <?php echo json_encode($Com_total) ?>;
+       var comercial = <?php echo json_encode($com_total) ?>;
        var desecho = <?php echo json_encode($des_total) ?>;
        var merma = <?php echo json_encode($merm_total) ?>;
 
@@ -864,7 +864,7 @@
       var titulo_circular = <?php echo json_encode($titulo_circular) ?>;
        var variedades = <?php echo json_encode($varieds) ?>;
        var exportacion = <?php echo json_encode($exp_total) ?>;
-       var comercial = <?php echo json_encode($Com_total) ?>;
+       var comercial = <?php echo json_encode($com_total) ?>;
        var desecho = <?php echo json_encode($des_total) ?>;
        var merma = <?php echo json_encode($merm_total) ?>;
 
