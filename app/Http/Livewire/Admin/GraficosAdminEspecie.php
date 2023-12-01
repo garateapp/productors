@@ -19,8 +19,8 @@ class GraficosAdminEspecie extends Component
         $this->espec=$especie;
         $this->titulo='Gráfico por Variedades de '.$especie->name;
         $this->titulo_circular='Gráfico Circular de '.$especie->name;
-        $this->recepcions=Recepcion::where('n_especie',$this->espec->name)->where('temporada','anterior')->get();
-        $this->recepcions2=Recepcion::where('n_especie',$this->espec->name)->where('temporada','actual')->get();
+        $this->recepcions2=Recepcion::where('n_especie',$this->espec->name)->where('temporada','anterior')->get();
+        $this->recepcions=Recepcion::where('n_especie',$this->espec->name)->where('temporada','actual')->get();
     }
 
     public function render()
@@ -29,17 +29,17 @@ class GraficosAdminEspecie extends Component
             if($this->varie){
                 $procesos=Proceso::where('variedad', $this->varie->name)
                             ->latest('n_proceso')->paginate($this->ctd);
-                    $procesosall=Proceso::where('variedad', $this->varie->name)->where('temporada','anterior')
+                    $procesosall2=Proceso::where('variedad', $this->varie->name)->where('temporada','anterior')
                             ->latest('n_proceso')->get();
-                    $procesosall2=Proceso::where('variedad', $this->varie->name)->where('temporada','actual')
+                    $procesosall=Proceso::where('variedad', $this->varie->name)->where('temporada','actual')
                             ->latest('n_proceso')->get();
                     
                 }else{
                         $procesos=Proceso::where('especie',$this->espec->name)
                             ->latest('n_proceso')->paginate($this->ctd);
-                        $procesosall=Proceso::where('especie', $this->espec->name)->where('temporada','anterior')
+                        $procesosall2=Proceso::where('especie', $this->espec->name)->where('temporada','anterior')
                             ->latest('n_proceso')->get();
-                        $procesosall2=Proceso::where('especie', $this->espec->name)->where('temporada','actual')
+                        $procesosall=Proceso::where('especie', $this->espec->name)->where('temporada','actual')
                             ->latest('n_proceso')->get();
                 }
 

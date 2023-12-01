@@ -143,10 +143,10 @@
               </div>
               <table class="my-2 text-xl font-bold gap-x-4 w-full">
                <tr class="">
-                  <td class="mx-2 text-center">{{number_format($cant2)}} </td> <td class="ml-4">  T23/24</td>
+                  <td class="mx-2 text-center">{{number_format($cant2)}} </td> <td class="ml-4">  T22/23</td>
                </tr>
                <tr class="">
-                  <td class="mx-2 text-center">{{number_format($cant)}} </td> <td class="ml-4">  T22/23</td>
+                  <td class="mx-2 text-center">{{number_format($cant)}} </td> <td class="ml-4">  T23/24</td>
                </tr>
               
               </table>
