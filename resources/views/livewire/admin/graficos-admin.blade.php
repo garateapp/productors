@@ -84,6 +84,30 @@
                  <i class="fas fa-ship fa-2x mb-4 text-blue-500"></i>
               </div>
               <div class="flex items-center">
+               @if (($exp_total2+$com_total2+$des_total2+$merm_total2)>0)
+                  <h1 class="block my-2 text-xl font-bold">{{number_format($exp_total2*100/($exp_total2+$com_total2+$des_total2+$merm_total2),1)}}%</h1>
+                  <div class="relative py-2 w-full mx-4">
+                     <div class="w-full overflow-hidden h-4 text-4xl flex rounded bg-gray-200">
+                        <div style="width: {{$exp_total2*100/($exp_total2+$com_total2+$des_total2+$merm_total2)}}%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500">
+                           </div>
+                     </div>
+                  </div>
+               @else
+                  <h1 class="block my-2 text-xl font-bold">0%</h1>
+                  <div class="relative py-2 w-full mx-4">
+                     <div class="w-full overflow-hidden h-4 text-4xl flex rounded bg-gray-200">
+                        <div style="width: 0%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500">
+                           </div>
+                     </div>
+                  </div>
+               @endif
+            
+
+           
+             <h1 class="block my-2 text-xl font-bold">T22/23</h1>
+            
+         </div>
+              <div class="flex items-center">
                  @if (($exp_total+$com_total+$des_total+$merm_total)>0)
                      <h1 class="block my-2 text-xl font-bold">{{number_format($exp_total*100/($exp_total+$com_total+$des_total+$merm_total),1)}}%</h1>
                      <div class="relative py-2 w-full mx-4">
@@ -104,33 +128,10 @@
                  
   
                 
-                  <h1 class="block my-2 text-xl font-bold">T22/23</h1>
+                  <h1 class="block my-2 text-xl font-bold">T23/24</h1>
                  
               </div>
-              <div class="flex items-center">
-                  @if (($exp_total2+$com_total2+$des_total2+$merm_total2)>0)
-                     <h1 class="block my-2 text-xl font-bold">{{number_format($exp_total2*100/($exp_total2+$com_total2+$des_total2+$merm_total2),1)}}%</h1>
-                     <div class="relative py-2 w-full mx-4">
-                        <div class="w-full overflow-hidden h-4 text-4xl flex rounded bg-gray-200">
-                           <div style="width: {{$exp_total2*100/($exp_total2+$com_total2+$des_total2+$merm_total2)}}%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500">
-                              </div>
-                        </div>
-                     </div>
-                  @else
-                     <h1 class="block my-2 text-xl font-bold">0%</h1>
-                     <div class="relative py-2 w-full mx-4">
-                        <div class="w-full overflow-hidden h-4 text-4xl flex rounded bg-gray-200">
-                           <div style="width: 0%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500">
-                              </div>
-                        </div>
-                     </div>
-                  @endif
-               
-
-              
-                <h1 class="block my-2 text-xl font-bold">T23/24</h1>
-               
-            </div>
+             
            </div>
            <div class="max-w-xl  bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
               <div class="flex justify-between">
@@ -142,11 +143,12 @@
               </div>
               <table class="my-2 text-xl font-bold gap-x-4 w-full">
                <tr class="">
-                  <td class="mx-2 text-center">{{number_format($cant)}} </td> <td class="ml-4">  T22/23</td>
-               </tr>
-               <tr class="">
                   <td class="mx-2 text-center">{{number_format($cant2)}} </td> <td class="ml-4">  T23/24</td>
                </tr>
+               <tr class="">
+                  <td class="mx-2 text-center">{{number_format($cant)}} </td> <td class="ml-4">  T22/23</td>
+               </tr>
+              
               </table>
              
            </div>

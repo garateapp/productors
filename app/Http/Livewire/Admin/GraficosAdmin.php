@@ -39,14 +39,14 @@ class GraficosAdmin extends Component
                 ->latest('n_proceso')->paginate($this->ctd);
         }
         
-        $procesosall=Proceso::where('temporada', 'anterior')->get();
-        $procesosall2=Proceso::where('temporada', 'actual')->get();
+        $procesosall2=Proceso::where('temporada', 'anterior')->get();
+        $procesosall=Proceso::where('temporada', 'actual')->get();
         
         $especies=Especie::where('id','>=',1)->get();
         $variedades=Variedad::all();
 
-        $recepcions=Recepcion::where('temporada', 'anterior')->get();
-        $recepcions2=Recepcion::where('temporada', 'actual')->get();
+        $recepcions2=Recepcion::where('temporada', 'anterior')->get();
+        $recepcions=Recepcion::where('temporada', 'actual')->get();
         $productors=User::where('rut','LIKE','%'. $this->search .'%')
                         ->orwhere('name','LIKE','%'. $this->search .'%')
                         ->orwhere('csg','LIKE','%'. $this->search .'%')
