@@ -38,7 +38,7 @@
       $cant2=0;
    
          foreach($recepcions2 as $recepcion2){
-            $cant2+=$recepcion->peso_neto;
+            $cant2+=$recepcion2->peso_neto;
          }
          
             
