@@ -1504,7 +1504,7 @@ class HomeController extends Controller
                     $peso_neto=$item;
                 }
                 if($m==16){
-                    $nota_calidad=floatval(str_replace('.',',',$item));
+                    $nota_calidad=$item;
                 }
                if($m==17){
                     $n_estado=$item;
