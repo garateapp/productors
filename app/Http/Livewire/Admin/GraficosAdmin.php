@@ -39,19 +39,22 @@ class GraficosAdmin extends Component
                 ->latest('n_proceso')->paginate($this->ctd);
         }
         
-        $procesosall=Proceso::all();
+        $procesosall=Proceso::where('temporada', 'anterior')->get();
+        $procesosall2=Proceso::where('temporada', 'actual')->get();
         
         $especies=Especie::where('id','>=',1)->get();
         $variedades=Variedad::all();
 
-        $recepcions=Recepcion::all();
+        $recepcions=Recepcion::where('temporada', 'anterior')->get();
+        $recepcions2=Recepcion::where('temporada', 'actual')->get();
         $productors=User::where('rut','LIKE','%'. $this->search .'%')
                         ->orwhere('name','LIKE','%'. $this->search .'%')
                         ->orwhere('csg','LIKE','%'. $this->search .'%')
                         ->orwhere('idprod','LIKE','%'. $this->search .'%')
                         ->orwhere('user','LIKE','%'. $this->search .'%')
                         ->latest('id')->paginate(5);
-        return view('livewire.admin.graficos-admin',compact('productors','now','recepcions','procesosall','procesos','variedades','especies'));
+
+        return view('livewire.admin.graficos-admin',compact('productors','now','recepcions','recepcions2','procesosall','procesosall2','procesos','variedades','especies'));
     }
     
     public function set_especie($id){
