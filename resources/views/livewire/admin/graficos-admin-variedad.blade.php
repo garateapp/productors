@@ -252,19 +252,19 @@
     <div class="mx-2 sm:mx-12">
         
         <div class="grid grid-cols-3">
-            <figure class="highcharts-figure mx-1 mt-6" wire:ignore>
+            <figure class="highcharts-figure mx-1 mt-6 hidden" wire:ignore>
                 <div id="grafico" wire:ignore>
                    
                 </div>
             </figure>
-            <figure class="highcharts-figure mx-1 mt-6 col-span-2" wire:ignore>
+            <figure class="highcharts-figure mx-1 mt-6 col-span-3" wire:ignore>
                 <div id="container" wire:ignore>
                    
                 </div>
             </figure>
 
         </div>
-        <figure class="highcharts-figure mt-2" wire:ignore>
+        <figure class="highcharts-figure mt-2 hidden" wire:ignore>
             <div id="barras" wire:ignore>
                
             </div>
@@ -431,23 +431,24 @@
         align: 'left'
     },
     tooltip: {
-        pointFormat: '<b><b>{point.y}</b>({point.percentage:.0f}%)<br/>',
-    },
-    accessibility: {
-        point: {
-            valueSuffix: '%'
-        }
-    },
-    plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: false
+               pointFormat: '<b><b>{point.y}</b>({point.percentage:.0f}%)<br/>',
             },
-            showInLegend: true
-        }
-    },
+            accessibility: {
+               point: {
+                     valueSuffix: '%'
+               }
+            },
+            plotOptions: {
+               pie: {
+                     allowPointSelect: true,
+                     cursor: 'pointer',
+                     dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                     },
+                     showInLegend: true
+               }
+            },
     series: [{
         name: 'Brands',
         colorByPoint: true,
