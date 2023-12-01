@@ -44,10 +44,10 @@
               foreach ($procesosall2 as $proceso2) {
                   
 
-                      $export2+=$proceso->exp;
-                      $comerc2+=$proceso->comercial;
-                      $desec2+=$proceso->desecho;
-                      $mer2+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+                      $export2+=$proceso2->exp;
+                      $comerc2+=$proceso2->comercial;
+                      $desec2+=$proceso2->desecho;
+                      $mer2+=($proceso2->kilos_netos-$proceso2->desecho-$proceso2->comercial-$proceso2->exp);
                    }
 
              $exp_total2=$export2;
