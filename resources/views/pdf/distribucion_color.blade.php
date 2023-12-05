@@ -49,6 +49,22 @@
                                     $series[]=['name' =>$name,
                                     'y' => $detalle->porcentaje_muestra];
                                 }
+
+                                if ($recepcion->n_especie=='Cherries') {
+                                    if ($name=='Fuera de color') {
+                                        $colors[]=['#FF0000'];
+                                    }elseif ($name=='Rojo') {
+                                        $colors[]=['#FF0000'];
+                                    }elseif($name=='Rojo caoba'){
+                                        $colors[]=['#D60000'];
+                                    }elseif($name=='Santina'){
+                                        $colors[]=['#960000'];
+                                    }elseif($name=='Caoba oscuro'){
+                                        $colors[]=['#640000'];
+                                    }elseif($name=='Negro'){
+                                        $colors[]=['#000000'];
+                                    }
+                                }
                     }
                 }
 
@@ -57,7 +73,7 @@
     @endphp
     @if ($recepcion->n_especie=='Cherries')
         @php
-            $colors=['#800000','#600000','#400000','#000000'];
+          
         @endphp
     @elseif($recepcion->n_especie=='Apples')
         @php
