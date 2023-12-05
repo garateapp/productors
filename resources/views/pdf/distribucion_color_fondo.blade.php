@@ -34,7 +34,6 @@
          
     @php
         $series=[];
-        $colors=[];
 
          if ($recepcion->calidad->detalles){
 
@@ -47,30 +46,14 @@
 
                              $series[]=['name' =>$name,
                                           'y' => $detalle->porcentaje_muestra];
-                        if ($recepcion->n_especie=='Cherries') {
-                           if ($name=='Fuera de color') {
-                              $colors[]=['#FF0000'];
-                           }elseif ($name=='Rojo') {
-                              $colors[]=['#FF0000'];
-                           }elseif($name=='Rojo caoba'){
-                              $colors[]=['#D60000'];
-                           }elseif($name=='Santina'){
-                              $colors[]=['#960000'];
-                           }elseif($name=='Caoba oscuro'){
-                              $colors[]=['#640000'];
-                           }elseif($name=='Negro'){
-                              $colors[]=['#000000'];
-                           }
-                        }
-
                  }
              } 
     @endphp
 
    @if ($recepcion->n_especie=='Cherries')
-             
-
-
+      @php
+         $colors=['#24a745','#96AE51','#f9e8cf','#ffd700'];
+      @endphp
    @elseif($recepcion->n_especie=='Apples')
       @php
          $colors=['#abab3b','#DFF95D','#f0e770','#e8da20'];
