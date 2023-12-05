@@ -53,17 +53,17 @@
 
                                 if ($recepcion->n_especie=='Cherries') {
                                     if ($name=='Fuera de color') {
-                                        $colors[]=['#FF0000'];
+                                        $colors[]='#FF0000';
                                     }elseif ($name=='ROJO') {
-                                        $colors[]=['#FF0000'];
+                                        $colors[]='#FF0000';
                                     }elseif($name=='ROJO CAOBA'){
-                                        $colors[]=['#D60000'];
+                                        $colors[]='#D60000';
                                     }elseif($name=='SANTINA'){
-                                        $colors[]=['#960000'];
+                                        $colors[]='#960000';
                                     }elseif($name=='CAOBA OSCURO'){
-                                        $colors[]=['#640000'];
+                                        $colors[]='#640000';
                                     }elseif($name=='NEGRO'){
-                                        $colors[]=['#000000'];
+                                        $colors[]='#000000';
                                     }
                                 }
                     }
