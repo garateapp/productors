@@ -72,11 +72,7 @@
          
             
     @endphp
-    @if ($recepcion->n_especie=='Cherries')
-        @php
-          
-        @endphp
-    @elseif($recepcion->n_especie=='Apples')
+    @if($recepcion->n_especie=='Apples')
         @php
             $colors=['#830d13','#E01620','#ED3F3F'];
         @endphp
