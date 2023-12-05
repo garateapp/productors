@@ -52,7 +52,7 @@
                                 }
 
                                 if ($recepcion->n_especie=='Cherries') {
-                                    if ($name=='Fuera de color') {
+                                    if ($name=='Fuera de Color') {
                                         $colors[]='#FF9999';
                                     }elseif ($name=='ROJO') {
                                         $colors[]='#FF0000';
