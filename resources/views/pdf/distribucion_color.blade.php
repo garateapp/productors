@@ -30,6 +30,7 @@
 			
     @php
         $series=[];
+        $colors=[];
 
             if ($recepcion->calidad->detalles){
 
