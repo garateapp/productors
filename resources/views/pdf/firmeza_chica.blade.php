@@ -48,31 +48,38 @@
     @if ($recepcion->n_especie=='Cherries')
         @php
             $colors=['#24a745'];
+            $titulo='FIRMEZAS (lb) y BRIX / CHICO (125 al 216)';
         @endphp
     @elseif($recepcion->n_especie=='Apples')
         @php
             $colors=['#831816'];
+            $titulo='FIRMEZAS (lb) y BRIX / CHICO (125 al 216)';
         @endphp
      @elseif($recepcion->n_especie=='Peaches' || $recepcion->n_especie=='Nectarines' || $recepcion->n_especie=='Plums')
         @php
             $colors=['#730000'];
+            $titulo='FIRMEZAS (lb) y BRIX / CHICO (60 a 68)';
         @endphp
     @elseif($recepcion->n_especie=='Pears')
         @php
             $colors=['#788527'];
+            $titulo='FIRMEZAS (lb) y BRIX / CHICO (125 al 216)';
         @endphp
     @elseif($recepcion->n_especie=='Membrillos')
         @php
             $colors=['#fddf09'];
+            $titulo='FIRMEZAS (lb) y BRIX / CHICO (125 al 216)';
         @endphp
     @else 
         @php
             $colors=['#24a745'];
+            $titulo='FIRMEZAS (lb) y BRIX / CHICO (125 al 216)';
         @endphp
     @endif
                     
 	
     <script>
+        var titulo = <?php echo json_encode($titulo) ?>;
         var categories = <?php echo json_encode($categories) ?>;
         var series = <?php echo json_encode($series) ?>;
         var col = <?php echo json_encode($colors) ?>;
@@ -82,7 +89,7 @@
                 type: 'column'
             },
             title: {
-                text: 'FIRMEZAS (lb) y BRIX / CHICO (125 al 216)'
+                text: titulo
             },
             legend: {
                 enabled: false 
