@@ -54,9 +54,9 @@
                                 if ($recepcion->n_especie=='Cherries') {
                                     if ($name=='Fuera de color') {
                                         $colors[]='#FF9999';
-                                    }elseif ($name=='Rojo') {
+                                    }elseif ($name=='ROJO') {
                                         $colors[]='#FF0000';
-                                    }elseif($name=='Rojo caoba'){
+                                    }elseif($name=='ROJO CAOBA'){
                                         $colors[]='#D60000';
                                     }elseif($name=='SANTINA'){
                                         $colors[]='#960000';
@@ -72,7 +72,11 @@
          
             
     @endphp
-    @if($recepcion->n_especie=='Apples')
+    @if ($recepcion->n_especie=='Cherries')
+        @php
+       
+        @endphp
+    @elseif($recepcion->n_especie=='Apples')
         @php
             $colors=['#830d13','#E01620','#ED3F3F'];
         @endphp
