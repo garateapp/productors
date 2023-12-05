@@ -54,9 +54,9 @@
                                 if ($recepcion->n_especie=='Cherries') {
                                     if ($name=='Fuera de color') {
                                         $colors[]='#FF9999';
-                                    }elseif ($name=='ROJO') {
+                                    }elseif ($name=='Rojo') {
                                         $colors[]='#FF0000';
-                                    }elseif($name=='ROJO CAOBA'){
+                                    }elseif($name=='Rojo caoba'){
                                         $colors[]='#D60000';
                                     }elseif($name=='SANTINA'){
                                         $colors[]='#960000';
