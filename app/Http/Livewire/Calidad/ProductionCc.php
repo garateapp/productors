@@ -16,7 +16,7 @@ use Livewire\Component;
 use PDF;
 use Illuminate\Support\Facades\Http;
 use Livewire\WithPagination;
-
+use PhpParser\Node\Stmt\TryCatch;
 
 class ProductionCc extends Component
 {   use WithPagination;
@@ -292,8 +292,12 @@ class ProductionCc extends Component
                                 
                             
                         ];
-                        
-                      Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+                        try {
+                            Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+                        } catch (\Throwable $th) {
+                            
+                        }  
+                     
                     }
             }    
         }
