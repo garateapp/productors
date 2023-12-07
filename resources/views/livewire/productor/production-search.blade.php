@@ -16,12 +16,12 @@
                 <div>
                     @if ($temporada=='actual')
                         <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:red-green-500 sm:mt-0 px-6 py-3 bg-red-500 hover:bg-red-500 focus:outline-none rounded">
-                            <p class="text-sm font-medium leading-none text-white">ACTUAL</p>
+                            <p class="text-sm font-medium leading-none text-white">T23/24</p>
                         </button>
                     @else
                         <a href="{{route('production.index')}}">
                             <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded">
-                                <p class="text-sm font-medium leading-none text-white">ACTUAL</p>
+                                <p class="text-sm font-medium leading-none text-white">T23/24</p>
                             </button>
                         </a>
                     @endif
@@ -30,12 +30,12 @@
                 <div>
                     @if ($temporada=='anterior')
                         <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:red-green-500 sm:mt-0 px-6 py-3 bg-red-500 hover:bg-red-500 focus:outline-none rounded">
-                            <p class="text-sm font-medium leading-none text-white">ANTERIOR</p>
+                            <p class="text-sm font-medium leading-none text-white">T22/23</p>
                         </button>
                     @else
                         <a href="{{route('production.index.anterior')}}">
                             <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded">
-                                <p class="text-sm font-medium leading-none text-white">ANTERIOR</p>
+                                <p class="text-sm font-medium leading-none text-white">T22/23</p>
                             </button>
                         </a>
                     @endif
