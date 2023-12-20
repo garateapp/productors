@@ -66,6 +66,17 @@
                                         $colors[]='#000000';
                                     }
                                 }
+                                if ($recepcion->n_especie=='Peaches' || $recepcion->n_especie=='Nectarines') {
+                                    if ($name=='<30') {
+                                        $colors[]='#F0E770';
+                                    }elseif ($name=='30-50') {
+                                        $colors[]='F05E5E';
+                                    }elseif($name=='50-70'){
+                                        $colors[]='#E01620';
+                                    }elseif($name=='>70'){
+                                        $colors[]='#830D13';
+                                    }
+                                }
                     }
                 }
 
