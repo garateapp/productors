@@ -15,6 +15,8 @@ use Carbon\Carbon;
 use Livewire\Component;
 use PDF;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RecepcionMailable;
 use Livewire\WithPagination;
 use PhpParser\Node\Stmt\TryCatch;
 
@@ -241,6 +243,10 @@ class ProductionCc extends Component
         
 
         if($user){
+
+            if($user->emnotification==TRUE){
+                Mail::to($user->email)->send(new RecepcionMailable($recepcion));
+            }
             
             if($user->telefonos->count()){
                     foreach($user->telefonos as $telefono){

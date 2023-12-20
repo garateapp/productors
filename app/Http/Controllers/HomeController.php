@@ -29,6 +29,8 @@ use DateTime;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
+use App\Mail\NotificacionMailable;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -96,6 +98,11 @@ class HomeController extends Controller
 
             
             if(!is_null($user)){
+
+                if($user->emnotification==TRUE){
+                    Mail::to($user->email)->send(new NotificacionMailable($proceso));
+                }
+
                     //en caso que exista el usuarioo consultar si tiene telefonos registrados
                     if($user->telefonos->count()){
                         foreach($user->telefonos as $telefono){
