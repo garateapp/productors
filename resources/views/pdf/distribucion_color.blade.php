@@ -70,11 +70,11 @@
                                     if ($name=='<30') {
                                         $colors[]='#F0E770';
                                     }elseif ($name=='30-50') {
-                                        $colors[]='F05E5E';
+                                        $colors[]='#f05e5e';
                                     }elseif($name=='50-70'){
-                                        $colors[]='#E01620';
+                                        $colors[]='#e01620';
                                     }elseif($name=='>70'){
-                                        $colors[]='#830D13';
+                                        $colors[]='#830d13';
                                     }
                                 }
                     }
@@ -91,7 +91,10 @@
         @php
             $colors=['#830d13','#E01620','#ED3F3F'];
         @endphp
-     @elseif($recepcion->n_especie=='Peaches' || $recepcion->n_especie=='Nectarines' || $recepcion->n_especie=='Plums')
+     @elseif($recepcion->n_especie=='Peaches' || $recepcion->n_especie=='Nectarines')
+
+
+     @elseif($recepcion->n_especie=='Plums')
         @php
             $colors=['#e3e014','#722a1c','#722a1c'];
         @endphp
