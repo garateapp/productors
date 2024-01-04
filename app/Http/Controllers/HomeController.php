@@ -1707,7 +1707,7 @@ class HomeController extends Controller
                 }
                
                 if($m==14){
-                    $cont=User::where('rut',$rut)->first();
+                    $cont=User::where('csg',$csg)->first();
                     $search=['.','-'];
                     if($cont){
                          $cont->forceFill([
