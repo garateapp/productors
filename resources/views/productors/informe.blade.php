@@ -341,7 +341,7 @@
 
 	<table style="width:100%;">
 		<tr>
-			@if ($recepcion->n_especie=='Cherries')
+			@if ($recepcion->n_especie=='Cherries' || $recepcion->n_variedad=='Dagen')
 				@isset($promedio_firmeza)
 					<td>
 						<img style="width:100%;" src="{{$promedio_firmeza}}" alt="" >
