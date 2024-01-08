@@ -635,135 +635,255 @@ class ProductionCc extends Component
                             ]);
                         }
                     }
-                    if ($n==24) {
-                        if($item==0){
-                            
-                        }else{
+
+                    if ($recepcion->n_variedad=='Dagen') {
+                        if ($n==24) {
+                            if($item==0){
+                                
+                            }else{
+                                Detalle::create([
+                                    'calidad_id'=>$this->recep->calidad->id,
+                                    'embalaje'=>$this->embalaje,
+                                    'valor_ss'=>floatval($item)*100,
+                                    'porcentaje_muestra'=>floatval($item)*100,
+                                    'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                    'tipo_detalle'=>'cc',
+                                    'detalle_item'=>'PRECALIBRE',
+                                    'fecha'=>$this->fecha                
+                                ]);
+                            }
+                        }
+                        if ($n==25) {
+                            if($item==0){
+                                
+                            }else{
+                                Detalle::create([
+                                    'calidad_id'=>$this->recep->calidad->id,
+                                    'embalaje'=>$this->embalaje,
+                                    'valor_ss'=>floatval($item)*100,
+                                    'porcentaje_muestra'=>floatval($item)*100,
+                                    'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                    'tipo_detalle'=>'cc',
+                                    'detalle_item'=>'L',
+                                    'fecha'=>$this->fecha                
+                                ]);
+                            }
+                        }
+                        if ($n==26) {
+                            if($item==0){
+                                
+                            }else{
+                                Detalle::create([
+                                    'calidad_id'=>$this->recep->calidad->id,
+                                    'embalaje'=>$this->embalaje,
+                                    'valor_ss'=>floatval($item)*100,
+                                    'porcentaje_muestra'=>floatval($item)*100,
+                                    'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                    'tipo_detalle'=>'cc',
+                                    'detalle_item'=>'XL',
+                                    'fecha'=>$this->fecha                
+                                ]);
+                            }
+                        }
+                        if ($n==27) {
+                            if($item==0){
+                                
+                            }else{
+                                Detalle::create([
+                                    'calidad_id'=>$this->recep->calidad->id,
+                                    'embalaje'=>$this->embalaje,
+                                    'valor_ss'=>floatval($item)*100,
+                                    'porcentaje_muestra'=>floatval($item)*100,
+                                    'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                    'tipo_detalle'=>'cc',
+                                    'detalle_item'=>'J',
+                                    'fecha'=>$this->fecha                
+                                ]);
+                            }
+                        }
+                        if ($n==28) {
+                            if($item==0){
+                                
+                            }else{
                             Detalle::create([
-                                'calidad_id'=>$this->recep->calidad->id,
-                                'embalaje'=>$this->embalaje,
-                                'valor_ss'=>floatval($item)*100,
-                                'porcentaje_muestra'=>floatval($item)*100,
-                                'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
-                                'tipo_detalle'=>'cc',
-                                'detalle_item'=>'PRECALIBRE',
-                                'fecha'=>$this->fecha                
-                            ]);
+                                    'calidad_id'=>$this->recep->calidad->id,
+                                    'embalaje'=>$this->embalaje,
+                                    'valor_ss'=>floatval($item)*100,
+                                    'porcentaje_muestra'=>floatval($item)*100,
+                                    'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                    'tipo_detalle'=>'cc',
+                                    'detalle_item'=>'SJ',
+                                    'fecha'=>$this->fecha                
+                                ]);
+                            }
                         }
-                    }
-                    if ($n==25) {
-                        if($item==0){
-                            
-                        }else{
+                        if ($n==29) {
+                            if($item==0){
+                                
+                            }else{
                             Detalle::create([
-                                'calidad_id'=>$this->recep->calidad->id,
-                                'embalaje'=>$this->embalaje,
-                                'valor_ss'=>floatval($item)*100,
-                                'porcentaje_muestra'=>floatval($item)*100,
-                                'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
-                                'tipo_detalle'=>'cc',
-                                'detalle_item'=>'L',
-                                'fecha'=>$this->fecha                
-                            ]);
+                                    'calidad_id'=>$this->recep->calidad->id,
+                                    'embalaje'=>$this->embalaje,
+                                    'valor_ss'=>floatval($item)*100,
+                                    'porcentaje_muestra'=>floatval($item)*100,
+                                    'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                    'tipo_detalle'=>'cc',
+                                    'detalle_item'=>'G',
+                                    'fecha'=>$this->fecha                
+                                ]);
+                            }
                         }
-                    }
-                    if ($n==26) {
-                        if($item==0){
-                            
-                        }else{
+                        if ($n==30) {
+                            if($item==0){
+                                
+                            }else{
                             Detalle::create([
-                                'calidad_id'=>$this->recep->calidad->id,
-                                'embalaje'=>$this->embalaje,
-                                'valor_ss'=>floatval($item)*100,
-                                'porcentaje_muestra'=>floatval($item)*100,
-                                'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
-                                'tipo_detalle'=>'cc',
-                                'detalle_item'=>'XL',
-                                'fecha'=>$this->fecha                
-                            ]);
+                                    'calidad_id'=>$this->recep->calidad->id,
+                                    'embalaje'=>$this->embalaje,
+                                    'valor_ss'=>floatval($item)*100,
+                                    'porcentaje_muestra'=>floatval($item)*100,
+                                    'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                    'tipo_detalle'=>'cc',
+                                    'detalle_item'=>'SOBRECALIBRE',
+                                    'fecha'=>$this->fecha                
+                                ]);
+                            }
                         }
-                    }
-                    if ($n==27) {
-                        if($item==0){
-                            
-                        }else{
+                    }else {
+                         if ($n==24) {
+                            if($item==0){
+                                
+                            }else{
+                                Detalle::create([
+                                    'calidad_id'=>$this->recep->calidad->id,
+                                    'embalaje'=>$this->embalaje,
+                                    'valor_ss'=>floatval($item)*100,
+                                    'porcentaje_muestra'=>floatval($item)*100,
+                                    'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                    'tipo_detalle'=>'cc',
+                                    'detalle_item'=>'PRECALIBRE',
+                                    'fecha'=>$this->fecha                
+                                ]);
+                            }
+                        }
+                        if ($n==25) {
+                            if($item==0){
+                                
+                            }else{
+                                Detalle::create([
+                                    'calidad_id'=>$this->recep->calidad->id,
+                                    'embalaje'=>$this->embalaje,
+                                    'valor_ss'=>floatval($item)*100,
+                                    'porcentaje_muestra'=>floatval($item)*100,
+                                    'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                    'tipo_detalle'=>'cc',
+                                    'detalle_item'=>'L',
+                                    'fecha'=>$this->fecha                
+                                ]);
+                            }
+                        }
+                        if ($n==26) {
+                            if($item==0){
+                                
+                            }else{
+                                Detalle::create([
+                                    'calidad_id'=>$this->recep->calidad->id,
+                                    'embalaje'=>$this->embalaje,
+                                    'valor_ss'=>floatval($item)*100,
+                                    'porcentaje_muestra'=>floatval($item)*100,
+                                    'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                    'tipo_detalle'=>'cc',
+                                    'detalle_item'=>'XL',
+                                    'fecha'=>$this->fecha                
+                                ]);
+                            }
+                        }
+                        if ($n==27) {
+                            if($item==0){
+                                
+                            }else{
+                                Detalle::create([
+                                    'calidad_id'=>$this->recep->calidad->id,
+                                    'embalaje'=>$this->embalaje,
+                                    'valor_ss'=>floatval($item)*100,
+                                    'porcentaje_muestra'=>floatval($item)*100,
+                                    'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                    'tipo_detalle'=>'cc',
+                                    'detalle_item'=>'J',
+                                    'fecha'=>$this->fecha                
+                                ]);
+                            }
+                        }
+                        if ($n==28) {
+                            if($item==0){
+                                
+                            }else{
                             Detalle::create([
-                                'calidad_id'=>$this->recep->calidad->id,
-                                'embalaje'=>$this->embalaje,
-                                'valor_ss'=>floatval($item)*100,
-                                'porcentaje_muestra'=>floatval($item)*100,
-                                'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
-                                'tipo_detalle'=>'cc',
-                                'detalle_item'=>'J',
-                                'fecha'=>$this->fecha                
-                            ]);
+                                    'calidad_id'=>$this->recep->calidad->id,
+                                    'embalaje'=>$this->embalaje,
+                                    'valor_ss'=>floatval($item)*100,
+                                    'porcentaje_muestra'=>floatval($item)*100,
+                                    'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                    'tipo_detalle'=>'cc',
+                                    'detalle_item'=>'2J',
+                                    'fecha'=>$this->fecha                
+                                ]);
+                            }
                         }
-                    }
-                    if ($n==28) {
-                        if($item==0){
-                            
-                        }else{
-                           Detalle::create([
-                                'calidad_id'=>$this->recep->calidad->id,
-                                'embalaje'=>$this->embalaje,
-                                'valor_ss'=>floatval($item)*100,
-                                'porcentaje_muestra'=>floatval($item)*100,
-                                'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
-                                'tipo_detalle'=>'cc',
-                                'detalle_item'=>'2J',
-                                'fecha'=>$this->fecha                
-                            ]);
+                        if ($n==29) {
+                            if($item==0){
+                                
+                            }else{
+                            Detalle::create([
+                                    'calidad_id'=>$this->recep->calidad->id,
+                                    'embalaje'=>$this->embalaje,
+                                    'valor_ss'=>floatval($item)*100,
+                                    'porcentaje_muestra'=>floatval($item)*100,
+                                    'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                    'tipo_detalle'=>'cc',
+                                    'detalle_item'=>'3J',
+                                    'fecha'=>$this->fecha                
+                                ]);
+                            }
                         }
-                    }
-                    if ($n==29) {
-                        if($item==0){
-                            
-                        }else{
-                          Detalle::create([
-                                'calidad_id'=>$this->recep->calidad->id,
-                                'embalaje'=>$this->embalaje,
-                                'valor_ss'=>floatval($item)*100,
-                                'porcentaje_muestra'=>floatval($item)*100,
-                                'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
-                                'tipo_detalle'=>'cc',
-                                'detalle_item'=>'3J',
-                                'fecha'=>$this->fecha                
-                            ]);
+                        if ($n==30) {
+                            if($item==0){
+                                
+                            }else{
+                            Detalle::create([
+                                    'calidad_id'=>$this->recep->calidad->id,
+                                    'embalaje'=>$this->embalaje,
+                                    'valor_ss'=>floatval($item)*100,
+                                    'porcentaje_muestra'=>floatval($item)*100,
+                                    'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                    'tipo_detalle'=>'cc',
+                                    'detalle_item'=>'4J',
+                                    'fecha'=>$this->fecha                
+                                ]);
+                            }
                         }
-                    }
-                    if ($n==30) {
-                        if($item==0){
-                            
-                        }else{
-                         Detalle::create([
-                                'calidad_id'=>$this->recep->calidad->id,
-                                'embalaje'=>$this->embalaje,
-                                'valor_ss'=>floatval($item)*100,
-                                'porcentaje_muestra'=>floatval($item)*100,
-                                'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
-                                'tipo_detalle'=>'cc',
-                                'detalle_item'=>'4J',
-                                'fecha'=>$this->fecha                
-                            ]);
+                        if ($n==31) {
+                            if($item==0){
+                                
+                            }else{
+                            Detalle::create([
+                                    'calidad_id'=>$this->recep->calidad->id,
+                                    'embalaje'=>$this->embalaje,
+                                    'valor_ss'=>floatval($item)*100,
+                                    'porcentaje_muestra'=>floatval($item)*100,
+                                    'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                    'tipo_detalle'=>'cc',
+                                    'detalle_item'=>'5J',
+                                    'fecha'=>$this->fecha                
+                                ]);
+                            }
                         }
+
                     }
-                    if ($n==31) {
-                        if($item==0){
-                            
-                        }else{
-                          Detalle::create([
-                                'calidad_id'=>$this->recep->calidad->id,
-                                'embalaje'=>$this->embalaje,
-                                'valor_ss'=>floatval($item)*100,
-                                'porcentaje_muestra'=>floatval($item)*100,
-                                'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
-                                'tipo_detalle'=>'cc',
-                                'detalle_item'=>'5J',
-                                'fecha'=>$this->fecha                
-                            ]);
-                        }
-                    }
-                    $n+=1;
+                    
+                      
+                    
+                        $n+=1;
 
                 }    
                 break;                                          
