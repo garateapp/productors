@@ -416,7 +416,7 @@
 			</tr>
 		</table>
 	@endif
-	@if ($recepcion->n_especie=='Cherries')
+	@if ($recepcion->n_especie=='Cherries' || $recepcion->n_variedad=='Dagen'))
 		<table style="width:100%;">
 			<tr>
 				@isset($porcentaje_firmeza)
