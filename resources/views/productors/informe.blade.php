@@ -328,7 +328,7 @@
 				</td>
 			@endif
 			
-			@if ($recepcion->n_especie=='Cherries')
+			@if ($recepcion->n_especie=='Cherries' || $recepcion->n_variedad=='Dagen')
 				@isset($distribucion_color)
 					<td>
 						<img style="width:100%;" src="{{$distribucion_color}}" alt="" >
