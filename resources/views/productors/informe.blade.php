@@ -416,7 +416,7 @@
 			</tr>
 		</table>
 	@endif
-	@if ($recepcion->n_especie=='Cherries' || $recepcion->n_variedad=='Dagen'))
+	@if ($recepcion->n_especie=='Cherries' || $recepcion->n_variedad=='Dagen')
 		<table style="width:100%;">
 			<tr>
 				@isset($porcentaje_firmeza)
@@ -424,12 +424,13 @@
 						<img style="width:100%;" src="{{$porcentaje_firmeza}}" alt="" >
 					</td>
 				@endif
-				@isset($distribucion_color_fondo)
-					<td>
-						<img style="width:100%;" src="{{$distribucion_color_fondo}}" alt="" >
-					</td>
+				@if ($recepcion->n_variedad=='Dagen')
+					@isset($distribucion_color_fondo)
+						<td>
+							<img style="width:100%;" src="{{$distribucion_color_fondo}}" alt="" >
+						</td>
+					@endif
 				@endif
-				
 			</tr>
 		</table>
 	@else
