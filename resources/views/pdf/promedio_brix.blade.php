@@ -32,7 +32,13 @@
     @php
         $categories=[];
         $series=[];
-        $items=['LIGHT','DARK','BLACK'];
+        if ($recepcion->n_variedad=='Dagen') {
+            $items=['<30','30-50','>50'];
+        } else {
+            $items=['LIGHT','DARK','BLACK'];
+        }
+        
+       
     @endphp
 
     @foreach ($items as $item)
