@@ -42,22 +42,40 @@
     @endphp
 
     @foreach ($items as $item)
-        @if ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES')->where('detalle_item',$item)->count()>0)
-            @foreach ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES')->where('detalle_item',$item) as $detalle)
-                
-                    @php
-                        $categories[]=$detalle->detalle_item;
-                        $series[]=$detalle->valor_ss;
-                    @endphp
-                
-            @endforeach
+        @if ($recepcion->n_variedad=='Dagen')
+            @if ($recepcion->calidad->detalles->where('tipo_item','BRIX DAGEN')->where('detalle_item',$item)->count()>0)
+                @foreach ($recepcion->calidad->detalles->where('tipo_item','BRIX DAGEN')->where('detalle_item',$item) as $detalle)
+                    
+                        @php
+                            $categories[]=$detalle->detalle_item;
+                            $series[]=$detalle->valor_ss;
+                        @endphp
+                    
+                @endforeach
+            @else
+                        @php
+                            $categories[]=$item;
+                            $series[]=0;
+                        @endphp
+            @endif
+            
         @else
-                    @php
-                        $categories[]=$item;
-                        $series[]=0;
-                    @endphp
+            @if ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES')->where('detalle_item',$item)->count()>0)
+                @foreach ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES')->where('detalle_item',$item) as $detalle)
+                    
+                        @php
+                            $categories[]=$detalle->detalle_item;
+                            $series[]=$detalle->valor_ss;
+                        @endphp
+                    
+                @endforeach
+            @else
+                        @php
+                            $categories[]=$item;
+                            $series[]=0;
+                        @endphp
+            @endif
         @endif
-        
     @endforeach
                     
     @if ($recepcion->n_especie=='Cherries')
