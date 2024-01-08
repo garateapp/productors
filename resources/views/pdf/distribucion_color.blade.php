@@ -125,8 +125,18 @@
             $colors=['#24a745','#96AE51','#f9e8cf','#ffd700'];
         @endphp
     @endif
+    @php
+    if ($recepcion->n_variedad=='Dagen') {
+        $titulo='DISTRIBUCIÓN DE COLOR DE CUBRIMIENTO';
+    } else {
+        $titulo='DISTRIBUCIÓN DE COLOR';
+    }
+    
+      
+    @endphp
       <script>
     var series = <?php echo json_encode($series) ?>;
+    var titulo = <?php echo json_encode($titulo) ?>;
     var col = <?php echo json_encode($colors) ?>;
     
     Highcharts.chart('circular', {
@@ -137,7 +147,7 @@
                type: 'pie'
             },
             title: {
-               text: 'DISTRIBUCIÓN DE COLOR',
+               text: titulo,
                align: 'left'
             },
             tooltip: {
