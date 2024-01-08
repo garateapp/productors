@@ -119,7 +119,7 @@
                         filter: {
                             property: 'y',
                             operator: '>',
-                            value: 5
+                            value: 1
                         },
                         style: {
                             fontSize: '22px'
