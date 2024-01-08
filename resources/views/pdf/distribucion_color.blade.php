@@ -77,6 +77,15 @@
                                         $colors[]='#830d13';
                                     }
                                 }
+                                if ($recepcion->n_variedad=='Dagen') {
+                                    if ($name=='<30') {
+                                        $colors[]='#70444d';
+                                    }elseif ($name=='30-50') {
+                                        $colors[]='#90585b';
+                                    }elseif($name=='>50'){
+                                        $colors[]='#56343b';
+                                    }
+                                }
                     }
                 }
 
@@ -117,9 +126,8 @@
              $colors=['#c6d406','#f8d34c','#fcad03','#fb8603'];
         @endphp
    @elseif($recepcion->n_variedad=='Dagen')
-        @php
-            $colors=['#70444d','#90595b','#56343b'];
-        @endphp
+        
+
     @else 
         @php
             $colors=['#24a745','#96AE51','#f9e8cf','#ffd700'];
