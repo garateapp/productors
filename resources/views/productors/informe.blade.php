@@ -355,7 +355,7 @@
 					</td>
 				@endif
 			@endif
-			@if ($recepcion->n_especie=='Cherries')
+			@if ($recepcion->n_especie=='Cherries'  || $recepcion->n_variedad=='Dagen')
 				@isset($promedio_brix)
 					<td>
 						<img style="width:100%;" src="{{$promedio_brix}}" alt="" >
