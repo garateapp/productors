@@ -737,20 +737,20 @@ class ProductionCc extends Component
                             if($item==0){
                                 
                             }else{
-                            Detalle::create([
-                                    'calidad_id'=>$this->recep->calidad->id,
-                                    'embalaje'=>$this->embalaje,
-                                    'valor_ss'=>floatval($item)*100,
-                                    'porcentaje_muestra'=>floatval($item)*100,
-                                    'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
-                                    'tipo_detalle'=>'cc',
-                                    'detalle_item'=>'SOBRECALIBRE',
-                                    'fecha'=>$this->fecha                
-                                ]);
+                                Detalle::create([
+                                        'calidad_id'=>$this->recep->calidad->id,
+                                        'embalaje'=>$this->embalaje,
+                                        'valor_ss'=>floatval($item)*100,
+                                        'porcentaje_muestra'=>floatval($item)*100,
+                                        'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
+                                        'tipo_detalle'=>'cc',
+                                        'detalle_item'=>'SOBRECALIBRE',
+                                        'fecha'=>$this->fecha                
+                                    ]);
                             }
                         }
                     }else {
-                         if ($n==24) {
+                        if ($n==24) {
                             if($item==0){
                                 
                             }else{
