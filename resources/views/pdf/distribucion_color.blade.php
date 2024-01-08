@@ -103,7 +103,7 @@
      @elseif($recepcion->n_especie=='Peaches' || $recepcion->n_especie=='Nectarines')
 
 
-     @elseif($recepcion->n_especie=='Plums' || $recepcion->n_variedad!='Dagen')
+     @elseif($recepcion->n_especie=='Plums' && $recepcion->n_variedad!='Dagen')
         @php
             $colors=['#e3e014','#722a1c','#722a1c'];
         @endphp
