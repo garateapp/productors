@@ -397,10 +397,11 @@ class ProductionCc extends Component
      $l=[];
      $d=[];
      $b=[];
-     
+  
     
         foreach ($rangos as $rango){
-        
+                $nfrutos=0;
+                $sumt=0;
                 $light=0;
                 $dark=0;
                 $black=0;
@@ -417,6 +418,9 @@ class ProductionCc extends Component
                     
                             if ($n==4) {
                                 $firmeza=$item;
+                            }
+                            if ($n==5) {
+                                $calibre=$item;
                             }
                             if ($n==13) {
                                 $color=$item;
@@ -441,23 +445,32 @@ class ProductionCc extends Component
                                         
 
                                     if ($rango==279) {
-                                        if ($firmeza>=280) {
-                                            if($color=='Rojo'){
-                                                $light+=1;
+                                        if ($recepcion->n_variedad=='Dagen') {
+                                            if ($calibre<28) {
+                                                $sumt+=$calibre;
+                                                $nfrutos+=1;
                                             }
-                                                if($color=='Rojo caoba'){
-                                                    $dark+=1;
+                                        } else {
+                                            if ($firmeza>=280) {
+                                                if($color=='Rojo'){
+                                                    $light+=1;
                                                 }
-                                                if($color=='Santina'){
-                                                    $dark+=1;
+                                                    if($color=='Rojo caoba'){
+                                                        $dark+=1;
+                                                    }
+                                                    if($color=='Santina'){
+                                                        $dark+=1;
+                                                    }
+                                                    if($color=='Caoba oscuro' || $color=='Caoba Oscuro'){
+                                                        $black+=1;
+                                                    }
+                                                    if($color=='Negro'){
+                                                        $black+=1;
                                                 }
-                                                if($color=='Caoba oscuro' || $color=='Caoba Oscuro'){
-                                                    $black+=1;
-                                                }
-                                                if($color=='Negro'){
-                                                    $black+=1;
-                                            }
-                                        }      
+                                            }  
+                                               
+                                        }
+                                            
                                     }
                                     if ($rango==219) {
                                         if ($firmeza>=200 && $firmeza<280) {
@@ -524,6 +537,34 @@ class ProductionCc extends Component
                                 $n+=1;
                 
                     }
+
+                }
+
+                if($sumt>0 && $nfrutos>0){
+
+                    if ($rango==279) {
+                        Detalle::create([
+                            'calidad_id'=>$this->recep->calidad->id,
+                            'embalaje'=>$this->embalaje,
+                            'valor_ss'=>$sumt/$nfrutos,
+                            'porcentaje_muestra'=>$sumt/$nfrutos,
+                            'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
+                            'tipo_detalle'=>'cc',
+                            'detalle_item'=>'PRECALIBRE',
+                            'fecha'=>$this->fecha                
+                        ]);
+                    }
+                    if ($rango==219) {
+                        
+
+                    }
+                    if ($rango==179) {
+
+                    }
+                    if ($rango==1) {
+                    
+                    }
+
 
                 }
                 
