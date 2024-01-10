@@ -307,9 +307,9 @@
 			
 			@endphp
 			@if ($recepcion->n_variedad=='Dagen')
-				@if ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','MUY FIRME')->first())
+				@if ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','MUY BLANDO')->first())
 					@php
-						$e=	$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','MUY FIRME')->first()->porcentaje_muestra;
+						$e=	$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','MUY BLANDO')->first()->porcentaje_muestra;
 					@endphp
 			
 				@endif
