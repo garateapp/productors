@@ -410,11 +410,13 @@
                                                         @endif
                                                     @endif
                                                    
-                                                        @if ($detalle->cantidad>=0)
+                                                        @if ($detalle->cantidad==0)
+                                                            0
+                                                        @elseif ($detalle->cantidad>=0)
                                                             {{$detalle->cantidad}}
                                                         @endif
                                                     
-                                            </p>
+                                                </p>
                                             
                                         </td>
                                         
