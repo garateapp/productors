@@ -32,6 +32,7 @@
     @php
         $categories=[];
         $series=[];
+        $colors=[];
         if ($recepcion->n_variedad=='Dagen') {
             $items=['<30','30-50','>50'];
         } else {
