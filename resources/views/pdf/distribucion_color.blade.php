@@ -86,6 +86,17 @@
                                         $colors[]='#8C1651';
                                     }
                                 }
+                                if ($recepcion->n_especie=='Plums' && $recepcion->n_variedad!='Dagen') {
+                                    if ($name=='<30') {
+                                        $colors[]='#F0E770';
+                                    }elseif ($name=='30-50') {
+                                        $colors[]='#f05e5e';
+                                    }elseif($name=='50-70'){
+                                        $colors[]='#e01620';
+                                    }elseif($name=='>70'){
+                                        $colors[]='#830d13';
+                                    }
+                                }
                     }
                 }
 
@@ -105,7 +116,7 @@
 
      @elseif($recepcion->n_especie=='Plums' && $recepcion->n_variedad!='Dagen')
         @php
-            $colors=['#e3e014','#722a1c','#722a1c'];
+           
         @endphp
  
     @elseif($recepcion->n_especie=='Paltas')
