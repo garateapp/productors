@@ -775,9 +775,7 @@ class ProductionCc extends Component
 
                     if ($recepcion->n_variedad=='Dagen') {
                         if ($n==24) {
-                            if($item==0){
-                                
-                            }else{
+                            if($item>0){
                                 Detalle::create([
                                     'calidad_id'=>$this->recep->calidad->id,
                                     'embalaje'=>$this->embalaje,
@@ -791,9 +789,7 @@ class ProductionCc extends Component
                             }
                         }
                         if ($n==25) {
-                            if($item==0){
-                                
-                            }else{
+                            if($item>0){
                                 Detalle::create([
                                     'calidad_id'=>$this->recep->calidad->id,
                                     'embalaje'=>$this->embalaje,
@@ -807,9 +803,7 @@ class ProductionCc extends Component
                             }
                         }
                         if ($n==26) {
-                            if($item==0){
-                                
-                            }else{
+                            if($item>0){
                                 Detalle::create([
                                     'calidad_id'=>$this->recep->calidad->id,
                                     'embalaje'=>$this->embalaje,
@@ -823,9 +817,7 @@ class ProductionCc extends Component
                             }
                         }
                         if ($n==27) {
-                            if($item==0){
-                                
-                            }else{
+                            if($item>0){
                                 Detalle::create([
                                     'calidad_id'=>$this->recep->calidad->id,
                                     'embalaje'=>$this->embalaje,
@@ -839,9 +831,7 @@ class ProductionCc extends Component
                             }
                         }
                         if ($n==28) {
-                            if($item==0){
-                                
-                            }else{
+                            if($item>0){
                             Detalle::create([
                                     'calidad_id'=>$this->recep->calidad->id,
                                     'embalaje'=>$this->embalaje,
@@ -855,9 +845,7 @@ class ProductionCc extends Component
                             }
                         }
                         if ($n==29) {
-                            if($item==0){
-                                
-                            }else{
+                            if($item>0){
                             Detalle::create([
                                     'calidad_id'=>$this->recep->calidad->id,
                                     'embalaje'=>$this->embalaje,
@@ -871,9 +859,8 @@ class ProductionCc extends Component
                             }
                         }
                         if ($n==30) {
-                            if($item==0){
+                            if($item>0){
                                 
-                            }else{
                                 Detalle::create([
                                         'calidad_id'=>$this->recep->calidad->id,
                                         'embalaje'=>$this->embalaje,
