@@ -411,8 +411,10 @@
                                                         @endif
                                                     @endif
                                                    
-                                                        @if ($detalle->cantidad)
+                                                        @if ($detalle->cantidad>0)
                                                             {{$detalle->cantidad}}
+                                                        @else
+                                                            0
                                                         @endif
                                                     
                                             </p>
