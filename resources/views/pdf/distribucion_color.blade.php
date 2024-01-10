@@ -79,11 +79,11 @@
                                 }
                                 if ($recepcion->n_variedad=='Dagen') {
                                     if ($name=='<30') {
-                                        $colors[]='#70444d';
+                                        $colors[]='#D26FDE';
                                     }elseif ($name=='30-50') {
-                                        $colors[]='#90585b';
+                                        $colors[]='#9817BB';
                                     }elseif($name=='>50'){
-                                        $colors[]='#56343b';
+                                        $colors[]='#8C1651';
                                     }
                                 }
                     }
