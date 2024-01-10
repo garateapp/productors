@@ -386,11 +386,11 @@
                                                 @endif
                                                 
                                                 @if ($detalle->tipo_item!='DISTRIBUCIÓN DE CALIBRES')
-                                                    @if ($detalle->porcentaje_muestra)
+                                                    @if ($detalle->porcentaje_muestra>=0)
                                                         {{$detalle->porcentaje_muestra}}
                                                     @endif
                                                 @elseif($recep->n_especie=='Orange' || $recep->n_especie=='Peaches' || $recep->n_especie=='Apples' || $recep->n_especie=='Pears' || $recep->n_especie=='Nectarines' || $recep->n_especie=='Plums' || $recep->n_especie=='Mandarinas' || $recep->n_especie=='Membrillos' || $recep->n_especie=='Paltas')
-                                                    @if ($detalle->porcentaje_muestra>0)
+                                                    @if ($detalle->porcentaje_muestra>=0)
                                                         {{$detalle->porcentaje_muestra}}
                                                    
                                                     @endif
@@ -410,7 +410,7 @@
                                                         @endif
                                                     @endif
                                                    
-                                                        @if ($detalle->cantidad>0)
+                                                        @if ($detalle->cantidad>=0)
                                                             {{$detalle->cantidad}}
                                                         @endif
                                                     
