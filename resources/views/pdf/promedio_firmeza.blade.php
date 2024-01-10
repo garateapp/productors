@@ -72,7 +72,7 @@
         @endphp
     @elseif($recepcion->n_variedad=='Dagen')
         @php
-            $colors=['#56343b'];
+            $colors=['#9817BB'];
         @endphp
     @else 
         @php
