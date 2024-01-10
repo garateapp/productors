@@ -170,30 +170,51 @@
        
     @endforeach
  --}}
+ @php
+    $categories=[];
+    $series=[];
+@endphp
 
     @if ($recepcion->calidad->detalles)
-        @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','LIGHT') as $detalle)
-          
-                @php
-                        $l[]=$detalle->valor_ss;
-                   
-                @endphp
-         
+        @if ($recepcion->n_variedad=='Dagen')
+        @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA') as $detalle)
+
+            @php
+                $categories[]=$detalle->detalle_item;
+                if ($recepcion->n_especie=='Cherries') {
+                    $series[]=$detalle->valor_ss;
+                }else {
+                    $series[]=$detalle->porcentaje_muestra;
+                }
+                    
+            @endphp
         @endforeach
-        @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','DARK') as $detalle)
-          
-                @php
-                        $d[]=$detalle->valor_ss;
-                @endphp
-         
-        @endforeach
-        @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','BLACK') as $detalle)
-          
-                @php
-                        $b[]=$detalle->valor_ss;
-                @endphp
-         
-        @endforeach
+
+        @else
+            @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','LIGHT') as $detalle)
+            
+                    @php
+                            $l[]=$detalle->valor_ss;
+                    
+                    @endphp
+            
+            @endforeach
+            @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','DARK') as $detalle)
+            
+                    @php
+                            $d[]=$detalle->valor_ss;
+                    @endphp
+            
+            @endforeach
+            @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','BLACK') as $detalle)
+            
+                    @php
+                            $b[]=$detalle->valor_ss;
+                    @endphp
+            
+            @endforeach
+        @endif
+
     @endif
                     
 	@if ($recepcion->n_especie=='Cherries')
@@ -217,93 +238,151 @@
             $colors=['#24a745'];
         @endphp
     @endif
-    <script>
-        var col = <?php echo json_encode($colors) ?>;
-        var l = <?php echo json_encode($l) ?>;
-        var d = <?php echo json_encode($d) ?>;
-        var b = <?php echo json_encode($b) ?>;
+    @if ($recepcion->n_variedad=='Dagen')
+        <script>
+            var categories = <?php echo json_encode($categories) ?>;
+            var series = <?php echo json_encode($series) ?>;
+            var col = <?php echo json_encode($colors) ?>;
 
-                Highcharts.chart('container', {
-            chart: {
-                type: 'column',
-                 overflow: 'justify'
-            },
-            title: {
-                text: '% Distribución de Firmezas por Segregación de Color'
-            },
-            legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle'
-                    },
-            xAxis: {
-                categories: ['Muy Firme >280 - 1000 <br>Durofel >75','Firme 200 - 279 <br> Durofel 72 - 74.9','Sensible 180 - 199 <br> Durofel 65 - 69.9','Blando 0,1 - 179<br>  Durofel <65,4'],
-                crosshair: false
-            },
-            yAxis: {
-                max: 100,
-                title: {
-                    text: '%'
-                }
-            },
-            colors: col,
-            tooltip: {
-                shared: true,
-                headerFormat: '<span style="font-size: 15px">{point.point.name}</span><br/>',
-                pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y} %</b><br/>'
-            },
-            plotOptions: {
-            column: {
-                dataLabels: {
-                    enabled: true,
-                    inside: false,
-                    style: {
-                        fontSize: '9px'
-                    },
-                    format: '{point.y:.1f}%'
+                    Highcharts.chart('container', {
+                chart: {
+                    type: 'column'
                 },
-                pointPadding: 0.01,
-                borderWidth: 2.1,
-                groupPadding: 0.07 // ajusta según sea necesario
-                 }
-        },
-            series: [
-                {
-                name: 'LIGHT',
-                data: l,
-                dataLabels: [{
-                    enabled: true,
-                    inside: false,
-                    style: {
-                        fontSize: '9px'
+                title: {
+                    text: 'PROMEDIO FIRMEZAS (gf/mm)'
+                },
+                legend: {
+                            layout: 'vertical',
+                            align: 'right',
+                            verticalAlign: 'middle'
+                        },
+                xAxis: {
+                    categories: categories,
+                    crosshair: false
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '(gf/mm)'
+                    }
+                },
+                colors: col,
+                tooltip: {
+                    shared: true,
+                    headerFormat: '<span style="font-size: 15px">{point.point.name}</span><br/>',
+                    pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y}</b><br/>'
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: '',
+                    data: series,
+                    colorByPoint: true,
+                    dataLabels: [{
+                        enabled: true,
+                        inside: true,
+                        style: {
+                            fontSize: '16px'
+                        },
+                        format: '{point.y:.1f}'
+                    }]
+
+                }]
+            });
+        </script>
+    @else
+        <script>
+            var col = <?php echo json_encode($colors) ?>;
+            var l = <?php echo json_encode($l) ?>;
+            var d = <?php echo json_encode($d) ?>;
+            var b = <?php echo json_encode($b) ?>;
+
+                    Highcharts.chart('container', {
+                chart: {
+                    type: 'column',
+                    overflow: 'justify'
+                },
+                title: {
+                    text: '% Distribución de Firmezas por Segregación de Color'
+                },
+                legend: {
+                            layout: 'vertical',
+                            align: 'right',
+                            verticalAlign: 'middle'
+                        },
+                xAxis: {
+                    categories: ['Muy Firme >280 - 1000 <br>Durofel >75','Firme 200 - 279 <br> Durofel 72 - 74.9','Sensible 180 - 199 <br> Durofel 65 - 69.9','Blando 0,1 - 179<br>  Durofel <65,4'],
+                    crosshair: false
+                },
+                yAxis: {
+                    max: 100,
+                    title: {
+                        text: '%'
+                    }
+                },
+                colors: col,
+                tooltip: {
+                    shared: true,
+                    headerFormat: '<span style="font-size: 15px">{point.point.name}</span><br/>',
+                    pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y} %</b><br/>'
+                },
+                plotOptions: {
+                column: {
+                    dataLabels: {
+                        enabled: true,
+                        inside: false,
+                        style: {
+                            fontSize: '9px'
+                        },
+                        format: '{point.y:.1f}%'
                     },
-                    format: '{point.y:.1f}%'
-                }]}
-                ,{
-                name: 'DARK',
-                data: d,
-                dataLabels: [{
-                    enabled: true,
-                    inside: false,
-                    style: {
-                        fontSize: '9px'
-                    },
-                    format: '{point.y:.1f}%'
-                }]}
-                ,{
-                name: 'BLACK',
-                data: b,
-                dataLabels: [{
-                    enabled: true,
-                    inside: false,
-                    style: {
-                        fontSize: '9px'
-                    },
-                    format: '{point.y:.1f}%'
-                }]}
-                
-            ]
-        });
-      </script>
+                    pointPadding: 0.01,
+                    borderWidth: 2.1,
+                    groupPadding: 0.07 // ajusta según sea necesario
+                    }
+            },
+                series: [
+                    {
+                    name: 'LIGHT',
+                    data: l,
+                    dataLabels: [{
+                        enabled: true,
+                        inside: false,
+                        style: {
+                            fontSize: '9px'
+                        },
+                        format: '{point.y:.1f}%'
+                    }]}
+                    ,{
+                    name: 'DARK',
+                    data: d,
+                    dataLabels: [{
+                        enabled: true,
+                        inside: false,
+                        style: {
+                            fontSize: '9px'
+                        },
+                        format: '{point.y:.1f}%'
+                    }]}
+                    ,{
+                    name: 'BLACK',
+                    data: b,
+                    dataLabels: [{
+                        enabled: true,
+                        inside: false,
+                        style: {
+                            fontSize: '9px'
+                        },
+                        format: '{point.y:.1f}%'
+                    }]}
+                    
+                ]
+            });
+        </script>
+    @endif
 </body>
 </html>
