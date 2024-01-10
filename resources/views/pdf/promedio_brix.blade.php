@@ -32,7 +32,6 @@
     @php
         $categories=[];
         $series=[];
-        $colors=[];
         if ($recepcion->n_variedad=='Dagen') {
             $items=['<30','30-50','>50'];
         } else {
@@ -51,36 +50,12 @@
                             $categories[]=$detalle->detalle_item;
                             $series[]=$detalle->valor_ss;
                         @endphp
-
-                        @php
-                             if ($recepcion->n_variedad=='Dagen') {
-                                    if ($name=='<30') {
-                                        $colors[]='#D26FDE';
-                                    }elseif ($name=='30-50') {
-                                        $colors[]='#9817BB';
-                                    }elseif($name=='>50'){
-                                        $colors[]='#8C1651';
-                                    }
-                                }
-                        @endphp
                     
                 @endforeach
             @else
                         @php
                             $categories[]=$item;
                             $series[]=0;
-                        @endphp
-
-                        @php
-                             if ($recepcion->n_variedad=='Dagen') {
-                                    if ($name=='<30') {
-                                        $colors[]='#D26FDE';
-                                    }elseif ($name=='30-50') {
-                                        $colors[]='#9817BB';
-                                    }elseif($name=='>50'){
-                                        $colors[]='#8C1651';
-                                    }
-                                }
                         @endphp
             @endif
             
@@ -91,16 +66,6 @@
                         @php
                             $categories[]=$detalle->detalle_item;
                             $series[]=$detalle->valor_ss;
-                             if ($recepcion->n_variedad=='Dagen') {
-                                    if ($name=='<30') {
-                                        $colors[]='#D26FDE';
-                                    }elseif ($name=='30-50') {
-                                        $colors[]='#9817BB';
-                                    }elseif($name=='>50'){
-                                        $colors[]='#8C1651';
-                                    }
-                                }
-                        
                         @endphp
                     
                 @endforeach
@@ -108,16 +73,6 @@
                         @php
                             $categories[]=$item;
                             $series[]=0;
-                             if ($recepcion->n_variedad=='Dagen') {
-                                    if ($name=='<30') {
-                                        $colors[]='#D26FDE';
-                                    }elseif ($name=='30-50') {
-                                        $colors[]='#9817BB';
-                                    }elseif($name=='>50'){
-                                        $colors[]='#8C1651';
-                                    }
-                                }
-                        
                         @endphp
             @endif
         @endif
@@ -129,7 +84,7 @@
         @endphp
     @elseif($recepcion->n_variedad=='Dagen')
         @php
-          
+            $colors=['#70444d','#90595b','#56343b'];
         @endphp
     @else 
         @php
