@@ -681,7 +681,7 @@
 									</td>
 								</tr>
 								<tr>
-									<td>Precencia de Barro y/o <br> Polvo </td> <td style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px ">
+									<td>Presencia de Barro y/o <br> Polvo </td> <td style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px ">
 										@if ($recepcion->calidad->barro==NULL)
 											-
 										@else
