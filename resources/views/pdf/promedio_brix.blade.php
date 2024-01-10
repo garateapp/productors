@@ -49,7 +49,17 @@
                         @php
                             $categories[]=$detalle->detalle_item;
                             $series[]=$detalle->valor_ss;
+                            if ($recepcion->n_variedad=='Dagen') {
+                                    if ($detalle->detalle_item=='<30') {
+                                        $colors[]='#D26FDE';
+                                    }elseif ($detalle->detalle_item=='30-50') {
+                                        $colors[]='#9817BB';
+                                    }elseif($detalle->detalle_item=='>50'){
+                                        $colors[]='#8C1651';
+                                    }
+                                }
                         @endphp
+                        
                     
                 @endforeach
             @else
@@ -84,7 +94,7 @@
         @endphp
     @elseif($recepcion->n_variedad=='Dagen')
         @php
-            $colors=['#70444d','#90595b','#56343b'];
+            
         @endphp
     @else 
         @php
