@@ -404,7 +404,7 @@
                                                 <p class="whitespace-nowrap  text-base flex font-medium leading-none text-gray-700 mr-2">
                 
                                                 
-                                                    @if ($recep->n_especie=='Cherries' || $recepcion->n_variedad=='Dagen') 
+                                                    @if ($recep->n_especie=='Cherries' || $recep->n_variedad=='Dagen') 
                                                         @if ($detalle->valor_ss)
                                                             {{$detalle->valor_ss}}
                                                         @endif
@@ -415,7 +415,7 @@
                                                         @elseif ($detalle->cantidad>=0)
                                                             {{$detalle->cantidad}}
                                                         @endif
-                                                        
+
                                                     @endif
                                                     
                                                 </p>
