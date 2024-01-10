@@ -392,8 +392,7 @@
                                                 @elseif($recep->n_especie=='Orange' || $recep->n_especie=='Peaches' || $recep->n_especie=='Apples' || $recep->n_especie=='Pears' || $recep->n_especie=='Nectarines' || $recep->n_especie=='Plums' || $recep->n_especie=='Mandarinas' || $recep->n_especie=='Membrillos' || $recep->n_especie=='Paltas')
                                                     @if ($detalle->porcentaje_muestra>0)
                                                         {{$detalle->porcentaje_muestra}}
-                                                    @else
-                                                        0    
+                                                   
                                                     @endif
                                                 @endif
                                                
@@ -413,8 +412,7 @@
                                                    
                                                         @if ($detalle->cantidad>0)
                                                             {{$detalle->cantidad}}
-                                                        @else
-                                                            0
+                                                       
                                                         @endif
                                                     
                                             </p>
