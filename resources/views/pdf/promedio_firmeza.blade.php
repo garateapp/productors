@@ -35,21 +35,35 @@
     @endphp
 
     @if ($recepcion->calidad->detalles)
-        @foreach ($recepcion->calidad->detalles->where('tipo_item','FIRMEZAS') as $detalle)
+        @if ($recepcion->n_variedad=='Dagen')
+            @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA') as $detalle)
 
-            @if ($detalle->detalle_item=='LIGHT' || $detalle->detalle_item=='DARK' || $detalle->detalle_item=='BLACK')
-                @php
-                    $categories[]=$detalle->detalle_item;
-                    if ($recepcion->n_especie=='Cherries') {
-                        $series[]=$detalle->valor_ss;
-                    }else {
-                        $series[]=$detalle->porcentaje_muestra;
-                    }
-                    
-                @endphp
-            @endif
-            
-        @endforeach
+                    @php
+                        $categories[]=$detalle->detalle_item;
+                        if ($recepcion->n_especie=='Cherries') {
+                            $series[]=$detalle->valor_ss;
+                        }else {
+                            $series[]=$detalle->porcentaje_muestra;
+                        }
+                        
+                    @endphp
+            @endforeach
+        @else
+            @foreach ($recepcion->calidad->detalles->where('tipo_item','FIRMEZAS') as $detalle)
+
+                @if ($detalle->detalle_item=='LIGHT' || $detalle->detalle_item=='DARK' || $detalle->detalle_item=='BLACK')
+                    @php
+                        $categories[]=$detalle->detalle_item;
+                        if ($recepcion->n_especie=='Cherries') {
+                            $series[]=$detalle->valor_ss;
+                        }else {
+                            $series[]=$detalle->porcentaje_muestra;
+                        }
+                        
+                    @endphp
+                @endif
+            @endforeach
+        @endif
     @endif
                     
     @if ($recepcion->n_especie=='Cherries')
