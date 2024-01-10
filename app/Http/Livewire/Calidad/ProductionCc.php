@@ -1234,7 +1234,7 @@ class ProductionCc extends Component
                         'porcentaje_muestra'=>$sensitivo*100/$cantidad_frutos,
                         'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
                         'tipo_detalle'=>'cc',
-                        'detalle_item'=>'SENSITIVO',
+                        'detalle_item'=>'SENSIBLE',
                         'fecha'=>$this->fecha                
                     ]);
                 }else{
