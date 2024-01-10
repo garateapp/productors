@@ -405,7 +405,9 @@
                 
                                                 
                                                     @if ($recep->n_especie=='Cherries' || $recep->n_variedad=='Dagen') 
-                                                        @if ($detalle->valor_ss)
+                                                        @if ($detalle->valor_ss==0)
+                                                            0
+                                                        @else
                                                             {{$detalle->valor_ss}}
                                                         @endif
                                                     @else
