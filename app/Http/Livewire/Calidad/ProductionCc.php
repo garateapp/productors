@@ -452,7 +452,7 @@ class ProductionCc extends Component
                                     if ($rango==279) {
                                         if ($recepcion->n_variedad=='Dagen') {
                                             if ($calibre<28) {
-                                                $sumt+=$calibre;
+                                                $sumt+=$firmeza;
                                                 $nfrutos+=1;
                                             }
                                         } else {
@@ -480,7 +480,7 @@ class ProductionCc extends Component
                                     if ($rango==219) {
                                         if ($recepcion->n_variedad=='Dagen') {
                                             if ($calibre>=28 && $calibre<30) {
-                                                $sumt+=$calibre;
+                                                $sumt+=$firmeza;
                                                 $nfrutos+=1;
                                             }
                                         } else {
@@ -506,7 +506,7 @@ class ProductionCc extends Component
                                     if ($rango==179) {
                                         if ($recepcion->n_variedad=='Dagen') {
                                             if ($calibre>=30 && $calibre<33) {
-                                                $sumt+=$calibre;
+                                                $sumt+=$firmeza;
                                                 $nfrutos+=1;
                                             }
                                         } else {
@@ -532,7 +532,7 @@ class ProductionCc extends Component
                                     if ($rango==1) {
                                         if ($recepcion->n_variedad=='Dagen') {
                                             if ($calibre>=33 && $calibre<36) {
-                                                $sumt+=$calibre;
+                                                $sumt+=$firmeza;
                                                 $nfrutos+=1;
                                             }
                                         } else {
@@ -558,7 +558,7 @@ class ProductionCc extends Component
                                     if ($rango==11) {
                                         if ($recepcion->n_variedad=='Dagen') {
                                             if ($calibre>=36 && $calibre<39) {
-                                                $sumt+=$calibre;
+                                                $sumt+=$firmeza;
                                                 $nfrutos+=1;
                                             }
                                         } else {
@@ -568,7 +568,7 @@ class ProductionCc extends Component
                                     if ($rango==12) {
                                         if ($recepcion->n_variedad=='Dagen') {
                                             if ($calibre>=39) {
-                                                $sumt+=$calibre;
+                                                $sumt+=$firmeza;
                                                 $nfrutos+=1;
                                             }
                                         } else {
