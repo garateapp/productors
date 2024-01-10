@@ -177,18 +177,15 @@
 
     @if ($recepcion->calidad->detalles)
         @if ($recepcion->n_variedad=='Dagen')
-        @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA') as $detalle)
+            @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA') as $detalle)
 
-            @php
-                $categories[]=$detalle->detalle_item;
-                if ($recepcion->n_especie=='Cherries') {
-                    $series[]=$detalle->valor_ss;
-                }else {
+                @php
+                    $categories[]=$detalle->detalle_item;
                     $series[]=$detalle->porcentaje_muestra;
-                }
                     
-            @endphp
-        @endforeach
+                        
+                @endphp
+            @endforeach
 
         @else
             @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','LIGHT') as $detalle)
