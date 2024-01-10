@@ -382,8 +382,6 @@
                                                 @if ($recep->n_especie=='Cherries') 
                                                     
                                                         {{$detalle->valor_ss}}
-                                                @else
-                                                    0
                                                     
                                                 @endif
                                                 
@@ -412,8 +410,6 @@
                                                     @if ($recepcion->n_especie=='Cherries') 
                                                         @if ($detalle->valor_ss)
                                                             {{$detalle->valor_ss}}
-                                                        @else
-                                                            0
                                                         @endif
                                                     @endif
                                                    
