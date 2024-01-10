@@ -306,11 +306,21 @@
 			}
 			
 			@endphp
-			@if ($recepcion->calidad->detalles->where('tipo_item','FIRMEZAS')->where('detalle_item','FRUTA BLANDA')->first())
-				@php
-					$e=	$recepcion->calidad->detalles->where('tipo_item','FIRMEZAS')->where('detalle_item','FRUTA BLANDA')->first()->porcentaje_muestra;
-				@endphp
-		
+			@if ($recepcion->n_variedad=='Dagen')
+				@if ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','MUY FIRME')->first())
+					@php
+						$e=	$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','MUY FIRME')->first()->porcentaje_muestra;
+					@endphp
+			
+				@endif
+				
+			@else
+				@if ($recepcion->calidad->detalles->where('tipo_item','FIRMEZAS')->where('detalle_item','FRUTA BLANDA')->first())
+					@php
+						$e=	$recepcion->calidad->detalles->where('tipo_item','FIRMEZAS')->where('detalle_item','FRUTA BLANDA')->first()->porcentaje_muestra;
+					@endphp
+			
+				@endif
 			@endif
 			
 			{{number_format((100-($total+$a+$b+$col+$e)),0)}} %
