@@ -36,7 +36,7 @@
 
     @if ($recepcion->calidad->detalles)
         @if ($recepcion->n_variedad=='Dagen')
-            @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA') as $detalle)
+            @foreach ($recepcion->calidad->detalles->where('tipo_item','FIRMEZAS') as $detalle)
 
                     @php
                         $categories[]=$detalle->detalle_item;

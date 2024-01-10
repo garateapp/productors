@@ -593,8 +593,8 @@ class ProductionCc extends Component
                                 'embalaje'=>$this->embalaje,
                                 'valor_ss'=>$sumt/$nfrutos,
                                 'porcentaje_muestra'=>$sumt/$nfrutos,
-                                'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
-                                'tipo_detalle'=>'cc',
+                                'tipo_item'=>'FIRMEZAS',
+                                'tipo_detalle'=>'ss',
                                 'detalle_item'=>'PRECALIBRE',
                                 'fecha'=>$this->fecha                
                             ]);
@@ -605,8 +605,8 @@ class ProductionCc extends Component
                                 'embalaje'=>$this->embalaje,
                                 'valor_ss'=>$sumt/$nfrutos,
                                 'porcentaje_muestra'=>$sumt/$nfrutos,
-                                'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
-                                'tipo_detalle'=>'cc',
+                                'tipo_item'=>'FIRMEZAS',
+                                'tipo_detalle'=>'ss',
                                 'detalle_item'=>'L',
                                 'fecha'=>$this->fecha                
                             ]);
@@ -618,8 +618,8 @@ class ProductionCc extends Component
                                 'embalaje'=>$this->embalaje,
                                 'valor_ss'=>$sumt/$nfrutos,
                                 'porcentaje_muestra'=>$sumt/$nfrutos,
-                                'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
-                                'tipo_detalle'=>'cc',
+                                'tipo_item'=>'FIRMEZAS',
+                                'tipo_detalle'=>'ss',
                                 'detalle_item'=>'XL',
                                 'fecha'=>$this->fecha                
                             ]);
@@ -630,8 +630,8 @@ class ProductionCc extends Component
                                 'embalaje'=>$this->embalaje,
                                 'valor_ss'=>$sumt/$nfrutos,
                                 'porcentaje_muestra'=>$sumt/$nfrutos,
-                                'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
-                                'tipo_detalle'=>'cc',
+                                'tipo_item'=>'FIRMEZAS',
+                                'tipo_detalle'=>'ss',
                                 'detalle_item'=>'J',
                                 'fecha'=>$this->fecha                
                             ]);
@@ -642,8 +642,8 @@ class ProductionCc extends Component
                                 'embalaje'=>$this->embalaje,
                                 'valor_ss'=>$sumt/$nfrutos,
                                 'porcentaje_muestra'=>$sumt/$nfrutos,
-                                'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
-                                'tipo_detalle'=>'cc',
+                                'tipo_item'=>'FIRMEZAS',
+                                'tipo_detalle'=>'ss',
                                 'detalle_item'=>'SJ',
                                 'fecha'=>$this->fecha                
                             ]);
@@ -654,8 +654,8 @@ class ProductionCc extends Component
                                 'embalaje'=>$this->embalaje,
                                 'valor_ss'=>$sumt/$nfrutos,
                                 'porcentaje_muestra'=>$sumt/$nfrutos,
-                                'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
-                                'tipo_detalle'=>'cc',
+                                'tipo_item'=>'FIRMEZAS',
+                                'tipo_detalle'=>'ss',
                                 'detalle_item'=>'G',
                                 'fecha'=>$this->fecha                
                             ]);
@@ -745,6 +745,7 @@ class ProductionCc extends Component
         
         }
 
+        //consulta para distribución de calibres
         $this->calibres=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/BuscarConsolidadoFruitCloud?Numero_recepcion='.$recepcion->numero_g_recepcion);
         $this->calibres = $this->calibres->json();
 
@@ -1014,6 +1015,7 @@ class ProductionCc extends Component
 
         }
 
+        //consulta para distribución de color
         $this->firmpro=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/BuscarRecepcionCloud?Numero_recepcion='.$recepcion->numero_g_recepcion);
         $this->firmpro = $this->firmpro->json();
         $subpromedio_light=0;
@@ -1149,123 +1151,79 @@ class ProductionCc extends Component
                 ]);
             }
 
-            if($rojo>0){
-                Detalle::create([
-                    'calidad_id'=>$this->recep->calidad->id,
-                    'embalaje'=>$this->embalaje,
-                    'valor_ss'=>$subpromedio_light/$rojo,
-                    'tipo_item'=>'FIRMEZAS',
-                    'tipo_detalle'=>'ss',
-                    'detalle_item'=>'LIGHT',
-                    'fecha'=>$this->fecha                
-                ]);
-             /*   Detalle::create([
-                    'calidad_id'=>$this->recep->calidad->id,
-                    'embalaje'=>$this->embalaje,
-                    'valor_ss'=>$subpromedio_light2/$rojo,
-                    'tipo_item'=>'BRIX DAGEN',
-                    'tipo_detalle'=>'ss',
-                    'detalle_item'=>'SLIGHT',
-                    'fecha'=>$this->fecha                
-                ]);*/
+            if ($recepcion->n_variedad=='Dagen') {
+
+            }else{
+
+                if($rojo>0){
+                    Detalle::create([
+                        'calidad_id'=>$this->recep->calidad->id,
+                        'embalaje'=>$this->embalaje,
+                        'valor_ss'=>$subpromedio_light/$rojo,
+                        'tipo_item'=>'FIRMEZAS',
+                        'tipo_detalle'=>'ss',
+                        'detalle_item'=>'LIGHT',
+                        'fecha'=>$this->fecha                
+                    ]);
+        
                 }else{
-                Detalle::create([
-                    'calidad_id'=>$this->recep->calidad->id,
-                    'embalaje'=>$this->embalaje,
-                    'valor_ss'=>0,
-                    'tipo_item'=>'FIRMEZAS',
-                    'tipo_detalle'=>'ss',
-                    'detalle_item'=>'LIGHT',
-                    'fecha'=>$this->fecha   ]);
-                /*    Detalle::create([
+                    Detalle::create([
                         'calidad_id'=>$this->recep->calidad->id,
                         'embalaje'=>$this->embalaje,
                         'valor_ss'=>0,
-                        'tipo_item'=>'BRIX DAGEN',
+                        'tipo_item'=>'FIRMEZAS',
                         'tipo_detalle'=>'ss',
-                        'detalle_item'=>'SLIGHT',
-                        'fecha'=>$this->fecha   ]);*/
-            }
-            if (($rojocaoba+$santina)>0) {
-                Detalle::create([
-                    'calidad_id'=>$this->recep->calidad->id,
-                    'embalaje'=>$this->embalaje,
-                    'valor_ss'=>$subpromedio_dark/($rojocaoba+$santina),
-                    'tipo_item'=>'FIRMEZAS',
-                    'tipo_detalle'=>'ss',
-                    'detalle_item'=>'DARK',
-                    'fecha'=>$this->fecha                
-                ]);
-              /*  Detalle::create([
-                    'calidad_id'=>$this->recep->calidad->id,
-                    'embalaje'=>$this->embalaje,
-                    'valor_ss'=>$subpromedio_dark2/($rojocaoba+$santina),
-                    'tipo_item'=>'BRIX DAGEN',
-                    'tipo_detalle'=>'ss',
-                    'detalle_item'=>'SDARK',
-                    'fecha'=>$this->fecha                
-                ]);*/
-                } else {
-                Detalle::create([
-                    'calidad_id'=>$this->recep->calidad->id,
-                    'embalaje'=>$this->embalaje,
-                    'valor_ss'=>0,
-                    'tipo_item'=>'FIRMEZAS',
-                    'tipo_detalle'=>'ss',
-                    'detalle_item'=>'DARK',
-                    'fecha'=>$this->fecha                
-                ]);
-              /*  Detalle::create([
-                    'calidad_id'=>$this->recep->calidad->id,
-                    'embalaje'=>$this->embalaje,
-                    'valor_ss'=>0,
-                    'tipo_item'=>'BRIX DAGEN',
-                    'tipo_detalle'=>'ss',
-                    'detalle_item'=>'SDARK',
-                    'fecha'=>$this->fecha                
-                ]);*/
-            }
-            
-            if (($negro+$caobaoscuro)>0) {
-                Detalle::create([
-                    'calidad_id'=>$this->recep->calidad->id,
-                    'embalaje'=>$this->embalaje,
-                    'valor_ss'=>$subpromedio_black/($negro+$caobaoscuro),
-                    'tipo_item'=>'FIRMEZAS',
-                    'tipo_detalle'=>'ss',
-                    'detalle_item'=>'BLACK',
-                    'fecha'=>$this->fecha                
-                ]);
-             /*   Detalle::create([
-                    'calidad_id'=>$this->recep->calidad->id,
-                    'embalaje'=>$this->embalaje,
-                    'valor_ss'=>$subpromedio_black2/($negro+$caobaoscuro),
-                    'tipo_item'=>'BRIX DAGEN',
-                    'tipo_detalle'=>'ss',
-                    'detalle_item'=>'SBLACK',
-                    'fecha'=>$this->fecha                
-                ]);*/
-                } else {
-                Detalle::create([
-                    'calidad_id'=>$this->recep->calidad->id,
-                    'embalaje'=>$this->embalaje,
-                    'valor_ss'=>0,
-                    'tipo_item'=>'FIRMEZAS',
-                    'tipo_detalle'=>'ss',
-                    'detalle_item'=>'BLACK',
-                    'fecha'=>$this->fecha                
-                ]);
-            /*    Detalle::create([
-                    'calidad_id'=>$this->recep->calidad->id,
-                    'embalaje'=>$this->embalaje,
-                    'valor_ss'=>0,
-                    'tipo_item'=>'BRIX DAGEN',
-                    'tipo_detalle'=>'ss',
-                    'detalle_item'=>'SBLACK',
-                    'fecha'=>$this->fecha                
-                ]);*/
-            }
+                        'detalle_item'=>'LIGHT',
+                        'fecha'=>$this->fecha   ]);
+                }
 
+                if (($rojocaoba+$santina)>0) {
+                    Detalle::create([
+                        'calidad_id'=>$this->recep->calidad->id,
+                        'embalaje'=>$this->embalaje,
+                        'valor_ss'=>$subpromedio_dark/($rojocaoba+$santina),
+                        'tipo_item'=>'FIRMEZAS',
+                        'tipo_detalle'=>'ss',
+                        'detalle_item'=>'DARK',
+                        'fecha'=>$this->fecha                
+                    ]);
+            
+                } else {
+                    Detalle::create([
+                        'calidad_id'=>$this->recep->calidad->id,
+                        'embalaje'=>$this->embalaje,
+                        'valor_ss'=>0,
+                        'tipo_item'=>'FIRMEZAS',
+                        'tipo_detalle'=>'ss',
+                        'detalle_item'=>'DARK',
+                        'fecha'=>$this->fecha                
+                    ]);
+                }
+                
+                if (($negro+$caobaoscuro)>0) {
+                    Detalle::create([
+                        'calidad_id'=>$this->recep->calidad->id,
+                        'embalaje'=>$this->embalaje,
+                        'valor_ss'=>$subpromedio_black/($negro+$caobaoscuro),
+                        'tipo_item'=>'FIRMEZAS',
+                        'tipo_detalle'=>'ss',
+                        'detalle_item'=>'BLACK',
+                        'fecha'=>$this->fecha                
+                    ]);
+            
+                } else {
+                    Detalle::create([
+                        'calidad_id'=>$this->recep->calidad->id,
+                        'embalaje'=>$this->embalaje,
+                        'valor_ss'=>0,
+                        'tipo_item'=>'FIRMEZAS',
+                        'tipo_detalle'=>'ss',
+                        'detalle_item'=>'BLACK',
+                        'fecha'=>$this->fecha                
+                    ]);
+                
+                }
+            }
            
  
     
