@@ -394,9 +394,9 @@ class ProductionCc extends Component
      $categories=[];
      $series=[];
      if ($recepcion->n_variedad=='Dagen') {
-        $rangos=[279,219,179,1];
-     }else{
         $rangos=[279,219,179,1,11,12];
+     }else{
+        $rangos=[279,219,179,1];
      }
 
      $l=[];
