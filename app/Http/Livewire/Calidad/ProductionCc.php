@@ -393,7 +393,12 @@ class ProductionCc extends Component
 
      $categories=[];
      $series=[];
-     $rangos=[279,219,179,1];
+     if ($recepcion->n_variedad=='Dagen') {
+        $rangos=[279,219,179,1];
+     }else{
+        $rangos=[279,219,179,1,11,12];
+     }
+
      $l=[];
      $d=[];
      $b=[];
@@ -473,63 +478,103 @@ class ProductionCc extends Component
                                             
                                     }
                                     if ($rango==219) {
-                                        if ($firmeza>=200 && $firmeza<280) {
-                                            if($color=='Rojo'){
-                                                $light+=1;
+                                        if ($recepcion->n_variedad=='Dagen') {
+                                            if ($calibre>=28 && $calibre<30) {
+                                                $sumt+=$calibre;
+                                                $nfrutos+=1;
                                             }
-                                                if($color=='Rojo caoba'){
-                                                    $dark+=1;
+                                        } else {
+                                            if ($firmeza>=200 && $firmeza<280) {
+                                                if($color=='Rojo'){
+                                                    $light+=1;
                                                 }
-                                                if($color=='Santina'){
-                                                    $dark+=1;
+                                                    if($color=='Rojo caoba'){
+                                                        $dark+=1;
+                                                    }
+                                                    if($color=='Santina'){
+                                                        $dark+=1;
+                                                    }
+                                                    if($color=='Caoba oscuro' || $color=='Caoba Oscuro'){
+                                                        $black+=1;
+                                                    }
+                                                    if($color=='Negro'){
+                                                        $black+=1;
                                                 }
-                                                if($color=='Caoba oscuro' || $color=='Caoba Oscuro'){
-                                                    $black+=1;
-                                                }
-                                                if($color=='Negro'){
-                                                    $black+=1;
                                             }
                                         }      
                                     }
                                     if ($rango==179) {
-                                        if ($firmeza>=180 && $firmeza<200) {
-                                            if($color=='Rojo'){
-                                                $light+=1;
+                                        if ($recepcion->n_variedad=='Dagen') {
+                                            if ($calibre>=30 && $calibre<33) {
+                                                $sumt+=$calibre;
+                                                $nfrutos+=1;
                                             }
-                                                if($color=='Rojo caoba'){
-                                                    $dark+=1;
-                                                }
-                                                if($color=='Santina'){
-                                                    $dark+=1;
-                                                }
-                                                if($color=='Caoba oscuro'|| $color=='Caoba Oscuro'){
-                                                    $black+=1;
-                                                }
-                                                if($color=='Negro'){
-                                                    $black+=1;
-                                            }
-                                        }      
-                                    }
-                                    if ($rango==1) {
-                                        if ($firmeza>=1 && $firmeza<180) {
+                                        } else {
+                                            if ($firmeza>=180 && $firmeza<200) {
                                                 if($color=='Rojo'){
                                                     $light+=1;
                                                 }
-                                                if($color=='Rojo caoba'){
-                                                    $dark+=1;
+                                                    if($color=='Rojo caoba'){
+                                                        $dark+=1;
+                                                    }
+                                                    if($color=='Santina'){
+                                                        $dark+=1;
+                                                    }
+                                                    if($color=='Caoba oscuro'|| $color=='Caoba Oscuro'){
+                                                        $black+=1;
+                                                    }
+                                                    if($color=='Negro'){
+                                                        $black+=1;
                                                 }
-                                                if($color=='Santina'){
-                                                    $dark+=1;
+                                            }      
+                                        }
+                                    }
+                                    if ($rango==1) {
+                                        if ($recepcion->n_variedad=='Dagen') {
+                                            if ($calibre>=33 && $calibre<36) {
+                                                $sumt+=$calibre;
+                                                $nfrutos+=1;
+                                            }
+                                        } else {
+                                            if ($firmeza>=1 && $firmeza<180) {
+                                                    if($color=='Rojo'){
+                                                        $light+=1;
+                                                    }
+                                                    if($color=='Rojo caoba'){
+                                                        $dark+=1;
+                                                    }
+                                                    if($color=='Santina'){
+                                                        $dark+=1;
+                                                    }
+                                                    if($color=='Caoba oscuro' || $color=='Caoba Oscuro'){
+                                                        $black+=1;
+                                                    }
+                                                    if($color=='Negro'){
+                                                        $black+=1;
                                                 }
-                                                if($color=='Caoba oscuro' || $color=='Caoba Oscuro'){
-                                                    $black+=1;
-                                                }
-                                                if($color=='Negro'){
-                                                    $black+=1;
                                             }
                                         }      
                                     }
-                                    
+                                    if ($rango==11) {
+                                        if ($recepcion->n_variedad=='Dagen') {
+                                            if ($calibre>=36 && $calibre<39) {
+                                                $sumt+=$calibre;
+                                                $nfrutos+=1;
+                                            }
+                                        } else {
+                                        
+                                        }
+                                    }
+                                    if ($rango==12) {
+                                        if ($recepcion->n_variedad=='Dagen') {
+                                            if ($calibre>=39) {
+                                                $sumt+=$calibre;
+                                                $nfrutos+=1;
+                                            }
+                                        } else {
+                                        
+                                        }
+                                    }
 
 
                             }
@@ -555,14 +600,65 @@ class ProductionCc extends Component
                         ]);
                     }
                     if ($rango==219) {
-                        
+                        Detalle::create([
+                            'calidad_id'=>$this->recep->calidad->id,
+                            'embalaje'=>$this->embalaje,
+                            'valor_ss'=>$sumt/$nfrutos,
+                            'porcentaje_muestra'=>$sumt/$nfrutos,
+                            'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
+                            'tipo_detalle'=>'cc',
+                            'detalle_item'=>'L',
+                            'fecha'=>$this->fecha                
+                        ]);
 
                     }
                     if ($rango==179) {
-
+                        Detalle::create([
+                            'calidad_id'=>$this->recep->calidad->id,
+                            'embalaje'=>$this->embalaje,
+                            'valor_ss'=>$sumt/$nfrutos,
+                            'porcentaje_muestra'=>$sumt/$nfrutos,
+                            'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
+                            'tipo_detalle'=>'cc',
+                            'detalle_item'=>'XL',
+                            'fecha'=>$this->fecha                
+                        ]);
                     }
                     if ($rango==1) {
-                    
+                     Detalle::create([
+                            'calidad_id'=>$this->recep->calidad->id,
+                            'embalaje'=>$this->embalaje,
+                            'valor_ss'=>$sumt/$nfrutos,
+                            'porcentaje_muestra'=>$sumt/$nfrutos,
+                            'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
+                            'tipo_detalle'=>'cc',
+                            'detalle_item'=>'J',
+                            'fecha'=>$this->fecha                
+                        ]);
+                    }
+                    if ($rango==11) {
+                     Detalle::create([
+                            'calidad_id'=>$this->recep->calidad->id,
+                            'embalaje'=>$this->embalaje,
+                            'valor_ss'=>$sumt/$nfrutos,
+                            'porcentaje_muestra'=>$sumt/$nfrutos,
+                            'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
+                            'tipo_detalle'=>'cc',
+                            'detalle_item'=>'SJ',
+                            'fecha'=>$this->fecha                
+                        ]);
+                    }
+                    if ($rango==12) {
+                        Detalle::create([
+                            'calidad_id'=>$this->recep->calidad->id,
+                            'embalaje'=>$this->embalaje,
+                            'valor_ss'=>$sumt/$nfrutos,
+                            'porcentaje_muestra'=>$sumt/$nfrutos,
+                            'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
+                            'tipo_detalle'=>'cc',
+                            'detalle_item'=>'G',
+                            'fecha'=>$this->fecha                
+                        ]);
                     }
 
 
