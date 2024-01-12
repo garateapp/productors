@@ -32,9 +32,9 @@ class ProcesosExport implements FromCollection, WithCustomStartCell, WithMapping
 
     public function startCell(): string
     {
-        return 'A2';
+        return 'A1';
     }
-    public function heading(): array
+    public function headings(): array
     {
         return[
             'Agricola',
