@@ -41,7 +41,7 @@
                         </x-jet-nav-link>
                     @endcan
                     @can('Ver procesos_propios')
-                        <x-jet-nav-link href="{{ route('procesos.productor.index') }}" :active="request()->routeIs('procesos.*')">
+                        <x-jet-nav-link href="{{ route('procesos.productor.index',auth()->user()->id) }}" :active="request()->routeIs('procesos.*')">
                             {{ __('Procesos') }}
                         </x-jet-nav-link>
                     @endcan

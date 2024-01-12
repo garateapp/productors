@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Especie;
 use App\Models\Estadisticas;
+use App\Models\User;
 use App\Models\Variedad;
 use Illuminate\Http\Request;
 
@@ -14,12 +15,12 @@ class ProcesoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {     $estadistica = Estadisticas::create([
-        'type'=> 'vistaprocesoproductor',
-        'user_id'=>auth()->user()->id
-    ]);
-        return view('productors.procesosproductor');
+                'type'=> 'vistaprocesoproductor',
+                'user_id'=>auth()->user()->id
+            ]);
+        return view('productors.procesosproductor',compact('user'));
     }
 
     public function especie(Especie $especie)

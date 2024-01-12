@@ -18,7 +18,7 @@
                </div>
             </div>
         <div>
-            <button  class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
+            <button wire:click="generateReport" class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
                 <p class="text-sm font-medium leading-none text-white">Descargar Excel</p>
             </button>
 

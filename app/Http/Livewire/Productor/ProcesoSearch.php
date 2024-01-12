@@ -2,16 +2,23 @@
 
 namespace App\Http\Livewire\Productor;
 
+use App\Exports\ProcesosExport;
 use App\Models\Especie;
 use App\Models\Proceso;
+use App\Models\User;
 use App\Models\Variedad;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProcesoSearch extends Component
 {   use WithPagination;
 
-    public $search, $espec, $ctd=25, $especieid, $especiename, $varie, $variedadid, $titulo='Gráfico por Especies';
+    public $search, $espec, $ctd=25, $especieid, $especiename, $varie, $productor, $variedadid, $titulo='Gráfico por Especies';
+
+    public function mount($user_id){
+        $this->productor=User::find($user_id);
+    }
 
     public function render()
     {       
@@ -80,5 +87,8 @@ class ProcesoSearch extends Component
         $this->varie =NULL;
         $this->search=$this->espec->name;
 
+    }
+    public function generateReport(){
+        return Excel::download(new ProcesosExport($this->productor->id),'Procesos '.$this->productor->name.'.xlsx');
     }
 }

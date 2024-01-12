@@ -95,7 +95,7 @@ Route::get('procesos', [HomeController::class,'procesos'])->middleware('auth')->
 
 Route::get('procesos/anterior', [HomeController::class,'procesos_anterior'])->middleware('auth')->name('procesos.index.anterior');
 
-Route::get('procesos/productor', [ProcesoController::class,'index'])->middleware('auth')->name('procesos.productor.index');
+Route::get('procesos/productor/{user}', [ProcesoController::class,'index'])->middleware('auth')->name('procesos.productor.index');
 
 Route::get('procesos/productor/{especie}', [ProcesoController::class,'productorespecie'])->middleware('auth')->name('procesos.productor.especie');
 

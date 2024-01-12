@@ -4,7 +4,7 @@
     </x-slot>
     
        
-       @livewire('productor.proceso-search')
+       @livewire('productor.proceso-search',['user_id'=>$user->id])
              
             
 </x-app-layout>
