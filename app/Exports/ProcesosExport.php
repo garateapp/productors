@@ -36,7 +36,7 @@ class ProcesosExport implements FromCollection, WithCustomStartCell, WithMapping
         return 'A1';
     }
     public function headings(): array
-    {
+    {   
         return[
             'Agricola',
             'Nro Proceso', 
