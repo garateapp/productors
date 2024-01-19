@@ -77,7 +77,9 @@ class ProcesoSearch extends Component
             $user=User::where('name',$proceso->agricola)->first();
 
             if($user->emnotification==TRUE){
-                Mail::to($user->email)->send(new NotificacionMailable($proceso));
+                if($user->email){
+                    Mail::to($user->email)->send(new NotificacionMailable($proceso));
+                }
             }
             
             if($user){
