@@ -184,6 +184,19 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
  
    <div >
+      @if ($procesosall->count()==0)
+         <div class="flex justify-center">
+            <div class="justify-center">
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded justify-center w-full flex" role="alert">
+               <strong class="font-bold mx-2">Lo siento!</strong>
+               <span class="flex">No hay registro de recepciones en la temporada actual</span>
+               <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+               <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+               </span>
+            </div>
+            </div>
+      </div>          
+      @endif
          <div class="flex justify-center mb-2 max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="max-w-7xl w-full sm:px-6 lg:px-8 bg-white shadow rounded-lg p-4 sm:p-6 xl:p-4 my-2 mx-4">
                <h1 class="font-bold">Buscador Temporada Actual: </h1>
@@ -239,61 +252,65 @@
                                        $desec=0;
                                        $mer=0;
                                        
-                                       
-                                       foreach ($procesosall as $proceso) {
-                                          
-                                          if ($proceso->variedad==$variedad->name) {
-                                                $export+=$proceso->exp;
-                                                $comerc+=$proceso->comercial;
-                                                $desec+=$proceso->desecho;
-                                                $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+                                          if ($procesosall->count()>0) {
+                                             
+                                             foreach ($procesosall as $proceso) {
+                                                
+                                                if ($proceso->variedad==$variedad->name) {
+                                                      $export+=$proceso->exp;
+                                                      $comerc+=$proceso->comercial;
+                                                      $desec+=$proceso->desecho;
+                                                      $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+
+                                                }
+
+                                             }
+
+                                             $inicio=date('W', strtotime($recepcions->first()->fecha_g_recepcion));
+                                             $final=date('W', strtotime($now));
+
+                                             if ($inicio>$final) {
+                                                $final=$final+52;
+                                             }
+                                             
+                                                
+                                                
+                                                $name=$variedad->name;
+                                                $array=[];
+                                                
+                                                foreach (range($inicio,($final)) as $number) {
+                                                   $kilos=0;
+                                                   if($number>52){
+                                                      $nro=($number-52);
+                                                   }else{
+                                                      $nro=$number;
+                                                   }  
+                                                   foreach($recepcions as $recepcion){
+                                                      
+                                                         if ($recepcion->n_variedad==$variedad->name) {
+                                                            if (date('W', strtotime($recepcion->fecha_g_recepcion))==$nro) {
+                                                               $kilos+=$recepcion->peso_neto;
+                                                            }
+                                                         } 
+                                                      }
+                                                   $array[]=$kilos; 
+                                                   }
+                                                   
+                                                   $series[]=['name' =>$name,
+                                                            'data'=> $array];
+
+                                                   $varieds[]=$variedad->name;
+                                                   $exportacion[]=$export;
+                                                   $comercial[]=$comerc;
+                                                   $desecho[]=$desec;
+                                                   $merma[]=$mer;
+                                                
+                                                   $exp_total+=$export;
+                                                   $com_total+=$comerc;
+                                                   $des_total+=$desec;
+                                                   $merm_total+=$mer;
 
                                           }
-
-                                       }
-
-                                       $inicio=date('W', strtotime($recepcions->first()->fecha_g_recepcion));
-                                       $final=date('W', strtotime($now));
-
-                                       if ($inicio>$final) {
-                                          $final=$final+52;
-                                       }
-                                       
-                                       $name=$variedad->name;
-                                       $array=[];
-                                       
-                                       foreach (range($inicio,($final)) as $number) {
-                                          $kilos=0;
-                                          if($number>52){
-                                             $nro=($number-52);
-                                          }else{
-                                             $nro=$number;
-                                          }  
-                                          foreach($recepcions as $recepcion){
-                                             
-                                                if ($recepcion->n_variedad==$variedad->name) {
-                                                   if (date('W', strtotime($recepcion->fecha_g_recepcion))==$nro) {
-                                                      $kilos+=$recepcion->peso_neto;
-                                                   }
-                                                } 
-                                             }
-                                          $array[]=$kilos; 
-                                       }
-                                          
-                                          $series[]=['name' =>$name,
-                                                   'data'=> $array];
-
-                                          $varieds[]=$variedad->name;
-                                          $exportacion[]=$export;
-                                          $comercial[]=$comerc;
-                                          $desecho[]=$desec;
-                                          $merma[]=$mer;
-                                       
-                                          $exp_total+=$export;
-                                          $com_total+=$comerc;
-                                          $des_total+=$desec;
-                                          $merm_total+=$mer;
-
 
                                        @endphp
                                     @endif
@@ -319,33 +336,40 @@
                                        $comerc=0;
                                        $desec=0;
                                        $mer=0;
-                                       foreach ($procesosall as $proceso) {
-                                             
-                                             if ($proceso->especie==$especie->name) {
-                                                $export+=$proceso->exp;
-                                                $comerc+=$proceso->comercial;
-                                                $desec+=$proceso->desecho;
-                                                $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
-            
-                                             }
-            
-                                       }
-                                       
-                                       
+                                       if ($procesosall->count()>0) {
                                           
-                                          $exportacion[]=$export;
-                                          $comercial[]=$comerc;
-                                          $desecho[]=$desec;
-                                          $merma[]=$mer;
-                                       
-                                          $varieds[]=$especie->name;
+                                          foreach ($procesosall as $proceso) {
+                                                
+                                                if ($proceso->especie==$especie->name) {
+                                                   $export+=$proceso->exp;
+                                                   $comerc+=$proceso->comercial;
+                                                   $desec+=$proceso->desecho;
+                                                   $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+               
+                                                }
+               
+                                          }
+                                          
+                                          
+                                             
+                                             $exportacion[]=$export;
+                                             $comercial[]=$comerc;
+                                             $desecho[]=$desec;
+                                             $merma[]=$mer;
+                                          
+                                             $varieds[]=$especie->name;
+                                             
+                                       }
                            @endphp
                         @endforeach
                         
                      @endif
                   
                   </div>
-                  @php
+                  
+                  
+            @isset ($inicio) 
+               @php
                   $semenas=[];
                   foreach (range($inicio,($final)) as $number) {
                      if($number>52){
@@ -354,9 +378,11 @@
                         $semanas[]='Semana '.$number;
                      }  
                   }
-
                   @endphp
-         
+
+            @endisset
+
+                 
          <div class="mx-2 sm:mx-12">
       
             <figure class="highcharts-figure mx-1 mt-4" wire:ignore>
@@ -592,8 +618,8 @@
    </div>
      --}}
 
-
-    <script>
+   @isset($semanas)
+      <script>
        var titulo = <?php echo json_encode($titulo) ?>;
        var variedades = <?php echo json_encode($varieds) ?>;
        var semanas = <?php echo json_encode($semanas) ?>;
@@ -701,66 +727,67 @@
 
          });
                 
-    </script> 
-    <script>
-      var titulo_circular = <?php echo json_encode($titulo_circular) ?>;
-       var variedades = <?php echo json_encode($varieds) ?>;
-       var exportacion = <?php echo json_encode($exp_total) ?>;
-       var comercial = <?php echo json_encode($com_total) ?>;
-       var desecho = <?php echo json_encode($des_total) ?>;
-       var merma = <?php echo json_encode($merm_total) ?>;
+      </script> 
+      <script>
+         var titulo_circular = <?php echo json_encode($titulo_circular) ?>;
+         var variedades = <?php echo json_encode($varieds) ?>;
+         var exportacion = <?php echo json_encode($exp_total) ?>;
+         var comercial = <?php echo json_encode($com_total) ?>;
+         var desecho = <?php echo json_encode($des_total) ?>;
+         var merma = <?php echo json_encode($merm_total) ?>;
 
-        Highcharts.chart('circular', {
-            chart: {
-               plotBackgroundColor: null,
-               plotBorderWidth: null,
-               plotShadow: false,
-               type: 'pie'
-            },
-            title: {
-               text: titulo_circular,
-               align: 'left'
-            },
-            tooltip: {
-               pointFormat: '<b><b>{point.y}</b>({point.percentage:.0f}%)<br/>',
-            },
-            accessibility: {
-               point: {
-                     valueSuffix: '%'
-               }
-            },
-            plotOptions: {
-               pie: {
-                     allowPointSelect: true,
-                     cursor: 'pointer',
-                     dataLabels: {
-                        enabled: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-                     },
-                     showInLegend: true
-               }
-            },
-            series: [{
-               name: 'Brands',
-               colorByPoint: true,
-               data: [{
-                     name: 'Exportacion',
-                     y: exportacion,
-                     sliced: true,
-                     selected: true
-               },  {
-                     name: 'Comercial',
-                     y: comercial
-               },  {
-                     name: 'Desecho',
-                     y: desecho
-               }, {
-                     name: 'Merma',
-                     y: merma
+         Highcharts.chart('circular', {
+               chart: {
+                  plotBackgroundColor: null,
+                  plotBorderWidth: null,
+                  plotShadow: false,
+                  type: 'pie'
+               },
+               title: {
+                  text: titulo_circular,
+                  align: 'left'
+               },
+               tooltip: {
+                  pointFormat: '<b><b>{point.y}</b>({point.percentage:.0f}%)<br/>',
+               },
+               accessibility: {
+                  point: {
+                        valueSuffix: '%'
+                  }
+               },
+               plotOptions: {
+                  pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                           enabled: true,
+                           format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        },
+                        showInLegend: true
+                  }
+               },
+               series: [{
+                  name: 'Brands',
+                  colorByPoint: true,
+                  data: [{
+                        name: 'Exportacion',
+                        y: exportacion,
+                        sliced: true,
+                        selected: true
+                  },  {
+                        name: 'Comercial',
+                        y: comercial
+                  },  {
+                        name: 'Desecho',
+                        y: desecho
+                  }, {
+                        name: 'Merma',
+                        y: merma
+                  }]
                }]
-            }]
-         });
-    </script>
+            });
+      </script>
+      @endisset
     {{-- comment 
     <script>
        var titulo = <?php echo json_encode($titulo) ?>;

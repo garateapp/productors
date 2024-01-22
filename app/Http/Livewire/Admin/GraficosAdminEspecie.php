@@ -33,7 +33,7 @@ class GraficosAdminEspecie extends Component
                             ->latest('n_proceso')->get();
                     $procesosall=Proceso::where('variedad', $this->varie->name)->where('temporada','actual')
                             ->latest('n_proceso')->get();
-                    
+                                                
                 }else{
                         $procesos=Proceso::where('especie',$this->espec->name)
                             ->latest('n_proceso')->paginate($this->ctd);
@@ -41,6 +41,7 @@ class GraficosAdminEspecie extends Component
                             ->latest('n_proceso')->get();
                         $procesosall=Proceso::where('especie', $this->espec->name)->where('temporada','actual')
                             ->latest('n_proceso')->get();
+                           
                 }
 
         }else{
