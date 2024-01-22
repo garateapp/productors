@@ -1,10 +1,13 @@
 <div x-data="temporadas()">
     @php
     $cant=0;
- 
-        foreach($recepcions as $recepcion){
+
+    if ($recepcions->count()>0) {
+      foreach($recepcions as $recepcion){
             $cant+=$recepcion->peso_neto;
         }
+    }
+       
         
         
                 
@@ -12,17 +15,21 @@
                 $comerc=0;
                 $desec=0;
                 $mer=0;
-                foreach ($procesosall as $proceso) {
-                    
-                    if ($proceso->especie==$espec->name) {
-                        $export+=$proceso->exp;
-                        $comerc+=$proceso->comercial;
-                        $desec+=$proceso->desecho;
-                        $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+                if ($procesosall->count()>0) {
+                
+                  foreach ($procesosall as $proceso) {
+                     
+                     if ($proceso->especie==$espec->name) {
+                           $export+=$proceso->exp;
+                           $comerc+=$proceso->comercial;
+                           $desec+=$proceso->desecho;
+                           $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
 
-                    }
+                     }
 
-                }
+                  }
+                
+               }
                 $exp_total=$export;
                $com_total=$comerc;
                $des_total=$desec;
@@ -31,23 +38,24 @@
     @endphp
      @php
       $cant2=0;
-   
+      
+      if ($recepcions2->count()>0) {
          foreach($recepcions2 as $recepcion2){
             $cant2+=$recepcion2->peso_neto;
          }
-         
+      }   
             
                   $export2=0;
                   $comerc2=0;
                   $desec2=0;
                   $mer2=0;
-                  foreach ($procesosall2 as $proceso2) {
-                     
-   
-                        $export2+=$proceso2->exp;
-                        $comerc2+=$proceso2->comercial;
-                        $desec2+=$proceso2->desecho;
-                        $mer2+=($proceso2->kilos_netos-$proceso2->desecho-$proceso2->comercial-$proceso2->exp);
+                  if ($procesosall2->count()>0) {
+                     foreach ($procesosall2 as $proceso2) {
+                           $export2+=$proceso2->exp;
+                           $comerc2+=$proceso2->comercial;
+                           $desec2+=$proceso2->desecho;
+                           $mer2+=($proceso2->kilos_netos-$proceso2->desecho-$proceso2->comercial-$proceso2->exp);
+                        }
                      }
    
                $exp_total2=$export2;
