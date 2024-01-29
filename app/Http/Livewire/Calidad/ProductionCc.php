@@ -648,7 +648,7 @@ class ProductionCc extends Component
                                 'porcentaje_muestra'=>$sumt/$nfrutos,
                                 'tipo_item'=>'FIRMEZAS',
                                 'tipo_detalle'=>'ss',
-                                'detalle_item'=>'SJ',
+                                'detalle_item'=>'2J',
                                 'fecha'=>$this->fecha                
                             ]);
                         }
@@ -660,7 +660,7 @@ class ProductionCc extends Component
                                 'porcentaje_muestra'=>$sumt/$nfrutos,
                                 'tipo_item'=>'FIRMEZAS',
                                 'tipo_detalle'=>'ss',
-                                'detalle_item'=>'G',
+                                'detalle_item'=>'3J',
                                 'fecha'=>$this->fecha                
                             ]);
                         }
