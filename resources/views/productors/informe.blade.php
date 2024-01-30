@@ -764,11 +764,24 @@
 				@endif
 			</td>
 		  	<td style="background-color:#47ac34; color: white;"><b>FRUTA BLANDA: </b>
-				@if ($recepcion->calidad->detalles->where('tipo_item','FIRMEZAS')->where('detalle_item','FRUTA BLANDA')->first())
-					{{$recepcion->calidad->detalles->where('tipo_item','FIRMEZAS')->where('detalle_item','FRUTA BLANDA')->first()->porcentaje_muestra}} %
+
+				@if ($recepcion->n_variedad=='Dagen')
+					@if ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','MUY BLANDO')->first())
+						
+						{{$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','MUY BLANDO')->first()->porcentaje_muestra}} %
+						
+				
+					@endif
+					
 				@else
-				-
+					@if ($recepcion->calidad->detalles->where('tipo_item','FIRMEZAS')->where('detalle_item','FRUTA BLANDA')->first())
+						{{$recepcion->calidad->detalles->where('tipo_item','FIRMEZAS')->where('detalle_item','FRUTA BLANDA')->first()->porcentaje_muestra}} %
+					@else
+					-
+					@endif
 				@endif
+				
+				
 		</td>
 		
 	  </tr>
