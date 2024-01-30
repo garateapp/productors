@@ -829,7 +829,7 @@ class ProductionCc extends Component
                                     'porcentaje_muestra'=>floatval($item)*100,
                                     'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
                                     'tipo_detalle'=>'cc',
-                                    'detalle_item'=>'SJ',
+                                    'detalle_item'=>'2J',
                                     'fecha'=>$this->fecha                
                                 ]);
                             }
@@ -843,7 +843,7 @@ class ProductionCc extends Component
                                     'porcentaje_muestra'=>floatval($item)*100,
                                     'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
                                     'tipo_detalle'=>'cc',
-                                    'detalle_item'=>'G',
+                                    'detalle_item'=>'3J',
                                     'fecha'=>$this->fecha                
                                 ]);
                             }
