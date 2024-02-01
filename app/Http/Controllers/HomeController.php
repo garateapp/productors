@@ -1033,6 +1033,11 @@ class HomeController extends Controller
         return view('admin.users.create');
     }
 
+    public function listado_agronomos() {
+
+        return view('admin.agronomos.index');
+    }
+
     public function user_store(Request $request) {
 
         if($request['password']==$request['password_confirmation']){

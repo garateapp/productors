@@ -156,7 +156,7 @@
                                 </x-jet-dropdown-link>
                             @endcan
                             @can('Ver produccion_total')
-                                <x-jet-dropdown-link href="{{ route('user.create') }}">
+                                <x-jet-dropdown-link href="{{ route('agronomos.index') }}">
                                     {{ __('Listado de Agronomos') }}
                                 </x-jet-dropdown-link>
                             @endcan
@@ -271,7 +271,7 @@
                     </x-jet-responsive-nav-link>
                 @endcan
                 @can('Ver produccion_total')
-                    <x-jet-responsive-nav-link href="{{ route('user.create') }}" :active="request()->routeIs('user.create')">
+                    <x-jet-responsive-nav-link href="{{ route('agronomos.index') }}" :active="request()->routeIs('agronomos.index')">
                         {{ __('Listado de Agronomos') }}
                     </x-jet-responsive-nav-link>
                 @endcan

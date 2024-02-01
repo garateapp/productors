@@ -170,6 +170,8 @@ Route::get('estadistica/{estadistica_type}', [HomeController::class,'estadistica
 
 Route::get('user/create', [HomeController::class,'user_create'])->name('user.create');
 
+Route::get('agronomos', [HomeController::class,'listado_agronomos'])->name('agronomos.index');
+
 Route::post('user/admin/store', [HomeController::class,'user_store'])->name('user.store');
 
 Route::resource('soporte', SoporteController::class)->names('soportes');
