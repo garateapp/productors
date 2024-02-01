@@ -155,6 +155,11 @@
                                     {{ __('Crear Usuario') }}
                                 </x-jet-dropdown-link>
                             @endcan
+                            @can('Ver produccion_total')
+                                <x-jet-dropdown-link href="{{ route('user.create') }}">
+                                    {{ __('Listado de Agronomos') }}
+                                </x-jet-dropdown-link>
+                            @endcan
                            
                             <x-jet-dropdown-link href="{{ route('mensajes.index') }}">
                                 {{ __('Bandeja de Entrada') }}
@@ -263,6 +268,11 @@
                 @can('Ver produccion_total')
                     <x-jet-responsive-nav-link href="{{ route('user.create') }}" :active="request()->routeIs('user.create')">
                         {{ __('Crear Usuario') }}
+                    </x-jet-responsive-nav-link>
+                @endcan
+                @can('Ver produccion_total')
+                    <x-jet-responsive-nav-link href="{{ route('user.create') }}" :active="request()->routeIs('user.create')">
+                        {{ __('Listado de Agronomos') }}
                     </x-jet-responsive-nav-link>
                 @endcan
                
