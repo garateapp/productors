@@ -28,6 +28,11 @@
           </div>
       @endif
 
+      
+      <h1 class="text-center mb-12">
+        Asignacion de Rol (Agrónomo)
+        </h1>
+
       <h1 class="text-center">
         LISTADO DE AGRONOMOS
         </h1>
