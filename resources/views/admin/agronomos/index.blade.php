@@ -38,7 +38,7 @@
         </h1>
         
       <h1 class="text-center">
-      Nombre/Apellido  / Nro Productores asignados / Nro Productores finalizados 
+      Nombre/Apellido  / Nro Productores asignados / Nro Productores finalizados / Nro Productores pendientes 
         </h1>
       
     </div>
