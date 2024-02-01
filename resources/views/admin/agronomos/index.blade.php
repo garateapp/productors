@@ -36,6 +36,10 @@
       <h1 class="text-center">
         LISTADO DE AGRONOMOS
         </h1>
+        
+      <h1 class="text-center">
+      Nombre/Apellido
+        </h1>
       
     </div>
 
