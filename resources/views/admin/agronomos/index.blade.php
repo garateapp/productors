@@ -38,7 +38,7 @@
         </h1>
         
       <h1 class="text-center">
-      Nombre/Apellido
+      Nombre/Apellido  / Nro Productores
         </h1>
       
     </div>
