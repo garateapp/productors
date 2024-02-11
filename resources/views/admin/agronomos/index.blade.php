@@ -42,15 +42,59 @@
       <h1 class="text-center">
       Nombre/Apellido  / Nro Productores asignados / Nro Productores finalizados / Nro Productores pendientes / Detalle
         </h1>
-        <table>
-          @foreach ($users as $user)
-            <tr>
-              <td>
-                {{$user->name}}
-              </td>
-            </tr>
-          @endforeach
-        </table>
+                   
+        <x-table-responsive>   
+          <table class="min-w-full divide-y divide-gray-200 mb-20 pb-20">
+    
+             <thead class="bg-gray-50 rounded-full">
+          
+                <th>Nombre</th>
+                <th>Email</th>
+                
+                
+             </thead>
+
+             <tbody>
+                @php
+                      $n=1;
+                @endphp
+             
+                   @foreach ($users as $user)
+                    
+                      <tr class="h-16 border border-gray-100 rounded">
+                         
+                            <td class="text-center">
+                               <p class="text-base font-medium  text-gray-700">
+                                        {{$user->name}}
+                               </p>
+                            
+                            </td>
+                            <td class="text-center">
+                              <p class="text-base font-medium  text-gray-700">
+                                @if ($user->email)
+                                  {{$user->email}}
+                                @endif
+                                       
+                              </p>
+                           
+                           </td>
+                   
+                            
+                         
+                         
+                      </tr>
+                   
+                   @endforeach
+    
+             
+                
+                
+             
+             
+             </tbody>
+          </table>
+       </x-table-responsive>
+
       
     </div>
 

@@ -157,7 +157,7 @@
                             @endcan
                             @can('Ver produccion_total')
                                 <x-jet-dropdown-link href="{{ route('agronomos.index') }}">
-                                    {{ __('Listado de Agronomos') }}
+                                    {{ __('Listado de Agrónomos') }}
                                 </x-jet-dropdown-link>
                             @endcan
                            
