@@ -38,6 +38,9 @@
 
         @livewire('agronomo.asignacion-rol')
 
+        @if ($users->count()>0)
+            
+        
       <h1 class="text-center mt-6 font-bold mb-2">
         LISTADO DE AGRÓNOMOS
         </h1>
@@ -121,8 +124,11 @@
              </tbody>
           </table>
        </x-table-responsive>
-
-      
+       @else
+          <h1 class="text-center mt-6 font-bold mb-2">
+            AGREGA AL PRIMER AGRÓNOMO
+            </h1>
+       @endif
     </div>
 
 
