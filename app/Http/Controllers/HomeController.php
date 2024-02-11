@@ -1035,7 +1035,11 @@ class HomeController extends Controller
 
     public function listado_agronomos() {
 
-        return view('admin.agronomos.index');
+        $usersWithAgronomoRole = User::whereHas('roles', function ($query) {
+            $query->where('name', 'Agrónomo');
+        })->get();
+        
+        return view('admin.agronomos.index',compact('usersWithAgronomoRole'));
     }
 
     public function user_store(Request $request) {

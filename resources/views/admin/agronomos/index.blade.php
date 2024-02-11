@@ -40,6 +40,15 @@
       <h1 class="text-center">
       Nombre/Apellido  / Nro Productores asignados / Nro Productores finalizados / Nro Productores pendientes / Detalle
         </h1>
+        <table>
+          @foreach ($usersWithAgronomoRole as $user)
+            <tr>
+              <td>
+                {{$user->name}}
+              </td>
+            </tr>
+          @endforeach
+        </table>
       
     </div>
 
