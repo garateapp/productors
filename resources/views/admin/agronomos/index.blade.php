@@ -3,7 +3,7 @@
        
     </x-slot>
 
-    <div class="flex flex-col sm:justify-center items-center sm:pt-14" >
+    <div class="flex flex-col sm:justify-center items-center sm:pt-4" >
       
       @if (session('info'))
           <div x-data="{open: true}">
@@ -28,7 +28,10 @@
           </div>
       @endif
 
-      
+      <h1 class="text-center font-bold text-2xl mb-2">
+        Gestión Equipo de Agrónomos
+        </h1>
+
       <h1 class="text-center mt-4">
        ¿Deseas agregar un nuevo Agrónomo?
         </h1>

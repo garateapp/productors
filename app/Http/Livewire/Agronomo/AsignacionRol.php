@@ -15,8 +15,13 @@ class AsignacionRol extends Component
     }
 
     public function getUsersProperty(){
-        return  User::where('name','LIKE','%'. $this->search .'%')
-        ->orwhere('email','LIKE','%'. $this->search .'%')
+        return User::where(function($query) {
+            $query->where('name','LIKE','%'. $this->search .'%')
+                  ->orWhere('email','LIKE','%'. $this->search .'%');
+        })
+        ->whereDoesntHave('roles', function ($query) {
+            $query->where('name', 'Agrónomo');
+        })
         ->latest('id')
         ->paginate(3);
     }
