@@ -29,11 +29,13 @@
       @endif
 
       
-      <h1 class="text-center mb-12">
-        Asignacion de Rol (Agrónomo)
+      <h1 class="text-center mt-4">
+       ¿Deseas agregar un nuevo Agrónomo?
         </h1>
 
-      <h1 class="text-center">
+        @livewire('agronomo.asignacion-rol')
+
+      <h1 class="text-center mt-6">
         LISTADO DE AGRONOMOS
         </h1>
         
@@ -41,7 +43,7 @@
       Nombre/Apellido  / Nro Productores asignados / Nro Productores finalizados / Nro Productores pendientes / Detalle
         </h1>
         <table>
-          @foreach ($usersWithAgronomoRole as $user)
+          @foreach ($users as $user)
             <tr>
               <td>
                 {{$user->name}}
