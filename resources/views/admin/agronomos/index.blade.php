@@ -35,14 +35,9 @@
 
         @livewire('agronomo.asignacion-rol')
 
-      <h1 class="text-center mt-6">
-        LISTADO DE AGRONOMOS
+      <h1 class="text-center mt-6 font-bold mb-2">
+        LISTADO DE AGRÓNOMOS
         </h1>
-        
-      <h1 class="text-center">
-      Nombre/Apellido  / Nro Productores asignados / Nro Productores finalizados / Nro Productores pendientes / Detalle
-        </h1>
-                   
         <x-table-responsive>   
           <table class="min-w-full divide-y divide-gray-200 mb-20 pb-20">
     
@@ -50,8 +45,12 @@
           
                 <th>Nombre</th>
                 <th>Email</th>
-                
-                
+                <th>Nro<br>Productores<br>Asignados</th>
+                <th>Nro<br>Productores<br>Finalizados</th>
+                <th>Nro<br>Productores<br>Pendiente</th>
+                <th class="relative px-6 py-3">
+                  <span class="sr-only">Detalle</span>
+                  </th>
              </thead>
 
              <tbody>
@@ -72,13 +71,38 @@
                             <td class="text-center">
                               <p class="text-base font-medium  text-gray-700">
                                 @if ($user->email)
-                                  {{$user->email}}
+                                    {{$user->email}}
+                                @else
+                                  (Sin Email)
                                 @endif
                                        
                               </p>
                            
                            </td>
-                   
+                           <td class="text-center">
+                            <p class="text-base font-medium  text-gray-700">
+                                3      
+                            </p>
+                            </td>
+                            <td class="text-center">
+                                <p class="text-base font-medium  text-gray-700">
+                                    2  
+                                </p>
+                            </td>
+                            <td class="text-center">
+                              <p class="text-base font-medium  text-gray-700">
+                                  1    
+                              </p>
+                            </td>
+                        
+                            <td class="text-center pr-10">
+                              <p class="text-base font-medium  text-blue-500 cursor-pointer">
+                                  Detalle
+                              </p>
+                            </td>
+                        <td>
+                          
+                        </td>
                             
                          
                          
