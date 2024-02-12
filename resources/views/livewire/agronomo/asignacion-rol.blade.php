@@ -21,19 +21,26 @@
                                 @endif
                           
                         <div class="flex justify-end items-center"> 
+                            @if ($type=='Agronomo')
                                 {!! Form::model($user, ['route'=>['users.update',$user],'method' => 'put']) !!}
 
-                                    @foreach ($user->roles as $role)
-                                        {!! Form::hidden('roles[]', $role->id) !!}
-                                    @endforeach
-                                                {!! Form::hidden('roles[]', 5) !!}
-                                             
-                                   
-                                
-                                <button  class="my-auto ml-4 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
-                                    <p class="text-sm font-medium leading-none text-white">Asignar Rol</p>
+                                        @foreach ($user->roles as $role)
+                                            {!! Form::hidden('roles[]', $role->id) !!}
+                                        @endforeach
+                                                    {!! Form::hidden('roles[]', 5) !!}
+                                                
+                                    
+                                    
+                                    <button class="my-auto ml-4 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
+                                        <p class="text-sm font-medium leading-none text-white">Asignar Rol</p>
+                                    </button>
+                                {!! Form::close() !!}
+                            @else
+                                <button wire:click="storecampo({{$user->id}})" class="my-auto ml-4 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded">
+                                    <p class="text-sm font-medium leading-none text-white">Asignar Campo</p>
                                 </button>
-                            {!! Form::close() !!}
+                            @endif
+                               
                         </div>
                         </li>
                         @empty

@@ -76,6 +76,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Telefono');
     }
 
+    public function campos(){
+        return $this->hasMany('App\Models\CampoStaff','agronomo_id');
+    }
+
     public function estadisticas(){
         return $this->hasMany('App\Models\Estadistica');
     }

@@ -36,7 +36,7 @@
        ¿Deseas agregar un nuevo Agrónomo?
         </h1>
 
-        @livewire('agronomo.asignacion-rol')
+        @livewire('agronomo.asignacion-rol',['type'=>'Agronomo','user_id'=>null])
 
         @if ($users->count()>0)
             
@@ -52,11 +52,18 @@
                 <th>Nombre</th>
                 <th>Email</th>
                 <th>Nro<br>Productores<br>Asignados</th>
+                <th>Listado</th>
                 <th>Nro<br>Productores<br>Finalizados</th>
                 <th>Nro<br>Productores<br>Pendiente</th>
                 <th class="relative px-6 py-3">
                   <span class="sr-only">Detalle</span>
                   </th>
+                  <th class="relative px-6 py-3">
+                    <span class="sr-only">Detalle</span>
+                    </th>
+                    <th class="relative px-6 py-3">
+                      <span class="sr-only">Detalle</span>
+                      </th>
              </thead>
 
              <tbody>
@@ -87,25 +94,63 @@
                            </td>
                            <td class="text-center">
                             <p class="text-base font-medium  text-gray-700">
-                                3      
+                                {{$user->campos->count()}}
                             </p>
+                              
                             </td>
                             <td class="text-center">
+                              @if ($user->campos->count()>0)
+                                @foreach ($user->campos as $campo)
+                                  {{$campo->user->name}}  <br>   
+                                @endforeach
+                              @else
+                                  -
+                              @endif
+                              
+                            </td>
+
+                            <td class="text-center">
                                 <p class="text-base font-medium  text-gray-700">
-                                    2  
+                                   0
                                 </p>
                             </td>
                             <td class="text-center">
                               <p class="text-base font-medium  text-gray-700">
-                                  1    
+                                {{$user->campos->count()}}    
                               </p>
                             </td>
                         
                             <td class="text-center pr-10">
-                              <p class="text-base font-medium  text-blue-500 cursor-pointer">
-                                  Detalle
+                              <a href="{{Route('agronomo.show',$user)}}">
+                                <p class="text-base font-medium  text-blue-500 cursor-pointer">
+                                    Detalle
+                                </p>
+                              </a>
+                            </td>
+                            <td class="text-center pr-10">
+                              <p class="text-base font-medium  text-orange-500 cursor-pointer">
+                                  Cambiar
                               </p>
                             </td>
+                            <td class="text-center pr-10">
+                                {!! Form::model($user, ['route'=>['users.update',$user],'method' => 'put']) !!}
+
+                                        @foreach ($user->roles as $role)
+                                          @if ($role->id!=5)
+                                            {!! Form::hidden('roles[]', $role->id) !!}
+                                          @endif
+                                        @endforeach
+                                                 
+                                                
+                                    
+                                    
+                                    <button class="text-base font-medium  text-red-500 cursor-pointer">
+                                        <p>Eliminar</p>
+                                    </button>
+                                {!! Form::close() !!}
+                           
+                            </td>
+                           
                         <td>
                           
                         </td>

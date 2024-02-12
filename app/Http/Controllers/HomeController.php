@@ -30,6 +30,7 @@ use Illuminate\Support\Facades\Validator;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use App\Mail\NotificacionMailable;
+use App\Models\CampoStaff;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
@@ -1040,6 +1041,13 @@ class HomeController extends Controller
         })->get();
         
         return view('admin.agronomos.index',compact('users'));
+    }
+
+    public function agronomo_show(User $user) {
+
+        $campos=CampoStaff::where('agronomo_id',$user->id)->get();
+        
+        return view('admin.agronomos.show',compact('user','campos'));
     }
 
     public function user_store(Request $request) {
