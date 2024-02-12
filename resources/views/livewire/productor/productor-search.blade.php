@@ -251,9 +251,6 @@
                                                     </button>
                                             @else
                                                 @if ($user->agronomos->count()>0)
-                                                @foreach ($user->agronomos as $item)
-                                                    {{$item}}
-                                                @endforeach
                                                     <button wire:click="set_iduser({{$user->id}})" class="mx-4 focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded">
 
                                                         <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
