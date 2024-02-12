@@ -41,7 +41,7 @@
               <div class="bg-gray-800 border border-gray-300 shadow-lg  rounded-2xl p-4">
                 <div class="flex-none sm:flex">
                   <div class=" relative h-32 w-32   sm:mb-0 mb-3">
-                    <img src="https://tailwindcomponents.com/storage/avatars/njkIbPhyZCftc4g9XbMWwVsa7aGVPajYLRXhEeoo.jpg" alt="aji" class=" w-32 h-32 object-cover rounded-2xl">
+                    <img src="{{$user->profile_photo_url}}" alt="aji" class=" w-32 h-32 object-cover rounded-2xl">
                     <a href="#" class="absolute -right-2 bottom-2   -ml-3  text-white p-1 text-xs bg-green-400 hover:bg-green-500 font-medium tracking-wider rounded-full transition ease-in duration-300">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
                         <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z">
