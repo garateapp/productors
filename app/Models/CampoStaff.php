@@ -16,4 +16,9 @@ class CampoStaff extends Model
         return $this->BelongsTo('App\Models\User');
     }
     
+    public function agronomo()
+    {
+        return $this->belongsTo(User::class, 'agronomo_id');
+    }
+    
 }

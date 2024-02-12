@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Productor;
 
+use App\Models\CampoStaff;
 use App\Models\Sync;
 use App\Models\Telefono;
 use App\Models\User;
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Http;
 
 class ProductorSearch extends Component
 {   use WithPagination;
+
+    
 
     public $search, $cellid, $agronomoid, $phone, $user, $ctd=25; 
 
@@ -81,10 +84,17 @@ class ProductorSearch extends Component
         $this->user=User::find($this->cellid);
     }
 
+    public function set_idagronomo($id){
+        $this->agronomoid=$id;
+        $this->user=User::find($this->agronomoid);
+    }
+
     public function cellid_clean(){
         $this->cellid=NULL;
         $this->user=NULL;
     }
+
+    
 
     public function storephone(){
         $rules = [
@@ -140,6 +150,11 @@ class ProductorSearch extends Component
     
     
     }
+
+    public function agronomodelete(CampoStaff $campostaff){
+        $campostaff->delete();
+    }
+
     public function phone_destroy(Telefono $telefono){
         $telefono->delete();
         $this->user->ForceFill([

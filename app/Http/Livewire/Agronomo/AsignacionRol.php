@@ -9,11 +9,12 @@ use Livewire\Component;
 class AsignacionRol extends Component
 {
     public $search,$type,$user_id;
+
     public function mount($type, $user_id){
         $this->type=$type;
         $this->user_id=$user_id;
-        
     }
+    
     public function render()
     {
         return view('livewire.agronomo.asignacion-rol');
@@ -30,6 +31,23 @@ class AsignacionRol extends Component
             })
             ->latest('id')
             ->paginate(3);
+        } elseif($this->type=='Productor') {
+
+            $campos = CampoStaff::where('user_id', $this->user_id)->pluck('agronomo_id'); // Obtener los IDs de los usuarios relacionados con CampoStaff
+
+            $users = User::where(function($query) {
+                            $query->where('name','LIKE','%'. $this->search .'%')
+                                  ->orWhere('email','LIKE','%'. $this->search .'%');
+                        })
+                        ->whereHas('roles', function ($query) {
+                            $query->where('name', 'Agronomo');
+                        })
+                        ->whereNotIn('id', $campos) // Excluir los IDs de usuarios relacionados con CampoStaff
+                        ->latest('id')
+                        ->paginate(3);
+            
+            return $users;
+
         } else {
 
             $campos = CampoStaff::where('agronomo_id', $this->user_id)->pluck('user_id'); // Obtener los IDs de los usuarios relacionados con CampoStaff
@@ -55,4 +73,18 @@ class AsignacionRol extends Component
         $user=User::find($this->user_id);
         return redirect(route('agronomo.show',$user));
     }
+
+    public function storeagronomo($user_id){
+        CampoStaff::create(['user_id'=>$this->user_id,
+                            'agronomo_id'=>$user_id,
+                            'rol'=>'admin']);
+
+                             // Emitir un evento
+      return redirect(route('productors.index'))->with('info','Agrónomo agregado con éxito');
+
+    }
+
+
+
+
 }
