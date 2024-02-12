@@ -86,8 +86,6 @@ Route::resource('telefono', TelefonoController::class)->names('telefonos');
 
 Route::resource('role', RoleController::class)->names('admin.roles');
 
-Route::post('deleteagronomo/{user}', [RoleController::class,'deleteagronomo'])->middleware('auth')->name('delete.agronomo');
-
 Route::resource('users', UserController::class)->only(['index','edit','update','destroy'])->names('users');
 
 Route::resource('prod/users', ProductorUserController::class)->only(['update'])->names('productor.users');
