@@ -141,7 +141,7 @@
                                           @endif
                                         @endforeach
                                                  
-                                                
+                                        {!! Form::hidden('user_id', $user->id) !!}
                                     
                                     
                                     <button class="text-base font-medium  text-red-500 cursor-pointer">

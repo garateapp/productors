@@ -238,7 +238,7 @@
                                                                                         
                                         </td>
                                         <td class="pl-5">
-                                            @if ($user->id==$cellid)
+                                            @if ($user->id==$agronomoid)
                                                     <button wire:click="cellid_clean" class="mx-4 focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded">
 
                                                         <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
@@ -250,7 +250,10 @@
                                                         </h1>
                                                     </button>
                                             @else
-                                                @if ($user->telefonos->count())
+                                                @if ($user->agronomos->count()>0)
+                                                @foreach ($user->agronomos as $item)
+                                                    {{$item}}
+                                                @endforeach
                                                     <button wire:click="set_iduser({{$user->id}})" class="mx-4 focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded">
 
                                                         <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
@@ -413,7 +416,6 @@
                                     </tr>
 
                                 @if ($cellid==$user->id)
-
                                     <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
                                         <td class="text-center">
                                             <p class="text-base font-medium leading-none text-gray-700 mr-2">
@@ -447,19 +449,12 @@
 
                                         
                                             
-                                        </p>
+                                            </p>
                                         
                                      
                                         
                                         <td class="pl-5">
-                                        
-
-                                        
-                                    
-                                        
-                                    
                                         </td>
-                                    
                                         <td class="pl-5 text-center items-center content-center">
 
                                             @if ($user->telefonos)
@@ -511,17 +506,12 @@
                                                 </p>
                                             </div>
                                         </td>
-                                    </td>
-                                    <td class="pl-5 whitespace-nowrap">
-                                        <p class="whitespace-nowrap  text-base flex font-medium leading-none text-gray-700 mr-2">
-
-                                            
-
-                                            
-                                        </p>
+                                        </td>
+                                        <td class="pl-5 whitespace-nowrap">
+                                            <p class="whitespace-nowrap  text-base flex font-medium leading-none text-gray-700 mr-2">
+                                            </p>
+                                        </td>
                                         
-                                    </td>
-                                    
                                         <td class="pl-5">
                                        
                                         </td>
@@ -532,7 +522,114 @@
                                            
                                         </td>
                                     </tr>
+                                @endif
+                                @if ($agronomoid==$user->id)
+                                    <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
+                                        <td class="text-center">
+                                            <p class="text-base font-medium leading-none text-gray-700 mr-2">
 
+                                            
+                                                
+                                                
+                                            </p>
+                                        
+                                        </td>
+                                        <td class="">
+                                            <div class="flex items-center pl-5">
+                                                <p class="text-base font-medium leading-none text-gray-700 mr-2">
+
+                                                
+                                                    
+                                                </p>
+                                            
+                                            </div>
+                                        </td>
+                                        <td class="pl-5">
+                                            <div class="whitespace-nowrap flex items-center text-center">
+                                                
+                                                <p class="whitespace-nowrap text-sm leading-none text-gray-600 ml-2">
+                                                    
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td class="pl-5">
+                                            <p class="text-base font-medium leading-none text-gray-700 mr-2">
+
+                                        
+                                            
+                                            </p>
+                                        
+                                    
+                                        
+                                        <td class="pl-5">
+                                        </td>
+                                        <td class="pl-5 text-center items-center content-center">
+
+                                            @if ($user->telefonos)
+                                                @foreach ($user->telefonos as $telefono)
+                                                <div class="flex text-center justify-center items-center content-center">
+                                                    <b>{{$telefono->numero}}  </b>
+                                                    <p wire:click="phone_destroy({{$telefono}})" class="text-red-500 cursor-pointer ml-1"> (X)</p>
+
+                                                </div>
+                                                    <br>
+                                                    
+                                                @endforeach
+                                                
+                                            @endif
+
+                                        
+                                        
+                                        
+                                        </td>
+                                        <td class="pl-5">
+                                            <div class="flex items-center">
+                                            
+                                                
+                                                <div class="flex items-center">
+                                                    <label class="w-32 mx-2"><strong>Agregar:</strong></label>
+                                                    <input wire:model="phone" class="form-input w-full border-2 border-gray-300 bg-white h-10 rounded-lg text-sm focus:outline-none">
+                                                </div>
+                                
+                                                @error('name')
+                                                    <span class="text-sm text-red-500">{{$message}}</span>
+                                                @enderror
+                                            
+                                            
+                                                <button wire:click="storephone" class="mx-4 focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded">
+
+                                                    <h1 style="font-size: 1rem;white-space: nowrap;" class="text-center text-white font-bold inline w-full" >
+                                                        +
+                                                        
+                                                    </h1>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td class="pl-5">
+                                            <div class="flex items-center">
+                                            
+                                                <p class="text-base font-medium leading-none text-gray-700 mr-2">
+
+                                                    
+                                                </p>
+                                            </div>
+                                        </td>
+                                        </td>
+                                        <td class="pl-5 whitespace-nowrap">
+                                            <p class="whitespace-nowrap  text-base flex font-medium leading-none text-gray-700 mr-2">
+                                            </p>
+                                        </td>
+                                        
+                                        <td class="pl-5">
+                                    
+                                        </td>
+                                        <td class="pl-4">
+                                        
+                                        </td>
+                                        <td>
+                                        
+                                        </td>
+                                    </tr>
                                 @endif
 
 

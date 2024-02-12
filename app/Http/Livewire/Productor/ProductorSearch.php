@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Http;
 class ProductorSearch extends Component
 {   use WithPagination;
 
-    public $search, $cellid, $phone, $user, $ctd=25; 
+    public $search, $cellid, $agronomoid, $phone, $user, $ctd=25; 
 
     public function render()
     {   $users = User::select(

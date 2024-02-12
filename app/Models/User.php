@@ -80,6 +80,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\CampoStaff','agronomo_id');
     }
 
+    public function agronomos(){
+        return $this->hasMany('App\Models\CampoStaff','user_id');
+    }
+
     public function estadisticas(){
         return $this->hasMany('App\Models\Estadistica');
     }
