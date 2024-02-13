@@ -133,14 +133,44 @@
             <!---stats-->
             <div class="">
               
-              {!! Form::model($user, ['route'=>['productor.users.update',$user],'method' => 'put', 'autocomplete'=>'off']) !!}           
-              <div>
-                {!! Form::email('email', null , ['class' => 'mt-1 block w-full']) !!}
+              {!! Form::model($user, ['route'=>['productor.users.update',$user],'method' => 'put', 'autocomplete'=>'off']) !!}    
 
-              </div>     
+              <div>
+              
+
+              </div>    
+              <div class="grid grid-cols-2 gap-x-4">
+                <div class="form-group">
+                    {!! Form::label('email','Email:') !!}
+                    {!! Form::email('email', null, ['class' => 'mt-1 block w-full rounded-lg', 'readonly' => 'readonly']) !!} 
+                  
+                    @error('email')
+                        <span class="text-danger">{{$message}}</span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    {!! Form::label('csg','Csg') !!}
+                    {!! Form::text('csg', null , ['class'=>'mt-1 block w-full rounded-lg',  'readonly' => 'readonly' , 'placeholder'=>'']) !!}
+                    
+                    @error('csg')
+                        <span class="text-danger">{{$message}}</span>
+                    @enderror
+                </div>
+              </div>
+              <div class="form-group mt-4">
+                  {!! Form::label('exportadora','Exportadora') !!}
+                  {!! Form::text('exportadora', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                  
+                  @error('exportadora')
+                      <span class="text-danger">{{$message}}</span>
+                  @enderror
+              </div>
+
+
               <div class="flex justify-center mt-4">
                 {!! Form::submit('Actualizar', ['class'=>'text-white font-bold mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
               </div>
+
                 {!! Form::close() !!}
             </div>
             <div class="grid grid-cols-12 gap-4 hidden">
