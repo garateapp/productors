@@ -1050,6 +1050,11 @@ class HomeController extends Controller
         return view('admin.agronomos.show',compact('user','campos'));
     }
 
+    public function productor_show(User $user) {
+        
+        return view('admin.agronomos.showproductor',compact('user'));
+    }
+
     public function user_store(Request $request) {
 
         if($request['password']==$request['password_confirmation']){

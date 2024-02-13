@@ -175,6 +175,8 @@ Route::get('agronomos', [HomeController::class,'listado_agronomos'])->name('agro
 
 Route::get('agronomo/{user}', [HomeController::class,'agronomo_show'])->name('agronomo.show');
 
+Route::get('formulario/productor/{user}', [HomeController::class,'productor_show'])->name('productor.show');
+
 Route::post('user/admin/store', [HomeController::class,'user_store'])->name('user.store');
 
 Route::resource('campostaff', CampoStaffController::class)->names('campostaffs');

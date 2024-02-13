@@ -37,7 +37,7 @@
             <!-- alert -->
         
             <!-- profile card -->
-            <div class="flex flex-col sticky top-0 z-10">
+            <div class="flex flex-col top-0 z-10">
               <div class="bg-gray-800 border border-gray-300 shadow-lg  rounded-2xl p-4">
                 <div class="flex-none sm:flex">
                   <div class=" relative h-32 w-32   sm:mb-0 mb-3">
@@ -53,9 +53,9 @@
                     <div class="flex items-center justify-between sm:mt-2">
                       <div class="flex items-center">
                         <div class="flex flex-col">
-                          <div class="w-full flex-none text-lg text-gray-200 font-bold leading-none">{{$user->name}}</div>
+                          <div class="w-full flex-none text-lg text-gray-200 font-bold leading-none">Formulario {{$user->name}}</div>
                           <div class="flex-auto text-gray-400 my-1">
-                            <span class="mr-3 ">Agrónomo</span><span class="mr-3 border-r border-gray-600  max-h-0"></span><span>{{$user->email}}</span>
+                            <span class="mr-3 ">Productor</span><span class="mr-3 border-r border-gray-600  max-h-0"></span><span>{{$user->email}}</span>
                           </div>
                         </div>
                       </div>
@@ -121,12 +121,9 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                           <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"></path>
                         </svg>
-                        <p class="">{{$campos->count()}} 
-                          @if ($campos->count()==1)
-                            Productor
-                          @else
-                            Productores
-                          @endif</p>
+                        <p class="">
+                          17 Datos Pendientes
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -134,14 +131,26 @@
               </div>
             </div>
             <!---stats-->
-            <div class="grid grid-cols-12 gap-4 ">
+            <div class="">
+              
+              {!! Form::model($user, ['route'=>['productor.users.update',$user],'method' => 'put', 'autocomplete'=>'off']) !!}           
+              <div>
+                {!! Form::email('email', null , ['class' => 'mt-1 block w-full']) !!}
+
+              </div>     
+              <div class="flex justify-center mt-4">
+                {!! Form::submit('Actualizar', ['class'=>'text-white font-bold mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
+              </div>
+                {!! Form::close() !!}
+            </div>
+            <div class="grid grid-cols-12 gap-4 hidden">
               <div class="col-span-12 sm:col-span-4">
                 <div class="p-4 relative  bg-gray-800 border border-gray-800 shadow-lg  rounded-2xl">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14  absolute bottom-4 right-3 text-green-400" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
                     <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
                   </svg>
-                  <div class="text-2xl text-gray-100 font-medium leading-8">{{$campos->count()}}</div>
+                  <div class="text-2xl text-gray-100 font-medium leading-8">0</div>
                   <div class="text-sm text-gray-500">Pendientes</div>
                 </div>
               </div>
@@ -159,17 +168,16 @@
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14  absolute bottom-4 right-3 text-yellow-300" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
-                  <div class="text-2xl text-gray-100 font-medium leading-8">{{$campos->count()}}</div>
+                  <div class="text-2xl text-gray-100 font-medium leading-8">0</div>
                   <div class="text-sm text-gray-500 mr-12"> 
                     
-                    @if ($campos->count()==1)
-                    Productor asignado
-                  @else
+                  
                     Productores asignados
-                  @endif </div>
+                 </div>
                 </div>
               </div>
             </div>
+
             <div class="grid gap-4 grid-cols-1 md:grid-cols-1">
       
               <!--confirm modal-->
@@ -195,58 +203,9 @@
                 </div>
               </div>
 
-                @livewire('agronomo.asignacion-rol',['type'=>'campos','user_id'=>$user->id])
+            
 
-              <h1 class="text-center mt-6 font-bold mb-2">
-                LISTADO DE CAMPOS
-                </h1>
-              <!--elements-->
-              <div class="flex flex-col space-y-4">
-                @foreach ($campos as $campo)
-                <a href="{{Route('productor.show',$campo->user)}}">
-                  <div class="flex flex-col p-4 bg-gray-800 border-gray-800 shadow-md hover:shodow-lg rounded-2xl cursor-pointer transition ease-in duration-500  transform hover:scale-105">
-                    <div class="flex items-center justify-between">
-                      <div class="flex items-center mr-auto">
-                        <div class="inline-flex w-12 h-12"><img src="https://tailwindcomponents.com/storage/avatars/njkIbPhyZCftc4g9XbMWwVsa7aGVPajYLRXhEeoo.jpg" alt="aji" class=" relative p-1 w-12 h-12 object-cover rounded-2xl"><span class="absolute w-12 h-12 inline-flex border-2 rounded-2xl border-gray-600 opacity-75"></span>
-                          <span></span>
-                        </div>
-        
-                        <div class="flex flex-col ml-3 min-w-0">
-                          <div class="font-medium leading-none text-gray-100">{{$campo->user->name}}</div>
-                          <p class="text-sm text-gray-500 leading-none mt-1 truncate">{{$campo->created_at}}</p>
-                        </div>
-                      </div>
-                      <div class="flex flex-col ml-3 min-w-0">
-                        <div class="flex">
-                          <h5 class="flex items-center font-medium text-gray-300 mr-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 8h6m-5 0a3 3 0 110 6H9l3 3m-3-6h6m6 1a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg> 0 / 17 Datos Completados
-                          </h5>
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                          </svg>
-                        
-                          <form action="{{route('campostaffs.destroy',$campo)}}" method="POST">
-                            @csrf
-                            @method('delete')
-                          <button>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-red-400 hover:text-red-800 ml-2">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                            </svg>
-                          </button>
-                        </form>
-                         
-                          
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-                @endforeach
-
-              
-              </div>
+            
               
             </div>
              
