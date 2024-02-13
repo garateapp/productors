@@ -209,6 +209,79 @@
                </div>
 
 
+              <div class="form-group mt-2">
+                {!! Form::label('antiguedad','Antiguedad en años:') !!}
+                {!! Form::text('antiguedad', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                
+                @error('antiguedad')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+              <div class="form-group mt-2">
+                {!! Form::label('hectareas','Cantidad de hectareas:') !!}
+                {!! Form::text('hectareas', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                
+                @error('hectareas')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+              <div class="form-group mt-2">
+                {!! Form::label('prod_hectareas','Producción por hectareas en toneladas:') !!}
+                {!! Form::text('prod_hectareas', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                
+                @error('prod_hectareas')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+              <div class="form-group mt-2">
+                {!! Form::label('campo_total_prod','Campo total producción:') !!}
+                {!! Form::text('campo_total_prod', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                
+                @error('campo_total_prod')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+              <div class="form-group mt-2">
+                {!! Form::label('porcentaje_entrega','Porcentaje de entrega a Greenex:') !!}
+                {!! Form::text('porcentaje_entrega', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                
+                @error('porcentaje_entrega')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+              <div class="form-group mt-2">
+                {!! Form::label('comuna','Comuna:') !!}
+                {!! Form::text('comuna', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                
+                @error('comuna')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+              <div class="form-group mt-2">
+                {!! Form::label('provincia','Provincia:') !!}
+                {!! Form::text('provincia', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                
+                @error('provincia')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+              <div class="form-group mt-2">
+                {!! Form::label('direccion','Dirección:') !!}
+                {!! Form::text('direccion', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                
+                @error('direccion')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+              <div class="form-group mt-2">
+                {!! Form::label('ano_plantacion','Año de plantación:') !!}
+                {!! Form::text('ano_plantacion', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                
+                @error('año_plantacion')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+
 
               <div class="flex justify-center mt-4">
                 {!! Form::submit('Actualizar', ['class'=>'text-white font-bold mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
