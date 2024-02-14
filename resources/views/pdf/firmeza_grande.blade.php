@@ -63,7 +63,7 @@
     @elseif($recepcion->n_especie=='Pears')
         @php
             $colors=['#788527'];
-            $titulo='FIRMEZAS (lb) y BRIX / GRANDE (30 al 48)';
+            $titulo='FIRMEZAS (lb) y BRIX / GRANDE (48 al 80)';
         @endphp
     @elseif($recepcion->n_especie=='Membrillos')
         @php
