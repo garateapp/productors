@@ -190,7 +190,30 @@
                
               </div>
              
-              
+              <div class="form-group mt-2">
+                {!! Form::label('comuna','Comuna:') !!}
+                {!! Form::text('comuna', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                
+                @error('comuna')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+              <div class="form-group mt-2">
+                {!! Form::label('provincia','Provincia:') !!}
+                {!! Form::text('provincia', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                
+                @error('provincia')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+              <div class="form-group mt-2">
+                {!! Form::label('direccion','Dirección:') !!}
+                {!! Form::text('direccion', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                
+                @error('direccion')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
              
               <div class="form-group mt-2">
                <h1 class="text-center">Especie:</h1>
@@ -214,19 +237,7 @@
                 @enderror
               </div>
 
-              <div>
-                <h1 class="mt-12">
-                  AGREGAR CUARTEL
-                </h1>
-              </div>
-              <div class="form-group mt-2">
-                {!! Form::label('cuartel','Cuartel') !!}
-                {!! Form::text('cuartel', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'1,2,3,4,5,6,7']) !!}
-                
-                @error('cuartel')
-                    <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
+            
               <div class="form-group mt-2">
                 {!! Form::label('ano_plantacion','Año de plantación:') !!}
                 {!! Form::text('ano_plantacion', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
@@ -235,22 +246,7 @@
                     <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
-              <div class="form-group mt-2">
-                <h1 class="text-center">Variedades:</h1>
-                 <div class="grid grid-cols-6 gap-y-2">
- 
-                   @foreach ($user->variedades_comercializas()->get() as $especie)
-                       <div class="flex justify-center">
-                           <button class="py-3 px-3 text-sm focus:outline-none leading-none text-green-700 bg-green-100 rounded">{{$especie->name}}</button>
-                       </div>
-                   @endforeach
- 
-                 </div>
-                 
-               </div>
               
-             
-
               <div class="form-group mt-2">
                 {!! Form::label('hectareas','Cantidad de hectareas:') !!}
                 {!! Form::text('hectareas', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
@@ -285,30 +281,67 @@
                     <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
-              <div class="form-group mt-2">
-                {!! Form::label('comuna','Comuna:') !!}
-                {!! Form::text('comuna', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+
+
+              <div class="flex justify-between mt-12">
+                <div>
+                  <h1 class="">
+                    AGREGAR CUARTEL
+                  </h1>
                 
-                @error('comuna')
-                    <span class="text-danger">{{$message}}</span>
-                @enderror
+                </div>
+                <div>
+
+                
+                </div>
+              </div>
+              <div class="grid grid-cols-2">
+                <div class="form-group mt-2">
+                  {!! Form::label('cuartel','Nombre cuartel:') !!}
+                  <div class="w-full max-w-xs">
+                    <label for="numero" class="block text-sm font-medium text-gray-700">Selecciona un número del 1 al 7:</label>
+                    <select id="numero" name="numero" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                      @for($i = 1; $i <= 7; $i++)
+                        <option value="{{ $i }}">Cuartel {{ $i }}</option>
+                      @endfor
+                    </select>
+                  </div>
+                  
+                  
+                  @error('cuartel')
+                      <span class="text-danger">{{$message}}</span>
+                  @enderror
+                </div>
+
+                  <div class="w-full max-w-xs">
+                    <label for="numero" class="block text-sm font-medium text-gray-700">Selecciona un número del 1 al 7:</label>
+                    <select id="numero" name="numero" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                      @for($i = 1; $i <= 7; $i++)
+                        <option value="{{ $i }}">Variedad {{ $i }}</option>
+                      @endfor
+                    </select>
+                  </div>
+              </div>
+
+              <div class="flex justify-center mt-4">
+                {!! Form::submit('Agregar Variedad', ['class'=>'text-white font-bold mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
               </div>
               <div class="form-group mt-2">
-                {!! Form::label('provincia','Provincia:') !!}
-                {!! Form::text('provincia', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                
-                @error('provincia')
-                    <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
-              <div class="form-group mt-2">
-                {!! Form::label('direccion','Dirección:') !!}
-                {!! Form::text('direccion', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                
-                @error('direccion')
-                    <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
+                <h1 class="text-center">Variedades:</h1>
+                 <div class="grid grid-cols-6 gap-y-2">
+ 
+                   @foreach ($user->variedades_comercializas()->get() as $especie)
+                       <div class="flex justify-center">
+                           <button class="py-3 px-3 text-sm focus:outline-none leading-none text-green-700 bg-green-100 rounded">{{$especie->name}}</button>
+                       </div>
+                   @endforeach
+ 
+                 </div>
+                 
+               </div>
+              
+             
+           
              
 
 
