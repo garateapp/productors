@@ -191,14 +191,7 @@
               </div>
              
               
-              <div class="form-group mt-2">
-                {!! Form::label('cuartel','Cuartel') !!}
-                {!! Form::text('cuartel', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'1,2,3,4,5,6,7']) !!}
-                
-                @error('cuartel')
-                    <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
+             
               <div class="form-group mt-2">
                <h1 class="text-center">Especie:</h1>
                 <div class="grid grid-cols-6 gap-y-2">
@@ -213,6 +206,36 @@
                 
               </div>
               <div class="form-group mt-2">
+                {!! Form::label('antiguedad','Temporadas en greenex:') !!}
+                {!! Form::text('antiguedad', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                
+                @error('antiguedad')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+
+              <div>
+                <h1 class="mt-12">
+                  AGREGAR CUARTEL
+                </h1>
+              </div>
+              <div class="form-group mt-2">
+                {!! Form::label('cuartel','Cuartel') !!}
+                {!! Form::text('cuartel', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'1,2,3,4,5,6,7']) !!}
+                
+                @error('cuartel')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+              <div class="form-group mt-2">
+                {!! Form::label('ano_plantacion','Año de plantación:') !!}
+                {!! Form::text('ano_plantacion', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                
+                @error('año_plantacion')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+              <div class="form-group mt-2">
                 <h1 class="text-center">Variedades:</h1>
                  <div class="grid grid-cols-6 gap-y-2">
  
@@ -225,16 +248,9 @@
                  </div>
                  
                </div>
+              
+             
 
-
-              <div class="form-group mt-2">
-                {!! Form::label('antiguedad','Antiguedad en años:') !!}
-                {!! Form::text('antiguedad', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                
-                @error('antiguedad')
-                    <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
               <div class="form-group mt-2">
                 {!! Form::label('hectareas','Cantidad de hectareas:') !!}
                 {!! Form::text('hectareas', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
@@ -243,6 +259,7 @@
                     <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
+              
               <div class="form-group mt-2">
                 {!! Form::label('prod_hectareas','Producción por hectareas en toneladas:') !!}
                 {!! Form::text('prod_hectareas', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
@@ -251,6 +268,7 @@
                     <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
+              
               <div class="form-group mt-2">
                 {!! Form::label('campo_total_prod','Campo total producción:') !!}
                 {!! Form::text('campo_total_prod', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
@@ -291,15 +309,15 @@
                     <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
-              <div class="form-group mt-2">
-                {!! Form::label('ano_plantacion','Año de plantación:') !!}
-                {!! Form::text('ano_plantacion', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                
-                @error('año_plantacion')
-                    <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
+             
 
+
+
+           
+
+
+             
+            
 
               <div class="flex justify-center mt-4">
                 {!! Form::submit('Actualizar', ['class'=>'text-white font-bold mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}

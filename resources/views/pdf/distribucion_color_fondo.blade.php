@@ -46,8 +46,6 @@
 
                              $series[]=['name' =>$name,
                                           'y' => $detalle->porcentaje_muestra];
-
-                               
                  }
              } 
     @endphp
@@ -62,7 +60,7 @@
       @endphp
    @elseif($recepcion->n_especie=='Pears')
       @php
-        
+         $colors=['#abab3b','#DFF95D','#F0E770','#E8DA20'];
       @endphp
    @elseif($recepcion->n_especie=='Membrillos')
       @php
