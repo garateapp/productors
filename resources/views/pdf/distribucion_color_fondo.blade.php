@@ -47,17 +47,7 @@
                              $series[]=['name' =>$name,
                                           'y' => $detalle->porcentaje_muestra];
 
-                                 if ($recepcion->n_especie=='Pears') {
-                                    if ($name=='VERDE') {
-                                        $colors[]='#ABAB3B';
-                                    }elseif ($name=='VERDE CREMA') {
-                                        $colors[]='#DFF95D';
-                                    }elseif($name=='CREMA'){
-                                        $colors[]='#F0E770';
-                                    }elseif($name=='AMARILLO'){
-                                        $colors[]='#E8DA20';
-                                    }
-                                }
+                               
                  }
              } 
     @endphp
