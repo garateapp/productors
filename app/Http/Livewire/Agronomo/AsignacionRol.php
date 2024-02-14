@@ -42,7 +42,7 @@ class AsignacionRol extends Component
                         ->whereHas('roles', function ($query) {
                             $query->where('name', 'Agronomo');
                         })
-                        ->whereNotIn('id', $campos) // Excluir los IDs de usuarios relacionados con CampoStaff
+                        //->whereNotIn('id', $campos) // Excluir los IDs de usuarios relacionados con CampoStaff
                         ->latest('id')
                         ->paginate(3);
             
