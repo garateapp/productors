@@ -34,6 +34,7 @@
          
     @php
         $series=[];
+        $colors=[];
 
          if ($recepcion->calidad->detalles){
 
@@ -46,6 +47,18 @@
 
                              $series[]=['name' =>$name,
                                           'y' => $detalle->porcentaje_muestra];
+
+                                 if ($recepcion->n_especie=='Pears') {
+                                    if ($name=='VERDE') {
+                                        $colors[]='#ABAB3B';
+                                    }elseif ($name=='VERDE CREMA') {
+                                        $colors[]='#DFF95D';
+                                    }elseif($name=='CREMA'){
+                                        $colors[]='#F0E770';
+                                    }elseif($name=='AMARILLO'){
+                                        $colors[]='#E8DA20';
+                                    }
+                                 }
                  }
              } 
     @endphp
@@ -60,7 +73,7 @@
       @endphp
    @elseif($recepcion->n_especie=='Pears')
       @php
-         $colors=['#abab3b','#DFF95D','#F0E770','#E8DA20'];
+        
       @endphp
    @elseif($recepcion->n_especie=='Membrillos')
       @php
