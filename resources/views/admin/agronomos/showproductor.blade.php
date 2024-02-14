@@ -53,12 +53,15 @@
                     <div class="flex items-center justify-between sm:mt-2">
                       <div class="flex items-center">
                         <div class="flex flex-col">
-                          <div class="w-full flex-none text-lg text-gray-200 font-bold leading-none">Formulario {{$user->name}}</div>
+                          <div class="text-gray-200">Ficha productor</div>  
+                          <div class="w-full flex-none text-lg text-gray-200 font-bold leading-none">{{$user->name}}</div>
                           <div class="flex-auto text-gray-400 my-1">
-                            <span class="mr-3 ">Productor</span><span class="mr-3 border-r border-gray-600  max-h-0"></span><span>{{$user->email}}</span>
+                            <span class="mr-3 ">Correo</span><span class="mr-3 border-r border-gray-600  max-h-0"></span><span>{{$user->email}}</span>
                           </div>
                         </div>
                       </div>
+
+                    
                     </div>
                     <div class="flex flex-row items-center">
                       <div class="flex">
@@ -126,7 +129,19 @@
                         </p>
                       </div>
                     </div>
+                  
                   </div>
+                 
+                </div>
+                <div class="grid grid-cols-6 gap-2 mt-6">
+                  @foreach ($user->especies_comercializas()->get() as $especie)
+             
+                    <div class="pr-4 bg-blue-500 p-2 rounded-lg text-center my-auto">
+                      <p class="text-xl font-bold text-white">1/60</p>
+                      <p class="text-sm text-white">Ranking {{$especie->name}}</p>
+                    </div>
+                  @endforeach
+                 
                 </div>
               </div>
             </div>
@@ -141,14 +156,22 @@
               </div>    
               <div class="grid grid-cols-2 gap-x-4">
                 <div class="form-group">
-                    {!! Form::label('email','Email:') !!}
-                    {!! Form::email('email', null, ['class' => 'mt-1 block w-full rounded-lg', 'readonly' => 'readonly']) !!} 
-                  
-                    @error('email')
+                    {!! Form::label('exportadora','Exportadora') !!}
+                    {!! Form::text('exportadora', 'Greenex' , ['class'=>'mt-1 block w-full rounded-lg',  'readonly' => 'readonly' ,  'placeholder'=>'']) !!}
+                    
+                    @error('exportadora')
                         <span class="text-danger">{{$message}}</span>
                     @enderror
                 </div>
                 <div class="form-group">
+                    {!! Form::label('name','Nombre razón social:') !!}
+                    {!! Form::text('name', null , ['class'=>'mt-1 block w-full rounded-lg',  'readonly' => 'readonly' , 'placeholder'=>'']) !!}
+                    
+                    @error('name')
+                        <span class="text-danger">{{$message}}</span>
+                    @enderror
+                </div>
+                <div class="form-group mt-2">
                     {!! Form::label('csg','Csg') !!}
                     {!! Form::text('csg', null , ['class'=>'mt-1 block w-full rounded-lg',  'readonly' => 'readonly' , 'placeholder'=>'']) !!}
                     
@@ -156,26 +179,21 @@
                         <span class="text-danger">{{$message}}</span>
                     @enderror
                 </div>
-              </div>
-              <div class="form-group mt-2">
-                  {!! Form::label('exportadora','Exportadora') !!}
-                  {!! Form::text('exportadora', 'Greenex' , ['class'=>'mt-1 block w-full rounded-lg',  'readonly' => 'readonly' ,  'placeholder'=>'']) !!}
+                <div class="form-group mt-2">
+                  {!! Form::label('predio','Nombre predio') !!}
+                  {!! Form::text('predio', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
                   
-                  @error('exportadora')
+                  @error('predio')
                       <span class="text-danger">{{$message}}</span>
                   @enderror
+                </div>
+               
               </div>
-              <div class="form-group mt-2">
-                {!! Form::label('predio','Predio') !!}
-                {!! Form::text('predio', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                
-                @error('predio')
-                    <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
+             
+              
               <div class="form-group mt-2">
                 {!! Form::label('cuartel','Cuartel') !!}
-                {!! Form::text('cuartel', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                {!! Form::text('cuartel', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'1,2,3,4,5,6,7']) !!}
                 
                 @error('cuartel')
                     <span class="text-danger">{{$message}}</span>
