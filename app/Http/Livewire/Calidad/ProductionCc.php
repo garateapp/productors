@@ -245,7 +245,9 @@ class ProductionCc extends Component
         if($user){
 
             if($user->emnotification==TRUE){
-                Mail::to($user->email)->send(new RecepcionMailable($recepcion));
+                if($user->email){
+                    Mail::to($user->email)->send(new RecepcionMailable($recepcion));
+                }
             }
             
             if($user->telefonos->count()){
