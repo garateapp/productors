@@ -221,7 +221,7 @@
 
                   @foreach ($user->especies_comercializas()->get() as $especie)
                       <div class="flex justify-center">
-                          <button class="py-3 px-3 text-sm focus:outline-none leading-none text-green-700 bg-green-100 rounded">{{$especie->name}}</button>
+                          <div class="py-3 px-3 text-sm focus:outline-none leading-none text-green-700 bg-green-100 rounded">{{$especie->name}}</div>
                       </div>
                   @endforeach
 
