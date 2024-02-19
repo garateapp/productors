@@ -39,7 +39,11 @@ class User extends Authenticatable
         'desecho',
         'exp',
         'profile_photo_path',
-        'merma'
+        'merma',
+        'predio',
+        'comuna',
+        'provincia',
+        'direccion'
     ];
 
     /**
