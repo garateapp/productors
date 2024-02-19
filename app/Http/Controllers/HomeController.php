@@ -1708,6 +1708,7 @@ class HomeController extends Controller
             $rut=null;
             $csg=null;
             $us=null;
+            $predio=null;
             
             $m=1;
             foreach ($user as $item){
