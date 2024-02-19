@@ -179,14 +179,7 @@
                         <span class="text-danger">{{$message}}</span>
                     @enderror
                 </div>
-                <div class="form-group mt-2">
-                  {!! Form::label('antiguedad','Temporadas en greenex:') !!}
-                  {!! Form::text('antiguedad', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                  
-                  @error('antiguedad')
-                      <span class="text-danger">{{$message}}</span>
-                  @enderror
-                </div>
+              
                 <div class="form-group mt-2">
                   {!! Form::label('predio','Nombre predio') !!}
                   {!! Form::text('predio', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
@@ -197,7 +190,14 @@
                 </div>
                
               </div>
-             
+              <div class="form-group mt-2">
+                {!! Form::label('antiguedad','Temporadas en greenex:') !!}
+                {!! Form::text('antiguedad', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                
+                @error('antiguedad')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
               <div class="form-group mt-2">
                 {!! Form::label('comuna','Comuna:') !!}
                 {!! Form::text('comuna', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
