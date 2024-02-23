@@ -222,6 +222,10 @@
                     <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
+
+              <div class="flex justify-end mt-4">
+                {!! Form::submit('Actualizar', ['class'=>'text-white font-bold mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
+              </div>
              
               <div class="form-group mt-2">
                <h1 class="text-center">Especie:</h1>

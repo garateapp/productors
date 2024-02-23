@@ -41,6 +41,7 @@ class User extends Authenticatable
         'profile_photo_path',
         'merma',
         'predio',
+        'antiguedad',
         'comuna',
         'provincia',
         'direccion'
