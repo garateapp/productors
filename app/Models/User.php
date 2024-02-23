@@ -80,14 +80,16 @@ class User extends Authenticatable
     public function telefonos(){
         return $this->hasMany('App\Models\Telefono');
     }
+    
+    public function comercialfruits(){
+        return $this->hasMany('App\Models\Comercialfruit','user_id');
+    }
 
     public function campos(){
         return $this->hasMany('App\Models\CampoStaff','agronomo_id');
     }
 
-    public function comercialfruits(){
-        return $this->hasMany('App\Models\Comercialfruit','user_id');
-    }
+  
 
     public function agronomos(){
         return $this->hasMany('App\Models\CampoStaff','user_id');
