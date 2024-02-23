@@ -335,7 +335,7 @@
                                                 </div>
                                                 <div class="items-center">
                                                     
-                                                    @if ($user->comercialfruits)
+                                                    @if ($user->comercial_fruits)
                                                         
                                                         @foreach ($user->comercial_fruits->get() as $ficha)
                                                             <div class="flex justify-center">
