@@ -334,6 +334,7 @@
                                                     @endforeach
                                                 </div>
                                                 <div class="items-center">
+                                                    {{-- comment
                                                     @if ($user->comercialfruits()->get())
                                                         
                                                         @foreach ($user->comercialfruits()->get() as $ficha)
@@ -342,6 +343,7 @@
                                                             </div>
                                                         @endforeach
                                                     @endif
+                                                     --}}
                                                 </div>
                                             </div>
                                                 

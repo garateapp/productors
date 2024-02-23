@@ -82,7 +82,7 @@ class User extends Authenticatable
     }
     
     public function comercialfruits(){
-        return $this->belongsToMany('App\Models\Comercialfruit');
+        return $this->hasMany('App\Models\Comercialfruit','user_id');
     }
 
     public function campos(){
