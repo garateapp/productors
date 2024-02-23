@@ -256,7 +256,7 @@
              
               {!! Form::model($user->comercialfruits->first()->id, ['route'=>['comercialfruits.update',$user->comercialfruits->first()->id],'method' => 'put', 'autocomplete'=>'off']) !!}    
 
-                  {{$user->comercialfruits->first()->id}}
+                  ID: {{$user->comercialfruits->first()->id}}
                 
                   <div class="form-group mt-2">
                     {!! Form::label('ano_plantacion','Año de plantación:') !!}
@@ -266,7 +266,7 @@
                         <span class="text-danger">{{$message}}</span>
                     @enderror
                   </div>
-                  {{-- comment
+                  {{-- comment  --}}
                   <div class="form-group mt-2">
                     {!! Form::label('cant_hectareas','Cantidad de hectareas:') !!}
                     {!! Form::text('cant_hectareas', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
@@ -301,7 +301,7 @@
                         <span class="text-danger">{{$message}}</span>
                     @enderror
                   </div>
-                  --}}
+                
                   <div class="flex justify-end mt-4">
                     {!! Form::submit('update', ['class'=>'text-white font-bold mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
                   </div>
