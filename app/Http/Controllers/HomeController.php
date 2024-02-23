@@ -31,6 +31,7 @@ use Laravel\Jetstream\Jetstream;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use App\Mail\NotificacionMailable;
 use App\Models\CampoStaff;
+use App\Models\ComercialFruit;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
@@ -1310,12 +1311,20 @@ class HomeController extends Controller
                                 'name'=> $n_especie
                             ]);
 
-                            $user=User::where('name',$n_emisor)->first();
+                            $user=User::where('csg',$Codigo_Sag_emisor)->first();
                             if(!IS_NULL($user)){
                                 if($espec->comercializado->contains($user->id)){
+                                    if($user->comercialfruits->count()>0){
+
+                                    }else{
+                                        ComercialFruit::create(['user_id'=>$user->id,
+                                                        'especie_id'=>$espec->id]);
+                                    }
 
                                 }else{
                                     $espec->comercializado()->attach($user->id);
+                                    ComercialFruit::create(['user_id'=>$user->id,
+                                                        'especie_id'=>$espec->id]);
                                 }
                             }
                             
@@ -1348,12 +1357,21 @@ class HomeController extends Controller
                             $especie=Especie::create([
                             'name'=> $n_especie
                             ]);
-                            $user=User::where('name',$n_emisor)->first();
+                            $user=User::where('csg',$Codigo_Sag_emisor)->first();
+                            
                             if(!IS_NULL($user)){
                                 if($especie->comercializado->contains($user->id)){
+                                    if($user->comercialfruits->count()>0){
+
+                                    }else{
+                                        ComercialFruit::create(['user_id'=>$user->id,
+                                                        'especie_id'=>$especie->id]);
+                                    }
 
                                 }else{
                                     $especie->comercializado()->attach($user->id);
+                                    ComercialFruit::create(['user_id'=>$user->id,
+                                                        'especie_id'=>$especie->id]);
                                 }
                             }
                             $varie=Variedad::where('name',$n_variedad)->first();
@@ -1535,7 +1553,7 @@ class HomeController extends Controller
                 if($m==16){
                     $nota_calidad=$item;
                 }
-               if($m==17){
+                if($m==17){
                     $n_estado=$item;
 
                         $espec=Especie::where('name',$n_especie)->first();
@@ -1544,12 +1562,21 @@ class HomeController extends Controller
                                 'name'=> $n_especie
                             ]);
 
-                            $user=User::where('name',$n_emisor)->first();
+                                $user=User::where('name',$n_emisor)->first();
+
                             if(!IS_NULL($user)){
                                 if($espec->comercializado->contains($user->id)){
+                                    if($user->comercialfruits->count()>0){
+
+                                    }else{
+                                        ComercialFruit::create(['user_id'=>$user->id,
+                                                        'especie_id'=>$espec->id]);
+                                    }
 
                                 }else{
                                     $espec->comercializado()->attach($user->id);
+                                    ComercialFruit::create(['user_id'=>$user->id,
+                                                        'especie_id'=>$espec->id]);
                                 }
                             }
                             
@@ -1585,9 +1612,17 @@ class HomeController extends Controller
                             $user=User::where('name',$n_emisor)->first();
                             if(!IS_NULL($user)){
                                 if($especie->comercializado->contains($user->id)){
+                                    if($user->comercialfruits->count()>0){
+
+                                    }else{
+                                        ComercialFruit::create(['user_id'=>$user->id,
+                                                        'especie_id'=>$especie->id]);
+                                    }
 
                                 }else{
                                     $especie->comercializado()->attach($user->id);
+                                    ComercialFruit::create(['user_id'=>$user->id,
+                                                        'especie_id'=>$especie->id]);
                                 }
                             }
                             $varie=Variedad::where('name',$n_variedad)->first();
@@ -1614,7 +1649,8 @@ class HomeController extends Controller
                             }
                         }
                     
-                        $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->where('temporada','anterior')->first();
+                        $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->where('temporada','actual')->first();
+                        
                         if($cont){
                             
                             $cont->forceFill([
@@ -1633,7 +1669,7 @@ class HomeController extends Controller
                                 'cantidad' => $cantidad,
                                 'peso_neto' => $peso_neto,
                                 'nota_calidad' => $nota_calidad,
-                                'temporada'=>'anterior'
+                                'temporada'=>'actual'
                                 
                             ])->save();
                           /*  if(IS_NULL($cont->calidad)){
@@ -1661,7 +1697,7 @@ class HomeController extends Controller
                                     'peso_neto' => $peso_neto,
                                     'nota_calidad' => $nota_calidad,
                                     'n_estado' => $n_estado,
-                                    'temporada'=>'anterior'
+                                    'temporada'=>'actual'
                                     
                                 ]);
                                 Calidad::create([

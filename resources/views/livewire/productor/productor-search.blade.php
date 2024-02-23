@@ -325,13 +325,22 @@
                                   
                                         <td class="pl-5 py-2">
                                            
-                                                @foreach ($user->especies_comercializas()->get() as $especie)
-                                                    <div class="flex justify-center">
-                                                        <button class="py-3 px-3 text-sm focus:outline-none leading-none text-green-700 bg-green-100 rounded">{{$especie->name}}</button>
-                                                    </div>
-                                                @endforeach
-
-                                           
+                                            <div class="flex items-center">
+                                                <div class="items-center">
+                                                    @foreach ($user->especies_comercializas()->get() as $especie)
+                                                        <div class="flex justify-center">
+                                                            <button class="py-3 px-3 text-sm focus:outline-none leading-none text-green-700 bg-green-100 rounded">{{$especie->name}}</button>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                                <div class="items-center">
+                                                    @foreach ($user->comercialfruits()->get() as $ficha)
+                                                        <div class="flex justify-center">
+                                                            <button class="py-3 px-3 text-sm focus:outline-none leading-none text-green-700 bg-green-100 rounded">{{$ficha->especie->name}}</button>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
                                                 
 
                                         </td>

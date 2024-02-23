@@ -85,6 +85,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\CampoStaff','agronomo_id');
     }
 
+    public function comercialfruits(){
+        return $this->hasMany('App\Models\Comercialfruit','user_id');
+    }
+
     public function agronomos(){
         return $this->hasMany('App\Models\CampoStaff','user_id');
     }
@@ -95,10 +99,6 @@ class User extends Authenticatable
 
     public function especies_comercializas(){
         return $this->belongsToMany('App\Models\Especie');
-    }
-
-    public function comercial_fruits(){
-        return $this->belongsToMany('App\Models\ComercialFruit');
     }
 
     public function variedades_comercializas(){

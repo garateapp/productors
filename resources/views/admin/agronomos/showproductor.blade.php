@@ -226,7 +226,7 @@
               <div class="flex justify-end mt-4">
                 {!! Form::submit('Actualizar', ['class'=>'text-white font-bold mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
               </div>
-             
+            {!! Form::close() !!}
               <div class="form-group mt-2">
                <h1 class="text-center">Especie:</h1>
                 <div class="grid grid-cols-6 gap-y-2">
@@ -240,55 +240,73 @@
                   @endforeach
 
                 </div>
+                <div class="grid grid-cols-6 gap-y-2">
+
+                  @foreach ($user->comercialfruits()->get() as $comercialfruit)
+                    
+                        <div class="flex justify-center">
+                            <span class="cursor-pointer py-3 px-3 text-sm focus:outline-none leading-none text-gray-700 bg-gray-200 rounded">{{$comercialfruit->especie->name}}</span>
+                        </div>
+
+                  @endforeach
+
+                </div>
                 
               </div>
              
+              {!! Form::model($user->comercialfruits->first()->id, ['route'=>['comercialfruits.update',$user->comercialfruits->first()->id],'method' => 'put', 'autocomplete'=>'off']) !!}    
 
-            
-              <div class="form-group mt-2">
-                {!! Form::label('ano_plantacion','Año de plantación:') !!}
-                {!! Form::text('ano_plantacion', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                  {{$user->comercialfruits->first()->id}}
                 
-                @error('año_plantacion')
-                    <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
-              
-              <div class="form-group mt-2">
-                {!! Form::label('hectareas','Cantidad de hectareas:') !!}
-                {!! Form::text('hectareas', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                
-                @error('hectareas')
-                    <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
-              
-              <div class="form-group mt-2">
-                {!! Form::label('prod_hectareas','Producción por hectareas en toneladas:') !!}
-                {!! Form::text('prod_hectareas', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                
-                @error('prod_hectareas')
-                    <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
-              
-              <div class="form-group mt-2">
-                {!! Form::label('campo_total_prod','Campo total producción:') !!}
-                {!! Form::text('campo_total_prod', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                
-                @error('campo_total_prod')
-                    <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
-              <div class="form-group mt-2">
-                {!! Form::label('porcentaje_entrega','Porcentaje de entrega a Greenex:') !!}
-                {!! Form::text('porcentaje_entrega', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                
-                @error('porcentaje_entrega')
-                    <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
+                  <div class="form-group mt-2">
+                    {!! Form::label('ano_plantacion','Año de plantación:') !!}
+                    {!! Form::text('ano_plantacion', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                    
+                    @error('ano_plantacion')
+                        <span class="text-danger">{{$message}}</span>
+                    @enderror
+                  </div>
+                  {{-- comment
+                  <div class="form-group mt-2">
+                    {!! Form::label('cant_hectareas','Cantidad de hectareas:') !!}
+                    {!! Form::text('cant_hectareas', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                    
+                    @error('cant_hectareas')
+                        <span class="text-danger">{{$message}}</span>
+                    @enderror
+                  </div>
+                  
+                  <div class="form-group mt-2">
+                    {!! Form::label('prod_hectareas','Producción por hectareas en toneladas:') !!}
+                    {!! Form::text('prod_hectareas', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                    
+                    @error('prod_hectareas')
+                        <span class="text-danger">{{$message}}</span>
+                    @enderror
+                  </div>
+                  
+                  <div class="form-group mt-2">
+                    {!! Form::label('total_produccion','Campo total producción:') !!}
+                    {!! Form::text('total_produccion', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                    
+                    @error('total_produccion')
+                        <span class="text-danger">{{$message}}</span>
+                    @enderror
+                  </div>
+                  <div class="form-group mt-2">
+                    {!! Form::label('porcentaje_de_entrega','Porcentaje de entrega a Greenex:') !!}
+                    {!! Form::text('porcentaje_de_entrega', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                    
+                    @error('porcentaje_de_entrega')
+                        <span class="text-danger">{{$message}}</span>
+                    @enderror
+                  </div>
+                  --}}
+                  <div class="flex justify-end mt-4">
+                    {!! Form::submit('update', ['class'=>'text-white font-bold mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
+                  </div>
 
+              {!! Form::close() !!}
 
 
               <div class="flex justify-between mt-12">
@@ -305,7 +323,6 @@
               </div>
               <div class="grid grid-cols-2">
                 <div class="form-group mt-2">
-                  {!! Form::label('cuartel','Nombre cuartel:') !!}
                   <div class="w-full max-w-xs">
                     <label for="numero" class="block text-sm font-medium text-gray-700">Selecciona un número del 1 al 7:</label>
                     <select id="numero" name="numero" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
@@ -322,8 +339,8 @@
                 </div>
 
                   <div class="w-full max-w-xs">
-                    <label for="numero" class="block text-sm font-medium text-gray-700">Selecciona un número del 1 al 7:</label>
-                    <select id="numero" name="numero" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                    <label for="variedadadee" class="block text-sm font-medium text-gray-700">Selecciona un número del 1 al 7:</label>
+                    <select id="variedadadee" name="variedadadee" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                       @for($i = 1; $i <= 7; $i++)
                         <option value="{{ $i }}">Variedad {{ $i }}</option>
                       @endfor
@@ -364,7 +381,7 @@
                 {!! Form::submit('Actualizar', ['class'=>'text-white font-bold mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
               </div>
 
-                {!! Form::close() !!}
+            
             </div>
             <div class="grid grid-cols-12 gap-4 hidden">
               <div class="col-span-12 sm:col-span-4">
