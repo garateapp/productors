@@ -19,6 +19,5 @@ class Comercialfruit extends Model
     public function especie(){
         return $this->BelongsTo('App\Models\Especie');
     }
-
     
 }
