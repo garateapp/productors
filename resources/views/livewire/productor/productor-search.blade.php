@@ -334,16 +334,15 @@
                                                     @endforeach
                                                 </div>
                                                 <div class="items-center">
-                                                    {{-- comment
-                                                    @if ($user->comercialfruits()->get())
+                                                    
+                                                    @if ($user->comercialfruits->count())
                                                         
-                                                        @foreach ($user->comercialfruits()->get() as $ficha)
+                                                        @foreach ($user->comercialfruits->get() as $ficha)
                                                             <div class="flex justify-center">
                                                                 <button class="py-3 px-3 text-sm focus:outline-none leading-none text-green-700 bg-green-100 rounded">{{$ficha->especie->name}}</button>
                                                             </div>
                                                         @endforeach
                                                     @endif
-                                                     --}}
                                                 </div>
                                             </div>
                                                 
