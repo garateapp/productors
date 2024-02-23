@@ -242,7 +242,7 @@
                 </div>
                 <div class="grid grid-cols-6 gap-y-2">
 
-                  @foreach ($user->comercialfruits()->get() as $comercialfruit)
+                  @foreach ($user->comercial_fruits()->get() as $comercialfruit)
                     
                         <div class="flex justify-center">
                             <span class="cursor-pointer py-3 px-3 text-sm focus:outline-none leading-none text-gray-700 bg-gray-200 rounded">{{$comercialfruit->especie->name}}</span>
