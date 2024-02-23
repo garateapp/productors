@@ -1709,6 +1709,9 @@ class HomeController extends Controller
             $csg=null;
             $us=null;
             $predio=null;
+            $comuna=null;
+            $provincia=null;
+            $direccion=null;
             
             $m=1;
             foreach ($user as $item){
@@ -1728,6 +1731,21 @@ class HomeController extends Controller
                 if($m==2){
                     $csg=$item;
                 }
+                
+
+                if($m==8){
+                    $predio=$item;
+                }
+                if($m==10){
+                    $comuna=$item;
+                }
+                if($m==12){
+                    $provincia=$item;
+                }
+                if($m==9){
+                    $direccion=$item;
+                }
+               
                
                 if($m==14){
                     $cont=User::where('csg',$csg)->first();
@@ -1738,7 +1756,11 @@ class HomeController extends Controller
                             'idprod' => $id,
                             'csg' => $csg,
                             'user' => 'gre-'.str_replace($search, '', $us),
-                            'rut' => $rut
+                            'rut' => $rut,
+                            'predio'=>$predio,
+                            'comuna'=>$comuna,
+                            'provincia'=>$provincia,
+                            'direccion'=>$direccion
                         ])->save();
                         $roleid=Role::where('name','Productor')->first();
                         $cont->roles()->sync([$roleid->id]);
@@ -1750,6 +1772,10 @@ class HomeController extends Controller
                             'user' => 'gre-'.str_replace($search, '', $us),
                             'rut' => $rut,
                             'password' => Hash::make('gre1234'),
+                            'predio'=>$predio,
+                            'comuna'=>$comuna,
+                            'provincia'=>$provincia,
+                            'direccion'=>$direccion,
                         ]);
                         $roleid=Role::where('name','Productor')->first();
                         $user->roles()->sync([$roleid->id]);

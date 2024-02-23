@@ -96,6 +96,10 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Especie');
     }
 
+    public function comercial_fruits(){
+        return $this->belongsToMany('App\Models\ComercialFruit');
+    }
+
     public function variedades_comercializas(){
         return $this->belongsToMany('App\Models\Variedad');
     }

@@ -228,9 +228,11 @@
                 <div class="grid grid-cols-6 gap-y-2">
 
                   @foreach ($user->especies_comercializas()->get() as $especie)
-                      <div class="flex justify-center">
-                          <button class="py-3 px-3 text-sm focus:outline-none leading-none text-green-700 bg-green-100 rounded">{{$especie->name}}</button>
-                      </div>
+                    
+                        <div class="flex justify-center">
+                            <span class="cursor-pointer py-3 px-3 text-sm focus:outline-none leading-none text-gray-700 bg-gray-200 rounded">{{$especie->name}}</span>
+                        </div>
+
                   @endforeach
 
                 </div>
@@ -282,6 +284,7 @@
                     <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
+
 
 
               <div class="flex justify-between mt-12">
