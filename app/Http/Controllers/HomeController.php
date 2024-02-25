@@ -31,7 +31,7 @@ use Laravel\Jetstream\Jetstream;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use App\Mail\NotificacionMailable;
 use App\Models\CampoStaff;
-use App\Models\ComercialFruit;
+use App\Models\Ficha;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
@@ -1314,16 +1314,16 @@ class HomeController extends Controller
                             $user=User::where('csg',$Codigo_Sag_emisor)->first();
                             if(!IS_NULL($user)){
                                 if($espec->comercializado->contains($user->id)){
-                                    if($user->comercialfruits->count()>0){
+                                    if($user->fichas->pluck('especie_id')->contains($espec->id)){
 
                                     }else{
-                                        ComercialFruit::create(['user_id'=>$user->id,
+                                        Ficha::create(['user_id'=>$user->id,
                                                         'especie_id'=>$espec->id]);
                                     }
 
                                 }else{
                                     $espec->comercializado()->attach($user->id);
-                                    ComercialFruit::create(['user_id'=>$user->id,
+                                    Ficha::create(['user_id'=>$user->id,
                                                         'especie_id'=>$espec->id]);
                                 }
                             }
@@ -1361,16 +1361,16 @@ class HomeController extends Controller
                             
                             if(!IS_NULL($user)){
                                 if($especie->comercializado->contains($user->id)){
-                                    if($user->comercialfruits->count()>0){
+                                    if($user->fichas->pluck('especie_id')->contains($espec->id)){
 
                                     }else{
-                                        ComercialFruit::create(['user_id'=>$user->id,
+                                        Ficha::create(['user_id'=>$user->id,
                                                         'especie_id'=>$especie->id]);
                                     }
 
                                 }else{
                                     $especie->comercializado()->attach($user->id);
-                                    ComercialFruit::create(['user_id'=>$user->id,
+                                    Ficha::create(['user_id'=>$user->id,
                                                         'especie_id'=>$especie->id]);
                                 }
                             }
@@ -1566,16 +1566,16 @@ class HomeController extends Controller
 
                             if(!IS_NULL($user)){
                                 if($espec->comercializado->contains($user->id)){
-                                    if($user->comercialfruits->count()>0){
+                                    if($user->fichas->pluck('especie_id')->contains($espec->id)){
 
                                     }else{
-                                        ComercialFruit::create(['user_id'=>$user->id,
+                                        Ficha::create(['user_id'=>$user->id,
                                                         'especie_id'=>$espec->id]);
                                     }
 
                                 }else{
                                     $espec->comercializado()->attach($user->id);
-                                    ComercialFruit::create(['user_id'=>$user->id,
+                                    Ficha::create(['user_id'=>$user->id,
                                                         'especie_id'=>$espec->id]);
                                 }
                             }
@@ -1612,16 +1612,16 @@ class HomeController extends Controller
                             $user=User::where('name',$n_emisor)->first();
                             if(!IS_NULL($user)){
                                 if($especie->comercializado->contains($user->id)){
-                                    if($user->comercialfruits->count()>0){
+                                    if($user->fichas->pluck('especie_id')->contains($especie->id)){
 
                                     }else{
-                                        ComercialFruit::create(['user_id'=>$user->id,
+                                        Ficha::create(['user_id'=>$user->id,
                                                         'especie_id'=>$especie->id]);
                                     }
 
                                 }else{
                                     $especie->comercializado()->attach($user->id);
-                                    ComercialFruit::create(['user_id'=>$user->id,
+                                    Ficha::create(['user_id'=>$user->id,
                                                         'especie_id'=>$especie->id]);
                                 }
                             }

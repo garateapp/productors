@@ -335,9 +335,9 @@
                                                 </div>
                                                 <div class="items-center">
                                                     
-                                                    @if ($user->comercial_fruits)
+                                                    @if ($user->fichas)
                                                         
-                                                        @foreach ($user->comercial_fruits->get() as $ficha)
+                                                        @foreach ($user->fichas as $ficha)
                                                             <div class="flex justify-center">
                                                                 <button class="py-3 px-3 text-sm focus:outline-none leading-none text-green-700 bg-green-100 rounded">{{$ficha->especie->name}}</button>
                                                             </div>

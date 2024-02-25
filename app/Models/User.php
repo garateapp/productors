@@ -81,8 +81,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Telefono');
     }
     
-    public function comercial_fruits(){
-        return $this->hasMany('App\Models\Comercialfruit','user_id');
+    public function fichas(){
+        return $this->hasMany('App\Models\Ficha','user_id');
     }
 
     public function campos(){

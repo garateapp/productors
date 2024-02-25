@@ -242,10 +242,10 @@
                 </div>
                 <div class="grid grid-cols-6 gap-y-2">
 
-                  @foreach ($user->comercial_fruits()->get() as $comercialfruit)
+                  @foreach ($user->fichas()->get() as $ficha)
                     
                         <div class="flex justify-center">
-                            <span class="cursor-pointer py-3 px-3 text-sm focus:outline-none leading-none text-gray-700 bg-gray-200 rounded">{{$comercialfruit->especie->name}}</span>
+                            <span class="cursor-pointer py-3 px-3 text-sm focus:outline-none leading-none text-gray-700 bg-gray-200 rounded">{{$ficha->especie->name}}</span>
                         </div>
 
                   @endforeach
@@ -253,10 +253,11 @@
                 </div>
                 
               </div>
-             
-              {!! Form::model($user->comercialfruits->first()->id, ['route'=>['comercialfruits.update',$user->comercialfruits->first()->id],'method' => 'put', 'autocomplete'=>'off']) !!}    
+             @if ($user->fichas->count()>0)
+                 
+              {!! Form::model($user->fichas->first()->id, ['route'=>['fichas.update',$user->fichas->first()->id],'method' => 'put', 'autocomplete'=>'off']) !!}    
 
-                  ID: {{$user->comercialfruits->first()->id}}
+                  ID: {{$user->fichas->first()->id}}
                 
                   <div class="form-group mt-2">
                     {!! Form::label('ano_plantacion','Año de plantación:') !!}
@@ -308,6 +309,7 @@
 
               {!! Form::close() !!}
 
+            @endif
 
               <div class="flex justify-between mt-12">
                 <div>

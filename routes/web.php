@@ -3,6 +3,7 @@
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\CampoStaffController;
 use App\Http\Controllers\ComercialFruitController;
+use App\Http\Controllers\FichaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MensajeController;
 use App\Http\Controllers\MensajeHistController;
@@ -188,6 +189,8 @@ Route::resource('ticket', TicketController::class)->names('tickets');
 
 Route::resource('mensaje_hist', MensajeHistController::class)->names('mensaje_hists');
 
-Route::resource('comercial_fruits', ComercialFruitController::class)->names('comercialfruits');
+Route::resource('comercial_fruit', ComercialFruitController::class)->names('comercialfruits');
+
+Route::resource('ficha', FichaController::class)->names('fichas');
 
 Route::get('download/mensaje/{mensaje_hist}.pdf', [MensajeHistController::class,'download'])->name('download.mensaje_hist');
