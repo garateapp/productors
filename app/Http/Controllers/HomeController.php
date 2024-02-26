@@ -1649,7 +1649,7 @@ class HomeController extends Controller
                             }
                         }
                     
-                        $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->where('temporada','actual')->first();
+                        $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->where('temporada','anterior')->first();
                         
                         if($cont){
                             
@@ -1669,7 +1669,7 @@ class HomeController extends Controller
                                 'cantidad' => $cantidad,
                                 'peso_neto' => $peso_neto,
                                 'nota_calidad' => $nota_calidad,
-                                'temporada'=>'actual'
+                                'temporada'=>'anterior'
                                 
                             ])->save();
                           /*  if(IS_NULL($cont->calidad)){
@@ -1697,7 +1697,7 @@ class HomeController extends Controller
                                     'peso_neto' => $peso_neto,
                                     'nota_calidad' => $nota_calidad,
                                     'n_estado' => $n_estado,
-                                    'temporada'=>'actual'
+                                    'temporada'=>'anterior'
                                     
                                 ]);
                                 Calidad::create([
