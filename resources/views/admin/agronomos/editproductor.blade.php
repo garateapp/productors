@@ -61,6 +61,13 @@
                         </div>
                       </div>
 
+                  <div class="">
+                    <div class="bg-green-500 p-2 rounded-lg text-center my-auto text-white mb-2">
+                      <h2 class="text-lg font-bold">Contrato Firmado</h2>
+                    </div>
+                   
+                    
+                  </div>
                     
                     </div>
                     <div class="flex flex-row items-center">
