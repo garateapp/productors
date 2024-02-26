@@ -233,37 +233,40 @@
               @endphp
         
               <div class="form-group mt-2"  x-data="setup()">
-               <h1 class="text-center">Especie:</h1>
-                <div class="grid grid-cols-6 gap-y-2 hidden">
-
-                  @foreach ($user->especies_comercializas()->get() as $especie)
-                    
-                        <div class="flex justify-center">
-                            <span class="cursor-pointer py-3 px-3 text-sm focus:outline-none leading-none text-gray-700 bg-gray-200 rounded">{{$especie->name}}</span>
-                        </div>
-
-                  @endforeach
-
-                </div>
-                <div class="grid grid-cols-6 gap-y-2 mt-2">
-                  @php
-                      $n=0;
-                  @endphp
-                  @foreach ($user->fichas()->get() as $ficha)
-                       
-                        <div class="flex justify-center" @click="activeTab = {{$n}}">
-                            <span  class="cursor-pointer py-3 px-3 text-sm focus:outline-none leading-none rounded" :class="activeTab==={{$n}} ? ' @if(!IS_NULL($ficha->ano_plantacion) && !IS_NULL($ficha->cant_hectareas) && !IS_NULL($ficha->prod_hectareas) && !IS_NULL($ficha->total_produccion) && !IS_NULL($ficha->porcentaje_de_entrega)) text-white bg-green-700 @else text-white bg-gray-500 @endif' : ' @if(!IS_NULL($ficha->ano_plantacion) && !IS_NULL($ficha->cant_hectareas) && !IS_NULL($ficha->prod_hectareas) && !IS_NULL($ficha->total_produccion) && !IS_NULL($ficha->porcentaje_de_entrega)) text-gray-700 bg-green-200 @else text-gray-700 bg-yellow-200 @endif'" >{{$ficha->especie->name}}</span>
-                        </div>
-
-                        @php
-                            $espec[]=$ficha->especie->name;
-                            $n+=1;
-                        @endphp
-
-                  @endforeach
-
-                </div>
                 
+                <section id="especies">  
+                <h1 class="text-center">Especie:</h1>
+                  <div class="grid grid-cols-6 gap-y-2 hidden">
+
+                    @foreach ($user->especies_comercializas()->get() as $especie)
+                      
+                          <div class="flex justify-center">
+                              <span class="cursor-pointer py-3 px-3 text-sm focus:outline-none leading-none text-gray-700 bg-gray-200 rounded">{{$especie->name}}</span>
+                          </div>
+
+                    @endforeach
+
+                  </div>
+
+                  <div class="grid grid-cols-6 gap-y-2 mt-2">
+                    @php
+                        $n=0;
+                    @endphp
+                    @foreach ($user->fichas()->get() as $ficha)
+                        
+                          <div class="flex justify-center" @click="activeTab = {{$n}}">
+                              <span  class="cursor-pointer py-3 px-3 text-sm focus:outline-none leading-none rounded" :class="activeTab==={{$n}} ? ' @if(!IS_NULL($ficha->ano_plantacion) && !IS_NULL($ficha->cant_hectareas) && !IS_NULL($ficha->prod_hectareas) && !IS_NULL($ficha->total_produccion) && !IS_NULL($ficha->porcentaje_de_entrega)) text-white bg-green-700 @else text-white bg-gray-500 @endif' : ' @if(!IS_NULL($ficha->ano_plantacion) && !IS_NULL($ficha->cant_hectareas) && !IS_NULL($ficha->prod_hectareas) && !IS_NULL($ficha->total_produccion) && !IS_NULL($ficha->porcentaje_de_entrega)) text-gray-700 bg-green-200 @else text-gray-700 bg-yellow-200 @endif'" >{{$ficha->especie->name}}</span>
+                          </div>
+
+                          @php
+                              $espec[]=$ficha->especie->name;
+                              $n+=1;
+                          @endphp
+
+                    @endforeach
+
+                  </div>
+                </section>
                 <ul class="flex justify-center items-center mb-6 mt-2 hidden">
                   <template x-for="(tab, index) in tabs" :key="index">
                      <li class="cursor-pointer py-3 px-4 rounded transition" :class="activeTab===index ? 'bg-red-500 text-white' : ' text-gray-500'" @click="activeTab = index"
@@ -349,6 +352,12 @@
                           $start+=1;
                       @endphp
                   @endforeach
+
+                  @if ($start==$user->fichas->count())
+                     @php
+                         $start=0;
+                     @endphp 
+                  @endif
                 
                 <script>
                   var espec = <?php echo json_encode($espec) ?>;
