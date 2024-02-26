@@ -241,6 +241,17 @@
                           </div>
                         </div>
                       </div>
+                      <div class="grid grid-cols-6 gap-y-2 mt-2">
+                        @foreach ($campo->user->fichas()->get() as $ficha)
+                             
+                              <div class="flex justify-center">
+                                  <span  class="cursor-pointer py-3 px-3 text-sm focus:outline-none leading-none rounded @if(!IS_NULL($ficha->ano_plantacion) && !IS_NULL($ficha->cant_hectareas) && !IS_NULL($ficha->prod_hectareas) && !IS_NULL($ficha->total_produccion) && !IS_NULL($ficha->porcentaje_de_entrega)) text-gray-700 bg-green-200 @else text-gray-700 bg-yellow-200 @endif" >{{$ficha->especie->name}}</span>
+                              </div>
+      
+      
+                        @endforeach
+      
+                      </div>
                     </div>
                   </a>
                 @endforeach
