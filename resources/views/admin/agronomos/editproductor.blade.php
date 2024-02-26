@@ -230,6 +230,41 @@
                   @enderror
                 </div>
 
+                @php
+                    $opcionesprograma = [
+                        'SIEMPRE' => 'SIEMPRE',
+                        'A VECES' => 'A VECES',
+                        'NUNCA' => 'NUNCA',
+                        // Agrega más opciones según sea necesario
+                    ];
+
+                @endphp
+
+                <div class="form-group mt-2">
+                  {!! Form::label('fitosanitario','Cumplimiento programa fitusanitario:') !!}
+                  {!! Form::select('fitosanitario', $opcionesprograma, null, ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'¿Cumple con el programa fitosanitario?']) !!}
+   
+                  @error('fitosanitario')
+                      <span class="text-danger">{{$message}}</span>
+                  @enderror
+                </div>
+                @php
+                    $opciones = [
+                        'SI' => 'SI',
+                        'NO' => 'NO',
+                        // Agrega más opciones según sea necesario
+                    ];
+
+                @endphp
+                <div class="form-group mt-2">
+                  {!! Form::label('certificaciones','Certificaciones:') !!}
+                  {!! Form::select('certificaciones', $opciones, null, ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'¿Posee alguna certificación?']) !!}
+ 
+                  @error('certificaciones')
+                      <span class="text-danger">{{$message}}</span>
+                  @enderror
+                </div>
+
                 <div class="flex justify-end mt-4">
                   {!! Form::submit('Actualizar', ['class'=>'text-white font-bold mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
                 </div>
@@ -335,6 +370,8 @@
                                 <span class="text-danger">{{$message}}</span>
                             @enderror
                           </div>
+
+                         
                         
                           <div class="flex justify-end mt-4">
                             {!! Form::submit('update', ['class'=>'text-white font-bold mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}

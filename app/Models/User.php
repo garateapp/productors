@@ -44,7 +44,9 @@ class User extends Authenticatable
         'antiguedad',
         'comuna',
         'provincia',
-        'direccion'
+        'direccion',
+        'fitosanitario',
+        'certificaciones'
     ];
 
     /**
