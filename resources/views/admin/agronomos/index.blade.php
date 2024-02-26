@@ -121,7 +121,7 @@
                             </td>
                         
                             <td class="text-center pr-10">
-                              <a href="{{Route('agronomo.show',$user)}}">
+                              <a href="{{Route('productor.index',$user)}}">
                                 <p class="text-base font-medium  text-blue-500 cursor-pointer">
                                     Detalle
                                 </p>

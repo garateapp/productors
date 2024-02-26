@@ -175,11 +175,13 @@ Route::get('user/create', [HomeController::class,'user_create'])->name('user.cre
 
 Route::get('agronomos', [HomeController::class,'listado_agronomos'])->name('agronomos.index');
 
-Route::get('agronomo/{user}', [HomeController::class,'agronomo_show'])->name('agronomo.show');
 
-Route::get('csgs/productor/{user}', [HomeController::class,'productor_index'])->name('productor.index');
+Route::get('agronomo/{user}', [HomeController::class,'productor_index'])->name('productor.index');
 
-Route::get('formulario/productor/{user}', [HomeController::class,'productor_show'])->name('productor.show');
+Route::get('csgs/productor/{user}', [HomeController::class,'agronomo_show'])->name('agronomo.show');
+
+
+Route::get('formulario/productor/{user}', [HomeController::class,'productor_edit'])->name('productor.edit');
 
 Route::post('user/admin/store', [HomeController::class,'user_store'])->name('user.store');
 

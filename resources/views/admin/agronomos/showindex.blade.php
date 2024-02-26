@@ -201,63 +201,58 @@
                 LISTADO DE CAMPOS
                 </h1>
               <!--elements-->
-              <div class="flex flex-col space-y-4">
-                @foreach ($campos as $campo)
-                  <a href="{{Route('productor.edit',$campo->user)}}" target="_blank">
-                    <div class="flex flex-col p-4 bg-gray-800 border-gray-800 shadow-md hover:shodow-lg rounded-2xl cursor-pointer transition ease-in duration-500  transform hover:scale-105">
-                      <div class="flex items-center justify-between">
-                        <div class="flex items-center mr-auto">
-                          <div class="inline-flex w-12 h-12"><img src="https://tailwindcomponents.com/storage/avatars/njkIbPhyZCftc4g9XbMWwVsa7aGVPajYLRXhEeoo.jpg" alt="aji" class=" relative p-1 w-12 h-12 object-cover rounded-2xl"><span class="absolute w-12 h-12 inline-flex border-2 rounded-2xl border-gray-600 opacity-75"></span>
-                            <span></span>
+      
+
+                @foreach ($uniqueUsers as $user)
+                  @if ($campos2->contains($user->rut))
+                    <a href="{{Route('agronomo.show',$user)}}" target="_blank">
+                      <div class="flex flex-col p-4 bg-gray-800 border-gray-800 shadow-md hover:shodow-lg rounded-2xl cursor-pointer transition ease-in duration-500  transform hover:scale-105">
+                        <div class="flex items-center justify-between">
+                          <div class="flex items-center mr-auto">
+                            <div class="inline-flex w-12 h-12"><img src="https://tailwindcomponents.com/storage/avatars/njkIbPhyZCftc4g9XbMWwVsa7aGVPajYLRXhEeoo.jpg" alt="aji" class=" relative p-1 w-12 h-12 object-cover rounded-2xl"><span class="absolute w-12 h-12 inline-flex border-2 rounded-2xl border-gray-600 opacity-75"></span>
+                              <span></span>
+                            </div>
+            
+                            <div class="flex flex-col ml-3 min-w-0">
+                              <div class="font-medium leading-none text-gray-100">{{$user->name}}-{{$user->rut}}</div>
+                              <p class="text-sm text-gray-500 leading-none mt-1 truncate hidden">- DATE -</p>
+                            </div>
                           </div>
-          
                           <div class="flex flex-col ml-3 min-w-0">
-                            <div class="font-medium leading-none text-gray-100">{{$campo->user->name}}</div>
-                            <p class="text-sm text-gray-500 leading-none mt-1 truncate">{{$campo->created_at}}</p>
-                          </div>
-                        </div>
-                        <div class="flex flex-col ml-3 min-w-0">
-                          <div class="flex">
-                            <h5 class="flex items-center font-medium text-gray-300 mr-2">
-                              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 8h6m-5 0a3 3 0 110 6H9l3 3m-3-6h6m6 1a9 9 0 11-18 0 9 9 0 0118 0z" />
-                              </svg> 0 / 17 Datos Completados
-                            </h5>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                          
-                            <form action="{{route('campostaffs.destroy',$campo)}}" method="POST">
-                              @csrf
-                              @method('delete')
-                            <button>
-                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-red-400 hover:text-red-800 ml-2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                            <div class="flex">
+                              <h5 class="flex items-center font-medium text-gray-300 mr-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 8h6m-5 0a3 3 0 110 6H9l3 3m-3-6h6m6 1a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg> 0 / 17 Datos Completados
+                              </h5>
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                               </svg>
-                            </button>
-                          </form>
-                          
                             
+                            
+                            
+                              
+                            </div>
                           </div>
                         </div>
+                        <div class="grid grid-cols-6 gap-y-2 mt-2 hidden">
+                          @foreach ($campos as $campo)
+                              
+                                <div class="flex justify-center">
+                                    <span  class="cursor-pointer py-3 px-3 text-sm focus:outline-none leading-none rounded  text-gray-700 bg-yellow-200" >Csg: {{$campo->user->csg}}</span>
+                                </div>
+        
+        
+                          @endforeach
+        
+                        </div>
                       </div>
-                      <div class="grid grid-cols-6 gap-y-2 mt-2">
-                        @foreach ($campo->user->fichas()->get() as $ficha)
-                             
-                              <div class="flex justify-center">
-                                  <span  class="cursor-pointer py-3 px-3 text-sm focus:outline-none leading-none rounded @if(!IS_NULL($ficha->ano_plantacion) && !IS_NULL($ficha->cant_hectareas) && !IS_NULL($ficha->prod_hectareas) && !IS_NULL($ficha->total_produccion) && !IS_NULL($ficha->porcentaje_de_entrega)) text-gray-700 bg-green-200 @else text-gray-700 bg-yellow-200 @endif" >{{$ficha->especie->name}}</span>
-                              </div>
-      
-      
-                        @endforeach
-      
-                      </div>
-                    </div>
-                  </a>
+                    </a>
+
+                  @endif
                 @endforeach
 
-              
-              </div>
+             
               
             </div>
              

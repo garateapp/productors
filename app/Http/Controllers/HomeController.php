@@ -1046,15 +1046,44 @@ class HomeController extends Controller
 
     public function agronomo_show(User $user) {
 
-        $campos=CampoStaff::where('agronomo_id',$user->id)->get();
+        $campos=CampoStaff::where('campo_rut',$user->rut)->get();
         
         return view('admin.agronomos.show',compact('user','campos'));
     }
 
-    public function productor_show(User $user) {
+    public function productor_index(User $user) {
+        $campos=CampoStaff::all();
+        foreach ($campos as $campo){
+            if(IS_NULL($campo->campo_rut)){
+                $campo->update(['campo_rut'=>$campo->user->rut]);
+            }
+        }
         
-        return view('admin.agronomos.showproductor',compact('user'));
+
+        $campos=CampoStaff::where('agronomo_id',$user->id)->get();
+
+        
+
+        $campos2=CampoStaff::where('agronomo_id',$user->id)->pluck('campo_rut');
+
+        $uniqueUsers = User::select('*')
+                    ->whereIn('id', function ($query) {
+                        $query->selectRaw('MIN(id)')
+                              ->from('users')
+                              ->groupBy('rut');
+                    })
+                    ->get();
+
+        
+        return view('admin.agronomos.showindex',compact('user','campos','campos2','uniqueUsers'));
     }
+
+    public function productor_edit(User $user) {
+        
+        return view('admin.agronomos.editproductor',compact('user'));
+    }
+
+   
 
     public function user_store(Request $request) {
 
