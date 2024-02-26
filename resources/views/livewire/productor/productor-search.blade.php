@@ -326,7 +326,7 @@
                                         <td class="pl-5 py-2">
                                            
                                             <div class="flex items-center">
-                                                <div class="items-center">
+                                                <div class="items-center hidden">
                                                     @foreach ($user->especies_comercializas()->get() as $especie)
                                                         <div class="flex justify-center">
                                                             <button class="py-3 px-3 text-sm focus:outline-none leading-none text-green-700 bg-green-100 rounded">{{$especie->name}}</button>
