@@ -52,7 +52,8 @@
                 <th>Nombre</th>
                 <th>Email</th>
                 <th>Nro<br>Productores<br>Asignados</th>
-                <th>Listado</th>
+                {{-- comment 
+                <th>Listado</th>--}}
                 <th>Nro<br>Productores<br>Finalizados</th>
                 <th>Nro<br>Productores<br>Pendiente</th>
                 <th class="relative px-6 py-3">
@@ -75,7 +76,7 @@
                     
                       <tr class="h-16 border border-gray-100 rounded">
                          
-                            <td class="text-center">
+                            <td class="text-left">
                                <p class="text-base font-medium  text-gray-700">
                                         {{$user->name}}
                                </p>
@@ -98,15 +99,17 @@
                             </p>
                               
                             </td>
-                            <td class="text-center">
+                         
                               {{-- comment 
+                                   <td class="text-center">
                               @foreach ($uniqueUsers as $item)
                                 @if ($campos2->where('agronomo_id',$user->id)->pluck('campo_rut')->contains($item->rut))
                                     {{$item->name}}<br>
                                 @endif
                               @endforeach
+                             </td>
                               --}}
-                            </td>
+                           
 
                             <td class="text-center">
                                 <p class="text-base font-medium  text-gray-700">
