@@ -241,7 +241,7 @@
                 @endphp
 
                 <div class="form-group mt-2">
-                  {!! Form::label('fitosanitario','Cumplimiento programa fitusanitario:') !!}
+                  {!! Form::label('fitosanitario','Cumplimiento programa fitosanitario:') !!}
                   {!! Form::select('fitosanitario', $opcionesprograma, null, ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'¿Cumple con el programa fitosanitario?']) !!}
    
                   @error('fitosanitario')
