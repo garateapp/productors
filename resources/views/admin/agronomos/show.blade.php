@@ -207,8 +207,7 @@
                 </div>
               </div>
 
-                @livewire('agronomo.asignacion-rol',['type'=>'campos','user_id'=>$user->id])
-
+             
               <h1 class="text-center mt-6 font-bold mb-2">
                 LISTADO DE CAMPOS
                 </h1>
