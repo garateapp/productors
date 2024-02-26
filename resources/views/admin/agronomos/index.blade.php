@@ -51,7 +51,7 @@
           
                 <th>Nombre</th>
                 <th>Email</th>
-                <th>Nro<br>Productores<br>Asignados</th>
+                <th>Nro<br>Prod.<br>Asignados</th>
                 {{-- comment 
                 <th>Listado</th>--}}
                 <th>Nro<br>Productores<br>Finalizados</th>
