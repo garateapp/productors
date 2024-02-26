@@ -164,7 +164,7 @@
                 <div class="grid grid-cols-2 gap-x-4">
                   <div class="form-group">
                       {!! Form::label('exportadora','Exportadora') !!}
-                      {!! Form::text('exportadora', 'Greenex' , ['class'=>'mt-1 block w-full rounded-lg',  'readonly' => 'readonly' ,  'placeholder'=>'']) !!}
+                      {!! Form::text('exportadora', 'Greenex SPA' , ['class'=>'mt-1 block w-full rounded-lg',  'readonly' => 'readonly' ,  'placeholder'=>'']) !!}
                       
                       @error('exportadora')
                           <span class="text-danger">{{$message}}</span>
