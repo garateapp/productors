@@ -150,86 +150,91 @@
               
               {!! Form::model($user, ['route'=>['productor.users.update',$user],'method' => 'put', 'autocomplete'=>'off']) !!}    
 
-              <div>
-              
+                <div>
+                
 
-              </div>    
-              <div class="grid grid-cols-2 gap-x-4">
-                <div class="form-group">
-                    {!! Form::label('exportadora','Exportadora') !!}
-                    {!! Form::text('exportadora', 'Greenex' , ['class'=>'mt-1 block w-full rounded-lg',  'readonly' => 'readonly' ,  'placeholder'=>'']) !!}
+                </div>    
+                <div class="grid grid-cols-2 gap-x-4">
+                  <div class="form-group">
+                      {!! Form::label('exportadora','Exportadora') !!}
+                      {!! Form::text('exportadora', 'Greenex' , ['class'=>'mt-1 block w-full rounded-lg',  'readonly' => 'readonly' ,  'placeholder'=>'']) !!}
+                      
+                      @error('exportadora')
+                          <span class="text-danger">{{$message}}</span>
+                      @enderror
+                  </div>
+                  <div class="form-group">
+                      {!! Form::label('name','Nombre razón social:') !!}
+                      {!! Form::text('name', null , ['class'=>'mt-1 block w-full rounded-lg',  'readonly' => 'readonly' , 'placeholder'=>'']) !!}
+                      
+                      @error('name')
+                          <span class="text-danger">{{$message}}</span>
+                      @enderror
+                  </div>
+                  <div class="form-group mt-2">
+                      {!! Form::label('csg','Csg') !!}
+                      {!! Form::text('csg', null , ['class'=>'mt-1 block w-full rounded-lg',  'readonly' => 'readonly' , 'placeholder'=>'']) !!}
+                      
+                      @error('csg')
+                          <span class="text-danger">{{$message}}</span>
+                      @enderror
+                  </div>
+                
+                  <div class="form-group mt-2">
+                    {!! Form::label('predio','Nombre predio') !!}
+                    {!! Form::text('predio', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
                     
-                    @error('exportadora')
+                    @error('predio')
                         <span class="text-danger">{{$message}}</span>
                     @enderror
-                </div>
-                <div class="form-group">
-                    {!! Form::label('name','Nombre razón social:') !!}
-                    {!! Form::text('name', null , ['class'=>'mt-1 block w-full rounded-lg',  'readonly' => 'readonly' , 'placeholder'=>'']) !!}
-                    
-                    @error('name')
-                        <span class="text-danger">{{$message}}</span>
-                    @enderror
+                  </div>
+                
                 </div>
                 <div class="form-group mt-2">
-                    {!! Form::label('csg','Csg') !!}
-                    {!! Form::text('csg', null , ['class'=>'mt-1 block w-full rounded-lg',  'readonly' => 'readonly' , 'placeholder'=>'']) !!}
-                    
-                    @error('csg')
-                        <span class="text-danger">{{$message}}</span>
-                    @enderror
-                </div>
-              
-                <div class="form-group mt-2">
-                  {!! Form::label('predio','Nombre predio') !!}
-                  {!! Form::text('predio', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                  {!! Form::label('antiguedad','Temporadas en greenex:') !!}
+                  {!! Form::text('antiguedad', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
                   
-                  @error('predio')
+                  @error('antiguedad')
                       <span class="text-danger">{{$message}}</span>
                   @enderror
                 </div>
-               
-              </div>
-              <div class="form-group mt-2">
-                {!! Form::label('antiguedad','Temporadas en greenex:') !!}
-                {!! Form::text('antiguedad', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                
-                @error('antiguedad')
-                    <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
-              <div class="form-group mt-2">
-                {!! Form::label('comuna','Comuna:') !!}
-                {!! Form::text('comuna', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                
-                @error('comuna')
-                    <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
-              <div class="form-group mt-2">
-                {!! Form::label('provincia','Provincia:') !!}
-                {!! Form::text('provincia', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                
-                @error('provincia')
-                    <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
-              <div class="form-group mt-2">
-                {!! Form::label('direccion','Dirección:') !!}
-                {!! Form::text('direccion', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                
-                @error('direccion')
-                    <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
+                <div class="form-group mt-2">
+                  {!! Form::label('comuna','Comuna:') !!}
+                  {!! Form::text('comuna', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                  
+                  @error('comuna')
+                      <span class="text-danger">{{$message}}</span>
+                  @enderror
+                </div>
+                <div class="form-group mt-2">
+                  {!! Form::label('provincia','Provincia:') !!}
+                  {!! Form::text('provincia', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                  
+                  @error('provincia')
+                      <span class="text-danger">{{$message}}</span>
+                  @enderror
+                </div>
+                <div class="form-group mt-2">
+                  {!! Form::label('direccion','Dirección:') !!}
+                  {!! Form::text('direccion', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                  
+                  @error('direccion')
+                      <span class="text-danger">{{$message}}</span>
+                  @enderror
+                </div>
 
-              <div class="flex justify-end mt-4">
-                {!! Form::submit('Actualizar', ['class'=>'text-white font-bold mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
-              </div>
-            {!! Form::close() !!}
-              <div class="form-group mt-2">
+                <div class="flex justify-end mt-4">
+                  {!! Form::submit('Actualizar', ['class'=>'text-white font-bold mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
+                </div>
+              {!! Form::close() !!}
+
+              @php
+                  $espec=[];
+              @endphp
+        
+              <div class="form-group mt-2"  x-data="setup()">
                <h1 class="text-center">Especie:</h1>
-                <div class="grid grid-cols-6 gap-y-2">
+                <div class="grid grid-cols-6 gap-y-2 hidden">
 
                   @foreach ($user->especies_comercializas()->get() as $especie)
                     
@@ -240,76 +245,122 @@
                   @endforeach
 
                 </div>
-                <div class="grid grid-cols-6 gap-y-2">
-
+                <div class="grid grid-cols-6 gap-y-2 mt-2">
+                  @php
+                      $n=0;
+                  @endphp
                   @foreach ($user->fichas()->get() as $ficha)
-                    
-                        <div class="flex justify-center">
-                            <span class="cursor-pointer py-3 px-3 text-sm focus:outline-none leading-none text-gray-700 bg-gray-200 rounded">{{$ficha->especie->name}}</span>
+                       
+                        <div class="flex justify-center" @click="activeTab = {{$n}}">
+                            <span  class="cursor-pointer py-3 px-3 text-sm focus:outline-none leading-none rounded" :class="activeTab==={{$n}} ? ' @if(!IS_NULL($ficha->ano_plantacion) && !IS_NULL($ficha->cant_hectareas) && !IS_NULL($ficha->prod_hectareas) && !IS_NULL($ficha->total_produccion) && !IS_NULL($ficha->porcentaje_de_entrega)) text-white bg-green-700 @else text-white bg-gray-500 @endif' : ' @if(!IS_NULL($ficha->ano_plantacion) && !IS_NULL($ficha->cant_hectareas) && !IS_NULL($ficha->prod_hectareas) && !IS_NULL($ficha->total_produccion) && !IS_NULL($ficha->porcentaje_de_entrega)) text-gray-700 bg-green-200 @else text-gray-700 bg-yellow-200 @endif'" >{{$ficha->especie->name}}</span>
                         </div>
+
+                        @php
+                            $espec[]=$ficha->especie->name;
+                            $n+=1;
+                        @endphp
 
                   @endforeach
 
                 </div>
                 
+                <ul class="flex justify-center items-center mb-6 mt-2 hidden">
+                  <template x-for="(tab, index) in tabs" :key="index">
+                     <li class="cursor-pointer py-3 px-4 rounded transition" :class="activeTab===index ? 'bg-red-500 text-white' : ' text-gray-500'" @click="activeTab = index"
+                        x-text="tab"></li>
+                  </template>
+            
+               </ul>
+             
+                
+                @if ($user->fichas->count()>0)
+                  @php
+                      $m=0;
+                  @endphp
+                  @foreach ($user->fichas as $ficha)
+                    <div x-show="activeTab==={{$m}}">
+                      {!! Form::model($ficha, ['route'=>['fichas.update',$ficha],'method' => 'put', 'autocomplete'=>'off']) !!}    
+
+                        
+                          <div class="form-group mt-4">
+                            {!! Form::label('ano_plantacion','Año de plantación:') !!}
+                            {!! Form::text('ano_plantacion', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                            
+                            @error('ano_plantacion')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
+                          </div>
+                          {{-- comment  --}}
+                          <div class="form-group mt-2">
+                            {!! Form::label('cant_hectareas','Cantidad de hectareas:') !!}
+                            {!! Form::text('cant_hectareas', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                            
+                            @error('cant_hectareas')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
+                          </div>
+                          
+                          <div class="form-group mt-2">
+                            {!! Form::label('prod_hectareas','Producción por hectareas en toneladas:') !!}
+                            {!! Form::text('prod_hectareas', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                            
+                            @error('prod_hectareas')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
+                          </div>
+                          
+                          <div class="form-group mt-2">
+                            {!! Form::label('total_produccion','Campo total producción:') !!}
+                            {!! Form::text('total_produccion', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                            
+                            @error('total_produccion')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
+                          </div>
+                          <div class="form-group mt-2">
+                            {!! Form::label('porcentaje_de_entrega','Porcentaje de entrega a Greenex:') !!}
+                            {!! Form::text('porcentaje_de_entrega', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                            
+                            @error('porcentaje_de_entrega')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
+                          </div>
+                        
+                          <div class="flex justify-end mt-4">
+                            {!! Form::submit('update', ['class'=>'text-white font-bold mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
+                          </div>
+
+                      {!! Form::close() !!}
+                    </div>
+                    @php
+                        $m+=1;
+                    @endphp
+                  @endforeach
+
+                @endif
+                @php
+                    $start=0;
+                @endphp
+                  @foreach ($user->fichas as $ficha)
+                      @if (IS_NULL($ficha->ano_plantacion) || IS_NULL($ficha->cant_hectareas) || IS_NULL($ficha->prod_hectareas) || IS_NULL($ficha->total_produccion) || IS_NULL($ficha->porcentaje_de_entrega))
+                          @break
+                      @endif
+                      @php
+                          $start+=1;
+                      @endphp
+                  @endforeach
+                
+                <script>
+                  var espec = <?php echo json_encode($espec) ?>;
+                  var start = <?php echo json_encode($start) ?>;
+                     function setup() {
+                        return {
+                        activeTab: start,
+                        tabs: espec
+                        };
+                  };
+               </script>
               </div>
-             @if ($user->fichas->count()>0)
-                 
-              {!! Form::model($user->fichas->first()->id, ['route'=>['fichas.update',$user->fichas->first()->id],'method' => 'put', 'autocomplete'=>'off']) !!}    
-
-                  ID: {{$user->fichas->first()->id}}
-                
-                  <div class="form-group mt-2">
-                    {!! Form::label('ano_plantacion','Año de plantación:') !!}
-                    {!! Form::text('ano_plantacion', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                    
-                    @error('ano_plantacion')
-                        <span class="text-danger">{{$message}}</span>
-                    @enderror
-                  </div>
-                  {{-- comment  --}}
-                  <div class="form-group mt-2">
-                    {!! Form::label('cant_hectareas','Cantidad de hectareas:') !!}
-                    {!! Form::text('cant_hectareas', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                    
-                    @error('cant_hectareas')
-                        <span class="text-danger">{{$message}}</span>
-                    @enderror
-                  </div>
-                  
-                  <div class="form-group mt-2">
-                    {!! Form::label('prod_hectareas','Producción por hectareas en toneladas:') !!}
-                    {!! Form::text('prod_hectareas', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                    
-                    @error('prod_hectareas')
-                        <span class="text-danger">{{$message}}</span>
-                    @enderror
-                  </div>
-                  
-                  <div class="form-group mt-2">
-                    {!! Form::label('total_produccion','Campo total producción:') !!}
-                    {!! Form::text('total_produccion', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                    
-                    @error('total_produccion')
-                        <span class="text-danger">{{$message}}</span>
-                    @enderror
-                  </div>
-                  <div class="form-group mt-2">
-                    {!! Form::label('porcentaje_de_entrega','Porcentaje de entrega a Greenex:') !!}
-                    {!! Form::text('porcentaje_de_entrega', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                    
-                    @error('porcentaje_de_entrega')
-                        <span class="text-danger">{{$message}}</span>
-                    @enderror
-                  </div>
-                
-                  <div class="flex justify-end mt-4">
-                    {!! Form::submit('update', ['class'=>'text-white font-bold mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
-                  </div>
-
-              {!! Form::close() !!}
-
-            @endif
 
               <div class="flex justify-between mt-12">
                 <div>
@@ -460,7 +511,6 @@
     </div>
 
 
-  
 
  
              

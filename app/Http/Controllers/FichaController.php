@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ficha;
 use Illuminate\Http\Request;
 
 class FichaController extends Controller
@@ -66,9 +67,11 @@ class FichaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Ficha $ficha)
     {
-        //
+        $ficha->update($request->all());
+
+        return redirect()->back();
     }
 
     /**
