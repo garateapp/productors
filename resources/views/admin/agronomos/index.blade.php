@@ -99,13 +99,11 @@
                               
                             </td>
                             <td class="text-center">
-                              @if ($user->campos->count()>0)
-                                @foreach ($user->campos as $campo)
-                                  {{$campo->user->name}}  <br>   
-                                @endforeach
-                              @else
-                                  -
-                              @endif
+                              @foreach ($uniqueUsers as $item)
+                                @if ($campos2->where('agronomo_id',$user->id)->pluck('campo_rut')->contains($item->rut))
+                                    {{$item->name}}<br>
+                                @endif
+                              @endforeach
                               
                             </td>
 

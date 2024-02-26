@@ -1040,8 +1040,18 @@ class HomeController extends Controller
         $users = User::whereHas('roles', function ($query) {
             $query->where('name', 'Agrónomo');
         })->get();
+
+        $campos2=CampoStaff::all();
+
+        $uniqueUsers = User::select('*')
+                    ->whereIn('id', function ($query) {
+                        $query->selectRaw('MIN(id)')
+                              ->from('users')
+                              ->groupBy('rut');
+                    })
+                    ->get();
         
-        return view('admin.agronomos.index',compact('users'));
+        return view('admin.agronomos.index',compact('users','campos2','uniqueUsers'));
     }
 
     public function agronomo_show(User $user) {
