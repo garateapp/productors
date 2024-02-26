@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\CampoStaffController;
+use App\Http\Controllers\CertificacionController;
 use App\Http\Controllers\ComercialFruitController;
 use App\Http\Controllers\FichaController;
 use App\Http\Controllers\HomeController;
@@ -188,6 +189,8 @@ Route::post('user/admin/store', [HomeController::class,'user_store'])->name('use
 Route::resource('campostaff', CampoStaffController::class)->names('campostaffs');
 
 Route::resource('soporte', SoporteController::class)->names('soportes');
+
+Route::resource('certificacion', CertificacionController::class)->names('certificacions');
 
 Route::resource('ticket', TicketController::class)->names('tickets');
 

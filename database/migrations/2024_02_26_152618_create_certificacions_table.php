@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('certificacions', function (Blueprint $table) {
             $table->id();
                 
+                $table->string('rut');
                 $table->string('name');
-                $table->string('vigencia')->nullable();
+                $table->date('vigencia')->nullable();
                 $table->string('documento')->nullable();
                 
 

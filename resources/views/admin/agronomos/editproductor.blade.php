@@ -248,27 +248,154 @@
                       <span class="text-danger">{{$message}}</span>
                   @enderror
                 </div>
-                @php
-                    $opciones = [
-                        'SI' => 'SI',
-                        'NO' => 'NO',
-                        // Agrega más opciones según sea necesario
-                    ];
-
-                @endphp
-                <div class="form-group mt-2">
-                  {!! Form::label('certificaciones','Certificaciones:') !!}
-                  {!! Form::select('certificaciones', $opciones, null, ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'¿Posee alguna certificación?']) !!}
- 
-                  @error('certificaciones')
-                      <span class="text-danger">{{$message}}</span>
-                  @enderror
-                </div>
+             
 
                 <div class="flex justify-end mt-4">
                   {!! Form::submit('Actualizar', ['class'=>'text-white font-bold mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
                 </div>
               {!! Form::close() !!}
+
+              @php
+                  $opciones = [
+                      'INSCRIPCION CHINA' => 'INSCRIPCION CHINA',
+                      'APROBADO CHINA' => 'APROBADO CHINA',
+                      'BPA' => 'BPA',
+                      'GLOBALGAP' => 'GLOBALGAP',
+                     
+                      // Agrega más opciones según sea necesario
+                  ];
+              @endphp
+
+              <section id="certificaciones" class="border-4 p-4 rounded-lg mt-4">  
+                <h1 class="text-center font-bold">CERTIFICACIONES</h1>
+                      
+                <div x-data="{open:false}">
+                
+                  @if ($certificacions->count()>0)
+                    <div class="flex justify-between items-center">
+                      <div>
+                        <div class="flex items-center">
+                        {!! Form::label('name','¿Posee alguna certificación?') !!}
+                        <div class="bg-green-500 text-white rounded-lg py-2 px-4 cursor-pointer ml-2" x-on:click="open=true">
+                          SI
+                        </div>
+                        <div class="ml-2 font-bold">
+                          {{$certificacions->count()}}/4
+                        </div>
+                      </div>
+                        <div class="flex mb-4 mt-2">
+                        
+                          <div class="bg-gray-500 text-white rounded-lg p-2 ml-2 cursor-pointer" x-on:click="open=!open">
+                            AGREGAR MÁS
+                          </div>
+                        </div>
+                      </div>
+                      <div class="items-center">
+                        @php
+                            $k=1;
+                        @endphp
+                        @foreach ($certificacions as $certificacion)
+                          <div class="font-bold text-2xl"> 
+                            {{$k}})  {{$certificacion->name}}<br>
+                          </div>
+                          @php
+                              $k+=1;
+                          @endphp
+                        @endforeach
+                      </div>
+                    </div>
+                    {!! Form::open(['route'=>'certificacions.store','files'=>true , 'autocomplete'=>'off', 'method'=> 'POST']) !!}
+                    
+                   
+                      
+                        <div x-show="open"> 
+                          
+                          <div class="form-group mb-2">
+                        
+                            {!! Form::select('name', $opciones, null, ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'Seleccione Nombre de Certificación']) !!}
+    
+                            @error('name')
+                                <span class="text-red-500 font-bold">{{$message}}</span>
+                            @enderror
+                          </div>
+
+                            {!! Form::hidden('rut', $user->rut) !!}
+                            {!! Form::hidden('user_id', $user->id) !!}
+
+                      
+
+                          
+
+                            <div class="form-group mb-2">
+                              {!! Form::label('vigencia','Vigencia:') !!}
+                              {!! Form::date('vigencia', null, ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'Seleccione Nombre de Certificación']) !!}
+
+                              @error('vigencia')
+                                  <span class="text-danger">{{$message}}</span>
+                              @enderror
+                            </div>
+
+                            <div class="form-group mb-2">
+                              {!! Form::label('file', 'Foto o Documento', ['class'=>'font-bold text-center']) !!}
+                              {!! Form::file('file', ['class'=>'form-input w-full'.($errors->has('file')?' border-red-600':''), 'id'=>'file','accept'=>'file/*']) !!}
+                            </div>
+                                {!! Form::submit('AGREGAR', ['class'=>'text-center text-white font-bold inline w-full mx-4 focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded cursor-pointer']) !!}
+                          </div>
+                    {!! Form::close() !!}
+                  @else
+                            
+                        {!! Form::open(['route'=>'certificacions.store','files'=>true , 'autocomplete'=>'off', 'method'=> 'POST']) !!}
+                        {!! Form::label('name','¿Posee alguna certificación?') !!}
+                        
+                        <div class="flex mb-4 mt-2">
+                          <div class="bg-green-500 text-white rounded-lg py-2 px-4 cursor-pointer" x-on:click="open=true">
+                            SI
+                          </div>
+                          <div class="bg-red-500 text-white rounded-lg p-2 ml-2 cursor-pointer" x-on:click="open=false">
+                            NO
+                          </div>
+                        </div>
+                          
+                            <div x-show="open"> 
+                              
+                              <div class="form-group mb-2">
+                            
+                                {!! Form::select('name', $opciones, null, ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'Seleccione Nombre de Certificación']) !!}
+        
+                                @error('name')
+                                    <span class="text-red-500 font-bold">{{$message}}</span>
+                                @enderror
+                              </div>
+
+                                {!! Form::hidden('rut', $user->rut) !!}
+                                {!! Form::hidden('user_id', $user->id) !!}
+
+                          
+
+                              
+
+                                <div class="form-group mb-2">
+                                  {!! Form::label('vigencia','Vigencia:') !!}
+                                  {!! Form::date('vigencia', null, ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'Seleccione Nombre de Certificación']) !!}
+
+                                  @error('vigencia')
+                                      <span class="text-danger">{{$message}}</span>
+                                  @enderror
+                                </div>
+
+                                <div class="form-group mb-2">
+                                  {!! Form::label('file', 'Foto o Documento', ['class'=>'font-bold text-center']) !!}
+                                  {!! Form::file('file', ['class'=>'form-input w-full'.($errors->has('file')?' border-red-600':''), 'id'=>'file','accept'=>'file/*']) !!}
+                                </div>
+                                    {!! Form::submit('AGREGAR', ['class'=>'text-center text-white font-bold inline w-full mx-4 focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded cursor-pointer']) !!}
+                              </div>
+                        {!! Form::close() !!}
+                      
+                    
+                    
+                  @endif
+              </div>
+              </section>
 
               @php
                   $espec=[];
@@ -277,7 +404,7 @@
               <div class="form-group mt-2"  x-data="setup()">
                 
                 <section id="especies">  
-                <h1 class="text-center">Especie:</h1>
+                <h1 class="text-center mt-4 font-bold">ESPECIES</h1>
                   <div class="grid grid-cols-6 gap-y-2 hidden">
 
                     @foreach ($user->especies_comercializas()->get() as $especie)

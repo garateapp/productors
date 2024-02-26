@@ -31,6 +31,7 @@ use Laravel\Jetstream\Jetstream;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use App\Mail\NotificacionMailable;
 use App\Models\CampoStaff;
+use App\Models\Certificacion;
 use App\Models\Ficha;
 use Illuminate\Support\Facades\Mail;
 
@@ -1088,9 +1089,9 @@ class HomeController extends Controller
         return view('admin.agronomos.showindex',compact('user','campos','campos2','uniqueUsers'));
     }
 
-    public function productor_edit(User $user) {
-        
-        return view('admin.agronomos.editproductor',compact('user'));
+    public function productor_edit(User $user) 
+    {   $certificacions=Certificacion::where('rut',$user->rut)->get();
+        return view('admin.agronomos.editproductor',compact('user','certificacions'));
     }
 
    

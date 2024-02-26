@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ticket;
+use App\Models\Certificacion;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class TicketController extends Controller
+class CertificacionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,17 +35,19 @@ class TicketController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-        {$request->validate([
-            'file'=>'informacion'
+        {
+            $request->validate([
+                'name' => 'required'
             ]);
-            
-        $mensaje=Ticket::create([
-            'observacion'=>$request->informacion,
-            'tipo'=>'Consulta',
-            'emisor_id'=>auth()->user()->id
-        ]);
 
-        return redirect()->back();
+        $mensaje=Certificacion::create([
+            'rut'=>$request->rut,
+            'name'=>$request->name,
+            'vigencia'=>$request->vigencia,
+            'documento'=>$request->file,            
+        ]);
+        $user=User::find($request->user_id);
+        return redirect(route('productor.edit',$user).'/#certificaciones');
 
     }
 
@@ -77,14 +80,9 @@ class TicketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ticket $ticket)
+    public function update(Request $request, $id)
     {
-        $ticket->status = 2;
-        $ticket->receptor_id = auth()->user()->id;
-        $ticket->respuesta = $request->respuesta;
-        $ticket->save();
-
-        return redirect()->back();
+        //
     }
 
     /**
