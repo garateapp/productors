@@ -214,8 +214,8 @@
                             </div>
             
                             <div class="flex flex-col ml-3 min-w-0">
-                              <div class="font-medium leading-none text-gray-100">{{$user->name}}-{{$user->rut}}</div>
-                              <p class="text-sm text-gray-500 leading-none mt-1 truncate hidden">- DATE -</p>
+                              <div class="font-medium leading-none text-gray-100">{{$user->name}}</div>
+                              <p class="text-sm text-gray-500 leading-none mt-1 truncate ">Rut: {{$user->rut}}</p>
                             </div>
                           </div>
                           <div class="flex flex-col ml-3 min-w-0">
