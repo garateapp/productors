@@ -71,7 +71,7 @@ class FichaController extends Controller
     {
         $ficha->update($request->all());
 
-        return redirect(route('productor.show',$ficha->user).'/#especies');
+        return redirect(route('productor.edit',$ficha->user).'/#especies');
 
     }
 
