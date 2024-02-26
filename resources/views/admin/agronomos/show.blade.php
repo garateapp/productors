@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-      <a href="{{Route('agronomos.index')}}" class="font-bold">
-      <- Lista de Agronomos
+      <a href="{{Route('productor.index',$campos->first()->agronomo)}}" class="font-bold">
+          <- Lista de Campos
       </a>
     </x-slot>
 
@@ -55,11 +55,14 @@
                         <div class="flex flex-col">
                           <div class="w-full flex-none text-lg text-gray-200 font-bold leading-none">{{$user->name}}</div>
                           <div class="flex-auto text-gray-400 my-1">
-                            <span class="mr-3 ">Agrónomo</span><span class="mr-3 border-r border-gray-600  max-h-0"></span><span>{{$user->email}}</span>
+                            <span class="mr-3 ">Productor</span><span class="mr-3 border-r border-gray-600  max-h-0"></span><span>{{$user->email}}</span>
                           </div>
                         </div>
                       </div>
+
+                     
                     </div>
+
                     <div class="flex flex-row items-center">
                       <div class="flex">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5 text-yellow-400">
@@ -130,6 +133,15 @@
                       </div>
                     </div>
                   </div>
+
+                  <div class="">
+                    <div class="bg-green-500 p-2 rounded-lg text-center my-auto text-white mb-2">
+                      <h2 class="text-lg font-bold">Contrato Firmado</h2>
+                    </div>
+                   
+                    
+                  </div>
+
                 </div>
               </div>
             </div>
