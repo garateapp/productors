@@ -99,12 +99,13 @@
                               
                             </td>
                             <td class="text-center">
+                              {{-- comment 
                               @foreach ($uniqueUsers as $item)
                                 @if ($campos2->where('agronomo_id',$user->id)->pluck('campo_rut')->contains($item->rut))
                                     {{$item->name}}<br>
                                 @endif
                               @endforeach
-                              
+                              --}}
                             </td>
 
                             <td class="text-center">
