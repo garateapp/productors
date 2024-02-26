@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-      <a href="{{Route('agronomos.index')}}" class="font-bold">
-      <- Lista de Agronomos
+      <a href="{{Route('agronomo.show',$user)}}" class="font-bold">
+      <- Lista de CSG's
       </a>
     </x-slot>
 
