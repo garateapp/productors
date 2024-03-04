@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Procesos;
 
+use App\Exports\ProcesostotalExport;
 use App\Mail\NotificacionMailable;
 use App\Models\Especie;
 use App\Models\Proceso;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProcesoSearch extends Component
 {   use WithPagination;
@@ -64,6 +66,10 @@ class ProcesoSearch extends Component
         ->first();
 
         return view('livewire.procesos.proceso-search',compact('sync','procesosall','procesos','variedades','especies'));
+    }
+
+    public function generateReport(){
+        return Excel::download(new ProcesostotalExport(),'Procesos_total'.'.xlsx');
     }
 
     public function reenviar_informe(Proceso $proceso) {
