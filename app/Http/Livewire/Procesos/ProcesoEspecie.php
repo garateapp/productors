@@ -2,12 +2,14 @@
 
 namespace App\Http\Livewire\Procesos;
 
+use App\Exports\ProcesostotalExport;
 use App\Models\Especie;
 use App\Models\Proceso;
 use App\Models\Sync;
 use App\Models\Variedad;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProcesoEspecie extends Component
 {   use WithPagination;
@@ -59,6 +61,10 @@ class ProcesoEspecie extends Component
         ->first();
 
         return view('livewire.procesos.proceso-especie',compact('sync','procesosall','procesos','variedades','especies'));
+    }
+
+    public function generateReport(){
+        return Excel::download(new ProcesostotalExport($this->espec),'Procesos_total_'.$this->espec->name.'.xlsx');
     }
 
     

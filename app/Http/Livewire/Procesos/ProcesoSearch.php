@@ -69,7 +69,7 @@ class ProcesoSearch extends Component
     }
 
     public function generateReport(){
-        return Excel::download(new ProcesostotalExport(),'Procesos_total'.'.xlsx');
+        return Excel::download(new ProcesostotalExport($this->espec),'Procesos_total'.'.xlsx');
     }
 
     public function reenviar_informe(Proceso $proceso) {

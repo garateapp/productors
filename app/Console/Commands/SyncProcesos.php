@@ -45,6 +45,7 @@ class SyncProcesos extends Command
             $categoria=Null;//6
             //7
             $id_empresa=Null;//8
+            $c_productor=Null;
             
             $m=1;
             foreach ($proceso as $item){
@@ -73,8 +74,11 @@ class SyncProcesos extends Command
                 if($m==8){
                     $id_empresa=$item;
                 }
+                if($m==9){
+                    $c_productor=$item;
+                }
                 
-               if($m==8){
+               if($m==9){
 
                         $cont=Proceso::where('n_proceso',$n_proceso)->where('temporada','actual')->first();
                         if($cont){
@@ -87,7 +91,8 @@ class SyncProcesos extends Command
                                     'fecha' => $fecha,//5
                                     'kilos_netos' => $kilos_netos,//6
                                     'id_empresa' => $id_empresa,//8
-                                     'temporada' => 'actual'//9
+                                     'temporada' => 'actual',//9,
+                                     'c_productor'=>$c_productor
                                 ])->save();
                             }elseif($categoria=='Exportacion'){
                                 $cont->forceFill([
@@ -98,7 +103,8 @@ class SyncProcesos extends Command
                                     'fecha' => $fecha,//5
                                     'exp' => $kilos_netos,//6
                                     'id_empresa' => $id_empresa,//8
-                                     'temporada' => 'actual'//9
+                                     'temporada' => 'actual',//9,
+                                     'c_productor'=>$c_productor
                                 ])->save();
                             }elseif($categoria=='Mercado Interno'){
                                 $cont->forceFill([
@@ -109,7 +115,8 @@ class SyncProcesos extends Command
                                     'fecha' => $fecha,//5
                                     'comercial' => $kilos_netos,//6
                                     'id_empresa' => $id_empresa,//8
-                                     'temporada' => 'actual'//9
+                                     'temporada' => 'actual',//9,
+                                     'c_productor'=>$c_productor
                                 ])->save();
                             }elseif($categoria=='Desecho'){
                                 $cont->forceFill([
@@ -120,7 +127,8 @@ class SyncProcesos extends Command
                                     'fecha' => $fecha,//5
                                     'desecho' => $kilos_netos,//6
                                     'id_empresa' => $id_empresa,//8
-                                     'temporada' => 'actual'//9
+                                     'temporada' => 'actual',//9,
+                                     'c_productor'=>$c_productor
                                 ])->save();
                             }
                             
@@ -141,7 +149,8 @@ class SyncProcesos extends Command
                                             'desecho' => 0,//6
                                             'merma' => 0,//6
                                             'id_empresa' => $id_empresa,//8
-                                             'temporada' => 'actual'//9
+                                             'temporada' => 'actual',//9,
+                                             'c_productor'=>$c_productor
                                         ]);
                                     }elseif($categoria=='Exportacion'){
                                         $rec=Proceso::create([
@@ -156,7 +165,8 @@ class SyncProcesos extends Command
                                             'desecho' => 0,//6
                                             'merma' => 0,//6
                                             'id_empresa' => $id_empresa,//8
-                                             'temporada' => 'actual'//9
+                                             'temporada' => 'actual',//9,
+                                             'c_productor'=>$c_productor
                                         ]);
                                     }elseif($categoria=='Mercado Interno'){
                                         $rec=Proceso::create([
@@ -171,7 +181,8 @@ class SyncProcesos extends Command
                                             'desecho' => 0,//6
                                             'merma' => 0,//6
                                             'id_empresa' => $id_empresa,//8
-                                             'temporada' => 'actual'//9
+                                             'temporada' => 'actual',//9,
+                                             'c_productor'=>$c_productor
                                         ]);
                                     }elseif($categoria=='Desecho'){
                                             
@@ -187,7 +198,8 @@ class SyncProcesos extends Command
                                                 'desecho' => $kilos_netos,//6
                                                 'merma' => 0,//6
                                                 'id_empresa' => $id_empresa,//8
-                                                 'temporada' => 'actual'//9
+                                                 'temporada' => 'actual',//9,
+                                                 'c_productor'=>$c_productor
                                             ]);
                                             
                                     }	

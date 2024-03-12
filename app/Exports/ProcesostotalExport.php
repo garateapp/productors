@@ -16,14 +16,29 @@ use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 
 class ProcesostotalExport implements FromCollection, WithCustomStartCell, WithMapping, WithColumnFormatting, WithHeadings, ShouldAutoSize
 {   use Exportable;
+
+    protected $especie;
+
+    public function __construct($especie)
+    {
+        $this->especie = $especie;
+    }
     /**
     * @return \Illuminate\Support\Collection
     */
     
     public function collection()
-    {
-        return Proceso::where('temporada','actual')
+    {   if($this->especie){
+            return Proceso::where('especie','LIKE', $this->especie->name)
+                                ->where('temporada','actual')
+                                ->where('kilos_netos','>',0)
+                                ->latest('n_proceso')->get();
+        }else{
+            return Proceso::where('temporada','actual')
+                ->where('kilos_netos','>',0)
                 ->latest('n_proceso')->get();
+        }
+        
     }
 
     public function startCell(): string
@@ -43,6 +58,7 @@ class ProcesostotalExport implements FromCollection, WithCustomStartCell, WithMa
             'Comercial',
             'Desecho',
             'Merma',
+            'C_productor',
             'Temporada'
         ];
     }
@@ -60,6 +76,7 @@ class ProcesostotalExport implements FromCollection, WithCustomStartCell, WithMa
             round($proceso->comercial*100/$proceso->kilos_netos, 1),
             round($proceso->desecho*100/$proceso->kilos_netos, 1),
             round(($proceso->kilos_netos-$proceso->exp-$proceso->comercial-$proceso->desecho)*100/$proceso->kilos_netos, 1),
+            $proceso->c_productor,
             'Actual',
 
         ];
