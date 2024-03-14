@@ -41,6 +41,10 @@ return new class extends Migration
 
             $table->string('porcentaje_de_entrega')->nullable();
 
+            $table->string('kilos_entregables')->nullable();
+
+            $table->string('nro_cajas')->nullable();
+
             $table->timestamps();
         });
     }

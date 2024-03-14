@@ -641,29 +641,50 @@
             
     </div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var cantHectareasInput = document.getElementById('cant_hectareas');
+        var prodHectareasInput = document.getElementById('prod_hectareas');
+        var totalProduccionInput = document.getElementById('total_produccion');
+        var porcentajeEntregaInput = document.getElementById('porcentaje_de_entrega');
+        var kilosEntregablesInput = document.getElementById('kilos_entregables');
+        var nroCajasInput = document.getElementById('nro_cajas');
 
-    <script>
-                      document.addEventListener("DOMContentLoaded", function() {
-                          var cantHectareasInput = document.getElementById('cant_hectareas');
-                          var prodHectareasInput = document.getElementById('prod_hectareas');
-                          var totalProduccionInput = document.getElementById('total_produccion');
-                  
-                          // Función para calcular la producción total
-                          function calcularProduccionTotal() {
-                              var cantHectareas = parseFloat(cantHectareasInput.value);
-                              var prodHectareas = parseFloat(prodHectareasInput.value);
-                  
-                              if (!isNaN(cantHectareas) && !isNaN(prodHectareas)) {
-                                  var totalProduccion = cantHectareas * prodHectareas;
-                                  totalProduccionInput.value = totalProduccion.toFixed(2); // Limitar a 2 decimales
-                              }
-                          }
-                  
-                          // Calcular la producción total al cambiar cualquiera de las dos entradas
-                          cantHectareasInput.addEventListener('input', calcularProduccionTotal);
-                          prodHectareasInput.addEventListener('input', calcularProduccionTotal);
-                      });
-                  </script>
+        // Función para calcular la producción total
+        function calcularProduccionTotal() {
+            var cantHectareas = parseFloat(cantHectareasInput.value);
+            var prodHectareas = parseFloat(prodHectareasInput.value);
+
+            if (!isNaN(cantHectareas) && !isNaN(prodHectareas)) {
+                var totalProduccion = cantHectareas * prodHectareas;
+                totalProduccionInput.value = totalProduccion.toFixed(2); // Limitar a 2 decimales
+            }
+        }
+
+        // Función para calcular los kilos entregables
+        function calcularKilosEntregables() {
+            var totalProduccion = parseFloat(totalProduccionInput.value);
+            var porcentajeEntrega = parseFloat(porcentajeEntregaInput.value);
+
+            if (!isNaN(totalProduccion) && !isNaN(porcentajeEntrega)) {
+                var kilosEntregables = totalProduccion * (porcentajeEntrega / 100); // Convertir porcentaje a fracción
+                kilosEntregablesInput.value = kilosEntregables.toFixed(2); // Limitar a 2 decimales
+                
+                // Calcular el número de cajas
+                var nroCajas = kilosEntregables / 5; // 5 kilogramos por caja
+                nroCajasInput.value = Math.floor(nroCajas); // Redondear hacia abajo
+            }
+        }
+
+        // Calcular la producción total al cambiar cualquiera de las dos entradas
+        cantHectareasInput.addEventListener('input', calcularProduccionTotal);
+        prodHectareasInput.addEventListener('input', calcularProduccionTotal);
+
+        // Calcular los kilos entregables al cambiar el porcentaje de entrega
+        porcentajeEntregaInput.addEventListener('input', calcularKilosEntregables);
+    });
+</script>
+
 
  
              

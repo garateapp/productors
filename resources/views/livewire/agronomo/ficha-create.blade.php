@@ -87,17 +87,17 @@
     </div>
 
     <div class="form-group mt-2">
-      {!! Form::label('porcentaje_de_entrega','Total Kilos Entregable') !!}
-      {!! Form::text('porcentaje_de_entrega', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-      @error('porcentaje_de_entrega')
+      {!! Form::label('kilos_entregables','Total Kilos Entregable') !!}
+      {!! Form::text('kilos_entregables', null , ['class'=>'mt-1 block w-full rounded-lg', 'readonly', 'placeholder'=>'']) !!}
+      @error('kilos_entregables')
           <span class="text-danger">{{$message}}</span>
           @enderror
     </div>
 
     <div class="form-group mt-2">
-      {!! Form::label('porcentaje_de_entrega','Nro de Cajas: (5kgs)') !!}
-      {!! Form::text('porcentaje_de_entrega', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-      @error('porcentaje_de_entrega')
+      {!! Form::label('nro_cajas','Nro de Cajas: (5kgs)') !!}
+      {!! Form::text('nro_cajas', null , ['class'=>'mt-1 block w-full rounded-lg', 'readonly', 'placeholder'=>'']) !!}
+      @error('nro_cajas')
           <span class="text-danger">{{$message}}</span>
       @enderror
     </div>
