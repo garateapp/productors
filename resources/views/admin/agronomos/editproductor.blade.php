@@ -697,7 +697,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('deleteButton').addEventListener('click', function () {
             Swal.fire({
-                title: "¿Eliminar temporada?",
+                title: "¿Eliminar registro?",
                 text: "No podrás revertir esta acción.",
                 icon: "warning",
                 showCancelButton: true,
