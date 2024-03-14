@@ -473,9 +473,9 @@
                           $k=0;
                       @endphp
                   <div class="flex flex-col space-y-4 mt-6">
-                    @foreach ($user->especies_comercializas()->get() as $especie)
+                    @foreach ($user->fichas->sortBy('cuartel') as $item)
                         @foreach ($user->fichas->sortBy('cuartel') as $ficha)
-                          @if ($especie->id==$ficha->especie_id)
+                          @if ($item->especie_id==$ficha->especie_id)
                             <div x-show="activeTab==={{$k}}" class="flex flex-col p-4 bg-gray-800 border-gray-800 shadow-md hover:shodow-lg rounded-2xl cursor-pointer transition ease-in duration-500  transform hover:scale-105">
                               <div class="flex items-center justify-between">
                                 <div class="flex items-center mr-auto">
