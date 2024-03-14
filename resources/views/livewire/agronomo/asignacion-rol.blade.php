@@ -13,7 +13,7 @@
 
                     @forelse ($this->users as $user)
                         <li class="leading-10 px-5 text-sm cursor-pointer hover:bg-gray-300 flex justify-between items-center whitespace-nowrap">
-                         {{$user->name}}-
+                         {{$user->name}}-{{$user->csg}}
                                 @if ($user->email)
                                     {{$user->email}} 
                                 @else

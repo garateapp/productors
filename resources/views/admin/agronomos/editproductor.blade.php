@@ -318,7 +318,7 @@
                         @endphp
                         @foreach ($certificacions as $certificacion)
                           <div class="font-bold text-lg"> 
-                            {{$k}})  {{$certificacion->name}} <span>(Eliminar)</span><br>
+                            {{$k}})  {{$certificacion->name}} <span>(Eliminar)</span> <br>
                           </div>
                           @php
                               $k+=1;
