@@ -322,12 +322,15 @@
                               {{$k}})  {{$certificacion->name}} 
                             </div>
                             <div>
-                            <form id="deleteFormCert" action="{{route('certificacions.destroy',$certificacion->id)}}" method="POST">
+                              <form id="deleteForm" action="{{ route('certificacions.destroy', $certificacion->id) }}" method="POST">
                                 @csrf
                                 @method('delete')
-                                <button id="deleteButtonCert" class="text-red-500 text-xs ml-2 font-bold" type="submit"> (Eliminar)</button>
-                              </div>
-                          </form>
+                                <button type="button" id="deleteButton" class="text-red-500 text-xs ml-2 font-bold">
+                                    (Eliminar)
+                                </button>
+                            </form>
+                            
+                                                      
                             
                             <br>
                           </div>
@@ -724,24 +727,25 @@
     });
 </script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('deleteButtonCert').addEventListener('click', function () {
-            Swal.fire({
-                title: "¿Eliminar la certificacion?",
-                text: "No podrás revertir esta acción.",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Sí, eliminarla"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('deleteFormCert').submit();
-                }
-            });
-        });
-    });
-</script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    document.getElementById('deleteButton').addEventListener('click', function () {
+                                        Swal.fire({
+                                            title: "¿Eliminar certificación?",
+                                            text: "No podrás revertir esta acción.",
+                                            icon: "warning",
+                                            showCancelButton: true,
+                                            confirmButtonColor: "#3085d6",
+                                            cancelButtonColor: "#d33",
+                                            confirmButtonText: "Sí, eliminar"
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                document.getElementById('deleteForm').submit();
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+
 
 
 
