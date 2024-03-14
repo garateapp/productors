@@ -318,7 +318,7 @@
                         @endphp
                         @foreach ($certificacions as $certificacion)
                           <div class="font-bold text-lg"> 
-                            {{$k}})  {{$certificacion->name}}<br>
+                            {{$k}})  {{$certificacion->name}} <span>(Eliminar)</span><br>
                           </div>
                           @php
                               $k+=1;
@@ -445,16 +445,18 @@
 
                       @php
                           $espec=[];
+                          $fichasOrdenadas = $user->fichas->sortBy('especie_id');
+                          $especiesUnicas = $fichasOrdenadas->unique('especie_id');
                       @endphp
 
                     <div class="grid grid-cols-6 gap-y-2">
  
-                      @foreach ($user->especies_comercializas()->get() as $especie)
+                      @foreach ($especiesUnicas as $ficha)
                           <div class="flex justify-center hidden">
                               <button class="py-3 px-3 text-sm focus:outline-none leading-none text-green-700 bg-green-100 rounded">{{$especie->name}}</button>
                           </div>
                           @php
-                              $espec[]=$especie->name;
+                              $espec[]=$ficha->especie->name;
                           @endphp
                       @endforeach
     
