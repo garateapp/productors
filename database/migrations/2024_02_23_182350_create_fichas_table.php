@@ -24,6 +24,13 @@ return new class extends Migration
             ->constrained()
             ->onDelete('cascade');
 
+            $table->foreignId('variedad_id')
+            ->nullable()
+            ->constrained()
+            ->onDelete('set null');
+
+            $table->string('cuartel')->nullable();
+
             $table->string('ano_plantacion')->nullable();
 
             $table->string('cant_hectareas')->nullable();

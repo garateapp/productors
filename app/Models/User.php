@@ -46,7 +46,8 @@ class User extends Authenticatable
         'provincia',
         'direccion',
         'fitosanitario',
-        'certificaciones'
+        'certificaciones',
+        'status'
     ];
 
     /**

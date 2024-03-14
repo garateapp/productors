@@ -62,9 +62,11 @@
                       </div>
 
                   <div class="">
-                    <div class="bg-green-500 p-2 rounded-lg text-center my-auto text-white mb-2">
-                      <h2 class="text-lg font-bold">Contrato Firmado</h2>
-                    </div>
+                    @if ($user->status)
+                      <div class="bg-green-500 p-2 rounded-lg text-center my-auto text-white mb-2">
+                        <h2 class="text-lg font-bold">{{$user->status}}</h2>
+                      </div>
+                    @endif
                    
                     
                   </div>
@@ -239,12 +241,32 @@
                     ];
 
                 @endphp
+                @php
+                $opcionstatus = [
+                    'Contrato Firmado' => 'Contrato Firmado',
+                    'Confirmado s/c' => 'Confirmado s/c',
+                    'Probable' => 'Probable',
+                    'En Conversación'=> 'En Conversación',
+                    'Productor Nuevo'=>'Productor Nuevo'
+                    // Agrega más opciones según sea necesario
+                ];
+
+            @endphp
 
                 <div class="form-group mt-2">
                   {!! Form::label('fitosanitario','Cumplimiento programa fitosanitario:') !!}
                   {!! Form::select('fitosanitario', $opcionesprograma, null, ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'¿Cumple con el programa fitosanitario?']) !!}
    
                   @error('fitosanitario')
+                      <span class="text-danger">{{$message}}</span>
+                  @enderror
+                </div>
+
+                <div class="form-group mt-2">
+                  {!! Form::label('status','¿Cuenta con contrato?') !!}
+                  {!! Form::select('status', $opcionstatus, null, ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'Seleccione']) !!}
+   
+                  @error('status')
                       <span class="text-danger">{{$message}}</span>
                   @enderror
                 </div>
@@ -295,7 +317,7 @@
                             $k=1;
                         @endphp
                         @foreach ($certificacions as $certificacion)
-                          <div class="font-bold text-2xl"> 
+                          <div class="font-bold text-lg"> 
                             {{$k}})  {{$certificacion->name}}<br>
                           </div>
                           @php
@@ -308,7 +330,9 @@
                     
                    
                       
-                        <div x-show="open"> 
+                        <div x-show="open">
+                          
+                        
                           
                           <div class="form-group mb-2">
                         
@@ -344,7 +368,7 @@
                     {!! Form::close() !!}
                   @else
                             
-                        {!! Form::open(['route'=>'certificacions.store','files'=>true , 'autocomplete'=>'off', 'method'=> 'POST']) !!}
+                      {!! Form::open(['route'=>'certificacions.store','files'=>true , 'autocomplete'=>'off', 'method'=> 'POST']) !!}
                         {!! Form::label('name','¿Posee alguna certificación?') !!}
                         
                         <div class="flex mb-4 mt-2">
@@ -404,38 +428,9 @@
               <div class="form-group mt-2"  x-data="setup()">
                 
                 <section id="especies">  
-                <h1 class="text-center mt-4 font-bold">ESPECIES</h1>
-                  <div class="grid grid-cols-6 gap-y-2 hidden">
-
-                    @foreach ($user->especies_comercializas()->get() as $especie)
-                      
-                          <div class="flex justify-center">
-                              <span class="cursor-pointer py-3 px-3 text-sm focus:outline-none leading-none text-gray-700 bg-gray-200 rounded">{{$especie->name}}</span>
-                          </div>
-
-                    @endforeach
-
-                  </div>
-
-                  <div class="grid grid-cols-6 gap-y-2 mt-2">
-                    @php
-                        $n=0;
-                    @endphp
-                    @foreach ($user->fichas()->get() as $ficha)
-                        
-                          <div class="flex justify-center" @click="activeTab = {{$n}}">
-                              <span  class="cursor-pointer py-3 px-3 text-sm focus:outline-none leading-none rounded" :class="activeTab==={{$n}} ? ' @if(!IS_NULL($ficha->ano_plantacion) && !IS_NULL($ficha->cant_hectareas) && !IS_NULL($ficha->prod_hectareas) && !IS_NULL($ficha->total_produccion) && !IS_NULL($ficha->porcentaje_de_entrega)) text-white bg-green-700 @else text-white bg-gray-500 @endif' : ' @if(!IS_NULL($ficha->ano_plantacion) && !IS_NULL($ficha->cant_hectareas) && !IS_NULL($ficha->prod_hectareas) && !IS_NULL($ficha->total_produccion) && !IS_NULL($ficha->porcentaje_de_entrega)) text-gray-700 bg-green-200 @else text-gray-700 bg-yellow-200 @endif'" >{{$ficha->especie->name}}</span>
-                          </div>
-
-                          @php
-                              $espec[]=$ficha->especie->name;
-                              $n+=1;
-                          @endphp
-
-                    @endforeach
-
-                  </div>
+                  <h1 class="text-center mt-4 font-bold">ESPECIES</h1>
                 </section>
+
                 <ul class="flex justify-center items-center mb-6 mt-2 hidden">
                   <template x-for="(tab, index) in tabs" :key="index">
                      <li class="cursor-pointer py-3 px-4 rounded transition" :class="activeTab===index ? 'bg-red-500 text-white' : ' text-gray-500'" @click="activeTab = index"
@@ -446,70 +441,161 @@
              
                 
                 @if ($user->fichas->count()>0)
-                  @php
-                      $m=0;
-                  @endphp
-                  @foreach ($user->fichas as $ficha)
-                    <div x-show="activeTab==={{$m}}">
-                      {!! Form::model($ficha, ['route'=>['fichas.update',$ficha],'method' => 'put', 'autocomplete'=>'off']) !!}    
+               
 
-                        
+            
+                    <div>
+                        {!! Form::open(['route'=>'fichas.store','files'=>true , 'autocomplete'=>'off', 'method'=> 'POST']) !!}
+                          {!! Form::hidden('user_id', $user->id) !!}
+
                           <div class="form-group mt-4">
-                            {!! Form::label('ano_plantacion','Año de plantación:') !!}
-                            {!! Form::text('ano_plantacion', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                            
-                            @error('ano_plantacion')
+                              {!! Form::label('cuartel','Cuartel Nro:') !!}
+                              {!! Form::text('cuartel', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                              @error('cuartel')
+                                  <span class="text-danger">{{$message}}</span>
+                              @enderror
+                          </div>
+
+                          <div class="form-group mt-2">
+                            {!! Form::label('especie_id','Especie:') !!}
+                            {!! Form::select('especie_id', $especies, null, ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'Seleccione una especie']) !!}
+             
+                            @error('fitosanitario')
                                 <span class="text-danger">{{$message}}</span>
                             @enderror
                           </div>
-                          {{-- comment  --}}
+
                           <div class="form-group mt-2">
-                            {!! Form::label('cant_hectareas','Cantidad de hectareas:') !!}
-                            {!! Form::text('cant_hectareas', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                            
-                            @error('cant_hectareas')
+                            {!! Form::label('variedad_id','Variedad:') !!}
+                            {!! Form::select('variedad_id', $especies, null, ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'Seleccione una especie']) !!}
+             
+                            @error('fitosanitario')
                                 <span class="text-danger">{{$message}}</span>
                             @enderror
+                          </div>
+
+                      
+                          
+                          <div class="form-group mt-4">
+                              {!! Form::label('ano_plantacion','Año de plantación:') !!}
+                              {!! Form::text('ano_plantacion', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                              @error('ano_plantacion')
+                                  <span class="text-danger">{{$message}}</span>
+                              @enderror
                           </div>
                           
                           <div class="form-group mt-2">
-                            {!! Form::label('prod_hectareas','Producción por hectareas en toneladas:') !!}
-                            {!! Form::text('prod_hectareas', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                            
-                            @error('prod_hectareas')
-                                <span class="text-danger">{{$message}}</span>
-                            @enderror
+                              {!! Form::label('cant_hectareas','Cantidad de hectáreas:') !!}
+                              {!! Form::text('cant_hectareas', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'', 'id'=>'cant_hectareas']) !!}
+                              @error('cant_hectareas')
+                                  <span class="text-danger">{{$message}}</span>
+                              @enderror
                           </div>
                           
                           <div class="form-group mt-2">
-                            {!! Form::label('total_produccion','Campo total producción:') !!}
-                            {!! Form::text('total_produccion', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                            
-                            @error('total_produccion')
-                                <span class="text-danger">{{$message}}</span>
-                            @enderror
+                              {!! Form::label('prod_hectareas','Producción por hectáreas en toneladas:') !!}
+                              {!! Form::text('prod_hectareas', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'', 'id'=>'prod_hectareas']) !!}
+                              @error('prod_hectareas')
+                                  <span class="text-danger">{{$message}}</span>
+                              @enderror
                           </div>
+                          
                           <div class="form-group mt-2">
-                            {!! Form::label('porcentaje_de_entrega','Porcentaje de entrega a Greenex:') !!}
+                              {!! Form::label('total_produccion','Campo total producción:') !!}
+                              {!! Form::text('total_produccion', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'', 'readonly', 'id'=>'total_produccion']) !!}
+                              @error('total_produccion')
+                                  <span class="text-danger">{{$message}}</span>
+                              @enderror
+                          </div>
+                          
+                          <div class="form-group mt-2">
+                              {!! Form::label('porcentaje_de_entrega','Porcentaje de entrega a Greenex:') !!}
+                              {!! Form::text('porcentaje_de_entrega', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
+                              @error('porcentaje_de_entrega')
+                                  <span class="text-danger">{{$message}}</span>
+                              @enderror
+                          </div>
+
+                          <div class="form-group mt-2">
+                            {!! Form::label('porcentaje_de_entrega','Total Kilos Entregable') !!}
                             {!! Form::text('porcentaje_de_entrega', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                            
+                            @error('porcentaje_de_entrega')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
+                          </div>
+
+                          <div class="form-group mt-2">
+                            {!! Form::label('porcentaje_de_entrega','Nro de Cajas: (5kgs)') !!}
+                            {!! Form::text('porcentaje_de_entrega', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
                             @error('porcentaje_de_entrega')
                                 <span class="text-danger">{{$message}}</span>
                             @enderror
-                          </div>
-
-                         
-                        
+                        </div>
+                      
                           <div class="flex justify-end mt-4">
-                            {!! Form::submit('update', ['class'=>'text-white font-bold mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
+                              {!! Form::submit('Agregar', ['class'=>'text-white font-bold mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
                           </div>
-
-                      {!! Form::close() !!}
+                      
+                        {!! Form::close() !!}
+                  
+                              
                     </div>
-                    @php
-                        $m+=1;
-                    @endphp
-                  @endforeach
+
+                    <div class="grid grid-cols-6 gap-y-2">
+ 
+                      @foreach ($user->especies_comercializas()->get() as $especie)
+                          <div class="flex justify-center">
+                              <button class="py-3 px-3 text-sm focus:outline-none leading-none text-green-700 bg-green-100 rounded">{{$especie->name}}</button>
+                          </div>
+                      @endforeach
+    
+                    </div>
+                  
+
+                  <div class="flex flex-col space-y-4 mt-6">
+                    @foreach ($user->fichas as $ficha)
+                        <div class="flex flex-col p-4 bg-gray-800 border-gray-800 shadow-md hover:shodow-lg rounded-2xl cursor-pointer transition ease-in duration-500  transform hover:scale-105">
+                          <div class="flex items-center justify-between">
+                            <div class="flex items-center mr-auto">
+                              <div class="inline-flex w-12 h-12"><img src="https://tailwindcomponents.com/storage/avatars/njkIbPhyZCftc4g9XbMWwVsa7aGVPajYLRXhEeoo.jpg" alt="aji" class=" relative p-1 w-12 h-12 object-cover rounded-2xl"><span class="absolute w-12 h-12 inline-flex border-2 rounded-2xl border-gray-600 opacity-75"></span>
+                                <span></span>
+                              </div>
+              
+                              <div class="flex flex-col ml-3 min-w-0">
+                                <div class="font-medium leading-none text-gray-100">Cuartel Nro: {{$ficha->cuartel}}</div>
+                                <p class="text-sm text-gray-500 leading-none mt-1 truncate">{{$ficha->especie->name}}</p>
+                              </div>
+                            </div>
+                            <div class="flex flex-col ml-3 min-w-0">
+                              <div class="flex">
+                                <h5 class="flex items-center font-medium text-gray-300 mr-2">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 8h6m-5 0a3 3 0 110 6H9l3 3m-3-6h6m6 1a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                  </svg> {{$ficha->total_produccion}} Kilos Producidos
+                                </h5>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                              
+                                <form action="" method="POST">
+                                  @csrf
+                                  @method('delete')
+                                <button>
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-red-400 hover:text-red-800 ml-2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                  </svg>
+                                </button>
+                              </form>
+                              
+                                
+                              </div>
+                            </div>
+                          </div>
+                        
+                        </div>
+                  
+                    @endforeach
+                  </div>
 
                 @endif
                 @php
@@ -554,36 +640,7 @@
                 
                 </div>
               </div>
-              <div class="grid grid-cols-2">
-                <div class="form-group mt-2">
-                  <div class="w-full max-w-xs">
-                    <label for="numero" class="block text-sm font-medium text-gray-700">Selecciona un número del 1 al 7:</label>
-                    <select id="numero" name="numero" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                      @for($i = 1; $i <= 7; $i++)
-                        <option value="{{ $i }}">Cuartel {{ $i }}</option>
-                      @endfor
-                    </select>
-                  </div>
-                  
-                  
-                  @error('cuartel')
-                      <span class="text-danger">{{$message}}</span>
-                  @enderror
-                </div>
-
-                  <div class="w-full max-w-xs">
-                    <label for="variedadadee" class="block text-sm font-medium text-gray-700">Selecciona un número del 1 al 7:</label>
-                    <select id="variedadadee" name="variedadadee" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                      @for($i = 1; $i <= 7; $i++)
-                        <option value="{{ $i }}">Variedad {{ $i }}</option>
-                      @endfor
-                    </select>
-                  </div>
-              </div>
-
-              <div class="flex justify-center mt-4">
-                {!! Form::submit('Agregar Variedad', ['class'=>'text-white font-bold mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
-              </div>
+     
               <div class="form-group mt-2">
                 <h1 class="text-center">Variedades:</h1>
                  <div class="grid grid-cols-6 gap-y-2">
@@ -691,6 +748,28 @@
     </div>
 
 
+    <script>
+                      document.addEventListener("DOMContentLoaded", function() {
+                          var cantHectareasInput = document.getElementById('cant_hectareas');
+                          var prodHectareasInput = document.getElementById('prod_hectareas');
+                          var totalProduccionInput = document.getElementById('total_produccion');
+                  
+                          // Función para calcular la producción total
+                          function calcularProduccionTotal() {
+                              var cantHectareas = parseFloat(cantHectareasInput.value);
+                              var prodHectareas = parseFloat(prodHectareasInput.value);
+                  
+                              if (!isNaN(cantHectareas) && !isNaN(prodHectareas)) {
+                                  var totalProduccion = cantHectareas * prodHectareas;
+                                  totalProduccionInput.value = totalProduccion.toFixed(2); // Limitar a 2 decimales
+                              }
+                          }
+                  
+                          // Calcular la producción total al cambiar cualquiera de las dos entradas
+                          cantHectareasInput.addEventListener('input', calcularProduccionTotal);
+                          prodHectareasInput.addEventListener('input', calcularProduccionTotal);
+                      });
+                  </script>
 
  
              

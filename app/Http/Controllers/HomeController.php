@@ -1103,7 +1103,8 @@ class HomeController extends Controller
 
     public function productor_edit(User $user) 
     {   $certificacions=Certificacion::where('rut',$user->rut)->get();
-        return view('admin.agronomos.editproductor',compact('user','certificacions'));
+        $especies=Especie::all()->pluck('name','id');
+        return view('admin.agronomos.editproductor',compact('user','certificacions','especies'));
     }
 
    
