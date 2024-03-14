@@ -34,7 +34,7 @@ class FichaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {    
         $ficha=Ficha::create($request->all());
 
         return redirect(route('productor.edit',$ficha->user).'/#especies');
