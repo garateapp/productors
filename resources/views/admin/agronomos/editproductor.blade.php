@@ -322,6 +322,7 @@
                               {{$k}})  {{$certificacion->name}} 
                             </div>
                             <div class="items-center my-auto content-center">
+
                               <form id="deleteForm" action="{{ route('certificacions.destroy', $certificacion->id) }}" method="POST">
                                 @csrf
                                 @method('delete')
@@ -329,10 +330,7 @@
                                     (Eliminar)
                                 </button>
                             </form>
-                            
-                                                      
-                            
-                            <br>
+                         
                           </div>
                           @php
                               $k+=1;
