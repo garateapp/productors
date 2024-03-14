@@ -326,7 +326,7 @@
                               <form id="deleteForm" action="{{ route('certificacions.destroy', $certificacion->id) }}" method="POST">
                                 @csrf
                                 @method('delete')
-                                <button type="button" id="deleteButton" class="text-red-500 text-xs my-auto ml-2 font-bold">
+                                <button type="button" id="deleteButton" class="text-red-500 text-xs mb-2 ml-2 font-bold">
                                     (Eliminar)
                                 </button>
                             </form>
