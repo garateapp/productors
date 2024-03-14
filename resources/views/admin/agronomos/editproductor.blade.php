@@ -317,15 +317,15 @@
                             $k=1;
                         @endphp
                         @foreach ($certificacions as $certificacion)
-                          <div class="font-bold text-lg flex"> 
-                            <div>
+                          <div class="flex items-center"> 
+                            <div class="items-center my-auto font-bold text-lg">
                               {{$k}})  {{$certificacion->name}} 
                             </div>
-                            <div>
+                            <div class="items-center my-auto content-center">
                               <form id="deleteForm" action="{{ route('certificacions.destroy', $certificacion->id) }}" method="POST">
                                 @csrf
                                 @method('delete')
-                                <button type="button" id="deleteButton" class="text-red-500 text-xs ml-2 font-bold">
+                                <button type="button" id="deleteButton" class="text-red-500 text-xs my-auto ml-2 pt-2 font-bold">
                                     (Eliminar)
                                 </button>
                             </form>
