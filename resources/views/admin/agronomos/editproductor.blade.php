@@ -476,6 +476,7 @@
                     @foreach ($user->fichas->sortBy('cuartel') as $item)
                         @foreach ($user->fichas->sortBy('cuartel') as $ficha)
                           @if ($item->especie_id==$ficha->especie_id)
+
                             <div x-show="activeTab==={{$k}}" class="flex flex-col p-4 bg-gray-800 border-gray-800 shadow-md hover:shodow-lg rounded-2xl cursor-pointer transition ease-in duration-500  transform hover:scale-105">
                               <div class="flex items-center justify-between">
                                 <div class="flex items-center mr-auto">
@@ -484,7 +485,7 @@
                                   </div>
                   
                                   <div class="flex flex-col ml-3 min-w-0">
-                                    <div class="font-medium leading-none text-gray-100">Cuartel Nro: {{$ficha->cuartel}} {{$ficha->id}}</div>
+                                    <div class="font-medium leading-none text-gray-100">Cuartel Nro: {{$ficha->cuartel}}</div>
                                     <p class="text-sm text-gray-500 leading-none mt-1 truncate">{{$ficha->especie->name}}</p>
                                   </div>
                                 </div>
