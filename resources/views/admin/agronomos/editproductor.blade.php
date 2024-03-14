@@ -489,7 +489,7 @@
                                   </div>
                   
                                   <div class="flex flex-col ml-3 min-w-0">
-                                    <div class="font-medium leading-none text-gray-100">Cuartel Nro: {{$ficha->cuartel}} (id:{{$ficha->id}})</div>
+                                    <div class="font-medium leading-none text-gray-100">Cuartel Nro: {{$ficha->cuartel}}</div>
                                     <p class="text-sm text-gray-500 leading-none mt-1 truncate">{{$ficha->especie->name}}</p>
                                   </div>
                                 </div>
