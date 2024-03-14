@@ -1081,11 +1081,8 @@ class HomeController extends Controller
                 $campo->update(['campo_rut'=>$campo->user->rut]);
             }
         }
-        
 
         $campos=CampoStaff::where('agronomo_id',$user->id)->get();
-
-        
 
         $campos2=CampoStaff::where('agronomo_id',$user->id)->pluck('campo_rut');
 
@@ -1104,7 +1101,8 @@ class HomeController extends Controller
     public function productor_edit(User $user) 
     {   $certificacions=Certificacion::where('rut',$user->rut)->get();
         $especies=Especie::all()->pluck('name','id');
-        return view('admin.agronomos.editproductor',compact('user','certificacions','especies'));
+        $variedades=Variedad::all()->pluck('name','id');
+        return view('admin.agronomos.editproductor',compact('user','certificacions','especies','variedades'));
     }
 
    
@@ -1367,17 +1365,10 @@ class HomeController extends Controller
                             $user=User::where('csg',$Codigo_Sag_emisor)->first();
                             if(!IS_NULL($user)){
                                 if($espec->comercializado->contains($user->id)){
-                                    if($user->fichas->pluck('especie_id')->contains($espec->id)){
-
-                                    }else{
-                                        Ficha::create(['user_id'=>$user->id,
-                                                        'especie_id'=>$espec->id]);
-                                    }
-
+                                   
                                 }else{
                                     $espec->comercializado()->attach($user->id);
-                                    Ficha::create(['user_id'=>$user->id,
-                                                        'especie_id'=>$espec->id]);
+                                   
                                 }
                             }
                             
@@ -1414,17 +1405,11 @@ class HomeController extends Controller
                             
                             if(!IS_NULL($user)){
                                 if($especie->comercializado->contains($user->id)){
-                                    if($user->fichas->pluck('especie_id')->contains($espec->id)){
-
-                                    }else{
-                                        Ficha::create(['user_id'=>$user->id,
-                                                        'especie_id'=>$especie->id]);
-                                    }
+                                 
 
                                 }else{
                                     $especie->comercializado()->attach($user->id);
-                                    Ficha::create(['user_id'=>$user->id,
-                                                        'especie_id'=>$especie->id]);
+                                   
                                 }
                             }
                             $varie=Variedad::where('name',$n_variedad)->first();
@@ -1619,17 +1604,10 @@ class HomeController extends Controller
 
                             if(!IS_NULL($user)){
                                 if($espec->comercializado->contains($user->id)){
-                                    if($user->fichas->pluck('especie_id')->contains($espec->id)){
-
-                                    }else{
-                                        Ficha::create(['user_id'=>$user->id,
-                                                        'especie_id'=>$espec->id]);
-                                    }
-
+                                   
                                 }else{
                                     $espec->comercializado()->attach($user->id);
-                                    Ficha::create(['user_id'=>$user->id,
-                                                        'especie_id'=>$espec->id]);
+                                    
                                 }
                             }
                             
@@ -1665,17 +1643,11 @@ class HomeController extends Controller
                             $user=User::where('name',$n_emisor)->first();
                             if(!IS_NULL($user)){
                                 if($especie->comercializado->contains($user->id)){
-                                    if($user->fichas->pluck('especie_id')->contains($especie->id)){
-
-                                    }else{
-                                        Ficha::create(['user_id'=>$user->id,
-                                                        'especie_id'=>$especie->id]);
-                                    }
+                                   
 
                                 }else{
                                     $especie->comercializado()->attach($user->id);
-                                    Ficha::create(['user_id'=>$user->id,
-                                                        'especie_id'=>$especie->id]);
+                                   
                                 }
                             }
                             $varie=Variedad::where('name',$n_variedad)->first();

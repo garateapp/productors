@@ -421,9 +421,7 @@
               </div>
               </section>
 
-              @php
-                  $espec=[];
-              @endphp
+           
         
               <div class="form-group mt-2"  x-data="setup()">
                 
@@ -431,130 +429,53 @@
                   <h1 class="text-center mt-4 font-bold">ESPECIES</h1>
                 </section>
 
-                <ul class="flex justify-center items-center mb-6 mt-2 hidden">
-                  <template x-for="(tab, index) in tabs" :key="index">
-                     <li class="cursor-pointer py-3 px-4 rounded transition" :class="activeTab===index ? 'bg-red-500 text-white' : ' text-gray-500'" @click="activeTab = index"
-                        x-text="tab"></li>
-                  </template>
-            
-               </ul>
+             
              
                 
-                @if ($user->fichas->count()>0)
+               
                
 
             
                     <div>
-                        {!! Form::open(['route'=>'fichas.store','files'=>true , 'autocomplete'=>'off', 'method'=> 'POST']) !!}
-                          {!! Form::hidden('user_id', $user->id) !!}
 
-                          <div class="form-group mt-4">
-                              {!! Form::label('cuartel','Cuartel Nro:') !!}
-                              {!! Form::text('cuartel', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                              @error('cuartel')
-                                  <span class="text-danger">{{$message}}</span>
-                              @enderror
-                          </div>
-
-                          <div class="form-group mt-2">
-                            {!! Form::label('especie_id','Especie:') !!}
-                            {!! Form::select('especie_id', $especies, null, ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'Seleccione una especie']) !!}
-             
-                            @error('fitosanitario')
-                                <span class="text-danger">{{$message}}</span>
-                            @enderror
-                          </div>
-
-                          <div class="form-group mt-2">
-                            {!! Form::label('variedad_id','Variedad:') !!}
-                            {!! Form::select('variedad_id', $especies, null, ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'Seleccione una especie']) !!}
-             
-                            @error('fitosanitario')
-                                <span class="text-danger">{{$message}}</span>
-                            @enderror
-                          </div>
-
-                      
-                          
-                          <div class="form-group mt-4">
-                              {!! Form::label('ano_plantacion','Año de plantación:') !!}
-                              {!! Form::text('ano_plantacion', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                              @error('ano_plantacion')
-                                  <span class="text-danger">{{$message}}</span>
-                              @enderror
-                          </div>
-                          
-                          <div class="form-group mt-2">
-                              {!! Form::label('cant_hectareas','Cantidad de hectáreas:') !!}
-                              {!! Form::text('cant_hectareas', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'', 'id'=>'cant_hectareas']) !!}
-                              @error('cant_hectareas')
-                                  <span class="text-danger">{{$message}}</span>
-                              @enderror
-                          </div>
-                          
-                          <div class="form-group mt-2">
-                              {!! Form::label('prod_hectareas','Producción por hectáreas en toneladas:') !!}
-                              {!! Form::text('prod_hectareas', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'', 'id'=>'prod_hectareas']) !!}
-                              @error('prod_hectareas')
-                                  <span class="text-danger">{{$message}}</span>
-                              @enderror
-                          </div>
-                          
-                          <div class="form-group mt-2">
-                              {!! Form::label('total_produccion','Campo total producción:') !!}
-                              {!! Form::text('total_produccion', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'', 'readonly', 'id'=>'total_produccion']) !!}
-                              @error('total_produccion')
-                                  <span class="text-danger">{{$message}}</span>
-                              @enderror
-                          </div>
-                          
-                          <div class="form-group mt-2">
-                              {!! Form::label('porcentaje_de_entrega','Porcentaje de entrega a Greenex:') !!}
-                              {!! Form::text('porcentaje_de_entrega', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                              @error('porcentaje_de_entrega')
-                                  <span class="text-danger">{{$message}}</span>
-                              @enderror
-                          </div>
-
-                          <div class="form-group mt-2">
-                            {!! Form::label('porcentaje_de_entrega','Total Kilos Entregable') !!}
-                            {!! Form::text('porcentaje_de_entrega', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                            @error('porcentaje_de_entrega')
-                                <span class="text-danger">{{$message}}</span>
-                                @enderror
-                          </div>
-
-                          <div class="form-group mt-2">
-                            {!! Form::label('porcentaje_de_entrega','Nro de Cajas: (5kgs)') !!}
-                            {!! Form::text('porcentaje_de_entrega', null , ['class'=>'mt-1 block w-full rounded-lg', 'placeholder'=>'']) !!}
-                            @error('porcentaje_de_entrega')
-                                <span class="text-danger">{{$message}}</span>
-                            @enderror
-                        </div>
-                      
-                          <div class="flex justify-end mt-4">
-                              {!! Form::submit('Agregar', ['class'=>'text-white font-bold mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
-                          </div>
-                      
-                        {!! Form::close() !!}
-                  
+                      @livewire('agronomo.ficha-create',['user'=>$user->id])
                               
                     </div>
+
+
+                      @php
+                          $espec=[];
+                      @endphp
 
                     <div class="grid grid-cols-6 gap-y-2">
  
                       @foreach ($user->especies_comercializas()->get() as $especie)
-                          <div class="flex justify-center">
+                          <div class="flex justify-center hidden">
                               <button class="py-3 px-3 text-sm focus:outline-none leading-none text-green-700 bg-green-100 rounded">{{$especie->name}}</button>
                           </div>
+                          @php
+                              $espec[]=$especie->name;
+                          @endphp
                       @endforeach
     
                     </div>
-                  
 
+                      
+                      <ul class="flex justify-center items-center mb-6 mt-2">
+                        <template x-for="(tab, index) in tabs" :key="index">
+                          <li class="cursor-pointer py-3 px-4 rounded transition" :class="activeTab===index ? 'bg-red-500 text-white' : ' text-gray-500'" @click="activeTab = index"
+                              x-text="tab"></li>
+                        </template>
+                      </ul>
+
+              @if ($user->fichas->count()>0)   
+                      @php
+                          $k=0;
+                      @endphp
                   <div class="flex flex-col space-y-4 mt-6">
-                    @foreach ($user->fichas as $ficha)
-                        <div class="flex flex-col p-4 bg-gray-800 border-gray-800 shadow-md hover:shodow-lg rounded-2xl cursor-pointer transition ease-in duration-500  transform hover:scale-105">
+                    @foreach ($user->fichas->sortByDesc('cuartel') as $ficha)
+                        
+                        <div x-show="activeTab==={{$k}}" class="flex flex-col p-4 bg-gray-800 border-gray-800 shadow-md hover:shodow-lg rounded-2xl cursor-pointer transition ease-in duration-500  transform hover:scale-105">
                           <div class="flex items-center justify-between">
                             <div class="flex items-center mr-auto">
                               <div class="inline-flex w-12 h-12"><img src="https://tailwindcomponents.com/storage/avatars/njkIbPhyZCftc4g9XbMWwVsa7aGVPajYLRXhEeoo.jpg" alt="aji" class=" relative p-1 w-12 h-12 object-cover rounded-2xl"><span class="absolute w-12 h-12 inline-flex border-2 rounded-2xl border-gray-600 opacity-75"></span>
@@ -593,7 +514,7 @@
                           </div>
                         
                         </div>
-                  
+                        
                     @endforeach
                   </div>
 
@@ -628,48 +549,15 @@
                </script>
               </div>
 
-              <div class="flex justify-between mt-12">
-                <div>
-                  <h1 class="">
-                    AGREGAR CUARTEL
-                  </h1>
-                
-                </div>
-                <div>
-
-                
-                </div>
-              </div>
-     
-              <div class="form-group mt-2">
-                <h1 class="text-center">Variedades:</h1>
-                 <div class="grid grid-cols-6 gap-y-2">
- 
-                   @foreach ($user->variedades_comercializas()->get() as $especie)
-                       <div class="flex justify-center">
-                           <button class="py-3 px-3 text-sm focus:outline-none leading-none text-green-700 bg-green-100 rounded">{{$especie->name}}</button>
-                       </div>
-                   @endforeach
- 
-                 </div>
-                 
-               </div>
               
+     
              
-           
-             
-
-
 
            
 
 
              
             
-
-              <div class="flex justify-center mt-4">
-                {!! Form::submit('Actualizar', ['class'=>'text-white font-bold mx-4 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-3 py-2 bg-gray-500 hover:bg-gray-500 focus:outline-none rounded']) !!}
-              </div>
 
             
             </div>
