@@ -473,9 +473,11 @@
               @if ($user->fichas->count()>0)   
                       @php
                           $k=0;
+                          $fichasOrdenadas = $user->fichas->sortBy('especie_id');
+                          $especiesUnicas = $fichasOrdenadas->unique('especie_id');
                       @endphp
                   <div class="flex flex-col space-y-4 mt-6">
-                    @foreach ($user->fichas->sortBy('cuartel') as $item)
+                    @foreach ($especiesUnicas as $item)
                         @foreach ($user->fichas->sortBy('cuartel') as $ficha)
                           @if ($item->especie_id==$ficha->especie_id)
 
@@ -521,6 +523,7 @@
                            
                           @endif
                         @endforeach
+                        
                         @php
                           $k+=1;
                         @endphp
