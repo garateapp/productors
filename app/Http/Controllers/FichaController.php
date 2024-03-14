@@ -84,8 +84,9 @@ class FichaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Ficha $ficha)
     {
-        //
+        $ficha->delete();
+        return redirect()->back();
     }
 }
