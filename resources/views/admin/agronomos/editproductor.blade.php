@@ -317,8 +317,19 @@
                             $k=1;
                         @endphp
                         @foreach ($certificacions as $certificacion)
-                          <div class="font-bold text-lg"> 
-                            {{$k}})  {{$certificacion->name}} <span>(Eliminar)</span> <br>
+                          <div class="font-bold text-lg flex"> 
+                            <div>
+                              {{$k}})  {{$certificacion->name}} 
+                            </div>
+                            <div>
+                            <form id="deleteFormCert" action="{{route('certificacions.destroy',$certificacion->id)}}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <button id="deleteButtonCert" class="text-red-500 text-xs ml-2 font-bold" type="submit"> (Eliminar)</button>
+                              </div>
+                          </form>
+                            
+                            <br>
                           </div>
                           @php
                               $k+=1;
@@ -707,6 +718,25 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById('deleteForm').submit();
+                }
+            });
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('deleteButtonCert').addEventListener('click', function () {
+            Swal.fire({
+                title: "¿Eliminar la certificacion?",
+                text: "No podrás revertir esta acción.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sí, eliminarla"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('deleteFormCert').submit();
                 }
             });
         });

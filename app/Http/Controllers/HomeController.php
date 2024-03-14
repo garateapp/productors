@@ -432,8 +432,8 @@ class HomeController extends Controller
     
 
     public function proceso_destroy(Proceso $proceso) {
-        Storage::delete($proceso->informe);
 
+        Storage::delete($proceso->informe);
         $proceso->update([
             'informe'=>NULL
         ]);
