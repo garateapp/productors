@@ -39,7 +39,9 @@ class FichaController extends Controller
      */
     public function store(Request $request)
     {    $request->validate([
-             'kilos_entregables'=>'required'
+             'kilos_entregables'=>'required',
+             'especie_id'=>'required',
+             'variedad_id'=>'required',
         ]);
 
         $ficha=Ficha::create($request->all());
