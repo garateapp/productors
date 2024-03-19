@@ -21,6 +21,7 @@
    
 @isset($user)
 
+
    @livewire('admin.graficos-productor', ['user' => $user], ($user->id))
 
    <div class="mx-2 sm:mx-12">
@@ -28,6 +29,10 @@
    </div>
 
 @else
+   @can('Vista agrónomo') 
+      @livewire('agronomo.listado-view', ['user' => auth()->user()], key(auth()->user()->id))
+   @endcan
+
    @can('Ver produccion_total') 
       @livewire('admin.graficos-admin')
    @endcan

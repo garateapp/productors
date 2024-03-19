@@ -1,6 +1,7 @@
 <div class="grid gap-4 grid-cols-1 md:grid-cols-1">
-
-    @livewire('agronomo.asignacion-rol',['type'=>'campos','user_id'=>$user->id])
+    @can('Asignar roles')
+      @livewire('agronomo.asignacion-rol',['type'=>'campos','user_id'=>$user->id])
+    @endcan
 
     <input wire:model="search" class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm"
     type="search" name="search" style="z-index: 10;" autocomplete="off">
