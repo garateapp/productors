@@ -297,47 +297,49 @@
                     <div class="flex justify-between items-center">
                       <div>
                         <div class="flex items-center">
-                        {!! Form::label('name','¿Posee alguna certificación?') !!}
-                        <div class="bg-green-500 text-white rounded-lg py-2 px-4 cursor-pointer ml-2" x-on:click="open=true">
-                          SI
-                        </div>
-                        <div class="ml-2 font-bold">
-                          {{$certificacions->count()}}/4
-                        </div>
-                      </div>
-                        <div class="flex mb-4 mt-2">
-                        
-                          <div class="bg-gray-500 text-white rounded-lg p-2 ml-2 cursor-pointer" x-on:click="open=!open">
-                            AGREGAR MÁS
+                            {!! Form::label('name','¿Posee alguna certificación?') !!}
+                              <div class="bg-green-500 text-white rounded-lg py-2 px-4 cursor-pointer ml-2" x-on:click="open=true">
+                                SI
+                              </div>
+                              <div class="ml-2 font-bold">
+                                {{$certificacions->count()}}/4
+                              </div>
                           </div>
-                        </div>
-                      </div>
-                      <div class="items-center">
-                        @php
-                            $k=1;
-                        @endphp
-                        @foreach ($certificacions as $certificacion)
-                          <div class="flex items-center"> 
-                            <div class="items-center my-auto font-bold text-lg">
-                              {{$k}})  {{$certificacion->name}} 
+                            <div class="flex mb-4 mt-2">
+                            
+                              <div class="bg-gray-500 text-white rounded-lg p-2 ml-2 cursor-pointer" x-on:click="open=!open">
+                                AGREGAR MÁS
+                              </div>
                             </div>
-                            <div class="items-center my-auto content-center">
-
-                              <form id="deleteForm" action="{{ route('certificacions.destroy', $certificacion->id) }}" method="POST">
-                                @csrf
-                                @method('delete')
-                                <button type="button" id="deleteButton" class="text-red-500 text-xs mb-2 ml-2 font-bold">
-                                    (Eliminar)
-                                </button>
-                            </form>
-                         
-                          </div>
-                          @php
-                              $k+=1;
-                          @endphp
-                        @endforeach
                       </div>
+                        <div class="grid grid-cols-1">
+                          @php
+                              $k=1;
+                          @endphp
+                          @foreach ($certificacions as $certificacion)
+                              <div class="flex items-center"> 
+                                <div class="items-center my-auto font-bold text-lg">
+                                  {{$k}})  {{$certificacion->name}} 
+                                </div>
+                                <div class="items-center my-auto content-center">
+
+                                  <form class="deleteFormcert" action="{{ route('certificacions.destroy', $certificacion->id) }}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="button" class="deleteButtoncert text-red-500 text-xs mb-2 ml-2 font-bold">
+                                        (Eliminar)
+                                    </button>
+                                </form>
+                            
+                              </div>
+                              @php
+                                  $k+=1;
+                              @endphp
+                              </div>
+                          @endforeach
+                        </div>
                     </div>
+                    
                     {!! Form::open(['route'=>'certificacions.store','files'=>true , 'autocomplete'=>'off', 'method'=> 'POST']) !!}
                     
                    
@@ -376,9 +378,12 @@
                               {!! Form::file('file', ['class'=>'form-input w-full'.($errors->has('file')?' border-red-600':''), 'id'=>'file','accept'=>'file/*']) !!}
                             </div>
                                 {!! Form::submit('AGREGAR', ['class'=>'text-center text-white font-bold inline w-full mx-4 focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded cursor-pointer']) !!}
-                          </div>
-                    {!! Form::close() !!}
+                        </div>
+
+                        {!! Form::close() !!}
+                    
                   @else
+
                             
                       {!! Form::open(['route'=>'certificacions.store','files'=>true , 'autocomplete'=>'off', 'method'=> 'POST']) !!}
                         {!! Form::label('name','¿Posee alguna certificación?') !!}
@@ -424,12 +429,15 @@
                                   {!! Form::file('file', ['class'=>'form-input w-full'.($errors->has('file')?' border-red-600':''), 'id'=>'file','accept'=>'file/*']) !!}
                                 </div>
                                     {!! Form::submit('AGREGAR', ['class'=>'text-center text-white font-bold inline w-full mx-4 focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-green-500 hover:bg-green-500 focus:outline-none rounded cursor-pointer']) !!}
-                              </div>
-                        {!! Form::close() !!}
+                            </div>
+
+                      {!! Form::close() !!}
                       
                     
                     
                   @endif
+
+
               </div>
               </section>
 
@@ -465,7 +473,7 @@
  
                       @foreach ($especiesUnicas as $ficha)
                           <div class="flex justify-center hidden">
-                              <button class="py-3 px-3 text-sm focus:outline-none leading-none text-green-700 bg-green-100 rounded">{{$especie->name}}</button>
+                              <button class="py-3 px-3 text-sm focus:outline-none leading-none text-green-700 bg-green-100 rounded">{{$ficha->especie->name}}</button>
                           </div>
                           @php
                               $espec[]=$ficha->especie->name;
@@ -529,15 +537,16 @@
                                           </h5>
                                         </a>
                                       
-                                      <form id="deleteForm" action="{{ route('fichas.destroy', $ficha) }}" method="POST">
-                                          @csrf
-                                          @method('delete')
-                                          <button type="button" id="deleteButton">
-                                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-red-400 hover:text-red-800 ml-2">
-                                                  <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                              </svg>
-                                          </button>
-                                      </form>
+                                        <form class="deleteForm" action="{{ route('fichas.destroy', $ficha) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="button" class="deleteButton">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-red-400 hover:text-red-800 ml-2">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                                </svg>
+                                            </button>
+                                        </form>
+                                      
                                     
                                       
                                     </div>
@@ -719,43 +728,55 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('deleteButton').addEventListener('click', function () {
+  document.addEventListener('DOMContentLoaded', function () {
+    var deleteButtons = document.getElementsByClassName('deleteButton');
+    
+    for (var i = 0; i < deleteButtons.length; i++) {
+        deleteButtons[i].addEventListener('click', function () {
             Swal.fire({
-                title: "¿Eliminar registro?",
+                title: "¿Eliminar ficha?",
                 text: "No podrás revertir esta acción.",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Sí, eliminarla"
+                confirmButtonText: "Sí, eliminar"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    document.getElementById('deleteForm').submit();
+                    // Selecciona el formulario que está justo antes del botón actual
+                    var form = this.parentElement;
+                    form.submit();
                 }
             });
         });
-    });
+    }
+  });
 </script>
 <script>
-                                document.addEventListener('DOMContentLoaded', function () {
-                                    document.getElementById('deleteButton').addEventListener('click', function () {
-                                        Swal.fire({
-                                            title: "¿Eliminar certificación?",
-                                            text: "No podrás revertir esta acción.",
-                                            icon: "warning",
-                                            showCancelButton: true,
-                                            confirmButtonColor: "#3085d6",
-                                            cancelButtonColor: "#d33",
-                                            confirmButtonText: "Sí, eliminar"
-                                        }).then((result) => {
-                                            if (result.isConfirmed) {
-                                                document.getElementById('deleteForm').submit();
-                                            }
-                                        });
-                                    });
-                                });
-                            </script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var deleteButtons = document.getElementsByClassName('deleteButtoncert');
+            
+            for (var i = 0; i < deleteButtons.length; i++) {
+                deleteButtons[i].addEventListener('click', function () {
+                    Swal.fire({
+                        title: "¿Eliminar certificación?",
+                        text: "No podrás revertir esta acción.",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Sí, eliminar"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Selecciona el formulario que está justo antes del botón actual
+                            var form = this.parentElement;
+                            form.submit();
+                        }
+                    });
+                });
+            }
+        });
+</script>
 
 
 
