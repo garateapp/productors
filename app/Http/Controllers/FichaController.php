@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Certificacion;
+use App\Models\Especie;
 use App\Models\Ficha;
+use App\Models\User;
+use App\Models\Variedad;
 use Illuminate\Http\Request;
 
 class FichaController extends Controller
@@ -34,7 +38,10 @@ class FichaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {    
+    {    $request->validate([
+             'kilos_entregables'=>'required'
+        ]);
+
         $ficha=Ficha::create($request->all());
 
         return redirect(route('productor.edit',$ficha->user).'/#especies');
@@ -58,9 +65,13 @@ class FichaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(Ficha $ficha)
+    {   $user=User::find($ficha->user_id);
+        $certificacions=Certificacion::where('rut',$user->rut)->get();
+        $especies=Especie::all()->pluck('name','id');
+        $variedades=Variedad::all()->pluck('name','id');
+        
+        return view('admin.agronomos.editficha',compact('ficha','user','certificacions','especies','variedades'));
     }
 
     /**
