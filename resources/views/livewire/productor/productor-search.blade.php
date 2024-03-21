@@ -421,7 +421,7 @@
                                             </a>
                                         </td>
                                         <td class="pl-5 text-center">
-                                           
+                                           <div class="grid grid-cols-1 gap-y-2">
                                             <a href="{{Route('download.proceso.user',$user)}}">
                                                 <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-2 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
                                                     <p class="text-sm font-medium leading-none text-white whitespace-nowrap">Descargar Excel de procesos</p>
@@ -433,7 +433,7 @@
                                                     <p class="text-sm font-medium leading-none text-white whitespace-nowrap">Descargar PDD's de procesos</p>
                                                 </button>
                                             </a>
-                                         
+                                        </div>
                                             
                                         </td>
                                       
