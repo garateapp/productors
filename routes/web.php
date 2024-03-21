@@ -139,6 +139,8 @@ Route::get('download/procesosallzip', [HomeController::class,'descargarInformes'
 
 Route::get('download/procesosallespecie/{especie}', [HomeController::class,'descargarInformespecies'])->name('download.procesosallzip.especie');
 
+Route::get('download/procesosallvariedad/{especie}', [HomeController::class,'descargarInformevariedad'])->name('download.procesosallzip.variedad');
+
 Route::get('download/procesosallusers/{user}', [HomeController::class,'descargarInformeusers'])->name('download.procesosallzip.user');
 
 Route::delete('delete/proceso/{proceso}',[HomeController::class,'proceso_destroy'])->name('delete.proceso');

@@ -21,6 +21,7 @@
   
            
         </div>
+       
         <div>
             @if ($temporada=='anterior')
                 <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:red-green-500 sm:mt-0 px-6 py-3 bg-red-500 hover:bg-red-500 focus:outline-none rounded">
@@ -65,6 +66,13 @@
                      <p class="text-xs font-medium leading-none text-white">ANTERIOR</p>
                   </button>
                </a>
+            </div>
+            <div>
+                <a href="{{route('download.procesosallzip.variedad',$varie)}}">
+                    <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
+                       <p class="text-sm font-medium leading-none text-white">Descargar PDF'S .zip</p>
+                    </button>
+                 </a>
             </div>
             <div class="items-center my-auto">
             
