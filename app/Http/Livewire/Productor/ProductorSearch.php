@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Productor;
 
+use App\Exports\ProcesosExport;
 use App\Models\CampoStaff;
 use App\Models\Sync;
 use App\Models\Telefono;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Http;
-
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductorSearch extends Component
 {   use WithPagination;
@@ -61,6 +62,8 @@ class ProductorSearch extends Component
 
         return view('livewire.productor.productor-search',compact('users','allusers','sync'));
     }
+
+    
 
     public function toggleEmailNotification($userId)
     {

@@ -88,6 +88,7 @@ class ProcesoSearch extends Component
         $this->search=$this->espec->name;
 
     }
+    
     public function generateReport(){
         return Excel::download(new ProcesosExport($this->productor->id),'Procesos '.$this->productor->name.'.xlsx');
     }

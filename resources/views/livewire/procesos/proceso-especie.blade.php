@@ -64,7 +64,8 @@
             </a>
          </div>
          <div>
-            <button wire:click="generateReport" class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
+      <div class="grid grid-cols-1 gap-y-2">
+         <button wire:click="generateReport" class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
                <p class="text-sm font-medium leading-none text-white">Descargar Excel</p>
          </button>
          <a href="{{route('download.procesosallzip.especie',$espec)}}">
@@ -73,7 +74,7 @@
                </button>
             </a>
          </div>
-
+      </div>
          <div class="items-center my-auto">
          
       

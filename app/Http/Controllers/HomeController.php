@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Fortify\CreateNewUser;
+use App\Exports\ProcesosExport;
 use App\Models\Calidad;
 use App\Models\Detalle;
 use App\Models\Especie;
@@ -34,6 +35,7 @@ use App\Models\CampoStaff;
 use App\Models\Certificacion;
 use App\Models\Ficha;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 use ZipArchive;
 
 class HomeController extends Controller
@@ -430,6 +432,13 @@ class HomeController extends Controller
         return response()->download(storage_path('app/'.$proceso->informe));
     }
 
+  
+
+    public function download_proceso_user(User $user){
+       
+        return Excel::download(new ProcesosExport($user->id),'Procesos '.$user->name.'.xlsx');
+    }
+
     
 
     public function descargarInformes() {
@@ -458,6 +467,29 @@ class HomeController extends Controller
     public function descargarInformespecies(Especie $especie) {
         $procesos = Proceso::whereNotNull('informe')->where('temporada','actual')->where('especie',$especie->name)->get(); // Suponiendo que Proceso es el nombre de tu modelo
         $zipFileName = 'Infomes_de_proceso_'.$especie->name.'.zip';
+        $zip = new ZipArchive;
+        $zip->open(storage_path('app/'.$zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
+    
+        foreach ($procesos as $proceso) {
+            $rutaInforme = $proceso->informe;
+            $nombreArchivo = basename($rutaInforme); // Obtiene el nombre del archivo PDF
+    
+            // Verifica si el archivo existe en el almacenamiento
+            if (Storage::exists($rutaInforme)) {
+                // Agrega el archivo al archivo ZIP
+                $zip->addFile(storage_path('app/'.$rutaInforme), $nombreArchivo);
+            }
+        }
+    
+        $zip->close();
+    
+        // Descarga el archivo ZIP y envía la respuesta al cliente
+        return response()->download(storage_path('app/'.$zipFileName))->deleteFileAfterSend();
+    }
+
+    public function descargarInformeusers(User $user) {
+        $procesos = Proceso::whereNotNull('informe')->where('temporada','actual')->where('agricola',$user->name)->get(); // Suponiendo que Proceso es el nombre de tu modelo
+        $zipFileName = 'Infomes_de_proceso_'.$user->name.'.zip';
         $zip = new ZipArchive;
         $zip->open(storage_path('app/'.$zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
     
