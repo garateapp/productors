@@ -432,7 +432,7 @@ class HomeController extends Controller
 
     public function download_procesoall() {
 
-        $procesos = Proceso::all(); // Suponiendo que Proceso es el nombre de tu modelo
+        $procesos = Proceso::whereNotNull('informe')->get(); // Suponiendo que Proceso es el nombre de tu modelo
 
         foreach ($procesos as $proceso) {
             $rutaInforme = $proceso->informe;
@@ -450,7 +450,7 @@ class HomeController extends Controller
     }
 
     public function descargarInformes() {
-        $procesos = Proceso::whereNotNull('informe')->get(); // Suponiendo que Proceso es el nombre de tu modelo
+        $procesos = Proceso::whereNotNull('informe')->where('temporada','actual')->get(); // Suponiendo que Proceso es el nombre de tu modelo
         $zipFileName = 'informes.zip';
         $zip = new ZipArchive;
         $zip->open(storage_path('app/'.$zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
