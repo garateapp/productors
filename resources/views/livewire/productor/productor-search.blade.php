@@ -87,6 +87,7 @@
                                 <th>MERMA</th>
                                 <th>Accion</th>
                                
+                               
                             </thead>
                             <tbody>
                                 @php
@@ -421,22 +422,22 @@
                                             </a>
                                         </td>
                                         <td class="pl-5 text-center">
-                                           <div class="grid grid-cols-1 gap-y-2">
-                                            <a href="{{Route('download.proceso.user',$user)}}">
-                                                <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-2 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
-                                                    <p class="text-sm font-medium leading-none text-white whitespace-nowrap">Descargar Excel de procesos</p>
-                                                </button>
-                                            </a>
-
-                                            <a href="{{Route('download.procesosallzip.user',$user)}}" target="_blank">
-                                                <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-2 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
-                                                    <p class="text-sm font-medium leading-none text-white whitespace-nowrap">Descargar PDD's de procesos</p>
-                                                </button>
-                                            </a>
-                                        </div>
+                                          
+                                                    <a href="{{Route('download.proceso.user',$user)}}">
+                                                        <button class="my-2 mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-2 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
+                                                            <p class="text-sm font-medium leading-none text-white whitespace-nowrap">Descargar Excel de procesos</p>
+                                                        </button>
+                                                    </a>
+                                              
+                                                    <a href="{{Route('download.procesosallzip.user',$user)}}" target="_blank" class="mt-4">
+                                                        <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-2 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
+                                                            <p class="text-sm font-medium leading-none text-white whitespace-nowrap">Descargar PDD's de procesos</p>
+                                                        </button>
+                                                    </a>
+                                               
                                             
                                         </td>
-                                      
+                                
                                          
                                     </tr>
 
