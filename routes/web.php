@@ -133,6 +133,10 @@ Route::post('archivo/recepcions', [HomeController::class,'recepcion_upload'])->n
 
 Route::get('download/{proceso}.pdf', [HomeController::class,'download_proceso'])->name('download.proceso');
 
+Route::get('download/procesosall', [HomeController::class,'download_proceso'])->name('download.procesosall');
+
+Route::get('download/procesosallzip', [HomeController::class,'descargarInformes'])->name('download.procesosallzip');
+
 Route::delete('delete/proceso/{proceso}',[HomeController::class,'proceso_destroy'])->name('delete.proceso');
 
 Route::resource('mensaje', MensajeController::class)->middleware('auth')->names('mensajes');

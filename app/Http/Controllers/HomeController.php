@@ -34,6 +34,7 @@ use App\Models\CampoStaff;
 use App\Models\Certificacion;
 use App\Models\Ficha;
 use Illuminate\Support\Facades\Mail;
+use ZipArchive;
 
 class HomeController extends Controller
 {
@@ -427,6 +428,48 @@ class HomeController extends Controller
     public function download_proceso(Proceso $proceso) {
 
         return response()->download(storage_path('app/'.$proceso->informe));
+    }
+
+    public function download_procesoall() {
+
+        $procesos = Proceso::all(); // Suponiendo que Proceso es el nombre de tu modelo
+
+        foreach ($procesos as $proceso) {
+            $rutaInforme = $proceso->informe;
+            $nombreArchivo = basename($rutaInforme); // Obtiene el nombre del archivo PDF
+            
+            // Verifica si el archivo existe en el almacenamiento
+            if (Storage::exists($rutaInforme)) {
+                // Descarga el archivo y envía la respuesta al cliente
+                return response()->download(storage_path('app/'.$rutaInforme), $nombreArchivo);
+            } else {
+                // Manejo de error si el archivo no existe
+                return response()->json(['error' => 'El archivo no existe'], 404);
+            }
+        }
+    }
+
+    public function descargarInformes() {
+        $procesos = Proceso::whereNotNull('informe')->get(); // Suponiendo que Proceso es el nombre de tu modelo
+        $zipFileName = 'informes.zip';
+        $zip = new ZipArchive;
+        $zip->open(storage_path('app/'.$zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
+    
+        foreach ($procesos as $proceso) {
+            $rutaInforme = $proceso->informe;
+            $nombreArchivo = basename($rutaInforme); // Obtiene el nombre del archivo PDF
+    
+            // Verifica si el archivo existe en el almacenamiento
+            if (Storage::exists($rutaInforme)) {
+                // Agrega el archivo al archivo ZIP
+                $zip->addFile(storage_path('app/'.$rutaInforme), $nombreArchivo);
+            }
+        }
+    
+        $zip->close();
+    
+        // Descarga el archivo ZIP y envía la respuesta al cliente
+        return response()->download(storage_path('app/'.$zipFileName))->deleteFileAfterSend();
     }
 
     

@@ -78,26 +78,42 @@
                </button>
             </a>
          </div>
-         <div class="items-center my-auto">
+         <div class="items-center my-auto grid grid-cols-1 gap-y-2">
             <button wire:click="generateReport" class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
                <p class="text-sm font-medium leading-none text-white">Descargar Excel</p>
            </button>
-           
-            @if(Route::currentRouteName() == 'procesos.index.anterior')
-               <a href="{{route('subir.procesos.anterior')}}">
-                  <button  class="my-1 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-green-500 hover:bg-green-600 focus:outline-none rounded ml-2">
-                     <p class="text-sm font-medium leading-none text-white">SUBIR PROCESO</p>
-                  </button>
-               </a>
-            @else
-               <a href="{{route('subir.procesos')}}">
-                  <button  class="my-1 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-green-500 hover:bg-green-600 focus:outline-none rounded ml-2">
-                     <p class="text-sm font-medium leading-none text-white">SUBIR PROCESO</p>
-                  </button>
-               </a>
-            @endif
+             <a href="{{route('download.procesosall')}}">
+               <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
+                  <p class="text-sm font-medium leading-none text-white">Descargar PDF'S</p>
+               </button>
+            </a>
+            <a href="{{route('download.procesosallzip')}}">
+               <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
+                  <p class="text-sm font-medium leading-none text-white">Descargar PDF'S .zip</p>
+               </button>
+            </a>
 
+
+          
+       
          </div>
+
+             
+         @if(Route::currentRouteName() == 'procesos.index.anterior')
+            <a href="{{route('subir.procesos.anterior')}}">
+               <button  class="my-1 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-green-500 hover:bg-green-600 focus:outline-none rounded ml-2">
+                  <p class="text-sm font-medium leading-none text-white">SUBIR PROCESO</p>
+               </button>
+            </a>
+         @else
+            <a href="{{route('subir.procesos')}}">
+               <button  class="my-1 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-green-500 hover:bg-green-600 focus:outline-none rounded ml-2">
+                  <p class="text-sm font-medium leading-none text-white">SUBIR PROCESO</p>
+               </button>
+            </a>
+         @endif
+
+        
       </div>
       
    </div>
