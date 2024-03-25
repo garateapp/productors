@@ -374,6 +374,8 @@
                     </tbody>
                 </table>
             </x-table-responsive>
-           
+            <div>
+                {{$detalles->links()}}
+            </div>
         </div>
 </div>
