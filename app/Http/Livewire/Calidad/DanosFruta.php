@@ -48,6 +48,11 @@ class DanosFruta extends Component
     }
 
     public function export(){
-        return Excel::download(new DanostotalExport($this->especie->name,$this->productor->name),'Daños '.$this->especie->name.'.xlsx');
+        if($this->productor){
+            return Excel::download(new DanostotalExport($this->especie->name,$this->productor->name),'Daños '.$this->especie->name.'-'.$this->productor->name.'.xlsx');
+        }else{
+            return Excel::download(new DanostotalExport($this->especie->name,null),'Daños '.$this->especie->name.'.xlsx');
+        }
+            
     }
 }
