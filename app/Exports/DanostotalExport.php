@@ -48,6 +48,7 @@ class DanostotalExport implements FromCollection, WithCustomStartCell, WithMappi
         return[
             'Id',
             'Lote', 
+            'especie',
             'Embalaje',
             'Variedad',
             'Tipo Item',
@@ -66,6 +67,7 @@ class DanostotalExport implements FromCollection, WithCustomStartCell, WithMappi
             return [
                 $detalle->calidad->recepcion->id_g_recepcion,
                 $detalle->calidad->recepcion->numero_g_recepcion,
+                $detalle->calidad->recepcion->n_especie,
                 $detalle->embalaje,
                 $detalle->variedad,
                 $detalle->tipo_item,
