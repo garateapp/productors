@@ -29,7 +29,7 @@ class DanostotalExport implements FromCollection, WithCustomStartCell, WithMappi
     public function collection()
     {   if($this->especie){
             return Detalle::whereHas('calidad.recepcion', function ($query) {
-                $query->where('n_especie', $this->especie);
+                $query->where('temporada', 'actual')->where('n_especie', $this->especie);
             })->get();
         }else{
             return Detalle::whereHas('calidad.recepcion', function ($query) {

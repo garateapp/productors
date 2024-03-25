@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire\Calidad;
 
+use App\Exports\DanostotalExport;
 use App\Models\Detalle;
 use App\Models\Especie;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DanosFruta extends Component
 {   use WithPagination;
@@ -29,5 +31,9 @@ class DanosFruta extends Component
 
     public function updatedselectedespecie($id){
         $this->especie=Especie::find($id);
+    }
+
+    public function export(){
+        return Excel::download(new DanostotalExport($this->especie),'Daños '.$this->especie->name.'.xlsx');
     }
 }
