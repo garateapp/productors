@@ -34,7 +34,7 @@ class DanosFruta extends Component
         
 
         $especies=Especie::all();
-        $productors= User::orderBy('name')->get();
+        $productors= User::where('kilos_netos','>',0)->orderBy('name')->get();
 
 
         return view('livewire.calidad.danos-fruta',compact('detalles','especies','productors'));
