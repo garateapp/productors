@@ -186,6 +186,10 @@ Route::get('user/create', [HomeController::class,'user_create'])->name('user.cre
 
 Route::get('agronomos', [HomeController::class,'listado_agronomos'])->name('agronomos.index');
 
+Route::get('/danosreport', [HomeController::class,'danoreport'])->name('danos.index');
+
+Route::get('/danosexport', [HomeController::class,'danoexport'])->name('danos.export');
+
 
 Route::get('agronomo/{user}', [HomeController::class,'productor_index'])->name('productor.index');
 

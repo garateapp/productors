@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Fortify\CreateNewUser;
+use App\Exports\DanostotalExport;
 use App\Exports\ProcesosExport;
 use App\Models\Calidad;
 use App\Models\Detalle;
@@ -46,6 +47,17 @@ class HomeController extends Controller
             'user_id'=>auth()->user()->id
         ]);
         return view('productors.index');
+    }
+
+    public function danoreport()
+    {   $detalles = Detalle::all();
+
+        return view('calidad.danos',compact('detalles'));
+    }
+
+    public function danoexport()
+    {    
+        return Excel::download(new DanostotalExport(null),'Daños.xlsx');
     }
     
 
