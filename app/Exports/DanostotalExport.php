@@ -34,7 +34,7 @@ class DanostotalExport implements FromCollection, WithCustomStartCell, WithMappi
         }else{
             return Detalle::whereHas('calidad.recepcion', function ($query) {
                 $query->where('temporada', 'actual');
-            })->get();
+            })->take(25000);
         }
         
     }
