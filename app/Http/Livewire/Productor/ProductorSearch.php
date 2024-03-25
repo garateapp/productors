@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Productor;
 
+use App\Exports\DanostotalExport;
 use App\Exports\ProcesosExport;
 use App\Models\CampoStaff;
 use App\Models\Sync;
@@ -63,7 +64,10 @@ class ProductorSearch extends Component
         return view('livewire.productor.productor-search',compact('users','allusers','sync'));
     }
 
-    
+    public function export($id){
+        $user=User::find($id);
+        return Excel::download(new DanostotalExport(null,$user->name),'Daños '.$user->name.'.xlsx');
+    }
 
     public function toggleEmailNotification($userId)
     {

@@ -16,11 +16,12 @@ use PhpOffice\PhpSpreadsheet\Shared\Date;
 class DanostotalExport implements FromCollection, WithCustomStartCell, WithMapping, WithColumnFormatting, WithHeadings, ShouldAutoSize
 {   use Exportable;
 
-    protected $especie;
+    protected $especie,$csg;
 
-    public function __construct($especie)
+    public function __construct($especie, $csg)
     {
         $this->especie = $especie;
+        $this->csg = $csg;
     }
     /**
     * @return \Illuminate\Support\Collection
@@ -28,13 +29,25 @@ class DanostotalExport implements FromCollection, WithCustomStartCell, WithMappi
     
     public function collection()
     {   if($this->especie){
-            return Detalle::whereHas('calidad.recepcion', function ($query) {
-                $query->where('temporada', 'actual')->where('n_especie', $this->especie);
-            })->get();
+            if($this->csg){
+                   return Detalle::whereHas('calidad.recepcion', function ($query) {
+                        $query->where('temporada', 'actual')->where('n_especie', $this->especie)->where('n_emisor', $this->csg);
+                    })->get();
+            }else{
+                 return Detalle::whereHas('calidad.recepcion', function ($query) {
+                        $query->where('temporada', 'actual')->where('n_especie', $this->especie);
+                    })->get();
+            }
         }else{
-            return Detalle::whereHas('calidad.recepcion', function ($query) {
-                $query->where('temporada', 'actual');
-            })->get();
+            if($this->csg){
+                   return Detalle::whereHas('calidad.recepcion', function ($query) {
+                        $query->where('temporada', 'actual')->where('n_emisor', $this->csg);
+                    })->get();
+            }else{
+                 return Detalle::whereHas('calidad.recepcion', function ($query) {
+                        $query->where('temporada', 'actual');
+                    })->get();
+            }
         }
         
     }
@@ -48,7 +61,8 @@ class DanostotalExport implements FromCollection, WithCustomStartCell, WithMappi
         return[
             'Id',
             'Lote', 
-            'especie',
+            'Especie',
+            'Productor',
             'Embalaje',
             'Variedad',
             'Tipo Item',
@@ -68,6 +82,7 @@ class DanostotalExport implements FromCollection, WithCustomStartCell, WithMappi
                 $detalle->calidad->recepcion->id_g_recepcion,
                 $detalle->calidad->recepcion->numero_g_recepcion,
                 $detalle->calidad->recepcion->n_especie,
+                $detalle->calidad->recepcion->n_emisor,
                 $detalle->embalaje,
                 $detalle->variedad,
                 $detalle->tipo_item,
@@ -84,6 +99,7 @@ class DanostotalExport implements FromCollection, WithCustomStartCell, WithMappi
                 $detalle->calidad->recepcion->id_g_recepcion,
                 $detalle->calidad->recepcion->numero_g_recepcion,
                 $detalle->calidad->recepcion->n_especie,
+                $detalle->calidad->recepcion->n_emisor,
                 $detalle->embalaje,
                 $detalle->temperatura,
                 $detalle->tipo_item,

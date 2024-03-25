@@ -23,6 +23,7 @@
                         <th>ID</th>
                         <th>Lote</th>
                         <th>Especie</th>
+                        <th>Productor</th>
                         <th>Embalaje</th>
                         <th>Cantidad</th>
                         <th class="text-center">Tipo Item</th>
@@ -71,6 +72,20 @@
                 
                                                 @if ($detalle->calidad->recepcion->numero_g_recepcion)
                                                     {{$detalle->calidad->recepcion->numero_g_recepcion}}
+                                                    
+                                                @endif
+                                            
+                                                
+                                            </p>
+                                        
+                                        </td>
+                                        <td class="text-center">
+                                            <p class="text-base font-medium leading-none text-gray-700 mr-2">
+                
+                                            
+                
+                                                @if ($detalle->calidad->recepcion->numero_g_recepcion)
+                                                    {{$detalle->calidad->recepcion->n_emisor}}
                                                     
                                                 @endif
                                             
@@ -257,6 +272,20 @@
                 
                                                 @if ($detalle->calidad->recepcion->numero_g_recepcion)
                                                     {{$detalle->calidad->recepcion->numero_g_recepcion}}
+                                                    
+                                                @endif
+                                            
+                                                
+                                            </p>
+                                        
+                                        </td>
+                                        <td class="text-center">
+                                            <p class="text-base font-medium leading-none text-gray-700 mr-2">
+                
+                                            
+                
+                                                @if ($detalle->calidad->recepcion->numero_g_recepcion)
+                                                    {{$detalle->calidad->recepcion->n_emisor}}
                                                     
                                                 @endif
                                             

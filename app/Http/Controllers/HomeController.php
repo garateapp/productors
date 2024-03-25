@@ -57,7 +57,7 @@ class HomeController extends Controller
 
     public function danoexport()
     {    
-        return Excel::download(new DanostotalExport(null),'Daños.xlsx');
+        return Excel::download(new DanostotalExport(null,null),'Daños.xlsx');
     }
     
 
