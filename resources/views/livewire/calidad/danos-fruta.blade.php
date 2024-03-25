@@ -1,10 +1,19 @@
 <div>
     <div class="flex justify-end my-4">                     
-        <a href="{{route('danos.export')}}" target="_blank">
-            <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
-            <p class="text-sm font-medium leading-none text-white">Exportar en Excel</p>
-            </button>
-        </a>
+            <div class="flex"> 
+                <select wire:model.live="selectedespecie" class="mx-auto w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                    <option value="" class="text-center"> - </option>
+                    @foreach ($especies as $especie)
+                        <option value="{{$especie->id}}" class="text-center mx-4">{{$especie->name}}</option>
+                    @endforeach
+                      
+                </select> 
+
+                <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
+                    <p class="text-sm font-medium leading-none text-white">Exportar en Excel</p>
+                </button>
+            </div>
+       
     </div>
         <div class="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10 mt-6">
             <x-table-responsive>   
@@ -13,6 +22,7 @@
                     <thead class="bg-gray-50 rounded-full">
                         <th>ID</th>
                         <th>Lote</th>
+                        <th>Especie</th>
                         <th>Embalaje</th>
                         <th>Cantidad</th>
                         <th class="text-center">Tipo Item</th>
@@ -61,6 +71,20 @@
                 
                                                 @if ($detalle->calidad->recepcion->numero_g_recepcion)
                                                     {{$detalle->calidad->recepcion->numero_g_recepcion}}
+                                                    
+                                                @endif
+                                            
+                                                
+                                            </p>
+                                        
+                                        </td>
+                                        <td class="text-center">
+                                            <p class="text-base font-medium leading-none text-gray-700 mr-2">
+                
+                                            
+                
+                                                @if ($detalle->calidad->recepcion->numero_g_recepcion)
+                                                    {{$detalle->calidad->recepcion->n_especie}}
                                                     
                                                 @endif
                                             
@@ -233,6 +257,20 @@
                 
                                                 @if ($detalle->calidad->recepcion->numero_g_recepcion)
                                                     {{$detalle->calidad->recepcion->numero_g_recepcion}}
+                                                    
+                                                @endif
+                                            
+                                                
+                                            </p>
+                                        
+                                        </td>
+                                        <td class="text-center">
+                                            <p class="text-base font-medium leading-none text-gray-700 mr-2">
+                
+                                            
+                
+                                                @if ($detalle->calidad->recepcion->numero_g_recepcion)
+                                                    {{$detalle->calidad->recepcion->n_especie}}
                                                     
                                                 @endif
                                             
