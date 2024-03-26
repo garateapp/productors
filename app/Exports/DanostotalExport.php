@@ -107,7 +107,8 @@ class DanostotalExport implements FromCollection, WithCustomStartCell, WithMappi
                 $detalle->valor_ss,
                 $detalle->porcentaje_muestra,
                 $detalle->cantidad,
-                date('d M Y', strtotime($detalle->fecha))
+                Date::dateTimeToExcel(new DateTime($detalle->fecha)),
+              
 
             ];
         }
