@@ -436,7 +436,7 @@
                                                     </a>
 
                                                     <button wire:click="export({{$user->id}})" class="my-2 mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500  px-2 mt-2 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
-                                                        <p class="text-sm font-medium leading-none text-white whitespace-nowrap">Descargar Daños</p>
+                                                        <p class="text-sm font-medium leading-none text-white whitespace-nowrap">Descargar Reporte de Calidad</p>
                                                     </button>
                                                
                                             

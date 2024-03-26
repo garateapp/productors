@@ -110,7 +110,7 @@
                           
                     <a href="{{route('danos.index')}}">
                         <button class="mx-2 items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-6 py-3 bg-gray-500 hover:bg-gray-600 focus:outline-none rounded">
-                        <p class="text-sm font-medium leading-none text-white">Daños</p>
+                        <p class="text-sm font-medium leading-none text-white">Reporte de Calidad</p>
                         </button>
                     </a>
                         <select wire:model="ctd" class="max-w-xl  mx-2 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-6 rounded focus:outline-none focus:bg-white focus:border-gray-500">
