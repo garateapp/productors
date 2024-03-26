@@ -338,9 +338,8 @@
                                                 </p>
                                             </div>
                                         </td>
-                                        <td class="text-left">
-    
-                                                <p class="text-base font-medium leading-none text-gray-700 mr-2 text-left">
+                                        <td class="pl-5 whitespace-nowrap">
+                                            <p class="whitespace-nowrap  text-base flex font-medium leading-none text-gray-700 mr-2">
                 
                                         
                                                 @if ($detalle->tipo_item)
@@ -350,9 +349,8 @@
                                             </p>
                                         
                                         </td>
-                                        <td class="text-left">
-    
-                                            <p class="text-base font-medium leading-none text-gray-700 mr-2 text-left">
+                                        <td class="pl-5 whitespace-nowrap">
+                                            <p class="whitespace-nowrap  text-base flex font-medium leading-none text-gray-700 mr-2">
             
     
                                                 @if ($detalle->detalle_item)
