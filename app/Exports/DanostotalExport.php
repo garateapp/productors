@@ -121,7 +121,7 @@ class DanostotalExport implements FromCollection, WithCustomStartCell, WithMappi
     public function columnFormats(): array
     {
         return [
-            'L'=>'dd/mm/yyyy'
+            'M'=>'dd/mm/yyyy'
         ];
     }
 }
