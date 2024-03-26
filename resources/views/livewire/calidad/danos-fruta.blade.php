@@ -29,8 +29,8 @@
                     <thead class="bg-gray-50 rounded-full">
                         <th>ID</th>
                         <th>Lote</th>
-                        <th>Especie</th>
                         <th>Productor</th>
+                        <th>Especie</th>
                         <th>Embalaje</th>
                         <th>Cantidad</th>
                         <th class="text-center">Tipo Item</th>
