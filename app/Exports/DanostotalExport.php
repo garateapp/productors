@@ -70,7 +70,6 @@ class DanostotalExport implements FromCollection, WithCustomStartCell, WithMappi
             'Detalle Item',
             'Cantidad',
             '% Muestra',
-            'Cantidad Muestra',
             'Fecha'
            
         ];
