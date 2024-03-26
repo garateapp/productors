@@ -88,8 +88,8 @@ class DanostotalExport implements FromCollection, WithCustomStartCell, WithMappi
                 $detalle->variedad,
                 $detalle->tipo_item,
                 $detalle->detalle_item,
-                $detalle->porcentaje_muestra,
                 $detalle->cantidad,
+                $detalle->porcentaje_muestra,
                 Date::dateTimeToExcel(new DateTime($detalle->fecha)),
             
 
