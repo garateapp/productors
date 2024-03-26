@@ -362,9 +362,9 @@
                                             </p>
                                             
                                         </td>
-                                        <td class="text-center">
+                                        <td class="text-left">
     
-                                            <p class="text-base font-medium leading-none text-gray-700 mr-2 text-center">
+                                            <p class="text-base font-medium leading-none text-gray-700 mr-2 text-left">
             
                                         
                                                 @if ($detalle->valor_ss)
@@ -375,9 +375,9 @@
                                             </p>
                                             
                                         </td>
-                                        <td class="text-center">
+                                        <td class="text-left">
     
-                                            <p class="text-base font-medium leading-none text-gray-700 mr-2 text-center">
+                                            <p class="text-base font-medium leading-none text-gray-700 mr-2 text-left">
             
                                         
                                                 @if ($detalle->valor_ss)
