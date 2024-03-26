@@ -327,10 +327,8 @@
                                                 </p>
                                     
                                         </td>
-                                        <td class="text-left">
-    
-                                            <p class="text-base font-medium leading-none text-gray-700 mr-2 text-center">
-            
+                                        <td class="pl-5">
+                                            <div class="whitespace-nowrap flex items-center text-center">
                                                 
                                                 <p class="whitespace-nowrap text-sm leading-none text-gray-600 ml-2">
                                             
