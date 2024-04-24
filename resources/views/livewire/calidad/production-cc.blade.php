@@ -347,11 +347,9 @@
                                                                 </button>
                                                                 <div class="dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 hidden">
                                                                     <div tabindex="0" class="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
-                                                                        <p>Edit</p>
+                                                                        <p>Editar</p>
                                                                     </div>
-                                                                    <div tabindex="0" class="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
-                                                                        <p>Delete</p>
-                                                                    </div>
+                                                                  
                                                                 </div>
                                                             </div>
                                                         </td>
