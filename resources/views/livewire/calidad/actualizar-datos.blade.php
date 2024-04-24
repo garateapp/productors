@@ -193,7 +193,7 @@
          
             
              @can('Ver produccion_total')
-                <button wire:click="editar({{$recepcion->id}})" class="font-bold py-1 px-3 mt-2 rounded-full bg-red-500 text-white text-xs" type="submit" title="Eliminar">EDITAR</button>
+                <button wire:click="editar({{$recepcion->id}})" class="font-bold py-1 px-3 mt-2 rounded-full bg-red-500 text-white text-xs" type="submit">EDITAR</button>
                  
              @endcan
                 
