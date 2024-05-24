@@ -119,9 +119,7 @@ class HomeController extends Controller
 
                 if($user->emnotification==TRUE){
                     Mail::to($user->email)->send(new NotificacionMailable($proceso));
-                }
-
-                    //en caso que exista el usuarioo consultar si tiene telefonos registrados
+                   //en caso que exista el usuarioo consultar si tiene telefonos registrados
                     if($user->telefonos->count()){
                         foreach($user->telefonos as $telefono){
                             $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
@@ -217,6 +215,8 @@ class HomeController extends Controller
                             Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
                         }
                     }    
+
+                }
             }
             
         }
@@ -250,101 +250,103 @@ class HomeController extends Controller
 
            
             if(!is_null($user)){
+                if($user->emnotification==TRUE){
                     //en caso que exista el usuarioo consultar si tiene telefonos registrados
-                    if($user->telefonos->count()){
-                        foreach($user->telefonos as $telefono){
-                        $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
-                        //TOKEN QUE NOS DA FACEBOOK
-                        $token = env('WS_TOKEN');
-                        $phoneid= env('WS_PHONEID');
-                        $link= 'https://appgreenex.cl/download/'.$proceso->id.'.pdf';
-                        $version='v16.0';
-                        $url="https://appgreenex.cl/";
-                        $payload=[
-                            'messaging_product' => 'whatsapp',
-                            "preview_url"=> false,
-                            'to'=>$fono,
-                            
-                            'type'=>'template',
-                                'template'=>[
-                                    'name'=>'proceso',
-                                    'language'=>[
-                                        'code'=>'es'],
-                                    'components'=>[ 
-                                        [
-                                            'type'=>'header',
-                                            'parameters'=>[
-                                                [
-                                                    'type'=>'document',
-                                                    'document'=> [
-                                                        'link'=>$link,
-                                                        'filename'=>$name
-                                                        ]
+                        if($user->telefonos->count()){
+                            foreach($user->telefonos as $telefono){
+                            $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
+                            //TOKEN QUE NOS DA FACEBOOK
+                            $token = env('WS_TOKEN');
+                            $phoneid= env('WS_PHONEID');
+                            $link= 'https://appgreenex.cl/download/'.$proceso->id.'.pdf';
+                            $version='v16.0';
+                            $url="https://appgreenex.cl/";
+                            $payload=[
+                                'messaging_product' => 'whatsapp',
+                                "preview_url"=> false,
+                                'to'=>$fono,
+                                
+                                'type'=>'template',
+                                    'template'=>[
+                                        'name'=>'proceso',
+                                        'language'=>[
+                                            'code'=>'es'],
+                                        'components'=>[ 
+                                            [
+                                                'type'=>'header',
+                                                'parameters'=>[
+                                                    [
+                                                        'type'=>'document',
+                                                        'document'=> [
+                                                            'link'=>$link,
+                                                            'filename'=>$name
+                                                            ]
+                                                    ]
                                                 ]
-                                            ]
-                                        ],
-                                        [
-                                            'type'=>'body',
-                                            'parameters'=>[
-                                                [
-                                                    'type'=>'text',
-                                                    'text'=> $proceso->n_proceso
+                                            ],
+                                            [
+                                                'type'=>'body',
+                                                'parameters'=>[
+                                                    [
+                                                        'type'=>'text',
+                                                        'text'=> $proceso->n_proceso
+                                                    ]
                                                 ]
                                             ]
                                         ]
                                     ]
-                                ]
+                                    
                                 
+                            ];
                             
-                        ];
+                            Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
                         
-                        Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+                            $token = env('WS_TOKEN');
+                            $phoneid= env('WS_PHONEID');
+                            $link= 'https://appgreenex.cl/download/'.$proceso->id.'.pdf';
+                            $version='v16.0';
+                            $url="https://appgreenex.cl/";
+                            $wsload=[
+                                'messaging_product' => 'whatsapp',
+                                "preview_url"=> false,
+                                'to'=>'56939245158',
+                                
+                                'type'=>'template',
+                                    'template'=>[
+                                        'name'=>'proceso',
+                                        'language'=>[
+                                            'code'=>'es'],
+                                        'components'=>[ 
+                                            [
+                                                'type'=>'header',
+                                                'parameters'=>[
+                                                    [
+                                                        'type'=>'document',
+                                                        'document'=> [
+                                                            'link'=>$link,
+                                                            'filename'=>$name
+                                                            ]
+                                                    ]
+                                                ]
+                                            ],
+                                            [
+                                                'type'=>'body',
+                                                'parameters'=>[
+                                                    [
+                                                        'type'=>'text',
+                                                        'text'=> $proceso->n_proceso
+                                                    ]
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                    
+                                
+                            ];
+                            
+                            Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
                     
-                        $token = env('WS_TOKEN');
-                        $phoneid= env('WS_PHONEID');
-                        $link= 'https://appgreenex.cl/download/'.$proceso->id.'.pdf';
-                        $version='v16.0';
-                        $url="https://appgreenex.cl/";
-                        $wsload=[
-                            'messaging_product' => 'whatsapp',
-                            "preview_url"=> false,
-                            'to'=>'56939245158',
-                            
-                            'type'=>'template',
-                                'template'=>[
-                                    'name'=>'proceso',
-                                    'language'=>[
-                                        'code'=>'es'],
-                                    'components'=>[ 
-                                        [
-                                            'type'=>'header',
-                                            'parameters'=>[
-                                                [
-                                                    'type'=>'document',
-                                                    'document'=> [
-                                                        'link'=>$link,
-                                                        'filename'=>$name
-                                                        ]
-                                                ]
-                                            ]
-                                        ],
-                                        [
-                                            'type'=>'body',
-                                            'parameters'=>[
-                                                [
-                                                    'type'=>'text',
-                                                    'text'=> $proceso->n_proceso
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                                
-                            
-                        ];
-                        
-                        Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
-                   
+                        }
                     }
                 }    
             }
