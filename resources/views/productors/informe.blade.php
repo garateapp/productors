@@ -234,11 +234,11 @@
 			
 			if ($recepcion->n_especie=='Orange') {
 
-				if ($recepcion->calidad->detalles->where('tipo_item','NOTA')->where('detalle_item','PRECALIBRE')->first()) {
-					$a=$recepcion->calidad->detalles->where('tipo_item','NOTA')->where('detalle_item','PRECALIBRE')->first()->porcentaje_muestra;
+				if ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','PRECALIBRE')->first()) {
+					$a=$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','PRECALIBRE')->first()->porcentaje_muestra;
 				}
-				if ($recepcion->calidad->detalles->where('tipo_item','NOTA')->where('detalle_item','SOBRECALIBRE')->first()) {
-					$b=$recepcion->calidad->detalles->where('tipo_item','NOTA')->where('detalle_item','SOBRECALIBRE')->first()->porcentaje_muestra;
+				if ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','SOBRECALIBRE')->first()) {
+					$b=$recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')->where('detalle_item','SOBRECALIBRE')->first()->porcentaje_muestra;
 				}	
 
 			}elseif($recepcion->n_especie=='Mandarinas'){
