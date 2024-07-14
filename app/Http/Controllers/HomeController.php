@@ -579,7 +579,15 @@ class HomeController extends Controller
 
     //Sincrinización proceso temporada "Actual"
     public function sync_proces()
-    {   $procesos=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Produccion/ObtenerProduccionTemporadaPasadas?IdTemporadaPasada=9');
+    {   $fechaActual = new DateTime();
+
+        // Restar 5 días a la fecha actual
+        $fechaActual->modify('-3 days');
+        
+        // Formatear la fecha para mostrarla
+       
+
+        $procesos=Http::post('https://api.greenexweb.cl/api/DatosProduccion?filter[fecha_proceso][gte]='.$fechaActual->format('Y-m-d'));
         $procesos = $procesos->json();
 
         $ri=Proceso::all();
@@ -1429,29 +1437,29 @@ class HomeController extends Controller
                 if($m==9){
                     $n_emisor=$item;
                 }
-                if($m==10){
+                if($m==11){
                     $tipo_documento_recepcion=$item;
                 }
-                if($m==11){
+                if($m==12){
                     $numero_documento_recepcion=$item;
                 }
-                if($m==12){
+                if($m==13){
                     $n_especie=$item;
 
                 }
-                if($m==13){
+                if($m==14){
                     $n_variedad=$item;
                 }
-                if($m==14){
+                if($m==15){
                     $cantidad=$item;
                 }
-                if($m==15){
+                if($m==16){
                     $peso_neto=$item;
                 }
-                if($m==16){
+                if($m==17){
                     $nota_calidad=$item;
                 }
-               if($m==17){
+               if($m==18){
                     $n_estado=$item;
 
                         $espec=Especie::where('name',$n_especie)->first();
@@ -1853,7 +1861,7 @@ class HomeController extends Controller
     public function productor_refresh()
     {  
 
-        $users= Http::post('https://apigarate.azurewebsites.net/api/v1.0/Productor/ObtenerProductor');
+        $users= Http::post('https://api.greenexweb.cl/api/ObtenerProductor');
 
         $users = $users->json();
 
