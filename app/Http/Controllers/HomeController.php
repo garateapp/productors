@@ -587,7 +587,7 @@ class HomeController extends Controller
         // Formatear la fecha para mostrarla
        
 
-        $procesos=Http::post('https://api.greenexweb.cl/api/DatosProduccion?filter[fecha_proceso][gte]='.$fechaActual->format('Y-m-d'));
+        $procesos=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Produccion/ObtenerProduccionTemporadaPasadas?IdTemporadaPasada=9');
         $procesos = $procesos->json();
 
         $ri=Proceso::all();
