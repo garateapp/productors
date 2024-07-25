@@ -37,10 +37,8 @@ class SyncRecepcions extends Command
     {   
         
         
-        $productions=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/ObtenerRecepcion');
-        
+        $productions=Http::post('https://api.greenexweb.cl/api/ObtenerRecepcion');
         $productions = $productions->json();
-        
         $ri=Recepcion::all();
         $totali=$ri->count();
 
@@ -62,9 +60,12 @@ class SyncRecepcions extends Command
             $peso_neto=Null;//15
             $nota_calidad=Null;//16
             $n_estado=Null;//17
-
+         
             $m=1;
-            foreach ($production as $item){    
+            foreach ($production as $item){
+                
+               
+
                 if($m==2){
                     $id_g_recepcion=$item;
                 }
@@ -89,97 +90,116 @@ class SyncRecepcions extends Command
                 if($m==9){
                     $n_emisor=$item;
                 }
-                if($m==10){
+                if($m==11){
                     $tipo_documento_recepcion=$item;
                 }
-                if($m==11){
+                if($m==12){
                     $numero_documento_recepcion=$item;
                 }
-                if($m==12){
+                if($m==13){
                     $n_especie=$item;
 
                 }
-                if($m==13){
+                if($m==14){
                     $n_variedad=$item;
                 }
-                if($m==14){
+                if($m==15){
                     $cantidad=$item;
                 }
-                if($m==15){
+                if($m==16){
                     $peso_neto=$item;
                 }
-                if($m==16){
+                if($m==17){
                     $nota_calidad=$item;
                 }
-               if($m==17){
+               if($m==18){
                     $n_estado=$item;
-                    /*
-                    $espec=Especie::where('name',$n_especie)->first();
-                    if($espec){
-                        $espec->forceFill([
-                            'name'=> $n_especie
-                        ]);
-                        $varie=Variedad::where('name',$n_variedad)->first();
-                        if($varie){
-                            $varie->forceFill([
-                                'name'=> $n_variedad,
-                                'especie_id='=> $espec->id
-                            ]);
-                        }else{
-                            Variedad::create([
-                                'name'=> $n_variedad,
-                                'especie_id'=>$espec->id
-                            ]);
-                        }
-                    }else{
-                        $especie=Especie::create([
-                        'name'=> $n_especie
-                        ]);
-                        $varie=Variedad::where('name',$n_variedad)->first();
-                        if($varie){
-                            $varie->forceFill([
-                                'name'=> $n_variedad,
-                                'especie_id='=> $especie->id
-                            ]);
-                        }else{
-                            Variedad::create([
-                                'name'=> $n_variedad,
-                                'especie_id'=>$especie->id
-                            ]);
-                        }
-                    }*/
-                
-                    $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->where('temporada','actual')->first();
-          
-                    if($cont){
-                     $cont->forceFill([
-                            'id_g_recepcion' => $id_g_recepcion,//1
-                            'tipo_g_recepcion' => $tipo_g_recepcion,//2
-                            'numero_g_recepcion' => $numero_g_recepcion,//3
-                            'fecha_g_recepcion' => $fecha_g_recepcion,//4
-                            'id_emisor' => $id_emisor,//5
-                            'r_emisor' => $r_emisor,//6
-                            'n_emisor' => $n_emisor,//8
-                            'Codigo_Sag_emisor' => $Codigo_Sag_emisor,//9
-                            'tipo_documento_recepcion' => $tipo_documento_recepcion,//10
-                            'numero_documento_recepcion' => $numero_documento_recepcion,//11
-                            'n_especie' => $n_especie,//12
-                            'n_variedad' => $n_variedad,
-                            'cantidad' => $cantidad,
-                            'peso_neto' => $peso_neto,
-                            'nota_calidad' => $nota_calidad,
-                            'temporada'=>'actual'
-                        ])->save();
 
-                        /*   if(IS_NULL($cont->calidad)){
-                            Calidad::create([
-                                'recepcion_id'=>$cont->id
+                        $espec=Especie::where('name',$n_especie)->first();
+                        if($espec){
+                            $espec->forceFill([
+                                'name'=> $n_especie
                             ]);
+
+                            $user=User::where('csg',$Codigo_Sag_emisor)->first();
+                            if(!IS_NULL($user)){
+                                if($espec->comercializado->contains($user->id)){
+                                   
+                                }else{
+                                    $espec->comercializado()->attach($user->id);
+                                   
+                                }
+                            }
+                            
+                            $varie=Variedad::where('name',$n_variedad)->first();
+                            if($varie){
+                                $varie->forceFill([
+                                    'name'=> $n_variedad,
+                                    'especie_id='=> $espec->id
+                                ]);
+
+                            }else{
+                                $varie=Variedad::create([
+                                    'name'=> $n_variedad,
+                                    'especie_id'=>$espec->id
+                                ]);
+
+                            }
+
+                            if(!IS_NULL($user)){
+                                if($varie){
+                                    if($varie->comercializado->contains($user->id)){
+
+                                    }else{
+                                        $varie->comercializado()->attach($user->id);
+                                    }
+                                }
+                            }
+
+                        }else{
+                            $especie=Especie::create([
+                            'name'=> $n_especie
+                            ]);
+                            $user=User::where('csg',$Codigo_Sag_emisor)->first();
+                            
+                            if(!IS_NULL($user)){
+                                if($especie->comercializado->contains($user->id)){
+                                 
+
+                                }else{
+                                    $especie->comercializado()->attach($user->id);
+                                   
+                                }
+                            }
+                            $varie=Variedad::where('name',$n_variedad)->first();
+                            if($varie){
+                                $varie->forceFill([
+                                    'name'=> $n_variedad,
+                                    'especie_id='=> $especie->id
+                                ]);
+                            }else{
+                                $varie=Variedad::create([
+                                    'name'=> $n_variedad,
+                                    'especie_id'=>$especie->id
+                                ]);
+                            }
+
+                            if(!IS_NULL($user)){
+                                if($varie){
+                                    if($varie->comercializado->contains($user->id)){
+
+                                    }else{
+                                        $varie->comercializado()->attach($user->id);
+                                    }
+                                }
+                            }
                         }
-                        */
-                    }else{
-                        if($n_estado=='Finalizado'){
-                            $rec=Recepcion::create([
+                    
+                        $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->where('temporada','actual')->first();
+                        
+                        if($cont){
+                            
+                            $cont->forceFill([
                                 'id_g_recepcion' => $id_g_recepcion,//1
                                 'tipo_g_recepcion' => $tipo_g_recepcion,//2
                                 'numero_g_recepcion' => $numero_g_recepcion,//3
@@ -195,21 +215,50 @@ class SyncRecepcions extends Command
                                 'cantidad' => $cantidad,
                                 'peso_neto' => $peso_neto,
                                 'nota_calidad' => $nota_calidad,
-                                'n_estado' => $n_estado,
                                 'temporada'=>'actual'
-                            ]);
-                            Calidad::create([
-                                'recepcion_id'=>$rec->id
-                            ]);
+                                
+                            ])->save();
+                          /*  if(IS_NULL($cont->calidad)){
+                                Calidad::create([
+                                    'recepcion_id'=>$cont->id
+                                ]);
+                            }*/
+                            }
+                        else{
+                            
+                                $rec=Recepcion::create([
+                                    'id_g_recepcion' => $id_g_recepcion,//1
+                                    'tipo_g_recepcion' => $tipo_g_recepcion,//2
+                                    'numero_g_recepcion' => $numero_g_recepcion,//3
+                                    'fecha_g_recepcion' => $fecha_g_recepcion,//4
+                                    'id_emisor' => $id_emisor,//5
+                                    'r_emisor' => $r_emisor,//6
+                                    'n_emisor' => $n_emisor,//8
+                                    'Codigo_Sag_emisor' => $Codigo_Sag_emisor,//9
+                                    'tipo_documento_recepcion' => $tipo_documento_recepcion,//10
+                                    'numero_documento_recepcion' => $numero_documento_recepcion,//11
+                                    'n_especie' => $n_especie,//12
+                                    'n_variedad' => $n_variedad,
+                                    'cantidad' => $cantidad,
+                                    'peso_neto' => $peso_neto,
+                                    'nota_calidad' => $nota_calidad,
+                                    'n_estado' => $n_estado,
+                                    'temporada'=>'actual'
+                                    
+                                ]);
+                                Calidad::create([
+                                    'recepcion_id'=>$rec->id
+                                ]);
+                            
                         }
-                    }
+                    
                 }
                 $m+=1;
                 
             } 
- 
         }
 
+        
         $rf=Recepcion::all();
         $total=$rf->count()-$ri->count();
         Sync::create([

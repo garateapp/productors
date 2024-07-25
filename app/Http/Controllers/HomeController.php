@@ -587,7 +587,7 @@ class HomeController extends Controller
         // Formatear la fecha para mostrarla
        
 
-        $procesos=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Produccion/ObtenerProduccionTemporadaPasadas?IdTemporadaPasada=9');
+        $procesos=Http::post('https://api.greenexweb.cl/api/DatosProduccion');
         $procesos = $procesos->json();
 
         $ri=Proceso::all();
@@ -787,7 +787,7 @@ class HomeController extends Controller
      //Sincrinización proceso temporada "Actual"
      public function sync_proces_anterior()
      {       
-         $procesos=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Produccion/ObtenerProduccionTemporadaPasadas?IdTemporadaPasada=8');
+         $procesos=Http::post('https://api.greenexweb.cl/api/TemporadasPacking/8/DatosProduccion');
          $procesos = $procesos->json();
  
          $ri=Proceso::all();
@@ -1384,7 +1384,7 @@ class HomeController extends Controller
 
     public function production_refresh()
     {        
-        $productions=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/ObtenerRecepcion');
+        $productions=Http::post('https://api.greenexweb.cl/api/ObtenerRecepcion');
         $productions = $productions->json();
         $ri=Recepcion::all();
         $totali=$ri->count();
@@ -1622,7 +1622,7 @@ class HomeController extends Controller
 
     public function production_refresh_anterior()
     {        
-        $productions=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/ObtenerRecepcionTemporadaPasada?IdTemporadaPasada=8');
+        $productions=Http::post('https://api.greenexweb.cl/api/TemporadasPacking/8/ObtenerRecepcion');
         $productions = $productions->json();
         $ri=Recepcion::all();
         $totali=$ri->count();
