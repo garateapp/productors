@@ -787,7 +787,7 @@ class HomeController extends Controller
      //Sincrinización proceso temporada "Actual"
      public function sync_proces_anterior()
      {       
-         $procesos=Http::post('https://api.greenexweb.cl/api/TemporadasPacking/8/DatosProduccion');
+         $procesos=Http::post('https://api.greenexweb.cl/api/TemporadasPacking/9/DatosProduccion');
          $procesos = $procesos->json();
  
          $ri=Proceso::all();
@@ -1622,7 +1622,7 @@ class HomeController extends Controller
 
     public function production_refresh_anterior()
     {        
-        $productions=Http::post('https://api.greenexweb.cl/api/TemporadasPacking/8/ObtenerRecepcion');
+        $productions=Http::post('https://api.greenexweb.cl/api/TemporadasPacking/9/ObtenerRecepcion');
         $productions = $productions->json();
         $ri=Recepcion::all();
         $totali=$ri->count();
