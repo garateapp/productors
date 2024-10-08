@@ -28,18 +28,11 @@
                     :style="handleToggle()"
                     class="border-l-2 border-purple-600 overflow-hidden max-h-0 duration-500 transition-all"
                   >
-                    <p class="p-3 text-gray-900">
-                      Paso 1: Eliminar Tablas 'Recepcions', 'Calidads' y 'Procesos'
-                    </p>
-                    <p class="p-3 text-gray-900">
-                        Paso 2: Eliminar de la Tabla 'Migrations', las lineas que indican 'create_recepcions_table', 'create_calidads_table' y 'create_procesos_table'
-                      </p>
-                    <p class="p-3 text-gray-900">
-                        Paso 3: Eliminar de la Tabla 'Migrations', las lineas que indican 'create_recepcions_table', 'create_calidads_table' y 'create_procesos_table'
-                      </p>
-                      <p class="p-3 text-gray-900">
-                        Paso 4: Ejecutar en <a href="https://forge.laravel.com/servers/609045/sites/1809752/commands" target="_blank">https://forge.laravel.com/servers/609045/sites/1809752/commands</a> el comando:<br> php artisan migrate --force
-                      </p>
+
+                  @livewire('cambiar-temporada')
+                  
+
+
                   </div>
                 </li>
                 {{-- 

@@ -112,7 +112,7 @@
                         
 
                         
-                        <h1 class="block my-2 text-xl font-bold">T23/24</h1>
+                        <h1 class="block my-2 text-xl font-bold">T24/25</h1>
                     
                 </div>
                     <div class="flex items-center">
@@ -136,7 +136,7 @@
                         
 
                         
-                        <h1 class="block my-2 text-xl font-bold">T22/23</h1>
+                        <h1 class="block my-2 text-xl font-bold">T23/24</h1>
                         
                     </div>
                    
@@ -151,10 +151,10 @@
                 </div>
                 <table class="my-2 text-xl font-bold gap-x-4 w-full">
                  <tr class="">
-                    <td class="mx-2 text-center">{{number_format($cant2)}} </td> <td class="ml-4">  T22/23</td>
+                    <td class="mx-2 text-center">{{number_format($cant2)}} </td> <td class="ml-4">  T23/24</td>
                  </tr>
                  <tr class="">
-                    <td class="mx-2 text-center">{{number_format($cant)}} </td> <td class="ml-4">  T23/24</td>
+                    <td class="mx-2 text-center">{{number_format($cant)}} </td> <td class="ml-4">  T24/25</td>
                  </tr>
                 </table>
                
