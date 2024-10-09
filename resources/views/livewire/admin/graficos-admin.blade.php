@@ -238,76 +238,78 @@
                      
                   @endif
                @else
-               
-                  @foreach ($especies as $especie)
-                     <div class="justify-center ">
-                        <a href="{{route('dashboard.especie',$especie)}}">
-                           <button class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-4 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
-                                 <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$especie->name}}</p>
-                           </button>
-                        </a>
-                     </div>
-                     @php
-                                
-                                 $export=0;
-                                 $comerc=0;
-                                 $desec=0;
-                                 $mer=0;
-                                 foreach ($procesosall as $proceso) {
-                                       
-                                       if ($proceso->especie==$especie->name) {
-                                          $export+=$proceso->exp;
-                                          $comerc+=$proceso->comercial;
-                                          $desec+=$proceso->desecho;
-                                          $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
-      
-                                       }
-      
-                                 }
-
-                                 $inicio=date('W', strtotime($recepcions->first()->fecha_g_recepcion));
-                                 $final=date('W', strtotime($now));
-                                 if ($inicio>$final) {
-                                    $final=$final+52;
-                                 }
-
-                                 $name=$especie->name;
-                                 $array=[];
+                  @if ($recepcions->count()>0)
+                      
+                     @foreach ($especies as $especie)
+                        <div class="justify-center ">
+                           <a href="{{route('dashboard.especie',$especie)}}">
+                              <button class="w-full items-center focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 px-4 py-3 hover:bg-gray-500 focus:outline-none rounded" style="background-color: #008d39;">
+                                    <p class="whitespace-nowrap text-sm font-medium leading-none text-white">{{$especie->name}}</p>
+                              </button>
+                           </a>
+                        </div>
+                        @php
                                  
-                                 foreach (range($inicio,($final)) as $number) {
-                                    $kilos=0;
-                                    if($number>52){
-                                       $nro=($number-52);
-                                    }else{
-                                       $nro=$number;
-                                    }  
-                                    foreach($recepcions as $recepcion){
+                                    $export=0;
+                                    $comerc=0;
+                                    $desec=0;
+                                    $mer=0;
+                                    foreach ($procesosall as $proceso) {
+                                          
+                                          if ($proceso->especie==$especie->name) {
+                                             $export+=$proceso->exp;
+                                             $comerc+=$proceso->comercial;
+                                             $desec+=$proceso->desecho;
+                                             $mer+=($proceso->kilos_netos-$proceso->desecho-$proceso->comercial-$proceso->exp);
+         
+                                          }
+         
+                                    }
+
+                                    $inicio=date('W', strtotime($recepcions->first()->fecha_g_recepcion));
+                                    $final=date('W', strtotime($now));
+                                    if ($inicio>$final) {
+                                       $final=$final+52;
+                                    }
+
+                                    $name=$especie->name;
+                                    $array=[];
+                                    
+                                    foreach (range($inicio,($final)) as $number) {
+                                       $kilos=0;
+                                       if($number>52){
+                                          $nro=($number-52);
+                                       }else{
+                                          $nro=$number;
+                                       }  
+                                       foreach($recepcions as $recepcion){
+                                          
+                                             if ($recepcion->n_especie==$especie->name) {
+                                                if (date('W', strtotime($recepcion->fecha_g_recepcion))==$nro) {
+                                                   $kilos+=$recepcion->peso_neto;
+                                                }
+                                             } 
+                                          }
+                                       $array[]=$kilos; 
+                                    }
                                        
-                                          if ($recepcion->n_especie==$especie->name) {
-                                             if (date('W', strtotime($recepcion->fecha_g_recepcion))==$nro) {
-                                                $kilos+=$recepcion->peso_neto;
-                                             }
-                                           } 
-                                       }
-                                    $array[]=$kilos; 
-                                 }
+                                       $series[]=['name' =>$name,
+                                                'data'=> $array];
+                                       
+                                       $exportacion[]=$export;
+                                       $comercial[]=$comerc;
+                                       $desecho[]=$desec;
+                                       $merma[]=$mer;
                                     
-                                    $series[]=['name' =>$name,
-                                             'data'=> $array];
-                                    
-                                    $exportacion[]=$export;
-                                    $comercial[]=$comerc;
-                                    $desecho[]=$desec;
-                                    $merma[]=$mer;
-                                 
-                                    $varieds[]=$especie->name;
-                     @endphp
-                  @endforeach
+                                       $varieds[]=$especie->name;
+                        @endphp
+                     @endforeach
                   
+                  @endif
                @endif
             
          </div>
-
+         @if ($recepcions->count()>0)
             @php
                $semenas=[];
                 foreach (range($inicio,($final)) as $number) {
@@ -319,7 +321,7 @@
                }
 
             @endphp
-             
+         @endif
               
     <div class="mx-2 sm:mx-12">
  
@@ -725,7 +727,7 @@
       };
    </script>
 
-
+   @if($recepcions->count()>0)
     <script>
        var titulo = <?php echo json_encode($titulo) ?>;
        var variedades = <?php echo json_encode($varieds) ?>;
@@ -895,176 +897,179 @@
          });
         
     </script>
-    {{-- comment 
-    <script>
-       var titulo = <?php echo json_encode($titulo) ?>;
-       var variedades = <?php echo json_encode($varieds) ?>;
-       var semanas = <?php echo json_encode($semanas) ?>;
-       var series = <?php echo json_encode($series) ?>;
-        var exportacion = <?php echo json_encode($exportacion) ?>;
-        var comercial = <?php echo json_encode($comercial) ?>;
-        var desecho = <?php echo json_encode($desecho) ?>;
-        var merma = <?php echo json_encode($merma) ?>;
-      
-        Highcharts.chart('graficos', {
- 
-        chart: {
-            type: 'column'
-        },
- 
-        title: {
-            text: titulo,
-            align: 'center'
-        },
- 
-        xAxis: {
-            categories: variedades
-        },
- 
-        yAxis: {
-            allowDecimals: false,
-            min: 0,
-            title: {
-                text: 'Kilos / %'
-            }
-        },
- 
-        tooltip: {
-         pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
-         shared: true
-       },
- 
-        plotOptions: {
-            column: {
-                stacking: 'percent'
-            }
-        },
- 
-        series: [{
-             name: 'Exportacion',
-             data: exportacion,
-             stack: 'variedades'
-         }, {
-             name: 'Nacional',
-             data: comercial,
-             stack: 'variedades'
-         }, {
-             name: 'Desecho',
-             data: desecho,
-             stack: 'variedades'
-         }, {
-             name: 'Merma',
-             data: merma,
-             stack: 'variedades'
-         }]
-         });
+   @endif
 
-         Highcharts.chart('containers', {
-
-            title: {
-               text: 'Kilos Recibidos Por Semana',
-               align: 'left'
-            },
-            xAxis: {
-               categories: semanas
-            },
-            yAxis: {
+   {{-- comment 
+      <script>
+         var titulo = <?php echo json_encode($titulo) ?>;
+         var variedades = <?php echo json_encode($varieds) ?>;
+         var semanas = <?php echo json_encode($semanas) ?>;
+         var series = <?php echo json_encode($series) ?>;
+         var exportacion = <?php echo json_encode($exportacion) ?>;
+         var comercial = <?php echo json_encode($comercial) ?>;
+         var desecho = <?php echo json_encode($desecho) ?>;
+         var merma = <?php echo json_encode($merma) ?>;
+         
+         Highcharts.chart('graficos', {
+   
+         chart: {
+               type: 'column'
+         },
+   
+         title: {
+               text: titulo,
+               align: 'center'
+         },
+   
+         xAxis: {
+               categories: variedades
+         },
+   
+         yAxis: {
+               allowDecimals: false,
+               min: 0,
                title: {
-                  text: 'Kilos'
+                  text: 'Kilos / %'
                }
-            },
-
-            legend: {
-               layout: 'vertical',
-               align: 'right',
-               verticalAlign: 'middle'
-            },
-
-            plotOptions: {
-               
-            },
-
-            series: series
-            ,
-
-            responsive: {
-               rules: [{
-                  condition: {
-                        maxWidth: 500
-                  },
-                  chartOptions: {
-                        legend: {
-                           layout: 'horizontal',
-                           align: 'center',
-                           verticalAlign: 'bottom'
-                        }
-                  }
-               }]
-            }
-
-            });
-   </script>  
-    
-   <script>
-        var titulo = <?php echo json_encode($titulo) ?>;
-       var variedades = <?php echo json_encode($varieds) ?>;
-       var exportacion = <?php echo json_encode($exp_total) ?>;
-       var comercial = <?php echo json_encode($com_total) ?>;
-       var desecho = <?php echo json_encode($des_total) ?>;
-       var merma = <?php echo json_encode($merm_total) ?>;
-
-        Highcharts.chart('circulars', {
-            chart: {
-               plotBackgroundColor: null,
-               plotBorderWidth: null,
-               plotShadow: false,
-               type: 'pie'
-            },
-            title: {
-               text: 'Distribución Por Categoría',
-               align: 'left'
-            },
-            tooltip: {
-               pointFormat: '<b><b>{point.y}</b>({point.percentage:.0f}%)<br/>',
-            },
-            accessibility: {
-               point: {
-                     valueSuffix: '%'
+         },
+   
+         tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+            shared: true
+         },
+   
+         plotOptions: {
+               column: {
+                  stacking: 'percent'
                }
-            },
-            plotOptions: {
-               pie: {
-                     allowPointSelect: true,
-                     cursor: 'pointer',
-                     dataLabels: {
-                        enabled: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-                     },
-                     showInLegend: true
-               }
-            },
-            series: [{
-               name: 'Brands',
-               colorByPoint: true,
-               data: [{
-                     name: 'Exportacion',
-                     y: exportacion,
-                     sliced: true,
-                     selected: true
-               },  {
-                     name: 'Comercial',
-                     y: comercial
-               },  {
-                     name: 'Desecho',
-                     y: desecho
-               }, {
-                     name: 'Merma',
-                     y: merma
-               }]
+         },
+   
+         series: [{
+               name: 'Exportacion',
+               data: exportacion,
+               stack: 'variedades'
+            }, {
+               name: 'Nacional',
+               data: comercial,
+               stack: 'variedades'
+            }, {
+               name: 'Desecho',
+               data: desecho,
+               stack: 'variedades'
+            }, {
+               name: 'Merma',
+               data: merma,
+               stack: 'variedades'
             }]
-         });
-        
-   </script>        
+            });
+
+            Highcharts.chart('containers', {
+
+               title: {
+                  text: 'Kilos Recibidos Por Semana',
+                  align: 'left'
+               },
+               xAxis: {
+                  categories: semanas
+               },
+               yAxis: {
+                  title: {
+                     text: 'Kilos'
+                  }
+               },
+
+               legend: {
+                  layout: 'vertical',
+                  align: 'right',
+                  verticalAlign: 'middle'
+               },
+
+               plotOptions: {
+                  
+               },
+
+               series: series
+               ,
+
+               responsive: {
+                  rules: [{
+                     condition: {
+                           maxWidth: 500
+                     },
+                     chartOptions: {
+                           legend: {
+                              layout: 'horizontal',
+                              align: 'center',
+                              verticalAlign: 'bottom'
+                           }
+                     }
+                  }]
+               }
+
+               });
+      </script>  
+      
+      <script>
+         var titulo = <?php echo json_encode($titulo) ?>;
+         var variedades = <?php echo json_encode($varieds) ?>;
+         var exportacion = <?php echo json_encode($exp_total) ?>;
+         var comercial = <?php echo json_encode($com_total) ?>;
+         var desecho = <?php echo json_encode($des_total) ?>;
+         var merma = <?php echo json_encode($merm_total) ?>;
+
+         Highcharts.chart('circulars', {
+               chart: {
+                  plotBackgroundColor: null,
+                  plotBorderWidth: null,
+                  plotShadow: false,
+                  type: 'pie'
+               },
+               title: {
+                  text: 'Distribución Por Categoría',
+                  align: 'left'
+               },
+               tooltip: {
+                  pointFormat: '<b><b>{point.y}</b>({point.percentage:.0f}%)<br/>',
+               },
+               accessibility: {
+                  point: {
+                        valueSuffix: '%'
+                  }
+               },
+               plotOptions: {
+                  pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                           enabled: true,
+                           format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        },
+                        showInLegend: true
+                  }
+               },
+               series: [{
+                  name: 'Brands',
+                  colorByPoint: true,
+                  data: [{
+                        name: 'Exportacion',
+                        y: exportacion,
+                        sliced: true,
+                        selected: true
+                  },  {
+                        name: 'Comercial',
+                        y: comercial
+                  },  {
+                        name: 'Desecho',
+                        y: desecho
+                  }, {
+                        name: 'Merma',
+                        y: merma
+                  }]
+               }]
+            });
+         
+      </script>        
    --}}
+
  </div>
  
