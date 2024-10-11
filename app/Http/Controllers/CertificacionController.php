@@ -39,12 +39,15 @@ class CertificacionController extends Controller
             $request->validate([
                 'name' => 'required'
             ]);
-
+            if ($request->hasFile('file')) {
+                // Guardar el archivo en la carpeta 'uploads' dentro de 'storage/app/public'
+                $filePath = $request->file('file')->store("certificaciones", 'public');
+            }
         $mensaje=Certificacion::create([
             'rut'=>$request->rut,
             'name'=>$request->name,
             'vigencia'=>$request->vigencia,
-            'documento'=>$request->file,            
+            'documento'=>$filePath,
         ]);
         $user=User::find($request->user_id);
         return redirect(route('productor.edit',$user).'/#certificaciones');
