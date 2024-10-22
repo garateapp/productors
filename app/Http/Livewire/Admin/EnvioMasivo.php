@@ -11,7 +11,7 @@ use Livewire\Component;
 
 class EnvioMasivo extends Component
 {   public $selectedespecie, $productors, $especie, $selectedarchivo, $tipo, $mensaje;
-    
+
     public function render()
     {   $mensajes =Mensaje_hist::all();
         $especies=Especie::pluck('name','id');
@@ -23,14 +23,15 @@ class EnvioMasivo extends Component
         $especie=Especie::find($especie_id);
         $this->productors = $especie->comercializado()->get();
         $this->especie = $especie;
-    
+
     }
     public function updatedselectedarchivo($archivo){
         $this->tipo = 'PDF';
-        
+
     }
     public function set_mensaje($mensaje_id){
         $this->mensaje=Mensaje_hist::find($mensaje_id);
-        
+
     }
+
 }
