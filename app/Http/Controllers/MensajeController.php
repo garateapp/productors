@@ -76,35 +76,14 @@ class MensajeController extends Controller
                 'messaging_product' => 'whatsapp',
                 "preview_url"=> false,
                 'to'=>'56966291494',
-                'type'=>'template',
-                    'template'=>[
-                        'name'=>'proceso',
-                        'language'=>[
-                            'code'=>'es'],
-                        'components'=>[
-                            [
-                                'type'=>'header',
-                                'parameters'=>[
-                                    [
-                                        'type'=>'document',
+                'type'=>'document',
+
                                         'document'=> [
                                             'link'=>$link,
                                             'filename'=>$name
                                             ]
-                                    ]
-                                ]
-                            ],
-                            [
-                                'type'=>'body',
-                                'parameters'=>[
-                                    [
-                                        'type'=>'text',
-                                        'text'=> "prueba"
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
+
+
 
 
             ];
