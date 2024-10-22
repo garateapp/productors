@@ -77,18 +77,14 @@ class MensajeController extends Controller
                 "preview_url"=> false,
                 'to'=>'56966291494',
                 'type'=>'document',
-
-                                        'document' => [
-                'link' => $url,
-                'caption' => 'Aquí está el documento solicitado.',
-            ],
-
-
-
-
+                        'document' => [
+                        'link' => $url,
+                        'caption' => 'Aquí está el documento solicitado.',
+                    ],
             ];
 
-            Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
+            $response=Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
+            dd($response);
 
 
             // $mensaje=Mensaje::create([
