@@ -221,7 +221,7 @@ Route::get('download/mensaje/{mensaje_hist}.pdf', [MensajeHistController::class,
 
 Route::resource('tipodocumentacions', TipoDocumentacionsController::class)->only(['index','edit','destroy','create'])->names('tipodocumentacions');
 Route::put('tipodocumentacions/{tipodocumentacion}', [TipoDocumentacionsController::class, 'update'])->name('tipodocumentacions.update');
-
+Route::get('/tipodocumentacions', [TipoDocumentacionsController::class, 'index'])->name('tipodocumentacions.index');
 Route::post('tipodocumentacions', [TipoDocumentacionsController::class,'store'])->name('tipodocumentacions.store');
 
 Route::resource('documentacions', DocumentacionController::class)->only(['index','edit','destroy','create'])->names('documentacions');
