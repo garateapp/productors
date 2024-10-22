@@ -8,6 +8,8 @@ use App\Models\Mensaje;
 use App\Models\Mensaje_hist;
 use Illuminate\Http\Request;
 use Illuminate\support\Str;
+use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
 
 class MensajeController extends Controller
 {
@@ -21,7 +23,7 @@ class MensajeController extends Controller
             'type'=> 'infotecnicaproductor',
             'user_id'=>auth()->user()->id
         ]);
-        
+
         return view('productors.mensaje');
     }
 
@@ -45,7 +47,7 @@ class MensajeController extends Controller
     {   $request->validate([
         'file'=>'required'
         ]);
-    
+
         $especie=Especie::find($request->especie);
         $productors = $especie->comercializado()->get();
 
@@ -53,25 +55,72 @@ class MensajeController extends Controller
         $url = $request->file('file')->storeAs(
             'app/archivos', $name
         );
-        
-        $mensaje_hist=Mensaje_hist::create([
-            'observacion'=>$request->observacion,
-            'especie'=>$especie->name,
-            'tipo'=>$request->tipo,
-            'archivo'=>$url,
-            'emisor_id'=>auth()->user()->id
-        ]);
 
+        // $mensaje_hist=Mensaje_hist::create([
+        //     'observacion'=>$request->observacion,
+        //     'especie'=>$especie->name,
+        //     'tipo'=>$request->tipo,
+        //     'archivo'=>$url,
+        //     'emisor_id'=>auth()->user()->id
+        // ]);
+        $token = env('WS_TOKEN');
+                            $phoneid= env('WS_PHONEID');
+                            $link= $url;//'https://appgreenex.cl/'+asset('storage/'.$zipFileName);
+                            $version='v16.0';
+                            $url="https://appgreenex.cl/";
         foreach($productors as $productor){
-            $mensaje=Mensaje::create([
-                'observacion'=>$request->observacion,
-                'especie'=>$especie->name,
-                'tipo'=>$request->tipo,
-                'archivo'=>$url,
-                'emisor_id'=>auth()->user()->id,
-                'receptor_id'=>$productor->id,
-                'mensaje_hist_id'=>$mensaje_hist->id
-            ]);
+
+
+            $wsload=[
+                'messaging_product' => 'whatsapp',
+                "preview_url"=> false,
+                'to'=>'56966291494',
+                'type'=>'template',
+                    'template'=>[
+                        'name'=>'proceso',
+                        'language'=>[
+                            'code'=>'es'],
+                        'components'=>[
+                            [
+                                'type'=>'header',
+                                'parameters'=>[
+                                    [
+                                        'type'=>'document',
+                                        'document'=> [
+                                            'link'=>$link,
+                                            'filename'=>$name
+                                            ]
+                                    ]
+                                ]
+                            ],
+                            [
+                                'type'=>'body',
+                                'parameters'=>[
+                                    [
+                                        'type'=>'text',
+                                        'text'=> "prueba"
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+
+
+            ];
+
+            Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
+
+
+            // $mensaje=Mensaje::create([
+            //     'observacion'=>$request->observacion,
+            //     'especie'=>$especie->name,
+            //     'tipo'=>$request->tipo,
+            //     'archivo'=>$url,
+            //     'emisor_id'=>auth()->user()->id,
+            //     'receptor_id'=>$productor->id,
+            //     'mensaje_hist_id'=>$mensaje_hist->id
+            // ]);
+
         }
 
         return redirect()->back();
