@@ -1618,6 +1618,8 @@ class HomeController extends Controller
         return redirect()->route('production.index');
 
         //return view('productors.production',compact('productions'));
+
+
     }
 
     public function production_refresh_anterior()
