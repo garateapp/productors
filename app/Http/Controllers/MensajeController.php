@@ -78,10 +78,10 @@ class MensajeController extends Controller
                 'to'=>'56966291494',
                 'type'=>'document',
 
-                                        'document'=> [
-                                            'link'=>$link,
-                                            'filename'=>$name
-                                            ]
+                                        'document' => [
+                'link' => $link,
+                'caption' => 'Aquí está el documento solicitado.',
+            ],
 
 
 
