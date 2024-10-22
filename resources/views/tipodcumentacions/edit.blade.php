@@ -114,13 +114,16 @@
                         <div>
                             <x-jet-label for="vigencia" value="Vigencia en días" class="text-white" />
                             <input id="fecha_vigencia" class="block mt-1" type="number" min="0"
-                                max="731" name="fecha_vigencia" value="" autofocus
+                                max="731" name="fecha_vigencia"
+                                value="{{ $tipodocumentacion->fecha_vigencia }}" autofocus
                                 autocomplete="fecha_vigencia" />
                         </div>
                         <div>
                             <x-jet-label for="obligatorio" value="Obligatorio" class="text-white" />
                             <input id="obligatorio" class="block mt-1" type="checkbox" name="obligatorio"
-                                value="{{ $tipodocumentacion->obligatorio }}" autofocus autocomplete="Obligatorio" />
+                                value="{{ $tipodocumentacion->obligatorio }}"
+                                {{ $tipodocumentacion->obligatorio == '1' ? 'checked' : '' }} autofocus
+                                autocomplete="Obligatorio" />
                         </div>
 
                         <div>
