@@ -68,7 +68,7 @@ class MensajeController extends Controller
                             $link= $url2;//'https://appgreenex.cl/'+asset('storage/'.$zipFileName);
                             $version='v16.0';
                             $url=asset('storage/archivos/'.$name);
-                            dd($url,$name);
+
         //foreach($productors as $productor){
 
 
