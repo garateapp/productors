@@ -17,6 +17,8 @@ use App\Models\Sync;
 use App\Models\User;
 use App\Models\Valor;
 use App\Models\Variedad;
+use App\Models\Documentacions;
+use App\Models\TipoDocumentacions;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -56,51 +58,51 @@ class HomeController extends Controller
     }
 
     public function danoexport()
-    {    
+    {
         return Excel::download(new DanostotalExport(null,null),'Reporte de Calidad.xlsx');
     }
-    
+
 
     public function envio_masivo()
     {  try {
-        
-       
+
+
         $especies=Especie::all();
         return view('productors.envio-masivo',compact('especies'));
 
     } catch (Exception $e) {
         $especies=Especie::all();
         return view('productors.envio-masivo',compact('especies'));
-       
+
     }
-       
+
     }
 
     public function subir_procesos()
-    {         
+    {
         return view('productors.subir-proceso');
     }
 
     public function subir_procesos_anterior()
-    {         
+    {
         return view('productors.subir-procesoanterior');
     }
 
     public function subir_recepciones()
-    {         
+    {
         return view('productors.subir-recepciones');
     }
 
     public function proceso_upload(Request $request)
-    {   
-    
+    {
+
         $file = $request->file('file');
         //obtener Nombre del archivo
         $name = $file->getClientOriginalName();
-        
+
         //Con dicho nombre, encontrar el proceso correspondiente al archivo
         $proceso=Proceso::where('n_proceso',explode("-",$name)[0])->where('temporada','actual')->first();
-        
+
 
         if($proceso){
             //si existe el proceso, guardar el archivo, si no existe, no lo guarda
@@ -114,7 +116,7 @@ class HomeController extends Controller
             //luego se busca al productor que tiene el nombre de la agricola del proceso
             $user=User::where('name',$proceso->agricola)->first();
 
-            
+
             if(!is_null($user)){
 
                 if($user->emnotification==TRUE){
@@ -133,13 +135,13 @@ class HomeController extends Controller
                                 'messaging_product' => 'whatsapp',
                                 "preview_url"=> false,
                                 'to'=>$fono,
-                                
+
                                 'type'=>'template',
                                     'template'=>[
                                         'name'=>'proceso',
                                         'language'=>[
                                             'code'=>'es'],
-                                        'components'=>[ 
+                                        'components'=>[
                                             [
                                                 'type'=>'header',
                                                 'parameters'=>[
@@ -163,12 +165,12 @@ class HomeController extends Controller
                                             ]
                                         ]
                                     ]
-                                    
-                                
+
+
                             ];
-                            
+
                             Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
-                        
+
                             $token = env('WS_TOKEN');
                             $phoneid= env('WS_PHONEID');
                             $link= 'https://appgreenex.cl/download/'.$proceso->id.'.pdf';
@@ -178,13 +180,13 @@ class HomeController extends Controller
                                 'messaging_product' => 'whatsapp',
                                 "preview_url"=> false,
                                 'to'=>'56939245158',
-                                
+
                                 'type'=>'template',
                                     'template'=>[
                                         'name'=>'proceso',
                                         'language'=>[
                                             'code'=>'es'],
-                                        'components'=>[ 
+                                        'components'=>[
                                             [
                                                 'type'=>'header',
                                                 'parameters'=>[
@@ -208,17 +210,17 @@ class HomeController extends Controller
                                             ]
                                         ]
                                     ]
-                                    
-                                
+
+
                             ];
-                            
+
                             Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
                         }
-                    }    
+                    }
 
                 }
             }
-            
+
         }
 
 
@@ -226,15 +228,15 @@ class HomeController extends Controller
     }
 
     public function proceso_upload_anterior(Request $request)
-    {   
-    
+    {
+
         $file = $request->file('file');
         //obtener Nombre del archivo
         $name = $file->getClientOriginalName();
-        
+
         //Con dicho nombre, encontrar el proceso correspondiente al archivo
         $proceso=Proceso::where('n_proceso',explode("-",$name)[0])->where('temporada','anterior')->first();
-        
+
 
         if($proceso){
             //si existe el proceso, guardar el archivo, si no existe, no lo guarda
@@ -248,7 +250,7 @@ class HomeController extends Controller
             //luego se busca al productor que tiene el nombre de la agricola del proceso
             $user=User::where('name',$proceso->agricola)->first();
 
-           
+
             if(!is_null($user)){
                 if($user->emnotification==TRUE){
                     //en caso que exista el usuarioo consultar si tiene telefonos registrados
@@ -265,13 +267,13 @@ class HomeController extends Controller
                                 'messaging_product' => 'whatsapp',
                                 "preview_url"=> false,
                                 'to'=>$fono,
-                                
+
                                 'type'=>'template',
                                     'template'=>[
                                         'name'=>'proceso',
                                         'language'=>[
                                             'code'=>'es'],
-                                        'components'=>[ 
+                                        'components'=>[
                                             [
                                                 'type'=>'header',
                                                 'parameters'=>[
@@ -295,12 +297,12 @@ class HomeController extends Controller
                                             ]
                                         ]
                                     ]
-                                    
-                                
+
+
                             ];
-                            
+
                             Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
-                        
+
                             $token = env('WS_TOKEN');
                             $phoneid= env('WS_PHONEID');
                             $link= 'https://appgreenex.cl/download/'.$proceso->id.'.pdf';
@@ -310,13 +312,13 @@ class HomeController extends Controller
                                 'messaging_product' => 'whatsapp',
                                 "preview_url"=> false,
                                 'to'=>'56939245158',
-                                
+
                                 'type'=>'template',
                                     'template'=>[
                                         'name'=>'proceso',
                                         'language'=>[
                                             'code'=>'es'],
-                                        'components'=>[ 
+                                        'components'=>[
                                             [
                                                 'type'=>'header',
                                                 'parameters'=>[
@@ -340,32 +342,32 @@ class HomeController extends Controller
                                             ]
                                         ]
                                     ]
-                                    
-                                
+
+
                             ];
-                            
+
                             Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
-                    
+
                         }
                     }
-                }    
+                }
             }
-           
+
         }
 
 
         return view('productors.subir-proceso')->with('info','Archivo subido con exito');
     }
     public function recepcion_upload(Request $request)
-    {   
-    
+    {
+
         $file = $request->file('file');
         //obtener Nombre del archivo
         $name = $file->getClientOriginalName();
-        
+
         //Con dicho nombre, encontrar el proceso correspondiente al archivo
         $recepcion=Recepcion::where('numero_g_recepcion',explode("-",$name)[0])->where('temporada','actual')->first();
-        
+
 
         if($recepcion){
             //si existe el proceso, guardar el archivo, si no existe, no lo guarda
@@ -383,7 +385,7 @@ class HomeController extends Controller
             /*
             $user=User::where('name',$recepcion->n_emisor)->first();
             if($user){
-                //en caso que exista el usuarioo consultar si tiene telefonos registrados   
+                //en caso que exista el usuarioo consultar si tiene telefonos registrados
                 if($user->telefonos->count()){
                     foreach($user->telefonos as $telefono){
                         $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
@@ -397,13 +399,13 @@ class HomeController extends Controller
                             'messaging_product' => 'whatsapp',
                             "preview_url"=> false,
                             'to'=>$fono,
-                            
+
                             'type'=>'template',
                                 'template'=>[
                                     'name'=>'proceso',
                                     'language'=>[
                                         'code'=>'es'],
-                                    'components'=>[ 
+                                    'components'=>[
                                         [
                                             'type'=>'header',
                                             'parameters'=>[
@@ -427,13 +429,13 @@ class HomeController extends Controller
                                         ]
                                     ]
                                 ]
-                                
-                            
+
+
                         ];
-                        
+
                         Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
                     }
-                }    
+                }
             }*/
         }
 
@@ -446,34 +448,34 @@ class HomeController extends Controller
         return response()->download(storage_path('app/'.$proceso->informe));
     }
 
-  
+
 
     public function download_proceso_user(User $user){
-       
+
         return Excel::download(new ProcesosExport($user->id),'Procesos '.$user->name.'.xlsx');
     }
 
-    
+
 
     public function descargarInformes() {
         $procesos = Proceso::whereNotNull('informe')->where('temporada','actual')->get(); // Suponiendo que Proceso es el nombre de tu modelo
         $zipFileName = 'informes_de_procesos_all.zip';
         $zip = new ZipArchive;
         $zip->open(storage_path('app/'.$zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
-    
+
         foreach ($procesos as $proceso) {
             $rutaInforme = $proceso->informe;
             $nombreArchivo = basename($rutaInforme); // Obtiene el nombre del archivo PDF
-    
+
             // Verifica si el archivo existe en el almacenamiento
             if (Storage::exists($rutaInforme)) {
                 // Agrega el archivo al archivo ZIP
                 $zip->addFile(storage_path('app/'.$rutaInforme), $nombreArchivo);
             }
         }
-    
+
         $zip->close();
-    
+
         // Descarga el archivo ZIP y envía la respuesta al cliente
         return response()->download(storage_path('app/'.$zipFileName))->deleteFileAfterSend();
     }
@@ -483,20 +485,20 @@ class HomeController extends Controller
         $zipFileName = 'Infomes_de_proceso_'.$especie->name.'.zip';
         $zip = new ZipArchive;
         $zip->open(storage_path('app/'.$zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
-    
+
         foreach ($procesos as $proceso) {
             $rutaInforme = $proceso->informe;
             $nombreArchivo = basename($rutaInforme); // Obtiene el nombre del archivo PDF
-    
+
             // Verifica si el archivo existe en el almacenamiento
             if (Storage::exists($rutaInforme)) {
                 // Agrega el archivo al archivo ZIP
                 $zip->addFile(storage_path('app/'.$rutaInforme), $nombreArchivo);
             }
         }
-    
+
         $zip->close();
-    
+
         // Descarga el archivo ZIP y envía la respuesta al cliente
         return response()->download(storage_path('app/'.$zipFileName))->deleteFileAfterSend();
     }
@@ -506,20 +508,20 @@ class HomeController extends Controller
         $zipFileName = 'Infomes_de_proceso_'.$variedad->name.'.zip';
         $zip = new ZipArchive;
         $zip->open(storage_path('app/'.$zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
-    
+
         foreach ($procesos as $proceso) {
             $rutaInforme = $proceso->informe;
             $nombreArchivo = basename($rutaInforme); // Obtiene el nombre del archivo PDF
-    
+
             // Verifica si el archivo existe en el almacenamiento
             if (Storage::exists($rutaInforme)) {
                 // Agrega el archivo al archivo ZIP
                 $zip->addFile(storage_path('app/'.$rutaInforme), $nombreArchivo);
             }
         }
-    
+
         $zip->close();
-    
+
         // Descarga el archivo ZIP y envía la respuesta al cliente
         return response()->download(storage_path('app/'.$zipFileName))->deleteFileAfterSend();
     }
@@ -529,25 +531,25 @@ class HomeController extends Controller
         $zipFileName = 'Infomes_de_proceso_'.$user->name.'.zip';
         $zip = new ZipArchive;
         $zip->open(storage_path('app/'.$zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
-    
+
         foreach ($procesos as $proceso) {
             $rutaInforme = $proceso->informe;
             $nombreArchivo = basename($rutaInforme); // Obtiene el nombre del archivo PDF
-    
+
             // Verifica si el archivo existe en el almacenamiento
             if (Storage::exists($rutaInforme)) {
                 // Agrega el archivo al archivo ZIP
                 $zip->addFile(storage_path('app/'.$rutaInforme), $nombreArchivo);
             }
         }
-    
+
         $zip->close();
-    
+
         // Descarga el archivo ZIP y envía la respuesta al cliente
         return response()->download(storage_path('app/'.$zipFileName))->deleteFileAfterSend();
     }
 
-    
+
 
     public function proceso_destroy(Proceso $proceso) {
 
@@ -583,9 +585,9 @@ class HomeController extends Controller
 
         // Restar 5 días a la fecha actual
         $fechaActual->modify('-3 days');
-        
+
         // Formatear la fecha para mostrarla
-       
+
 
         $procesos=Http::post('https://api.greenexweb.cl/api/DatosProduccion');
         $procesos = $procesos->json();
@@ -603,10 +605,10 @@ class HomeController extends Controller
             //7
             $id_empresa=Null;//8
             $c_productor=Null;
-            
+
             $m=1;
             foreach ($proceso as $item){
-                
+
                 if($m==1){
                     $agricola=$item;
                 }
@@ -634,7 +636,7 @@ class HomeController extends Controller
                 if($m==9){
                     $c_productor=$item;
                 }
-                
+
                if($m==9){
 
                         $cont=Proceso::where('n_proceso',$n_proceso)->where('temporada','actual')->first();
@@ -688,9 +690,9 @@ class HomeController extends Controller
                                      'c_productor'=>$c_productor
                                 ])->save();
                             }
-                            
+
                         }else{
-                            
+
 
                                 if($kilos_netos>0){
                                     if($categoria=='Sin Procesar'){
@@ -742,7 +744,7 @@ class HomeController extends Controller
                                              'c_productor'=>$c_productor
                                         ]);
                                     }elseif($categoria=='Desecho'){
-                                            
+
                                             $rec=Proceso::create([
                                                 'agricola' => $agricola,//1
                                                 'n_proceso' => $n_proceso,//2
@@ -758,19 +760,19 @@ class HomeController extends Controller
                                                  'temporada' => 'actual',//9,
                                                  'c_productor'=>$c_productor
                                             ]);
-                                            
-                                    }	
+
+                                    }
                                 }
-                          
+
                         }
-                    
+
                 }
                 $m+=1;
-                
-            } 
+
+            }
         }
 
-        
+
         $rf=Proceso::all();
         $total=$rf->count()-$ri->count();
         Sync::create([
@@ -786,13 +788,13 @@ class HomeController extends Controller
 
      //Sincrinización proceso temporada "Actual"
      public function sync_proces_anterior()
-     {       
+     {
          $procesos=Http::post('https://api.greenexweb.cl/api/TemporadasPacking/9/DatosProduccion');
          $procesos = $procesos->json();
- 
+
          $ri=Proceso::all();
          $totali=$ri->count();
- 
+
          foreach ($procesos as $proceso){
              $agricola=Null;//1
              $n_proceso=Null;//2
@@ -802,10 +804,10 @@ class HomeController extends Controller
              $categoria=Null;//6
              //7
              $id_empresa=Null;//8
-             
+
              $m=1;
              foreach ($proceso as $item){
-                 
+
                  if($m==1){
                      $agricola=$item;
                  }
@@ -830,9 +832,9 @@ class HomeController extends Controller
                  if($m==8){
                      $id_empresa=$item;
                  }
-                 
+
                 if($m==8){
- 
+
                          $cont=Proceso::where('n_proceso',$n_proceso)->where('temporada','anterior')->first();
                          if($cont){
                              if($categoria=='Sin Procesar'){
@@ -880,10 +882,10 @@ class HomeController extends Controller
                                       'temporada' => 'anterior'//9
                                  ])->save();
                              }
-                             
+
                          }else{
-                             
- 
+
+
                                  if($kilos_netos>0){
                                      if($categoria=='Sin Procesar'){
                                          $rec=Proceso::create([
@@ -931,7 +933,7 @@ class HomeController extends Controller
                                               'temporada' => 'anterior'//9
                                          ]);
                                      }elseif($categoria=='Desecho'){
-                                             
+
                                              $rec=Proceso::create([
                                                  'agricola' => $agricola,//1
                                                  'n_proceso' => $n_proceso,//2
@@ -946,19 +948,19 @@ class HomeController extends Controller
                                                  'id_empresa' => $id_empresa,//8
                                                   'temporada' => 'anterior'//9
                                              ]);
-                                             
-                                     }	
+
+                                     }
                                  }
-                           
+
                          }
-                     
+
                  }
                  $m+=1;
-                 
-             } 
+
+             }
          }
- 
-         
+
+
          $rf=Proceso::all();
          $total=$rf->count()-$ri->count();
          Sync::create([
@@ -967,9 +969,9 @@ class HomeController extends Controller
              'fecha'=>Carbon::now(),
              'cantidad'=>$total
          ]);
- 
+
          return redirect()->route('procesos.index');
- 
+
      }
 
     public function sync_consolidado()
@@ -977,7 +979,7 @@ class HomeController extends Controller
         foreach ($users as $user){
 
             $procesos=Proceso::where('agricola',$user->name)->latest('n_proceso')->get();
-            
+
             $kilos_netos=0;
             $exportacion=0;
             $comercial=0;
@@ -985,13 +987,13 @@ class HomeController extends Controller
             $merma=0;
 
             foreach ($procesos as $proceso){
-            
+
                 $kilos_netos+=$proceso->kilos_netos;
                 $exportacion+=$proceso->exp;
                 $comercial+=$proceso->comercial;
                 $desecho=+$proceso->desecho;
                 $merma+=($proceso->kilos_netos-$proceso->exp-$proceso->comercial-$proceso->desecho);
-            
+
             }
 
             $user->update(['kilos_netos'=>$kilos_netos,
@@ -1000,7 +1002,7 @@ class HomeController extends Controller
                             'merma'=>$merma,
                             'exp'=>$exportacion]);
         }
-      
+
 
         return redirect()->route('productors.index');
 
@@ -1009,15 +1011,15 @@ class HomeController extends Controller
     public function dashboard () {
         $users=User::all();
 
-      
 
-        
+
+
         return view('dashboard',compact('users'));
     }
 
     public function dashboard_especie (Especie $especie) {
         $users=User::all();
-        
+
 
         return view('dashboardespecie',compact('users','especie'));
     }
@@ -1035,7 +1037,7 @@ class HomeController extends Controller
     public function downloadpdf(Recepcion $recepcion) {
 
         return response()->download(storage_path('app/'.$recepcion->informe));
-      
+
     }
     //PERAS // MANZANAS //CEREZAS //DAGEN
     public function distribucion_calibre(Recepcion $recepcion) {
@@ -1080,7 +1082,7 @@ class HomeController extends Controller
     //CEREZAS //DAGEN
     public function porcentaje_firmeza(Recepcion $recepcion) {
         //$firmpro=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/BuscarRecepcionCloud?Numero_recepcion='.$recepcion->numero_g_recepcion);
-        
+
         //$firmpro = $firmpro->json();
 
         return view('pdf.porcentaje_firmeza',compact('recepcion'));
@@ -1137,14 +1139,14 @@ class HomeController extends Controller
 
     public function estadistica_type(Estadistica_type $estadistica_type) {
 
-       
+
 
         $estadisticas=Estadisticas::where('type',$estadistica_type->search)->paginate(50);
         $usuarios = Estadisticas::selectRaw('user_id, COUNT(*) as repeticiones')
         ->where('type', $estadistica_type->search)
         ->groupBy('user_id')
         ->get();
-       
+
 
         return view('admin.estadistica_type',compact('estadisticas','estadistica_type','usuarios'));
     }
@@ -1169,14 +1171,14 @@ class HomeController extends Controller
                               ->groupBy('rut');
                     })
                     ->get();
-        
+
         return view('admin.agronomos.index',compact('users','campos2','uniqueUsers'));
     }
 
     public function agronomo_show(User $user) {
 
         $campos=CampoStaff::where('campo_rut',$user->rut)->get();
-        
+
         return view('admin.agronomos.show',compact('user','campos'));
     }
 
@@ -1200,18 +1202,23 @@ class HomeController extends Controller
                     })
                     ->get();
 
-        
+
         return view('admin.agronomos.showindex',compact('user','campos','campos2','uniqueUsers'));
     }
 
-    public function productor_edit(User $user) 
+    public function productor_edit(User $user)
     {   $certificacions=Certificacion::where('rut',$user->rut)->get();
         $especies=Especie::all()->pluck('name','id');
         $variedades=Variedad::all()->pluck('name','id');
-        return view('admin.agronomos.editproductor',compact('user','certificacions','especies','variedades'));
+        $tipodocumentacions=TipoDocumentacions::where('estado',1)->with('especie','pais')->get();
+        //$documentacion=TipoDocumentacions::where('estado',1)->with('especie','pais')->has('Documentacions')->where('user_id',$user->id)->get();
+        $documentacion=Documentacions::where('user_id',$user->id)->with(['TipoDocumentacion','TipoDocumentacion.especie', 'TipoDocumentacion.pais'])->get();
+
+        return view('admin.agronomos.editproductor',compact('user','certificacions','especies','variedades','documentacion','tipodocumentacions'));
     }
 
-   
+
+
 
     public function user_store(Request $request) {
 
@@ -1221,12 +1228,12 @@ class HomeController extends Controller
                 'email' => $request['email'],
                 'password' => Hash::make($request['password']),
             ]);
-    
+
             return redirect()->back()->with('info','El usuario fue creado con éxito.');
         }else{
             return redirect()->back()->with('fail','La Contraseña no coincide');
         }
-        
+
     }
 
     public function detalle_update(Calidad $calidad, Request $request) {
@@ -1256,7 +1263,7 @@ class HomeController extends Controller
             $firmezas_mediana=NULL;
             $firmezas_chica=NULL;
         }
-            
+
         if ($recepcion->n_especie=="Cherries" || $recepcion->n_variedad=='Dagen') {
             $distribucion_calibre='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x380';
             $promedio_firmeza='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/'.$recepcion->id.'.html&viewport=800x400';
@@ -1274,7 +1281,7 @@ class HomeController extends Controller
         }
         //view()->share('productors.informe',$recepcion,$distribucion_calibre);
         $user=User::where('name',$recepcion->n_emisor)->first();
- 
+
         $presiones=Valor::where('parametro_id',16)->where('especie',$recepcion->n_especie)->orderby('id','ASC')->get();
         $almidons=Valor::where('parametro_id',8)->where('especie',$recepcion->n_especie)->orderby('id','ASC')->get();
 
@@ -1295,7 +1302,7 @@ class HomeController extends Controller
 
         $pdfContent = $pdf->output();
         $filename = $recepcion->numero_g_recepcion.'-'.$recepcion->id_emisor.'.pdf';
-                                                    
+
         Storage::put('pdf-recepciones/' . $filename, $pdfContent);
 
         $recepcion->update([
@@ -1304,9 +1311,9 @@ class HomeController extends Controller
 
 
          return $pdf->stream($recepcion->numero_g_recepcion.'-'.$recepcion->id_emisor.'.pdf');
-         
+
          //return view('productors.informe',compact('recepcion','distribucion_calibre'));
-         
+
     }
 
     public function production()
@@ -1331,7 +1338,7 @@ class HomeController extends Controller
     }
 
     public function productionpropia()
-    {  
+    {
         //$recepcions = $recepcions->json();
         $estadistica = Estadisticas::create([
             'type'=> 'vistarecepcionproductor',
@@ -1346,18 +1353,18 @@ class HomeController extends Controller
                 'type'=> 'recepcioncc',
                 'user_id'=>auth()->user()->id
             ]);
-            
+
         //$recepcions = $recepcions->json();
 
         return view('productors.productioncc');
     }
     public function productionccindexanterior()
-    {   
+    {
         $estadistica = Estadisticas::create([
                 'type'=> 'recepcionccanterior',
                 'user_id'=>auth()->user()->id
             ]);
-            
+
         //$recepcions = $recepcions->json();
 
         return view('productors.productionccanterior');
@@ -1383,7 +1390,7 @@ class HomeController extends Controller
     }
 
     public function production_refresh()
-    {        
+    {
         $productions=Http::post('https://api.greenexweb.cl/api/ObtenerRecepcion');
         $productions = $productions->json();
         $ri=Recepcion::all();
@@ -1407,11 +1414,11 @@ class HomeController extends Controller
             $peso_neto=Null;//15
             $nota_calidad=Null;//16
             $n_estado=Null;//17
-         
+
             $m=1;
             foreach ($production as $item){
-                
-               
+
+
 
                 if($m==2){
                     $id_g_recepcion=$item;
@@ -1471,13 +1478,13 @@ class HomeController extends Controller
                             $user=User::where('csg',$Codigo_Sag_emisor)->first();
                             if(!IS_NULL($user)){
                                 if($espec->comercializado->contains($user->id)){
-                                   
+
                                 }else{
                                     $espec->comercializado()->attach($user->id);
-                                   
+
                                 }
                             }
-                            
+
                             $varie=Variedad::where('name',$n_variedad)->first();
                             if($varie){
                                 $varie->forceFill([
@@ -1508,14 +1515,14 @@ class HomeController extends Controller
                             'name'=> $n_especie
                             ]);
                             $user=User::where('csg',$Codigo_Sag_emisor)->first();
-                            
+
                             if(!IS_NULL($user)){
                                 if($especie->comercializado->contains($user->id)){
-                                 
+
 
                                 }else{
                                     $especie->comercializado()->attach($user->id);
-                                   
+
                                 }
                             }
                             $varie=Variedad::where('name',$n_variedad)->first();
@@ -1541,11 +1548,11 @@ class HomeController extends Controller
                                 }
                             }
                         }
-                    
+
                         $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->where('temporada','actual')->first();
-                        
+
                         if($cont){
-                            
+
                             $cont->forceFill([
                                 'id_g_recepcion' => $id_g_recepcion,//1
                                 'tipo_g_recepcion' => $tipo_g_recepcion,//2
@@ -1563,7 +1570,7 @@ class HomeController extends Controller
                                 'peso_neto' => $peso_neto,
                                 'nota_calidad' => $nota_calidad,
                                 'temporada'=>'actual'
-                                
+
                             ])->save();
                           /*  if(IS_NULL($cont->calidad)){
                                 Calidad::create([
@@ -1572,7 +1579,7 @@ class HomeController extends Controller
                             }*/
                             }
                         else{
-                            
+
                                 $rec=Recepcion::create([
                                     'id_g_recepcion' => $id_g_recepcion,//1
                                     'tipo_g_recepcion' => $tipo_g_recepcion,//2
@@ -1591,21 +1598,21 @@ class HomeController extends Controller
                                     'nota_calidad' => $nota_calidad,
                                     'n_estado' => $n_estado,
                                     'temporada'=>'actual'
-                                    
+
                                 ]);
                                 Calidad::create([
                                     'recepcion_id'=>$rec->id
                                 ]);
-                            
+
                         }
-                    
+
                 }
                 $m+=1;
-                
-            } 
+
+            }
         }
 
-        
+
         $rf=Recepcion::all();
         $total=$rf->count()-$ri->count();
         Sync::create([
@@ -1623,7 +1630,7 @@ class HomeController extends Controller
     }
 
     public function production_refresh_anterior()
-    {        
+    {
         $productions=Http::post('https://api.greenexweb.cl/api/TemporadasPacking/9/ObtenerRecepcion');
         $productions = $productions->json();
         $ri=Recepcion::all();
@@ -1647,11 +1654,11 @@ class HomeController extends Controller
             $peso_neto=Null;//15
             $nota_calidad=Null;//16
             $n_estado=Null;//17
-         
+
             $m=1;
             foreach ($production as $item){
-                
-               
+
+
 
                 if($m==2){
                     $id_g_recepcion=$item;
@@ -1712,13 +1719,13 @@ class HomeController extends Controller
 
                             if(!IS_NULL($user)){
                                 if($espec->comercializado->contains($user->id)){
-                                   
+
                                 }else{
                                     $espec->comercializado()->attach($user->id);
-                                    
+
                                 }
                             }
-                            
+
                             $varie=Variedad::where('name',$n_variedad)->first();
                             if($varie){
                                 $varie->forceFill([
@@ -1751,11 +1758,11 @@ class HomeController extends Controller
                             $user=User::where('name',$n_emisor)->first();
                             if(!IS_NULL($user)){
                                 if($especie->comercializado->contains($user->id)){
-                                   
+
 
                                 }else{
                                     $especie->comercializado()->attach($user->id);
-                                   
+
                                 }
                             }
                             $varie=Variedad::where('name',$n_variedad)->first();
@@ -1781,11 +1788,11 @@ class HomeController extends Controller
                                 }
                             }
                         }
-                    
+
                         $cont=Recepcion::where('id_g_recepcion',$id_g_recepcion)->where('temporada','anterior')->first();
-                        
+
                         if($cont){
-                            
+
                             $cont->forceFill([
                                 'id_g_recepcion' => $id_g_recepcion,//1
                                 'tipo_g_recepcion' => $tipo_g_recepcion,//2
@@ -1803,7 +1810,7 @@ class HomeController extends Controller
                                 'peso_neto' => $peso_neto,
                                 'nota_calidad' => $nota_calidad,
                                 'temporada'=>'anterior'
-                                
+
                             ])->save();
                           /*  if(IS_NULL($cont->calidad)){
                                 Calidad::create([
@@ -1812,7 +1819,7 @@ class HomeController extends Controller
                             }*/
                             }
                         else{
-                            
+
                                 $rec=Recepcion::create([
                                     'id_g_recepcion' => $id_g_recepcion,//1
                                     'tipo_g_recepcion' => $tipo_g_recepcion,//2
@@ -1831,21 +1838,21 @@ class HomeController extends Controller
                                     'nota_calidad' => $nota_calidad,
                                     'n_estado' => $n_estado,
                                     'temporada'=>'anterior'
-                                    
+
                                 ]);
                                 Calidad::create([
                                     'recepcion_id'=>$rec->id
                                 ]);
-                            
+
                         }
-                    
+
                 }
                 $m+=1;
-                
-            } 
+
+            }
         }
 
-        
+
         $rf=Recepcion::all();
         $total=$rf->count()-$ri->count();
         Sync::create([
@@ -1861,7 +1868,7 @@ class HomeController extends Controller
     }
 
     public function productor_refresh()
-    {  
+    {
 
         $users= Http::post('https://api.greenexweb.cl/api/ObtenerProductor');
 
@@ -1870,7 +1877,7 @@ class HomeController extends Controller
         $ri=User::all();
         $totali=$ri->count();
 
-       
+
         foreach ($users as $user){
             $id=null;
             $nombre=null;
@@ -1881,10 +1888,10 @@ class HomeController extends Controller
             $comuna=null;
             $provincia=null;
             $direccion=null;
-            
+
             $m=1;
             foreach ($user as $item){
-                
+
                 if($m==1){
                     $id=$item;
                 }
@@ -1900,7 +1907,7 @@ class HomeController extends Controller
                 if($m==2){
                     $csg=$item;
                 }
-                
+
 
                 if($m==8){
                     $predio=$item;
@@ -1914,8 +1921,8 @@ class HomeController extends Controller
                 if($m==9){
                     $direccion=$item;
                 }
-               
-               
+
+
                 if($m==14){
                     $cont=User::where('csg',$csg)->first();
                     $search=['.','-'];
@@ -1951,8 +1958,8 @@ class HomeController extends Controller
                     }
                 }
                 $m+=1;
-                
-            } 
+
+            }
         }
 
         $rf=User::all();

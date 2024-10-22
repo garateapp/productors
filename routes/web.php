@@ -15,7 +15,10 @@ use App\Http\Controllers\SoporteController;
 use App\Http\Controllers\TelefonoController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TipoDocumentacionsController;
+use App\Http\Controllers\DocumentacionController;
 use App\Models\Recepcion;
+use App\Models\TipoDocumentacions;
 use App\Models\User;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -39,10 +42,10 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    
+
 
     Route::get('/dashboard',[HomeController::class,'dashboard'])->name('dashboard');
-    
+
 });
 
 Route::get('/dashboard/especie/{especie}',[HomeController::class,'dashboard_especie'])->name('dashboard.especie');
@@ -215,3 +218,19 @@ Route::resource('comercial_fruit', ComercialFruitController::class)->names('come
 Route::resource('ficha', FichaController::class)->names('fichas');
 
 Route::get('download/mensaje/{mensaje_hist}.pdf', [MensajeHistController::class,'download'])->name('download.mensaje_hist');
+
+Route::resource('tipodocumentacions', TipoDocumentacionsController::class)->only(['index','edit','destroy','create'])->names('tipodocumentacions');
+Route::put('tipodocumentacions/{tipodocumentacion}', [TipoDocumentacionsController::class, 'update'])->name('tipodocumentacions.update');
+
+Route::post('tipodocumentacions', [TipoDocumentacionsController::class,'store'])->name('tipodocumentacions.store');
+
+Route::resource('documentacions', DocumentacionController::class)->only(['index','edit','destroy','create'])->names('documentacions');
+Route::put('documentacions/{tipodocumentacion}', [DocumentacionController::class, 'update'])->name('documentacions.update');
+
+Route::post('documentacions', [DocumentacionController::class,'store'])->name('documentacions.store');
+
+Route::post('documentacions/actualizardocto', [DocumentacionController::class,'actualizardocto'])->name('documentacions.actualizardocto');
+Route::post('documentacions/obtenerDocumentoxProductor', [DocumentacionController::class,'obtenerDocumentoxProductor'])->name('documentacions.obtenerDocumentoxProductor');
+Route::post('documentacions/descargaSeleccionados', [DocumentacionController::class,'descargaSeleccionados'])->name('documentacions.descargaSeleccionados');
+
+
