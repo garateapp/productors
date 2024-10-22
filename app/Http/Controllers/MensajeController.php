@@ -52,8 +52,8 @@ class MensajeController extends Controller
         $productors = $especie->comercializado()->get();
 
         $name = Str::random(5).$request->file('file')->getClientOriginalName();
-        $url = $request->file('file')->storeAs(
-            'app/archivos', $name
+        $url2 = $request->file('file')->storeAs(
+           'public/archivos', $name
         );
 
         // $mensaje_hist=Mensaje_hist::create([
@@ -65,10 +65,11 @@ class MensajeController extends Controller
         // ]);
         $token = env('WS_TOKEN');
                             $phoneid= env('WS_PHONEID');
-                            $link= $url;//'https://appgreenex.cl/'+asset('storage/'.$zipFileName);
+                            $link= $url2;//'https://appgreenex.cl/'+asset('storage/'.$zipFileName);
                             $version='v16.0';
-                            $url="https://appgreenex.cl/";
-        foreach($productors as $productor){
+                            $url=asset('storage/archivos/'.$name);
+                           // dd($url,$name);
+        //foreach($productors as $productor){
 
 
             $wsload=[
@@ -121,7 +122,7 @@ class MensajeController extends Controller
             //     'mensaje_hist_id'=>$mensaje_hist->id
             // ]);
 
-        }
+        //}
 
         return redirect()->back();
 
