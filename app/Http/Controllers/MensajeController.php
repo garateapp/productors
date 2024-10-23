@@ -84,7 +84,7 @@ class MensajeController extends Controller
             ];
 
             $response=Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
-            dd($response);
+
 
 
             // $mensaje=Mensaje::create([
