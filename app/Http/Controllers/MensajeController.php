@@ -75,7 +75,7 @@ class MensajeController extends Controller
         $wsload=[
             'messaging_product' => 'whatsapp',
             "preview_url"=> false,
-            'to'=>'56939245158',
+            'to'=>'56966291494',
 
             'type'=>'template',
                 'template'=>[
