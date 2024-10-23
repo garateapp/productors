@@ -72,16 +72,43 @@ class MensajeController extends Controller
         //foreach($productors as $productor){
 
 
-            $wsload=[
-                'messaging_product' => 'whatsapp',
-                "preview_url"=> false,
-                'to'=>'56966291494',
-                'type'=>'document',
-                        'document' => [
-                        'link' => $url,
-                        'caption' => 'Aquí está el documento solicitado.',
-                    ],
-            ];
+        $wsload=[
+            'messaging_product' => 'whatsapp',
+            "preview_url"=> false,
+            'to'=>'56939245158',
+
+            'type'=>'template',
+                'template'=>[
+                    'name'=>'proceso',
+                    'language'=>[
+                        'code'=>'es'],
+                    'components'=>[
+                        [
+                            'type'=>'header',
+                            'parameters'=>[
+                                [
+                                    'type'=>'document',
+                                    'document'=> [
+                                        'link'=>$url,
+                                        'filename'=>"prueba.pdf",
+                                        ]
+                                ]
+                            ]
+                        ],
+                        [
+                            'type'=>'body',
+                            'parameters'=>[
+                                [
+                                    'type'=>'text',
+                                    'text'=> "2"
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+
+
+        ];
 
             $response=Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
 
