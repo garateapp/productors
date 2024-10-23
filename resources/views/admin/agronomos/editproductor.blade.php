@@ -651,7 +651,7 @@
                                                     @if ($documento->file == '')
                                                     @else
                                                     @endif
-                                                    <form class="deleteFormcert"
+                                                    {{-- <form class="deleteFormcert"
                                                         action="{{ route('documentacions.destroy', $documento->id) }}"
                                                         method="POST">
                                                         <button type="button" id="actualizardocto"
@@ -659,14 +659,14 @@
                                                             class="mb-2 ml-2 text-2xl text-orange-500 cursor-pointer fa-solid fas fa-cog"
                                                             data-id="{{ $documento->id }}">
 
-                                                        </button>
-                                                        <a href="{{ asset('storage') }}/{{ $documento->file }}"
-                                                            target="_blank" title="Ver Documento"
-                                                            class="mb-2 ml-2 text-2xl text-green-500 cursor-pointer fa-solid fas fa-file-pdf">
+                                                        </button> --}}
+                                                    <a href="{{ asset('storage') }}/{{ $documento->file }}"
+                                                        target="_blank" title="Ver Documento"
+                                                        class="mb-2 ml-2 text-2xl text-green-500 cursor-pointer fa-solid fas fa-file-pdf">
 
-                                                        </a>
-                                                        @csrf
-                                                        @method('delete')
+                                                    </a>
+                                                    @csrf
+                                                    {{-- @method('delete')
                                                         <button type="button"
                                                             class="mb-2 ml-2 text-2xl font-bold text-red-500 deleteButtondoc fas fa-trash"
                                                             title="Eliminar">
@@ -677,7 +677,7 @@
                                                             placeholder="Nombre de Documento"
                                                             value="{{ $documento->id }}" data-name="doctoid" />
 
-                                                    </form>
+                                                    </form> --}}
 
                                                 </td>
                                             </tr>
