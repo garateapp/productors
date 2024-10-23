@@ -7,12 +7,12 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.min.css
 " rel="stylesheet">
     <x-slot name="header">
         <div class="flex justify-end">
-            {{-- <a href="{{ route('documentacions.create') }}">
+            <a href="{{ route('documentacions.create') }}">
                 <button
                     class="items-center px-6 py-3 ml-auto bg-gray-500 rounded focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 hover:bg-gray-500 focus:outline-none">
-                    <p class="text-sm font-medium leading-none text-white">Documentación Productores</p>
+                    <p class="text-sm font-medium leading-none text-white">Subir Documentación Productores</p>
                 </button>
-            </a> --}}
+            </a>
             <input type="text" id="searchInput" class="items-center py-3 ml-auto px-36" wire:model="search"
                 placeholder="Buscar Productor por CSG o Nombre">
 
@@ -118,6 +118,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.min.css
                                         <p class="text-sm font-medium leading-none text-white">Ver
                                             Documentación</p>
                                     </button>
+
                                 </a>
                             </td>
 
@@ -214,7 +215,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.min.css
                 })
                 .done(function(response) {
                     console.log(response);
-                    generarListado(response, productorNombre);
+                    generarListado(response, productorNombre, productorId);
                     // $("#nombredocto").val(response.nombre);
                     // $("#descripciondocto").val(response.descripcion);
                     // $("#tipodocto").val(response.tipo_documentacion_id);
@@ -235,7 +236,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.min.css
             });
         });
 
-        function generarListado(data, productorNombre) {
+        function generarListado(data, productorNombre, productorId) {
             // Limpiar el contenedor donde se mostrará la tabla
             $('#contenedor-listado').empty();
             var separador = "<hr class='my-4' />";
@@ -294,11 +295,20 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.min.css
                             <td class="text-center"><p class="mr-2 text-base font-medium leading-none text-gray-700">${fechaFormateada}</p></td>
                             <td>
                                 <!-- Aquí puedes agregar un botón de descarga, ver, o lo que necesites -->
+                                 <form action="{{ route('documentacions.edit') }}" method="POST">
                                <a href="{{ asset('storage') }}/${documento.file}"
                                                             target="_blank" title="Ver Documento"
                                                             class="mb-2 ml-2 text-2xl text-green-500 cursor-pointer fa-solid fas fa-file-pdf">
 
                                                         </a>
+
+                                                            @csrf
+                                                            <input type="hidden" name="id" value="${documento.id}">
+                                                            <input type="hidden" name="user_id" value="${productorId}">
+                                                            <button type="submit" class="mb-2 ml-2 text-2xl text-gray-500 cursor-pointer fa-solid fas fa-edit"></button>
+                                                            </form>
+
+
                             </td>
                         </tr>
                     `;

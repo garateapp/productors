@@ -224,9 +224,9 @@ Route::put('tipodocumentacions/{tipodocumentacion}', [TipoDocumentacionsControll
 Route::get('/tipodocumentacions', [TipoDocumentacionsController::class, 'index'])->name('tipodocumentacions.index');
 Route::post('tipodocumentacions', [TipoDocumentacionsController::class,'store'])->name('tipodocumentacions.store');
 
-Route::resource('documentacions', DocumentacionController::class)->only(['index','edit','destroy','create'])->names('documentacions');
+Route::resource('documentacions', DocumentacionController::class)->only(['index','destroy','create'])->names('documentacions');
 Route::put('documentacions/{tipodocumentacion}', [DocumentacionController::class, 'update'])->name('documentacions.update');
-
+Route::post('documentacions.edit', [DocumentacionController::class,'edit'])->name('documentacions.edit');
 Route::post('documentacions', [DocumentacionController::class,'store'])->name('documentacions.store');
 
 Route::post('documentacions/actualizardocto', [DocumentacionController::class,'actualizardocto'])->name('documentacions.actualizardocto');

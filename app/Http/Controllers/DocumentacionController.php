@@ -63,6 +63,15 @@ public function obtenerDocumentoxProductor(Request $request)
      */
     public function create()
     {
+        $productores=User::where('csg','!=',null)->get();
+        $paises=Paises::has('TipoDocumentacion')->get();
+        $productores=User::where('csg','!=',null)->get();
+        $especies=Especie::has('TipoDocumentacion')->get();
+        $tipodocumentacions=TipoDocumentacions::where('estado',1)->with('especie','pais')->get();
+        //$documentacion=TipoDocumentacions::where('estado',1)->with('especie','pais')->has('Documentacions')->where('user_id',$user->id)->get();
+        $documentacion=Documentacions::with(['TipoDocumentacion','TipoDocumentacion.especie', 'TipoDocumentacion.pais'])->get();
+
+        return view('documentacions.create',compact('documentacion','tipodocumentacions','paises','especies','productores'));
         //
     }
     public function descargaSeleccionados(Request $request){
@@ -154,9 +163,17 @@ public function obtenerDocumentoxProductor(Request $request)
             'host'=>request()->ip(),
             'properties'=>json_encode($documentacion->all()),
         ]);
-        return redirect()->back()->with('info','El Documento fue actualizado con exito :) !!!!!.');
+
+        $productores=User::where('csg','!=',null)->get();
+        $paises=Paises::has('TipoDocumentacion')->get();
+        $productores=User::where('csg','!=',null)->get();
+        $especies=Especie::has('TipoDocumentacion')->get();
+        $tipos=TipoDocumentacions::with('especie','pais')->where('estado',1)->get();
+        $documentos=Documentacions::with("TipoDocumentacion")->get();
+
+        return view('documentacions.index',compact('documentos','tipos','paises','especies','productores'))->with('info','El Documento fue actualizado con exito :) !!!!!.');
         }catch(\Exception $e){
-         return redirect()->back()->with('info',"El Documento no fue actualizado :'( !!!!!.");
+         return view('documentacions.index')->with('info',"El Documento no fue actualizado :'( !!!!!.");
         }
 
     }
@@ -178,9 +195,19 @@ public function obtenerDocumentoxProductor(Request $request)
      * @param  \App\Models\Documentacion  $documentacion
      * @return \Illuminate\Http\Response
      */
-    public function edit(Documentacions $documentacion)
+    public function edit(Request $request)
     {
-        //
+
+        $paises=Paises::has('TipoDocumentacion')->get();
+        $productores=User::where('id','=',$request->user_id)->first();
+        //dd($productores,$request->user_id);
+        $especies=Especie::has('TipoDocumentacion')->get();
+        $tipodocumentacions=TipoDocumentacions::where('estado',1)->with('especie','pais')->get();
+        //$documentacion=TipoDocumentacions::where('estado',1)->with('especie','pais')->has('Documentacions')->where('user_id',$user->id)->get();
+        $documento=Documentacions::find($request->id);
+        $documentacion=Documentacions::with(['TipoDocumentacion','TipoDocumentacion.especie', 'TipoDocumentacion.pais'])->get();
+       // dd($documento,$documentacion);
+        return view('documentacions.edit',compact('documento','documentacion','tipodocumentacions','paises','especies','productores'));
     }
 
     /**
