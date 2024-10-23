@@ -1210,7 +1210,7 @@ class HomeController extends Controller
     {   $certificacions=Certificacion::where('rut',$user->rut)->get();
         $especies=Especie::all()->pluck('name','id');
         $variedades=Variedad::all()->pluck('name','id');
-        $tipodocumentacions=TipoDocumentacions::where('estado',1)->with('especie','pais')->get();
+       $tipodocumentacions=TipoDocumentacions::where('estado',1)->with('especie','pais')->get();
         //$documentacion=TipoDocumentacions::where('estado',1)->with('especie','pais')->has('Documentacions')->where('user_id',$user->id)->get();
         $documentacion=Documentacions::where('user_id',$user->id)->with(['TipoDocumentacion','TipoDocumentacion.especie', 'TipoDocumentacion.pais'])->get();
 

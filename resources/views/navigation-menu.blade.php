@@ -188,15 +188,17 @@
                                     {{ __('Envio Masivo') }}
                                 </x-jet-dropdown-link>
                             @endcan
-                            @can('Asignar roles')
+                            @can('agregar_tipos_documento')
                                 <!--Documentación Productores-->
                                 <x-jet-dropdown-link href="{{ route('tipodocumentacions.index') }}">
                                     {{ __('Tipo Documentos') }}
                                 </x-jet-dropdown-link>
+
                                 <x-jet-dropdown-link href="{{ route('documentacions.index') }}">
                                     {{ __('Documentos Productores') }}
                                 </x-jet-dropdown-link>
                             @endcan
+
                             <!--Fin Documentación Productores-->
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">

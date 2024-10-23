@@ -304,8 +304,11 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.min.css
 
                                                             @csrf
                                                             <input type="hidden" name="id" value="${documento.id}">
+
+                                                            @can('editar_archivos_productores')
                                                             <input type="hidden" name="user_id" value="${productorId}">
                                                             <button type="submit" class="mb-2 ml-2 text-2xl text-gray-500 cursor-pointer fa-solid fas fa-edit"></button>
+                                                            @endcan
                                                             </form>
 
 
