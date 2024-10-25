@@ -83,7 +83,7 @@ class MensajeController extends Controller
 
 
         foreach($productors as $productor){
-           dd($productor);
+
             $telefonos=Telefono::where('user_id',$productor->id)->get();
             if($productor->emnotification==TRUE){
 
