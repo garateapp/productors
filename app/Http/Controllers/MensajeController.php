@@ -96,7 +96,7 @@ class MensajeController extends Controller
             $mensaje->emisor_id=auth()->user()->id;
 
             $subject="Envío de Archivo: ".$request->tipo." para ".$especie->name;
-            $contador=30;
+            $contador=0;
             if($productor->email!=null && $productor->email!=''){
                 if($contador>=30){
                     Mail::to($productor->email)->send(new MensajeGenericoMailable($mensaje,$url2));
