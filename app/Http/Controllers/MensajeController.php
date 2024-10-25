@@ -96,9 +96,16 @@ class MensajeController extends Controller
             $mensaje->emisor_id=auth()->user()->id;
 
             $subject="Envío de Archivo: ".$request->tipo." para ".$especie->name;
+            $contador=30;
             if($productor->email!=null && $productor->email!=''){
-                Mail::to($productor->email)->send(new MensajeGenericoMailable($mensaje,$url2));
-                FacadesLog::info('Mensaje enviado a '.$productor->name.', Email: '.$productor->email.', CSG: '.$productor->csg.' para '.$especie->name.' por '.$request->tipo);
+                if($contador>=30){
+                    Mail::to($productor->email)->send(new MensajeGenericoMailable($mensaje,$url2));
+                    FacadesLog::info('Mensaje enviado a '.$productor->name.', Email: '.$productor->email.', CSG: '.$productor->csg.' para '.$especie->name.' por '.$request->tipo);
+                    if($contador%30==0){
+                        sleep(60);
+                    }
+                    $contador++;
+                }
             }
             else{
                 FacadesLog::info($productor->name.' no tiene correo electronico');
