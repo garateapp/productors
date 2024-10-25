@@ -73,21 +73,21 @@ class MensajeController extends Controller
         $version='v16.0';
         $url=asset('storage/archivos/'.$name);
 
-        // $mensaje_hist=Mensaje_hist::create([
-        //     'observacion'=>$request->observacion,
-        //     'especie'=>$especie->name,
-        //     'tipo'=>$request->tipo,
-        //     'archivo'=>$url,
-        //     'emisor_id'=>auth()->user()->id
-        // ]);
+        $mensaje_hist=Mensaje_hist::create([
+            'observacion'=>$request->observacion,
+            'especie'=>$especie->name,
+            'tipo'=>$request->tipo,
+            'archivo'=>$url,
+            'emisor_id'=>auth()->user()->id
+        ]);
 
 
-        //foreach($productors as $productor){
-           //dd($productor);
-            // $telefonos=Telefono::where('user_id',$productor->id)->get();
-            // if($productor->emnotification==TRUE){
+        foreach($productors as $productor){
+           dd($productor);
+            $telefonos=Telefono::where('user_id',$productor->id)->get();
+            if($productor->emnotification==TRUE){
 
-            // }
+
             $mensaje=New Mensaje();
             $mensaje->observacion=$request->observacion;
             $mensaje->especie=$especie->name;
@@ -96,12 +96,17 @@ class MensajeController extends Controller
             $mensaje->emisor_id=auth()->user()->id;
 
             $subject="Envío de Archivo: ".$request->tipo." para ".$especie->name;
-            //Mail::to("carlos.alvarez@greenex.cl")->send(new MensajeGenericoMailable($mensaje,$url2));
-            //Mail::to("nadia.lell@greenex.cl")->send(new MensajeGenericoMailable($mensaje,$url2));
+            if($productor->email!=null && $productor->email!=''){
+                Mail::to($productor->email)->send(new MensajeGenericoMailable($mensaje,$url2));
+            }
+            else{
+                FacadesLog::info($productor->name.' no tiene correo electronico');
+            }
+            }
             //dd($productor);
-            //foreach($productor->telefonos as $telefono){
-                //$fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
-                $fono="56966291494";
+            foreach($productor->telefonos as $telefono){
+                $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
+                //$fono="56966291494";
                 try{
 
                     $wsload=[
@@ -141,67 +146,31 @@ class MensajeController extends Controller
 
 
                     ];
-                    $wsload2=[
-                        'messaging_product' => 'whatsapp',
-                        "preview_url"=> false,
-                        'to'=>'56926398450',
 
-                        'type'=>'template',
-                            'template'=>[
-                                'name'=>'proceso',
-                                'language'=>[
-                                    'code'=>'es'],
-                                'components'=>[
-                                    [
-                                        'type'=>'header',
-                                        'parameters'=>[
-                                            [
-                                                'type'=>'document',
-                                                'document'=> [
-                                                    'link'=>$url,
-                                                    'filename'=>$name,
-                                                    ]
-                                            ]
-                                        ]
-                                    ],
-                                    [
-                                        'type'=>'body',
-                                        'parameters'=>[
-                                            [
-                                                'type'=>'text',
-                                                'text'=> "45 Envio de Documento :".$mensaje->tipo." para ".$especie->name
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-
-
-                    ];
                    // dd($wsload);
 
                     $response=Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
-                    $response2=Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload2)->throw()->json();
+                    //$response2=Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload2)->throw()->json();
                    // dd($response);
-                   // FacadesLog::info('Mensaje enviado a '.$productor->name.', Telefono: '.$fono.', CSG: '.$productor->csg.' ID Mensaje='.$response->json_decode());
+                    FacadesLog::info('Mensaje enviado a '.$productor->name.', Telefono: '.$fono.', CSG: '.$productor->csg.' ID Mensaje='.$response->json_decode());
                 }catch(Exception $e){
                         FacadesLog::error('Error al enviar mensaje: '.$e->getMessage());
                             //dd($e->getMessage());
                 }
 
-            //}
+            }
 
-            // $mensaje=Mensaje::create([
-            //     'observacion'=>$request->observacion,
-            //     'especie'=>$especie->name,
-            //     'tipo'=>$request->tipo,
-            //     'archivo'=>$url,
-            //     'emisor_id'=>auth()->user()->id,
-            //     'receptor_id'=>$productor->id,
-            //     'mensaje_hist_id'=>$mensaje_hist->id
-            // ]);
+            $mensaje=Mensaje::create([
+                'observacion'=>$request->observacion,
+                'especie'=>$especie->name,
+                'tipo'=>$request->tipo,
+                'archivo'=>$url,
+                'emisor_id'=>auth()->user()->id,
+                'receptor_id'=>$productor->id,
+                'mensaje_hist_id'=>$mensaje_hist->id
+            ]);
 
-       // }
+        }
 
         return redirect()->back();
 
