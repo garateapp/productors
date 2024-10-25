@@ -98,6 +98,7 @@ class MensajeController extends Controller
             $subject="Envío de Archivo: ".$request->tipo." para ".$especie->name;
             if($productor->email!=null && $productor->email!=''){
                 Mail::to($productor->email)->send(new MensajeGenericoMailable($mensaje,$url2));
+                FacadesLog::info('Mensaje enviado a '.$productor->name.', Email: '.$productor->email.', CSG: '.$productor->csg.' para '.$especie->name.' por '.$request->tipo);
             }
             else{
                 FacadesLog::info($productor->name.' no tiene correo electronico');
@@ -149,10 +150,10 @@ class MensajeController extends Controller
 
                    // dd($wsload);
 
-                    $response=Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
+                    //$response=Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
                     //$response2=Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload2)->throw()->json();
                    // dd($response);
-                    FacadesLog::info('Mensaje enviado a '.$productor->name.', Telefono: '.$fono.', CSG: '.$productor->csg.' ID Mensaje='.$response->json_decode());
+
                 }catch(Exception $e){
                         FacadesLog::error('Error al enviar mensaje: '.$e->getMessage());
                             //dd($e->getMessage());
