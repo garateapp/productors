@@ -79,7 +79,7 @@
                                     <option value="">Seleccione un Productor</option>
                                     @foreach ($productores as $productor)
                                         <option value="{{ $productor->id }}">
-                                            {{ $productor->name }}</option>
+                                            {{ $productor->name }} - {{ $productor->csg }}</option>
                                     @endforeach
                                 </select>
                             </div>

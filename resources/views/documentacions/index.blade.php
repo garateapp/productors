@@ -114,7 +114,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.min.css
                                     <button
                                         class="items-center px-6 py-3 ml-auto bg-gray-500 rounded focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 hover:bg-gray-500 focus:outline-none"
                                         id="verDocumentos" data-id="{{ $productor->id }}"
-                                        data-nombre="{{ $productor->name }}">
+                                        data-nombre="{{ $productor->name }}" data-csg="{{ $productor->csg }}">
                                         <p class="text-sm font-medium leading-none text-white">Ver
                                             Documentación</p>
                                     </button>
@@ -123,11 +123,11 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.min.css
                             </td>
 
                             {{-- <td width='120px'>
-                                <form action="{{ route('tipodocumentacions.destroy', $tipodocumentacion) }}"
+                                <form action="{{ route('documentacions.destroy', $documentacion) }}"
                                     method="POST">
                                     @method('delete')
                                     @csrf
-                                    <input type="hidden" name="id" value="{{ $tipodocumentacion->id }}">
+                                    <input type="hidden" name="id" value="{{ $documentacion->id }}">
                                     <button class="btn btn-danger" type='submit'>Eliminar</button>
                                 </form>
                             </td> --}}
@@ -142,7 +142,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.min.css
                         {{-- comment  --}}
                         <tr tabindex="0" class="h-16 border border-gray-100 rounded focus:outline-none">
                             <td class="text-center">
-                                <p class="mr-2 text-base font-medium leading-none text-gray-700">
+                                <p class="mr-2 text-base font-medium leading-none text-gray-700 fa-solid">
 
 
                                     -
@@ -152,7 +152,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.min.css
 
                             </td>
                             <td class="text-center">
-                                <p class="mr-2 text-base font-medium leading-none text-gray-700">
+                                <p class="mr-2 text-base font-medium leading-none text-gray-700 ">
 
 
                                     No hay ningun Tipo de Documentación registrado
@@ -183,6 +183,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.min.css
         $(document).on('click', '#verDocumentos', function() {
             var productorId = $(this).data('id');
             var productorNombre = $(this).data('nombre');
+            var csg = $(this).data('csg');
             Swal.fire({
                 title: "Documentos de " + productorNombre,
                 width: '70%',
@@ -211,6 +212,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.min.css
                     url: '/documentacions/obtenerDocumentoxProductor',
                     data: {
                         ids: productorId,
+                        csg: csg
                     }
                 })
                 .done(function(response) {
@@ -240,6 +242,64 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.min.css
             // Limpiar el contenedor donde se mostrará la tabla
             $('#contenedor-listado').empty();
             var separador = "<hr class='my-4' />";
+
+
+            var tipoHTML = `<h3 class="my-4 text-2xl font-bold text-left">Global</h3>`;
+            $('#contenedor-listado').append(tipoHTML);
+
+
+            if (data.tiposGlobales.length > 0) {
+
+                var tablaHTMLGlobal = `
+                        <table class="min-w-full pb-20 mb-20 divide-y divide-gray-200">
+                        <thead clas="rounded-full bg-gray-50">
+                            <tr>
+                                <th></th>
+                                <th>ID</th>
+                                <th>Nombre Documento</th>
+                                <th>Fecha</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+
+                data.documentos.forEach(function(tipo) {
+                    var fechaFormateada = formatearFecha(tipo.created_at);
+                    tablaHTMLGlobal += `
+                        <tr>
+                            <td><input type="checkbox" class="form-checkbox" id="check${tipo.id}" name="check${tipo.id}" value="${tipo.id}"></td>
+                            <td class="text-center"><p class="mr-2 text-base font-medium leading-none text-gray-700">${tipo.id}</p></td>
+                            <td class="text-center"><p class="mr-2 text-base font-medium leading-none text-gray-700">${tipo.nombre}</p></td>
+                            <td class="text-center"><p class="mr-2 text-base font-medium leading-none text-gray-700">${fechaFormateada}</p></td>
+                            <td>
+                                <!-- Aquí puedes agregar un botón de descarga, ver, o lo que necesites -->
+                                 <form action="{{ route('documentacions.edit') }}" method="POST">
+                               <a href="{{ asset('storage') }}/${tipo.file}"
+                                                            target="_blank" title="Ver Documento"
+                                                            class="mb-2 ml-2 text-2xl text-green-500 cursor-pointer fa-solid fas fa-file-pdf">
+
+                                                        </a>
+
+                                                            @csrf
+                                                            <input type="hidden" name="id" value="${tipo.id}">
+
+                                                            @can('editar_archivos_productores')
+                                                            <input type="hidden" name="user_id" value="${productorId}">
+                                                            <button type="submit" class="mb-2 ml-2 text-2xl text-gray-500 cursor-pointer fa-solid fas fa-edit"></button>
+                                                            @endcan
+                                                            </form>
+
+
+                            </td>
+                        </tr>
+                    `;
+
+                });
+                $("#contenedor-listado").append(tablaHTMLGlobal);
+                $('#contenedor-listado').append("</tbody></table>");
+
+            }
+
             // Agrupar los documentos por país y especie
             data.paises.forEach(function(pais) {
                 // Crear encabezado del país
@@ -295,21 +355,33 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.min.css
                             <td class="text-center"><p class="mr-2 text-base font-medium leading-none text-gray-700">${fechaFormateada}</p></td>
                             <td>
                                 <!-- Aquí puedes agregar un botón de descarga, ver, o lo que necesites -->
-                                 <form action="{{ route('documentacions.edit') }}" method="POST">
+
                                <a href="{{ asset('storage') }}/${documento.file}"
                                                             target="_blank" title="Ver Documento"
                                                             class="mb-2 ml-2 text-2xl text-green-500 cursor-pointer fa-solid fas fa-file-pdf">
 
                                                         </a>
+                                                            @can('editar_archivos_productores')
+                                                            <form action="{{ route('documentacions.edit') }}" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="id" value="${documento.id}"/>
 
+
+                                                            <input type="hidden" name="user_id" value="${productorId}"/>
+                                                            <button type="submit" class="mb-2 ml-2 text-2xl text-gray-500 cursor-pointer fa-solid fas fa-edit"></button>
+
+
+                                                            </form>
+                                                            <form action="{{ route('documentacions.elimina') }}" method="POST">
                                                             @csrf
                                                             <input type="hidden" name="id" value="${documento.id}">
 
-                                                            @can('editar_archivos_productores')
-                                                            <input type="hidden" name="user_id" value="${productorId}">
-                                                            <button type="submit" class="mb-2 ml-2 text-2xl text-gray-500 cursor-pointer fa-solid fas fa-edit"></button>
+
+                                                            <input type="hidden" name="user_id" value="${productorId}/">
+                                                                <button type="submit" class="mb-2 ml-2 text-2xl text-gray-500 cursor-pointer fa-solid fas fa-trash"></button>
+
+                                                                </form>
                                                             @endcan
-                                                            </form>
 
 
                             </td>
@@ -327,12 +399,15 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.min.css
                 });
             });
             var descargaSeleccionados =
-                "<hr/><br/><button id='btn-procesar' type='button' class='mb-2 ml-2 text-2xl text-gray-500 cursor-pointer fa-solid fas fa-download'>Descargar Seleccionados</button>";
+                "<button id='btn-procesar' type='button' class='items-center px-6 py-3 ml-auto text-white bg-blue-500 rounded focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 hover:bg-gray-500 focus:outline-none'>Descargar Seleccionados</button>";
+            var eliminarSeleccionados =
+                "&nbsp;<button id='btn-eliminar' type='button' class='items-center px-6 py-3 ml-auto text-white bg-red-500 rounded focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 hover:bg-gray-500 focus:outline-none'>Eliminar Seleccionados</button>";
             var productor =
                 "<input type = 'hidden' name = 'productor' id = 'productor'             value = '" + productorNombre +
                 "' >";
             $('#contenedor-listado').append(productor);
             $('#contenedor-listado').append(descargaSeleccionados);
+            $('#contenedor-listado').append(eliminarSeleccionados);
         }
 
         function formatearFecha(fechaISO) {
@@ -367,6 +442,39 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.min.css
                 .done(function(response) {
                     console.log(response);
                     window.open(response.url, '_blank');
+                    // $("#nombredocto").val(response.nombre);
+                    // $("#descripciondocto").val(response.descripcion);
+                    // $("#tipodocto").val(response.tipo_documentacion_id);
+                    // $("#doctoid").val(response.id);
+                    // $("#doctofecha_vigencia").val(response.fecha_vigencia);
+                    // $("#agregardocto").val("MODIFICAR");
+                })
+                .fail(function(response) {
+                    console.log(response);
+                });
+        });
+        $(document).on('click', '#btn-eliminar', function() {
+            // Obtener los checkboxes seleccionados de la tabla 1
+            var seleccionados = [];
+            $('.form-checkbox:checked').each(function() {
+                seleccionados.push($(this).val());
+            });
+
+
+            $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    method: 'DELETE',
+                    url: '/documentacions/elimina',
+                    data: {
+                        seleccionados: seleccionados,
+                        nombre: $("#productor").val()
+                    }
+                })
+                .done(function(response) {
+                    console.log(response);
+                    location.reload();
                     // $("#nombredocto").val(response.nombre);
                     // $("#descripciondocto").val(response.descripcion);
                     // $("#tipodocto").val(response.tipo_documentacion_id);

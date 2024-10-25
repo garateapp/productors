@@ -52,6 +52,14 @@
 
                         @csrf
                         <div class="mt-4">
+                            <x-jet-label for="esglobal" value="Es Global" class="text-white" /> <span
+                                class="text-white fa-solid fas fa-question-circle"><i></i></span>
+                            <select id="global" class="block w-full mt-1" type="text" name="global" required>
+                                <option value="1">Si</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="mt-4">
                             <x-jet-label for="estado" value="País" class="text-white" />
                             <select id="pais" class="block w-full mt-1" type="text" name="pais_id" required
                                 value="{{ $tipodocumentacion->pais_id }}" required>
@@ -105,8 +113,8 @@
                         </div>
                         <div>
                             <x-jet-label for="tiene_vigencia" value="Tiene Vigencia" class="text-white" />
-                            <select id="tiene_vigencia" class="block w-full mt-1" type="text" name="tiene_vigencia"
-                                required>
+                            <select id="tiene_vigencia" class="block w-full mt-1" type="text"
+                                name="tiene_vigencia" required>
                                 <option value="1" selected>Con Vigencia</-option>
                                 <option value="0">Sin vigencia</-jet-option>
                             </select>
@@ -152,6 +160,18 @@
         </div>
 
     </div>
-
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $("#global").change(function() {
+            if ($(this).val() == 1) {
+                $("#pais_id").prop("disabled", true);
+                //$("#especie_id").prop("disabled", true);
+            } else {
+                $("#pais_id").prop("disabled", false);
+                //$("#especie_id").prop("disabled", false);
+            }
+        });
+    </script>
 
 </x-app-layout>

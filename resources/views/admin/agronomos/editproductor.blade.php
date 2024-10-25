@@ -639,9 +639,12 @@
                                             <tr>
                                                 <td>{{ $k }})</td>
                                                 <td style="word-wrap: break-word">
-                                                    {{ $documento->TipoDocumentacion->pais->nombre }} -
-                                                    {{ $documento->TipoDocumentacion->especie->name }} -
-                                                    {{ $documento->TipoDocumentacion->nombre }}</td>
+                                                    @if ($documento->TipoDocumentacion->pais != null)
+                                                        {{ $documento->TipoDocumentacion->pais->nombre }} -
+                                                        {{ $documento->TipoDocumentacion->especie->name }} -
+                                                    @endif
+                                                    {{ $documento->TipoDocumentacion->nombre }}
+                                                </td>
                                                 <td style="word-wrap: break-word">{{ $documento->nombre }}</td>
 
                                                 <td style="word-wrap: break-word">{{ $documento->descripcion }}</td>
@@ -699,7 +702,7 @@
                             </div>
 
                             {!! Form::open([
-                                'route' => 'documentacions.store',
+                                'route' => 'documentacions.storeDesdeProductor',
                                 'files' => true,
                                 'autocomplete' => 'off',
                                 'method' => 'POST',
@@ -725,12 +728,18 @@
                                     <select id="tipodocto" data-name = 'doctotipo' class="block w-full mt-1"
                                         type="text" name="tipo" required>
                                         <option value="">Seleccione un Tipo de Documento</option>
-                                        @foreach ($tipodocumentacions as $tipoDocumentacion)
-                                            <option value="{{ $tipoDocumentacion->id }}">
-                                                {{ $tipoDocumentacion->pais->nombre }} -
-                                                {{ $tipoDocumentacion->especie->name }} -
-                                                {{ $tipoDocumentacion->nombre }}</option>
+                                        @foreach ($tiposGlobales as $tipoGlobal)
+                                            <option value="{{ $tipoGlobal->id }}">GLOBAL -
+                                                {{ $tipoGlobal->nombre }}</option>
                                         @endforeach
+                                        @if (count($tipodocumentacions) > 0)
+                                            @foreach ($tipodocumentacions as $tipoDocumentacion)
+                                                <option value="{{ $tipoDocumentacion->id }}">
+                                                    {{ $tipoDocumentacion->pais->nombre }} -
+                                                    {{ $tipoDocumentacion->especie->name }} -
+                                                    {{ $tipoDocumentacion->nombre }}</option>
+                                            @endforeach
+                                        @endif
                                     </select>
                                 </div>
                                 @error('name')

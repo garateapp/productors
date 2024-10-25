@@ -73,6 +73,7 @@
                                 <select id="tipodocto" data-name = 'doctotipo' class="block w-full mt-1" type="text"
                                     name="tipo" required>
                                     <option value="">Seleccione un Tipo de Documento</option>
+
                                     @foreach ($tipodocumentacions as $tipodocumentacion)
                                         <option value="{{ $tipodocumentacion->id }}"
                                             {{ $documento->tipo_documentacion_id == $tipodocumentacion->id ? 'selected' : '' }}>

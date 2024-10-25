@@ -54,7 +54,110 @@
                 </button>
             </a>
         </div>
+        <div class="flex justify-end">
+            <h4 class="ss="text-lg font-medium leading-6 text-gray-900">Documentos Globales</h4>
+        </div>
+        <table class="min-w-full pb-20 mb-20 divide-y divide-gray-200">
 
+            <thead class="rounded-full bg-gray-50">
+                <th>ID</th>
+                {{-- <th>Especie</th> --}}
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+                <th>Obligatorio</th>
+            </thead>
+            <tbody>
+                @forelse ($tiposglobales as $tipoglobal)
+                    <tr tabindex="0" class="h-16 border border-gray-100 rounded focus:outline-none">
+                        <td class="text-center">
+                            <p class="mr-2 text-base font-medium leading-none text-gray-700">
+                                {{ $tipoglobal->id }}
+                            </p>
+                        </td>
+
+                        <td class="text-center">
+                            <p class="mr-2 text-base font-medium leading-none text-gray-700">
+                                {{ $tipoglobal->nombre_guardado }}
+                            </p>
+                        </td>
+                        {{-- <td class="text-center">
+                        <p class="mr-2 text-base font-medium leading-none text-gray-700">
+                            {{ $tipodocumentacion->descripcion }}
+                        </p>
+                    </td> --}}
+                        <td class="text-center">
+                            <p class="mr-2 text-base font-medium leading-none text-gray-700">
+                                {{ $tipoglobal->estado == 1 ? 'ACTIVO' : 'INACTIVO' }}
+                            </p>
+                        </td>
+                        {{-- <td class="text-center">
+                        <p class="mr-2 text-base font-medium leading-none text-gray-700">
+                            {{ $tipodocumentacion->nombre_guardado }}
+                        </p>
+                    </td> --}}
+
+                        <td class="text-center">
+                            <p class="mr-2 text-base font-medium leading-none text-gray-700">
+                                {{ $tipoglobal->obligatorio == 1 ? 'SI' : 'NO' }}
+                            </p>
+                        </td>
+                        {{-- <td class="text-center">
+                        <p class="mr-2 text-base font-medium leading-none text-gray-700">
+                            {{ User::find($tipodocumentacion->creado_por)->name }}
+                        </p>
+                    </td> --}}
+
+                        <td width='120px'>
+                            <a href="{{ route('tipodocumentacions.edit', $tipoglobal) }}">
+                                <button
+                                    class="items-center px-6 py-3 ml-auto bg-gray-500 rounded focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 hover:bg-gray-500 focus:outline-none">
+                                    <p class="text-sm font-medium leading-none text-white">EDITAR</p>
+                                </button>
+                            </a>
+                        </td>
+
+                        <td width='120px'>
+                            <form action="{{ route('tipodocumentacions.destroy', $tipoglobal) }}" method="POST">
+                                @method('delete')
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $tipoglobal->id }}">
+                                <button class="btn btn-danger" type='submit'>Eliminar</button>
+                            </form>
+                        </td>
+
+
+                    </tr>
+                @empty
+
+
+                    {{-- comment  --}}
+                    <tr tabindex="0" class="h-16 border border-gray-100 rounded focus:outline-none">
+                        <td class="text-center">
+                            <p class="mr-2 text-base font-medium leading-none text-gray-700">
+
+
+                                -
+
+
+                            </p>
+
+                        </td>
+                        <td class="text-center">
+                            <p class="mr-2 text-base font-medium leading-none text-gray-700">
+
+
+                                No hay ningun Tipo de Documentación Global
+
+
+                            </p>
+
+                        </td>
+
+                    </tr>
+                @endforelse ($tiposglobales as $tipoglobal)
+            </tbody>
+        </table>
         <x-table-responsive>
             <table class="min-w-full pb-20 mb-20 divide-y divide-gray-200">
 
@@ -63,11 +166,9 @@
                     <th>País</th>
                     <th>Especie</th>
                     <th>Nombre</th>
-                    <th>Descripción</th>
                     <th>Estado</th>
-                    <th>Cómo debe guardarse</th>
                     <th>Obligatorio</th>
-                    <th>Creado por</th>
+
                 </thead>
                 <tbody>
 
@@ -92,35 +193,35 @@
                             </td>
                             <td class="text-center">
                                 <p class="mr-2 text-base font-medium leading-none text-gray-700">
-                                    {{ $tipodocumentacion->nombre }}
+                                    {{ $tipodocumentacion->nombre_guardado }}
                                 </p>
                             </td>
-                            <td class="text-center">
+                            {{-- <td class="text-center">
                                 <p class="mr-2 text-base font-medium leading-none text-gray-700">
                                     {{ $tipodocumentacion->descripcion }}
                                 </p>
-                            </td>
+                            </td> --}}
                             <td class="text-center">
                                 <p class="mr-2 text-base font-medium leading-none text-gray-700">
                                     {{ $tipodocumentacion->estado == 1 ? 'ACTIVO' : 'INACTIVO' }}
                                 </p>
                             </td>
-                            <td class="text-center">
+                            {{-- <td class="text-center">
                                 <p class="mr-2 text-base font-medium leading-none text-gray-700">
                                     {{ $tipodocumentacion->nombre_guardado }}
                                 </p>
-                            </td>
+                            </td> --}}
 
                             <td class="text-center">
                                 <p class="mr-2 text-base font-medium leading-none text-gray-700">
                                     {{ $tipodocumentacion->obligatorio == 1 ? 'SI' : 'NO' }}
                                 </p>
                             </td>
-                            <td class="text-center">
+                            {{-- <td class="text-center">
                                 <p class="mr-2 text-base font-medium leading-none text-gray-700">
                                     {{ User::find($tipodocumentacion->creado_por)->name }}
                                 </p>
-                            </td>
+                            </td> --}}
 
                             <td width='120px'>
                                 <a href="{{ route('tipodocumentacions.edit', $tipodocumentacion) }}">

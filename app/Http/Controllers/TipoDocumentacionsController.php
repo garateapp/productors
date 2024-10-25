@@ -24,10 +24,11 @@ class TipoDocumentacionsController extends Controller
     public function index()
     {
         //
-        $tipos = TipoDocumentacions::all();
+        $tipos = TipoDocumentacions::where('global',0)->get();
         $productores=User::where('csg','!=',null)->get();
+        $tiposglobales = TipoDocumentacions::where('global',1)->get();
 
-        return view('tipodcumentacions.index',compact('tipos','productores'));
+        return view('tipodcumentacions.index',compact('tipos','productores','tiposglobales'));
     }
 
     /**
@@ -70,7 +71,7 @@ class TipoDocumentacionsController extends Controller
         $tipoDocumentacion->creado_por=$request->creado_por;
         $tipoDocumentacion->pais_id=$request->pais_id;
         $tipoDocumentacion->especie_id=$request->especie_id;
-
+        $tipoDocumentacion->global=$request->global;
 
        // dd($tipoDocumentacion);
         $tipoDocumentacion->save();
@@ -129,6 +130,7 @@ class TipoDocumentacionsController extends Controller
         $tipoDocumentacion->creado_por=$request->creado_por;
         $tipoDocumentacion->pais_id=$request->pais_id;
         $tipoDocumentacion->especie_id=$request->especie_id;
+        $tipoDocumentacion->global=$request->global;
 
 
        // dd($tipoDocumentacion);

@@ -1210,11 +1210,11 @@ class HomeController extends Controller
     {   $certificacions=Certificacion::where('rut',$user->rut)->get();
         $especies=Especie::all()->pluck('name','id');
         $variedades=Variedad::all()->pluck('name','id');
-       $tipodocumentacions=TipoDocumentacions::where('estado',1)->with('especie','pais')->get();
-        //$documentacion=TipoDocumentacions::where('estado',1)->with('especie','pais')->has('Documentacions')->where('user_id',$user->id)->get();
+        $tipodocumentacions=TipoDocumentacions::where('estado',1)->where('global',0)->with('especie','pais')->get();
         $documentacion=Documentacions::where('user_id',$user->id)->with(['TipoDocumentacion','TipoDocumentacion.especie', 'TipoDocumentacion.pais'])->get();
-
-        return view('admin.agronomos.editproductor',compact('user','certificacions','especies','variedades','documentacion','tipodocumentacions'));
+        $tiposGlobales=TipoDocumentacions::where('estado',1)->where('global',1)->get();
+        //dd($documentacion);
+        return view('admin.agronomos.editproductor',compact('user','certificacions','especies','variedades','documentacion','tipodocumentacions','tiposGlobales'));
     }
 
 

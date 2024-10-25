@@ -22,7 +22,8 @@ class TipoDocumentacions extends Model
         'obligatorio',
         'creado_por',
         'pais_id',
-        'especie_id'
+        'especie_id',
+        'global'
     ];
 
 

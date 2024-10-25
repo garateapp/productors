@@ -228,6 +228,9 @@ Route::resource('documentacions', DocumentacionController::class)->only(['index'
 Route::put('documentacions/{tipodocumentacion}', [DocumentacionController::class, 'update'])->name('documentacions.update');
 Route::post('documentacions.edit', [DocumentacionController::class,'edit'])->name('documentacions.edit');
 Route::post('documentacions', [DocumentacionController::class,'store'])->name('documentacions.store');
+Route::delete('documentacions.elimina', [DocumentacionController::class,'elimina'])->name('documentacions.elimina');
+Route::post('documentacions.storeDesdeProductor', [DocumentacionController::class,'storeDesdeProductor'])->name('documentacions.storeDesdeProductor');
+
 
 Route::post('documentacions/actualizardocto', [DocumentacionController::class,'actualizardocto'])->name('documentacions.actualizardocto');
 Route::post('documentacions/obtenerDocumentoxProductor', [DocumentacionController::class,'obtenerDocumentoxProductor'])->name('documentacions.obtenerDocumentoxProductor');

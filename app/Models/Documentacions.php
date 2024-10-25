@@ -9,7 +9,7 @@ class Documentacions extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $fillable = ['nombre', 'file', 'user_id','fecha_vigencia','tipodocumentacion_id'];
+    protected $fillable = ['nombre', 'file', 'user_id','fecha_vigencia','tipodocumentacion_id','csg','descripcion'];
 
 
     /**
