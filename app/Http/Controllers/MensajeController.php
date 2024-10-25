@@ -181,7 +181,7 @@ class MensajeController extends Controller
                    // dd($wsload);
 
                     $response=Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
-                    dd($response);
+                   // dd($response);
                    // FacadesLog::info('Mensaje enviado a '.$productor->name.', Telefono: '.$fono.', CSG: '.$productor->csg.' ID Mensaje='.$response->json_decode());
                 }catch(Exception $e){
                         FacadesLog::error('Error al enviar mensaje: '.$e->getMessage());
