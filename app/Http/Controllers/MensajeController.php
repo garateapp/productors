@@ -73,112 +73,178 @@ class MensajeController extends Controller
         $version='v16.0';
         $url=asset('storage/archivos/'.$name);
 
-        $mensaje_hist=Mensaje_hist::create([
-            'observacion'=>$request->observacion,
-            'especie'=>$especie->name,
-            'tipo'=>$request->tipo,
-            'archivo'=>$url,
-            'emisor_id'=>auth()->user()->id
-        ]);
+        // $mensaje_hist=Mensaje_hist::create([
+        //     'observacion'=>$request->observacion,
+        //     'especie'=>$especie->name,
+        //     'tipo'=>$request->tipo,
+        //     'archivo'=>$url,
+        //     'emisor_id'=>auth()->user()->id
+        // ]);
 
+        //Para Pruebas de Whatsapp
+        $mensaje=New Mensaje();
+        $mensaje->observacion=$request->observacion;
+        $mensaje->especie=$especie->name;
+        $mensaje->tipo=$request->tipo;
+        $mensaje->archivo=$url2;
+        $mensaje->emisor_id=auth()->user()->id;
+        $fono="56966291494";
+        try{
 
-        foreach($productors as $productor){
+            $wsload=[
+                'messaging_product' => 'whatsapp',
+                "preview_url"=> false,
+                'to'=>$fono,
 
-            $telefonos=Telefono::where('user_id',$productor->id)->get();
-            if($productor->emnotification==TRUE){
-
-
-            $mensaje=New Mensaje();
-            $mensaje->observacion=$request->observacion;
-            $mensaje->especie=$especie->name;
-            $mensaje->tipo=$request->tipo;
-            $mensaje->archivo=$url2;
-            $mensaje->emisor_id=auth()->user()->id;
-
-            $subject="Envío de Archivo: ".$request->tipo." para ".$especie->name;
-            $contador=0;
-            if($productor->email!=null && $productor->email!=''){
-                if($contador>=30){
-                    Mail::to($productor->email)->send(new MensajeGenericoMailable($mensaje,$url2));
-                    FacadesLog::info('Mensaje enviado a '.$productor->name.', Email: '.$productor->email.', CSG: '.$productor->csg.' para '.$especie->name.' por '.$request->tipo);
-                    if($contador%30==0){
-                        sleep(60);
-                    }
-                    $contador++;
-                }
-            }
-            else{
-                FacadesLog::info($productor->name.' no tiene correo electronico');
-            }
-            }
-            //dd($productor);
-            foreach($productor->telefonos as $telefono){
-                $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
-                //$fono="56966291494";
-                try{
-
-                    $wsload=[
-                        'messaging_product' => 'whatsapp',
-                        "preview_url"=> false,
-                        'to'=>$fono,
-
-                        'type'=>'template',
-                            'template'=>[
-                                'name'=>'proceso',
-                                'language'=>[
-                                    'code'=>'es'],
-                                'components'=>[
+                'type'=>'template',
+                    'template'=>[
+                        'name'=>'envios_masivos',
+                        'language'=>[
+                            'code'=>'es'],
+                        'components'=>[
+                            [
+                                'type'=>'header',
+                                'parameters'=>[
                                     [
-                                        'type'=>'header',
-                                        'parameters'=>[
-                                            [
-                                                'type'=>'document',
-                                                'document'=> [
-                                                    'link'=>$url,
-                                                    'filename'=>$name,
-                                                    ]
+                                        'type'=>'document',
+                                        'document'=> [
+                                            'link'=>$url,
+                                            'filename'=>$name,
                                             ]
-                                        ]
-                                    ],
+                                    ]
+                                ]
+                            ],
+                            [
+                                'type'=>'body',
+                                'parameters'=>[
                                     [
-                                        'type'=>'body',
-                                        'parameters'=>[
-                                            [
-                                                'type'=>'text',
-                                                'text'=> "45 Envio de Documento :".$mensaje->tipo." para ".$especie->name,
-                                            ]
-                                        ]
+                                        'type'=>'text',
+                                        'text'=> "Documento ".$request->tipo." de la Especie ". $mensaje->tipo,
                                     ]
                                 ]
                             ]
+                        ]
+                    ]
 
 
-                    ];
+            ];
+            $response=Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
 
-                   // dd($wsload);
-
-                    //$response=Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
-                    //$response2=Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload2)->throw()->json();
-                   // dd($response);
-
-                }catch(Exception $e){
+            }catch(Exception $e){
                         FacadesLog::error('Error al enviar mensaje: '.$e->getMessage());
                             //dd($e->getMessage());
                 }
+             //Para Pruebas de Whatsapp
+        $contador=0;
+        // foreach($productors as $productor){
 
-            }
+        //     $telefonos=Telefono::where('user_id',$productor->id)->get();
+        //     if($productor->emnotification==1){
 
-            $mensaje=Mensaje::create([
-                'observacion'=>$request->observacion,
-                'especie'=>$especie->name,
-                'tipo'=>$request->tipo,
-                'archivo'=>$url,
-                'emisor_id'=>auth()->user()->id,
-                'receptor_id'=>$productor->id,
-                'mensaje_hist_id'=>$mensaje_hist->id
-            ]);
 
-        }
+
+
+        //         $subject="Envío de Archivo: ".$request->tipo." para ".$especie->name;
+
+        //         if($contador>=35){
+        //             if($contador%20==0){
+        //                 sleep(10);
+        //             }
+        //             if($productor->email!=null && $productor->email!='')
+        //             {
+        //                     //Mail::to($productor->email)->send(new MensajeGenericoMailable($mensaje,$url2));
+        //                     FacadesLog::info('Mensaje enviado a '.$productor->name.', Email: '.$productor->email.', CSG: '.$productor->csg.' para '.$especie->name.' por '.$request->tipo);
+
+        //             }
+        //             $contador++;
+        //         }
+        //         else{
+        //             FacadesLog::info($contador.'Mensaje Saltado '.$productor->name.', Email: '.$productor->email.', CSG: '.$productor->csg.' para '.$especie->name.' por '.$request->tipo);
+        //             $contador++;
+        //         }
+        //     }
+        //     else{
+        //             FacadesLog::info($productor->name.' no tiene correo electronico');
+        //         }
+
+
+
+
+            //dd($productor);
+                // foreach($productor->telefonos as $telefono){
+                //     $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
+                //     $mensaje=New Mensaje();
+                //     $mensaje->observacion=$request->observacion;
+                //     $mensaje->especie=$especie->name;
+                //     $mensaje->tipo=$request->tipo;
+                //     $mensaje->archivo=$url2;
+                //     $mensaje->emisor_id=auth()->user()->id;
+                //     $fono="56966291494";
+                //     try{
+
+                //         $wsload=[
+                //             'messaging_product' => 'whatsapp',
+                //             "preview_url"=> false,
+                //             'to'=>$fono,
+
+                //             'type'=>'template',
+                //                 'template'=>[
+                //                     'name'=>'envios_masivos',
+                //                     'language'=>[
+                //                         'code'=>'es'],
+                //                     'components'=>[
+                //                         [
+                //                             'type'=>'header',
+                //                             'parameters'=>[
+                //                                 [
+                //                                     'type'=>'document',
+                //                                     'document'=> [
+                //                                         'link'=>$url,
+                //                                         'filename'=>$name,
+                //                                         ]
+                //                                 ]
+                //                             ]
+                //                         ],
+                //                         [
+                //                             'type'=>'body',
+                //                             'parameters'=>[
+                //                                 [
+                //                                     'type'=>'text',
+                //                                     'text'=> "Documento ".$request->tipo." de la Especie ". $mensaje->tipo,
+                //                                 ]
+                //                             ]
+                //                         ]
+                //                     ]
+                //                 ]
+
+
+                //         ];
+
+                //     // dd($wsload);
+
+                //         //$response=Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
+                //     // }
+                //         //$response2=Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload2)->throw()->json();
+                //     // dd($response);
+
+                //     }catch(Exception $e){
+                //             FacadesLog::error('Error al enviar mensaje: '.$e->getMessage());
+                //                 //dd($e->getMessage());
+                //     }
+
+                // }
+
+            // $mensaje=Mensaje::create([
+            //     'observacion'=>$request->observacion,
+            //     'especie'=>$especie->name,
+            //     'tipo'=>$request->tipo,
+            //     'archivo'=>$url,
+            //     'emisor_id'=>auth()->user()->id,
+            //     'receptor_id'=>$productor->id,
+            //     'mensaje_hist_id'=>$mensaje_hist->id
+            // ]);
+
+        //}
 
         return redirect()->back();
 
