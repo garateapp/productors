@@ -119,7 +119,7 @@ class MensajeController extends Controller
                                 'parameters'=>[
                                     [
                                         'type'=>'text',
-                                        'text'=> "Documento ".$request->tipo." de la Especie ". $mensaje->tipo,
+                                        'text'=> "Documento ".$request->tipo." de la Especie ". $mensaje->especie,
                                     ]
                                 ]
                             ]
