@@ -151,7 +151,7 @@ class MensajeController extends Controller
 
                 $subject="Envío de Archivo: ".$request->tipo." para ".$especie->name;
 
-                if($contador>=35){
+
                     if($contador%20==0){
                         sleep(10);
                     }
@@ -162,11 +162,7 @@ class MensajeController extends Controller
 
                     }
                     $contador++;
-                }
-                else{
-                    FacadesLog::info($contador.'Mensaje Saltado '.$productor->name.', Email: '.$productor->email.', CSG: '.$productor->csg.' para '.$especie->name.' por '.$request->tipo);
-                    $contador++;
-                }
+
             }
             else{
                     FacadesLog::info($productor->name.' no tiene correo electronico');
