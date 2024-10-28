@@ -179,7 +179,7 @@ class MensajeController extends Controller
                 foreach($productor->telefonos as $telefono){
                     $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
 
-                    $fono="56966291494";
+                    //$fono="56966291494"; //Solo Testing
                     try{
 
                         $wsload=[
