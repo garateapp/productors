@@ -18,4 +18,7 @@ class Especie extends Model
     public function variedads(){
         return $this->hasMany('App\Models\Variedad');
     }
+    public function TipoDocumentacion(){
+        return $this->hasMany('App\Models\TipoDocumentacion');
+    }
 }
