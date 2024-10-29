@@ -389,7 +389,7 @@ class ProductionCc extends Component
 
     public function cargar_firmpro(Recepcion $recepcion){
         
-        $firmpro1=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/BuscarRecepcionCloud?Numero_recepcion='.$recepcion->numero_g_recepcion);
+        $firmpro1=Http::post('https://api.greenexweb.cl/api/BuscarRecepcionCloud?filter[numero_recepcion][eq]='.$recepcion->numero_g_recepcion);
         
         $firmpro1 = $firmpro1->json();
 
@@ -753,7 +753,7 @@ class ProductionCc extends Component
         }
 
         //consulta para distribución de calibres
-        $this->calibres=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/BuscarConsolidadoFruitCloud?Numero_recepcion='.$recepcion->numero_g_recepcion);
+        $this->calibres=Http::post('https://api.greenexweb.cl/api/BuscarRecepcionCloudConsolidado?filter[numero_recepcion][eq]='.$recepcion->numero_g_recepcion);
         $this->calibres = $this->calibres->json();
 
 
@@ -1024,7 +1024,7 @@ class ProductionCc extends Component
         }
 
         //consulta para distribución de color
-        $this->firmpro=Http::post('https://apigarate.azurewebsites.net/api/v1.0/Recepcion/BuscarRecepcionCloud?Numero_recepcion='.$recepcion->numero_g_recepcion);
+        $this->firmpro=Http::post('https://api.greenexweb.cl/api/BuscarRecepcionCloud?filter[numero_recepcion][eq]='.$recepcion->numero_g_recepcion);
         $this->firmpro = $this->firmpro->json();
         $subpromedio_light=0;
         $subpromedio_dark=0;
