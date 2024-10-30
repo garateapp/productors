@@ -312,7 +312,7 @@
                                                 <div class="font-medium leading-none text-gray-100">
                                                     {{ $campo->user->name }}</div>
                                                 <p class="text-sm text-gray-500 leading-none mt-1 truncate">
-                                                    CSG: {{ $campo->csg }}</p>
+                                                    CSG: {{ $campo->user->csg }}</p>
                                                 <p class="text-sm text-gray-500 leading-none mt-1 truncate">
                                                     {{ $campo->created_at }}</p>
                                             </div>
