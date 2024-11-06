@@ -41,9 +41,9 @@ class ProductorSearch extends Component
         'users.merma',
         'users.exp',
         'users.emnotification',
-        DB::raw('COUNT(especies.name) as especies_comercializas'))
+        DB::raw('COUNT(especie_user.id) as especies_comercializadas')
+                    )
                     ->leftJoin('especie_user', 'users.id', '=', 'especie_user.user_id')
-                    ->join('especies', 'especies.id', '=', 'especie_user.especie_id')
                     ->where(function ($query) {
                         $query->where('rut', 'LIKE', '%' . $this->search . '%')
                             ->orWhere('email', 'LIKE', '%' . $this->search . '%')
