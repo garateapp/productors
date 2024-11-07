@@ -87,7 +87,7 @@
 
         .logo {
             max-width: 150px;
-            max-height: 71px;
+            max-height: 71px !important;
             margin: 0 auto;
             display: block;
         }
