@@ -41,6 +41,7 @@ class ProductorSearch extends Component
         'users.merma',
         'users.exp',
         'users.emnotification',
+        'users.enviomasivo',
         DB::raw('COUNT(especie_user.id) as especies_comercializadas')
                     )
                     ->leftJoin('especie_user', 'users.id', '=', 'especie_user.user_id')
@@ -52,7 +53,7 @@ class ProductorSearch extends Component
                             ->orWhere('idprod', 'LIKE', '%' . $this->search . '%')
                             ->orWhere('user', 'LIKE', '%' . $this->search . '%');
                     })
-                    ->groupBy('users.id', 'users.name','users.profile_photo_path', 'users.rut', 'users.email', 'users.csg', 'users.idprod', 'users.user','users.kilos_netos','users.comercial', 'users.desecho', 'users.merma','users.exp', 'users.emnotification')
+                    ->groupBy('users.id', 'users.name','users.profile_photo_path', 'users.rut', 'users.email', 'users.csg', 'users.idprod', 'users.user','users.kilos_netos','users.comercial', 'users.desecho', 'users.merma','users.exp', 'users.emnotification','users.enviomasivo')
                     ->orderByDesc(DB::raw('SUM(users.kilos_netos)'))
                     ->latest('users.id')
                     ->paginate($this->ctd);
@@ -85,7 +86,18 @@ class ProductorSearch extends Component
 
 
     }
+    public function toggleEmailMasivo($userId)
+    {
+        $user = User::find($userId);
 
+        if ($user->enviomasivo==true) {
+            $user->update(['enviomasivo' => false]);
+        }else{
+            $user->update(['enviomasivo' => true]);
+        }
+
+
+    }
     public function limpiar_page(){
         $this->resetPage();
     }
@@ -157,7 +169,7 @@ class ProductorSearch extends Component
 
         ];
 
-        Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+        //Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
 
 
     }
