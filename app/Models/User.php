@@ -47,7 +47,8 @@ class User extends Authenticatable
         'direccion',
         'fitosanitario',
         'certificaciones',
-        'status'
+        'status',
+        'enviomasivo'
     ];
 
     /**
@@ -83,7 +84,7 @@ class User extends Authenticatable
     public function telefonos(){
         return $this->hasMany('App\Models\Telefono');
     }
-    
+
     public function fichas(){
         return $this->hasMany('App\Models\Ficha','user_id');
     }

@@ -343,7 +343,17 @@
                                                 wire:click="toggleEmailNotification({{ $user->id }})">
                                         </div>
                                     @endif
-
+                                    @if ($user->enviomasivo == true)
+                                        <div class="flex items-center justify-center mt-1">
+                                            <p class="mr-2 text-xd">Envío Masivo </p><input type="checkbox"
+                                                wire:click="toggleEmailMasivo({{ $user->id }})" checked>
+                                        </div>
+                                    @else
+                                        <div class="flex items-center justify-center mt-1">
+                                            <p class="mr-2 text-xd">Envío Masivo</p> <input type="checkbox"
+                                                wire:click="toggleEmailMasivo({{ $user->id }})">
+                                        </div>
+                                    @endif
 
 
 
