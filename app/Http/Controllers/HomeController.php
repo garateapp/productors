@@ -101,7 +101,7 @@ class HomeController extends Controller
         $name = $file->getClientOriginalName();
 
         //Con dicho nombre, encontrar el proceso correspondiente al archivo
-        $proceso=Proceso::where('n_proceso',explode("-",$name)[0])->where('temporada','actual')->first();
+        $proceso=Proceso::where('n_proceso',explode("-",$name)[0])->where('temporada','actual')->where('csg',explode("-",$name)[1])->first();
 
 
         if($proceso){
@@ -120,7 +120,7 @@ class HomeController extends Controller
             if(!is_null($user)){
 
                 if($user->emnotification==TRUE){
-                    Mail::to($user->email)->send(new NotificacionMailable($proceso));
+                    //(Mail::to($user->email)->send(new NotificacionMailable($proceso));
                    //en caso que exista el usuarioo consultar si tiene telefonos registrados
                     if($user->telefonos->count()){
                         foreach($user->telefonos as $telefono){
@@ -169,7 +169,7 @@ class HomeController extends Controller
 
                             ];
 
-                            Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+                           // Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
 
                             $token = env('WS_TOKEN');
                             $phoneid= env('WS_PHONEID');
