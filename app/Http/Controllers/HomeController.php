@@ -639,7 +639,8 @@ class HomeController extends Controller
 
                if($m==9){
 
-                        $cont=Proceso::where('n_proceso',$n_proceso)->where('temporada','actual')->first();
+                        $cont=Proceso::where('n_proceso',$n_proceso)->where('temporada','actual')->where('id_empresa',$id_empresa)->first();
+
                         if($cont){
                             if($categoria=='Sin Procesar'){
                                 $cont->forceFill([
