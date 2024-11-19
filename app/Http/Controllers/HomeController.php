@@ -101,7 +101,7 @@ class HomeController extends Controller
         $name = $file->getClientOriginalName();
 
         //Con dicho nombre, encontrar el proceso correspondiente al archivo
-        $proceso=Proceso::where('n_proceso',explode("-",$name)[0])->where('temporada','actual')->where('csg',explode("-",$name)[1])->first();
+        $proceso=Proceso::where('n_proceso',explode("-",$name)[0])->where('temporada','actual')->where('id_empresa',explode("-",$name)[1])->first();
 
 
         if($proceso){
