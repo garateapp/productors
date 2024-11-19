@@ -888,7 +888,8 @@
                                                                     -
                                                                 @endif
                                                             </td>
-                                                            <td style="background-color:#47ac34; color: white;"><b>FRUTA BLANDA: </b>
+                                                            {{-- <td style="background-color:#47ac34; color: white;">
+                                                                <b>FRUTA BLANDA: </b>
 
                                                                 @if ($recepcion->n_variedad == 'Dagen')
                                                                     @if ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item', 'MUY BLANDO')->first())
@@ -908,7 +909,7 @@
                                                                 @endif
 
 
-                                                            </td>
+                                                            </td> --}}
 
                                                         </tr>
                                                     </table>
