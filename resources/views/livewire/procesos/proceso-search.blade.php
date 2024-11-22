@@ -243,7 +243,7 @@
         <div class="px-4 py-4 bg-white md:py-7 md:px-8 xl:px-10 ">
 
 
-            {{ dd(Auth::user()) }}
+
             <x-table-responsive>
                 <table class="min-w-full pb-20 mb-20 divide-y divide-gray-200">
 
@@ -272,7 +272,7 @@
                         @endphp
                         <!-- Cambios de como se ven los procesos -->
                         @foreach ($procesos as $proceso)
-                            @if (!$proceso->informe && (Auth::user()->name == 'Fabian Garay' || Auth::user()->name == 'David Rosas'))
+                            @if ($proceso->informe == '' && (Auth::user()->name == 'Fabian Garay' || Auth::user()->name == 'David Rosas'))
                                 <tr class="h-16 border border-gray-100 rounded">
 
                                     <td class="text-center">
