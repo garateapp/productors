@@ -243,7 +243,7 @@
         <div class="px-4 py-4 bg-white md:py-7 md:px-8 xl:px-10 ">
 
 
-
+            {{ dd(Auth::user()) }}
             <x-table-responsive>
                 <table class="min-w-full pb-20 mb-20 divide-y divide-gray-200">
 
@@ -267,202 +267,201 @@
 
                     <tbody>
                         @php
+
                             $n = 1;
                         @endphp
                         <!-- Cambios de como se ven los procesos -->
                         @foreach ($procesos as $proceso)
-                            @if (!$proceso->informe)
-                                @can('Asignar roles')
-                                    <tr class="h-16 border border-gray-100 rounded">
+                            @if (!$proceso->informe && (Auth::user()->name == 'Fabian Garay' || Auth::user()->name == 'David Rosas'))
+                                <tr class="h-16 border border-gray-100 rounded">
 
-                                        <td class="text-center">
-                                            <p class="text-base font-medium text-gray-700">
-
+                                    <td class="text-center">
+                                        <p class="text-base font-medium text-gray-700">
 
 
-                                                @if ($proceso->agricola)
-                                                    {{ $proceso->agricola }}
+
+                                            @if ($proceso->agricola)
+                                                {{ $proceso->agricola }}
+                                            @endif
+
+
+                                        </p>
+
+                                    </td>
+                                    <td class="">
+                                        <div class="flex items-center pl-5">
+                                            <p class="mr-2 text-base font-medium leading-none text-gray-700">
+
+
+                                                @if ($proceso->n_proceso)
+                                                    {{ $proceso->n_proceso }}
                                                 @endif
 
 
                                             </p>
 
-                                        </td>
-                                        <td class="">
-                                            <div class="flex items-center pl-5">
-                                                <p class="mr-2 text-base font-medium leading-none text-gray-700">
+                                        </div>
+                                    </td>
+                                    <td class="">
+                                        <div class="flex items-center pl-5">
+                                            <p class="mr-2 text-base font-medium leading-none text-gray-700">
 
 
-                                                    @if ($proceso->n_proceso)
-                                                        {{ $proceso->n_proceso }}
-                                                    @endif
-
-
-                                                </p>
-
-                                            </div>
-                                        </td>
-                                        <td class="">
-                                            <div class="flex items-center pl-5">
-                                                <p class="mr-2 text-base font-medium leading-none text-gray-700">
-
-
-                                                    @if ($proceso->especie)
-                                                        {{ $proceso->especie }}
-                                                    @endif
-
-
-                                                </p>
-
-                                            </div>
-                                        </td>
-                                        <td class="pl-5">
-                                            <div class="flex items-center text-center whitespace-nowrap">
-
-                                                <p class="ml-2 text-sm leading-none text-gray-600 whitespace-nowrap">
-
-                                                    @if ($proceso->variedad)
-                                                        {{ $proceso->variedad }}
-                                                    @endif
-                                                </p>
-                                            </div>
-                                        </td>
-                                        <td class="pl-5 text-center whitespace-nowrap">
-                                            <p
-                                                class="mr-2 text-base font-medium leading-none text-center text-gray-700 whitespace-nowrap">
-
-
-                                                @if ($proceso->fecha)
-                                                    {{ date('d M Y g:i a', strtotime($proceso->fecha)) }}
+                                                @if ($proceso->especie)
+                                                    {{ $proceso->especie }}
                                                 @endif
-
-                                            </p>
-
-                                        </td>
-                                        <td class="pl-5 whitespace-nowrap">
-                                            <p
-                                                class="flex mr-2 text-base font-medium leading-none text-gray-700 whitespace-nowrap">
-
-
-
-                                                @if ($proceso->kilos_netos)
-                                                    {{ number_format($proceso->kilos_netos) }}
-                                                @endif
-
-                                            </p>
-                                        </td>
-
-                                        <td class="pl-5 whitespace-nowrap">
-                                            <p
-                                                class="flex mr-2 text-base font-medium leading-none text-gray-700 whitespace-nowrap">
-
-
-
-                                                @if ($proceso->kilos_netos > 0)
-                                                    {{ round(($proceso->exp * 100) / $proceso->kilos_netos, 1) }}%
-                                                @endif
-                                            </p>
-
-                                        </td>
-                                        <td class="pl-5 whitespace-nowrap">
-                                            <p
-                                                class="flex mr-2 text-base font-medium leading-none text-gray-700 whitespace-nowrap">
-
-
-
-                                                @if ($proceso->kilos_netos > 0)
-                                                    {{ round(($proceso->comercial * 100) / $proceso->kilos_netos, 1) }}%
-                                                @endif
-
-                                            </p>
-
-                                        </td>
-                                        <td class="pl-5 whitespace-nowrap">
-                                            <p
-                                                class="flex mr-2 text-base font-medium leading-none text-gray-700 whitespace-nowrap">
-
-
-
-                                                @if ($proceso->kilos_netos > 0)
-                                                    {{ round(($proceso->desecho * 100) / $proceso->kilos_netos, 1) }}%
-                                                @endif
-
-                                            </p>
-
-                                        </td>
-                                        <td class="pl-5 whitespace-nowrap">
-                                            <p
-                                                class="flex mr-2 text-base font-medium leading-none text-gray-700 whitespace-nowrap">
-
-
-
-                                                @if ($proceso->kilos_netos > 0)
-                                                    {{ round((($proceso->kilos_netos - $proceso->exp - $proceso->comercial - $proceso->desecho) * 100) / $proceso->kilos_netos, 1) }}%
-                                                @endif
-
 
 
                                             </p>
 
-                                        </td>
+                                        </div>
+                                    </td>
+                                    <td class="pl-5">
+                                        <div class="flex items-center text-center whitespace-nowrap">
 
-                                        <td class="pl-5">
+                                            <p class="ml-2 text-sm leading-none text-gray-600 whitespace-nowrap">
 
-                                            <div class="items-center content-center">
-                                                @if ($proceso->informe)
-                                                    <div class="flex justify-center">
-                                                        <a href="{{ route('download.proceso', $proceso) }}"
-                                                            target="_blank"
-                                                            class="items-center content-center justify-center mx-auto">
-                                                            <img class="object-contain h-8 mx-2"
-                                                                src="{{ asset('image/pdf_icon2.png') }}"
-                                                                title="Descargar" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <button wire:click="reenviar_informe({{ $proceso }})"
-                                                        class="px-3 py-1 mt-2 mb-2 text-xs font-bold text-white bg-green-500 rounded-full"
-                                                        type="submit" title="Reenviar Whatsapp">Reenviar
-                                                        Whatsapp</button>
-                                                @else
+                                                @if ($proceso->variedad)
+                                                    {{ $proceso->variedad }}
                                                 @endif
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td class="pl-5 text-center whitespace-nowrap">
+                                        <p
+                                            class="mr-2 text-base font-medium leading-none text-center text-gray-700 whitespace-nowrap">
 
 
-                                            </div>
+                                            @if ($proceso->fecha)
+                                                {{ date('d M Y g:i a', strtotime($proceso->fecha)) }}
+                                            @endif
 
+                                        </p>
 
-
-
-                                        </td>
-                                        <td class="mr-2">
-
-                                            <div class="block w-full">
-                                                @if ($proceso->informe)
-                                                    <form action="{{ route('delete.proceso', $proceso) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('delete')
-
-                                                        <button
-                                                            class="px-3 py-1 text-xl font-bold text-white bg-red-500 rounded-full"
-                                                            type="submit" title="Eliminar">x</button>
-
-                                                    </form>
-                                                @else
-                                                @endif
-
-
-                                            </div>
+                                    </td>
+                                    <td class="pl-5 whitespace-nowrap">
+                                        <p
+                                            class="flex mr-2 text-base font-medium leading-none text-gray-700 whitespace-nowrap">
 
 
 
+                                            @if ($proceso->kilos_netos)
+                                                {{ number_format($proceso->kilos_netos) }}
+                                            @endif
 
-                                        </td>
+                                        </p>
+                                    </td>
+
+                                    <td class="pl-5 whitespace-nowrap">
+                                        <p
+                                            class="flex mr-2 text-base font-medium leading-none text-gray-700 whitespace-nowrap">
+
+
+
+                                            @if ($proceso->kilos_netos > 0)
+                                                {{ round(($proceso->exp * 100) / $proceso->kilos_netos, 1) }}%
+                                            @endif
+                                        </p>
+
+                                    </td>
+                                    <td class="pl-5 whitespace-nowrap">
+                                        <p
+                                            class="flex mr-2 text-base font-medium leading-none text-gray-700 whitespace-nowrap">
+
+
+
+                                            @if ($proceso->kilos_netos > 0)
+                                                {{ round(($proceso->comercial * 100) / $proceso->kilos_netos, 1) }}%
+                                            @endif
+
+                                        </p>
+
+                                    </td>
+                                    <td class="pl-5 whitespace-nowrap">
+                                        <p
+                                            class="flex mr-2 text-base font-medium leading-none text-gray-700 whitespace-nowrap">
+
+
+
+                                            @if ($proceso->kilos_netos > 0)
+                                                {{ round(($proceso->desecho * 100) / $proceso->kilos_netos, 1) }}%
+                                            @endif
+
+                                        </p>
+
+                                    </td>
+                                    <td class="pl-5 whitespace-nowrap">
+                                        <p
+                                            class="flex mr-2 text-base font-medium leading-none text-gray-700 whitespace-nowrap">
+
+
+
+                                            @if ($proceso->kilos_netos > 0)
+                                                {{ round((($proceso->kilos_netos - $proceso->exp - $proceso->comercial - $proceso->desecho) * 100) / $proceso->kilos_netos, 1) }}%
+                                            @endif
+
+
+
+                                        </p>
+
+                                    </td>
+
+                                    <td class="pl-5">
+
+                                        <div class="items-center content-center">
+                                            @if ($proceso->informe)
+                                                <div class="flex justify-center">
+                                                    <a href="{{ route('download.proceso', $proceso) }}"
+                                                        target="_blank"
+                                                        class="items-center content-center justify-center mx-auto">
+                                                        <img class="object-contain h-8 mx-2"
+                                                            src="{{ asset('image/pdf_icon2.png') }}"
+                                                            title="Descargar" alt="">
+                                                    </a>
+                                                </div>
+                                                <button wire:click="reenviar_informe({{ $proceso }})"
+                                                    class="px-3 py-1 mt-2 mb-2 text-xs font-bold text-white bg-green-500 rounded-full"
+                                                    type="submit" title="Reenviar Whatsapp">Reenviar
+                                                    Whatsapp</button>
+                                            @else
+                                            @endif
+
+
+                                        </div>
 
 
 
 
-                                    </tr>
-                                @endcan
+                                    </td>
+                                    <td class="mr-2">
+
+                                        <div class="block w-full">
+                                            @if ($proceso->informe)
+                                                <form action="{{ route('delete.proceso', $proceso) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('delete')
+
+                                                    <button
+                                                        class="px-3 py-1 text-xl font-bold text-white bg-red-500 rounded-full"
+                                                        type="submit" title="Eliminar">x</button>
+
+                                                </form>
+                                            @else
+                                            @endif
+
+
+                                        </div>
+
+
+
+
+                                    </td>
+
+
+
+
+                                </tr>
                             @else
                                 <tr class="h-16 border border-gray-100 rounded">
 
