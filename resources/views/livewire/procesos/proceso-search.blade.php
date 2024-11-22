@@ -18,12 +18,15 @@
             </div>
         @endif
     </div>
+
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/series-label.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    @php
 
+    @endphp
     <div class="flex justify-center mt-2">
         <div>
             @if ($temporada == 'actual')
@@ -268,7 +271,199 @@
                         @endphp
 
                         @foreach ($procesos as $proceso)
-                            @if ($proceso->informe)
+                            @if (!$proceso->informe)
+                                @can('Asignar roles')
+                                    <tr class="h-16 border border-gray-100 rounded">
+
+                                        <td class="text-center">
+                                            <p class="text-base font-medium text-gray-700">
+
+
+
+                                                @if ($proceso->agricola)
+                                                    {{ $proceso->agricola }}
+                                                @endif
+
+
+                                            </p>
+
+                                        </td>
+                                        <td class="">
+                                            <div class="flex items-center pl-5">
+                                                <p class="mr-2 text-base font-medium leading-none text-gray-700">
+
+
+                                                    @if ($proceso->n_proceso)
+                                                        {{ $proceso->n_proceso }}
+                                                    @endif
+
+
+                                                </p>
+
+                                            </div>
+                                        </td>
+                                        <td class="">
+                                            <div class="flex items-center pl-5">
+                                                <p class="mr-2 text-base font-medium leading-none text-gray-700">
+
+
+                                                    @if ($proceso->especie)
+                                                        {{ $proceso->especie }}
+                                                    @endif
+
+
+                                                </p>
+
+                                            </div>
+                                        </td>
+                                        <td class="pl-5">
+                                            <div class="flex items-center text-center whitespace-nowrap">
+
+                                                <p class="ml-2 text-sm leading-none text-gray-600 whitespace-nowrap">
+
+                                                    @if ($proceso->variedad)
+                                                        {{ $proceso->variedad }}
+                                                    @endif
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td class="pl-5 text-center whitespace-nowrap">
+                                            <p
+                                                class="mr-2 text-base font-medium leading-none text-center text-gray-700 whitespace-nowrap">
+
+
+                                                @if ($proceso->fecha)
+                                                    {{ date('d M Y g:i a', strtotime($proceso->fecha)) }}
+                                                @endif
+
+                                            </p>
+
+                                        </td>
+                                        <td class="pl-5 whitespace-nowrap">
+                                            <p
+                                                class="flex mr-2 text-base font-medium leading-none text-gray-700 whitespace-nowrap">
+
+
+
+                                                @if ($proceso->kilos_netos)
+                                                    {{ number_format($proceso->kilos_netos) }}
+                                                @endif
+
+                                            </p>
+                                        </td>
+
+                                        <td class="pl-5 whitespace-nowrap">
+                                            <p
+                                                class="flex mr-2 text-base font-medium leading-none text-gray-700 whitespace-nowrap">
+
+
+
+                                                @if ($proceso->kilos_netos > 0)
+                                                    {{ round(($proceso->exp * 100) / $proceso->kilos_netos, 1) }}%
+                                                @endif
+                                            </p>
+
+                                        </td>
+                                        <td class="pl-5 whitespace-nowrap">
+                                            <p
+                                                class="flex mr-2 text-base font-medium leading-none text-gray-700 whitespace-nowrap">
+
+
+
+                                                @if ($proceso->kilos_netos > 0)
+                                                    {{ round(($proceso->comercial * 100) / $proceso->kilos_netos, 1) }}%
+                                                @endif
+
+                                            </p>
+
+                                        </td>
+                                        <td class="pl-5 whitespace-nowrap">
+                                            <p
+                                                class="flex mr-2 text-base font-medium leading-none text-gray-700 whitespace-nowrap">
+
+
+
+                                                @if ($proceso->kilos_netos > 0)
+                                                    {{ round(($proceso->desecho * 100) / $proceso->kilos_netos, 1) }}%
+                                                @endif
+
+                                            </p>
+
+                                        </td>
+                                        <td class="pl-5 whitespace-nowrap">
+                                            <p
+                                                class="flex mr-2 text-base font-medium leading-none text-gray-700 whitespace-nowrap">
+
+
+
+                                                @if ($proceso->kilos_netos > 0)
+                                                    {{ round((($proceso->kilos_netos - $proceso->exp - $proceso->comercial - $proceso->desecho) * 100) / $proceso->kilos_netos, 1) }}%
+                                                @endif
+
+
+
+                                            </p>
+
+                                        </td>
+
+                                        <td class="pl-5">
+
+                                            <div class="items-center content-center">
+                                                @if ($proceso->informe)
+                                                    <div class="flex justify-center">
+                                                        <a href="{{ route('download.proceso', $proceso) }}"
+                                                            target="_blank"
+                                                            class="items-center content-center justify-center mx-auto">
+                                                            <img class="object-contain h-8 mx-2"
+                                                                src="{{ asset('image/pdf_icon2.png') }}"
+                                                                title="Descargar" alt="">
+                                                        </a>
+                                                    </div>
+                                                    <button wire:click="reenviar_informe({{ $proceso }})"
+                                                        class="px-3 py-1 mt-2 mb-2 text-xs font-bold text-white bg-green-500 rounded-full"
+                                                        type="submit" title="Reenviar Whatsapp">Reenviar
+                                                        Whatsapp</button>
+                                                @else
+                                                @endif
+
+
+                                            </div>
+
+
+
+
+                                        </td>
+                                        <td class="mr-2">
+
+                                            <div class="block w-full">
+                                                @if ($proceso->informe)
+                                                    <form action="{{ route('delete.proceso', $proceso) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('delete')
+
+                                                        <button
+                                                            class="px-3 py-1 text-xl font-bold text-white bg-red-500 rounded-full"
+                                                            type="submit" title="Eliminar">x</button>
+
+                                                    </form>
+                                                @else
+                                                @endif
+
+
+                                            </div>
+
+
+
+
+                                        </td>
+
+
+
+
+                                    </tr>
+                                @endcan
+                            @else
                                 <tr class="h-16 border border-gray-100 rounded">
 
                                     <td class="text-center">
