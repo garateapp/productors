@@ -269,7 +269,7 @@
                         @php
                             $n = 1;
                         @endphp
-
+                        <!-- Cambios de como se ven los procesos -->
                         @foreach ($procesos as $proceso)
                             @if (!$proceso->informe)
                                 @can('Asignar roles')
