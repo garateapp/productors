@@ -463,7 +463,9 @@
 
                                 </tr>
                             @else
-                                @if (Auth::user()->name == 'David Rosas' || Auth::user()->name == 'Fabian Garay')
+                                @if (Auth::user()->name == 'David Rosas' ||
+                                        Auth::user()->name == 'Fabian Garay' ||
+                                        Auth::user()->name == 'Carlos Alvarez')
                                     <tr class="h-16 border border-gray-100 rounded">
 
                                         <td class="text-center">

@@ -72,7 +72,7 @@
                             @if ($variedad->especie_id == $espec->id)
                                 <div class="flex justify-center">
                                     <button wire:click="set_varie({{ $variedad->id }})"
-                                        class="items-center w-full px-2 py-3 rounded  focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 hover:bg-gray-500 focus:outline-none"
+                                        class="items-center w-full px-2 py-3 rounded focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 hover:bg-gray-500 focus:outline-none"
                                         style="background-color: #008d39;">
                                         <p class="text-sm font-medium leading-none text-white whitespace-nowrap">
                                             {{ $variedad->name }}</p>
@@ -356,7 +356,9 @@
 
                                 </tr>
                             @else
-                                @if (Auth::user()->name == 'David Rosas' || Auth::user()->name == 'Fabian Garay')
+                                @if (Auth::user()->name == 'David Rosas' ||
+                                        Auth::user()->name == 'Fabian Garay' ||
+                                        Auth::user()->name == 'Carlos Alvarez')
                                     <tr class="h-16 border border-gray-100 rounded">
 
                                         <td class="text-center">
