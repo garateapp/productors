@@ -38,7 +38,9 @@ use App\Models\CampoStaff;
 use App\Models\Certificacion;
 use App\Models\Ficha;
 use Illuminate\Support\Facades\Mail;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\ExcelImport;
 use ZipArchive;
 
 class HomeController extends Controller
@@ -56,6 +58,278 @@ class HomeController extends Controller
 
         return view('calidad.danos',compact('detalles'));
     }
+
+
+    //Proceso de subida Greenvic
+    public function greenvic()
+    {
+        return view('calidad.greenvic');
+    }
+
+public function uploadAndReadExcelGreenvic(Request $request)
+    {
+        // Validar el archivo
+        $request->validate([
+            'file' => 'required|file|mimes:xlsx,xls,csv',
+        ]);
+
+        // Cargar el archivo y procesarlo
+        $file = $request->file('file');
+
+        $data = Excel::toArray(new ExcelImport, $file);
+
+        //Datos de la recepción
+        $recepcion=new Recepcion();
+        $productor = $data[0][2][7];
+        $recepcion->n_variedad=$data[0][5][7];
+        $recepcion->cantidad=$data[0][5][1];
+        $recepcion->peso_neto=$data[0][4][1];
+
+        //datos de Calidad
+        $calidad=new Calidad();
+        if($data[0][9][0]==null && $data[0][9][1]==null){
+            $calidad->t_camion=null;
+        }elseif($data[0][9][0]!=null){
+            $calidad->t_camion=$data[0][8][0];
+        }
+        else{
+            $calidad->t_camion=$data[0][8][1];
+        }
+        if($data[0][9][2]==null && $data[0][9][3]==null){
+            $calidad->encarpado=null;
+        }elseif($data[0][9][2]!=null){
+            $calidad->encarpado=$data[0][9][2];
+        }else{
+            $calidad->encarpado=$data[0][9][3];
+        }
+        $calidad->seteo_termo=$data[0][9][4];
+        if($data[0][9][6]==null && $data[0][9][8]==null){
+            $calidad->condicion=null;
+        }elseif($data[0][9][6]!=null){
+            $calidad->condicion=$data[0][8][6];
+        }else{
+            $calidad->condicion=$data[0][8][8];
+        }
+        if($data[0][9][10]==null && $data[0][9][11]==null){
+            $calidad->materia_vegetal=null;
+        }elseif($data[0][9][10]!=null){
+            $calidad->materia_vegetal=$data[0][9][10];
+        }else{
+            $calidad->materia_vegetal=$data[0][9][11];
+        }
+        if($data[0][9][12]==null && $data[0][9][13]==null){
+            $calidad->piedras=null;
+        }elseif($data[0][9][12]!=null){
+            $calidad->piedras=$data[0][9][12];
+        }else{
+            $calidad->piedras=$data[0][9][13];
+        }
+        if($data[0][9][14]==null && $data[0][9][15]==null){
+            $calidad->barro=null;
+        }elseif($data[0][9][14]!=null){
+            $calidad->barro=$data[0][9][14];
+        }else{
+            $calidad->barro=$data[0][9][15];
+        }
+        if($data[0][9][16]==null && $data[0][9][17]==null){
+            $calidad->pedicelo_largo=null;
+        }elseif($data[0][9][16]!=null){
+            $calidad->pedicelo_largo=$data[0][9][16];
+        }else{
+            $calidad->pedicelo_largo=$data[0][9][17];
+        }
+        if($data[0][9][18]==null && $data[0][9][19]==null){
+            $calidad->racimo=null;
+        }elseif($data[0][9][18]!=null){
+            $calidad->racimo=$data[0][9][18];
+        }else{
+            $calidad->racimo=$data[0][9][19];
+        }
+        if($data[0][9][20]==null && $data[0][9][21]==null){
+            $calidad->esponjas=null;
+        }elseif($data[0][9][20]!=null){
+            $calidad->esponjas=$data[0][9][20];
+        }else{
+            $calidad->esponjas=$data[0][9][21];
+        }
+        if($data[0][9][22]==null && $data[0][9][24]==null && $data[0][9][26]==null){
+            $calidad->h_esponjas=null;
+        }elseif($data[0][9][22]!=null){
+            $calidad->h_esponjas=$data[0][8][22];
+        }elseif($data[0][9][24]!=null){
+            $calidad->h_esponjas=$data[0][8][24];
+        }
+        else{
+            $calidad->h_esponjas=$data[0][8][26];
+        }
+        if($data[0][9][27]==null && $data[0][9][29]==null && $data[0][9][31]==null){
+            $calidad->llenado_tottes=null;
+        }elseif($data[0][9][27]!=null){
+            $calidad->llenado_tottes=$data[0][8][27];
+        }elseif($data[0][9][29]!=null){
+            $calidad->llenado_tottes=$data[0][8][29];
+        }
+        else{
+            $calidad->h_racimo=$data[0][8][31];
+        }
+        $lstDetalle = collect();
+
+        for ($i=18; $i < 41; $i++) {
+            $detalle = new Detalle();
+            $detalle->cantidad = $data[0][$i][3] ?? null;
+            $detalle->porcentaje_muestra = (floatval($data[0][$i][3])*100)/floatval($data[0][5][14]);
+            $detalle->tipo_detalle = "cc";
+            $detalle->tipo_item = "DEFECTOS DE CONDICIÓN";
+            $detalle->detalle_item = $data[0][$i][0] ?? null;
+            $detalle->estado = 1;
+
+            // Añadir el detalle a la colección
+            $lstDetalle->push($detalle);
+        }
+        for ($i=18; $i < 31; $i++) {
+            $detalle = new Detalle();
+            $detalle->cantidad = $data[0][$i][13] ?? null;
+            $detalle->porcentaje_muestra = (floatval($data[0][$i][13])*100)/floatval($data[0][5][14]);
+            $detalle->tipo_detalle = "cc";
+            $detalle->tipo_item = "DEFECTOS DE CALIDAD";
+            $detalle->detalle_item = $data[0][$i][8] ?? null;
+            $detalle->estado = 1;
+
+            // Añadir el detalle a la colección
+            $lstDetalle->push($detalle);
+        }
+        for ($i=27; $i < 34; $i++) {
+            $detalle = new Detalle();
+            $detalle->cantidad = ($data[0][$i][20] == null)? 0:floatval($data[0][$i][20])*100 ;
+            $detalle->porcentaje_muestra = ($data[0][$i][20]==null)? null:floatval(str_replace('%','',$data[0][$i][20]));
+            $detalle->tipo_detalle = "cc";
+            $detalle->tipo_item = "DISTRIBUCION DE CALIBRES";
+            $detalle->detalle_item = $data[0][$i][18] ?? null;
+            $detalle->estado = 1;
+
+            // Añadir el detalle a la colección
+            $lstDetalle->push($detalle);
+        }
+
+        for ($i=34; $i < 41; $i++) {
+            $detalle = new Detalle();
+            $detalle->cantidad = $data[0][$i][13] ?? null;
+            $detalle->porcentaje_muestra = ($data[0][$i][13]==null)? 0:(floatval($data[0][$i][13])*100)/floatval($data[0][5][14]);
+            $detalle->tipo_detalle = "cc";
+            $detalle->tipo_item = "DAÑO DE PLAGA";
+            $detalle->detalle_item = $data[0][$i][8] ?? null;
+            $detalle->estado = 1;
+
+            // Añadir el detalle a la colección
+            $lstDetalle->push($detalle);
+        }
+        for ($i=12; $i < 17; $i++) {
+            $detalle = new Detalle();
+            $detalle->cantidad = $data[0][$i][3] ?? null;
+            $detalle->porcentaje_muestra = ($data[0][$i][3]==null)? 0:$data[0][$i][3];
+            $detalle->tipo_detalle = "cc";
+            $detalle->tipo_item = "COLOR DE CUBRIMIENTO";
+            $detalle->detalle_item = $data[0][$i][1] ?? null;
+            $detalle->estado = 1;
+
+            // Añadir el detalle a la colección
+            $lstDetalle->push($detalle);
+        }
+
+
+        //FIRMEZA
+        $detalle = new Detalle();
+        $detalle->cantidad = $data[0][19][26] ?? null;
+        $detalle->porcentaje_muestra = null;
+        $detalle->tipo_detalle = "ss";
+        $detalle->tipo_item = "FIRMEZA";
+        $detalle->detalle_item = $data[0][18][26] ?? null;
+        $detalle->estado = 1;
+        $lstDetalle->push($detalle);
+
+        $detalle = new Detalle();
+        $detalle->cantidad = $data[0][19][27] ?? null;
+        $detalle->porcentaje_muestra = null;
+        $detalle->tipo_detalle = "ss";
+        $detalle->tipo_item = "FIRMEZA";
+        $detalle->detalle_item = $data[0][18][27] ?? null;
+        $detalle->estado = 1;
+        $lstDetalle->push($detalle);
+
+        $detalle = new Detalle();
+        $detalle->cantidad = $data[0][19][28] ?? null;
+        $detalle->porcentaje_muestra = null;
+        $detalle->tipo_detalle = "ss";
+        $detalle->tipo_item = "FIRMEZA";
+        $detalle->detalle_item = $data[0][18][28] ?? null;
+        $detalle->estado = 1;
+        $lstDetalle->push($detalle);
+
+
+        $promLight=0;
+        $promDark=0;
+        $promBlack=0;
+        for ($i=4; $i < 14; $i++) {
+            $promLight += ($data[0][12][$i]==null)?0:floatval($data[0][12][$i]);
+        }
+        for ($i=4; $i < 14; $i++) {
+            $promDark += ($data[0][13][$i]==null)?0:floatval($data[0][13][$i]);
+        }
+        for ($i=4; $i < 14; $i++) {
+            $promDark += ($data[0][14][$i]==null)?0:floatval($data[0][14][$i]);
+        }
+        for ($i=4; $i < 14; $i++) {
+            $promBlack += ($data[0][15][$i]==null)?0:floatval($data[0][15][$i]);
+        }
+        for ($i=4; $i < 14; $i++) {
+            $promBlack += ($data[0][16][$i]==null)?0:floatval($data[0][16][$i]);
+        }
+        $promDark = $promDark/20;
+        $promLight = $promLight/10;
+        $promBlack = $promBlack/20;
+
+        $detalle = new Detalle();
+        $detalle->cantidad = $promLight;
+        $detalle->porcentaje_muestra = null;
+        $detalle->tipo_detalle = "ss";
+        $detalle->tipo_item = "SOLIDOS SOLUBLES";
+        $detalle->detalle_item = "LIGHT";
+        $detalle->estado = 1;
+        $lstDetalle->push($detalle);
+
+        $detalle = new Detalle();
+        $detalle->cantidad = $promDark;
+        $detalle->porcentaje_muestra = null;
+        $detalle->tipo_detalle = "ss";
+        $detalle->tipo_item = "SOLIDOS SOLUBLES";
+        $detalle->detalle_item = "DARK";
+        $detalle->estado = 1;
+        $lstDetalle->push($detalle);
+
+
+        $detalle = new Detalle();
+        $detalle->cantidad = $promLight;
+        $detalle->porcentaje_muestra = null;
+        $detalle->tipo_detalle = "ss";
+        $detalle->tipo_item = "SOLIDOS SOLUBLES";
+        $detalle->detalle_item = "BLACK";
+        $detalle->estado = 1;
+        $lstDetalle->push($detalle);
+
+        // Leer celdas específicas
+        $specificCells = $data[0]; // Solo se procesó la primera hoja
+        $recepciones=Recepcion::where('n_estado','=','Finalizado')
+        ->where('fecha_g_recepcion','>','2024-11-28')
+        //->where('fecha_g_recepcion','<','2024-11-28')
+        ->orderByDesc('numero_g_recepcion')
+        ->get();
+
+
+        return view('calidad.previsualizagreenvic',compact('lstDetalle','recepcion','calidad','recepciones'));
+    }
+
+
+    //Proceso de subida Greenvic
 
     public function danoexport()
     {

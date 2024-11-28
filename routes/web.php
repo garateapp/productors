@@ -193,6 +193,13 @@ Route::get('/danosreport', [HomeController::class,'danoreport'])->name('danos.in
 
 Route::get('/danosexport', [HomeController::class,'danoexport'])->name('danos.export');
 
+//procesos Greenvic
+
+Route::get('/greenvic', [HomeController::class,'greenvic'])->name('danos.greenvic');
+
+Route::post('/uploadAndReadExcelGreenvic', [HomeController::class, 'uploadAndReadExcelGreenvic'])->name('danos.uploadAndReadExcelGreenvic');
+
+//Fin Procesos Greenvic
 
 Route::get('agronomo/{user}', [HomeController::class,'productor_index'])->name('productor.index');
 
