@@ -340,6 +340,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
     public function previsualizagreenvic_store(Request $request){
 
         $Rcalidad=$request->calidad;
+        $Rcalidad['recepcion_id']=$request->numero_g_recepcion;
         $calidad = Calidad::create($Rcalidad);
         $Rdetallee=$request->lstDetalle;
         foreach ($Rdetallee as $detalle) {

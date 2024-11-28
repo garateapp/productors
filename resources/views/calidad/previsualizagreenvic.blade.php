@@ -8935,7 +8935,7 @@ a.text-dark:hover {
                             <div class="container">
                                 <div class="form-group">
                                     <label for="recepcion">Seleccione Recepción:</label>
-                                    <select id="recepcion" name="id_rececion" class="form-control">
+                                    <select id="numero_g_recepcion" name="numero_g_recepcion" class="form-control">
                                         @foreach ($recepciones as $recepcion)
                                             <option value="{{ $recepcion->id }}">{{ $recepcion->n_emisor }} -
                                                 {{ $recepcion->numero_g_recepcion }}</option>
