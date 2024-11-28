@@ -8879,13 +8879,13 @@ a.text-dark:hover {
     }
 }
 
-        </style>
+</style>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
             Subir Recepciones Greenvic
         </h2>
     </x-slot>
-    <div class="overflow-hidden bg-white rounded shadow-lg">
+    
 
         @if (session('info'))
             <div class="flex justify-center">
@@ -8924,15 +8924,11 @@ a.text-dark:hover {
                 </div>
             </div>
         @endif
-
-
-        
-            
-                <div class="row">
+                <div class="container">
                     <div class="col-md-12">
                         <form method="POST" action="{{ route('danos.previsualizagreenvic_store') }}">
                             @csrf
-                            <div class="container">
+                           
                                 <div class="form-group">
                                     <label for="recepcion">Seleccione Recepción:</label>
                                     <select id="numero_g_recepcion" name="numero_g_recepcion" class="form-control">
@@ -8945,131 +8941,112 @@ a.text-dark:hover {
                                 </div>
                                 <div class="card">
                                     <div class="card-header">
-                                Recepción
+                                        Recepción
                                     </div>                                    
-                                    <div class="card-body">
-                                <div>
+                                    <di class="card-body">
+                                
                                     <div class="form-group">
-                                    <label for="n_variedad">Variedad:</label>
-                                    <input type="text" id="n_variedad" class="form-control" name="recepcion[n_variedad]" value="SANTINA">
+                                        <label for="n_variedad">Variedad:</label>
+                                        <input type="text" id="n_variedad" class="form-control" name="recepcion[n_variedad]" value="SANTINA"/>
                                     </div>
-                               
-                                </div>
-                                <div>
+                                    
+                                
+                                
                                     <div class="form-group">
                                     <label for="cantidad">Cantidad:</label>
                                     <input class="form-control" type="number" id="cantidad" name="recepcion[cantidad]" value="672">
                                     </div>
-                                </div>
-                                <div>
+                                
+                                
                                     <div class="form-group">
                                     <label for="peso_neto">Peso Neto (kg):</label>
                                     <input type="number" class="form-control" id="peso_neto" name="recepcion[peso_neto]" value="5407">
                                     </div>
-                                </div>
+                                
                                     </div>
                                 </div>
                                 <!-- Campos para calidad -->
                                 <div class="card">
                                     <div class="card-header">
-                                Calidad
+                                        Calidad
                                     </div>
-                                <div>
-                                    <div class="form-group">
-                                    <label for="t_camion">Tipo de Camión:</label>
-                                    <input type="text" id="t_camion" class="form-control" name="calidad[t_camion]" value="Termo">
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="form-group">
-                                    <label for="encarpado">Encarpado:</label>
-                                    <select id="encarpado" name="calidad[encarpado]" class="form-control">
-                                        <option value="SI" {{ 'NO' == 'SI' ? 'selected' : '' }}>SI</option>
-                                        <option value="NO" {{ 'NO' == 'NO' ? 'selected' : '' }}>NO</option>
-                                    </select>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="form-group">
-                                    <label for="seteo_termo">Seteo del Termo (°C):</label>
-                                    <input type="number" id="seteo_termo" class="form-control" name="calidad[seteo_termo]" value="10">
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="form-group">
-                                    <label for="condicion">Condición:</label>
-                                    <input type="text" id="condicion" class="form-control" name="calidad[condicion]" value="Limpio">
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="form-group">
-                                    <label for="materia_vegetal">Materia Vegetal:</label>
-                                    <select id="materia_vegetal" name="calidad[materia_vegetal]" class="form-control">
-                                        <option value="SI" {{ 'SI' == 'SI' ? 'selected' : '' }}>SI</option>
-                                        <option value="NO" {{ 'SI' == 'NO' ? 'selected' : '' }}>NO</option>
-                                    </select>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="form-group">
-                                    <label for="piedras">Piedras:</label>
-                                    <select id="piedras" name="calidad[piedras]" class="form-control">
-                                        <option value="SI" {{ 'NO' == 'SI' ? 'selected' : '' }}>SI</option>
-                                        <option value="NO" {{ 'NO' == 'NO' ? 'selected' : '' }}>NO</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <div class="form-group">
-                                    <label for="barro">Barro:</label>
-                                    <select id="barro" name="calidad[barro]" class="form-control">
-                                        <option value="SI" {{ 'NO' == 'SI' ? 'selected' : '' }}>SI</option>
-                                        <option value="NO" {{ 'NO' == 'NO' ? 'selected' : '' }}>NO</option>
-                                    </select>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="form-group">
-                                    <label for="pedicelo_largo">Pedicelo Largo:</label>
-                                    <select id="pedicelo_largo" name="calidad[pedicelo_largo]" class="form-control">
-                                        <option value="SI" {{ 'NO' == 'SI' ? 'selected' : '' }}>SI</option>
-                                        <option value="NO" {{ 'NO' == 'NO' ? 'selected' : '' }}>NO</option>
-                                    </select>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="form-group">
-                                    <label for="racimo">Racimo:</label>
-                                    <select id="racimo" name="calidad[racimo]" class="form-control">
-                                        <option value="SI" {{ 'SI' == 'SI' ? 'selected' : '' }}>SI</option>
-                                        <option value="NO" {{ 'SI' == 'NO' ? 'selected' : '' }}>NO</option>
-                                    </select>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="form-group">
-                                    <label for="esponjas">Esponjas:</label>
-                                    <select id="esponjas" name="calidad[esponjas]" class="form-control">
-                                        <option value="SI" {{ 'SI' == 'SI' ? 'selected' : '' }}>SI</option>
-                                        <option value="NO" {{ 'SI' == 'NO' ? 'selected' : '' }}>NO</option>
-                                    </select>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="t_camion">Tipo de Camión:</label>
+                                            <input type="text" id="t_camion" class="form-control" name="calidad[t_camion]" value="Termo">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="encarpado">Encarpado:</label>
+                                            <select id="encarpado" name="calidad[encarpado]" class="form-control">
+                                                <option value="SI" {{ 'NO' == 'SI' ? 'selected' : '' }}>SI</option>
+                                                <option value="NO" {{ 'NO' == 'NO' ? 'selected' : '' }}>NO</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="seteo_termo">Seteo del Termo (°C):</label>
+                                            <input type="number" id="seteo_termo" class="form-control" name="calidad[seteo_termo]" value="10">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="condicion">Condición:</label>
+                                            <input type="text" id="condicion" class="form-control" name="calidad[condicion]" value="Limpio">
+                                        </div>
+                                    
+                                        <div class="form-group">
+                                            <label for="materia_vegetal">Materia Vegetal:</label>
+                                            <select id="materia_vegetal" name="calidad[materia_vegetal]" class="form-control">
+                                                <option value="SI" {{ 'SI' == 'SI' ? 'selected' : '' }}>SI</option>
+                                                <option value="NO" {{ 'SI' == 'NO' ? 'selected' : '' }}>NO</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="piedras">Piedras:</label>
+                                            <select id="piedras" name="calidad[piedras]" class="form-control">
+                                                <option value="SI" {{ 'NO' == 'SI' ? 'selected' : '' }}>SI</option>
+                                                <option value="NO" {{ 'NO' == 'NO' ? 'selected' : '' }}>NO</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="barro">Barro:</label>
+                                            <select id="barro" name="calidad[barro]" class="form-control">
+                                                <option value="SI" {{ 'NO' == 'SI' ? 'selected' : '' }}>SI</option>
+                                                <option value="NO" {{ 'NO' == 'NO' ? 'selected' : '' }}>NO</option>
+                                            </select>
+                                        </div>
+                                    
+                                        <div class="form-group">
+                                            <label for="pedicelo_largo">Pedicelo Largo:</label>
+                                            <select id="pedicelo_largo" name="calidad[pedicelo_largo]" class="form-control">
+                                                <option value="SI" {{ 'NO' == 'SI' ? 'selected' : '' }}>SI</option>
+                                                <option value="NO" {{ 'NO' == 'NO' ? 'selected' : '' }}>NO</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="racimo">Racimo:</label>
+                                            <select id="racimo" name="calidad[racimo]" class="form-control">
+                                                <option value="SI" {{ 'SI' == 'SI' ? 'selected' : '' }}>SI</option>
+                                                <option value="NO" {{ 'SI' == 'NO' ? 'selected' : '' }}>NO</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="esponjas">Esponjas:</label>
+                                            <select id="esponjas" name="calidad[esponjas]" class="form-control">
+                                                <option value="SI" {{ 'SI' == 'SI' ? 'selected' : '' }}>SI</option>
+                                                <option value="NO" {{ 'SI' == 'NO' ? 'selected' : '' }}>NO</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="h_esponjas">Estado de Esponjas:</label>
+                                            <input type="text" id="h_esponjas" name="calidad[h_esponjas]" class="form-control"
+                                                value="Regular">
+                                        </div>
+                                    
+                                        <div class="form-group">
+                                            <label for="h_racimo">Estado del Racimo:</label>
+                                            <input type="text" id="h_racimo" name="calidad[h_racimo]" value="Correcto" class="form-control">
+                                        </div>
                                     </div>
                                 </div>
-                                <div>
-                                    <div class="form-group">
-                                    <label for="h_esponjas">Estado de Esponjas:</label>
-                                    <input type="text" id="h_esponjas" name="calidad[h_esponjas]" class="form-control"
-                                        value="Regular">
-                                    </div>
-                                </div>
-                                <div>
-
-                                    <div class="form-group">
-                                    <label for="h_racimo">Estado del Racimo:</label>
-                                    <input type="text" id="h_racimo" name="calidad[h_racimo]" value="Correcto" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    
                                 @foreach ($lstDetalle as $index => $detalle)
                                     <div class="card">
                                         <div class="card-header">
@@ -9105,8 +9082,7 @@ a.text-dark:hover {
                                                         class="form-control"
                                                         value="{{ $detalle['porcentaje_muestra'] }}">
                                                 </div>
-                                            </div>
-                                                    <input type="hidden"
+                                                <input type="hidden"
                                                         name="detalles[{{ $index }}][tipo_detalle]"
                                                         id="tipo_detalle_{{ $index }}" class="form-control"
                                                         value="{{ $detalle['tipo_detalle'] }}">
@@ -9120,24 +9096,18 @@ a.text-dark:hover {
                                                             {{ $detalle['estado'] == 0 ? 'selected' : '' }}>
                                                             Inactivo</option>
                                                     </select>
+                                            </div>
+                                                    
 
                                         </div>
                                     </div>
                                 @endforeach
-                            </div>
-                            <div class="form-control">
-                                <br/>
+                           
+                            <div class="form-control">                            
                             <button type="submit" class="btn btn-primary">Guardar</button>
                             </div>
+                        
                         </form>
                     </div>
-
-
-
                 </div>
-        
-        
-    
-    </div>
-
 </x-app-layout>
