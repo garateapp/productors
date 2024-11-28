@@ -316,6 +316,16 @@ public function uploadAndReadExcelGreenvic(Request $request)
         $detalle->estado = 1;
         $lstDetalle->push($detalle);
 
+
+        $detalle = new Detalle();
+        $detalle->cantidad = 0;
+        $detalle->porcentaje_muestra = null;
+        $detalle->tipo_detalle = "cc";
+        $detalle->tipo_item = "NOTA";
+        $detalle->detalle_item = "";
+        $detalle->estado = 1;
+        $lstDetalle->push($detalle);
+
         // Leer celdas específicas
         $specificCells = $data[0]; // Solo se procesó la primera hoja
         $recepciones=Recepcion::where('n_estado','=','Finalizado')
@@ -327,7 +337,20 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
         return view('calidad.previsualizagreenvic',compact('lstDetalle','recepcion','calidad','recepciones'));
     }
+    public function previsualizagreenvic_store(Request $request){
 
+        $Rcalidad=$request->calidad;
+        $calidad = Calidad::create($Rcalidad);
+        $Rdetallee=$request->lstDetalle;
+        foreach ($Rdetallee as $detalle) {
+            $detalle['calidad_id'] = $calidad->id;
+            $detalle['embalaje']=1;
+            Detalle::create($detalle);
+        }
+
+
+        return redirect()->route('productioncc.index');
+    }
 
     //Proceso de subida Greenvic
 

@@ -198,6 +198,7 @@ Route::get('/danosexport', [HomeController::class,'danoexport'])->name('danos.ex
 Route::get('/greenvic', [HomeController::class,'greenvic'])->name('danos.greenvic');
 
 Route::post('/uploadAndReadExcelGreenvic', [HomeController::class, 'uploadAndReadExcelGreenvic'])->name('danos.uploadAndReadExcelGreenvic');
+Route::post('/previsualizagreenvic_store', [HomeController::class, 'previsualizagreenvic_store'])->name('danos.previsualizagreenvic_store');
 
 //Fin Procesos Greenvic
 
