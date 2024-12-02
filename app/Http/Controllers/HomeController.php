@@ -207,6 +207,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
         else{
             $calidad->llenado_tottes=strtoupper($data[0][8][33]);
         }
+      
         $lstDetalle = collect();
 
         for ($i=18; $i < 41; $i++) {
@@ -362,6 +363,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
         $detalle->detalle_item = "LIGHT";
         $detalle->estado = 1;
         $detalle->valor_ss=$promLight;
+        $detalle->temperatura= (floatval($data[0][4][19])+floatval($data[0][4][19])+floatval($data[0][4][19]))/3;
         $lstDetalle->push($detalle);
 
         $detalle = new Detalle();
@@ -372,6 +374,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
         $detalle->detalle_item = "DARK";
         $detalle->estado = 1;
         $detalle->valor_ss=$promDark;
+        $detalle->temperatura= (floatval($data[0][4][19])+floatval($data[0][4][19])+floatval($data[0][4][19]))/3;
         $lstDetalle->push($detalle);
 
 
@@ -383,15 +386,16 @@ public function uploadAndReadExcelGreenvic(Request $request)
         $detalle->detalle_item = "BLACK";
         $detalle->valor_ss=$promBlack;
         $detalle->estado = 1;
+        $detalle->temperatura= (floatval($data[0][4][19])+floatval($data[0][4][19])+floatval($data[0][4][19]))/3;
         $lstDetalle->push($detalle);
 
 
         $detalle = new Detalle();
-        $detalle->cantidad = 0;
+        $detalle->cantidad = ($data[0][4][23] == null)?0:$data[0][4][23];
         $detalle->porcentaje_muestra = null;
         $detalle->tipo_detalle = "cc";
         $detalle->tipo_item = "NOTA";
-        $detalle->detalle_item = "";
+        $detalle->detalle_item = "EXTERNA";
         $detalle->estado = 1;
         $lstDetalle->push($detalle);
 
@@ -495,7 +499,8 @@ public function uploadAndReadExcelGreenvic(Request $request)
             } 
             else
             { 
-            if(($detalle['cantidad']==0 || $detalle['cantidad']==null) && ($detalle['porcentaje_muestra']==null || $detalle['porcentaje_muestra']==0) && ($detalle['valor_ss']==0 || $detalle['valor_ss']==null)){
+            if(($detalle['cantidad']==0 || $detalle['cantidad']==null) && ($detalle['porcentaje_muestra']==null 
+            || $detalle['porcentaje_muestra']==0) && ($detalle['valor_ss']==0 || $detalle['valor_ss']==null) && $detalle['tipo_item']!="DISTRIBUCIÓN DE FIRMEZA"){
 
             }
             else{
