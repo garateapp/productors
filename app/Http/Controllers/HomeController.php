@@ -363,7 +363,8 @@ public function uploadAndReadExcelGreenvic(Request $request)
         $detalle->detalle_item = "LIGHT";
         $detalle->estado = 1;
         $detalle->valor_ss=$promLight;
-        $detalle->temperatura= (floatval($data[0][4][19])+floatval($data[0][4][19])+floatval($data[0][4][19]))/3;
+        $detalle->temperatura= round((floatval($data[0][4][17])+floatval($data[0][4][18])+floatval($data[0][4][19]))/3,2);
+        $t2=$detalle->temperatura;
         $lstDetalle->push($detalle);
 
         $detalle = new Detalle();
@@ -374,7 +375,8 @@ public function uploadAndReadExcelGreenvic(Request $request)
         $detalle->detalle_item = "DARK";
         $detalle->estado = 1;
         $detalle->valor_ss=$promDark;
-        $detalle->temperatura= (floatval($data[0][4][19])+floatval($data[0][4][19])+floatval($data[0][4][19]))/3;
+        $detalle->temperatura=  round((floatval($data[0][4][17])+floatval($data[0][4][18])+floatval($data[0][4][19]))/3,2);
+        $t1=$detalle->temperatura;
         $lstDetalle->push($detalle);
 
 
@@ -386,7 +388,8 @@ public function uploadAndReadExcelGreenvic(Request $request)
         $detalle->detalle_item = "BLACK";
         $detalle->valor_ss=$promBlack;
         $detalle->estado = 1;
-        $detalle->temperatura= (floatval($data[0][4][19])+floatval($data[0][4][19])+floatval($data[0][4][19]))/3;
+        $detalle->temperatura=  round((floatval($data[0][4][17])+floatval($data[0][4][18])+floatval($data[0][4][19]))/3,2);
+        $t3=$detalle->temperatura;
         $lstDetalle->push($detalle);
 
 
@@ -397,8 +400,9 @@ public function uploadAndReadExcelGreenvic(Request $request)
         $detalle->tipo_item = "NOTA";
         $detalle->detalle_item = "EXTERNA";
         $detalle->estado = 1;
+        
         $lstDetalle->push($detalle);
-
+        //dd($t1,$t2,$t3);
             for($i=26;$i<33;$i++){
                 for($j=19;$j<23;$j++){
                     switch ($i) {
@@ -466,7 +470,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
          
 
         
-        return view('calidad.previsualizagreenvic',compact('lstDetalle','calidad','recepciones','newCalidad'));
+        return view('calidad.previsualizagreenvic',compact('lstDetalle','calidad','recepciones','newCalidad','t1'));
     }
     public function previsualizagreenvic_store(Request $request){
        //dd($request);
@@ -492,6 +496,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
         //dd($calidad);
         $Rcalidad['recepcion_id']=$request->numero_g_recepcion;
         $calidad->save();
+        
         $Rdetallee=$request->detalles;
         foreach ($Rdetallee as $detalle) {
             if($detalle['detalle_item']==null && $detalle['detalle_item']==''){
@@ -509,7 +514,12 @@ public function uploadAndReadExcelGreenvic(Request $request)
                 Detalle::create($detalle);
             }
         }
+       
         }
+        $NDetalle=Detalle::where('calidad_id','=',$calidad->id)->where('tipo_item','=','SOLIDOS SOLUBLES')->first();
+        
+        $NDetalle->temperatura=$request->temperatura;
+        $NDetalle->save();
         return redirect()->route('productioncc.index');
     }
 
