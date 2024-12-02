@@ -63,7 +63,7 @@
                                 <input type="text" id="codigo_sag" class="form-control" name="codigo_sag" value=""/>
                             </div>
                             <div class="form-group">
-                                <label for="fecha">Código SAG</label>
+                                <label for="fecha">Fecha Recepción</label>
                                 <input type="date" id="fecha" class="form-control" name="fecha" value=""/>
                             </div>
                             <label for="file">Selecciona un archivo Excel</label>
