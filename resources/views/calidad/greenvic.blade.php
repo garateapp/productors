@@ -1,4 +1,5 @@
 <x-app-layout>
+    <link rel="stylesheet" href="{{asset('css/estilo-interno.css')}}">
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
             Subir Recepciones Greenvic
@@ -45,28 +46,37 @@
         @endif
 
 
-        <div>
-            <div class="flex justify-center my-4">
-                <div class="flex">
-                    <div class="max-w-4xl py-12 mx-auto sm:px-6 lg:px-44">
-                        <div class="px-6 py-4 mt-6 overflow-hidden shadow-md sm:max-w-md sm:rounded-lg"
-                            style="background-color: rgb(0,0,0,0.5); width: 95%;">
-                            <form action="{{ route('danos.uploadAndReadExcelGreenvic') }}" method="POST"
-                                enctype="multipart/form-data">
-                                @csrf
+        
+        <div class="container">
+            <div class="col-md-12">
 
-                                <label for="file">Selecciona un archivo Excel</label>
-                                <input type="file" name="file" id="file" required>
-                                <button type="submit">Subir Archivo</button>
-                            </form>
-                        </div>
-
-
-
+                        
+                        <form action="{{ route('danos.uploadAndReadExcelGreenvic') }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="Guia">Número de Guía</label>
+                                <input type="text" id="n_guia" class="form-control" name="n_guia" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <label for="codigo_sag">Código SAG</label>
+                                <input type="text" id="codigo_sag" class="form-control" name="codigo_sag" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <label for="fecha">Código SAG</label>
+                                <input type="date" id="fecha" class="form-control" name="fecha" value=""/>
+                            </div>
+                            <label for="file">Selecciona un archivo Excel</label>
+                            <input type="file" name="file" id="file" required>
+                            <button type="submit">Subir Archivo</button>
+                        </form>
                     </div>
+
+
+
                 </div>
-                <div class="px-4 py-4 mt-6 bg-white md:py-7 md:px-8 xl:px-10">
-                </div>
+            
+            <div class="px-4 py-4 mt-6 bg-white md:py-7 md:px-8 xl:px-10">
             </div>
         </div>
     </div>

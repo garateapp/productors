@@ -41,6 +41,7 @@ use Illuminate\Support\Facades\Mail;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ExcelImport;
+use Illuminate\Support\Facades\Log;
 use ZipArchive;
 
 class HomeController extends Controller
@@ -77,100 +78,134 @@ public function uploadAndReadExcelGreenvic(Request $request)
         $file = $request->file('file');
 
         $data = Excel::toArray(new ExcelImport, $file);
-
-        //Datos de la recepción
-        $recepcion=new Recepcion();
         $productor = $data[0][2][7];
-        $recepcion->n_variedad=$data[0][5][7];
-        $recepcion->cantidad=$data[0][5][1];
-        $recepcion->peso_neto=$data[0][4][1];
+        $UltimaRecepcion = Recepcion::where('id_g_recepcion', '>', 10001)->orderBy('id_g_recepcion', 'desc')->first();
+        $emisor=User::where('name','like','%'.$productor.'%')->get()->first();
+        if($UltimaRecepcion){
+            $id_g_recepcion = $UltimaRecepcion->id_g_recepcion + 1;
+        }else{
+            $id_g_recepcion = '10001';
+        }
+        if($emisor){
+            $id_emisor=$emisor->id;
+            $n_emisor=$emisor->name;
+            $r_emisor=$emisor->rut;
+        }else{
+            $id_emisor=0;
+            $n_emisor=$productor;
+            $r_emisor='1-9';
+        }
+        //Datos de la recepción
+        
+       
+        
+        $recepciones=new Recepcion();
+        $recepciones->n_variedad=$data[0][5][7];
+        $recepciones->cantidad=$data[0][5][1];
+        $recepciones->peso_neto=$data[0][4][1];
+        $recepciones->id_g_recepcion=$id_g_recepcion; //deberiamos darle una numeracion superior a 10000 para aislarlo de la sincronización
+        $recepciones->tipo_g_recepcion='RFG';
+        $recepciones->numero_g_recepcion=$id_g_recepcion;        
+        $recepciones->fecha_g_recepcion=$request->fecha;
+        $recepciones->id_emisor=$id_emisor;
+        $recepciones->r_emisor=$r_emisor;
+        $recepciones->n_emisor=$n_emisor;
+        $recepciones->Codigo_Sag_emisor=$request->codigo_sag;
+        $recepciones->tipo_documento_recepcion="GD";
+        $recepciones->numero_documento_recepcion=$request->n_guia;
+        $recepciones->n_especie="Cherries";
+        $recepciones->nota_calidad=0;
+        $recepciones->n_estado="Finalizado";
+        $recepciones->temporada="actual";
+        //dd($recepciones);
 
         //datos de Calidad
         $calidad=new Calidad();
         if($data[0][9][0]==null && $data[0][9][1]==null){
             $calidad->t_camion=null;
         }elseif($data[0][9][0]!=null){
-            $calidad->t_camion=$data[0][8][0];
+            $calidad->t_camion=strtoupper($data[0][8][0]);
+            
         }
         else{
-            $calidad->t_camion=$data[0][8][1];
+            $calidad->t_camion=strtoupper($data[0][8][1]);
         }
         if($data[0][9][2]==null && $data[0][9][3]==null){
             $calidad->encarpado=null;
         }elseif($data[0][9][2]!=null){
-            $calidad->encarpado=$data[0][9][2];
+            $calidad->encarpado=strtoupper($data[0][9][2]);
         }else{
-            $calidad->encarpado=$data[0][9][3];
+            $calidad->encarpado=strtoupper($data[0][9][3]);
         }
-        $calidad->seteo_termo=$data[0][9][4];
+        $calidad->seteo_termo=strtoupper($data[0][9][4]);
         if($data[0][9][6]==null && $data[0][9][8]==null){
             $calidad->condicion=null;
         }elseif($data[0][9][6]!=null){
-            $calidad->condicion=$data[0][8][6];
+            $calidad->condicion=strtoupper($data[0][8][6]);
         }else{
-            $calidad->condicion=$data[0][8][8];
+            $calidad->condicion=strtoupper($data[0][8][8]);
         }
         if($data[0][9][10]==null && $data[0][9][11]==null){
             $calidad->materia_vegetal=null;
         }elseif($data[0][9][10]!=null){
-            $calidad->materia_vegetal=$data[0][9][10];
+            $calidad->materia_vegetal=strtoupper($data[0][9][10]);
         }else{
-            $calidad->materia_vegetal=$data[0][9][11];
+            $calidad->materia_vegetal=strtoupper($data[0][9][11]);
         }
         if($data[0][9][12]==null && $data[0][9][13]==null){
             $calidad->piedras=null;
         }elseif($data[0][9][12]!=null){
-            $calidad->piedras=$data[0][9][12];
+            $calidad->piedras=strtoupper($data[0][9][12]);
         }else{
-            $calidad->piedras=$data[0][9][13];
+            $calidad->piedras=strtoupper($data[0][9][13]);
         }
         if($data[0][9][14]==null && $data[0][9][15]==null){
             $calidad->barro=null;
         }elseif($data[0][9][14]!=null){
-            $calidad->barro=$data[0][9][14];
+            $calidad->barro=strtoupper($data[0][9][14]);
         }else{
-            $calidad->barro=$data[0][9][15];
+            $calidad->barro=strtoupper($data[0][9][15]);
         }
         if($data[0][9][16]==null && $data[0][9][17]==null){
             $calidad->pedicelo_largo=null;
         }elseif($data[0][9][16]!=null){
-            $calidad->pedicelo_largo=$data[0][9][16];
+            $calidad->pedicelo_largo=strtoupper($data[0][9][16]);
         }else{
-            $calidad->pedicelo_largo=$data[0][9][17];
+            $calidad->pedicelo_largo=strtoupper($data[0][9][17]);
         }
         if($data[0][9][18]==null && $data[0][9][19]==null){
             $calidad->racimo=null;
         }elseif($data[0][9][18]!=null){
-            $calidad->racimo=$data[0][9][18];
+            $calidad->racimo=strtoupper($data[0][9][18]);
         }else{
-            $calidad->racimo=$data[0][9][19];
+            $calidad->racimo=strtoupper($data[0][9][19]);
         }
         if($data[0][9][20]==null && $data[0][9][21]==null){
             $calidad->esponjas=null;
         }elseif($data[0][9][20]!=null){
-            $calidad->esponjas=$data[0][9][20];
+            $calidad->esponjas=strtoupper($data[0][9][20]);
         }else{
-            $calidad->esponjas=$data[0][9][21];
+            $calidad->esponjas=strtoupper($data[0][9][21]);
         }
         if($data[0][9][22]==null && $data[0][9][24]==null && $data[0][9][26]==null){
             $calidad->h_esponjas=null;
         }elseif($data[0][9][22]!=null){
-            $calidad->h_esponjas=$data[0][8][22];
+            $calidad->h_esponjas=strtoupper($data[0][8][22]);
         }elseif($data[0][9][24]!=null){
-            $calidad->h_esponjas=$data[0][8][24];
+            $calidad->h_esponjas=strtoupper($data[0][8][24]);
         }
         else{
-            $calidad->h_esponjas=$data[0][8][26];
+            $calidad->h_esponjas=strtoupper($data[0][8][26]);
         }
-        if($data[0][9][27]==null && $data[0][9][29]==null && $data[0][9][31]==null){
+        if($data[0][9][28]==null && $data[0][9][31]==null && $data[0][9][33]==null){
             $calidad->llenado_tottes=null;
-        }elseif($data[0][9][27]!=null){
-            $calidad->llenado_tottes=$data[0][8][27];
-        }elseif($data[0][9][29]!=null){
-            $calidad->llenado_tottes=$data[0][8][29];
+        }elseif($data[0][9][28]!=null){
+            $calidad->llenado_tottes=strtoupper($data[0][8][28]);
+        }elseif($data[0][9][31]!=null){
+            $calidad->llenado_tottes=strtoupper($data[0][8][31]);
         }
         else{
-            $calidad->h_racimo=$data[0][8][31];
+            $calidad->llenado_tottes=strtoupper($data[0][8][33]);
         }
         $lstDetalle = collect();
 
@@ -181,6 +216,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
             $detalle->tipo_detalle = "cc";
             $detalle->tipo_item = "DEFECTOS DE CONDICIÓN";
             $detalle->detalle_item = $data[0][$i][0] ?? null;
+            $detalle->valor_ss=null;
             $detalle->estado = 1;
 
             // Añadir el detalle a la colección
@@ -191,6 +227,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
             $detalle->cantidad = $data[0][$i][13] ?? null;
             $detalle->porcentaje_muestra = (floatval($data[0][$i][13])*100)/floatval($data[0][5][14]);
             $detalle->tipo_detalle = "cc";
+            $detalle->valor_ss=null;
             $detalle->tipo_item = "DEFECTOS DE CALIDAD";
             $detalle->detalle_item = $data[0][$i][8] ?? null;
             $detalle->estado = 1;
@@ -200,11 +237,12 @@ public function uploadAndReadExcelGreenvic(Request $request)
         }
         for ($i=27; $i < 34; $i++) {
             $detalle = new Detalle();
-            $detalle->cantidad = ($data[0][$i][20] == null)? 0:floatval($data[0][$i][20])*100 ;
-            $detalle->porcentaje_muestra = ($data[0][$i][20]==null)? null:floatval(str_replace('%','',$data[0][$i][20]));
+            $detalle->cantidad =null;
+            $detalle->porcentaje_muestra = ($data[0][$i][20]==null)? null:floatval(str_replace('%','',$data[0][$i][20]))*100;
             $detalle->tipo_detalle = "cc";
-            $detalle->tipo_item = "DISTRIBUCION DE CALIBRES";
+            $detalle->tipo_item = "DISTRIBUCIÓN DE CALIBRES";
             $detalle->detalle_item = $data[0][$i][18] ?? null;
+            $detalle->valor_ss=($data[0][$i][20]==null)? null:floatval(str_replace('%','',$data[0][$i][20]))*100;
             $detalle->estado = 1;
 
             // Añadir el detalle a la colección
@@ -219,17 +257,19 @@ public function uploadAndReadExcelGreenvic(Request $request)
             $detalle->tipo_item = "DAÑO DE PLAGA";
             $detalle->detalle_item = $data[0][$i][8] ?? null;
             $detalle->estado = 1;
+            $detalle->valor_ss=null;
 
             // Añadir el detalle a la colección
             $lstDetalle->push($detalle);
         }
         for ($i=12; $i < 17; $i++) {
             $detalle = new Detalle();
-            $detalle->cantidad = $data[0][$i][3] ?? null;
-            $detalle->porcentaje_muestra = ($data[0][$i][3]==null)? 0:$data[0][$i][3];
+            $detalle->cantidad = null;
+            $detalle->porcentaje_muestra = null;
             $detalle->tipo_detalle = "cc";
+            $detalle->valor_ss=($data[0][$i][3]==null)? 0:floatval($data[0][$i][3])*100;
             $detalle->tipo_item = "COLOR DE CUBRIMIENTO";
-            $detalle->detalle_item = $data[0][$i][1] ?? null;
+            $detalle->detalle_item = strtoupper($data[0][$i][1]);
             $detalle->estado = 1;
 
             // Añadir el detalle a la colección
@@ -239,80 +279,109 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
         //FIRMEZA
         $detalle = new Detalle();
-        $detalle->cantidad = $data[0][19][26] ?? null;
+        $detalle->cantidad = $data[0][23][26] ?? null;
         $detalle->porcentaje_muestra = null;
         $detalle->tipo_detalle = "ss";
-        $detalle->tipo_item = "FIRMEZA";
-        $detalle->detalle_item = $data[0][18][26] ?? null;
+        $detalle->tipo_item = "FIRMEZAS";
+        $detalle->valor_ss=$data[0][23][26] ?? null;
+        $detalle->detalle_item = strtoupper($data[0][18][26]);
         $detalle->estado = 1;
         $lstDetalle->push($detalle);
 
         $detalle = new Detalle();
-        $detalle->cantidad = $data[0][19][27] ?? null;
+        $detalle->cantidad = $data[0][23][29] ?? null;
         $detalle->porcentaje_muestra = null;
         $detalle->tipo_detalle = "ss";
-        $detalle->tipo_item = "FIRMEZA";
-        $detalle->detalle_item = $data[0][18][27] ?? null;
+        $detalle->tipo_item = "FIRMEZAS";
+        $detalle->detalle_item =strtoupper( $data[0][18][29] )?? null;
+        $detalle->valor_ss=$data[0][23][29] ?? null;
         $detalle->estado = 1;
         $lstDetalle->push($detalle);
 
         $detalle = new Detalle();
-        $detalle->cantidad = $data[0][19][28] ?? null;
+        $detalle->cantidad = strtoupper($data[0][23][32]) == 'NO' ? 'NO' : $data[0][23][32] ?? null;
         $detalle->porcentaje_muestra = null;
         $detalle->tipo_detalle = "ss";
-        $detalle->tipo_item = "FIRMEZA";
-        $detalle->detalle_item = $data[0][18][28] ?? null;
+        $detalle->tipo_item = "FIRMEZAS";
+        $detalle->detalle_item = strtoupper($data[0][18][32])?? null;
         $detalle->estado = 1;
+        $detalle->valor_ss=$data[0][23][32] ?? null;
         $lstDetalle->push($detalle);
 
 
         $promLight=0;
+        $contadorLight=0;
         $promDark=0;
+        $contadorDark=0;
         $promBlack=0;
+        $contadorBlack=0;
         for ($i=4; $i < 14; $i++) {
-            $promLight += ($data[0][12][$i]==null)?0:floatval($data[0][12][$i]);
+            if($data[0][12][$i]!=null){
+                $promLight += floatval($data[0][12][$i]);
+                $contadorLight++;
+            }
+            //$promLight += ($data[0][12][$i]==null)?0:floatval($data[0][12][$i]);
         }
         for ($i=4; $i < 14; $i++) {
-            $promDark += ($data[0][13][$i]==null)?0:floatval($data[0][13][$i]);
+            if($data[0][13][$i]!=null){
+                $promDark += floatval($data[0][13][$i]);
+                $contadorDark++;
+            }
+            //$promDark += ($data[0][13][$i]==null)?0:floatval($data[0][13][$i]);
         }
         for ($i=4; $i < 14; $i++) {
-            $promDark += ($data[0][14][$i]==null)?0:floatval($data[0][14][$i]);
+            if($data[0][14][$i]!=null){
+                $promBlack += floatval($data[0][14][$i]);
+                $contadorBlack++;
+            }
+            //$promDark += ($data[0][14][$i]==null)?0:floatval($data[0][14][$i]);
         }
         for ($i=4; $i < 14; $i++) {
-            $promBlack += ($data[0][15][$i]==null)?0:floatval($data[0][15][$i]);
+            if($data[0][15][$i]!=null){
+                $promBlack += floatval($data[0][15][$i]);
+                $contadorBlack++;
+            }
+            //$promBlack += ($data[0][15][$i]==null)?0:floatval($data[0][15][$i]);
         }
         for ($i=4; $i < 14; $i++) {
-            $promBlack += ($data[0][16][$i]==null)?0:floatval($data[0][16][$i]);
+            if($data[0][16][$i]!=null){
+                $promBlack += floatval($data[0][16][$i]);
+                $contadorBlack++;
+            }
+            //$promBlack += ($data[0][16][$i]==null)?0:floatval($data[0][16][$i]);
         }
-        $promDark = $promDark/20;
-        $promLight = $promLight/10;
-        $promBlack = $promBlack/20;
+        $promDark = ($contadorDark>0)?round($promDark/$contadorDark,2):0;//$promDark
+        $promLight = ($contadorLight>0)?round($promLight/$contadorLight,2):0;//$promLight
+        $promBlack =($contadorBlack>0)?round($promBlack/$contadorBlack,2):0;//$promBlack
 
         $detalle = new Detalle();
-        $detalle->cantidad = $promLight;
+        $detalle->cantidad = null;
         $detalle->porcentaje_muestra = null;
         $detalle->tipo_detalle = "ss";
         $detalle->tipo_item = "SOLIDOS SOLUBLES";
         $detalle->detalle_item = "LIGHT";
         $detalle->estado = 1;
+        $detalle->valor_ss=$promLight;
         $lstDetalle->push($detalle);
 
         $detalle = new Detalle();
-        $detalle->cantidad = $promDark;
+        $detalle->cantidad = null;
         $detalle->porcentaje_muestra = null;
         $detalle->tipo_detalle = "ss";
         $detalle->tipo_item = "SOLIDOS SOLUBLES";
         $detalle->detalle_item = "DARK";
         $detalle->estado = 1;
+        $detalle->valor_ss=$promDark;
         $lstDetalle->push($detalle);
 
 
         $detalle = new Detalle();
-        $detalle->cantidad = $promLight;
+        $detalle->cantidad = null;
         $detalle->porcentaje_muestra = null;
         $detalle->tipo_detalle = "ss";
         $detalle->tipo_item = "SOLIDOS SOLUBLES";
         $detalle->detalle_item = "BLACK";
+        $detalle->valor_ss=$promBlack;
         $detalle->estado = 1;
         $lstDetalle->push($detalle);
 
@@ -326,30 +395,116 @@ public function uploadAndReadExcelGreenvic(Request $request)
         $detalle->estado = 1;
         $lstDetalle->push($detalle);
 
+            for($i=26;$i<33;$i++){
+                for($j=19;$j<23;$j++){
+                    switch ($i) {
+                        
+                    case 26:
+                        $detalle = new Detalle();
+                        $detalle->cantidad = $data[0][$j][$i] ?? null;
+                        $detalle->porcentaje_muestra = null;
+                        $detalle->tipo_detalle = "cc";
+                        $detalle->tipo_item = "DISTRIBUCIÓN DE FIRMEZA";
+                        $detalle->detalle_item = strtoupper($data[0][18][$i]);
+                        $detalle->estado = 1;
+                        $detalle->valor_ss=$data[0][$j][$i] ?? null;
+                        $lstDetalle->push($detalle);
+                    break;
+                    case 29:
+                        $detalle = new Detalle();
+                        $detalle->cantidad = $data[0][$j][$i] ?? null;
+                        $detalle->porcentaje_muestra = null;
+                        $detalle->tipo_detalle = "cc";
+                        $detalle->tipo_item = "DISTRIBUCIÓN DE FIRMEZA";
+                        $detalle->detalle_item = strtoupper($data[0][18][$i]);
+                        $detalle->estado = 1;
+                        $detalle->valor_ss=$data[0][$j][$i] ?? null;
+                        $lstDetalle->push($detalle);
+                    break;
+                    
+                    case 32:
+                        $detalle = new Detalle();
+                        $detalle->cantidad = $data[0][$j][$i] ?? null;
+                        $detalle->porcentaje_muestra = null;
+                        $detalle->tipo_detalle = "cc";
+                        $detalle->tipo_item = "DISTRIBUCIÓN DE FIRMEZA";
+                        $detalle->detalle_item = strtoupper($data[0][18][$i]);
+                        $detalle->estado = 1;
+                        $detalle->valor_ss=$data[0][$j][$i] ?? null;
+                        $lstDetalle->push($detalle);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            // $detalle = new Detalle();
+            // $detalle->cantidad = ($data[0][$j][26]==null?0:floatval($data[0][$j][26])*100);
+            // $detalle->porcentaje_muestra =($data[0][19][26]==null?0:floatval($data[0][19][26]*100));
+            // $detalle->tipo_detalle = "cc";
+            // $detalle->tipo_item = "DISTRIBUCIÓN DE FIRMEZA";
+            // $detalle->detalle_item =strtoupper($data[0][18][26]);
+            // $detalle->estado = 1;
+            // $detalle->valor_ss=($data[0][$j][26]==null?0:floatval($data[0][18][$i])*100);
+            // $lstDetalle->push($detalle);
+        
+            
+        }
+       
+        $recepciones->save();
+        $newCalidad=new Calidad();
+        $newCalidad->recepcion_id=$recepciones->id;        
+
+        $newCalidad->save();
         // Leer celdas específicas
         $specificCells = $data[0]; // Solo se procesó la primera hoja
-        $recepciones=Recepcion::where('n_estado','=','Finalizado')
-        ->where('fecha_g_recepcion','>','2024-11-28')
-        //->where('fecha_g_recepcion','<','2024-11-28')
-        ->orderByDesc('numero_g_recepcion')
-        ->get();
+        //  $recepciones=Recepcion::find($recepciones->id)
+        //  ->first();
+         
 
-
-        return view('calidad.previsualizagreenvic',compact('lstDetalle','recepcion','calidad','recepciones'));
+        
+        return view('calidad.previsualizagreenvic',compact('lstDetalle','calidad','recepciones','newCalidad'));
     }
     public function previsualizagreenvic_store(Request $request){
-
+       //dd($request);
         $Rcalidad=$request->calidad;
+
+       // dd($Rcalidad);
+        $calidad=Calidad::where('recepcion_id','=',$request->numero_g_recepcion)->first();
+        $calidad->t_camion=$Rcalidad['t_camion'];
+        $calidad->t_muestra=(isset($Rcalidad['t_muestra'])?$Rcalidad['t_muestra']:null);
+        $calidad->encarpado=$Rcalidad['encarpado'];
+        $calidad->seteo_termo=$Rcalidad['seteo_termo'];
+        $calidad->condicion=$Rcalidad['condicion'];
+        $calidad->materia_vegetal=$Rcalidad['materia_vegetal'];
+        $calidad->piedras=$Rcalidad['piedras'];
+        $calidad->barro=$Rcalidad['barro'];
+        $calidad->pedicelo_largo=$Rcalidad['pedicelo_largo'];
+        $calidad->racimo=$Rcalidad['racimo'];
+        $calidad->esponjas=$Rcalidad['esponjas'];
+        $calidad->h_esponjas=$Rcalidad['h_esponjas'];
+        $calidad->llenado_tottes=$Rcalidad['llenado_tottes'];
+        
+        //$calidad=Calidad::where('recepcion_id','=',$request->numero_g_recepcion)->first();
+        //dd($calidad);
         $Rcalidad['recepcion_id']=$request->numero_g_recepcion;
-        $calidad = Calidad::create($Rcalidad);
-        $Rdetallee=$request->lstDetalle;
+        $calidad->save();
+        $Rdetallee=$request->detalles;
         foreach ($Rdetallee as $detalle) {
-            $detalle['calidad_id'] = $calidad->id;
-            $detalle['embalaje']=1;
-            Detalle::create($detalle);
+            if($detalle['detalle_item']==null && $detalle['detalle_item']==''){
+
+            } 
+            else
+            { 
+            if(($detalle['cantidad']==0 || $detalle['cantidad']==null) && ($detalle['porcentaje_muestra']==null || $detalle['porcentaje_muestra']==0) && ($detalle['valor_ss']==0 || $detalle['valor_ss']==null)){
+
+            }
+            else{
+                $detalle['calidad_id'] = $calidad->id;
+                $detalle['embalaje']=1;
+                Detalle::create($detalle);
+            }
         }
-
-
+        }
         return redirect()->route('productioncc.index');
     }
 
@@ -1648,7 +1803,8 @@ public function uploadAndReadExcelGreenvic(Request $request)
     }
 
     public function productionccindex()
-    {   $estadistica = Estadisticas::create([
+    {  
+         $estadistica = Estadisticas::create([
                 'type'=> 'recepcioncc',
                 'user_id'=>auth()->user()->id
             ]);
