@@ -407,7 +407,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
                         $detalle->tipo_item = "DISTRIBUCIÓN DE FIRMEZA";
                         $detalle->detalle_item = strtoupper($data[0][18][$i]);
                         $detalle->estado = 1;
-                        $detalle->valor_ss=$data[0][$j][$i] ?? null;
+                        $detalle->valor_ss=($data[0][$j][$i] ==null)?0:$data[0][$j][$i];
                         $lstDetalle->push($detalle);
                     break;
                     case 29:
