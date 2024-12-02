@@ -79,7 +79,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
         $data = Excel::toArray(new ExcelImport, $file);
         $productor = $data[0][2][7];
-        $UltimaRecepcion = Recepcion::where('id_g_recepcion', '>', 10001)->orderBy('id_g_recepcion', 'desc')->first();
+        $UltimaRecepcion = Recepcion::where('id_g_recepcion', '>', 10000)->orderBy('id_g_recepcion', 'desc')->first();
         $emisor=User::where('name','like','%'.$productor.'%')->get()->first();
         if($UltimaRecepcion){
             $id_g_recepcion = $UltimaRecepcion->id_g_recepcion + 1;
