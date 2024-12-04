@@ -325,7 +325,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
         $detalle->detalle_item = "LIGHT";
         $detalle->estado = 1;
         $detalle->valor_ss=$promLight;
-        $detalle->temperatura= round((floatval($data[0][4][17])+floatval($data[0][4][18])+floatval($data[0][4][19]))/3,2);
+        $detalle->temperatura= round(floatval($data[0][4][20]),2);
         $t2=$detalle->temperatura;
         $lstDetalle->push($detalle);
 
