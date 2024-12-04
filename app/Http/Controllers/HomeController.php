@@ -310,11 +310,11 @@ public function uploadAndReadExcelGreenvic(Request $request)
         $lstDetalle->push($detalle);
 
 
-        $promLight=round(floatval($data[0][12][15]),2);
+        $promLight=round(floatval($data[0][12][14]),2);
 
-        $promDark=round(floatval($data[0][13][15]),2);
+        $promDark=round(((floatval($data[0][13][14])+floatval($data[0][14][14]))/2),2);
 
-        $promBlack=round(floatval($data[0][15][15]),2);
+        $promBlack=round(((floatval($data[0][15][14])+floatval($data[0][15][14]))/2),2);
 
 
         $detalle = new Detalle();
