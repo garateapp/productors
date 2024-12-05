@@ -311,10 +311,18 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
 
         $promLight=round(floatval($data[0][12][14]),2);
+        if(floatval($data[0][13][14])==null || floatval($data[0][14][14])==null){
+            $promDark=round(((floatval($data[0][13][14])+floatval($data[0][14][14]))/2),1);
+        }else{
+            $promDark=round(((floatval($data[0][13][14])+floatval($data[0][14][14]))/2),2);
+        }
 
-        $promDark=round(((floatval($data[0][13][14])+floatval($data[0][14][14]))/2),2);
+        if(floatval($data[0][15][14])==null || floatval($data[0][16][14])==null){
+            $promBlack=round(((floatval($data[0][15][14])+floatval($data[0][16][14]))/2),1);
+        }else{
+            $promBlack=round(((floatval($data[0][15][14])+floatval($data[0][16][14]))/2),2);
+        }
 
-        $promBlack=round(((floatval($data[0][15][14])+floatval($data[0][15][14]))/2),2);
 
 
         $detalle = new Detalle();
