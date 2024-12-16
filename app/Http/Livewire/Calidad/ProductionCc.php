@@ -19,19 +19,20 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\RecepcionMailable;
 use Livewire\WithPagination;
 use PhpParser\Node\Stmt\TryCatch;
+use Illuminate\Support\Facades\Log;
 
 class ProductionCc extends Component
 {   use WithPagination;
 
 
     public $firmpro, $temporada, $calibres, $search, $ctd=25,$espec, $varie, $variedadid, $recep, $especieid, $materia_vegetal, $temperatura, $valor, $tipo_control, $fecha, $embalaje=1, $cantidad, $detalle, $porcentaje_muestra, $total_muestra=100, $detalles, $recepcion_id, $calidad, $nro_muestra, $parametros, $valores, $selectedparametro, $selectedvalor;
-    
+
     public function mount($temporada){
         $this->temporada=$temporada;
     }
-    
+
     public function render()
-    {   
+    {
         $recepcions=Recepcion::where('temporada', $this->temporada ) // Agregar esta condición
                 ->where(function($query) {
                     $query->where('id_g_recepcion','LIKE','%'. $this->search .'%')
@@ -73,7 +74,7 @@ class ProductionCc extends Component
         $especies=Especie::all();
         $variedades=Variedad::all();
 
-        
+
         return view('livewire.calidad.production-cc',compact('especies','variedades','recepcions','allrecepcions','allsubrecepcions','sync'));
     }
 
@@ -99,13 +100,13 @@ class ProductionCc extends Component
     }
 
     public function updatedselectedparametro($parametro){
-        
+
         $this->valores = Valor::where('parametro_id',$parametro)->get();
         $this->reset(['detalle']);
     }
 
     public function updatedselectedvalor($valor){
-        
+
         $this->detalle = Valor::find($valor);
     }
 
@@ -114,37 +115,37 @@ class ProductionCc extends Component
         $this->recep=Recepcion::find($this->recepcion_id);
         $this->parametros=Parametro::where('tipo',"cc")->get();
         $this->tipo_control='cc';
-        
+
     }
 
     public function set_recep($id){
         $this->recepcion_id=$id;
         $this->recep=Recepcion::find($this->recepcion_id);
-        
+
     }
 
     public function clean_recep(){
-      
+
         $this->reset(['recepcion_id','recep']);
     }
 
-    
+
 
     public function set_recepcion_ss($id){
         $this->recepcion_id=$id;
         $this->recep=Recepcion::find($this->recepcion_id);
         $this->parametros=Parametro::where('tipo',"ss")->get();
         $this->tipo_control='ss';
-        
+
     }
 
     public function detalle_store(){
         $rules = [
             'cantidad'=>'required',
             'detalle'=>'required'
-            
+
             ];
-      
+
         $this->validate ($rules);
 
         Detalle::create([
@@ -155,9 +156,9 @@ class ProductionCc extends Component
             'tipo_item'=>$this->detalle->parametro->name,
             'tipo_detalle'=>$this->tipo_control,
             'detalle_item'=>$this->detalle->name,
-            'fecha'=>$this->fecha                
+            'fecha'=>$this->fecha
         ]);
-        
+
         $this->reset(['detalle','porcentaje_muestra','selectedvalor','selectedparametro','cantidad','fecha','embalaje']);
         $this->recep = Recepcion::find($this->recepcion_id);
     }
@@ -166,9 +167,9 @@ class ProductionCc extends Component
         $rules = [
             'valor'=>'required',
             'detalle'=>'required'
-            
+
             ];
-      
+
         $this->validate ($rules);
 
         Detalle::create([
@@ -178,9 +179,9 @@ class ProductionCc extends Component
             'tipo_item'=>$this->detalle->parametro->name,
             'tipo_detalle'=>$this->tipo_control,
             'detalle_item'=>$this->detalle->name,
-            'fecha'=>$this->fecha                
+            'fecha'=>$this->fecha
         ]);
-        
+
         $this->reset(['detalle','selectedvalor','selectedparametro','valor','fecha']);
         $this->recep = Recepcion::find($this->recepcion_id);
     }
@@ -206,7 +207,7 @@ class ProductionCc extends Component
         $this->varie =NULL;
         $this->espec=Especie::find($this->especieid);
         $this->search=$this->espec->name;
-        
+
     }
 
     public function set_varie($id){
@@ -215,8 +216,8 @@ class ProductionCc extends Component
         $this->search=$this->varie->name;
     }
 
-    
-    
+
+
     public function limpiar_page(){
         $this->resetPage();
     }
@@ -232,7 +233,7 @@ class ProductionCc extends Component
         }else{
             $this->porcentaje_muestra=$this->cantidad*100/$this->total_muestra;
         }
-        
+
     }
 
     public function validar_informe(Recepcion $recepcion) {
@@ -240,7 +241,7 @@ class ProductionCc extends Component
         $recepcion->save();
         $user=User::where('name',$recepcion->n_emisor)->first();
 
-        
+
 
         if($user){
 
@@ -249,7 +250,7 @@ class ProductionCc extends Component
                     Mail::to($user->email)->send(new RecepcionMailable($recepcion));
                 }
             }
-            
+
             if($user->telefonos->count()){
                     foreach($user->telefonos as $telefono){
                         $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
@@ -263,13 +264,13 @@ class ProductionCc extends Component
                             'messaging_product' => 'whatsapp',
                             "preview_url"=> false,
                             'to'=>$fono,
-                            
+
                             'type'=>'template',
                                 'template'=>[
                                     'name'=>'recepcion',
                                     'language'=>[
                                         'code'=>'es'],
-                                    'components'=>[ 
+                                    'components'=>[
                                         [
                                             'type'=>'header',
                                             'parameters'=>[
@@ -297,17 +298,19 @@ class ProductionCc extends Component
                                         ]
                                     ]
                                 ]
-                                
-                            
+
+
                         ];
                         try {
                             Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+                            Log::info("MENSAJE ENVIADO A ".$fono);
+
                         } catch (\Throwable $th) {
-                            
-                        }  
-                     
+
+                        }
+
                     }
-            }    
+            }
         }
 
        return redirect()->route('productioncc.index');
@@ -316,18 +319,18 @@ class ProductionCc extends Component
     public function revalidar_informe(Recepcion $recepcion) {
         $recepcion->n_estado='CERRADO';
         $recepcion->save();
-       
+
        return redirect()->route('productioncc.index');
     }
 
     public function reenviar_informe(Recepcion $recepcion) {
-    
+
         $user=User::where('name',$recepcion->n_emisor)->first();
 
-        
+
 
         if($user){
-            
+
             if($user->telefonos->count()){
                     foreach($user->telefonos as $telefono){
                         $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
@@ -341,13 +344,13 @@ class ProductionCc extends Component
                             'messaging_product' => 'whatsapp',
                             "preview_url"=> false,
                             'to'=>$fono,
-                            
+
                             'type'=>'template',
                                 'template'=>[
                                     'name'=>'recepcion',
                                     'language'=>[
                                         'code'=>'es'],
-                                    'components'=>[ 
+                                    'components'=>[
                                         [
                                             'type'=>'header',
                                             'parameters'=>[
@@ -375,22 +378,22 @@ class ProductionCc extends Component
                                         ]
                                     ]
                                 ]
-                                
-                            
+
+
                         ];
-                        
+
                       Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
                     }
-            }    
+            }
         }
 
        return redirect()->route('productioncc.index');
     }
 
     public function cargar_firmpro(Recepcion $recepcion){
-        
+
         $firmpro1=Http::post('https://api.greenexweb.cl/api/BuscarRecepcionCloud?filter[numero_recepcion][eq]='.$recepcion->numero_g_recepcion);
-        
+
         $firmpro1 = $firmpro1->json();
 
      $categories=[];
@@ -404,8 +407,8 @@ class ProductionCc extends Component
      $l=[];
      $d=[];
      $b=[];
-  
-    
+
+
         foreach ($rangos as $rango){
                 $nfrutos=0;
                 $nfrutostot=0;
@@ -417,14 +420,14 @@ class ProductionCc extends Component
                 $tlight=0;
                 $tdark=0;
                 $tblack=0;
-        
+
                 foreach ($firmpro1 as $items){
                         $n=1;
-                
+
                     foreach ($items as $item){
-                
-                    
-                    
+
+
+
                             if ($n==4) {
                                 $firmeza=$item;
                             }
@@ -435,7 +438,7 @@ class ProductionCc extends Component
                                 $color=$item;
                             }
                             if ($n==14) {
-                                
+
                                         if($color=='Rojo'){
                                             $tlight+=1;
                                         }
@@ -451,7 +454,7 @@ class ProductionCc extends Component
                                         if($color=='Negro'){
                                             $tblack+=1;
                                         }
-                                        
+
 
                                     if ($rango==279) {
                                         if ($recepcion->n_variedad=='Dagen') {
@@ -476,10 +479,10 @@ class ProductionCc extends Component
                                                     if($color=='Negro'){
                                                         $black+=1;
                                                 }
-                                            }  
-                                               
+                                            }
+
                                         }
-                                            
+
                                     }
                                     if ($rango==219) {
                                         if ($recepcion->n_variedad=='Dagen') {
@@ -505,7 +508,7 @@ class ProductionCc extends Component
                                                         $black+=1;
                                                 }
                                             }
-                                        }      
+                                        }
                                     }
                                     if ($rango==179) {
                                         if ($recepcion->n_variedad=='Dagen') {
@@ -530,7 +533,7 @@ class ProductionCc extends Component
                                                     if($color=='Negro'){
                                                         $black+=1;
                                                 }
-                                            }      
+                                            }
                                         }
                                     }
                                     if ($rango==1) {
@@ -557,7 +560,7 @@ class ProductionCc extends Component
                                                         $black+=1;
                                                 }
                                             }
-                                        }      
+                                        }
                                     }
                                     if ($rango==11) {
                                         if ($recepcion->n_variedad=='Dagen') {
@@ -566,7 +569,7 @@ class ProductionCc extends Component
                                                 $nfrutos+=1;
                                             }
                                         } else {
-                                        
+
                                         }
                                     }
                                     if ($rango==12) {
@@ -576,16 +579,16 @@ class ProductionCc extends Component
                                                 $nfrutos+=1;
                                             }
                                         } else {
-                                        
+
                                         }
                                     }
-                                 
+
 
 
                             }
-                                
+
                                 $n+=1;
-                
+
                     }
                     $nfrutostot+=1;
 
@@ -602,7 +605,7 @@ class ProductionCc extends Component
                                 'tipo_item'=>'FIRMEZAS',
                                 'tipo_detalle'=>'ss',
                                 'detalle_item'=>'PRECALIBRE',
-                                'fecha'=>$this->fecha                
+                                'fecha'=>$this->fecha
                             ]);
                         }
                         if ($rango==219) {
@@ -614,7 +617,7 @@ class ProductionCc extends Component
                                 'tipo_item'=>'FIRMEZAS',
                                 'tipo_detalle'=>'ss',
                                 'detalle_item'=>'L',
-                                'fecha'=>$this->fecha                
+                                'fecha'=>$this->fecha
                             ]);
 
                         }
@@ -627,7 +630,7 @@ class ProductionCc extends Component
                                 'tipo_item'=>'FIRMEZAS',
                                 'tipo_detalle'=>'ss',
                                 'detalle_item'=>'XL',
-                                'fecha'=>$this->fecha                
+                                'fecha'=>$this->fecha
                             ]);
                         }
                         if ($rango==1) {
@@ -639,7 +642,7 @@ class ProductionCc extends Component
                                 'tipo_item'=>'FIRMEZAS',
                                 'tipo_detalle'=>'ss',
                                 'detalle_item'=>'J',
-                                'fecha'=>$this->fecha                
+                                'fecha'=>$this->fecha
                             ]);
                         }
                         if ($rango==11) {
@@ -651,7 +654,7 @@ class ProductionCc extends Component
                                 'tipo_item'=>'FIRMEZAS',
                                 'tipo_detalle'=>'ss',
                                 'detalle_item'=>'2J',
-                                'fecha'=>$this->fecha                
+                                'fecha'=>$this->fecha
                             ]);
                         }
                         if ($rango==12) {
@@ -663,7 +666,7 @@ class ProductionCc extends Component
                                 'tipo_item'=>'FIRMEZAS',
                                 'tipo_detalle'=>'ss',
                                 'detalle_item'=>'3J',
-                                'fecha'=>$this->fecha                
+                                'fecha'=>$this->fecha
                             ]);
                         }
 
@@ -671,7 +674,7 @@ class ProductionCc extends Component
                     }
 
                 }else{
-            
+
                     if ($tlight>0) {
                         Detalle::create([
                             'calidad_id'=>$this->recep->calidad->id,
@@ -681,7 +684,7 @@ class ProductionCc extends Component
                             'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
                             'tipo_detalle'=>'cc',
                             'detalle_item'=>'LIGHT',
-                            'fecha'=>$this->fecha                
+                            'fecha'=>$this->fecha
                         ]);
                         //$l[]=$light*100/$tlight;
                     }else{
@@ -693,11 +696,11 @@ class ProductionCc extends Component
                             'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
                             'tipo_detalle'=>'cc',
                             'detalle_item'=>'LIGHT',
-                            'fecha'=>$this->fecha                
+                            'fecha'=>$this->fecha
                         ]);
                     }
 
-                    if ($tdark>0) {  
+                    if ($tdark>0) {
                         Detalle::create([
                         'calidad_id'=>$this->recep->calidad->id,
                         'embalaje'=>$this->embalaje,
@@ -706,7 +709,7 @@ class ProductionCc extends Component
                         'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
                         'tipo_detalle'=>'cc',
                         'detalle_item'=>'DARK',
-                        'fecha'=>$this->fecha                
+                        'fecha'=>$this->fecha
                     ]);
                         //$d[]=$dark*100/$tdark;
                     }else{
@@ -718,7 +721,7 @@ class ProductionCc extends Component
                             'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
                             'tipo_detalle'=>'cc',
                             'detalle_item'=>'DARK',
-                            'fecha'=>$this->fecha                
+                            'fecha'=>$this->fecha
                         ]);
                         //$d[]=0;
                     }
@@ -732,7 +735,7 @@ class ProductionCc extends Component
                             'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
                             'tipo_detalle'=>'cc',
                             'detalle_item'=>'BLACK',
-                            'fecha'=>$this->fecha                
+                            'fecha'=>$this->fecha
                         ]);
                         //$b[]=$black*100/$tblack;
                     }else{
@@ -744,12 +747,12 @@ class ProductionCc extends Component
                             'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
                             'tipo_detalle'=>'cc',
                             'detalle_item'=>'BLACK',
-                            'fecha'=>$this->fecha                
+                            'fecha'=>$this->fecha
                         ]);
                     // $b[]=0;
                     }
                 }
-        
+
         }
 
         //consulta para distribución de calibres
@@ -757,13 +760,13 @@ class ProductionCc extends Component
         $this->calibres = $this->calibres->json();
 
 
-        foreach ($this->calibres as $items){              
-            $n=1;        
+        foreach ($this->calibres as $items){
+            $n=1;
                 foreach ($items as $item){
                     if($n==5){
                         $cantidad_frutos=$item;
                     }
-                    
+
 
                     if ($recepcion->n_variedad=='Dagen') {
                         if ($n==24) {
@@ -776,7 +779,7 @@ class ProductionCc extends Component
                                     'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
                                     'tipo_detalle'=>'cc',
                                     'detalle_item'=>'PRECALIBRE',
-                                    'fecha'=>$this->fecha                
+                                    'fecha'=>$this->fecha
                                 ]);
                             }
                         }
@@ -790,7 +793,7 @@ class ProductionCc extends Component
                                     'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
                                     'tipo_detalle'=>'cc',
                                     'detalle_item'=>'L',
-                                    'fecha'=>$this->fecha                
+                                    'fecha'=>$this->fecha
                                 ]);
                             }
                         }
@@ -804,7 +807,7 @@ class ProductionCc extends Component
                                     'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
                                     'tipo_detalle'=>'cc',
                                     'detalle_item'=>'XL',
-                                    'fecha'=>$this->fecha                
+                                    'fecha'=>$this->fecha
                                 ]);
                             }
                         }
@@ -818,7 +821,7 @@ class ProductionCc extends Component
                                     'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
                                     'tipo_detalle'=>'cc',
                                     'detalle_item'=>'J',
-                                    'fecha'=>$this->fecha                
+                                    'fecha'=>$this->fecha
                                 ]);
                             }
                         }
@@ -832,7 +835,7 @@ class ProductionCc extends Component
                                     'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
                                     'tipo_detalle'=>'cc',
                                     'detalle_item'=>'2J',
-                                    'fecha'=>$this->fecha                
+                                    'fecha'=>$this->fecha
                                 ]);
                             }
                         }
@@ -846,13 +849,13 @@ class ProductionCc extends Component
                                     'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
                                     'tipo_detalle'=>'cc',
                                     'detalle_item'=>'3J',
-                                    'fecha'=>$this->fecha                
+                                    'fecha'=>$this->fecha
                                 ]);
                             }
                         }
                         if ($n==30) {
                             if($item>0){
-                                
+
                                 Detalle::create([
                                         'calidad_id'=>$this->recep->calidad->id,
                                         'embalaje'=>$this->embalaje,
@@ -861,16 +864,16 @@ class ProductionCc extends Component
                                         'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
                                         'tipo_detalle'=>'cc',
                                         'detalle_item'=>'SOBRECALIBRE',
-                                        'fecha'=>$this->fecha                
+                                        'fecha'=>$this->fecha
                                     ]);
                             }
                         }
                     }else {
                         if ($n==14) {
                             if($item==0){
-                                
+
                             }else{
-                              
+
                                 Detalle::create([
                                     'calidad_id'=>$this->recep->calidad->id,
                                     'embalaje'=>$this->embalaje,
@@ -879,13 +882,13 @@ class ProductionCc extends Component
                                     'tipo_item'=>'FIRMEZAS',
                                     'tipo_detalle'=>'ss',
                                     'detalle_item'=>'FRUTA BLANDA',
-                                    'fecha'=>$this->fecha                
+                                    'fecha'=>$this->fecha
                                 ]);
                             }
                         }
                         if ($n==24) {
                             if($item==0){
-                                
+
                             }else{
                                 Detalle::create([
                                     'calidad_id'=>$this->recep->calidad->id,
@@ -895,13 +898,13 @@ class ProductionCc extends Component
                                     'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
                                     'tipo_detalle'=>'cc',
                                     'detalle_item'=>'PRECALIBRE',
-                                    'fecha'=>$this->fecha                
+                                    'fecha'=>$this->fecha
                                 ]);
                             }
                         }
                         if ($n==25) {
                             if($item==0){
-                                
+
                             }else{
                                 Detalle::create([
                                     'calidad_id'=>$this->recep->calidad->id,
@@ -911,13 +914,13 @@ class ProductionCc extends Component
                                     'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
                                     'tipo_detalle'=>'cc',
                                     'detalle_item'=>'L',
-                                    'fecha'=>$this->fecha                
+                                    'fecha'=>$this->fecha
                                 ]);
                             }
                         }
                         if ($n==26) {
                             if($item==0){
-                                
+
                             }else{
                                 Detalle::create([
                                     'calidad_id'=>$this->recep->calidad->id,
@@ -927,13 +930,13 @@ class ProductionCc extends Component
                                     'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
                                     'tipo_detalle'=>'cc',
                                     'detalle_item'=>'XL',
-                                    'fecha'=>$this->fecha                
+                                    'fecha'=>$this->fecha
                                 ]);
                             }
                         }
                         if ($n==27) {
                             if($item==0){
-                                
+
                             }else{
                                 Detalle::create([
                                     'calidad_id'=>$this->recep->calidad->id,
@@ -943,13 +946,13 @@ class ProductionCc extends Component
                                     'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
                                     'tipo_detalle'=>'cc',
                                     'detalle_item'=>'J',
-                                    'fecha'=>$this->fecha                
+                                    'fecha'=>$this->fecha
                                 ]);
                             }
                         }
                         if ($n==28) {
                             if($item==0){
-                                
+
                             }else{
                             Detalle::create([
                                     'calidad_id'=>$this->recep->calidad->id,
@@ -959,13 +962,13 @@ class ProductionCc extends Component
                                     'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
                                     'tipo_detalle'=>'cc',
                                     'detalle_item'=>'2J',
-                                    'fecha'=>$this->fecha                
+                                    'fecha'=>$this->fecha
                                 ]);
                             }
                         }
                         if ($n==29) {
                             if($item==0){
-                                
+
                             }else{
                             Detalle::create([
                                     'calidad_id'=>$this->recep->calidad->id,
@@ -975,13 +978,13 @@ class ProductionCc extends Component
                                     'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
                                     'tipo_detalle'=>'cc',
                                     'detalle_item'=>'3J',
-                                    'fecha'=>$this->fecha                
+                                    'fecha'=>$this->fecha
                                 ]);
                             }
                         }
                         if ($n==30) {
                             if($item==0){
-                                
+
                             }else{
                             Detalle::create([
                                     'calidad_id'=>$this->recep->calidad->id,
@@ -991,13 +994,13 @@ class ProductionCc extends Component
                                     'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
                                     'tipo_detalle'=>'cc',
                                     'detalle_item'=>'4J',
-                                    'fecha'=>$this->fecha                
+                                    'fecha'=>$this->fecha
                                 ]);
                             }
                         }
                         if ($n==31) {
                             if($item==0){
-                                
+
                             }else{
                             Detalle::create([
                                     'calidad_id'=>$this->recep->calidad->id,
@@ -1007,19 +1010,19 @@ class ProductionCc extends Component
                                     'tipo_item'=>'DISTRIBUCIÓN DE CALIBRES',
                                     'tipo_detalle'=>'cc',
                                     'detalle_item'=>'5J',
-                                    'fecha'=>$this->fecha                
+                                    'fecha'=>$this->fecha
                                 ]);
                             }
                         }
 
                     }
-                    
-                      
-                    
+
+
+
                         $n+=1;
 
-                }    
-                break;                                          
+                }
+                break;
 
         }
 
@@ -1045,15 +1048,15 @@ class ProductionCc extends Component
         $sensitivo=0;
         $firme=0;
         $mfirme=0;
-        foreach ($this->firmpro as $items){    
-            $totalfrutos+=1;   
-            $n=1;   
+        foreach ($this->firmpro as $items){
+            $totalfrutos+=1;
+            $n=1;
 
                 //CADA REGISTRO:
                 foreach ($items as $item){
                     if($n==4){
                         $firmeza=$item;
-                       
+
                     }
                     if($n==5){
                         $calibre=$item;
@@ -1103,15 +1106,15 @@ class ProductionCc extends Component
                         if ($firmeza>=950) {
                             $mfirme+=1;
                         }
-                       
-                       
+
+
                     }
                     $n+=1;
-                } 
+                }
             if ($totalfrutos>=$cantidad_frutos) {
                 break;
-            }                                             
-            
+            }
+
         }
 
             if($fueradecolor>0){
@@ -1122,7 +1125,7 @@ class ProductionCc extends Component
                     'tipo_item'=>'COLOR DE CUBRIMIENTO',
                     'tipo_detalle'=>'cc',
                     'detalle_item'=>'Fuera de Color',
-                    'fecha'=>$this->fecha                
+                    'fecha'=>$this->fecha
                 ]);
             }
             if($rojo>0){
@@ -1133,7 +1136,7 @@ class ProductionCc extends Component
                     'tipo_item'=>'COLOR DE CUBRIMIENTO',
                     'tipo_detalle'=>'cc',
                     'detalle_item'=>'ROJO',
-                    'fecha'=>$this->fecha                
+                    'fecha'=>$this->fecha
                 ]);
             }
             if($rojocaoba>0){
@@ -1144,7 +1147,7 @@ class ProductionCc extends Component
                     'tipo_item'=>'COLOR DE CUBRIMIENTO',
                     'tipo_detalle'=>'cc',
                     'detalle_item'=>'ROJO CAOBA',
-                    'fecha'=>$this->fecha                
+                    'fecha'=>$this->fecha
                 ]);
             }
             if($santina>0){
@@ -1155,7 +1158,7 @@ class ProductionCc extends Component
                     'tipo_item'=>'COLOR DE CUBRIMIENTO',
                     'tipo_detalle'=>'cc',
                     'detalle_item'=>'SANTINA',
-                    'fecha'=>$this->fecha                
+                    'fecha'=>$this->fecha
                 ]);
             }
             if($caobaoscuro>0){
@@ -1166,7 +1169,7 @@ class ProductionCc extends Component
                     'tipo_item'=>'COLOR DE CUBRIMIENTO',
                     'tipo_detalle'=>'cc',
                     'detalle_item'=>'CAOBA OSCURO',
-                    'fecha'=>$this->fecha                
+                    'fecha'=>$this->fecha
                 ]);
             }
              if($negro>0){
@@ -1177,11 +1180,11 @@ class ProductionCc extends Component
                     'tipo_item'=>'COLOR DE CUBRIMIENTO',
                     'tipo_detalle'=>'cc',
                     'detalle_item'=>'NEGRO',
-                    'fecha'=>$this->fecha                
+                    'fecha'=>$this->fecha
                 ]);
             }
 
-            if ($recepcion->n_variedad=='Dagen') {  
+            if ($recepcion->n_variedad=='Dagen') {
                 if ($mblando>0) {
                     Detalle::create([
                         'calidad_id'=>$this->recep->calidad->id,
@@ -1191,7 +1194,7 @@ class ProductionCc extends Component
                         'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
                         'tipo_detalle'=>'cc',
                         'detalle_item'=>'MUY BLANDO',
-                        'fecha'=>$this->fecha                
+                        'fecha'=>$this->fecha
                     ]);
                 }else{
                     Detalle::create([
@@ -1202,7 +1205,7 @@ class ProductionCc extends Component
                         'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
                         'tipo_detalle'=>'cc',
                         'detalle_item'=>'MUY BLANDO',
-                        'fecha'=>$this->fecha                
+                        'fecha'=>$this->fecha
                     ]);
                 }
                 if ($blando>0) {
@@ -1214,7 +1217,7 @@ class ProductionCc extends Component
                         'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
                         'tipo_detalle'=>'cc',
                         'detalle_item'=>'BLANDO',
-                        'fecha'=>$this->fecha                
+                        'fecha'=>$this->fecha
                     ]);
                 }else{
                     Detalle::create([
@@ -1225,7 +1228,7 @@ class ProductionCc extends Component
                         'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
                         'tipo_detalle'=>'cc',
                         'detalle_item'=>'BLANDO',
-                        'fecha'=>$this->fecha                
+                        'fecha'=>$this->fecha
                     ]);
                 }
 
@@ -1238,7 +1241,7 @@ class ProductionCc extends Component
                         'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
                         'tipo_detalle'=>'cc',
                         'detalle_item'=>'SENSIBLE',
-                        'fecha'=>$this->fecha                
+                        'fecha'=>$this->fecha
                     ]);
                 }else{
                     Detalle::create([
@@ -1249,7 +1252,7 @@ class ProductionCc extends Component
                         'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
                         'tipo_detalle'=>'cc',
                         'detalle_item'=>'SENSITIVO',
-                        'fecha'=>$this->fecha                
+                        'fecha'=>$this->fecha
                     ]);
                 }
 
@@ -1262,7 +1265,7 @@ class ProductionCc extends Component
                         'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
                         'tipo_detalle'=>'cc',
                         'detalle_item'=>'FIRME',
-                        'fecha'=>$this->fecha                
+                        'fecha'=>$this->fecha
                     ]);
                 }else{
                     Detalle::create([
@@ -1273,7 +1276,7 @@ class ProductionCc extends Component
                         'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
                         'tipo_detalle'=>'cc',
                         'detalle_item'=>'FIRME',
-                        'fecha'=>$this->fecha                
+                        'fecha'=>$this->fecha
                     ]);
                 }
 
@@ -1286,7 +1289,7 @@ class ProductionCc extends Component
                         'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
                         'tipo_detalle'=>'cc',
                         'detalle_item'=>'MUY FIRME',
-                        'fecha'=>$this->fecha                
+                        'fecha'=>$this->fecha
                     ]);
                 }else{
                     Detalle::create([
@@ -1297,12 +1300,12 @@ class ProductionCc extends Component
                         'tipo_item'=>'DISTRIBUCIÓN DE FIRMEZA',
                         'tipo_detalle'=>'cc',
                         'detalle_item'=>'MUY FIRME',
-                        'fecha'=>$this->fecha                
+                        'fecha'=>$this->fecha
                     ]);
                 }
 
 
-                
+
             }else{
 
                 if($rojo>0){
@@ -1313,9 +1316,9 @@ class ProductionCc extends Component
                         'tipo_item'=>'FIRMEZAS',
                         'tipo_detalle'=>'ss',
                         'detalle_item'=>'LIGHT',
-                        'fecha'=>$this->fecha                
+                        'fecha'=>$this->fecha
                     ]);
-        
+
                 }else{
                     Detalle::create([
                         'calidad_id'=>$this->recep->calidad->id,
@@ -1335,9 +1338,9 @@ class ProductionCc extends Component
                         'tipo_item'=>'FIRMEZAS',
                         'tipo_detalle'=>'ss',
                         'detalle_item'=>'DARK',
-                        'fecha'=>$this->fecha                
+                        'fecha'=>$this->fecha
                     ]);
-            
+
                 } else {
                     Detalle::create([
                         'calidad_id'=>$this->recep->calidad->id,
@@ -1346,10 +1349,10 @@ class ProductionCc extends Component
                         'tipo_item'=>'FIRMEZAS',
                         'tipo_detalle'=>'ss',
                         'detalle_item'=>'DARK',
-                        'fecha'=>$this->fecha                
+                        'fecha'=>$this->fecha
                     ]);
                 }
-                
+
                 if (($negro+$caobaoscuro)>0) {
                     Detalle::create([
                         'calidad_id'=>$this->recep->calidad->id,
@@ -1358,9 +1361,9 @@ class ProductionCc extends Component
                         'tipo_item'=>'FIRMEZAS',
                         'tipo_detalle'=>'ss',
                         'detalle_item'=>'BLACK',
-                        'fecha'=>$this->fecha                
+                        'fecha'=>$this->fecha
                     ]);
-            
+
                 } else {
                     Detalle::create([
                         'calidad_id'=>$this->recep->calidad->id,
@@ -1369,14 +1372,14 @@ class ProductionCc extends Component
                         'tipo_item'=>'FIRMEZAS',
                         'tipo_detalle'=>'ss',
                         'detalle_item'=>'BLACK',
-                        'fecha'=>$this->fecha                
+                        'fecha'=>$this->fecha
                     ]);
-                
+
                 }
             }
-           
- 
-    
+
+
+
     }
-    
+
 }
