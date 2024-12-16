@@ -558,7 +558,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
             if(!is_null($user)){
 
                 if($user->emnotification==TRUE){
-                    Mail::to($user->email)->send(new NotificacionMailable($proceso));
+
                    //en caso que exista el usuarioo consultar si tiene telefonos registrados
                     if($user->telefonos->count()){
                         foreach($user->telefonos as $telefono){
@@ -655,6 +655,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
                             Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
                         }
                     }
+                    Mail::to([$user->email])->send(new NotificacionMailable($proceso));
 
                 }
             }
