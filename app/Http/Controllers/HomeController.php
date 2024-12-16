@@ -653,6 +653,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
                             ];
 
                             Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
+                            Log::info('Mensaje enviado a David');
                         }
                     }
                     Mail::to([$user->email])->send(new NotificacionMailable($proceso));
@@ -787,7 +788,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
                             ];
 
                             Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
-                            Log::info('Mensaje enviado a '.$fono);
+                            Log::info('Mensaje enviado a David');
 
                         }
                     }

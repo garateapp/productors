@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Log;
 
 class ProcesoSearch extends Component
 {   use WithPagination;
@@ -26,9 +27,9 @@ class ProcesoSearch extends Component
     }
 
     public function render()
-    {   
+    {
 
-        
+
         if($this->espec){
             if($this->varie){
                 $procesos=Proceso::where('variedad','LIKE', $this->varie->name)
@@ -52,12 +53,12 @@ class ProcesoSearch extends Component
                         })
                         ->orderBy('n_proceso', 'desc')
                         ->paginate($this->ctd);
-        
+
         }
-        
+
         $procesosall = Proceso::where('temporada', $this->temporada)->get();
 
-        
+
         $especies=Especie::where('id','>=',1)->latest('id')->get();
         $variedades=Variedad::all();
 
@@ -74,11 +75,11 @@ class ProcesoSearch extends Component
 
     public function reenviar_informe(Proceso $proceso) {
 
-        
+
 
         if($proceso){
             //si existe el proceso, guardar el archivo, si no existe, no lo guarda
-           
+
             //luego se busca al productor que tiene el nombre de la agricola del proceso
             $user=User::where('name',$proceso->agricola)->first();
 
@@ -87,7 +88,7 @@ class ProcesoSearch extends Component
                     Mail::to($user->email)->send(new NotificacionMailable($proceso));
                 }
             }
-            
+
             if($user){
                     //en caso que exista el usuarioo consultar si tiene telefonos registrados
                     if($user->telefonos->count()){
@@ -103,13 +104,13 @@ class ProcesoSearch extends Component
                             'messaging_product' => 'whatsapp',
                             "preview_url"=> false,
                             'to'=>$fono,
-                            
+
                             'type'=>'template',
                                 'template'=>[
                                     'name'=>'proceso',
                                     'language'=>[
                                         'code'=>'es'],
-                                    'components'=>[ 
+                                    'components'=>[
                                         [
                                             'type'=>'header',
                                             'parameters'=>[
@@ -133,15 +134,15 @@ class ProcesoSearch extends Component
                                         ]
                                     ]
                                 ]
-                                
-                            
+
+
                         ];
-                        
+
                         Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
-                    
-                     
+                        Log::info('Mensaje enviado a '.$fono);
+
                     }
-                }    
+                }
             }
         }
 
@@ -153,14 +154,14 @@ class ProcesoSearch extends Component
         $this->variedadid=NULL;
         $this->varie =NULL;
         $this->espec=Especie::find($this->especieid);
-        
-        
+
+
     }
 
     public function set_varie($id){
         $this->variedadid=$id;
         $this->varie=Variedad::find($this->variedadid);
-        
+
     }
 
     public function limpiar_page(){
@@ -180,5 +181,5 @@ class ProcesoSearch extends Component
 
     }
 
-    
+
 }
