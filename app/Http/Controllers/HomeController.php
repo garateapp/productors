@@ -553,7 +553,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
             ]);
             //luego se busca al productor que tiene el nombre de la agricola del proceso
             $user=User::where('name',$proceso->agricola)->first();
-
+            Log::info('Se envio el informe de proceso a '.$proceso->agricola);
 
             if(!is_null($user)){
 
@@ -657,7 +657,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
                         }
                     }
                     Mail::to([$user->email])->send(new NotificacionMailable($proceso));
-
+                    Log::info('Mensaje enviado a correo '.$user->email);
                 }
             }
 
