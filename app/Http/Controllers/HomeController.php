@@ -311,13 +311,13 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
 
         $promLight=round(floatval($data[0][12][14]),2);
-        if(floatval($data[0][13][14])==null || floatval($data[0][14][14])==null){
+        if(floatval($data[0][13][14])==null || floatval($data[0][13][14])==0 || floatval($data[0][14][14])==null || floatval($data[0][14][14])==0){
             $promDark=round(((floatval($data[0][13][14])+floatval($data[0][14][14]))/2),1);
         }else{
             $promDark=round(((floatval($data[0][13][14])+floatval($data[0][14][14]))/2),2);
         }
 
-        if(floatval($data[0][15][14])==null || floatval($data[0][16][14])==null){
+        if(floatval($data[0][15][14])==null || floatval($data[0][15][14])==0 || floatval($data[0][16][14])==null || floatval($data[0][16][14])==0){
             $promBlack=round(((floatval($data[0][15][14])+floatval($data[0][16][14]))/2),1);
         }else{
             $promBlack=round(((floatval($data[0][15][14])+floatval($data[0][16][14]))/2),2);
@@ -608,7 +608,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
                             ];
 
                             Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
-
+                            Log::info('Mensaje enviado a '.$fono);
                             $token = env('WS_TOKEN');
                             $phoneid= env('WS_PHONEID');
                             $link= 'https://appgreenex.cl/download/'.$proceso->id.'.pdf';
@@ -740,6 +740,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
                             ];
 
                             Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+                            Log::info('Mensaje enviado a '.$fono);
 
                             $token = env('WS_TOKEN');
                             $phoneid= env('WS_PHONEID');
@@ -785,6 +786,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
                             ];
 
                             Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
+                            Log::info('Mensaje enviado a '.$fono);
 
                         }
                     }

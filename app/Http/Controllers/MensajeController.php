@@ -13,13 +13,15 @@ use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\Facades\Log as FacadesLog;
-use Log;
+use Illuminate\Support\Facades\Log;
 use Exception;
 use App\Mail\MensajeGenericoMailable;
 use App\Models\CampoStaff;
 use App\Models\Certificacion;
 use App\Models\Ficha;
 use Illuminate\Support\Facades\Mail;
+
+
 
 class MensajeController extends Controller
 {
@@ -158,7 +160,7 @@ class MensajeController extends Controller
                     if($productor->email!=null && $productor->email!='' && $productor->email!="vicente.pirozzi@conectikids.cl" && $productor->email!="avaldivia@viverorancagua.cl" && $productor->email!="camposur20@gmail.com" && $productor->email!="lfaverio@alosrobles.cl")
                     {
                             Mail::to($productor->email)->send(new MensajeGenericoMailable($mensaje,$url2));
-                            FacadesLog::info('Mensaje enviado a '.$productor->name.', Email: '.$productor->email.', CSG: '.$productor->csg.' para '.$especie->name.' por '.$request->tipo);
+                            Log::info('Mensaje enviado a '.$productor->name.', Email: '.$productor->email.', CSG: '.$productor->csg.' para '.$especie->name.' por '.$request->tipo);
 
 
                     }
@@ -166,7 +168,7 @@ class MensajeController extends Controller
 
             }
             else{
-                    FacadesLog::info($productor->name.' no tiene correo electronico');
+                    Log::info($productor->name.' no tiene correo electronico');
                 }
 
 
@@ -223,13 +225,14 @@ class MensajeController extends Controller
 
 
                             $response=Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
+                            Log::info('Mensaje enviado a '.$fono);
 
 
                         }
 
 
                     }catch(Exception $e){
-                            FacadesLog::error('Error al enviar mensaje: '.$e->getMessage());
+                            Log::error('Error al enviar mensaje: '.$e->getMessage());
                                 //dd($e->getMessage());
                     }
 
