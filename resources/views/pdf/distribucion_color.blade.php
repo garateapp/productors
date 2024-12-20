@@ -6,7 +6,8 @@
 	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.highcharts.com/modules/series-label.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
@@ -20,27 +21,27 @@
 </head>
 <body>
 
-    <figure class="highcharts-figure mx-1 mt-4 h-screen">
+    <figure class="h-screen mx-1 mt-4 highcharts-figure">
         <div id="circular">
-           
+
         </div>
      </figure>
-	
-				
-			
+
+
+
     @php
         $series=[];
         $colors=[];
 
             if ($recepcion->calidad->detalles){
 
-       
+
                 foreach ($recepcion->calidad->detalles->where('tipo_item','COLOR DE CUBRIMIENTO') as $detalle){
-          
-             
+
+
                     //$categories[]=$detalle->detalle_item;
                     //$series[]=$detalle->porcentaje_muestra;
-     
+
                                 $name=$detalle->detalle_item;
 
                                 if ($recepcion->n_especie=='Cherries') {
@@ -100,12 +101,12 @@
                     }
                 }
 
-         
-            
+
+
     @endphp
     @if ($recepcion->n_especie=='Cherries')
         @php
-       
+
         @endphp
     @elseif($recepcion->n_especie=='Apples')
         @php
@@ -116,9 +117,9 @@
 
      @elseif($recepcion->n_especie=='Plums' && $recepcion->n_variedad!='Dagen')
         @php
-           
+
         @endphp
- 
+
     @elseif($recepcion->n_especie=='Paltas')
         @php
             $colors=['#3f4729','#5c6c2d','#738813','#c0e22e'];
@@ -137,9 +138,9 @@
              $colors=['#c6d406','#f8d34c','#fcad03','#fb8603'];
         @endphp
    @elseif($recepcion->n_variedad=='Dagen')
-        
 
-    @else 
+
+    @else
         @php
             $colors=['#24a745','#96AE51','#f9e8cf','#ffd700'];
         @endphp
@@ -150,14 +151,15 @@
     } else {
         $titulo='DISTRIBUCIÓN DE COLOR';
     }
-    
-      
+
+
     @endphp
       <script>
+        $(document).ready(function() {
     var series = <?php echo json_encode($series) ?>;
     var titulo = <?php echo json_encode($titulo) ?>;
     var col = <?php echo json_encode($colors) ?>;
-    
+
     Highcharts.chart('circular', {
             chart: {
                plotBackgroundColor: null,
@@ -181,7 +183,7 @@
                point: {
                      valueSuffix: '%'
                }
-            }, 
+            },
             colors: col,
             plotOptions: {
                 series: {
@@ -206,7 +208,7 @@
                      },
                      showInLegend: true
                }
-              
+
 
             },
             series: [{
@@ -215,7 +217,7 @@
                data: series
             }]
          });
-         
+      });
       </script>
 </body>
 </html>

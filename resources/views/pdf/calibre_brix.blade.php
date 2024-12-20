@@ -20,7 +20,7 @@
 </head>
 <body>
 
-    <figure class="highcharts-figure mx-1 mt-4">
+    <figure class="mx-1 mt-4 highcharts-figure">
         <div id="container">
            
         </div>
@@ -51,7 +51,7 @@
                         $series[]=0;
                     @endphp
         @endif
-        
+     
     
                     
     @if ($recepcion->n_especie=='Cherries')

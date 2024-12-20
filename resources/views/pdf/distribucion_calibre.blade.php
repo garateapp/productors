@@ -6,7 +6,8 @@
 	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js" defer></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.highcharts.com/modules/series-label.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
@@ -24,19 +25,19 @@
         }
         </style>
     @endif
-   
+
 </head>
 <body>
 
-    <figure class="highcharts-figure mx-1 mt-4">
+    <figure class="mx-1 mt-4 highcharts-figure">
         <div id="container">
-           
+
         </div>
      </figure>
 
 
-    
-	
+
+
      @php
         $categories=[];
         $series=[];
@@ -45,22 +46,22 @@
 
         @if ($recepcion->calidad->detalles)
                 @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES') as $detalle)
-                
+
                         @php
-                           
+
                             if ($recepcion->n_especie=='Cherries') {
                                 $cantidad+=$detalle->cantidad;
                             }else {
                                 $cantidad+=$detalle->cantidad;
                             }
-                            
+
                         @endphp
-                
+
                 @endforeach
         @endif
     @if ($recepcion->calidad->detalles)
         @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE CALIBRES') as $detalle)
-          
+
                 @php
                     $categories[]=$detalle->detalle_item;
                     if ($recepcion->n_especie=='Cherries') {
@@ -71,15 +72,15 @@
                         } else {
                             $series[]=$detalle->porcentaje_muestra;
                         }
-                        
-                        
+
+
                     }
-                    
+
                 @endphp
-         
+
         @endforeach
     @endif
-                    
+
 	@if ($recepcion->n_especie=='Cherries')
         @php
             $colors=['#7f1710'];
@@ -108,12 +109,13 @@
         @php
             $colors=['#9817BB'];
         @endphp
-    @else 
+    @else
         @php
             $colors=['#24a745'];
         @endphp
     @endif
     <script>
+         $(document).ready(function() {
         var categories = <?php echo json_encode($categories) ?>;
         var series = <?php echo json_encode($series) ?>;
         var col = <?php echo json_encode($colors) ?>;
@@ -166,6 +168,7 @@
 
             }]
         });
+    });
       </script>
 </body>
 </html>

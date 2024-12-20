@@ -6,7 +6,8 @@
 	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js" defer></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.highcharts.com/modules/series-label.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
@@ -20,26 +21,26 @@
 </head>
 <body>
 
-    <figure class="highcharts-figure mx-1 mt-4 h-screen">
+    <figure class="h-screen mx-1 mt-4 highcharts-figure">
         <div id="circular">
-           
+
         </div>
      </figure>
-	
-	
-				
-			
 
-             
-         
+
+
+
+
+
+
     @php
         $series=[];
 
          if ($recepcion->calidad->detalles){
 
-    
+
              foreach ($recepcion->calidad->detalles->where('tipo_item','COLOR DE FONDO') as $detalle){
-                
+
                 //$categories[]=$detalle->detalle_item;
                 //$series[]=$detalle->porcentaje_muestra;
                              $name=$detalle->detalle_item;
@@ -60,7 +61,7 @@
                                     }
                                  }
                  }
-             } 
+             }
     @endphp
 
    @if ($recepcion->n_especie=='Cherries')
@@ -81,17 +82,18 @@
       @endphp
   @elseif($recepcion->n_variedad=='Dagen')
       @php
-        
+
       @endphp
-   @else 
+   @else
       @php
          $colors=['#24a745','#96AE51','#f9e8cf','#ffd700'];
       @endphp
    @endif
    <script>
+     $(document).ready(function() {
  var series = <?php echo json_encode($series) ?>;
  var col = <?php echo json_encode($colors) ?>;
- 
+
  Highcharts.chart('circular', {
          chart: {
             plotBackgroundColor: null,
@@ -110,7 +112,7 @@
             point: {
                   valueSuffix: '%'
             }
-         }, 
+         },
          legend: {
                         layout: 'vertical',
                         align: 'right',
@@ -147,7 +149,8 @@
             data: series
          }]
       });
-      
+     });
+
    </script>
 </body>
 </html>

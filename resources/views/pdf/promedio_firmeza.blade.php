@@ -6,7 +6,8 @@
 	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js" defer></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.highcharts.com/modules/series-label.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
@@ -20,15 +21,15 @@
 </head>
 <body>
 
-    <figure class="highcharts-figure mx-1 mt-4">
+    <figure class="mx-1 mt-4 highcharts-figure">
         <div id="container">
-           
+
         </div>
      </figure>
 
 
-    
-	
+
+
      @php
         $categories=[];
         $series=[];
@@ -45,7 +46,7 @@
                         }else {
                             $series[]=$detalle->porcentaje_muestra;
                         }
-                        
+
                     @endphp
             @endforeach
         @else
@@ -59,13 +60,13 @@
                         }else {
                             $series[]=$detalle->porcentaje_muestra;
                         }
-                        
+
                     @endphp
                 @endif
             @endforeach
         @endif
     @endif
-                    
+
     @if ($recepcion->n_especie=='Cherries')
          @php
             $colors=['#800000','#400000','#000000'];
@@ -74,16 +75,19 @@
         @php
             $colors=['#9817BB'];
         @endphp
-    @else 
+    @else
         @php
             $colors=['#24a745'];
         @endphp
     @endif
     <script>
+         $(document).ready(function() {
         var categories = <?php echo json_encode($categories) ?>;
         var series = <?php echo json_encode($series) ?>;
         var col = <?php echo json_encode($colors) ?>;
-
+        console.log(categories);
+        console.log(series);
+        console.log(col);
                 Highcharts.chart('container', {
             chart: {
                 type: 'column'
@@ -133,6 +137,7 @@
 
             }]
         });
+    });
       </script>
 </body>
 </html>

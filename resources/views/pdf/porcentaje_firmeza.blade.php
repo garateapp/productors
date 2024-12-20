@@ -6,7 +6,8 @@
 	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js" defer></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.highcharts.com/modules/series-label.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
@@ -20,15 +21,15 @@
 </head>
 <body>
 
-    <figure class="highcharts-figure mx-1 mt-4">
+    <figure class="mx-1 mt-4 highcharts-figure">
         <div id="container">
-           
+
         </div>
      </figure>
 
 
-    
-	{{-- comment 
+
+	{{-- comment
      @php
         $categories=[];
         $series=[];
@@ -36,8 +37,8 @@
         $l=[];
         $d=[];
         $b=[];
-        
-       
+
+
     @endphp
     @foreach ($rangos as $rango)
         @php
@@ -47,14 +48,14 @@
             $tlight=0;
             $tdark=0;
             $tblack=0;
-        @endphp 
+        @endphp
         @foreach ($firmpro as $items)
             @php
                 $n=1;
             @endphp
             @foreach ($items as $item)
-          
-            
+
+
             @php
                 if ($n==4) {
                     $firmeza=$item;
@@ -63,7 +64,7 @@
                     $color=$item;
                 }
                 if ($n==14) {
-                    
+
                             if($color=='Rojo'){
                                 $tlight+=1;
                             }
@@ -79,7 +80,7 @@
                             if($color=='Negro'){
                                 $tblack+=1;
                             }
-                            
+
 
                     if ($rango==279) {
                         if ($firmeza>=280) {
@@ -98,7 +99,7 @@
                                 if($color=='Negro'){
                                     $black+=1;
                             }
-                        }      
+                        }
                     }
                     if ($rango==219) {
                         if ($firmeza>=220 && $firmeza<280) {
@@ -117,7 +118,7 @@
                                 if($color=='Negro'){
                                     $black+=1;
                             }
-                        }      
+                        }
                     }
                     if ($rango==179) {
                         if ($firmeza>=180 && $firmeza<220) {
@@ -136,7 +137,7 @@
                                 if($color=='Negro'){
                                     $black+=1;
                             }
-                        }      
+                        }
                     }
                     if ($rango==1) {
                         if ($firmeza>=1 && $firmeza<180) {
@@ -155,19 +156,19 @@
                                 if($color=='Negro'){
                                     $black+=1;
                             }
-                        }      
+                        }
                     }
-                   
+
 
 
                 }
                 $n+=1;
             @endphp
             @endforeach
-           
-            
+
+
         @endforeach
-       
+
     @endforeach
  --}}
  @php
@@ -182,38 +183,39 @@
                 @php
                     $categories[]=$detalle->detalle_item;
                     $series[]=$detalle->porcentaje_muestra;
-                    
-                        
+
+
                 @endphp
             @endforeach
 
         @else
+
             @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','LIGHT') as $detalle)
-            
+
                     @php
                             $l[]=$detalle->valor_ss;
-                    
+
                     @endphp
-            
+
             @endforeach
             @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','DARK') as $detalle)
-            
+
                     @php
                             $d[]=$detalle->valor_ss;
                     @endphp
-            
+
             @endforeach
             @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','BLACK') as $detalle)
-            
+
                     @php
                             $b[]=$detalle->valor_ss;
                     @endphp
-            
+
             @endforeach
         @endif
 
     @endif
-                    
+
 	@if ($recepcion->n_especie=='Cherries')
         @php
             $colors=['#dc0c15','#71160e','#2b1d16'];
@@ -230,13 +232,15 @@
         @php
             $colors=['#9817BB'];
         @endphp
-    @else 
+    @else
         @php
             $colors=['#24a745'];
         @endphp
     @endif
+
     @if ($recepcion->n_variedad=='Dagen')
         <script>
+             $(document).ready(function() {
             var categories = <?php echo json_encode($categories) ?>;
             var series = <?php echo json_encode($series) ?>;
             var col = <?php echo json_encode($colors) ?>;
@@ -290,9 +294,11 @@
 
                 }]
             });
+        });
         </script>
     @else
         <script>
+            $(document).ready(function() {
             var col = <?php echo json_encode($colors) ?>;
             var l = <?php echo json_encode($l) ?>;
             var d = <?php echo json_encode($d) ?>;
@@ -376,9 +382,10 @@
                         },
                         format: '{point.y:.1f}%'
                     }]}
-                    
+
                 ]
             });
+        });
         </script>
     @endif
 </body>
