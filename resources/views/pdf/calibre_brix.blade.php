@@ -6,7 +6,8 @@
 	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js" defer></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.highcharts.com/modules/series-label.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
@@ -22,28 +23,28 @@
 
     <figure class="mx-1 mt-4 highcharts-figure">
         <div id="container">
-           
+
         </div>
      </figure>
 
 
-    
-	
+
+
     @php
         $categories=[];
         $series=[];
         //$items=['LIGHT','DARK','BLACK'];
     @endphp
 
-    
+
         @if ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES')->count()>0)
             @foreach ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES') as $detalle)
-                
+
                     @php
                         $categories[]=$detalle->detalle_item;
                         $series[]=$detalle->valor_ss;
                     @endphp
-                
+
             @endforeach
         @else
                     @php
@@ -51,9 +52,9 @@
                         $series[]=0;
                     @endphp
         @endif
-     
-    
-                    
+
+
+
     @if ($recepcion->n_especie=='Cherries')
         @php
             $colors=['#800000','#400000','#000000'];
@@ -62,12 +63,13 @@
         @php
             $colors=['#70444d','#90595b','#56343b'];
         @endphp
-    @else 
+    @else
         @php
             $colors=['#f18515'];
         @endphp
     @endif
     <script>
+          $(document).ready(function() {
         var categories = <?php echo json_encode($categories) ?>;
         var series = <?php echo json_encode($series) ?>;
         var col = <?php echo json_encode($colors) ?>;
@@ -121,6 +123,7 @@
 
             }]
         });
+    });
       </script>
 </body>
 </html>
