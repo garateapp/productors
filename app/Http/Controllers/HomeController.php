@@ -1036,8 +1036,9 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
         $ri=Proceso::all();
         $totali=$ri->count();
-
+        $n_proceso_anterior=0;
         foreach ($procesos as $proceso){
+
             $agricola=Null;//1
             $n_proceso=Null;//2
             $especie=Null;//3
@@ -1049,6 +1050,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
             $c_productor=Null;
 
             $m=1;
+            
             foreach ($proceso as $item){
 
                 if($m==1){
@@ -1056,6 +1058,11 @@ public function uploadAndReadExcelGreenvic(Request $request)
                 }
                 if($m==2){
                     $n_proceso=$item;
+                    if($n_proceso_anterior!=$n_proceso){
+                       
+                        $n_proceso_anterior=$n_proceso;
+                        $sumExportacion=0;
+                    }
                 }
                 if($m==3){
                     $especie=$item;
@@ -1083,7 +1090,11 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
                         $cont=Proceso::where('n_proceso',$n_proceso)->where('temporada','actual')->where('id_empresa',$id_empresa)->first();
 
+
+
                         if($cont){
+
+
                             if($categoria=='Sin Procesar'){
                                 $cont->forceFill([
                                     'agricola' => $agricola,//1
@@ -1097,13 +1108,16 @@ public function uploadAndReadExcelGreenvic(Request $request)
                                      'c_productor'=>$c_productor
                                 ])->save();
                             }elseif($categoria=='Exportacion'){
+                               
+                                $sumExportacion=$sumExportacion+$kilos_netos;
+                               
                                 $cont->forceFill([
                                     'agricola' => $agricola,//1
                                     'n_proceso' => $n_proceso,//2
                                     'especie' => $especie,//3
                                     'variedad' => $variedad,//4
                                     'fecha' => $fecha,//5
-                                    'exp' => $kilos_netos,//6
+                                    'exp' => $sumExportacion,//6
                                     'id_empresa' => $id_empresa,//8
                                      'temporada' => 'actual',//9,
                                      'c_productor'=>$c_productor
@@ -1155,6 +1169,8 @@ public function uploadAndReadExcelGreenvic(Request $request)
                                              'c_productor'=>$c_productor
                                         ]);
                                     }elseif($categoria=='Exportacion'){
+
+                                        $sumExportacion=$sumExportacion+$kilos_netos;
                                         $rec=Proceso::create([
                                             'agricola' => $agricola,//1
                                             'n_proceso' => $n_proceso,//2
@@ -1162,7 +1178,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
                                             'variedad' => $variedad,//4
                                             'fecha' => $fecha,//5
                                             'kilos_netos' => 0,//6
-                                            'exp' => $kilos_netos,//6
+                                            'exp' => $sumExportacion,//6
                                             'comercial' => 0,//6
                                             'desecho' => 0,//6
                                             'merma' => 0,//6
@@ -1711,6 +1727,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
             $distribucion_calibre='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x380';
             $promedio_firmeza='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/'.$recepcion->id.'.html&viewport=800x400';
             $promedio_brix='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/brix/'.$recepcion->id.'.html&viewport=800x400';
+
             $porcentaje_firmeza='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/porcentaje/firmeza/'.$recepcion->id.'.html&viewport=800x330';
         }else{
             $promedio_firmeza=NULL;
