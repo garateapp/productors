@@ -1050,7 +1050,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
             $c_productor=Null;
 
             $m=1;
-            
+
             foreach ($proceso as $item){
 
                 if($m==1){
@@ -1059,9 +1059,12 @@ public function uploadAndReadExcelGreenvic(Request $request)
                 if($m==2){
                     $n_proceso=$item;
                     if($n_proceso_anterior!=$n_proceso){
-                       
+
                         $n_proceso_anterior=$n_proceso;
                         $sumExportacion=0;
+                        $sumSinProcesar=0;
+                        $sumDesecho=0;
+                        $sumMercadoInterno=0;
                     }
                 }
                 if($m==3){
@@ -1096,21 +1099,22 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
 
                             if($categoria=='Sin Procesar'){
+                                $sumSinProcesar=$sumSinProcesar+$kilos_netos;
                                 $cont->forceFill([
                                     'agricola' => $agricola,//1
                                     'n_proceso' => $n_proceso,//2
                                     'especie' => $especie,//3
                                     'variedad' => $variedad,//4
                                     'fecha' => $fecha,//5
-                                    'kilos_netos' => $kilos_netos,//6
+                                    'kilos_netos' => $sumSinProcesar,//6
                                     'id_empresa' => $id_empresa,//8
                                      'temporada' => 'actual',//9,
                                      'c_productor'=>$c_productor
                                 ])->save();
                             }elseif($categoria=='Exportacion'){
-                               
+
                                 $sumExportacion=$sumExportacion+$kilos_netos;
-                               
+
                                 $cont->forceFill([
                                     'agricola' => $agricola,//1
                                     'n_proceso' => $n_proceso,//2
@@ -1123,25 +1127,27 @@ public function uploadAndReadExcelGreenvic(Request $request)
                                      'c_productor'=>$c_productor
                                 ])->save();
                             }elseif($categoria=='Mercado Interno'){
+                                $sumMercadoInterno=$sumMercadoInterno+$kilos_netos;
                                 $cont->forceFill([
                                     'agricola' => $agricola,//1
                                     'n_proceso' => $n_proceso,//2
                                     'especie' => $especie,//3
                                     'variedad' => $variedad,//4
                                     'fecha' => $fecha,//5
-                                    'comercial' => $kilos_netos,//6
+                                    'comercial' => $sumMercadoInterno,//6
                                     'id_empresa' => $id_empresa,//8
                                      'temporada' => 'actual',//9,
                                      'c_productor'=>$c_productor
                                 ])->save();
                             }elseif($categoria=='Desecho'){
+                                $sumDesecho=$sumDesecho+$kilos_netos;
                                 $cont->forceFill([
                                     'agricola' => $agricola,//1
                                     'n_proceso' => $n_proceso,//2
                                     'especie' => $especie,//3
                                     'variedad' => $variedad,//4
                                     'fecha' => $fecha,//5
-                                    'desecho' => $kilos_netos,//6
+                                    'desecho' => $sumDesecho,//6
                                     'id_empresa' => $id_empresa,//8
                                      'temporada' => 'actual',//9,
                                      'c_productor'=>$c_productor
@@ -1153,13 +1159,15 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
                                 if($kilos_netos>0){
                                     if($categoria=='Sin Procesar'){
+
+                                        $sumSinProcesar=$sumSinProcesar+$kilos_netos;
                                         $rec=Proceso::create([
                                             'agricola' => $agricola,//1
                                             'n_proceso' => $n_proceso,//2
                                             'especie' => $especie,//3
                                             'variedad' => $variedad,//4
                                             'fecha' => $fecha,//5
-                                            'kilos_netos' => $kilos_netos,//6
+                                            'kilos_netos' => $sumSinProcesar,//6
                                             'exp' => 0,//6
                                             'comercial' => 0,//6
                                             'desecho' => 0,//6
@@ -1187,6 +1195,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
                                              'c_productor'=>$c_productor
                                         ]);
                                     }elseif($categoria=='Mercado Interno'){
+                                        $sumMercadoInterno=$sumMercadoInterno+$kilos_netos;
                                         $rec=Proceso::create([
                                             'agricola' => $agricola,//1
                                             'n_proceso' => $n_proceso,//2
@@ -1195,7 +1204,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
                                             'fecha' => $fecha,//5
                                             'kilos_netos' => 0,//6
                                             'exp' => 0,
-                                            'comercial' => $kilos_netos,//6
+                                            'comercial' => $sumMercadoInterno,//6
                                             'desecho' => 0,//6
                                             'merma' => 0,//6
                                             'id_empresa' => $id_empresa,//8
@@ -1203,7 +1212,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
                                              'c_productor'=>$c_productor
                                         ]);
                                     }elseif($categoria=='Desecho'){
-
+                                            $sumDesecho=$sumDesecho+$kilos_netos;
                                             $rec=Proceso::create([
                                                 'agricola' => $agricola,//1
                                                 'n_proceso' => $n_proceso,//2
@@ -1213,7 +1222,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
                                                 'kilos_netos' => 0,//6
                                                 'exp' => 0,
                                                 'comercial' => 0,//6
-                                                'desecho' => $kilos_netos,//6
+                                                'desecho' => $sumDesecho,//6
                                                 'merma' => 0,//6
                                                 'id_empresa' => $id_empresa,//8
                                                  'temporada' => 'actual',//9,
