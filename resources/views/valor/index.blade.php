@@ -90,7 +90,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.min.css
                         <td class="text-center">
                             <form action="{{ route('valor.destroy', $dagno->id) }}" method="POST" style="display: inline;">
                             <a href="{{ route('valor.edit',$dagno->id) }}" class="text-white">
-                                <button
+                                <button type="button"
                                     class="items-center px-6 py-2 ml-auto bg-green-500 rounded focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 hover:bg-gray-500 focus:outline-none">
                                     Editar
                                 </button>
