@@ -134,12 +134,7 @@
                                 <p class="text-sm font-medium leading-none text-white">Subir Recepción Greenvic</p>
                             </button>
                         </a>
-                        <a href="{{ route('valor.index') }}">
-                            <button
-                                class="items-center px-6 py-3 mx-2 bg-gray-500 rounded focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 hover:bg-gray-600 focus:outline-none">
-                                <p class="text-sm font-medium leading-none text-white">Agregar Daños</p>
-                            </button>
-                        </a>
+
                         <a href="{{ route('danos.index') }}">
                             <button
                                 class="items-center px-6 py-3 mx-2 bg-gray-500 rounded focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 hover:bg-gray-600 focus:outline-none">

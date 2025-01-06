@@ -143,6 +143,9 @@
                                 <x-jet-dropdown-link href="{{ route('admin.roles.index') }}">
                                     {{ __('Roles') }}
                                 </x-jet-dropdown-link>
+                                <x-jet-dropdown-link href="{{ route('valor.index') }}">
+                                    {{ __('Daños') }}
+                                </x-jet-dropdown-link>
                             @endcan
 
                             @can('Ver produccion_total')
@@ -196,6 +199,9 @@
 
                                 <x-jet-dropdown-link href="{{ route('documentacions.index') }}">
                                     {{ __('Documentos Productores') }}
+                                </x-jet-dropdown-link>
+                                <x-jet-dropdown-link href="{{ route('servicios.index') }}">
+                                    {{ __('Servicios') }}
                                 </x-jet-dropdown-link>
                             @endcan
 
