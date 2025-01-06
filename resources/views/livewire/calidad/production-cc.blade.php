@@ -75,7 +75,7 @@
                                 @if ($variedad->especie_id == $espec->id)
                                     <div class="flex justify-center">
                                         <button wire:click="set_varie({{ $variedad->id }})"
-                                            class="items-center w-full px-2 py-3 rounded  focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 hover:bg-gray-500 focus:outline-none"
+                                            class="items-center w-full px-2 py-3 rounded focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 hover:bg-gray-500 focus:outline-none"
                                             style="background-color: #008d39;">
                                             <p class="text-sm font-medium leading-none text-white whitespace-nowrap">
                                                 {{ $variedad->name }}</p>
@@ -132,6 +132,12 @@
                             <button
                                 class="items-center px-6 py-3 mx-2 bg-gray-500 rounded focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 hover:bg-gray-600 focus:outline-none">
                                 <p class="text-sm font-medium leading-none text-white">Subir Recepción Greenvic</p>
+                            </button>
+                        </a>
+                        <a href="{{ route('valor.index') }}">
+                            <button
+                                class="items-center px-6 py-3 mx-2 bg-gray-500 rounded focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 hover:bg-gray-600 focus:outline-none">
+                                <p class="text-sm font-medium leading-none text-white">Agregar Daños</p>
                             </button>
                         </a>
                         <a href="{{ route('danos.index') }}">
@@ -199,7 +205,7 @@
                                                 </div>
                                             </a>
                                         </div>
-                                        @if ($recepcion->calidad->obs_ext)
+                                        @if ($recepcion->calidad!=null && $recepcion->calidad->obs_ext)
                                             <div class="flex justify-center ">
                                                 <div
                                                     class="px-2 py-1 mx-12 mt-1 mb-1 text-xs leading-none text-center text-gray-600 bg-gray-100 rounded cursor-pointer focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 hover:bg-gray-200 focus:outline-none">
@@ -812,6 +818,16 @@
                                                                 VER INFORME PREVIO
                                                             </button>
                                                         </a>
+                                                        <a href="{{route('promedio.firmeza',$recepcion)}}" target="_blank" class="px-5 py-3 mb-4 text-sm leading-none text-red-600 bg-red-100 rounded focus:ring-2 focus:ring-offset-2 focus:ring-red-300 hover:bg-red-200 focus:outline-none">VER PROMEDIO FIRMEZA</a>
+                                                        <br/>
+                                                        <a href="{{route('promedio.brix',$recepcion)}}" target="_blank" class="px-5 py-3 mb-4 text-sm leading-none text-red-600 bg-red-100 rounded focus:ring-2 focus:ring-offset-2 focus:ring-red-300 hover:bg-red-200 focus:outline-none"> PROMEDIO BRIX</a>
+                                                        <br/>
+                                                        <a href="{{route('distribucion.calibre',$recepcion)}}" target="_blank" class="px-5 py-3 mb-4 text-sm leading-none text-red-600 bg-red-100 rounded focus:ring-2 focus:ring-offset-2 focus:ring-red-300 hover:bg-red-200 focus:outline-none">DISTRIBUCION CALIBRE</a>
+                                                        <br/>
+                                                        <a href="{{route('distribucion.color',$recepcion)}}" target="_blank" class="px-5 py-3 mb-4 text-sm leading-none text-red-600 bg-red-100 rounded focus:ring-2 focus:ring-offset-2 focus:ring-red-300 hover:bg-red-200 focus:outline-none">DISTRIBUCION COLOR</a>
+
+                                                        <br/>
+                                                        <a href="{{route('porcentaje.firmeza',$recepcion)}}" target="_blank" class="px-5 py-3 mb-4 text-sm leading-none text-red-600 bg-red-100 rounded focus:ring-2 focus:ring-offset-2 focus:ring-red-300 hover:bg-red-200 focus:outline-none">% Firmeza</a>
 
                                                     </div>
                                                 </td>

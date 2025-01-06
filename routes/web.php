@@ -17,6 +17,8 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TipoDocumentacionsController;
 use App\Http\Controllers\DocumentacionController;
+use App\Http\Controllers\ServiciosController;
+use App\Http\Controllers\ValorController;
 use App\Models\Recepcion;
 use App\Models\TipoDocumentacions;
 use App\Models\User;
@@ -244,4 +246,15 @@ Route::post('documentacions/actualizardocto', [DocumentacionController::class,'a
 Route::post('documentacions/obtenerDocumentoxProductor', [DocumentacionController::class,'obtenerDocumentoxProductor'])->name('documentacions.obtenerDocumentoxProductor');
 Route::post('documentacions/descargaSeleccionados', [DocumentacionController::class,'descargaSeleccionados'])->name('documentacions.descargaSeleccionados');
 
+Route::resource('servicios', ServiciosController::class)->only(['index','edit','destroy','create'])->names('servicios');
+Route::post('servicios', [ServiciosController::class,'store'])->name('servicios.store');
+Route::get('servicios.edit/{servicio}', [ServiciosController::class,'edit'])->name('servicios.edit');
+Route::put('servicios/{servicio}', [ServiciosController::class, 'update'])->name('servicios.update');
+Route::delete('servicios.elimina', [ServiciosController::class,'elimina'])->name('servicios.elimina');
+Route::get('servicios/showProductores/{servicio}', [ServiciosController::class,'showProductores'])->name('servicios.showProductores');
+Route::get('servicios/obtenerProductores/{{servicio}}', [ServiciosController::class,'obtenerProductores'])->name('servicios.obtenerProductores');
 
+Route::resource('valor', ValorController::class)->only(['index','edit','destroy','create'])->names('valor');
+Route::put('valor/{valor}', [ValorController::class, 'update'])->name('valor.update');
+Route::get('/valor', [ValorController::class, 'index'])->name('valor.index');
+Route::post('valor', [ValorController::class,'store'])->name('valor.store');
