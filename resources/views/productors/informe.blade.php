@@ -872,11 +872,11 @@
                                                             </td>
                                                             <td style="background-color:#47ac34; color: white;"><b>SOBRECALIBRE: </b>
                                                                 @if ($recepcion->calidad->detalles->where(function($query) {
-                                                                    $query->whereRaw('UPPER(tipo_item) = ?', ['DISTRIBUCIÓN DE CALIBRES'])
+                                                                    $query->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')
                                                                           ->whereRaw('UPPER(detalle_item) = ?', ['SOBRECALIBRE']);
                                                                 })->first())
                                                                     {{ $recepcion->calidad->detalles->where(function($query) {
-                                                                        $query->whereRaw('UPPER(tipo_item) = ?', ['DISTRIBUCIÓN DE CALIBRES'])
+                                                                        $query->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')
                                                                               ->whereRaw('UPPER(detalle_item) = ?', ['SOBRECALIBRE']);
                                                                     })->first()->porcentaje_muestra }}
                                                                     %
