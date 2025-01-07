@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
-@php
-    use DB;
-@endphp
+
 <head>
     <title>Informe de Recepción Nro° {{ $recepcion->numero_g_recepcion }}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
