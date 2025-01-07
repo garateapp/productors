@@ -813,7 +813,7 @@
                                                                 VER INFORME PREVIO
                                                             </button>
                                                         </a>
-                                                        <a href="{{route('promedio.firmeza',$recepcion)}}" target="_blank" class="px-5 py-3 mb-4 text-sm leading-none text-red-600 bg-red-100 rounded focus:ring-2 focus:ring-offset-2 focus:ring-red-300 hover:bg-red-200 focus:outline-none">VER PROMEDIO FIRMEZA</a>
+                                                        {{-- <a href="{{route('promedio.firmeza',$recepcion)}}" target="_blank" class="px-5 py-3 mb-4 text-sm leading-none text-red-600 bg-red-100 rounded focus:ring-2 focus:ring-offset-2 focus:ring-red-300 hover:bg-red-200 focus:outline-none">VER PROMEDIO FIRMEZA</a>
                                                         <br/>
                                                         <a href="{{route('promedio.brix',$recepcion)}}" target="_blank" class="px-5 py-3 mb-4 text-sm leading-none text-red-600 bg-red-100 rounded focus:ring-2 focus:ring-offset-2 focus:ring-red-300 hover:bg-red-200 focus:outline-none"> PROMEDIO BRIX</a>
                                                         <br/>
@@ -822,7 +822,7 @@
                                                         <a href="{{route('distribucion.color',$recepcion)}}" target="_blank" class="px-5 py-3 mb-4 text-sm leading-none text-red-600 bg-red-100 rounded focus:ring-2 focus:ring-offset-2 focus:ring-red-300 hover:bg-red-200 focus:outline-none">DISTRIBUCION COLOR</a>
 
                                                         <br/>
-                                                        <a href="{{route('porcentaje.firmeza',$recepcion)}}" target="_blank" class="px-5 py-3 mb-4 text-sm leading-none text-red-600 bg-red-100 rounded focus:ring-2 focus:ring-offset-2 focus:ring-red-300 hover:bg-red-200 focus:outline-none">% Firmeza</a>
+                                                        <a href="{{route('porcentaje.firmeza',$recepcion)}}" target="_blank" class="px-5 py-3 mb-4 text-sm leading-none text-red-600 bg-red-100 rounded focus:ring-2 focus:ring-offset-2 focus:ring-red-300 hover:bg-red-200 focus:outline-none">% Firmeza</a> --}}
 
                                                     </div>
                                                 </td>
