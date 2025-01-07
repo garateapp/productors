@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-
+@php
+    use DB;
+@endphp
 <head>
     <title>Informe de Recepción Nro° {{ $recepcion->numero_g_recepcion }}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -872,9 +874,9 @@
                                                             </td>
                                                             <td style="background-color:#47ac34; color: white;"><b>SOBRECALIBRE: </b>
                                                                 @if ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE CALIBRES')
-                                                                ->whereRaw('UPPER(detalle_item) = ?', ['SOBRECALIBRE'])->first())
+                                                                ->where(DB::raw('UPPER(detalle_item) = SOBRECALIBRE'))->first())
                                                                     {{ $recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE CALIBRES')
-                                                                     ->whereRaw('UPPER(detalle_item) = ?', ['SOBRECALIBRE'])->first()->porcentaje_muestra }}
+                                                                     ->where(DB::raw('UPPER(detalle_item) = SOBRECALIBRE'))->first()->porcentaje_muestra }}
                                                                     %
                                                                 @elseif($recepcion->n_especie == 'Orange' || $recepcion->n_especie == 'Mandarinas')
                                                                     {{ $b }}%
