@@ -871,14 +871,9 @@
 
                                                             </td>
                                                             <td style="background-color:#47ac34; color: white;"><b>SOBRECALIBRE: </b>
-                                                                @if ($recepcion->calidad->detalles->where(function($query) {
-                                                                    $query->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')
-                                                                          ->whereRaw('UPPER(detalle_item) = ?', ['SOBRECALIBRE']);
-                                                                })->first())
-                                                                    {{ $recepcion->calidad->detalles->where(function($query) {
-                                                                        $query->where('tipo_item','DISTRIBUCIÓN DE CALIBRES')
-                                                                              ->whereRaw('UPPER(detalle_item) = ?', ['SOBRECALIBRE']);
-                                                                    })->first()->porcentaje_muestra }}
+                                                                @if ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE CALIBRES')
+                                                                ->where('detalle_item', 'SOBRECALIBRE')->first())
+                                                                    {{ $recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE CALIBRES')->where('detalle_item', 'SOBRECALIBRE')->first()->porcentaje_muestra }}
                                                                     %
                                                                 @elseif($recepcion->n_especie == 'Orange' || $recepcion->n_especie == 'Mandarinas')
                                                                     {{ $b }}%
