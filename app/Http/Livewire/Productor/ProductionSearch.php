@@ -10,6 +10,7 @@ use App\Models\Sync;
 use App\Models\User;
 use App\Models\Variedad;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -17,13 +18,13 @@ use Livewire\WithPagination;
 class ProductionSearch extends Component
 {   use WithPagination;
     public $search, $ctd=25, $espec, $especieid, $especiename, $varie, $variedadid, $temporada;
-    
+
     public function mount($temporada){
         $this->temporada=$temporada;
     }
 
     public function render()
-    {   
+    {
         $recepcions=Recepcion::where('temporada', $this->temporada) // Agregar esta condición
                 ->where(function($query) {
                     $query->where('id_g_recepcion','LIKE','%'. $this->search .'%')
@@ -61,15 +62,15 @@ class ProductionSearch extends Component
                 })
                 ->latest('id')
                 ->get();
-            
-        
+
+
         $allrecepcions=Recepcion::where('temporada', $this->temporada)->get();
         $sync=Sync::where('entidad','RECEPCIONES')
         ->orderby('id','DESC')
         ->first();
         $especies=Especie::all();
         $variedades=Variedad::all();
-        
+
         return view('livewire.productor.production-search',compact('variedades','especies','recepcions','allrecepcions','allsubrecepcions','sync'));
     }
     public function update_temporada(){
@@ -81,7 +82,7 @@ class ProductionSearch extends Component
     }
 
     public function reenviar_informe(Recepcion $recepcion) {
-    
+
         $user=User::where('name',$recepcion->n_emisor)->first();
 
         if($user->emnotification==TRUE){
@@ -89,7 +90,7 @@ class ProductionSearch extends Component
         }
 
         if($user){
-            
+
             if($user->telefonos->count()){
                     foreach($user->telefonos as $telefono){
                         $fono='569'.substr(str_replace(' ', '', $telefono->numero), -8);
@@ -103,13 +104,13 @@ class ProductionSearch extends Component
                             'messaging_product' => 'whatsapp',
                             "preview_url"=> false,
                             'to'=>$fono,
-                            
+
                             'type'=>'template',
                                 'template'=>[
                                     'name'=>'recepcion',
                                     'language'=>[
                                         'code'=>'es'],
-                                    'components'=>[ 
+                                    'components'=>[
                                         [
                                             'type'=>'header',
                                             'parameters'=>[
@@ -137,25 +138,26 @@ class ProductionSearch extends Component
                                         ]
                                     ]
                                 ]
-                                
-                            
+
+
                         ];
-                        
+
                       Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+                      Log::info('Mensaje enviado a '.$fono);
                     }
-            }    
+            }
         }
 
        return redirect()->route('production.index');
     }
-    
+
     public function set_especie($id){
         $this->especieid=$id;
         $this->variedadid=NULL;
         $this->varie =NULL;
         $this->espec=Especie::find($this->especieid);
         $this->search=$this->espec->name;
-        
+
     }
 
     public function set_varie($id){
