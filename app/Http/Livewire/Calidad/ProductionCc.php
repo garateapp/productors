@@ -301,13 +301,12 @@ class ProductionCc extends Component
 
 
                         ];
-                        try {
+
                             Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
                             Log::info("MENSAJE ENVIADO A ".$fono);
 
-                        } catch (\Throwable $th) {
 
-                        }
+
 
                     }
             }
@@ -383,6 +382,7 @@ class ProductionCc extends Component
                         ];
 
                       Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+                      Log::info("MENSAJE ENVIADO A ".$fono);
                     }
             }
         }
