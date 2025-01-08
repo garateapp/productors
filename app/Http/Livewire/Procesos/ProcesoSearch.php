@@ -138,8 +138,9 @@ class ProcesoSearch extends Component
 
                         ];
 
-                        Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
-                        Log::info('Mensaje enviado a '.$fono);
+                       $resp=Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+                        Log::info('Mensaje enviado a '.$fono.' '.$resp);
+
 
                     }
                 }
