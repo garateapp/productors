@@ -607,8 +607,8 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
                             ];
                             try{
-                            $resp=Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
-                            Log::info('Mensaje enviado a '.$fono.'-----'.'WSP responde'.$resp);
+                            Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+                            Log::info('Mensaje enviado a '.$fono.'-----'.'WSP responde');
                             }
                             catch(Exception $e){
                                 Log::info('Error al enviar mensaje a '.$fono.'-----'.$e->getMessage());
@@ -658,9 +658,9 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
                             ];
                             try{
-                           $resp= Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
+                            Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
                             Log::info('Mensaje enviado a David');
-                            Log::info('Mensaje enviado a -----'.'WSP responde'.$resp);
+
                             }catch(\Exception $e){
                                 Log::info('Error al enviar mensaje a David'.'-----'.$e->getMessage());
                             }
@@ -751,9 +751,9 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
                             ];
                             try{
-                           $resp= Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
+                            Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
                             Log::info('Mensaje enviado a '.$fono);
-                            Log::info('Mensaje enviado a '.$fono.'-----'.'WSP responde'.$resp);
+
                         }
                         catch(Exception $e){
                             Log::info('Error al enviar mensaje a '.$fono.'-----'.$e->getMessage());
@@ -802,8 +802,8 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
                             ];
                             try{
-                           $resp= Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
-                            Log::info('Mensaje enviado a David WSP responde:'.$resp);
+                           Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
+                            Log::info('Mensaje enviado a David WSP responde');
 
                             }catch(Exception $e){
                                 Log::info('Error al enviar mensaje a David'.'-----'.$e->getMessage());
