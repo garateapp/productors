@@ -606,13 +606,10 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
 
                             ];
-                            try{
+
                             Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
                             Log::info('Mensaje enviado a '.$fono.'-----'.'WSP responde');
-                            }
-                            catch(Exception $e){
-                                Log::info('Error al enviar mensaje a '.$fono.'-----'.$e->getMessage());
-                            }
+
 
                             Log::info('Mensaje enviado a '.$fono);
                             $token = env('WS_TOKEN');
@@ -657,13 +654,10 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
 
                             ];
-                            try{
+
                             Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
                             Log::info('Mensaje enviado a David');
 
-                            }catch(\Exception $e){
-                                Log::info('Error al enviar mensaje a David'.'-----'.$e->getMessage());
-                            }
                         }
                     }
                     Mail::to([$user->email])->send(new NotificacionMailable($proceso));
@@ -750,14 +744,10 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
 
                             ];
-                            try{
+
                             Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$payload)->throw()->json();
                             Log::info('Mensaje enviado a '.$fono);
 
-                        }
-                        catch(Exception $e){
-                            Log::info('Error al enviar mensaje a '.$fono.'-----'.$e->getMessage());
-                        }
 
                             $token = env('WS_TOKEN');
                             $phoneid= env('WS_PHONEID');
@@ -801,13 +791,10 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
 
                             ];
-                            try{
+
                            Http::withToken($token)->post('https://graph.facebook.com/'.$version.'/'.$phoneid.'/messages',$wsload)->throw()->json();
                             Log::info('Mensaje enviado a David WSP responde');
 
-                            }catch(Exception $e){
-                                Log::info('Error al enviar mensaje a David'.'-----'.$e->getMessage());
-                            }
 
                         }
                     }
