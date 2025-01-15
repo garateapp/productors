@@ -56,10 +56,15 @@
             $colors=['#831816'];
             $titulo='FIRMEZAS (lb) y BRIX / CHICO (125 al 216)';
         @endphp
-     @elseif($recepcion->n_especie=='Peaches' || $recepcion->n_especie=='Nectarines' || $recepcion->n_especie=='Plums')
+     @elseif($recepcion->n_especie=='Peaches' || $recepcion->n_especie=='Nectarines')
         @php
             $colors=['#730000'];
-            $titulo='FIRMEZAS (lb) y BRIX / CHICO (60 a 68)';
+            $titulo='FIRMEZAS (lb) y BRIX / CHICO (60 a 78)';
+        @endphp
+        @elseif($recepcion->n_especie=='Plums')
+        @php
+            $colors=['#730000'];
+            $titulo='FIRMEZAS (lb) y BRIX / CHICO (72 a 120)';
         @endphp
     @elseif($recepcion->n_especie=='Pears')
         @php
