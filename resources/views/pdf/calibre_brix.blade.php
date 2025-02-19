@@ -4,14 +4,7 @@
 	<title>Informe de Recepción Nro° {{$recepcion->numero_g_recepcion}}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js" defer></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.highcharts.com/modules/series-label.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
 	<style>
 		#container {
         height: 350px;
@@ -68,62 +61,73 @@
             $colors=['#f18515'];
         @endphp
     @endif
+
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
           $(document).ready(function() {
+
         var categories = <?php echo json_encode($categories) ?>;
         var series = <?php echo json_encode($series) ?>;
         var col = <?php echo json_encode($colors) ?>;
 
-                Highcharts.chart('container', {
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'CALIBRE VS BRIX'
-            },
-            legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle'
+        var ctx = document.getElementById('barChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: categories,
+                    datasets: [{
+                        label: '°Brix',
+                        data: series,
+                        backgroundColor: colors,
+                        borderColor: colors,
+                        borderWidth: 1,
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'top',
+                            font: {
+                                size: 16
+                            },
+                            formatter: function (value) {
+                                return value.toFixed(1);
+                            }
+                        }
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function (tooltipItem) {
+                                    return tooltipItem.label + ': ' + tooltipItem.raw.toFixed(1);
+                                }
+                            }
+                        },
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'top',
+                            font: {
+                                size: 16
+                            }
+                        }
                     },
-            xAxis: {
-                categories: categories,
-                crosshair: false
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: '°Brix'
+                    scales: {
+                        x: {
+                            beginAtZero: true
+                        },
+                        y: {
+                            min: 0,
+                            title: {
+                                display: true,
+                                text: '°Brix'
+                            }
+                        }
+                    }
                 }
-            },
-            colors: col,
-            tooltip: {
-                shared: true,
-                headerFormat: '<span style="font-size: 15px">{point.point.name}</span><br/>',
-                pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y}</b><br/>'
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0,
-                    borderWidth: 0
-                }
-            },
-            series: [{
-                name: '°BRIX',
-                data: series,
-                colorByPoint: true,
-                dataLabels: [{
-                    enabled: true,
-                    inside: true,
-                    style: {
-                        fontSize: '16px'
-                    },
-                    format: '{point.y:.1f}'
-                }]
-
-            }]
+            });
         });
-    });
-      </script>
+    </script>
 </body>
 </html>

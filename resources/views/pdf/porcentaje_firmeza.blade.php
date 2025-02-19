@@ -1,35 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Informe de Recepción Nro° {{$recepcion->numero_g_recepcion}}</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js" defer></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.highcharts.com/modules/series-label.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-	<style>
-		#container {
-        height: 310px;
-    }
 
-	</style>
+<head>
+    <title>Informe de Recepción Nro° {{ $recepcion->numero_g_recepcion }}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        #container {
+            height: 310px;
+        }
+    </style>
 </head>
+
 <body>
 
     <figure class="mx-1 mt-4 highcharts-figure">
-        <div id="container">
+        <canvas id="container">
 
-        </div>
-     </figure>
+        </canvas>
+    </figure>
 
 
 
-	{{-- comment
+    {{-- comment
      @php
         $categories=[];
         $series=[];
@@ -171,222 +169,113 @@
 
     @endforeach
  --}}
- @php
-    $categories=[];
-    $series=[];
-@endphp
+    @php
+        $categories = [];
+        $series = [];
+    @endphp
 
     @if ($recepcion->calidad->detalles)
-        @if ($recepcion->n_variedad=='Dagen')
-            @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA') as $detalle)
-
+        @if ($recepcion->n_variedad == 'Dagen')
+            @foreach ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE FIRMEZA') as $detalle)
                 @php
-                    $categories[]=$detalle->detalle_item;
-                    $series[]=$detalle->porcentaje_muestra;
-
+                    $categories[] = $detalle->detalle_item;
+                    $series[] = $detalle->porcentaje_muestra;
 
                 @endphp
             @endforeach
-
         @else
+            @foreach ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item', 'LIGHT') as $detalle)
+                @php
+                    $l[] = $detalle->valor_ss;
 
-            @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','LIGHT') as $detalle)
-
-                    @php
-                            $l[]=$detalle->valor_ss;
-
-                    @endphp
-
+                @endphp
             @endforeach
-            @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','DARK') as $detalle)
-
-                    @php
-                            $d[]=$detalle->valor_ss;
-                    @endphp
-
+            @foreach ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item', 'DARK') as $detalle)
+                @php
+                    $d[] = $detalle->valor_ss;
+                @endphp
             @endforeach
-            @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','BLACK') as $detalle)
-
-                    @php
-                            $b[]=$detalle->valor_ss;
-                    @endphp
-
+            @foreach ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item', 'BLACK') as $detalle)
+                @php
+                    $b[] = $detalle->valor_ss;
+                @endphp
             @endforeach
         @endif
 
     @endif
 
-	@if ($recepcion->n_especie=='Cherries')
+    @if ($recepcion->n_especie == 'Cherries')
         @php
-            $colors=['#dc0c15','#71160e','#2b1d16'];
+            $colors = ['#dc0c15', '#71160e', '#2b1d16'];
         @endphp
-    @elseif($recepcion->n_especie=='Apples')
+    @elseif($recepcion->n_especie == 'Apples')
         @php
-            $colors=['#831816'];
+            $colors = ['#831816'];
         @endphp
-    @elseif($recepcion->n_especie=='Pears')
+    @elseif($recepcion->n_especie == 'Pears')
         @php
-            $colors=['#788527'];
+            $colors = ['#788527'];
         @endphp
-    @elseif($recepcion->n_variedad=='Dagen')
+    @elseif($recepcion->n_variedad == 'Dagen')
         @php
-            $colors=['#9817BB'];
+            $colors = ['#9817BB'];
         @endphp
     @else
         @php
-            $colors=['#24a745'];
+            $colors = ['#24a745'];
         @endphp
     @endif
 
-    @if ($recepcion->n_variedad=='Dagen')
-        <script>
-             $(document).ready(function() {
-            var categories = <?php echo json_encode($categories) ?>;
-            var series = <?php echo json_encode($series) ?>;
-            var col = <?php echo json_encode($colors) ?>;
+    <script>
+        $(document).ready(function() {
+            var col = <?php echo json_encode($colors); ?>;
+            var categories = <?php echo json_encode($categories); ?>;
+            var series = <?php echo json_encode($series); ?>;
+            var l = <?php echo json_encode($l); ?>;
+            var d = <?php echo json_encode($d); ?>;
+            var b = <?php echo json_encode($b); ?>;
+            var ctx = document.getElementById("container").getContext("2d");
 
-                    Highcharts.chart('container', {
-                chart: {
-                    type: 'column'
-                },
-                title: {
-                    text: 'PROMEDIO FIRMEZAS (gf/mm)'
-                },
-                legend: {
-                            layout: 'vertical',
-                            align: 'right',
-                            verticalAlign: 'middle'
-                        },
-                xAxis: {
-                    categories: categories,
-                    crosshair: false
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: '(gf/mm)'
-                    }
-                },
-                colors: col,
-                tooltip: {
-                    shared: true,
-                    headerFormat: '<span style="font-size: 15px">{point.point.name}</span><br/>',
-                    pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y}</b><br/>'
-                },
-                plotOptions: {
-                    column: {
-                        pointPadding: 0,
-                        borderWidth: 0
-                    }
-                },
-                series: [{
-                    name: '',
-                    data: series,
-                    colorByPoint: true,
-                    dataLabels: [{
-                        enabled: true,
-                        inside: true,
-                        style: {
-                            fontSize: '16px'
-                        },
-                        format: '{point.y:.1f}'
-                    }]
+            // Definir el tipo de gráfico basado en la variedad
+            var chartType = "{{ $recepcion->n_variedad }}" === "Dagen" ? "bar" : "bar";
 
+            // Definir los datos del gráfico
+            var data = {
+                labels: categories,
+                datasets: [{
+                    label: "Firmeza",
+                    data: series, // Usamos 'series' para Dagen y 'd' para el resto
+                    backgroundColor: col,
+                    borderColor: col,
+                    borderWidth: 1
                 }]
-            });
-        });
-        </script>
-    @else
-        <script>
-            $(document).ready(function() {
-            var col = <?php echo json_encode($colors) ?>;
-            var l = <?php echo json_encode($l) ?>;
-            var d = <?php echo json_encode($d) ?>;
-            var b = <?php echo json_encode($b) ?>;
+            };
 
-                    Highcharts.chart('container', {
-                chart: {
-                    type: 'column',
-                    overflow: 'justify'
-                },
-                title: {
-                    text: '% Distribución de Firmezas por Segregación de Color'
-                },
-                legend: {
-                            layout: 'vertical',
-                            align: 'right',
-                            verticalAlign: 'middle'
+            // Crear el gráfico con Chart.js
+            new Chart(ctx, {
+                type: chartType,
+                data: data,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: "top"
                         },
-                xAxis: {
-                    categories: ['Muy Firme >280 - 1000 <br>Durofel >75','Firme 200 - 279 <br> Durofel 72 - 74.9','Sensible 180 - 199 <br> Durofel 65 - 69.9','Blando 0,1 - 179<br>  Durofel <65,4'],
-                    crosshair: false
-                },
-                yAxis: {
-                    max: 100,
-                    title: {
-                        text: '%'
-                    }
-                },
-                colors: col,
-                tooltip: {
-                    shared: true,
-                    headerFormat: '<span style="font-size: 15px">{point.point.name}</span><br/>',
-                    pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y} %</b><br/>'
-                },
-                plotOptions: {
-                column: {
-                    dataLabels: {
-                        enabled: true,
-                        inside: false,
-                        style: {
-                            fontSize: '9px'
-                        },
-                        format: '{point.y:.1f}%'
+                        title: {
+                            display: true,
+                            text: "PROMEDIO FIRMEZAS (gf/mm)"
+                        }
                     },
-                    pointPadding: 0.01,
-                    borderWidth: 2.1,
-                    groupPadding: 0.07 // ajusta según sea necesario
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: categories.length ? undefined : 100
+                        }
                     }
-            },
-                series: [
-                    {
-                    name: 'LIGHT',
-                    data: l,
-                    dataLabels: [{
-                        enabled: true,
-                        inside: false,
-                        style: {
-                            fontSize: '9px'
-                        },
-                        format: '{point.y:.1f}%'
-                    }]}
-                    ,{
-                    name: 'DARK',
-                    data: d,
-                    dataLabels: [{
-                        enabled: true,
-                        inside: false,
-                        style: {
-                            fontSize: '9px'
-                        },
-                        format: '{point.y:.1f}%'
-                    }]}
-                    ,{
-                    name: 'BLACK',
-                    data: b,
-                    dataLabels: [{
-                        enabled: true,
-                        inside: false,
-                        style: {
-                            fontSize: '9px'
-                        },
-                        format: '{point.y:.1f}%'
-                    }]}
-
-                ]
+                }
             });
         });
-        </script>
-    @endif
+    </script>
 </body>
+
 </html>

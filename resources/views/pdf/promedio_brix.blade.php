@@ -8,12 +8,12 @@
     {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <!-- Correcto -->
-<script src="https://code.highcharts.com/highcharts.js" defer></script>
+{{-- <script src="https://code.highcharts.com/highcharts.js" defer></script> --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    {{-- <script src="https://code.highcharts.com/modules/series-label.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script> --}}
 	<style>
 		#container {
         height: 350px;
@@ -24,9 +24,9 @@
 <body>
 
     <figure class="mx-1 mt-4 highcharts-figure">
-        <div id="container">
+        <canvas id="container">
 
-        </div>
+        </canvas>
      </figure>
 
 
@@ -106,62 +106,41 @@
         @endphp
     @endif
 
+
     <script>
-       $(document).ready(function() {
-        var categories = <?php echo json_encode($categories) ?>;
-        var series = <?php echo json_encode($series) ?>;
-        var col = <?php echo json_encode($colors) ?>;
+        $(document).ready(function() {
+            var ctx = document.getElementById("container").getContext("2d");
+            var categories = <?php echo json_encode($categories); ?>;
+            var series = <?php echo json_encode($series); ?>;
+            var colors = <?php echo json_encode($colors); ?>;
 
-         Highcharts.chart('container', {
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'PROMEDIO BRIX'
-            },
-            legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle'
+            new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: categories,
+                    datasets: [{
+                        label: "°Brix",
+                        data: series,
+                        backgroundColor: colors,
+                        borderColor: colors,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: "top" },
+                        title: { display: true, text: "PROMEDIO BRIX" }
                     },
-            xAxis: {
-                categories: categories,
-                crosshair: false
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: '°Brix'
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: "°Brix" }
+                        }
+                    }
                 }
-            },
-            colors: col,
-            tooltip: {
-                shared: true,
-                headerFormat: '<span style="font-size: 15px">{point.point.name}</span><br/>',
-                pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y} °Brix</b><br/>'
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0,
-                    borderWidth: 0
-                }
-            },
-            series: [{
-                name: '',
-                data: series,
-                colorByPoint: true,
-                dataLabels: [{
-                    enabled: true,
-                    inside: true,
-                    style: {
-                        fontSize: '16px'
-                    },
-                    format: '{point.y:.1f}°'
-                }]
-
-            }]
+            });
         });
-    });
-      </script>
+    </script>
 </body>
 </html>

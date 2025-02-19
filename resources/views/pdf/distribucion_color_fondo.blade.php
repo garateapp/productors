@@ -6,25 +6,22 @@
 	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js" defer></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.highcharts.com/modules/series-label.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-	<style>
-		#container {
-        height: 700px;
-    }
 
-	</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+    #chartContainer {
+        width: 80%;
+        max-width: 600px;
+        margin: auto;
+    }
+</style>
 </head>
 <body>
 
-    <figure class="h-screen mx-1 mt-4 highcharts-figure">
-        <div id="circular">
+    <figure class="h-screen mx-1 mt-4">
+        <canvas id="circular">
 
-        </div>
+        </canvas>
      </figure>
 
 
@@ -94,62 +91,35 @@
  var series = <?php echo json_encode($series) ?>;
  var col = <?php echo json_encode($colors) ?>;
 
- Highcharts.chart('circular', {
-         chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-         },
-         title: {
-            text: 'DISTRIBUCIÓN DE COLOR DE FONDO',
-            align: 'left'
-         },
-         tooltip: {
-            pointFormat: '<b><b>{point.y}</b>({point.percentage:.0f}%)<br/>',
-         },
-         accessibility: {
-            point: {
-                  valueSuffix: '%'
-            }
-         },
-         legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle'
-                    },
-         colors: col,
-         plotOptions: {
-            series: {
-                animation: false // Desactivar la animación de carga
+ var ctx = document.getElementById('circular').getContext('2d');
+ new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: colors
+                    }]
                 },
-            pie: {
-                     allowPointSelect: true,
-                     cursor: 'pointer',
-                     dataLabels: {
-                        enabled: true,
-                        inside: true,
-                        format: '{point.percentage:.1f} %',
-                        distance: -50,
-                        filter: {
-                            property: 'y',
-                            operator: '>',
-                            value: 1
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right'
                         },
-                        style: {
-                            fontSize: '22px'
-                        },
-                     },
-                     showInLegend: true
-               }
-         },
-         series: [{
-            name: 'Brands',
-            colorByPoint: true,
-            data: series
-         }]
-      });
-     });
+                        tooltip: {
+                            callbacks: {
+                                label: function (tooltipItem) {
+                                    let value = tooltipItem.raw;
+                                    let percentage = ((value / data.reduce((a, b) => a + b, 0)) * 100).toFixed(1);
+                                    return `${tooltipItem.label}: ${value} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
 
    </script>
 </body>

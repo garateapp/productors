@@ -6,12 +6,12 @@
 	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js" defer></script>
+    {{-- <script src="https://code.highcharts.com/highcharts.js" defer></script> --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    {{-- <script src="https://code.highcharts.com/modules/series-label.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script> --}}
 	<style>
 		#container {
         height: 350px;
@@ -22,9 +22,9 @@
 <body>
 
     <figure class="mx-1 mt-4 highcharts-figure">
-        <div id="container">
+        <canvas id="container">
 
-        </div>
+        </canvas>
      </figure>
 
 
@@ -81,63 +81,48 @@
         @endphp
     @endif
     <script>
-         $(document).ready(function() {
-        var categories = <?php echo json_encode($categories) ?>;
-        var series = <?php echo json_encode($series) ?>;
-        var col = <?php echo json_encode($colors) ?>;
-        console.log(categories);
-        console.log(series);
-        console.log(col);
-                Highcharts.chart('container', {
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'PROMEDIO FIRMEZAS (gf/mm)'
-            },
-            legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle'
-                    },
-            xAxis: {
-                categories: categories,
-                crosshair: false
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: '(gf/mm)'
-                }
-            },
-            colors: col,
-            tooltip: {
-                shared: true,
-                headerFormat: '<span style="font-size: 15px">{point.point.name}</span><br/>',
-                pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y}</b><br/>'
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0,
-                    borderWidth: 0
-                }
-            },
-            series: [{
-                name: '',
-                data: series,
-                colorByPoint: true,
-                dataLabels: [{
-                    enabled: true,
-                    inside: true,
-                    style: {
-                        fontSize: '16px'
-                    },
-                    format: '{point.y:.1f}'
-                }]
+        $(document).ready(function() {
+            var categories = <?php echo json_encode($categories); ?>;
+            var series = <?php echo json_encode($series); ?>;
+            var colors = <?php echo json_encode($colors); ?>;
 
-            }]
+            console.log(categories);
+            console.log(series);
+            console.log(colors);
+
+            var ctx = document.getElementById("container").getContext("2d");
+
+            new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: categories,
+                    datasets: [{
+                        label: "Firmeza (gf/mm)",
+                        data: series,
+                        backgroundColor: colors,
+                        borderColor: colors,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: "top" },
+                        title: { display: true, text: "PROMEDIO FIRMEZAS (gf/mm)" }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: "Categorías" }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: "(gf/mm)" }
+                        }
+                    }
+                }
+            });
         });
-    });
-      </script>
+    </script>
+
 </body>
 </html>

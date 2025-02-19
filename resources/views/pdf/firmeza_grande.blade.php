@@ -6,12 +6,9 @@
 	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js" defer></script>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.highcharts.com/modules/series-label.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
 	<style>
 		#container {
         height: 200px;
@@ -22,9 +19,9 @@
 <body>
 
     <figure class="mx-1 mt-4 highcharts-figure">
-        <div id="container">
+        <canvas id="container">
 
-        </div>
+        </canvas>
      </figure>
 
 
@@ -90,54 +87,45 @@
         var series = <?php echo json_encode($series) ?>;
         var col = <?php echo json_encode($colors) ?>;
 
-                Highcharts.chart('container', {
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: titulo
-            },
-            xAxis: {
-                categories: categories,
-                crosshair: false
-            },
-            legend: {
-                enabled: false
-                    } ,
-            yAxis: {
-                min:0,
-                max: 20,
-                title: {
-                    text: 'Lbs/°Brix'
-                }
-            },
-            colors: col,
-            tooltip: {
-                shared: true,
-                headerFormat: '<span style="font-size: 15px">{point.point.name}</span><br/>',
-                pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y} %</b><br/>'
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0,
-                    borderWidth: 0
-                }
-            },
-            series: [{
-                name: '%',
-                data: series,
-                dataLabels: [{
-                    enabled: true,
-                    inside: true,
-                    style: {
-                        fontSize: '16px'
+        var ctx = document.getElementById('container').getContext('2d');
+        new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: categories,
+                    datasets: [{
+                        label: titulo,
+                        data: series,
+                        backgroundColor: colors,
+                        borderColor: colors.map(color => color.replace("#", "rgba(") + ", 1)"),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Lbs/°Brix'
+                            }
+                        }
                     },
-                    format: '{point.y:.1f}'
-                }]
-
-            }]
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (tooltipItem) {
+                                    return tooltipItem.raw.toFixed(1) + ' %';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
         });
-    });
       </script>
 </body>
 </html>
