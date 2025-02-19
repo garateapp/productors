@@ -9,16 +9,16 @@
 
 	<style>
 		#circular {
-        height: 350px;
-    }
-
+            height: 400px;
+            width: 800px;
+        }
 	</style>
 </head>
 <body>
 
     <figure class="h-screen mx-1 mt-4 highcharts-figure">
 
-            <canvas id="circular" width="400" height="200"></canvas>
+            <canvas id="circular" width="800" height="400"></canvas>
 
 
      </figure>
