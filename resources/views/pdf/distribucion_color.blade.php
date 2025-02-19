@@ -3,15 +3,10 @@
 <head>
 	<title>Informe de Recepción Nro° {{$recepcion->numero_g_recepcion}}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.highcharts.com/modules/series-label.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
 	<style>
 		#circular {
         height: 350px;
@@ -22,9 +17,10 @@
 <body>
 
     <figure class="h-screen mx-1 mt-4 highcharts-figure">
-        <div id="circular">
 
-        </div>
+            <canvas id="circular" width="400" height="200"></canvas>
+
+
      </figure>
 
 
@@ -154,70 +150,56 @@
 
 
     @endphp
-      <script>
+    <script>
         $(document).ready(function() {
-    var series = <?php echo json_encode($series) ?>;
-    var titulo = <?php echo json_encode($titulo) ?>;
-    var col = <?php echo json_encode($colors) ?>;
+            var series = <?php echo json_encode($series) ?>;
+            var titulo = <?php echo json_encode($titulo) ?>;
+            var col = <?php echo json_encode($colors) ?>;
 
-    Highcharts.chart('circular', {
-            chart: {
-               plotBackgroundColor: null,
-               plotBorderWidth: null,
-               plotShadow: false,
-               type: 'pie'
-            },
-            title: {
-               text: titulo,
-               align: 'left'
-            },
-            tooltip: {
-               pointFormat: '<b><b>{point.y}</b>({point.percentage:.0f}%)<br/>',
-            },
-            legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle'
-                    },
-            accessibility: {
-               point: {
-                     valueSuffix: '%'
-               }
-            },
-            colors: col,
-            plotOptions: {
-                series: {
-                animation: false // Desactivar la animación de carga
+            var labels = series.map(item => item.name);
+            var data = series.map(item => item.y);
+
+            var ctx = document.getElementById('circular').getContext('2d');
+            var circularChart = new Chart(ctx, {
+                type: 'pie', // Tipo de gráfico
+                data: {
+                    labels: labels, // Etiquetas de los segmentos del gráfico
+                    datasets: [{
+                        data: data, // Datos de los segmentos
+                        backgroundColor: col, // Colores de los segmentos
+                        borderColor: col, // Color del borde
+                        borderWidth: 1
+                    }]
                 },
-               pie: {
-                     allowPointSelect: true,
-                     cursor: 'pointer',
-                     dataLabels: {
-                        enabled: true,
-                        inside: false,
-                        format: '{point.percentage:.1f} %',
-                        distance: 10,
-                        filter: {
-                            property: 'y',
-                            operator: '>',
-                            value: 1
+                options: {
+                    responsive: true,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    var percentage = tooltipItem.raw + ' (' + tooltipItem.raw + '%)';
+                                    return percentage;
+                                }
+                            }
                         },
-                        style: {
-                            fontSize: '18px'
+                        legend: {
+                            position: 'right',
                         },
-                     },
-                     showInLegend: true
-               }
-
-
-            },
-            series: [{
-               name: 'Brands',
-               colorByPoint: true,
-               data: series
-            }]
-         });
-      });
-      </script>
+                        datalabels: {
+                            display: true,
+                            color: '#fff',
+                            font: {
+                                weight: 'bold',
+                                size: 18
+                            },
+                            formatter: function(value, context) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
