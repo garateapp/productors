@@ -15,7 +15,7 @@
 	<style>
 		#container {
         height: 300px !important;
-        width: 600px !important;
+        width: 500px !important;
     }
 
 	</style>

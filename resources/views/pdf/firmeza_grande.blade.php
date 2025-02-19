@@ -12,8 +12,8 @@
 
     <style>
         #container {
-            height: 300px !important;
-            width: 600px !important;
+            height: 200px !important;
+            width: 500px !important;
         }
     </style>
 </head>
