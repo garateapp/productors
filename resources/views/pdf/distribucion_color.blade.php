@@ -140,8 +140,9 @@
         }
 
     @endphp
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <script>
-        $(document).ready(function() {
+          $(document).ready(function() {
             Chart.register(ChartDataLabels);
             var series = <?php echo json_encode($series); ?>;
             var titulo = <?php echo json_encode($titulo); ?>;
@@ -187,20 +188,19 @@
                             position: 'right',
                         },
                         datalabels: {
-                            color: '#fff',
+                            anchor: 'end', // Posición del label
+                            align: 'end', // Alineación del texto
+                            color: '#fff', // Color del texto
                             font: {
-                                size: 14,
+                                size: 12,
                                 weight: 'bold'
                             },
-                            formatter: (value) => {
-                                // Mostrar solo si el segmento es mayor al 5%
-                                return value > 5 ? `${value.toFixed(1)}%` : '';
+                            formatter: function(value) {
+                                return value.toFixed(1) + '%'; // Formato con 1 decimal
                             },
-                            anchor: 'center',
-                            align: 'center',
-                            clip: true,
-                            textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
-                        },
+                            offset: 4, // Espaciado desde la barra
+                            clamp: true // Evitar que salgan del canvas
+                        }
                     }
                 }
             });

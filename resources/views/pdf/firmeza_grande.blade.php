@@ -104,20 +104,7 @@
                         borderWidth: 1
                     }]
                 },
-                datalabels: {
-    anchor: 'end',    // Posición del label
-    align: 'end',     // Alineación del texto
-    color: '#fff',    // Color del texto
-    font: {
-        size: 12,
-        weight: 'bold'
-    },
-    formatter: function(value) {
-        return value.toFixed(1) + '%'; // Formato con 1 decimal
-    },
-    offset: 4,        // Espaciado desde la barra
-    clamp: true       // Evitar que salgan del canvas
-},
+
                 options: {
                     responsive: true,
                     scales: {
@@ -147,6 +134,20 @@
                         title: {
                             display: true,
                             text: titulo
+                        },
+                        datalabels: {
+                            anchor: 'end', // Posición del label
+                            align: 'end', // Alineación del texto
+                            color: '#fff', // Color del texto
+                            font: {
+                                size: 12,
+                                weight: 'bold'
+                            },
+                            formatter: function(value) {
+                                return value.toFixed(1) + '%'; // Formato con 1 decimal
+                            },
+                            offset: 4, // Espaciado desde la barra
+                            clamp: true // Evitar que salgan del canvas
                         }
                     }
                 }

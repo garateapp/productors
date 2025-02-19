@@ -1,64 +1,64 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Informe de Recepción Nro° {{$recepcion->numero_g_recepcion}}</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
+    <title>Informe de Recepción Nro° {{ $recepcion->numero_g_recepcion }}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     {{-- <script src="https://code.highcharts.com/highcharts.js" defer></script> --}}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {{-- <script src="https://code.highcharts.com/modules/series-label.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script> --}}
-	<style>
-		#container {
-        height: 350px;
-    }
-
-	</style>
+    <style>
+        #container {
+            height: 350px;
+        }
+    </style>
 </head>
+
 <body>
 
     <figure class="mx-1 mt-4 highcharts-figure">
         <canvas id="container">
 
         </canvas>
-     </figure>
+    </figure>
 
 
 
 
-     @php
-        $categories=[];
-        $series=[];
+    @php
+        $categories = [];
+        $series = [];
     @endphp
 
     @if ($recepcion->calidad->detalles)
-        @if ($recepcion->n_variedad=='Dagen')
-            @foreach ($recepcion->calidad->detalles->where('tipo_item','FIRMEZAS') as $detalle)
+        @if ($recepcion->n_variedad == 'Dagen')
+            @foreach ($recepcion->calidad->detalles->where('tipo_item', 'FIRMEZAS') as $detalle)
+                @php
+                    $categories[] = $detalle->detalle_item;
+                    if ($recepcion->n_especie == 'Cherries') {
+                        $series[] = $detalle->valor_ss;
+                    } else {
+                        $series[] = $detalle->porcentaje_muestra;
+                    }
 
-                    @php
-                        $categories[]=$detalle->detalle_item;
-                        if ($recepcion->n_especie=='Cherries') {
-                            $series[]=$detalle->valor_ss;
-                        }else {
-                            $series[]=$detalle->porcentaje_muestra;
-                        }
-
-                    @endphp
+                @endphp
             @endforeach
         @else
-            @foreach ($recepcion->calidad->detalles->where('tipo_item','FIRMEZAS') as $detalle)
-
-                @if ($detalle->detalle_item=='LIGHT' || $detalle->detalle_item=='DARK' || $detalle->detalle_item=='BLACK')
+            @foreach ($recepcion->calidad->detalles->where('tipo_item', 'FIRMEZAS') as $detalle)
+                @if ($detalle->detalle_item == 'LIGHT' || $detalle->detalle_item == 'DARK' || $detalle->detalle_item == 'BLACK')
                     @php
-                        $categories[]=$detalle->detalle_item;
-                        if ($recepcion->n_especie=='Cherries') {
-                            $series[]=$detalle->valor_ss;
-                        }else {
-                            $series[]=$detalle->porcentaje_muestra;
+                        $categories[] = $detalle->detalle_item;
+                        if ($recepcion->n_especie == 'Cherries') {
+                            $series[] = $detalle->valor_ss;
+                        } else {
+                            $series[] = $detalle->porcentaje_muestra;
                         }
 
                     @endphp
@@ -67,21 +67,23 @@
         @endif
     @endif
 
-    @if ($recepcion->n_especie=='Cherries')
-         @php
-            $colors=['#800000','#400000','#000000'];
-        @endphp
-    @elseif($recepcion->n_variedad=='Dagen')
+    @if ($recepcion->n_especie == 'Cherries')
         @php
-            $colors=['#9817BB'];
+            $colors = ['#800000', '#400000', '#000000'];
+        @endphp
+    @elseif($recepcion->n_variedad == 'Dagen')
+        @php
+            $colors = ['#9817BB'];
         @endphp
     @else
         @php
-            $colors=['#24a745'];
+            $colors = ['#24a745'];
         @endphp
     @endif
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <script>
-        $(document).ready(function() {
+          $(document).ready(function() {
+            Chart.register(ChartDataLabels);
             var categories = <?php echo json_encode($categories); ?>;
             var series = <?php echo json_encode($series); ?>;
             var colors = <?php echo json_encode($colors); ?>;
@@ -107,28 +109,39 @@
                 options: {
                     responsive: true,
                     plugins: {
-                        legend: { position: "top" },
-                        title: { display: true, text: "PROMEDIO FIRMEZAS (gf/mm)" },
-                        datalabels: {
-                        anchor: 'end',
-                        align: 'top',
-                        color: '#fff',
-                        font: {
-                            size: 14,
-                            weight: 'bold'
+                        legend: {
+                            position: "top"
                         },
-                        formatter: (value) => `${value}`,
-                        clamp: true
-                    }
+                        title: {
+                            display: true,
+                            text: "PROMEDIO FIRMEZAS (gf/mm)"
+                        },
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'top',
+                            color: '#fff',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            formatter: (value) => `${value}`,
+                            clamp: true
+                        }
                     },
 
                     scales: {
                         x: {
-                            title: { display: true, text: "Categorías" }
+                            title: {
+                                display: true,
+                                text: "Categorías"
+                            }
                         },
                         y: {
                             beginAtZero: true,
-                            title: { display: true, text: "(gf/mm)" }
+                            title: {
+                                display: true,
+                                text: "(gf/mm)"
+                            }
                         }
                     }
                 }
@@ -137,4 +150,5 @@
     </script>
 
 </body>
+
 </html>
