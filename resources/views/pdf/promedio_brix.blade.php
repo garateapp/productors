@@ -109,11 +109,14 @@
 
     <script>
         $(document).ready(function() {
+
             var ctx = document.getElementById("container").getContext("2d");
             var categories = <?php echo json_encode($categories); ?>;
             var series = <?php echo json_encode($series); ?>;
             var colors = <?php echo json_encode($colors); ?>;
-
+            console.log(categories);
+            console.log(series);
+            console.log(colors);
             new Chart(ctx, {
                 type: "bar",
                 data: {

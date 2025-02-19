@@ -97,8 +97,8 @@
                     datasets: [{
                         label: titulo,
                         data: series,
-                        backgroundColor: colors,
-                        borderColor: colors.map(color => color.replace("#", "rgba(") + ", 1)"),
+                        backgroundColor: col,
+                        borderColor: col.map(color => color.replace("#", "rgba(") + ", 1)"),
                         borderWidth: 1
                     }]
                 },

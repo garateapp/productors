@@ -63,14 +63,18 @@
     @endif
 
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
           $(document).ready(function() {
 
         var categories = <?php echo json_encode($categories) ?>;
         var series = <?php echo json_encode($series) ?>;
         var col = <?php echo json_encode($colors) ?>;
+        console.log(categories);
+        console.log(series);
+        console.log(col);
 
         var ctx = document.getElementById('barChart').getContext('2d');
             new Chart(ctx, {

@@ -86,7 +86,9 @@
         var categories = <?php echo json_encode($categories) ?>;
         var series = <?php echo json_encode($series) ?>;
         var col = <?php echo json_encode($colors) ?>;
-
+            console.log(categories);
+            console.log(series);
+            console.log(col);
         var ctx = document.getElementById('container').getContext('2d');
         new Chart(ctx, {
                 type: 'bar',
@@ -95,8 +97,8 @@
                     datasets: [{
                         label: titulo,
                         data: series,
-                        backgroundColor: colors,
-                        borderColor: colors.map(color => color.replace("#", "rgba(") + ", 1)"),
+                        backgroundColor: col,
+                        borderColor: col.map(color => color.replace("#", "rgba(") + ", 1)"),
                         borderWidth: 1
                     }]
                 },
