@@ -117,6 +117,10 @@
                         legend: {
                             display: false
                         },
+                        title: {
+                            display: true,
+                            text: titulo
+                            },
                         tooltip: {
                             callbacks: {
                                 label: function (tooltipItem) {

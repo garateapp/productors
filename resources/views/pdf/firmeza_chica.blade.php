@@ -90,6 +90,7 @@
         var categories = <?php echo json_encode($categories) ?>;
         var series = <?php echo json_encode($series) ?>;
         var col = <?php echo json_encode($colors) ?>;
+        var ctx=document.getElementById('container').getContext('2d');
         new Chart(ctx, {
                 type: 'bar',
                 data: {
