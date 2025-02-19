@@ -249,20 +249,7 @@
                             backgroundColor: col,
                         }]
                     },
-                    datalabels: {
-                        anchor: 'end', // Posición del label
-                        align: 'end', // Alineación del texto
-                        color: '#fff', // Color del texto
-                        font: {
-                            size: 12,
-                            weight: 'bold'
-                        },
-                        formatter: function(value) {
-                            return value.toFixed(1) + '%'; // Formato con 1 decimal
-                        },
-                        offset: 4, // Espaciado desde la barra
-                        clamp: true // Evitar que salgan del canvas
-                    },
+
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
@@ -278,13 +265,18 @@
                                 display: false
                             },
                             datalabels: {
-                                anchor: 'end',
-                                align: 'end',
-                                formatter: (value) => value.toFixed(1),
+                                anchor: 'center', // Posición del label
+                                align: 'center', // Alineación del texto
+                                color: '#fff', // Color del texto
                                 font: {
-                                    size: 16
+                                    size: 12,
+                                    weight: 'bold'
                                 },
-                                color: 'black'
+                                formatter: function(value) {
+                                    return value.toFixed(1) + '%'; // Formato con 1 decimal
+                                },
+                                offset: 4, // Espaciado desde la barra
+                                clamp: true // Evitar que salgan del canvas
                             },
                             tooltip: {
                                 callbacks: {

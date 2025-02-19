@@ -168,8 +168,8 @@
                             display: true
                         },
                         datalabels: {
-                            anchor: 'end', // Posición del label
-                            align: 'middle', // Alineación del texto
+                            anchor: 'center', // Posición del label
+                            align: 'center', // Alineación del texto
                             color: '#fff', // Color del texto
                             font: {
                                 size: 12,
