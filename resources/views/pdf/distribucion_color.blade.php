@@ -11,7 +11,7 @@
 	<style>
 		#circular {
             height: 400px !important;
-            width: 800px !important;
+            width: 500px !important;
         }
 	</style>
 </head>
