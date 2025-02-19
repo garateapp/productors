@@ -130,8 +130,8 @@
                             text: titulo
                         },
                         datalabels: {
-                            anchor: 'end', // Posición del label
-                            align: 'end', // Alineación del texto
+                            anchor: 'center', // Posición del label
+                            align: 'center', // Alineación del texto
                             color: '#fff', // Color del texto
                             font: {
                                 size: 12,
