@@ -122,15 +122,7 @@
                         backgroundColor: <?php echo json_encode($colors); ?>,
                         borderColor: <?php echo json_encode($colors); ?>,
                         borderWidth: 1,
-                        datalabels: {
-                            align: 'center',
-                            font: {
-                                size: 16
-                            },
-                            formatter: function(value) {
-                                return value.toFixed(1) + '%';
-                            }
-                        }
+                       
                     }]
                 },
                 options: {

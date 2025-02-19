@@ -192,7 +192,7 @@
                             align: 'center', // Alineación del texto
                             color: '#fff', // Color del texto
                             font: {
-                                size: 12,
+                                size: 14,
                                 weight: 'bold'
                             },
                             formatter: function(value) {
