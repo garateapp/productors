@@ -15,6 +15,7 @@
 	<style>
 		#container {
         height: 200px !important;
+        width: 100% !important;
     }
 
 	</style>
@@ -124,6 +125,10 @@
                                     return tooltipItem.raw.toFixed(1) + ' %';
                                 }
                             }
+                        },
+                        title: {
+                            display: true,
+                            text: titulo
                         }
                     }
                 }
