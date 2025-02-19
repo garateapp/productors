@@ -5,6 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -87,40 +88,81 @@
       @endphp
    @endif
    <script>
-     $(document).ready(function() {
- var series = <?php echo json_encode($series) ?>;
- var col = <?php echo json_encode($colors) ?>;
+    $(document).ready(function() {
+        // Registrar plugins necesarios
+        Chart.register(ChartDataLabels);
 
- var ctx = document.getElementById('circular').getContext('2d');
- new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        data: data,
-                        backgroundColor: colors
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'right'
+        const series = <?php echo json_encode($series) ?>;
+        const col = <?php echo json_encode($colors) ?>;
+
+        // Mapear datos a formato Chart.js
+        const labels = series.map(item => item.name);
+        const data = series.map(item => item.y);
+
+        const ctx = document.getElementById('circular').getContext('2d');
+
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data,
+                    backgroundColor: col,
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'DISTRIBUCIÓN DE COLOR DE FONDO',
+                        align: 'start',
+                        font: {
+                            size: 18
                         },
-                        tooltip: {
-                            callbacks: {
-                                label: function (tooltipItem) {
-                                    let value = tooltipItem.raw;
-                                    let percentage = ((value / data.reduce((a, b) => a + b, 0)) * 100).toFixed(1);
-                                    return `${tooltipItem.label}: ${value} (${percentage}%)`;
-                                }
+                        padding: 20
+                    },
+                    legend: {
+                        position: 'right',
+                        align: 'center',
+                        labels: {
+                            boxWidth: 20,
+                            padding: 15,
+                            font: {
+                                size: 14
                             }
                         }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: (context) => {
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = ((context.raw / total) * 100).toFixed(0);
+                                return `${context.label}: ${context.raw} (${percentage}%)`;
+                            }
+                        }
+                    },
+                    datalabels: {
+                        color: '#fff',
+                        font: {
+                            size: 22,
+                            weight: 'bold'
+                        },
+                        formatter: (value, context) => {
+                            const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                            const percentage = ((value / total) * 100).toFixed(1);
+                            return value > total * 0.01 ? `${percentage}%` : '';
+                        },
+                        anchor: 'center',
+                        align: 'center'
                     }
-                }
-            });
+                },
+                animation: false
+            }
         });
-
-   </script>
+    });
+</script>
 </body>
 </html>
