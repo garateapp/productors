@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -141,6 +142,7 @@
     @endphp
     <script>
         $(document).ready(function() {
+            Chart.register(ChartDataLabels);
             var series = <?php echo json_encode($series); ?>;
             var titulo = <?php echo json_encode($titulo); ?>;
             var col = <?php echo json_encode($colors); ?>;
@@ -185,16 +187,20 @@
                             position: 'right',
                         },
                         datalabels: {
-                            display: true,
                             color: '#fff',
                             font: {
-                                weight: 'bold',
-                                size: 18
+                                size: 14,
+                                weight: 'bold'
                             },
-                            formatter: function(value, context) {
-                                return value + '%';
-                            }
-                        }
+                            formatter: (value) => {
+                                // Mostrar solo si el segmento es mayor al 5%
+                                return value > 5 ? `${value.toFixed(1)}%` : '';
+                            },
+                            anchor: 'center',
+                            align: 'center',
+                            clip: true,
+                            textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+                        },
                     }
                 }
             });

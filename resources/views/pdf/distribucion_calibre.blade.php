@@ -18,7 +18,7 @@
     @else
         <style>
             #container {
-                height: 280px;
+                height: 230px;
             }
         </style>
     @endif

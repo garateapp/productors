@@ -106,10 +106,10 @@
         @endphp
     @endif
 
-
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <script>
         $(document).ready(function() {
-
+            Chart.register(ChartDataLabels);
             var ctx = document.getElementById("container").getContext("2d");
             var categories = <?php echo json_encode($categories); ?>;
             var series = <?php echo json_encode($series); ?>;

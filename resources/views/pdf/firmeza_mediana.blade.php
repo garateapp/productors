@@ -83,6 +83,7 @@
 
     <script>
           $(document).ready(function() {
+            Chart.register(ChartDataLabels);
         var titulo = <?php echo json_encode($titulo) ?>;
         var categories = <?php echo json_encode($categories) ?>;
         var series = <?php echo json_encode($series) ?>;

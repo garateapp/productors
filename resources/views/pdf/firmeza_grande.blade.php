@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -82,6 +83,7 @@
 
     <script>
         $(document).ready(function() {
+            Chart.register(ChartDataLabels);
             var titulo = <?php echo json_encode($titulo); ?>;
             var categories = <?php echo json_encode($categories); ?>;
             var series = <?php echo json_encode($series); ?>;
@@ -102,6 +104,20 @@
                         borderWidth: 1
                     }]
                 },
+                datalabels: {
+    anchor: 'end',    // Posición del label
+    align: 'end',     // Alineación del texto
+    color: '#fff',    // Color del texto
+    font: {
+        size: 12,
+        weight: 'bold'
+    },
+    formatter: function(value) {
+        return value.toFixed(1) + '%'; // Formato con 1 decimal
+    },
+    offset: 4,        // Espaciado desde la barra
+    clamp: true       // Evitar que salgan del canvas
+},
                 options: {
                     responsive: true,
                     scales: {

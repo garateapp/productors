@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Informe de Recepción Nro° {{$recepcion->numero_g_recepcion}}</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
+    <title>Informe de Recepción Nro° {{ $recepcion->numero_g_recepcion }}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-	<style>
-		#container {
-        height: 310px;
-    }
-
-	</style>
+    <style>
+        #container {
+            height: 310px;
+        }
+    </style>
 </head>
+
 <body>
 
     <figure class="mx-1 mt-4 highcharts-figure">
         <canvas id="container">
 
         </canvas>
-     </figure>
+    </figure>
 
 
 
-	{{-- comment
+    {{-- comment
      @php
         $categories=[];
         $series=[];
@@ -169,70 +171,60 @@
 
     @endforeach
  --}}
- @php
-    $categories=[];
-    $series=[];
-@endphp
+    @php
+        $categories = [];
+        $series = [];
+    @endphp
 
     @if ($recepcion->calidad->detalles)
-        @if ($recepcion->n_variedad=='Dagen')
-            @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA') as $detalle)
-
+        @if ($recepcion->n_variedad == 'Dagen')
+            @foreach ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE FIRMEZA') as $detalle)
                 @php
-                    $categories[]=$detalle->detalle_item;
-                    $series[]=$detalle->porcentaje_muestra;
-
+                    $categories[] = $detalle->detalle_item;
+                    $series[] = $detalle->porcentaje_muestra;
 
                 @endphp
             @endforeach
-
         @else
+            @foreach ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item', 'LIGHT') as $detalle)
+                @php
+                    $l[] = $detalle->valor_ss;
 
-            @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','LIGHT') as $detalle)
-
-                    @php
-                            $l[]=$detalle->valor_ss;
-
-                    @endphp
-
+                @endphp
             @endforeach
-            @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','DARK') as $detalle)
-
-                    @php
-                            $d[]=$detalle->valor_ss;
-                    @endphp
-
+            @foreach ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item', 'DARK') as $detalle)
+                @php
+                    $d[] = $detalle->valor_ss;
+                @endphp
             @endforeach
-            @foreach ($recepcion->calidad->detalles->where('tipo_item','DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item','BLACK') as $detalle)
-
-                    @php
-                            $b[]=$detalle->valor_ss;
-                    @endphp
-
+            @foreach ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item', 'BLACK') as $detalle)
+                @php
+                    $b[] = $detalle->valor_ss;
+                @endphp
             @endforeach
         @endif
 
     @endif
 
-	@if ($recepcion->n_especie=='Cherries')
+    @if ($recepcion->n_especie == 'Cherries')
         @php
-            $colors=['#dc0c15','#71160e','#2b1d16'];
+            $colors = ['#dc0c15', '#71160e', '#2b1d16'];
         @endphp
-    @elseif($recepcion->n_especie=='Apples')
+    @elseif($recepcion->n_especie == 'Apples')
         @php
-            $colors=['#831816'];
+            $colors = ['#831816'];
         @endphp
-    @elseif($recepcion->n_especie=='Pears')
+    @elseif($recepcion->n_especie == 'Pears')
         @php
-            $colors=['#788527'];
+            $colors = ['#788527'];
         @endphp
-    @elseif($recepcion->n_variedad=='Dagen')
+    @elseif($recepcion->n_variedad == 'Dagen')
         @php
-            $colors=['#9817BB'];
+            $colors = ['#9817BB'];
         @endphp
     @else
         @php
-            $colors=['#24a745'];
+            $colors = ['#24a745'];
         @endphp
     @endif
 
@@ -241,7 +233,7 @@
         $(document).ready(function() {
 
 
-            @if($recepcion->n_variedad == 'Dagen')
+            @if ($recepcion->n_variedad == 'Dagen')
                 // Configuración para Dagen
                 var categories = @json($categories);
                 var series = @json($series);
@@ -257,6 +249,20 @@
                             backgroundColor: col,
                         }]
                     },
+                    datalabels: {
+                        anchor: 'end', // Posición del label
+                        align: 'end', // Alineación del texto
+                        color: '#fff', // Color del texto
+                        font: {
+                            size: 12,
+                            weight: 'bold'
+                        },
+                        formatter: function(value) {
+                            return value.toFixed(1) + '%'; // Formato con 1 decimal
+                        },
+                        offset: 4, // Espaciado desde la barra
+                        clamp: true // Evitar que salgan del canvas
+                    },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
@@ -264,14 +270,20 @@
                             title: {
                                 display: true,
                                 text: 'PROMEDIO FIRMEZAS (gf/mm)',
-                                font: { size: 16 }
+                                font: {
+                                    size: 16
+                                }
                             },
-                            legend: { display: false },
+                            legend: {
+                                display: false
+                            },
                             datalabels: {
                                 anchor: 'end',
                                 align: 'end',
                                 formatter: (value) => value.toFixed(1),
-                                font: { size: 16 },
+                                font: {
+                                    size: 16
+                                },
                                 color: 'black'
                             },
                             tooltip: {
@@ -283,7 +295,10 @@
                         },
                         scales: {
                             y: {
-                                title: { display: true, text: '(gf/mm)' },
+                                title: {
+                                    display: true,
+                                    text: '(gf/mm)'
+                                },
                                 beginAtZero: true
                             }
                         }
@@ -307,8 +322,7 @@
                     type: 'bar',
                     data: {
                         labels: categories,
-                        datasets: [
-                            {
+                        datasets: [{
                                 label: 'LIGHT',
                                 data: l,
                                 backgroundColor: col[0],
@@ -335,18 +349,25 @@
                             title: {
                                 display: true,
                                 text: '% Distribución de Firmezas por Segregación de Color',
-                                font: { size: 16 }
+                                font: {
+                                    size: 16
+                                }
                             },
                             legend: {
                                 position: 'right',
-                                labels: { boxWidth: 12, padding: 20 }
+                                labels: {
+                                    boxWidth: 12,
+                                    padding: 20
+                                }
                             },
                             datalabels: {
                                 formatter: (value) => value.toFixed(1) + '%',
                                 color: 'black',
                                 anchor: 'end',
                                 align: 'end',
-                                font: { size: 9 },
+                                font: {
+                                    size: 9
+                                },
                                 offset: 2
                             },
                             tooltip: {
@@ -368,7 +389,10 @@
                             },
                             y: {
                                 max: 100,
-                                title: { display: true, text: '%' },
+                                title: {
+                                    display: true,
+                                    text: '%'
+                                },
                                 beginAtZero: true
                             }
                         },
@@ -381,4 +405,5 @@
         });
     </script>
 </body>
+
 </html>

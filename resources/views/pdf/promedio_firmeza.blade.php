@@ -108,8 +108,20 @@
                     responsive: true,
                     plugins: {
                         legend: { position: "top" },
-                        title: { display: true, text: "PROMEDIO FIRMEZAS (gf/mm)" }
+                        title: { display: true, text: "PROMEDIO FIRMEZAS (gf/mm)" },
+                        datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        color: '#fff',
+                        font: {
+                            size: 14,
+                            weight: 'bold'
+                        },
+                        formatter: (value) => `${value}`,
+                        clamp: true
+                    }
                     },
+
                     scales: {
                         x: {
                             title: { display: true, text: "Categorías" }
