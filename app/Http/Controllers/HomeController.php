@@ -1724,7 +1724,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
         $distribucion_calibre='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x300';
         Log::info("Distribucion calibre ".$distribucion_calibre);
         $distribucion_color='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html&delay=5&viewport=800x400';
-        Log::inf("Distribucion color ".$distribucion_color);
+        Log::info("Distribucion color ".$distribucion_color);
         if ($recepcion->calidad->detalles->where('tipo_item','COLOR DE FONDO')->count()) {
             $distribucion_color_fondo='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/fondo/'.$recepcion->id.'.html&delay=1&viewport=800x400';
         }else{
