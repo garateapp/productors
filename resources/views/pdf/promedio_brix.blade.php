@@ -5,7 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
 
-    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <!-- Correcto -->
 {{-- <script src="https://code.highcharts.com/highcharts.js" defer></script> --}}

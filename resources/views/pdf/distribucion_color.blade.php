@@ -1,161 +1,149 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Informe de Recepción Nro° {{$recepcion->numero_g_recepcion}}</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Informe de Recepción Nro° {{ $recepcion->numero_g_recepcion }}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-	<style>
-		#circular {
+    <style>
+        #circular {
             height: 400px !important;
             width: 500px !important;
         }
-	</style>
+    </style>
 </head>
+
 <body>
 
     <figure class="h-screen mx-1 mt-4 highcharts-figure">
 
-            <canvas id="circular" width="800" height="400"></canvas>
+        <canvas id="circular" width="800" height="400"></canvas>
 
 
-     </figure>
+    </figure>
 
 
 
     @php
-        $series=[];
-        $colors=[];
+        $series = [];
+        $colors = [];
 
-            if ($recepcion->calidad->detalles){
+        if ($recepcion->calidad->detalles) {
+            foreach ($recepcion->calidad->detalles->where('tipo_item', 'COLOR DE CUBRIMIENTO') as $detalle) {
+                //$categories[]=$detalle->detalle_item;
+                //$series[]=$detalle->porcentaje_muestra;
 
+                $name = $detalle->detalle_item;
 
-                foreach ($recepcion->calidad->detalles->where('tipo_item','COLOR DE CUBRIMIENTO') as $detalle){
-
-
-                    //$categories[]=$detalle->detalle_item;
-                    //$series[]=$detalle->porcentaje_muestra;
-
-                                $name=$detalle->detalle_item;
-
-                                if ($recepcion->n_especie=='Cherries') {
-                                    $series[]=['name' =>$name,
-                                    'y' => $detalle->valor_ss];
-                                }else {
-                                    $series[]=['name' =>$name,
-                                    'y' => $detalle->porcentaje_muestra];
-                                }
-
-                                if ($recepcion->n_especie=='Cherries') {
-                                    if ($name=='Fuera de Color') {
-                                        $colors[]='#FF9999';
-                                    }elseif ($name=='ROJO') {
-                                        $colors[]='#FF0000';
-                                    }elseif($name=='ROJO CAOBA'){
-                                        $colors[]='#D60000';
-                                    }elseif($name=='SANTINA'){
-                                        $colors[]='#960000';
-                                    }elseif($name=='CAOBA OSCURO'){
-                                        $colors[]='#640000';
-                                    }elseif($name=='NEGRO'){
-                                        $colors[]='#000000';
-                                    }
-                                }
-                                if ($recepcion->n_especie=='Peaches' || $recepcion->n_especie=='Nectarines') {
-                                    if ($name=='<30') {
-                                        $colors[]='#F0E770';
-                                    }elseif ($name=='30-50') {
-                                        $colors[]='#f05e5e';
-                                    }elseif($name=='50-70'){
-                                        $colors[]='#e01620';
-                                    }elseif($name=='>70'){
-                                        $colors[]='#830d13';
-                                    }
-                                }
-                                if ($recepcion->n_variedad=='Dagen') {
-                                    if ($name=='<30') {
-                                        $colors[]='#D26FDE';
-                                    }elseif ($name=='30-50') {
-                                        $colors[]='#9817BB';
-                                    }elseif($name=='>50'){
-                                        $colors[]='#8C1651';
-                                    }
-                                }
-                                if ($recepcion->n_especie=='Plums' && $recepcion->n_variedad!='Dagen') {
-                                    if ($name=='<30') {
-                                        $colors[]='#F0E770';
-                                    }elseif ($name=='30-50') {
-                                        $colors[]='#f05e5e';
-                                    }elseif($name=='50-70'){
-                                        $colors[]='#e01620';
-                                    }elseif($name=='>70'){
-                                        $colors[]='#830d13';
-                                    }
-                                }
-                    }
+                if ($recepcion->n_especie == 'Cherries') {
+                    $series[] = ['name' => $name, 'y' => $detalle->valor_ss];
+                } else {
+                    $series[] = ['name' => $name, 'y' => $detalle->porcentaje_muestra];
                 }
 
-
+                if ($recepcion->n_especie == 'Cherries') {
+                    if ($name == 'Fuera de Color') {
+                        $colors[] = '#FF9999';
+                    } elseif ($name == 'ROJO') {
+                        $colors[] = '#FF0000';
+                    } elseif ($name == 'ROJO CAOBA') {
+                        $colors[] = '#D60000';
+                    } elseif ($name == 'SANTINA') {
+                        $colors[] = '#960000';
+                    } elseif ($name == 'CAOBA OSCURO') {
+                        $colors[] = '#640000';
+                    } elseif ($name == 'NEGRO') {
+                        $colors[] = '#000000';
+                    }
+                }
+                if ($recepcion->n_especie == 'Peaches' || $recepcion->n_especie == 'Nectarines') {
+                    if ($name == '<30') {
+                        $colors[] = '#F0E770';
+                    } elseif ($name == '30-50') {
+                        $colors[] = '#f05e5e';
+                    } elseif ($name == '50-70') {
+                        $colors[] = '#e01620';
+                    } elseif ($name == '>70') {
+                        $colors[] = '#830d13';
+                    }
+                }
+                if ($recepcion->n_variedad == 'Dagen') {
+                    if ($name == '<30') {
+                        $colors[] = '#D26FDE';
+                    } elseif ($name == '30-50') {
+                        $colors[] = '#9817BB';
+                    } elseif ($name == '>50') {
+                        $colors[] = '#8C1651';
+                    }
+                }
+                if ($recepcion->n_especie == 'Plums' && $recepcion->n_variedad != 'Dagen') {
+                    if ($name == '<30') {
+                        $colors[] = '#F0E770';
+                    } elseif ($name == '30-50') {
+                        $colors[] = '#f05e5e';
+                    } elseif ($name == '50-70') {
+                        $colors[] = '#e01620';
+                    } elseif ($name == '>70') {
+                        $colors[] = '#830d13';
+                    }
+                }
+            }
+        }
 
     @endphp
-    @if ($recepcion->n_especie=='Cherries')
+    @if ($recepcion->n_especie == 'Cherries')
         @php
 
         @endphp
-    @elseif($recepcion->n_especie=='Apples')
+    @elseif($recepcion->n_especie == 'Apples')
         @php
-            $colors=['#830d13','#E01620','#ED3F3F'];
+            $colors = ['#830d13', '#E01620', '#ED3F3F'];
         @endphp
-     @elseif($recepcion->n_especie=='Peaches' || $recepcion->n_especie=='Nectarines')
+    @elseif($recepcion->n_especie == 'Peaches' || $recepcion->n_especie == 'Nectarines')
 
-
-     @elseif($recepcion->n_especie=='Plums' && $recepcion->n_variedad!='Dagen')
+    @elseif($recepcion->n_especie == 'Plums' && $recepcion->n_variedad != 'Dagen')
         @php
 
         @endphp
-
-    @elseif($recepcion->n_especie=='Paltas')
+    @elseif($recepcion->n_especie == 'Paltas')
         @php
-            $colors=['#3f4729','#5c6c2d','#738813','#c0e22e'];
+            $colors = ['#3f4729', '#5c6c2d', '#738813', '#c0e22e'];
         @endphp
-
-    @elseif($recepcion->n_especie=='Pears')
+    @elseif($recepcion->n_especie == 'Pears')
         @php
-            $colors=['#78851b','#bec31f','#d9e53d'];
+            $colors = ['#78851b', '#bec31f', '#d9e53d'];
         @endphp
-    @elseif($recepcion->n_especie=='Membrillos')
+    @elseif($recepcion->n_especie == 'Membrillos')
         @php
-            $colors=['#fedf00','#bec31f','#d9eb00'];
+            $colors = ['#fedf00', '#bec31f', '#d9eb00'];
         @endphp
-    @elseif($recepcion->n_especie=='Orange' || $recepcion->n_especie=='Mandarinas')
+    @elseif($recepcion->n_especie == 'Orange' || $recepcion->n_especie == 'Mandarinas')
         @php
-             $colors=['#c6d406','#f8d34c','#fcad03','#fb8603'];
+            $colors = ['#c6d406', '#f8d34c', '#fcad03', '#fb8603'];
         @endphp
-   @elseif($recepcion->n_variedad=='Dagen')
-
-
+    @elseif($recepcion->n_variedad == 'Dagen')
     @else
         @php
-            $colors=['#24a745','#96AE51','#f9e8cf','#ffd700'];
+            $colors = ['#24a745', '#96AE51', '#f9e8cf', '#ffd700'];
         @endphp
     @endif
     @php
-    if ($recepcion->n_variedad=='Dagen') {
-        $titulo='DISTRIBUCIÓN DE COLOR DE CUBRIMIENTO';
-    } else {
-        $titulo='DISTRIBUCIÓN DE COLOR';
-    }
-
+        if ($recepcion->n_variedad == 'Dagen') {
+            $titulo = 'DISTRIBUCIÓN DE COLOR DE CUBRIMIENTO';
+        } else {
+            $titulo = 'DISTRIBUCIÓN DE COLOR';
+        }
 
     @endphp
     <script>
         $(document).ready(function() {
-            var series = <?php echo json_encode($series) ?>;
-            var titulo = <?php echo json_encode($titulo) ?>;
-            var col = <?php echo json_encode($colors) ?>;
+            var series = <?php echo json_encode($series); ?>;
+            var titulo = <?php echo json_encode($titulo); ?>;
+            var col = <?php echo json_encode($colors); ?>;
 
             var labels = series.map(item => item.name);
             var data = series.map(item => item.y);
@@ -175,11 +163,21 @@
                 options: {
                     responsive: true,
                     plugins: {
+                        // Añadir configuración del título aquí
+                        title: {
+                            display: true,
+                            text: 'Distribución de Color',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            },
+                            padding: 10,
+                            align: 'center'
+                        },
                         tooltip: {
                             callbacks: {
                                 label: function(tooltipItem) {
-                                    var percentage = tooltipItem.raw + ' (' + tooltipItem.raw + '%)';
-                                    return percentage;
+                                    return `${tooltipItem.raw}%`;
                                 }
                             }
                         },
@@ -203,4 +201,5 @@
         });
     </script>
 </body>
+
 </html>
