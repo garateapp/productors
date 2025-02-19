@@ -11,7 +11,7 @@
 
 	<style>
 		#container {
-        height: 200px;
+            height: 200px !important;
     }
 
 	</style>
