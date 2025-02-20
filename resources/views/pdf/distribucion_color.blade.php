@@ -32,9 +32,9 @@
 
 <body>
 
-    <figure class="container h-screen mx-1 mt-4">
+    <figure class="container h-screen mx-1 mt-4" id="container">
 
-        <canvas id="circular" width="800" height="400"></canvas>
+        <canvas id="container2"></canvas>
 
 
     </figure>
@@ -163,7 +163,7 @@
             var labels = series.map(item => item.name);
             var data = series.map(item => item.y);
 
-            var ctx = document.getElementById('circular').getContext('2d');
+            var ctx = document.getElementById('container2').getContext('2d');
             var circularChart = new Chart(ctx, {
                 type: 'pie', // Tipo de gráfico
                 data: {
@@ -177,13 +177,13 @@
                 },
                 options: {
                     aspectRatio: 1, // Ratio directo en Chart.js (sobrescribe CSS)
-    responsive: true,
-    maintainAspectRatio: true,// Activa el cálculo automático
+                    responsive: true,
+                    maintainAspectRatio: true,// Activa el cálculo automático
                     plugins: {
                         // Añadir configuración del título aquí
                         title: {
                             display: true,
-                            text: 'Distribución de Color',
+                            text: 'DISTRIBUCIÓN DE COLOR',
                             font: {
                                 size: 16,
                                 weight: 'bold'

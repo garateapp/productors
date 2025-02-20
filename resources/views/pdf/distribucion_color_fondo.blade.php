@@ -19,8 +19,8 @@
 </head>
 <body>
 
-    <figure class="h-screen mx-1 mt-4">
-        <canvas id="circular">
+    <figure class="h-screen mx-1 mt-4" id="container">
+        <canvas id="container2">
 
         </canvas>
      </figure>
@@ -99,7 +99,7 @@
         const labels = series.map(item => item.name);
         const data = series.map(item => item.y);
 
-        const ctx = document.getElementById('circular').getContext('2d');
+        const ctx = document.getElementById('container2').getContext('2d');
 
         new Chart(ctx, {
             type: 'pie',
