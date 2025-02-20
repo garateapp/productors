@@ -10,17 +10,17 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-		#container {
-            /* height: 200px !important;
-
-            width: 100% !important; */
-            .container {
+		
+            
+.container {
     position: relative;
     max-width: 800px;
     margin: 20px auto;
-    aspect-ratio: 11; /* Ratio 1:1 para gráficos circulares */
+    aspect-ratio: 1;
+    max-width: 600px;
+     /* Ratio 1:1 para gráficos circulares */
     /* Para gráficos de barras: aspect-ratio: 16/9; */
-}
+
 }
 
 .container canvas {
