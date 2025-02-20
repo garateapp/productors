@@ -203,11 +203,11 @@
                             position: 'right',
                         },
                         datalabels: {
-                            anchor: 'end', // Posición del label
+                            anchor: 'center', // Posición del label
                             align: 'center', // Alineación del texto
-                            color: '#666', // Color del texto
+                            color: '#fff', // Color del texto
                             font: {
-                                size: 16,
+                                size: 14,
                                 weight: 'bold'
                             },
                             formatter: function(value) {
