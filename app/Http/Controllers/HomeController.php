@@ -1721,7 +1721,15 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
     public function viewpdf(Recepcion $recepcion) {
 
-        $distribucion_calibre='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x420';
+        $viewport='';
+        if ($recepcion->n_especie == 'Cherries') {
+            $viewport="800x360";
+
+        }
+        else{
+            $viewport="800x250";
+        }
+        $distribucion_calibre='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport='.$viewport;
 
         $distribucion_color='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html&delay=5&viewport=600x420';
 
@@ -1798,7 +1806,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
     }
     public function viewinforme(Recepcion $recepcion) {
 
-        $distribucion_calibre='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html?viewport=800x380';
+        $distribucion_calibre='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html?viewport=800x260';
 
         $distribucion_color='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html?delay=5&viewport=500x380';
 
