@@ -12,7 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
-		#container {
+		
             /* height: 200px !important;
 
             width: 100% !important; */
@@ -22,7 +22,6 @@
     margin: 20px auto;
     aspect-ratio: 16/9; /* Ratio 1:1 para gráficos circulares */
     /* Para gráficos de barras: aspect-ratio: 16/9; */
-}
 }
 
 .container canvas {

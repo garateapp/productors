@@ -6,17 +6,14 @@
 	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
 
     <style>
-		#container {
-            /* height: 200px !important;
 
-            width: 100% !important; */
             .container {
     position: relative;
     max-width: 800px;
     margin: 20px auto;
     aspect-ratio: 16/9; /* Ratio 1:1 para gráficos circulares */
     /* Para gráficos de barras: aspect-ratio: 16/9; */
-}
+
 }
 
 .container canvas {

@@ -15,17 +15,13 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script> --}}
 	<style>
-		#container {
-            /* height: 200px !important;
-
-            width: 100% !important; */
             .container {
     position: relative;
     max-width: 800px;
     margin: 20px auto;
     aspect-ratio: 16/9; /* Ratio 1:1 para gráficos circulares */
     /* Para gráficos de barras: aspect-ratio: 16/9; */
-}
+
 }
 
 .container canvas {
@@ -36,7 +32,7 @@
 </head>
 <body>
 
-    <figure class="mx-1 mt-4 highcharts-figure">
+    <figure class="container mx-1 mt-4">
         <canvas id="container2">
 
         </canvas>

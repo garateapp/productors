@@ -14,10 +14,7 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script> --}}
 	<style>
-		#container {
-            /* height: 200px !important;
 
-            width: 100% !important; */
             .container {
     position: relative;
     max-width: 800px;
