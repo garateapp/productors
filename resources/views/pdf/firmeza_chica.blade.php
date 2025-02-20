@@ -22,7 +22,7 @@
     position: relative;
     max-width: 800px;
     margin: 20px auto;
-    aspect-ratio: 1; /* Ratio 1:1 para gráficos circulares */
+    aspect-ratio: 16/9; /* Ratio 1:1 para gráficos circulares */
     /* Para gráficos de barras: aspect-ratio: 16/9; */
 }
 
