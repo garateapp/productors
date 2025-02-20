@@ -179,7 +179,7 @@
                 options: {
 
                     responsive: true,
-
+                    maintainAspectRatio: true,
                     plugins: {
                         // Añadir configuración del título aquí
                         title: {

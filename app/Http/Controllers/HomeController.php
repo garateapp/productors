@@ -1720,15 +1720,10 @@ public function uploadAndReadExcelGreenvic(Request $request)
     }
 
     public function viewpdf(Recepcion $recepcion) {
-        $viewport='800x300';
+
         $distribucion_calibre='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x300';
-        if($recepcion->n_especie=='Nectarines'){
-            $viewport='600x420';
-        }
-        else{
-            $viewport='800x420';
-        }
-        $distribucion_color='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html&delay=5&viewport='.$viewport;
+
+        $distribucion_color='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html&delay=5&viewport=800x420';
 
 
         if ($recepcion->calidad->detalles->where('tipo_item','COLOR DE FONDO')->count()) {
