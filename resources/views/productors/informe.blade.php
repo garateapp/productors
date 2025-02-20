@@ -431,26 +431,26 @@
                     @if ($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen')
                         @isset($promedio_firmeza)
                             <td>
-                                <img style="width:100%;" src="{{ $promedio_firmeza }}" alt="">
+                                <img style="width:100%;height:100%;" src="{{ $promedio_firmeza }}" alt="">
                             </td>
                         @endif
                     @else
                         @isset($distribucion_color)
                             <td>
-                                <img style="width:100%;" src="{{ $distribucion_color }}" alt="">
+                                <img style="width:100%;height:100%;" src="{{ $distribucion_color }}" alt="">
                             </td>
                             @endif
                             @endif
                             @if ($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen')
                                 @isset($promedio_brix)
                                     <td>
-                                        <img style="width:100%;" src="{{ $promedio_brix }}" alt="">
+                                        <img style="width:100%;height:100%;" src="{{ $promedio_brix }}" alt="">
                                     </td>
                                 @endif
                             @else
                                 @isset($distribucion_color_fondo)
                                     <td>
-                                        <img style="width:100%;" src="{{ $distribucion_color_fondo }}" alt="">
+                                        <img style="width:100%;height:100%;" src="{{ $distribucion_color_fondo }}" alt="">
                                     </td>
                                     @endif
                                     @endif
@@ -463,11 +463,11 @@
 
 
                             @if ($recepcion->calidad->detalles->where('tipo_item', 'GRANDE')->first())
-                                <table style="width:100%;">
+                                <table style="width:100%;height:100%;">
                                     <tr>
                                         @isset($firmezas_grande)
                                             <td>
-                                                <img style="width:100%;" src="{{ $firmezas_grande }}" alt="">
+                                                <img style="width:100%;height:100%;" src="{{ $firmezas_grande }}" alt="">
                                             </td>
                                 @endif
 
@@ -476,11 +476,11 @@
                                 </table>
                                 @endif
                                 @if ($recepcion->calidad->detalles->where('tipo_item', 'MEDIANO')->first())
-                                    <table style="width:100%;">
+                                    <table style="width:100%;height:100%;">
                                         <tr>
                                             @isset($firmezas_mediana)
                                                 <td>
-                                                    <img style="width:100%;" src="{{ $firmezas_mediana }}" alt="">
+                                                    <img style="width:100%;height:100%;" src="{{ $firmezas_mediana }}" alt="">
                                                 </td>
                                     @endif
 
@@ -489,11 +489,11 @@
                                     </table>
                                     @endif
                                     @if ($recepcion->calidad->detalles->where('tipo_item', 'CHICO')->first())
-                                        <table style="width:100%;">
+                                        <table style="width:100%;height:100%;">
                                             <tr>
                                                 @isset($firmezas_chica)
                                                     <td>
-                                                        <img style="width:100%;" src="{{ $firmezas_chica }}" alt="">
+                                                        <img style="width:100%;height:100%;" src="{{ $firmezas_chica }}" alt="">
                                                     </td>
                                         @endif
 
@@ -506,13 +506,13 @@
                                                 <tr>
                                                     @isset($porcentaje_firmeza)
                                                         <td>
-                                                            <img style="width:100%;" src="{{ $porcentaje_firmeza }}" alt="">
+                                                            <img style="width:100%;height:100%;" src="{{ $porcentaje_firmeza }}" alt="">
                                                         </td>
                                             @endif
                                             @if ($recepcion->n_variedad == 'Dagen')
                                                 @isset($distribucion_color_fondo)
                                                     <td>
-                                                        <img style="width:100%;" src="{{ $distribucion_color_fondo }}" alt="">
+                                                        <img style="width:100%;height:100%;" src="{{ $distribucion_color_fondo }}" alt="">
                                                     </td>
                                                 @endif
                                                 @endif
