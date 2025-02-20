@@ -1793,7 +1793,81 @@ public function uploadAndReadExcelGreenvic(Request $request)
          //return view('productors.informe',compact('recepcion','distribucion_calibre'));
 
     }
+    public function viewinforme(Recepcion $recepcion) {
 
+        $distribucion_calibre='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x380';
+
+        $distribucion_color='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html&delay=5&viewport=800x420';
+
+        if ($recepcion->calidad->detalles->where('tipo_item','COLOR DE FONDO')->count()) {
+            $distribucion_color_fondo='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/fondo/'.$recepcion->id.'.html&delay=1&viewport=800x420';
+        }else{
+            $distribucion_color_fondo=NULL;
+        }
+
+        if ($recepcion->n_especie!='Orange' || $recepcion->n_especie=="Cherries") {
+            $firmezas_grande='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/grande/'.$recepcion->id.'.html&viewport=800x250';
+            $firmezas_mediana='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/mediana/'.$recepcion->id.'.html&viewport=800x250';
+            $firmezas_chica='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/chica/'.$recepcion->id.'.html&viewport=800x250';
+        }else{
+            $firmezas_grande=NULL;
+            $firmezas_mediana=NULL;
+            $firmezas_chica=NULL;
+        }
+
+        if ($recepcion->n_especie=="Cherries" || $recepcion->n_variedad=='Dagen') {
+            $distribucion_calibre='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x380';
+            $promedio_firmeza='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/'.$recepcion->id.'.html&viewport=800x400';
+            $promedio_brix='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/brix/'.$recepcion->id.'.html&viewport=800x400';
+
+            $porcentaje_firmeza='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/porcentaje/firmeza/'.$recepcion->id.'.html&viewport=800x330';
+        }else{
+            $promedio_firmeza=NULL;
+            $promedio_brix=NULL;
+            $porcentaje_firmeza=NULL;
+        }
+        if ($recepcion->n_especie=='Orange'  || $recepcion->n_especie=='Mandarinas') {
+            $calibrix='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibrix/'.$recepcion->id.'.html&viewport=800x380';
+        }else{
+            $calibrix=NULL;
+        }
+        //view()->share('productors.informe',$recepcion,$distribucion_calibre);
+        $user=User::where('name',$recepcion->n_emisor)->first();
+
+        $presiones=Valor::where('parametro_id',16)->where('especie',$recepcion->n_especie)->orderby('id','ASC')->get();
+        $almidons=Valor::where('parametro_id',8)->where('especie',$recepcion->n_especie)->orderby('id','ASC')->get();
+
+        return view('productors.informe',compact( 
+         ['recepcion' => $recepcion,
+                                                     'distribucion_calibre'=>$distribucion_calibre,
+                                                     'distribucion_color'=>$distribucion_color,
+                                                    'distribucion_color_fondo'=> $distribucion_color_fondo,
+                                                    'firmezas_grande'=>$firmezas_grande,
+                                                    'firmezas_mediana'=>$firmezas_mediana,
+                                                    'firmezas_chica'=>$firmezas_chica,
+                                                    'presiones'=>$presiones,
+                                                    'promedio_firmeza'=>$promedio_firmeza,
+                                                    'promedio_brix'=>$promedio_brix,
+                                                    'porcentaje_firmeza'=>$porcentaje_firmeza,
+                                                    'almidons'=>$almidons,
+                                                    'calibrix'=>$calibrix,
+                                                    'user'=>$user]));
+
+        // $pdfContent = $pdf->output();
+        // $filename = $recepcion->numero_g_recepcion.'-'.$recepcion->id_emisor.'.pdf';
+
+        // Storage::put('pdf-recepciones/' . $filename, $pdfContent);
+
+        // $recepcion->update([
+        //     'informe'=>'pdf-recepciones/'.$filename
+        // ]);
+
+
+        // return $pdf->stream($recepcion->numero_g_recepcion.'-'.$recepcion->id_emisor.'.pdf');
+
+         //return view('productors.informe',compact('recepcion','distribucion_calibre'));
+
+    }
     public function production()
     {  $estadistica = Estadisticas::create([
             'type'=> 'vistarecepcionadmin',

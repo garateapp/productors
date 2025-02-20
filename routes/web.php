@@ -82,6 +82,8 @@ Route::get('download/recepcion/{recepcion}.pdf', [HomeController::class,'downloa
 
 Route::get('informe/{recepcion}', [HomeController::class,'viewpdf'])->name('informe.view');
 
+Route::get('viewinforme/{recepcion}', [HomeController::class,'viewinforme'])->name('informe.view');
+
 Route::post('pass/{user}', [UserController::class,'password_rec'])->middleware('auth')->name('recuperar.contrasena');
 
 Route::get('createlogo/{user}', [UserController::class,'logo_create'])->middleware('auth')->name('create.logo');
