@@ -14,9 +14,9 @@
 .container {
     position: relative;
     margin: 20px auto;
-    /* aspect-ratio: 1;
+    aspect-ratio: 1;
     max-width: 600px;
-    height: 600px; */
+
      /* Ratio 1:1 para gráficos circulares */
     /* Para gráficos de barras: aspect-ratio: 16/9; */
 
@@ -124,8 +124,7 @@
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true,
-                aspectRatio:1,
+
                 plugins: {
                     title: {
                         display: true,

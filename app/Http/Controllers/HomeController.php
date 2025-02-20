@@ -1791,17 +1791,19 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
          return $pdf->stream($recepcion->numero_g_recepcion.'-'.$recepcion->id_emisor.'.pdf');
 
-         //return view('productors.informe',compact('recepcion','distribucion_calibre'));
+        //  return view('productors.informe',compact('recepcion','distribucion_calibre','distribucion_color',
+        //  'distribucion_color_fondo','firmezas_grande','firmezas_mediana','firmezas_chica','presiones',
+        //  'promedio_firmeza','promedio_brix','porcentaje_firmeza','almidons','calibrix','user'));
 
     }
     public function viewinforme(Recepcion $recepcion) {
 
         $distribucion_calibre='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html?viewport=800x380';
 
-        $distribucion_color='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html?delay=5&viewport=600x480';
+        $distribucion_color='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html?delay=5&viewport=500x380';
 
         if ($recepcion->calidad->detalles->where('tipo_item','COLOR DE FONDO')->count()) {
-            $distribucion_color_fondo='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/fondo/'.$recepcion->id.'.html?delay=1&viewport=600x480';
+            $distribucion_color_fondo='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/fondo/'.$recepcion->id.'.html?delay=1&viewport=500x380';
         }else{
             $distribucion_color_fondo=NULL;
         }
