@@ -14,7 +14,7 @@
     <style>
         #container {
             height: 200px !important;
-            width: 500px !important;
+            width: 100% !important;
         }
     </style>
 </head>
@@ -127,7 +127,7 @@
                         tooltip: {
                             callbacks: {
                                 label: function(tooltipItem) {
-                                    return tooltipItem.raw.toFixed(1) + ' %';
+                                    return tooltipItem.raw.toFixed(1) + '';
                                 }
                             }
                         },

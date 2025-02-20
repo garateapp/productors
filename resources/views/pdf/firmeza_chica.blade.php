@@ -16,7 +16,7 @@
 	<style>
 		#container {
             height: 200px !important;
-        width: 500px !important;
+            width: 100% !important;
     }
 
 	</style>
@@ -106,7 +106,7 @@
                         borderWidth: 1
                     }]
                 },
-              
+
                 options: {
                     responsive: true,
                     scales: {
@@ -125,7 +125,7 @@
                         tooltip: {
                             callbacks: {
                                 label: function (tooltipItem) {
-                                    return tooltipItem.raw.toFixed(1) + ' %';
+                                    return tooltipItem.raw.toFixed(1) + '';
                                 }
                             }
                         },
