@@ -15,8 +15,8 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script> --}}
 	<style>
 		#container {
-            height: 200px !important;
-            width: 100% !important;
+            /* height: 200px !important;
+            width: 100% !important; */
     }
 
 	</style>
