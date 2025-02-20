@@ -145,7 +145,7 @@
                 options: {
                     aspectRatio: 1, // Ratio directo en Chart.js (sobrescribe CSS)
     responsive: true,
-    maintainAspectRatio: true // Activa el cálculo automático
+    maintainAspectRatio: true, // Activa el cálculo automático
                     plugins: {
                         legend: { position: "top" },
                         title: { display: true, text: "PROMEDIO BRIX" },
