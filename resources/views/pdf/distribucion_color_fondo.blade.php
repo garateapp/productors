@@ -136,14 +136,6 @@
                         },
                         legend: {
                             position: 'right',
-                            align: 'center',
-                            labels: {
-                                boxWidth: 10,
-                                padding: 15,
-                                font: {
-                                    size: 12
-                                }
-                            }
                         },
                         tooltip: {
                             callbacks: {
