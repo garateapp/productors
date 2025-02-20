@@ -10,17 +10,28 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-    #chartContainer {
-        width: 80%;
-        max-width: 600px;
-        margin: auto;
-    }
+  
+.container {
+    position: relative;
+    margin: 20px auto;
+    /* aspect-ratio: 1;
+    max-width: 600px;
+    height: 600px; */
+     /* Ratio 1:1 para gráficos circulares */
+    /* Para gráficos de barras: aspect-ratio: 16/9; */
+
+}
+
+.container canvas {
+    /* width: 100%!important;
+    height: 100%!important; */
+}
 </style>
 </head>
 <body>
 
-    <figure class="h-screen mx-1 mt-4" id="container">
-        <canvas id="container2">
+    <figure class="container h-screen mx-2 mt-4" id="container" style="position: relative; height:80vh; width:60vw">
+        <canvas id="container2"> 
 
         </canvas>
      </figure>
@@ -124,7 +135,7 @@
                             size: 18
                         },
                         padding: 20
-                    },
+                   },
                     legend: {
                         position: 'right',
                         align: 'center',
