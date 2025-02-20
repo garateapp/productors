@@ -19,7 +19,7 @@
     @else
         <style>
             #container {
-                max-height: 350px;
+                max-height: 250px;
             }
         </style>
     @endif
