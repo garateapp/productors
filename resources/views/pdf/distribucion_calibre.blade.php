@@ -28,7 +28,7 @@
 
 <body>
 
-    <figure class="mx-1 mt-4" style="position: relative;height:100vh; width:90vw">
+    <figure class="mx-1 mt-4">
         <canvas id="container" style="position: relative;"></canvas>
     </figure>
 
@@ -128,7 +128,7 @@
                 options: {
                     aspectRatio: 16/9, // Ratio directo en Chart.js (sobrescribe CSS)
     responsive: true,
-    maintainAspectRatio: true, // Activa el cálculo automático
+    maintainAspectRatio: false, // Activa el cálculo automático
                     scales: {
                         x: {
                             title: {
