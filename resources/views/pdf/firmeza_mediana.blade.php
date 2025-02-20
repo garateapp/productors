@@ -14,7 +14,18 @@
             /* height: 200px !important;
 
             width: 100% !important; */
+            .container {
+    position: relative;
+    max-width: 800px;
+    margin: 20px auto;
+    aspect-ratio: 1; /* Ratio 1:1 para gráficos circulares */
+    /* Para gráficos de barras: aspect-ratio: 16/9; */
+}
 
+.container canvas {
+    width: 100%!important;
+    height: 100%!important;
+}
 	</style>
 </head>
 <body>

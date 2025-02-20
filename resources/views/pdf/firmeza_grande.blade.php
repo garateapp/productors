@@ -12,11 +12,23 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
-        #container {
-            /* height: 300px !important;
+		#container {
+            /* height: 200px !important;
+
             width: 100% !important; */
-        }
-    </style>
+            .container {
+    position: relative;
+    max-width: 800px;
+    margin: 20px auto;
+    aspect-ratio: 1; /* Ratio 1:1 para gráficos circulares */
+    /* Para gráficos de barras: aspect-ratio: 16/9; */
+}
+
+.container canvas {
+    width: 100%!important;
+    height: 100%!important;
+}
+	</style>
 </head>
 
 <body>
