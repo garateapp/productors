@@ -149,7 +149,7 @@
                         datalabels: {
                             color: '#666',
                             font: {
-                                size: 14,
+                                size: 12,
                                 weight: 'bold'
                             },
                             formatter: (value, context) => {
