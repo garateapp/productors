@@ -10,7 +10,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-  
+
 .container {
     position: relative;
     margin: 20px auto;
@@ -30,8 +30,8 @@
 </head>
 <body>
 
-    <figure class="container h-screen mx-1 mt-4" id="container" style="position: relative; height:80vh; width:80vw">
-        <canvas id="container2"> 
+    <figure class="container h-screen mx-1 mt-4" id="container" style="position: relative; height:60vh; width:80vw">
+        <canvas id="container2">
 
         </canvas>
      </figure>

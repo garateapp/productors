@@ -33,7 +33,7 @@
 
 <body>
 
-    <figure class="container h-screen mx-1 mt-4" id="container"  style="position: relative; height:80vh; width:80vw">
+    <figure class="container h-screen mx-1 mt-4" id="container"  style="position: relative; height:60vh; width:80vw">
 
         <canvas id="container2"></canvas>
 

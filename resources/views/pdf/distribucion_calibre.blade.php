@@ -19,7 +19,7 @@
     @else
         <style>
             #container {
-                max-height: 250px;
+                max-height: 350px;
             }
         </style>
     @endif
@@ -126,9 +126,9 @@
                     }]
                 },
                 options: {
-                    aspectRatio: 16/9, // Ratio directo en Chart.js (sobrescribe CSS)
+                     // Ratio directo en Chart.js (sobrescribe CSS)
     responsive: true,
-    maintainAspectRatio: false, // Activa el cálculo automático
+   // maintainAspectRatio: true, // Activa el cálculo automático
                     scales: {
                         x: {
                             title: {
