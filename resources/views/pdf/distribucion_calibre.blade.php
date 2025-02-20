@@ -107,7 +107,7 @@
     @endif
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <script>
-          $(document).ready(function() {
+        $(document).ready(function() {
             Chart.register(ChartDataLabels);
 
             var ctx = document.getElementById('container').getContext('2d');
@@ -122,7 +122,7 @@
                         backgroundColor: <?php echo json_encode($colors); ?>,
                         borderColor: <?php echo json_encode($colors); ?>,
                         borderWidth: 1,
-                       
+
                     }]
                 },
                 options: {
@@ -172,6 +172,14 @@
                             },
                             offset: 4, // Espaciado desde la barra
                             clamp: true // Evitar que salgan del canvas
+                        }
+                    },
+                    layout: {
+                        padding: {
+                            top: 20,
+                            right: 30,
+                            bottom: 20,
+                            left: 30
                         }
                     }
                 }

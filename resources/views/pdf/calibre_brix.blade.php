@@ -5,17 +5,30 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
 
-	<style>
+    <style>
 		#container {
-        height: 350px;
-    }
+            /* height: 200px !important;
 
+            width: 100% !important; */
+            .container {
+    position: relative;
+    max-width: 800px;
+    margin: 20px auto;
+    aspect-ratio: 16/9; /* Ratio 1:1 para gráficos circulares */
+    /* Para gráficos de barras: aspect-ratio: 16/9; */
+}
+}
+
+.container canvas {
+    width: 100%!important;
+    height: 100%!important;
+}
 	</style>
 </head>
 <body>
 
-    <figure class="mx-1 mt-4 highcharts-figure">
-        <div id="container">
+    <figure class="container mx-1 mt-4" id="container">
+        <div id="container2">
 
         </div>
      </figure>
@@ -77,7 +90,7 @@
         console.log(series);
         console.log(col);
 
-        var ctx = document.getElementById('barChart').getContext('2d');
+        var ctx = document.getElementById('container2').getContext('2d');
             new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -102,6 +115,7 @@
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     plugins: {
                         tooltip: {
                             callbacks: {

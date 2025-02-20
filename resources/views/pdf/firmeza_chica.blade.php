@@ -34,11 +34,11 @@
 </head>
 <body>
 
-    <figure class="mx-1 mt-4 highcharts-figure">
-        <canvas id="container">
+    <figure class="container mx-1 mt-4" id="container">
+        <canvas id="container2">
 
         </canvas>
-     </figure>
+    </figure>
 
 
 
@@ -104,7 +104,7 @@
         var categories = <?php echo json_encode($categories) ?>;
         var series = <?php echo json_encode($series) ?>;
         var col = <?php echo json_encode($colors) ?>;
-        var ctx=document.getElementById('container').getContext('2d');
+        var ctx=document.getElementById('container2').getContext('2d');
         new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -120,6 +120,7 @@
 
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     scales: {
                         y: {
                             beginAtZero: true,

@@ -9,18 +9,30 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <style>
-        #circular {
-            height: 400px !important;
-            width: 500px !important;
-        }
-    </style>
+		#container {
+            /* height: 200px !important;
+
+            width: 100% !important; */
+            .container {
+    position: relative;
+    max-width: 800px;
+    margin: 20px auto;
+    aspect-ratio: 11; /* Ratio 1:1 para gráficos circulares */
+    /* Para gráficos de barras: aspect-ratio: 16/9; */
+}
+}
+
+.container canvas {
+    width: 100%!important;
+    height: 100%!important;
+}
+	</style>
 </head>
 
 <body>
 
-    <figure class="h-screen mx-1 mt-4 highcharts-figure">
+    <figure class="container h-screen mx-1 mt-4">
 
         <canvas id="circular" width="800" height="400"></canvas>
 
@@ -164,6 +176,7 @@
                     }]
                 },
                 options: {
+                    maintainAspectRatio: false,
                     responsive: true,
                     plugins: {
                         // Añadir configuración del título aquí
@@ -202,7 +215,14 @@
                             clamp: true // Evitar que salgan del canvas
                         }
                     }
-                }
+                }, layout: {
+        padding: {
+            top: 20,
+            right: 30,
+            bottom: 20,
+            left: 30
+        }
+    }
             });
         });
     </script>

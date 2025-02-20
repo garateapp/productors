@@ -15,16 +15,30 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script> --}}
     <style>
-        #container {
-            height: 350px;
-        }
-    </style>
+		#container {
+            /* height: 200px !important;
+
+            width: 100% !important; */
+            .container {
+    position: relative;
+    max-width: 800px;
+    margin: 20px auto;
+    aspect-ratio: 16/9; /* Ratio 1:1 para gráficos circulares */
+    /* Para gráficos de barras: aspect-ratio: 16/9; */
+}
+}
+
+.container canvas {
+    width: 100%!important;
+    height: 100%!important;
+}
+	</style>
 </head>
 
 <body>
 
-    <figure class="mx-1 mt-4 highcharts-figure">
-        <canvas id="container">
+    <figure class="container mx-1 mt-4">
+        <canvas id="container2">
 
         </canvas>
     </figure>
@@ -92,7 +106,7 @@
             console.log(series);
             console.log(colors);
 
-            var ctx = document.getElementById("container").getContext("2d");
+            var ctx = document.getElementById("container2").getContext("2d");
 
             new Chart(ctx, {
                 type: "bar",
@@ -108,6 +122,7 @@
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     plugins: {
                         legend: {
                             position: "top"

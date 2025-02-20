@@ -34,8 +34,8 @@
 
 <body>
 
-    <figure class="mx-1 mt-4 highcharts-figure">
-        <canvas id="container">
+    <figure class="container mx-1 mt-4" id="container">
+        <canvas id="container2">
 
         </canvas>
     </figure>
@@ -104,7 +104,7 @@
             console.log(categories);
             console.log(series);
             console.log(col);
-            var ctx = document.getElementById('container').getContext('2d');
+            var ctx = document.getElementById('container2').getContext('2d');
             new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -120,6 +120,7 @@
 
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     scales: {
                         y: {
                             beginAtZero: true,
@@ -157,7 +158,7 @@
                                 weight: 'bold'
                             },
                             formatter: function(value) {
-                                return value.toFixed(1) + '%'; // Formato con 1 decimal
+                                return value.toFixed(1) + ''; // Formato con 1 decimal
                             },
                             offset: 4, // Espaciado desde la barra
                             clamp: true // Evitar que salgan del canvas

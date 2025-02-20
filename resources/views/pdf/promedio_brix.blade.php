@@ -16,15 +16,28 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script> --}}
 	<style>
 		#container {
-        height: 350px;
-    }
+            /* height: 200px !important;
 
+            width: 100% !important; */
+            .container {
+    position: relative;
+    max-width: 800px;
+    margin: 20px auto;
+    aspect-ratio: 16/9; /* Ratio 1:1 para gráficos circulares */
+    /* Para gráficos de barras: aspect-ratio: 16/9; */
+}
+}
+
+.container canvas {
+    width: 100%!important;
+    height: 100%!important;
+}
 	</style>
 </head>
 <body>
 
     <figure class="mx-1 mt-4 highcharts-figure">
-        <canvas id="container">
+        <canvas id="container2">
 
         </canvas>
      </figure>
@@ -110,7 +123,7 @@
     <script>
         $(document).ready(function() {
             Chart.register(ChartDataLabels);
-            var ctx = document.getElementById("container").getContext("2d");
+            var ctx = document.getElementById("container2").getContext("2d");
             var categories = <?php echo json_encode($categories); ?>;
             var series = <?php echo json_encode($series); ?>;
             var colors = <?php echo json_encode($colors); ?>;
@@ -131,6 +144,7 @@
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     plugins: {
                         legend: { position: "top" },
                         title: { display: true, text: "PROMEDIO BRIX" },
