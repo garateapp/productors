@@ -1723,7 +1723,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
         $distribucion_calibre='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x400';
 
-        $distribucion_color='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html&delay=5&viewport=800x620';
+        $distribucion_color='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html&delay=5&viewport=800x420';
 
         if ($recepcion->calidad->detalles->where('tipo_item','COLOR DE FONDO')->count()) {
             $distribucion_color_fondo='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/fondo/'.$recepcion->id.'.html&delay=1&viewport=800x620';
@@ -1837,7 +1837,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
         $presiones=Valor::where('parametro_id',16)->where('especie',$recepcion->n_especie)->orderby('id','ASC')->get();
         $almidons=Valor::where('parametro_id',8)->where('especie',$recepcion->n_especie)->orderby('id','ASC')->get();
 
-        return view('productors.informe',compact( 
+        return view('productors.informe',compact(
          ['recepcion' => $recepcion,
                                                      'distribucion_calibre'=>$distribucion_calibre,
                                                      'distribucion_color'=>$distribucion_color,
