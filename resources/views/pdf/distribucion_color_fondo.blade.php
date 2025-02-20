@@ -147,7 +147,7 @@
                             }
                         },
                         datalabels: {
-                            color: <?php echo $datalabelColor; ?>,
+                            color: '#666',
                             font: {
                                 size: 14,
                                 weight: 'bold'
