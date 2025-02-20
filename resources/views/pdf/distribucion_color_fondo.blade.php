@@ -138,10 +138,10 @@
                             position: 'right',
                             align: 'center',
                             labels: {
-                                boxWidth: 20,
+                                boxWidth: 10,
                                 padding: 15,
                                 font: {
-                                    size: 14
+                                    size: 12
                                 }
                             }
                         },
@@ -155,9 +155,9 @@
                             }
                         },
                         datalabels: {
-                            color: '#fff',
+                            color: <?php echo $datalabelColor; ?>,
                             font: {
-                                size: 16,
+                                size: 14,
                                 weight: 'bold'
                             },
                             formatter: (value, context) => {
