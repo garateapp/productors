@@ -31,7 +31,7 @@
 
 <body>
 
-    <figure class="container" id="container" style="height:60vh; width:80vw">
+    <figure class="container" id="container" style="height:60vh; width:60vw">
         <canvas id="container2">
 
         </canvas>
