@@ -14,24 +14,24 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script> --}}
 	<style>
-/* 
+
             .container {
     position: relative;
     max-width: 800px;
     margin: 20px auto;
     aspect-ratio: 16/9; /* Ratio 1:1 para gráficos circulares */
-    /* Para gráficos de barras: aspect-ratio: 16/9; 
+    /* Para gráficos de barras: aspect-ratio: 16/9; */
 }
 
 .container canvas {
     width: 100%!important;
     height: 100%!important;
-} */
+}
 	</style>
 </head>
 <body>
 
-    <figure class="container mx-1 mt-4" id="container" style="height:40vh; width:60vw">
+    <figure class="container mx-1 mt-4" id="container" style="height:60vh; width:60vw">
         <canvas id="container2">
 
         </canvas>

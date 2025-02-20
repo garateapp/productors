@@ -11,12 +11,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<style>
 
-            /* .container {
+             .container {
     position: relative;
     max-width: 800px;
     margin: 20px auto;
     aspect-ratio: 16/9; /* Ratio 1:1 para gráficos circulares */
-    /* Para gráficos de barras: aspect-ratio: 16/9; 
+    /* Para gráficos de barras: aspect-ratio: 16/9; */
 
 }
 
@@ -28,7 +28,7 @@
 </head>
 <body>
 
-    <figure class="container mx-1 mt-4" id="container" style="height:40vh; width:60vw">
+    <figure class="container mx-1 mt-4" id="container" style="height:60vh; width:60vw">
         <canvas id="container2">
 
         </canvas>
