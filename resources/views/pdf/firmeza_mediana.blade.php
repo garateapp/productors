@@ -11,19 +11,19 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<style>
 
-            .container {
+            /* .container {
     position: relative;
     max-width: 800px;
     margin: 20px auto;
     aspect-ratio: 16/9; /* Ratio 1:1 para gráficos circulares */
-    /* Para gráficos de barras: aspect-ratio: 16/9; */
+    /* Para gráficos de barras: aspect-ratio: 16/9; 
 
 }
 
 .container canvas {
     width: 100%!important;
     height: 100%!important;
-}
+} */
 	</style>
 </head>
 <body>
@@ -115,7 +115,7 @@
                 options: {
                     aspectRatio: 16/9, // Ratio directo en Chart.js (sobrescribe CSS)
     responsive: true,
-    maintainAspectRatio: true, // Activa el cálculo automático
+    maintainAspectRatio: false, // Activa el cálculo automático
                     scales: {
                         y: {
                             beginAtZero: true,
