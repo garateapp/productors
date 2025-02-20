@@ -31,7 +31,7 @@
 </head>
 <body>
 
-    <figure class="container mx-1 mt-4" id="container">
+    <figure class="container mx-1 mt-4" id="container" style="height:40vh; width:100vw">
         <canvas id="container2">
 
         </canvas>
