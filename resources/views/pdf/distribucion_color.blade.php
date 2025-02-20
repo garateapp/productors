@@ -10,13 +10,14 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-		
-            
+
+
 .container {
     position: relative;
     margin: 20px auto;
-    /* aspect-ratio: 1;
     max-width: 600px;
+    /* aspect-ratio: 1;
+
     height: 600px; */
      /* Ratio 1:1 para gráficos circulares */
     /* Para gráficos de barras: aspect-ratio: 16/9; */
@@ -24,8 +25,8 @@
 }
 
 .container canvas {
-    /* width: 100%!important;
-    height: 100%!important; */
+    width: 100%!important;
+    height: 100%!important;
 }
 	</style>
 </head>
@@ -176,9 +177,9 @@
                     }]
                 },
                 options: {
-                    
+
                     responsive: true,
-                    
+
                     plugins: {
                         // Añadir configuración del título aquí
                         title: {

@@ -19,7 +19,7 @@
     @else
         <style>
             #container {
-                height: 250px;
+                max-height: 250px;
             }
         </style>
     @endif
@@ -28,8 +28,8 @@
 
 <body>
 
-    <figure class="mx-1 mt-4">
-        <canvas id="container"></canvas>
+    <figure class="mx-1 mt-4" style="position: relative;height:100vh; width:90vw">
+        <canvas id="container" style="position: relative;"></canvas>
     </figure>
 
 
