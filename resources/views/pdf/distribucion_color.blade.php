@@ -203,9 +203,9 @@
                             position: 'right',
                         },
                         datalabels: {
-                            anchor: 'center', // Posición del label
+                            anchor: 'end', // Posición del label
                             align: 'center', // Alineación del texto
-                            color: '#fff', // Color del texto
+                            color: '#666', // Color del texto
                             font: {
                                 size: 16,
                                 weight: 'bold'
@@ -214,7 +214,7 @@
                                 return value.toFixed(1) + '%'; // Formato con 1 decimal
                             },
                             offset: 4, // Espaciado desde la barra
-                            clamp: true // Evitar que salgan del canvas
+                            clamp: false // Evitar que salgan del canvas
                         }
                     }
                 }, layout: {

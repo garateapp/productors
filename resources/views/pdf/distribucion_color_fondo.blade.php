@@ -158,8 +158,9 @@
                                 const percentage = ((value / total) * 100).toFixed(1);
                                 return value > total * 0.01 ? `${percentage}%` : '';
                             },
-                            anchor: 'center',
-                            align: 'center'
+                            anchor: 'end',
+                            align: 'center',
+                            clamp:false
                         }
                     },
                     animation: false
