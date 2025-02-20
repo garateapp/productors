@@ -44,6 +44,7 @@
 
 
     @php
+    $datalabelColor="#fff";
         $series = [];
 
         if ($recepcion->calidad->detalles) {
@@ -64,9 +65,11 @@
                     } elseif ($name == 'AMARILLO') {
                         $colors[] = '#E8DA20';
                     }
+                    $datalabelColor="#333";
                 }
             }
         }
+
     @endphp
 
     @if ($recepcion->n_especie == 'Cherries')
@@ -154,7 +157,7 @@
                         datalabels: {
                             color: '#fff',
                             font: {
-                                size: 22,
+                                size: 16,
                                 weight: 'bold'
                             },
                             formatter: (value, context) => {
