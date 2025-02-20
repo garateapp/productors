@@ -15,9 +15,9 @@
 .container {
     position: relative;
     margin: 20px auto;
-    aspect-ratio: 1;
+    /* aspect-ratio: 1;
     max-width: 600px;
-    height: 600px;
+    height: 600px; */
      /* Ratio 1:1 para gráficos circulares */
     /* Para gráficos de barras: aspect-ratio: 16/9; */
 
@@ -32,7 +32,7 @@
 
 <body>
 
-    <figure class="container h-screen mx-1 mt-4" id="container">
+    <figure class="container h-screen mx-1 mt-4" id="container"  style="position: relative; height:40vh; width:40vw">
 
         <canvas id="container2"></canvas>
 
@@ -176,9 +176,9 @@
                     }]
                 },
                 options: {
-                    aspectRatio: 1/2, // Ratio directo en Chart.js (sobrescribe CSS)
+                    
                     responsive: true,
-                    maintainAspectRatio: false,// Activa el cálculo automático
+                    
                     plugins: {
                         // Añadir configuración del título aquí
                         title: {
