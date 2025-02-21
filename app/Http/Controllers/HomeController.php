@@ -43,6 +43,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ExcelImport;
 use Illuminate\Support\Facades\Log;
 use ZipArchive;
+use Spatie\Browsershot\Browsershot;
 
 
 class HomeController extends Controller
@@ -1731,11 +1732,11 @@ public function uploadAndReadExcelGreenvic(Request $request)
         }
         $distribucion_calibre='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport='.$viewport;
 
-        $distribucion_color='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html&delay=5&viewport=600x320';
+        $distribucion_color='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html&delay=5&viewport=500x520';
 
 
         if ($recepcion->calidad->detalles->where('tipo_item','COLOR DE FONDO')->count()) {
-            $distribucion_color_fondo='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/fondo/'.$recepcion->id.'.html&delay=1&viewport=600x320';
+            $distribucion_color_fondo='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/fondo/'.$recepcion->id.'.html&delay=1&viewport=500x520';
         }else{
             $distribucion_color_fondo=NULL;
         }
@@ -1803,6 +1804,24 @@ public function uploadAndReadExcelGreenvic(Request $request)
         //  'distribucion_color_fondo','firmezas_grande','firmezas_mediana','firmezas_chica','presiones',
         //  'promedio_firmeza','promedio_brix','porcentaje_firmeza','almidons','calibrix','user'));
 
+    }
+    public function guardarGrafico(Request $request)
+    {
+        $data = $request->input('image');
+
+        if (!$data) {
+            return response()->json(['error' => 'No se recibió la imagen'], 400);
+        }
+
+        // Decodificar la imagen base64
+        $image = str_replace('data:image/png;base64,', '', $data);
+        $image = base64_decode($image);
+
+        // Guardar la imagen en el almacenamiento de Laravel
+        $fileName = 'grafico_' . time() . '.png';
+        Storage::disk('public')->put($fileName, $image);
+
+        return response()->json(['path' => asset('storage/' . $fileName)]);
     }
     public function viewinforme(Recepcion $recepcion) {
 

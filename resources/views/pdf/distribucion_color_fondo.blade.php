@@ -23,8 +23,8 @@
         }
 
         .container canvas {
-            width: 100%!important;
-    height: 100%!important;
+            width: 100% !important;
+            height: 100% !important;
         }
     </style>
 </head>
@@ -44,7 +44,7 @@
 
 
     @php
-    $datalabelColor="#fff";
+        $datalabelColor = '#fff';
         $series = [];
 
         if ($recepcion->calidad->detalles) {
@@ -65,7 +65,7 @@
                     } elseif ($name == 'AMARILLO') {
                         $colors[] = '#E8DA20';
                     }
-                    $datalabelColor="#333";
+                    $datalabelColor = '#333';
                 }
             }
         }
@@ -128,7 +128,7 @@
                         title: {
                             display: true,
                             text: 'DISTRIBUCIÓN DE COLOR DE FONDO',
-                            align: 'start',
+                            align: 'center',
                             font: {
                                 size: 18
                             },
@@ -158,22 +158,25 @@
                                 const percentage = ((value / total) * 100).toFixed(1);
                                 return value > total * 0.01 ? `${percentage}%` : '';
                             },
-                            anchor: 'end',
+                            anchor: 'center',
                             align: 'center',
-                            clamp:false
+                            offset: 4, // Espaciado desde la barra
+                            clamp: true
                         }
                     },
                     scales: {
                         y: {
-                            beginAtZero: true,
+
                             grid: {
-                                drawOnChartArea: false
+                                drawOnChartArea: false,
+                                display:false
                             }
 
                         },
                         x: {
                             grid: {
-                                drawOnChartArea: false
+                                drawOnChartArea: false,
+                                display:false
                             }
                         }
                     },

@@ -180,6 +180,7 @@
 
                     responsive: true,
                     maintainAspectRatio: false,
+                    animation: false,
                     plugins: {
                         // Añadir configuración del título aquí
                         title: {
@@ -226,7 +227,20 @@
         }
     }
             });
+            function guardarGrafico(chart) {
+            const image = chart.toBase64Image("image/png");
+
+            fetch("/guardar-grafico", {
+                method: "POST",
+                body: JSON.stringify({ image }),
+                headers: { "Content-Type": "application/json" },
+            })
+                .then((response) => response.json())
+                .then((data) => console.log("Imagen guardada en:", data.path))
+                .catch((error) => console.error("Error:", error));
+        }
         });
+
     </script>
 </body>
 

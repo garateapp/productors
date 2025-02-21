@@ -117,7 +117,7 @@
                 data: {
                     labels: <?php echo json_encode($categories); ?>,
                     datasets: [{
-                        label: '% Según muestra',
+                        label: '',//'% Según muestra',
                         data: <?php echo json_encode($series); ?>,
                         backgroundColor: <?php echo json_encode($colors); ?>,
                         borderColor: <?php echo json_encode($colors); ?>,
