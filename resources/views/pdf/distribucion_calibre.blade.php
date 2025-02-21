@@ -10,7 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
-    {{-- @if ($recepcion->n_especie == 'Cherries')
+     @if ($recepcion->n_especie == 'Cherries')
         <style>
             #container {
                 height: 360px;
@@ -19,7 +19,7 @@
     @else
         <style>
             #container {
-                max-height: 250px;
+                max-height: 300px;
             }
 
             canvas {
@@ -27,7 +27,7 @@
                 height: auto !important;
             }
         </style>
-    @endif --}}
+    @endif
 
 </head>
 
@@ -133,7 +133,9 @@
                 options: {
                     // Ratio directo en Chart.js (sobrescribe CSS)
                     //responsive: true,
-                    maintainAspectRatio: false,
+                    aspectRatio: 16/9, // Ratio directo en Chart.js (sobrescribe CSS)
+    responsive: true,
+    maintainAspectRatio: false, // Activa el cálculo automático
                     animation: false, // Activa el cálculo automático
                     //aspectRatio: 0.5, // Establece la relación de aspecto deseada
                     scales: {
@@ -191,9 +193,9 @@
                     },
                     layout: {
                         padding: {
-                            top: 20,
+                            top: 0,
                             right: 30,
-                            bottom: 20,
+                            bottom: 0,
                             left: 30
                         }
                     }

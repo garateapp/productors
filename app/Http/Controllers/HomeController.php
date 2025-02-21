@@ -1737,7 +1737,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
             $ancho=1280;
         }
 
-        $distribucion_calibre=$this->generarGrafico($recepcion->id,'calibre','calibre',800,250);
+        $distribucion_calibre=$this->generarGrafico($recepcion->id,'calibre','calibre',1250,311);
         //'https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport='.$viewport;
         //
         //
@@ -1834,6 +1834,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
     }
     //if (!file_exists($imagePath)) {
         Browsershot::url("https://appgreenex.cl/{$tipo}/{$id}.html")
+        //Browsershot::url("http://productors.test/{$tipo}/{$id}.html")
             ->setChromePath('/usr/bin/chromium-browser')
             ->windowSize($ancho, $alto)
             //->setOption('args', ['--verbose']) // Modo debug

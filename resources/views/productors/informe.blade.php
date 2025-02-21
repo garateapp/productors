@@ -410,9 +410,15 @@
     <table style="width:100%;">
         <tr>
                 @isset($distribucion_calibre)
+                @if ($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen')
                 <td>
-                    <img style="width:100%;" src="{{ $distribucion_calibre }}" alt="">
+                    <img style="width:100%;height:360px;" src="{{ $distribucion_calibre }}" alt="">
                 </td>
+                @else
+                <td>
+                    <img style="width:100%;height:300px;" src="{{ $distribucion_calibre }}" alt="">
+                </td>
+                @endif
                 @endif
 
                 @if ($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen')
