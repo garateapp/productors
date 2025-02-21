@@ -10,7 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
-    @if ($recepcion->n_especie == 'Cherries')
+    {{-- @if ($recepcion->n_especie == 'Cherries')
         <style>
             #container {
                 height: 360px;
@@ -27,7 +27,7 @@
                 height: auto !important;
             }
         </style>
-    @endif
+    @endif --}}
 
 </head>
 
@@ -132,9 +132,10 @@
                 },
                 options: {
                     // Ratio directo en Chart.js (sobrescribe CSS)
-                    responsive: true,
-                    maintainAspectRatio: false, // Activa el cálculo automático
-                    aspectRatio: 2.5, // Establece la relación de aspecto deseada
+                    //responsive: true,
+                    maintainAspectRatio: false,
+                    animation: false, // Activa el cálculo automático
+                    //aspectRatio: 0.5, // Establece la relación de aspecto deseada
                     scales: {
                         x: {
                             title: {
@@ -176,9 +177,9 @@
                         datalabels: {
                             anchor: 'center', // Posición del label
                             align: 'center', // Alineación del texto
-                            color: '#fff', // Color del texto
+                            color: '#333', // Color del texto
                             font: {
-                                size: 16,
+                                size: 14,
                                 weight: 'bold'
                             },
                             formatter: function(value) {
