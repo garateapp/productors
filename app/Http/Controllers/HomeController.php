@@ -1831,6 +1831,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
     if (!file_exists($imagePath)) {
         Browsershot::url("https://appgreenex.cl/{$tipo}/{$id}.html")
+        ->setChromePath('/usr/bin/google-chrome')
             ->windowSize($ancho, $alto)
             ->save($imagePath);
     }
