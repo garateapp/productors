@@ -168,15 +168,25 @@
                         y: {
 
                             grid: {
-                                drawOnChartArea: false,
-                                display:false
+                                drawOnChartArea: false, // Evita que se dibuje la cuadrícula
+                                drawTicks: false, // Oculta las marcas de las etiquetas
+                                drawBorder: false, // Oculta la línea del eje
+                                color: "rgba(0,0,0,0)" // Asegura que no haya líneas visibles
+                            },
+                            ticks: {
+                                display: false
                             }
 
                         },
                         x: {
                             grid: {
-                                drawOnChartArea: false,
-                                display:false
+                                drawOnChartArea: false, // Evita que se dibuje la cuadrícula
+                                drawTicks: false, // Oculta las marcas de las etiquetas
+                                drawBorder: false, // Oculta la línea del eje
+                                color: "rgba(0,0,0,0)" // Asegura que no haya líneas visibles
+                            },
+                            ticks: {
+                                display: false
                             }
                         }
                     },
@@ -184,9 +194,9 @@
                 },
                 layout: {
                     padding: {
-                        top: 20,
+                        top: 0,
                         right: 30,
-                        bottom: 20,
+                        bottom: 0,
                         left: 30
                     }
                 }
