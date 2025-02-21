@@ -1834,10 +1834,10 @@ public function uploadAndReadExcelGreenvic(Request $request)
     }
     //if (!file_exists($imagePath)) {
         Browsershot::url("https://appgreenex.cl/{$tipo}/{$id}.html")
-        // ->setChromePath('/usr/bin/chromium-browser')
+            ->setChromePath('/usr/bin/chromium-browser')
             ->windowSize($ancho, $alto)
-            ->setOption('args', ['--verbose']) // Modo debug
-            ->setOption('debug', true) // Activa más detalles
+            //->setOption('args', ['--verbose']) // Modo debug
+           // ->setOption('debug', true) // Activa más detalles
             ->waitUntilNetworkIdle()
             ->save($imagePath);
     //}
