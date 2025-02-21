@@ -163,6 +163,20 @@
                             clamp:false
                         }
                     },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                drawOnChartArea: false
+                            }
+
+                        },
+                        x: {
+                            grid: {
+                                drawOnChartArea: false
+                            }
+                        }
+                    },
                     animation: false
                 },
                 layout: {

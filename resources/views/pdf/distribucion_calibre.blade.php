@@ -134,6 +134,9 @@
                             title: {
                                 display: true,
                                 text: 'Calibre'
+                            },
+                            grid: {
+                                drawOnChartArea: false // ❌ Evita que se dibujen líneas en el área del gráfico
                             }
                         },
                         y: {
@@ -146,6 +149,9 @@
                                 callback: function(value) {
                                     return value + '%';
                                 }
+                            },
+                            grid: {
+                                drawOnChartArea: false // ❌ Evita que se dibujen líneas en el área del gráfico
                             }
                         }
                     },

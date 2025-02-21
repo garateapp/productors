@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Informe de Recepción Nro° {{$recepcion->numero_g_recepcion}}</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
+    <title>Informe de Recepción Nro° {{ $recepcion->numero_g_recepcion }}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href=”https://fonts.googleapis.com/css?family=Pacifico” rel=”stylesheet”>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     {{-- <script src="https://code.highcharts.com/highcharts.js" defer></script> --}}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {{-- <script src="https://code.highcharts.com/modules/series-label.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script> --}}
-	<style>
+    <style>
+        .container {
+            position: relative;
+            max-width: 800px;
+            margin: 20px auto;
+            aspect-ratio: 16/9;
+            /* Ratio 1:1 para gráficos circulares */
+            /* Para gráficos de barras: aspect-ratio: 16/9; */
+        }
 
-            .container {
-    position: relative;
-    max-width: 800px;
-    margin: 20px auto;
-    aspect-ratio: 16/9; /* Ratio 1:1 para gráficos circulares */
-    /* Para gráficos de barras: aspect-ratio: 16/9; */
-}
-
-.container canvas {
-    width: 100%!important;
-    height: 100%!important;
-}
-	</style>
+        .container canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+    </style>
 </head>
+
 <body>
 
     <figure class="container mx-1 mt-4" id="container" style="height:60vh; width:60vw">
@@ -41,68 +43,66 @@
 
 
     @php
-        $categories=[];
-        $series=[];
+        $categories = [];
+        $series = [];
     @endphp
 
     @if ($recepcion->calidad->detalles)
-        @foreach ($recepcion->calidad->detalles->where('tipo_item','CHICO') as $detalle)
-
-                @php
-                    $categories[]=$detalle->detalle_item;
-                    $series[]=$detalle->valor_ss;
-                @endphp
-
+        @foreach ($recepcion->calidad->detalles->where('tipo_item', 'CHICO') as $detalle)
+            @php
+                $categories[] = $detalle->detalle_item;
+                $series[] = $detalle->valor_ss;
+            @endphp
         @endforeach
     @endif
 
-    @if ($recepcion->n_especie=='Cherries')
+    @if ($recepcion->n_especie == 'Cherries')
         @php
-            $colors=['#24a745'];
-            $titulo='FIRMEZAS (lb) y BRIX / CHICO (125 al 216)';
+            $colors = ['#24a745'];
+            $titulo = 'FIRMEZAS (lb) y BRIX / CHICO (125 al 216)';
         @endphp
-    @elseif($recepcion->n_especie=='Apples')
+    @elseif($recepcion->n_especie == 'Apples')
         @php
-            $colors=['#831816'];
-            $titulo='FIRMEZAS (lb) y BRIX / CHICO (125 al 216)';
+            $colors = ['#831816'];
+            $titulo = 'FIRMEZAS (lb) y BRIX / CHICO (125 al 216)';
         @endphp
-     @elseif($recepcion->n_especie=='Peaches' || $recepcion->n_especie=='Nectarines')
+    @elseif($recepcion->n_especie == 'Peaches' || $recepcion->n_especie == 'Nectarines')
         @php
-            $colors=['#730000'];
-            $titulo='FIRMEZAS (lb) y BRIX / CHICO (60 a 78)';
+            $colors = ['#730000'];
+            $titulo = 'FIRMEZAS (lb) y BRIX / CHICO (60 a 78)';
         @endphp
-        @elseif($recepcion->n_especie=='Plums')
+    @elseif($recepcion->n_especie == 'Plums')
         @php
-            $colors=['#730000'];
-            $titulo='FIRMEZAS (lb) y BRIX / CHICO (72 a 120)';
+            $colors = ['#730000'];
+            $titulo = 'FIRMEZAS (lb) y BRIX / CHICO (72 a 120)';
         @endphp
-    @elseif($recepcion->n_especie=='Pears')
+    @elseif($recepcion->n_especie == 'Pears')
         @php
-            $colors=['#788527'];
-            $titulo='FIRMEZAS (lb) y BRIX / CHICO';
+            $colors = ['#788527'];
+            $titulo = 'FIRMEZAS (lb) y BRIX / CHICO';
         @endphp
-    @elseif($recepcion->n_especie=='Membrillos')
+    @elseif($recepcion->n_especie == 'Membrillos')
         @php
-            $colors=['#fddf09'];
-            $titulo='FIRMEZAS (lb) y BRIX / CHICO (125 al 216)';
+            $colors = ['#fddf09'];
+            $titulo = 'FIRMEZAS (lb) y BRIX / CHICO (125 al 216)';
         @endphp
     @else
         @php
-            $colors=['#24a745'];
-            $titulo='FIRMEZAS (lb) y BRIX / CHICO (125 al 216)';
+            $colors = ['#24a745'];
+            $titulo = 'FIRMEZAS (lb) y BRIX / CHICO (125 al 216)';
         @endphp
     @endif
 
 
     <script>
-          $(document).ready(function() {
+        $(document).ready(function() {
             Chart.register(ChartDataLabels);
-        var titulo = <?php echo json_encode($titulo) ?>;
-        var categories = <?php echo json_encode($categories) ?>;
-        var series = <?php echo json_encode($series) ?>;
-        var col = <?php echo json_encode($colors) ?>;
-        var ctx=document.getElementById('container2').getContext('2d');
-        new Chart(ctx, {
+            var titulo = <?php echo json_encode($titulo); ?>;
+            var categories = <?php echo json_encode($categories); ?>;
+            var series = <?php echo json_encode($series); ?>;
+            var col = <?php echo json_encode($colors); ?>;
+            var ctx = document.getElementById('container2').getContext('2d');
+            new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: categories,
@@ -116,15 +116,23 @@
                 },
 
                 options: {
-                    aspectRatio: 16/9, // Ratio directo en Chart.js (sobrescribe CSS)
-    responsive: true,
-    maintainAspectRatio: false, // Activa el cálculo automático
+                    aspectRatio: 16 / 9, // Ratio directo en Chart.js (sobrescribe CSS)
+                    responsive: true,
+                    maintainAspectRatio: false, // Activa el cálculo automático
                     scales: {
                         y: {
                             beginAtZero: true,
                             title: {
                                 display: true,
                                 text: 'Lbs/°Brix'
+                            },
+                            grid: {
+                                drawOnChartArea: false // ❌ Evita que se dibujen líneas en el área del gráfico
+                            }
+                        },
+                        x: {
+                            grid: {
+                                drawOnChartArea: false // ❌ Evita que se dibujen líneas en el área del gráfico
                             }
                         }
                     },
@@ -134,7 +142,7 @@
                         },
                         tooltip: {
                             callbacks: {
-                                label: function (tooltipItem) {
+                                label: function(tooltipItem) {
                                     return tooltipItem.raw.toFixed(1) + '';
                                 }
                             }
@@ -161,6 +169,7 @@
                 }
             });
         });
-      </script>
+    </script>
 </body>
+
 </html>

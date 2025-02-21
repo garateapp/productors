@@ -116,12 +116,20 @@
                     aspectRatio: 16/9, // Ratio directo en Chart.js (sobrescribe CSS)
     responsive: true,
     maintainAspectRatio: false, // Activa el cálculo automático
-                    scales: {
+    scales: {
                         y: {
                             beginAtZero: true,
                             title: {
                                 display: true,
                                 text: 'Lbs/°Brix'
+                            },
+                            grid: {
+                                drawOnChartArea: false // ❌ Evita que se dibujen líneas en el área del gráfico
+                            }
+                        },
+                        x: {
+                            grid: {
+                                drawOnChartArea: false // ❌ Evita que se dibujen líneas en el área del gráfico
                             }
                         }
                     },

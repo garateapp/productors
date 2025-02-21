@@ -13,7 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
-       
+
             .container {
                 position: relative;
                 max-width: 800px;
@@ -22,7 +22,7 @@
                 /* Ratio 1:1 para gráficos circulares */
                 /* Para gráficos de barras: aspect-ratio: 16/9; */
             }
-        
+
 
         .container canvas {
             width: 100% !important;
@@ -304,7 +304,15 @@
                                     display: true,
                                     text: '(gf/mm)'
                                 },
-                                beginAtZero: true
+                                beginAtZero: true,
+                                grid: {
+                                    drawOnChartArea: false // ❌ Evita que se dibujen líneas en el área del gráfico
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    drawOnChartArea: false // ❌ Evita que se dibujen líneas en el área del gráfico
+                                }
                             }
                         }
                     }

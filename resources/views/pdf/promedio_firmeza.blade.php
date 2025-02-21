@@ -15,7 +15,7 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script> --}}
     <style>
-	
+
             .container {
     position: relative;
     max-width: 800px;
@@ -150,6 +150,9 @@
                             title: {
                                 display: true,
                                 text: "Categorías"
+                            },
+                            grid: {
+                                drawOnChartArea: false // ❌ Evita que se dibujen líneas en el área del gráfico
                             }
                         },
                         y: {
@@ -157,6 +160,9 @@
                             title: {
                                 display: true,
                                 text: "(gf/mm)"
+                            },
+                            grid: {
+                                drawOnChartArea: false // ❌ Evita que se dibujen líneas en el área del gráfico
                             }
                         }
                     }

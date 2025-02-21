@@ -139,13 +139,19 @@
                     },
                     scales: {
                         x: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            grid: {
+                                drawOnChartArea: false
+                            }
                         },
                         y: {
                             min: 0,
                             title: {
                                 display: true,
                                 text: '°Brix'
+                            },
+                            grid: {
+                                drawOnChartArea: false
                             }
                         }
                     }
