@@ -409,7 +409,7 @@
 
     <table style="width:100%;">
         <tr>
-            @isset($distribucion_calibre)
+                @isset($distribucion_calibre)
                 <td>
                     <img style="width:100%;" src="{{ $distribucion_calibre }}" alt="">
                 </td>
@@ -421,10 +421,10 @@
                             <img style="width:100%;" src="{{ $distribucion_color }}" alt="">
                         </td>
                     @endif
-                    @endif
+                @endif
 
-                </tr>
-            </table>
+        </tr>
+    </table>
 
             <table style="width:100%;">
                 <tr>
@@ -436,24 +436,24 @@
                         @endif
                     @else
                         @isset($distribucion_color)
-                            <td>
-                                <img style="width:100%;" src="{{ $distribucion_color }}" alt="">
-                            </td>
-                            @endif
-                            @endif
-                            @if ($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen')
-                                @isset($promedio_brix)
+                        <td style="align:center;">
+                                <img style="width:100%; max-width:400px;" src="{{ $distribucion_color }}" alt="">
+                        </td>
+                        @endif
+                    @endif
+                    @if ($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen')
+                        @isset($promedio_brix)
                                     <td>
                                         <img style="width:100%;" src="{{ $promedio_brix }}" alt="">
                                     </td>
-                                @endif
-                            @else
-                                @isset($distribucion_color_fondo)
-                                    <td>
-                                        <img style="width:100%;" src="{{ $distribucion_color_fondo }}" alt="">
+                        @endif
+                    @else
+                        @isset($distribucion_color_fondo)
+                                    <td style="align:center;">
+                                        <img style="width:100%; max-width:400px;" src="{{ $distribucion_color_fondo }}" alt="">
                                     </td>
-                                    @endif
-                                    @endif
+                        @endif
+                    @endif
 
 
 
@@ -871,8 +871,7 @@
 
                                                             </td>
                                                             <td style="background-color:#47ac34; color: white;"><b>SOBRECALIBRE: </b>
-                                                                @if ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE CALIBRES')
-                                                                ->where('detalle_item', 'SOBRECALIBRE')->first())
+                                                                @if ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE CALIBRES')->where('detalle_item', 'SOBRECALIBRE')->first())
                                                                     {{ $recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE CALIBRES')->where('detalle_item', 'SOBRECALIBRE')->first()->porcentaje_muestra }}
                                                                     %
                                                                 @elseif($recepcion->n_especie == 'Orange' || $recepcion->n_especie == 'Mandarinas')

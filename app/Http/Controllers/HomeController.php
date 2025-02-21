@@ -1723,27 +1723,42 @@ public function uploadAndReadExcelGreenvic(Request $request)
     public function viewpdf(Recepcion $recepcion) {
 
         $viewport='';
+        $alto=0;
+        $ancho=0;
         if ($recepcion->n_especie == 'Cherries') {
             $viewport="800x360";
+            $alto=360;
+            $ancho=800;
 
         }
         else{
             $viewport="800x250";
+            $alto=250;
+            $ancho=800;
         }
-        $distribucion_calibre='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport='.$viewport;
 
-        $distribucion_color='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html&delay=5&viewport=500x520';
+        $distribucion_calibre='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport='.$viewport;
+        //$this->generarGrafico($recepcion->id,'calibre','calibre',$ancho,$alto);
+        //
+
+        $distribucion_color=$this->generarGrafico($recepcion->id,'color','color',500,520);
+        //'https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html&delay=5&viewport=500x520';
+
 
 
         if ($recepcion->calidad->detalles->where('tipo_item','COLOR DE FONDO')->count()) {
-            $distribucion_color_fondo='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/fondo/'.$recepcion->id.'.html&delay=1&viewport=500x520';
+            $distribucion_color_fondo=$this->generarGrafico($recepcion->id,'color/fondo','color_fondo',500,520);
+            //'https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/fondo/'.$recepcion->id.'.html&delay=1&viewport=500x520';
         }else{
             $distribucion_color_fondo=NULL;
         }
 
         if ($recepcion->n_especie!='Orange' || $recepcion->n_especie=="Cherries") {
+            //$firmezas_grande=$this->generarGrafico($recepcion->id,'firmeza/grande','firmeza_grande',800,250);
             $firmezas_grande='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/grande/'.$recepcion->id.'.html&viewport=800x250';
+            //$firmezas_mediana=$this->generarGrafico($recepcion->id,'firmeza/mediana','firmeza_mediana',800,250);
             $firmezas_mediana='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/mediana/'.$recepcion->id.'.html&viewport=800x250';
+            //$firmezas_chica=$this->generarGrafico($recepcion->id,'firmeza/chica','firmeza_chica',800,250);
             $firmezas_chica='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/chica/'.$recepcion->id.'.html&viewport=800x250';
         }else{
             $firmezas_grande=NULL;
@@ -1752,18 +1767,23 @@ public function uploadAndReadExcelGreenvic(Request $request)
         }
 
         if ($recepcion->n_especie=="Cherries" || $recepcion->n_variedad=='Dagen') {
-            $distribucion_calibre='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x380';
-            $promedio_firmeza='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/'.$recepcion->id.'.html&viewport=800x400';
-            $promedio_brix='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/brix/'.$recepcion->id.'.html&viewport=800x400';
+            $distribucion_calibre='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x380';//$this->generarGrafico($recepcion->id,'calibre','calibre',800,380);
+            //'https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x380';
+            $promedio_firmeza='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/'.$recepcion->id.'.html&viewport=800x400';//$this->generarGrafico($recepcion->id,'firmeza','firmeza',800,400);
+            //'https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/'.$recepcion->id.'.html&viewport=800x400';
+            $promedio_brix='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/brix/'.$recepcion->id.'.html&viewport=800x400';//$this->generarGrafico($recepcion->id,'brix','brix',800,400);
+            //'https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/brix/'.$recepcion->id.'.html&viewport=800x400';
 
-            $porcentaje_firmeza='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/porcentaje/firmeza/'.$recepcion->id.'.html&viewport=800x330';
+            $porcentaje_firmeza='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/porcentaje/firmeza/'.$recepcion->id.'.html&viewport=800x330';//$this->generarGrafico($recepcion->id,'porcentaje/firmeza','porcentaje_firmeza',800,330);
+            //'https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/porcentaje/firmeza/'.$recepcion->id.'.html&viewport=800x330';
         }else{
             $promedio_firmeza=NULL;
             $promedio_brix=NULL;
             $porcentaje_firmeza=NULL;
         }
         if ($recepcion->n_especie=='Orange'  || $recepcion->n_especie=='Mandarinas') {
-            $calibrix='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibrix/'.$recepcion->id.'.html&viewport=800x380';
+            $calibrix=$this->generarGrafico($recepcion->id,'calibrix','calibrix',800,380);
+            //'https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibrix/'.$recepcion->id.'.html&viewport=800x380';
         }else{
             $calibrix=NULL;
         }
@@ -1805,6 +1825,18 @@ public function uploadAndReadExcelGreenvic(Request $request)
         //  'promedio_firmeza','promedio_brix','porcentaje_firmeza','almidons','calibrix','user'));
 
     }
+    public function generarGrafico($id,$tipo,$nombre,$ancho,$alto)
+{
+    $imagePath = storage_path("app/public/screenshots/{$nombre}_{$id}.png");
+
+    if (!file_exists($imagePath)) {
+        Browsershot::url("https://appgreenex.cl/{$tipo}/{$id}.html")
+            ->windowSize($ancho, $alto)
+            ->save($imagePath);
+    }
+
+    return $imagePath;
+}
     public function guardarGrafico(Request $request)
     {
         $data = $request->input('image');

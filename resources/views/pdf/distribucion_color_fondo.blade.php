@@ -14,7 +14,7 @@
         .container {
             position: relative;
             margin: 20px auto;
-            aspect-ratio: 1;
+
             max-width: 600px;
 
             /* Ratio 1:1 para gráficos circulares */
@@ -31,7 +31,7 @@
 
 <body>
 
-    <figure class="container" id="container" style="height:90vh; width:90vw">
+    <figure class="container" id="container">
         <canvas id="container2">
 
         </canvas>
@@ -132,7 +132,7 @@
                             font: {
                                 size: 18
                             },
-                            padding: 20
+
                         },
                         legend: {
                             position: 'right',

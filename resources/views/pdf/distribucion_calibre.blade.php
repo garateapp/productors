@@ -21,6 +21,11 @@
             #container {
                 max-height: 250px;
             }
+
+            canvas {
+                width: 100% !important;
+                height: auto !important;
+            }
         </style>
     @endif
 
@@ -29,7 +34,7 @@
 <body>
 
     <figure class="mx-1 mt-4">
-        <canvas id="container" style="position: relative;"></canvas>
+        <canvas id="container"></canvas>
     </figure>
 
 
@@ -117,7 +122,7 @@
                 data: {
                     labels: <?php echo json_encode($categories); ?>,
                     datasets: [{
-                        label: '',//'% Según muestra',
+                        label: '', //'% Según muestra',
                         data: <?php echo json_encode($series); ?>,
                         backgroundColor: <?php echo json_encode($colors); ?>,
                         borderColor: <?php echo json_encode($colors); ?>,
@@ -126,9 +131,10 @@
                     }]
                 },
                 options: {
-                     // Ratio directo en Chart.js (sobrescribe CSS)
-    responsive: true,
-   // maintainAspectRatio: true, // Activa el cálculo automático
+                    // Ratio directo en Chart.js (sobrescribe CSS)
+                    responsive: true,
+                    maintainAspectRatio: false, // Activa el cálculo automático
+                    aspectRatio: 2.5, // Establece la relación de aspecto deseada
                     scales: {
                         x: {
                             title: {
@@ -172,7 +178,7 @@
                             align: 'center', // Alineación del texto
                             color: '#fff', // Color del texto
                             font: {
-                                size: 12,
+                                size: 16,
                                 weight: 'bold'
                             },
                             formatter: function(value) {
