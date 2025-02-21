@@ -1752,7 +1752,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
         }else{
             $distribucion_color_fondo=NULL;
         }
-
+        Log::info("Color de Fondo:".$distribucion_color_fondo);
         if ($recepcion->n_especie!='Orange' || $recepcion->n_especie=="Cherries") {
             //$firmezas_grande=$this->generarGrafico($recepcion->id,'firmeza/grande','firmeza_grande',800,250);
             $firmezas_grande='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/grande/'.$recepcion->id.'.html&viewport=800x250';
@@ -1818,7 +1818,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
         ]);
 
 
-         return $pdf->stream($recepcion->numero_g_recepcion.'-'.$recepcion->id_emisor.'.pdf');
+        return $pdf->stream($recepcion->numero_g_recepcion.'-'.$recepcion->id_emisor.'.pdf');
 
         //  return view('productors.informe',compact('recepcion','distribucion_calibre','distribucion_color',
         //  'distribucion_color_fondo','firmezas_grande','firmezas_mediana','firmezas_chica','presiones',

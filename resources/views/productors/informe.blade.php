@@ -426,7 +426,7 @@
         </tr>
     </table>
 
-            <table style="width:100%;">
+            {{-- <table style="width:100%;">
                 <tr>
                     @if ($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen')
                         @isset($promedio_firmeza)
@@ -449,17 +449,55 @@
                         @endif
                     @else
                         @isset($distribucion_color_fondo)
+                            @if($distribucion_color_fondo!='')
                                     <td style="align:center;">
                                         <img style="width:100%; max-width:400px;" src="{{ $distribucion_color_fondo }}" alt="">
                                     </td>
+                            @endif
                         @endif
                     @endif
 
 
 
                                 </tr>
-                            </table>
+                            </table> --}}
+                            @php
+                            $imageCount = 0;
+                            if (($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen') && isset($promedio_firmeza)) $imageCount++;
+                            if (($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen') && isset($promedio_brix)) $imageCount++;
+                            if (!($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen') && isset($distribucion_color)) $imageCount++;
+                            if (!($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen') && isset($distribucion_color_fondo) && $distribucion_color_fondo != '') $imageCount++;
+                        @endphp
 
+                        <table style="width:100%; text-align:center;">
+                            <tr>
+                                @if ($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen')
+                                    @isset($promedio_firmeza)
+                                        <td @if($imageCount == 1) colspan="2" @endif>
+                                            <img style="width:100%; max-width:400px; display:block; margin:auto;" src="{{ $promedio_firmeza }}" alt="">
+                                        </td>
+                                    @endisset
+                                    @isset($promedio_brix)
+                                        <td @if($imageCount == 1) colspan="2" @endif>
+                                            <img style="width:100%; max-width:400px; display:block; margin:auto;" src="{{ $promedio_brix }}" alt="">
+                                        </td>
+                                    @endisset
+                                @else
+                                    @isset($distribucion_color)
+                                        <td @if($imageCount == 1) colspan="2" @endif>
+                                            <img style="width:100%; max-width:400px; display:block; margin:auto;" src="{{ $distribucion_color }}" alt="">
+                                        </td>
+                                    @endisset
+                                    @isset($distribucion_color_fondo)
+                                        @if($distribucion_color_fondo!='')
+                                            <td @if($imageCount == 1) colspan="2" @endif>
+                                                <img style="width:100%; max-width:400px; display:block; margin:auto;" src="{{ $distribucion_color_fondo }}" alt="">
+                                            </td>
+                                        @endif
+                                    @endisset
+                                @endif
+                            </tr>
+                        </table>
 
 
                             @if ($recepcion->calidad->detalles->where('tipo_item', 'GRANDE')->first())
