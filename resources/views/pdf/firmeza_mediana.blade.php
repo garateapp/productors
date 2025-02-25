@@ -151,9 +151,9 @@
                         datalabels: {
                             anchor: 'center', // Posición del label
                             align: 'center', // Alineación del texto
-                            color: '#d2d6d2', // Color del texto
+                            color: '#c0c3c0', // Color del texto
                             font: {
-                                size: 12,
+                                size: 14,
                                 weight: 'bold'
                             },
                             formatter: function(value) {
