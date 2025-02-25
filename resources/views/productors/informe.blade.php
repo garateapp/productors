@@ -424,7 +424,7 @@
                 @if ($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen')
                     @isset($distribucion_color)
                         <td>
-                            <img style="width:100%;" src="{{ $distribucion_color }}" alt="">
+                            <img style="width:100%;:360px;" src="{{ $distribucion_color }}" alt="">
                         </td>
                     @endif
                 @endif
@@ -532,7 +532,7 @@
                                     </tr>
                                     </table>
                                     @endif
-                                    @if ($recepcion->calidad->detalles->where('tipo_item', 'CHICO')->first())
+                                     @if ($recepcion->calidad->detalles->where('tipo_item', 'CHICO')->first())
                                         <table style="width:100%;">
                                             <tr>
                                                 @isset($firmezas_chica)
@@ -564,6 +564,8 @@
                                                 </table>
                                             @else
                                                 @if ($recepcion->n_especie == 'Apples')
+                                                    <div class="page-break"></div>
+
                                                     <table style="width:100%; border:1px solid black;  border-collapse: collapse;  text-align: center;">
                                                         <tr style="width:100%; border:1px solid black;  border-collapse: collapse;">
                                                             <th colspan="2" style="border:1px solid black;  border-collapse: collapse;">

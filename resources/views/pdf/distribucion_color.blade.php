@@ -10,30 +10,28 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-
-
-.container {
-    position: relative;
-    margin: 20px auto;
-    max-width: 600px;
-    /* aspect-ratio: 1;
+        .container {
+            position: relative;
+            margin: 20px auto;
+            max-width: 600px;
+            /* aspect-ratio: 1;
 
     height: 600px; */
-     /* Ratio 1:1 para gráficos circulares */
-    /* Para gráficos de barras: aspect-ratio: 16/9; */
+            /* Ratio 1:1 para gráficos circulares */
+            /* Para gráficos de barras: aspect-ratio: 16/9; */
 
-}
+        }
 
-.container canvas {
-    width: 100%!important;
-    height: 100%!important;
-}
-	</style>
+        .container canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+    </style>
 </head>
 
 <body>
 
-    <figure class="container h-screen mx-1 mt-4" id="container"  style="position: relative; height:90vh; width:90vw">
+    <figure class="container h-screen mx-1 mt-4" id="container" style="position: relative; height:90vh; width:90vw">
 
         <canvas id="container2"></canvas>
 
@@ -155,7 +153,7 @@
     @endphp
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <script>
-          $(document).ready(function() {
+        $(document).ready(function() {
             Chart.register(ChartDataLabels);
             var series = <?php echo json_encode($series); ?>;
             var titulo = <?php echo json_encode($titulo); ?>;
@@ -203,44 +201,66 @@
                         legend: {
                             position: 'right',
                         },
+                        // datalabels: {
+                        //     anchor: 'center', // Posición del label
+                        //     align: 'center', // Alineación del texto
+                        //     color: '#fff', // Color del texto
+                        //     font: {
+                        //         size: 14,
+                        //         weight: 'bold'
+                        //     },
+                        //     formatter: function(value) {
+                        //         return value.toFixed(1) + '%'; // Formato con 1 decimal
+                        //     },
+                        //     offset: 4, // Espaciado desde la barra
+                        //     clamp: false // Evitar que salgan del canvas
+                        // }
                         datalabels: {
-                            anchor: 'center', // Posición del label
-                            align: 'center', // Alineación del texto
-                            color: '#fff', // Color del texto
-                            font: {
-                                size: 14,
-                                weight: 'bold'
+                            anchor: function(context) {
+                                let value = context.dataset.data[context.dataIndex];
+                                return value < 5 ? 'end' :
+                                'center'; // Mueve etiquetas pequeñas hacia afuera
                             },
-                            formatter: function(value) {
-                                return value.toFixed(1) + '%'; // Formato con 1 decimal
+                            align: function(context) {
+                                let value = context.dataset.data[context.dataIndex];
+                                return value < 5 ? 'end' : 'center';
                             },
-                            offset: 4, // Espaciado desde la barra
-                            clamp: false // Evitar que salgan del canvas
+                            color: function(context) {
+                                let value = context.dataset.data[context.dataIndex];
+                                return value < 5 ? '#000' :
+                                '#fff'; // Etiquetas pequeñas en negro para contraste
+                            }
                         }
+
                     }
-                }, layout: {
-        padding: {
-            top: 20,
-            right: 30,
-            bottom: 20,
-            left: 30
-        }
-    }
+                },
+                layout: {
+                    padding: {
+                        top: 20,
+                        right: 30,
+                        bottom: 20,
+                        left: 30
+                    }
+                }
             });
+
             function guardarGrafico(chart) {
-            const image = chart.toBase64Image("image/png");
+                const image = chart.toBase64Image("image/png");
 
-            fetch("/guardar-grafico", {
-                method: "POST",
-                body: JSON.stringify({ image }),
-                headers: { "Content-Type": "application/json" },
-            })
-                .then((response) => response.json())
-                .then((data) => console.log("Imagen guardada en:", data.path))
-                .catch((error) => console.error("Error:", error));
-        }
+                fetch("/guardar-grafico", {
+                        method: "POST",
+                        body: JSON.stringify({
+                            image
+                        }),
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                    })
+                    .then((response) => response.json())
+                    .then((data) => console.log("Imagen guardada en:", data.path))
+                    .catch((error) => console.error("Error:", error));
+            }
         });
-
     </script>
 </body>
 

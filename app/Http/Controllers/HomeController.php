@@ -1763,11 +1763,11 @@ public function uploadAndReadExcelGreenvic(Request $request)
             //$firmezas_chica='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/chica/'.$recepcion->id.'.html&viewport=800x250';
         }
         elseif ($recepcion->n_especie=='Apples') {
-            $firmezas_grande=$this->generarGrafico($recepcion->id,'firmeza/grande','firmeza_grande',800,300);
+            $firmezas_grande=$this->generarGrafico($recepcion->id,'firmeza/grande','firmeza_grande',800,400);
             //$firmezas_grande='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/grande/'.$recepcion->id.'.html&viewport=800x250';
-            $firmezas_mediana=$this->generarGrafico($recepcion->id,'firmeza/mediana','firmeza_mediana',800,300);
+            $firmezas_mediana=$this->generarGrafico($recepcion->id,'firmeza/mediana','firmeza_mediana',800,400);
             //$firmezas_mediana='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/mediana/'.$recepcion->id.'.html&viewport=800x250';
-            $firmezas_chica=$this->generarGrafico($recepcion->id,'firmeza/chica','firmeza_chica',800,300);
+            $firmezas_chica=$this->generarGrafico($recepcion->id,'firmeza/chica','firmeza_chica',800,400);
             //$firmezas_chica='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/chica/'.$recepcion->id.'.html&viewport=800x250';
         }
         else{
@@ -1843,7 +1843,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
     }
     //if (!file_exists($imagePath)) {
         Browsershot::url("https://appgreenex.cl/{$tipo}/{$id}.html")
-       // Browsershot::url("http://productors.test/{$tipo}/{$id}.html")
+        //Browsershot::url("http://productors.test/{$tipo}/{$id}.html")
             ->setChromePath('/usr/bin/chromium-browser')
             ->windowSize($ancho, $alto)
             //->setOption('args', ['--verbose']) // Modo debug
