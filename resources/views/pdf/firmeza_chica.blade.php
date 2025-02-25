@@ -154,7 +154,7 @@
                         datalabels: {
                             anchor: 'center', // Posición del label
                             align: 'center', // Alineación del texto
-                            color: '#fff', // Color del texto
+                            color: '#666', // Color del texto
                             font: {
                                 size: 12,
                                 weight: 'bold'
