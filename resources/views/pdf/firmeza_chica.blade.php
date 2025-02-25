@@ -154,7 +154,16 @@
                         datalabels: {
                             anchor: 'center', // Posición del label
                             align: 'center', // Alineación del texto
-                            color: '#c0c3c0', // Color del texto
+                            //color: '#c0c3c0', // Color del texto
+                            color: function(context) {
+                                let value = context.dataset.data[context.dataIndex];
+                                return value < 5 ? '#000' :
+                                    '#fff'; // Etiquetas pequeñas en negro para contraste
+                            },
+                            offset: function(context) {
+                                let value = context.dataset.data[context.dataIndex];
+                                return value < 2 ? 15 : 0; // Agrega espacio a los valores pequeños
+                            }
                             font: {
                                 size: 14,
                                 weight: 'bold'
@@ -162,7 +171,7 @@
                             formatter: function(value) {
                                 return value.toFixed(1) + ''; // Formato con 1 decimal
                             },
-                            offset: 4, // Espaciado desde la barra
+                            //offset: 4, // Espaciado desde la barra
                             clamp: true // Evitar que salgan del canvas
                         }
                     }
