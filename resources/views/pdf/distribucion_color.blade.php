@@ -221,6 +221,9 @@
                                 return value < 5 ? 'end' :
                                 'center'; // Mueve etiquetas pequeñas hacia afuera
                             },
+                            formatter: function(value) {
+                                return value.toFixed(1) + '%'; // Formato con 1 decimal
+                            },
                             align: function(context) {
                                 let value = context.dataset.data[context.dataIndex];
                                 return value < 5 ? 'end' : 'center';
