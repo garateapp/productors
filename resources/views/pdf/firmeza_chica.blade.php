@@ -163,7 +163,7 @@
                             offset: function(context) {
                                 let value = context.dataset.data[context.dataIndex];
                                 return value < 2 ? 15 : 0; // Agrega espacio a los valores pequeños
-                            }
+                            },
                             font: {
                                 size: 14,
                                 weight: 'bold'
