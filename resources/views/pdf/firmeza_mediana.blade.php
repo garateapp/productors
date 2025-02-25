@@ -170,7 +170,7 @@
                             },
                             offset: function(context) {
                                 let value = context.dataset.data[context.dataIndex];
-                                return value < 2 ? 25 : 0; // Agrega espacio a los valores pequeños
+                                return value < 5 ? 45 : 0; // Agrega espacio a los valores pequeños
                             },
                             font: {
                                 size: 14,
