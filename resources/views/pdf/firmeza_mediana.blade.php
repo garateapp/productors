@@ -156,7 +156,11 @@
                             text: titulo
                         },
                         datalabels: {
-                            anchor: 'center', // Posición del label
+                            anchor: function(context) {
+                                let value = context.dataset.data[context.dataIndex];
+                                return value < 3 ? 'end' :
+                                    'center'; // Mueve etiquetas pequeñas hacia afuera
+                            },
                             align: 'center', // Alineación del texto
                             //color: '#c0c3c0', // Color del texto
                             color: function(context) {
