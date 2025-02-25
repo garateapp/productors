@@ -219,7 +219,7 @@
                             anchor: function(context) {
                                 let value = context.dataset.data[context.dataIndex];
                                 return value < 5 ? 'end' :
-                                'center'; // Mueve etiquetas pequeñas hacia afuera
+                                    'center'; // Mueve etiquetas pequeñas hacia afuera
                             },
                             formatter: function(value) {
                                 return value.toFixed(1) + '%'; // Formato con 1 decimal
@@ -231,7 +231,11 @@
                             color: function(context) {
                                 let value = context.dataset.data[context.dataIndex];
                                 return value < 5 ? '#000' :
-                                '#fff'; // Etiquetas pequeñas en negro para contraste
+                                    '#fff'; // Etiquetas pequeñas en negro para contraste
+                            },
+                            offset: function(context) {
+                                let value = context.dataset.data[context.dataIndex];
+                                return value < 2 ? 10 : 0; // Agrega espacio a los valores pequeños
                             }
                         }
 
