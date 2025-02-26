@@ -160,10 +160,21 @@
                             align: 'center', // Alineación del texto
                             //color: '#c0c3c0', // Color del texto
                             color: function(context) {
-                                let value = context.dataset.data[context.dataIndex];
-                                return value < 5 ? '#c0c3c0' :
-                                    '#fff'; // Etiquetas pequeñas en negro para contraste
+                                return context.raw < 6 ? "black" : "white"; // Menos de 6: texto negro
                             },
+                            backgroundColor: function(context) {
+                                return context.raw < 6 ? "white" :
+                                "rgba(0, 0, 0, 0.7)"; // Menos de 6: fondo blanco
+                            },
+                            borderColor: function(context) {
+                                return context.raw < 6 ? "black" :
+                                "transparent"; // Menos de 6: borde negro
+                            },
+                            borderWidth: function(context) {
+                                return context.raw < 6 ? 2 : 0; // Menos de 6: borde visible
+                            },
+                            borderRadius: 4,
+                            padding: 4,
                             offset: function(context) {
                                 let value = context.dataset.data[context.dataIndex];
                                 return value < 5 ? 45 : 0; // Agrega espacio a los valores pequeños
