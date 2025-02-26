@@ -161,7 +161,7 @@
                             //color: '#c0c3c0', // Color del texto
                             color: function(context) {
                                 let value = context.dataset.data[context.dataIndex];
-                                return value < 5 ? '#000' :
+                                return value < 5 ? '#c0c3c0' :
                                     '#fff'; // Etiquetas pequeñas en negro para contraste
                             },
                             offset: function(context) {
