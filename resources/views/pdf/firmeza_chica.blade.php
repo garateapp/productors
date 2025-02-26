@@ -161,16 +161,20 @@
                             //color: '#c0c3c0', // Color del texto
                             color: function(context) {
                                 let value = context.dataset.data[context.dataIndex];
-                                return value < 5 ? "black" : "white"; // Menos de 6: texto negro
+                                return value < 5 ? "white" : "white"; // Menos de 6: texto negro
+                            },
+                            color: function(context) {
+                                let value = context.dataset.data[context.dataIndex];
+                                return value < 5 ? "white" : "white"; // Menos de 6: texto negro
                             },
                             backgroundColor: function(context) {
                                 let value = context.dataset.data[context.dataIndex];
-                                return value < 6 ? "white" :
+                                return value < 6 ? col :
                                 ""; // Menos de 6: fondo blanco
                             },
                             borderColor: function(context) {
                                 let value = context.dataset.data[context.dataIndex];
-                                return value < 6 ? "black" :
+                                return value < 6 ? col :
                                 ""; // Menos de 6: borde negro
                             },
                             borderWidth: function(context) {
