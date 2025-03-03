@@ -433,7 +433,7 @@
                                     {{ number_format(100 - ($total + $a + $b + $col), 0) }} %
                                 @endif
 
-
+                                @if ($total_cat1 > 0)
                             <table style="width:100%;">
                                 <tr>
                                     <td>CAT 1</td>
@@ -442,11 +442,9 @@
 
                                 <tr>
                                     <td>
-                                        @if ($total_cat1 > 0)
-                                            {{ number_format(100 - ($total  + $a + $b + $col), 0) }} %
-                                        @else
-                                            {{ number_format(100 - ($total + $a + $b + $col), 0) }} %
-                                        @endif
+
+                                        {{ number_format(100 - ($total + $a + $b + $col), 0) }} %
+
                                     </td>
                                     <td>
                                         {{ number_format($total_cat1, 0) }} %
@@ -454,6 +452,7 @@
 
                                 </tr>
                             </table>
+                            @endif
 
 
                 {{-- Se modifica a solicitud de Viviana se eliminó el item $e FRUTA BLANDA --}}
