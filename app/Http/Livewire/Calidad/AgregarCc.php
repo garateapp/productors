@@ -14,8 +14,8 @@ class AgregarCc extends Component
 {   use WithPagination;
 
 
-    public $search, $ctd=25, $recep, $materia_vegetal, $temperatura, $valor, $tipo_control, $fecha, $embalaje=1, $cantidad, $detalle, $porcentaje_muestra, $total_muestra=100, $detalles, $recepcion_id, $calidad, $nro_muestra, $parametros, $valores, $selectedparametro, $selectedvalor;
-    
+    public $search, $ctd=25, $recep, $materia_vegetal, $temperatura, $valor, $tipo_control, $fecha, $embalaje=1, $cantidad, $detalle, $porcentaje_muestra, $total_muestra=100, $detalles, $recepcion_id, $calidad, $nro_muestra, $parametros, $valores, $selectedparametro, $selectedvalor,$categoria;
+
     public function mount(Recepcion $recepcion){
         $this->recepcion_id=$recepcion->id;
         $this->recep=Recepcion::find($this->recepcion_id);
@@ -66,21 +66,26 @@ class AgregarCc extends Component
         }else{
             $this->valores = Valor::where('parametro_id',$parametro)->where('especie',$this->recep->n_especie)->orderby('name','ASC')->get();
         }
-            
+
         $this->reset(['detalle']);
     }
 
     public function updatedselectedvalor($valor){
-        
-        $this->detalle = Valor::find($valor);
-    }
 
+        $this->detalle = Valor::find($valor);
+
+    }
+    public function categoria($categoria){
+
+
+        $this->detalle->categoria=$categoria;
+    }
     public function set_recepcion_cc($id){
         $this->recepcion_id=$id;
         $this->recep=Recepcion::find($this->recepcion_id);
         $this->parametros=Parametro::where('tipo',"cc")->orderby('name','ASC')->get();
         $this->tipo_control='cc';
-        
+
     }
 
     public function set_recepcion_ss($id){
@@ -88,16 +93,16 @@ class AgregarCc extends Component
         $this->recep=Recepcion::find($this->recepcion_id);
         $this->parametros=Parametro::where('tipo',"ss")->get();
         $this->tipo_control='ss';
-        
+
     }
 
     public function detalle_store(){
         $rules = [
             'cantidad'=>'required',
-            'detalle'=>'required'
-            
+            'detalle'=>'required',
+
             ];
-      
+
         $this->validate ($rules);
 
         Detalle::create([
@@ -108,10 +113,11 @@ class AgregarCc extends Component
             'tipo_item'=>$this->detalle->parametro->name,
             'tipo_detalle'=>$this->tipo_control,
             'detalle_item'=>$this->detalle->name,
-            'fecha'=>$this->fecha                
+            'fecha'=>$this->fecha,
+            'categoria'=>$this->categoria,
         ]);
-        
-        $this->reset(['detalle','porcentaje_muestra','selectedvalor','selectedparametro','cantidad','fecha','embalaje']);
+
+        $this->reset(['detalle','porcentaje_muestra','selectedvalor','selectedparametro','cantidad','fecha','embalaje','categoria']);
         $this->recep = Recepcion::find($this->recepcion_id);
     }
 
@@ -119,9 +125,9 @@ class AgregarCc extends Component
         $rules = [
             'valor'=>'required',
             'detalle'=>'required'
-            
+
             ];
-      
+
         $this->validate ($rules);
 
         Detalle::create([
@@ -131,9 +137,9 @@ class AgregarCc extends Component
             'tipo_item'=>$this->detalle->parametro->name,
             'tipo_detalle'=>$this->tipo_control,
             'detalle_item'=>$this->detalle->name,
-            'fecha'=>$this->fecha                
+            'fecha'=>$this->fecha
         ]);
-        
+
         $this->reset(['detalle','selectedvalor','selectedparametro','valor','fecha']);
         $this->recep = Recepcion::find($this->recepcion_id);
     }
@@ -152,7 +158,7 @@ class AgregarCc extends Component
         $this->total_muestra=100;
         $this->porcentaje_muestra=$this->cantidad*100/$this->total_muestra;
     }
-    
+
     public function limpiar_page(){
         $this->resetPage();
     }
@@ -168,6 +174,6 @@ class AgregarCc extends Component
         }else{
             $this->porcentaje_muestra=$this->cantidad*100/$this->total_muestra;
         }
-        
+
     }
 }

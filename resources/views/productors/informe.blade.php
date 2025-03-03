@@ -107,11 +107,19 @@
 
     @php
         $total = 0;
+        $total_cat1 = 0;
+        $total_cat2 = 0;
     @endphp
     @if ($d_calidad)
         @foreach ($d_calidad as $item)
             @php
                 $total += $item->porcentaje_muestra;
+                if ($item->categoria == '1') {
+                    $total_cat1 += $item->porcentaje_muestra;
+                }
+                if ($item->categoria == '2') {
+                    $total_cat2 += $item->porcentaje_muestra;
+                }
             @endphp
         @endforeach
     @endif
@@ -119,6 +127,12 @@
         @foreach ($d_condicion as $item)
             @php
                 $total += $item->porcentaje_muestra;
+                if ($item->categoria == '1') {
+                    $total_cat1 += $item->porcentaje_muestra;
+                }
+                if ($item->categoria == '2') {
+                    $total_cat2 += $item->porcentaje_muestra;
+                }
             @endphp
         @endforeach
     @endif
@@ -126,6 +140,12 @@
         @foreach ($d_plaga as $item)
             @php
                 $total += $item->porcentaje_muestra;
+                if ($item->categoria == '1') {
+                    $total_cat1 += $item->porcentaje_muestra;
+                }
+                if ($item->categoria == '2') {
+                    $total_cat2 += $item->porcentaje_muestra;
+                }
             @endphp
         @endforeach
     @endif
@@ -260,7 +280,7 @@
 			padding-left: 10px;
 			padding-right: 10px;
 			border-radius: 5px;">
-                <h3 style="color: teal;">Estimación<br> Exportación</h3>
+
                 @php
                     $a = 0;
                     $b = 0;
@@ -399,25 +419,65 @@
 
                     @endif
                 @endif
+                <h3 style="color: teal;">Estimación<br> Exportación</h3>
+
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="text-align: center;">
+
+                                @if ($total_cat1 > 0)
+
+                                    {{ number_format(100 - ($total -$total_cat1 + $a + $b + $col), 0) }} %
+
+                                @else
+                                    {{ number_format(100 - ($total + $a + $b + $col), 0) }} %
+                                @endif
+
+
+                            <table style="width:100%;">
+                                <tr>
+                                    <td>CAT 1</td>
+                                    <td>CAT 2</td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        @if ($total_cat1 > 0)
+                                            {{ number_format(100 - ($total  + $a + $b + $col), 0) }} %
+                                        @else
+                                            {{ number_format(100 - ($total + $a + $b + $col), 0) }} %
+                                        @endif
+                                    </td>
+                                    <td>
+                                        {{ number_format($total_cat1, 0) }} %
+                                    </td>
+
+                                </tr>
+                            </table>
+
+
                 {{-- Se modifica a solicitud de Viviana se eliminó el item $e FRUTA BLANDA --}}
-                {{ number_format(100 - ($total + $a + $b + $col), 0) }} %
+
 
 
             </td>
         </tr>
     </table>
+    </td>
+    </tr>
+    </table>
 
     <table style="width:100%;">
         <tr>
-                @isset($distribucion_calibre)
+            @isset($distribucion_calibre)
                 @if ($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen')
-                <td>
-                    <img style="width:100%;height:360px;" src="{{ $distribucion_calibre }}" alt="">
-                </td>
+                    <td>
+                        <img style="width:100%;height:360px;" src="{{ $distribucion_calibre }}" alt="">
+                    </td>
                 @else
-                <td>
-                    <img style="width:100%;height:300px;" src="{{ $distribucion_calibre }}" alt="">
-                </td>
+                    <td>
+                        <img style="width:100%;height:300px;" src="{{ $distribucion_calibre }}" alt="">
+                    </td>
                 @endif
                 @endif
 
@@ -427,10 +487,10 @@
                             <img style="width:100%;:360px;" src="{{ $distribucion_color }}" alt="">
                         </td>
                     @endif
-                @endif
+                    @endif
 
-        </tr>
-    </table>
+                </tr>
+            </table>
 
             {{-- <table style="width:100%;">
                 <tr>
@@ -455,7 +515,7 @@
                         @endif
                     @else
                         @isset($distribucion_color_fondo)
-                            @if($distribucion_color_fondo!='')
+                            @if ($distribucion_color_fondo != '')
                                     <td style="align:center;">
                                         <img style="width:100%; max-width:400px;" src="{{ $distribucion_color_fondo }}" alt="">
                                     </td>
@@ -467,474 +527,503 @@
 
                                 </tr>
                             </table> --}}
-                            @php
-                            $imageCount = 0;
-                            if (($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen') && isset($promedio_firmeza)) $imageCount++;
-                            if (($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen') && isset($promedio_brix)) $imageCount++;
-                            if (!($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen') && isset($distribucion_color)) $imageCount++;
-                            if (!($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen') && isset($distribucion_color_fondo) && $distribucion_color_fondo != '') $imageCount++;
-                        @endphp
+            @php
+                $imageCount = 0;
+                if (
+                    ($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen') &&
+                    isset($promedio_firmeza)
+                ) {
+                    $imageCount++;
+                }
+                if (
+                    ($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen') &&
+                    isset($promedio_brix)
+                ) {
+                    $imageCount++;
+                }
+                if (
+                    !($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen') &&
+                    isset($distribucion_color)
+                ) {
+                    $imageCount++;
+                }
+                if (
+                    !($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen') &&
+                    isset($distribucion_color_fondo) &&
+                    $distribucion_color_fondo != ''
+                ) {
+                    $imageCount++;
+                }
+            @endphp
 
-                        <table style="width:100%; text-align:center;">
+            <table style="width:100%; text-align:center;">
+                <tr>
+                    @if ($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen')
+                        @isset($promedio_firmeza)
+                            <td @if ($imageCount == 1) colspan="2" @endif>
+                                <img style="width:100%; max-width:400px; display:block; margin:auto;" src="{{ $promedio_firmeza }}"
+                                    alt="">
+                            </td>
+                        @endisset
+                        @isset($promedio_brix)
+                            <td @if ($imageCount == 1) colspan="2" @endif>
+                                <img style="width:100%; max-width:400px; display:block; margin:auto;" src="{{ $promedio_brix }}"
+                                    alt="">
+                            </td>
+                        @endisset
+                    @else
+                        @isset($distribucion_color)
+                            <td @if ($imageCount == 1) colspan="2" @endif>
+                                <img style="width:100%; max-width:400px; display:block; margin:auto;"
+                                    src="{{ $distribucion_color }}" alt="">
+                            </td>
+                        @endisset
+                        @isset($distribucion_color_fondo)
+                            @if ($distribucion_color_fondo != '')
+                                <td @if ($imageCount == 1) colspan="2" @endif>
+                                    <img style="width:100%; max-width:400px; display:block; margin:auto;"
+                                        src="{{ $distribucion_color_fondo }}" alt="">
+                                </td>
+                            @endif
+                        @endisset
+                    @endif
+                </tr>
+            </table>
+
+
+            @if ($recepcion->calidad->detalles->where('tipo_item', 'GRANDE')->first())
+                <table style="width:100%;">
+                    <tr>
+                        @isset($firmezas_grande)
+                            <td>
+                                <img style="width:100%;" src="{{ $firmezas_grande }}" alt="">
+                            </td>
+                @endif
+
+
+                </tr>
+                </table>
+                @endif
+                @if ($recepcion->calidad->detalles->where('tipo_item', 'MEDIANO')->first())
+                    <table style="width:100%;">
+                        <tr>
+                            @isset($firmezas_mediana)
+                                <td>
+                                    <img style="width:100%;" src="{{ $firmezas_mediana }}" alt="">
+                                </td>
+                    @endif
+
+
+                    </tr>
+                    </table>
+                    @endif
+                    @if ($recepcion->calidad->detalles->where('tipo_item', 'CHICO')->first())
+                        <table style="width:100%;">
                             <tr>
-                                @if ($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen')
-                                    @isset($promedio_firmeza)
-                                        <td @if($imageCount == 1) colspan="2" @endif>
-                                            <img style="width:100%; max-width:400px; display:block; margin:auto;" src="{{ $promedio_firmeza }}" alt="">
-                                        </td>
-                                    @endisset
-                                    @isset($promedio_brix)
-                                        <td @if($imageCount == 1) colspan="2" @endif>
-                                            <img style="width:100%; max-width:400px; display:block; margin:auto;" src="{{ $promedio_brix }}" alt="">
-                                        </td>
-                                    @endisset
-                                @else
-                                    @isset($distribucion_color)
-                                        <td @if($imageCount == 1) colspan="2" @endif>
-                                            <img style="width:100%; max-width:400px; display:block; margin:auto;" src="{{ $distribucion_color }}" alt="">
-                                        </td>
-                                    @endisset
-                                    @isset($distribucion_color_fondo)
-                                        @if($distribucion_color_fondo!='')
-                                            <td @if($imageCount == 1) colspan="2" @endif>
-                                                <img style="width:100%; max-width:400px; display:block; margin:auto;" src="{{ $distribucion_color_fondo }}" alt="">
-                                            </td>
-                                        @endif
-                                    @endisset
-                                @endif
-                            </tr>
+                                @isset($firmezas_chica)
+                                    <td>
+                                        <img style="width:100%;" src="{{ $firmezas_chica }}" alt="">
+                                    </td>
+                        @endif
+
+
+                        </tr>
                         </table>
-
-
-                            @if ($recepcion->calidad->detalles->where('tipo_item', 'GRANDE')->first())
-                                <table style="width:100%;">
-                                    <tr>
-                                        @isset($firmezas_grande)
-                                            <td>
-                                                <img style="width:100%;" src="{{ $firmezas_grande }}" alt="">
-                                            </td>
+                        @endif
+                        @if ($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen')
+                            <table style="width:100%;">
+                                <tr>
+                                    @isset($porcentaje_firmeza)
+                                        <td>
+                                            <img style="width:100%;" src="{{ $porcentaje_firmeza }}" alt="">
+                                        </td>
+                            @endif
+                            @if ($recepcion->n_variedad == 'Dagen')
+                                @isset($distribucion_color_fondo)
+                                    <td>
+                                        <img style="width:100%;" src="{{ $distribucion_color_fondo }}" alt="">
+                                    </td>
                                 @endif
-
-
+                                @endif
                                 </tr>
                                 </table>
+                            @else
+                                @if ($recepcion->n_especie == 'Apples')
+                                    <div class="page-break"></div>
+
+                                    <table style="width:100%; border:1px solid black;  border-collapse: collapse;  text-align: center;">
+                                        <tr style="width:100%; border:1px solid black;  border-collapse: collapse;">
+                                            <th colspan="2" style="border:1px solid black;  border-collapse: collapse;">
+                                                Corazon Acuoso
+                                            </th>
+                                            <th colspan="2" style="border:1px solid black;  border-collapse: collapse;">
+                                                Corazon Mohoso
+                                            </th>
+                                        </tr>
+                                        <tr style="border:1px solid black;">
+                                            <td style="border:1px solid black;  border-collapse: collapse;">
+                                                Leve
+                                            </td>
+                                            <td style="border:1px solid black;  border-collapse: collapse;">
+                                                @if ($recepcion->calidad->detalles->where('tipo_item', 'CARAZÓN ACUOSO')->where('detalle_item', 'Leve')->first())
+                                                    {{ $recepcion->calidad->detalles->where('tipo_item', 'CARAZÓN ACUOSO')->where('detalle_item', 'Leve')->first()->valor_ss }}
+                                                    %
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                            <td style="border:1px solid black;  border-collapse: collapse;">
+                                                Leve
+                                            </td>
+                                            <td style="border:1px solid black;  border-collapse: collapse;">
+                                                @if ($recepcion->calidad->detalles->where('tipo_item', 'CORAZÓN MOHOSO')->where('detalle_item', 'Leve')->first())
+                                                    {{ $recepcion->calidad->detalles->where('tipo_item', 'CORAZÓN MOHOSO')->where('detalle_item', 'Leve')->first()->valor_ss }}
+                                                    %
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr style="border:1px solid black;">
+                                            <td style="border:1px solid black;  border-collapse: collapse;">
+                                                Moderado
+                                            </td>
+                                            <td style="border:1px solid black;  border-collapse: collapse;">
+                                                @if ($recepcion->calidad->detalles->where('tipo_item', 'CARAZÓN ACUOSO')->where('detalle_item', 'Moderado')->first())
+                                                    {{ $recepcion->calidad->detalles->where('tipo_item', 'CARAZÓN ACUOSO')->where('detalle_item', 'Moderado')->first()->valor_ss }}
+                                                    %
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                            <td style="border:1px solid black;  border-collapse: collapse;">
+                                                Moderado
+                                            </td>
+                                            <td style="border:1px solid black;  border-collapse: collapse;">
+                                                @if ($recepcion->calidad->detalles->where('tipo_item', 'CORAZÓN MOHOSO')->where('detalle_item', 'Moderado')->first())
+                                                    {{ $recepcion->calidad->detalles->where('tipo_item', 'CORAZÓN MOHOSO')->where('detalle_item', 'Moderado')->first()->valor_ss }}
+                                                    %
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr style="border:1px solid black;  border-collapse: collapse;">
+                                            <td style="border:1px solid black;  border-collapse: collapse;">
+                                                Severo
+                                            </td>
+                                            <td style="border:1px solid black;  border-collapse: collapse;">
+                                                @if ($recepcion->calidad->detalles->where('tipo_item', 'CARAZÓN ACUOSO')->where('detalle_item', 'Severo')->first())
+                                                    {{ $recepcion->calidad->detalles->where('tipo_item', 'CARAZÓN ACUOSO')->where('detalle_item', 'Severo')->first()->valor_ss }}
+                                                    %
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                            <td style="border:1px solid black;  border-collapse: collapse;">
+                                                Severo
+                                            </td>
+                                            <td style="border:1px solid black;  border-collapse: collapse;">
+                                                @if ($recepcion->calidad->detalles->where('tipo_item', 'CORAZÓN MOHOSO')->where('detalle_item', 'Severo')->first())
+                                                    {{ $recepcion->calidad->detalles->where('tipo_item', 'CORAZÓN MOHOSO')->where('detalle_item', 'Severo')->first()->valor_ss }}
+                                                    %
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    </table>
                                 @endif
-                                @if ($recepcion->calidad->detalles->where('tipo_item', 'MEDIANO')->first())
+
+                                @if ($recepcion->n_especie == 'Apples' || $recepcion->n_especie == 'Pears')
+                                    <table
+                                        style="width:100%; border:1px solid black;  border-collapse: collapse;  text-align: center; margin-top: 30px; ">
+                                        <tr style="width:100%; border:1px solid black;  border-collapse: collapse;">
+                                            <th colspan="{{ $presiones->count() }}" style="border:1px solid black;  border-collapse: collapse;">
+                                                % Distribución de Presiones (Lbs)
+                                            </th>
+                                            @if ($recepcion->n_especie == 'Apples')
+                                                @if ($almidons->count())
+                                                    <th colspan="{{ $almidons->count() }}"
+                                                        style="border:1px solid black;  border-collapse: collapse;">
+                                                        % Distribución Almidón
+                                                    </th>
+                                                @endif
+                                            @endif
+                                        </tr>
+                                        <tr style="border:1px solid black;">
+                                            @foreach ($presiones as $item)
+                                                <td style="border:1px solid black;  border-collapse: collapse;">
+                                                    {{ $item->name }}
+                                                </td>
+                                            @endforeach
+                                            @if ($recepcion->n_especie == 'Apples')
+                                                @if ($almidons->count())
+                                                    @foreach ($almidons as $item)
+                                                        <td style="border:1px solid black;  border-collapse: collapse;">
+                                                            {{ $item->name }}
+                                                        </td>
+                                                    @endforeach
+                                                @endif
+                                            @endif
+                                        </tr>
+                                        <tr style="border:1px solid black;">
+                                            @foreach ($presiones as $item)
+                                                <td style="border:1px solid black;  border-collapse: collapse;">
+
+                                                    @if ($recepcion->calidad->detalles->where('tipo_item', 'PRESIONES')->where('detalle_item', $item->name)->first())
+                                                        {{ $recepcion->calidad->detalles->where('tipo_item', 'PRESIONES')->where('detalle_item', $item->name)->first()->valor_ss }}
+                                                        %
+                                                    @else
+                                                        0 %
+                                                    @endif
+
+                                                </td>
+                                            @endforeach
+                                            @if ($recepcion->n_especie == 'Apples')
+                                                @if ($almidons->count())
+                                                    @foreach ($almidons as $item)
+                                                        <td style="border:1px solid black;  border-collapse: collapse;">
+
+                                                            @if ($recepcion->calidad->detalles->where('tipo_item', 'ALMIDON')->where('detalle_item', $item->name)->first())
+                                                                {{ $recepcion->calidad->detalles->where('tipo_item', 'ALMIDON')->where('detalle_item', $item->name)->first()->valor_ss }}
+                                                                %
+                                                            @else
+                                                                0 %
+                                                            @endif
+
+                                                        </td>
+                                                    @endforeach
+                                                @endif
+                                            @endif
+                                        </tr>
+
+                                    </table>
+                                @endif
+                                @endif
+
+                                @if (
+                                    $recepcion->n_especie != 'Pears' &&
+                                        $recepcion->n_especie != 'Peaches' &&
+                                        $recepcion->n_especie != 'Apples' &&
+                                        $recepcion->n_especie != 'Nectarines' &&
+                                        $recepcion->n_especie != 'Plums' &&
+                                        $recepcion->n_especie != 'Membrillos')
+                                    <div class="page-break"></div>
+                                @endif
+
+                                @if ($recepcion->n_variedad == 'Dagen')
+                                    <div class="page-break"></div>
+                                @endif
+
+                                @if ($recepcion->n_especie == 'Orange' || $recepcion->n_especie == 'Mandarinas')
                                     <table style="width:100%;">
                                         <tr>
-                                            @isset($firmezas_mediana)
+                                            @isset($calibrix)
                                                 <td>
-                                                    <img style="width:100%;" src="{{ $firmezas_mediana }}" alt="">
+                                                    <img style="width:100%;" src="{{ $calibrix }}" alt="">
                                                 </td>
                                     @endif
-
 
                                     </tr>
                                     </table>
                                     @endif
-                                     @if ($recepcion->calidad->detalles->where('tipo_item', 'CHICO')->first())
-                                        <table style="width:100%;">
-                                            <tr>
-                                                @isset($firmezas_chica)
-                                                    <td>
-                                                        <img style="width:100%;" src="{{ $firmezas_chica }}" alt="">
-                                                    </td>
-                                        @endif
 
+                                    <table style="width:100%;  font-size: 12px; border-spacing: 2px;">
+
+                                        <tr>
+                                            <td style="background-color:#47ac34; color: white; padding-left: 5px;"><b>DEFECTOS DE CALIDAD</b> </td>
+                                            <td style="background-color:#47ac34; color: white; padding-left: 5px;"><b>DEFECTOS DE CONDICIÓN</b> </td>
+                                            <td style="background-color:#47ac34; color: white; padding-left: 5px;"><b>DAÑOS DE PLAGA </b></td>
+                                            <td style="background-color:#47ac34; color: white; padding-left: 5px;"><b>CALIDAD DE LLEGADA</b> </td>
 
                                         </tr>
-                                        </table>
-                                        @endif
-                                        @if ($recepcion->n_especie == 'Cherries' || $recepcion->n_variedad == 'Dagen')
-                                            <table style="width:100%;">
-                                                <tr>
-                                                    @isset($porcentaje_firmeza)
-                                                        <td>
-                                                            <img style="width:100%;" src="{{ $porcentaje_firmeza }}" alt="">
+
+
+
+
+
+                                        <tr>
+                                            <td style="vertical-align: text-top;font-size: 14px;">
+                                                @php
+                                                    $totalcalidad = 0;
+                                                @endphp
+                                                @if ($d_calidad->count())
+                                                    @foreach ($d_calidad as $item)
+                                                        @if ($item->categoria != '1')
+                                                            <div>
+                                                                <div style="display: inline;"> {{ $item->detalle_item }} </div>
+                                                                <div style="display: inline; text-align: right; justify-items: end;">
+                                                                    {{ $item->porcentaje_muestra }}%</div>
+                                                            </div>
+                                                            @php
+                                                                $totalcalidad += $item->porcentaje_muestra;
+                                                            @endphp
+                                                        @endif
+                                                    @endforeach
+                                                    <div style="background-color:#47ac34; color: white; font-size: 12px; padding-left: 3px;">
+                                                        <div style=""><b> TOTAL DEFECTOS DE CALIDAD </b></div>
+                                                        <div style="text-align: left; justify-items: end;"><b>{{ $totalcalidad }}%</b></div>
+                                                    </div>
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                            <td style="vertical-align: text-top;font-size: 14px;">
+                                                @php
+                                                    $totalcondicion = 0;
+                                                @endphp
+                                                @if ($d_condicion->count())
+
+                                                    @foreach ($d_condicion as $item)
+                                                        @if ($item->categoria != '1')
+                                                            <div>
+                                                                <div style="display: inline;"> {{ $item->detalle_item }} </div>
+                                                                <div style="display: inline; text-align: right; justify-items: end;">
+                                                                    {{ $item->porcentaje_muestra }}%</div>
+                                                            </div>
+                                                            @php
+                                                                $totalcondicion += $item->porcentaje_muestra;
+                                                            @endphp
+                                                        @endif
+                                                    @endforeach
+                                                    <div style="background-color:#47ac34; color: white; font-size: 12px; padding-left: 3px;">
+                                                        <div style=""> <b>TOTAL DEFECTOS DE CONDICIÓN </b></div>
+                                                        <div style="text-align: left; justify-items: end;"><b>{{ $totalcondicion }}%</b></div>
+                                                    </div>
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                            <td style="vertical-align: text-top;font-size: 14px;">
+                                                @php
+                                                    $totalplaga = 0;
+                                                @endphp
+                                                @if ($d_plaga->count())
+                                                    @foreach ($d_plaga as $item)
+                                                        <div>
+                                                            <div style="display: inline;"> {{ $item->detalle_item }} </div>
+                                                            <div style="display: inline; text-align: right; justify-items: end;">
+                                                                {{ $item->porcentaje_muestra }}%</div>
+                                                        </div>
+                                                        @php
+                                                            $totalplaga += $item->porcentaje_muestra;
+                                                        @endphp
+                                                    @endforeach
+                                                    <div style="background-color:#47ac34; color: white; font-size: 12px; padding-left: 3px;">
+                                                        <div style=""><b> TOTAL DAÑOS DE PLAGA </b></div>
+                                                        <div style="text-align: left; justify-items: end;"><b>{{ $totalplaga }}%</b></div>
+                                                    </div>
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                            <td style="vertical-align: text-top;font-size: 12px;">
+                                                <table>
+                                                    <tr>
+                                                        <td>Materia Vegetal </td>
+                                                        <td
+                                                            style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px ">
+                                                            @if ($recepcion->calidad->materia_vegetal == null)
+                                                                -
+                                                            @else
+                                                                {{ $recepcion->calidad->materia_vegetal }}
+                                                            @endif
                                                         </td>
-                                            @endif
-                                            @if ($recepcion->n_variedad == 'Dagen')
-                                                @isset($distribucion_color_fondo)
-                                                    <td>
-                                                        <img style="width:100%;" src="{{ $distribucion_color_fondo }}" alt="">
-                                                    </td>
-                                                @endif
-                                                @endif
-                                                </tr>
-                                                </table>
-                                            @else
-                                                @if ($recepcion->n_especie == 'Apples')
-                                                    <div class="page-break"></div>
-
-                                                    <table style="width:100%; border:1px solid black;  border-collapse: collapse;  text-align: center;">
-                                                        <tr style="width:100%; border:1px solid black;  border-collapse: collapse;">
-                                                            <th colspan="2" style="border:1px solid black;  border-collapse: collapse;">
-                                                                Corazon Acuoso
-                                                            </th>
-                                                            <th colspan="2" style="border:1px solid black;  border-collapse: collapse;">
-                                                                Corazon Mohoso
-                                                            </th>
-                                                        </tr>
-                                                        <tr style="border:1px solid black;">
-                                                            <td style="border:1px solid black;  border-collapse: collapse;">
-                                                                Leve
-                                                            </td>
-                                                            <td style="border:1px solid black;  border-collapse: collapse;">
-                                                                @if ($recepcion->calidad->detalles->where('tipo_item', 'CARAZÓN ACUOSO')->where('detalle_item', 'Leve')->first())
-                                                                    {{ $recepcion->calidad->detalles->where('tipo_item', 'CARAZÓN ACUOSO')->where('detalle_item', 'Leve')->first()->valor_ss }}
-                                                                    %
-                                                                @else
-                                                                    -
-                                                                @endif
-                                                            </td>
-                                                            <td style="border:1px solid black;  border-collapse: collapse;">
-                                                                Leve
-                                                            </td>
-                                                            <td style="border:1px solid black;  border-collapse: collapse;">
-                                                                @if ($recepcion->calidad->detalles->where('tipo_item', 'CORAZÓN MOHOSO')->where('detalle_item', 'Leve')->first())
-                                                                    {{ $recepcion->calidad->detalles->where('tipo_item', 'CORAZÓN MOHOSO')->where('detalle_item', 'Leve')->first()->valor_ss }}
-                                                                    %
-                                                                @else
-                                                                    -
-                                                                @endif
-                                                            </td>
-                                                        </tr>
-                                                        <tr style="border:1px solid black;">
-                                                            <td style="border:1px solid black;  border-collapse: collapse;">
-                                                                Moderado
-                                                            </td>
-                                                            <td style="border:1px solid black;  border-collapse: collapse;">
-                                                                @if ($recepcion->calidad->detalles->where('tipo_item', 'CARAZÓN ACUOSO')->where('detalle_item', 'Moderado')->first())
-                                                                    {{ $recepcion->calidad->detalles->where('tipo_item', 'CARAZÓN ACUOSO')->where('detalle_item', 'Moderado')->first()->valor_ss }}
-                                                                    %
-                                                                @else
-                                                                    -
-                                                                @endif
-                                                            </td>
-                                                            <td style="border:1px solid black;  border-collapse: collapse;">
-                                                                Moderado
-                                                            </td>
-                                                            <td style="border:1px solid black;  border-collapse: collapse;">
-                                                                @if ($recepcion->calidad->detalles->where('tipo_item', 'CORAZÓN MOHOSO')->where('detalle_item', 'Moderado')->first())
-                                                                    {{ $recepcion->calidad->detalles->where('tipo_item', 'CORAZÓN MOHOSO')->where('detalle_item', 'Moderado')->first()->valor_ss }}
-                                                                    %
-                                                                @else
-                                                                    -
-                                                                @endif
-                                                            </td>
-                                                        </tr>
-                                                        <tr style="border:1px solid black;  border-collapse: collapse;">
-                                                            <td style="border:1px solid black;  border-collapse: collapse;">
-                                                                Severo
-                                                            </td>
-                                                            <td style="border:1px solid black;  border-collapse: collapse;">
-                                                                @if ($recepcion->calidad->detalles->where('tipo_item', 'CARAZÓN ACUOSO')->where('detalle_item', 'Severo')->first())
-                                                                    {{ $recepcion->calidad->detalles->where('tipo_item', 'CARAZÓN ACUOSO')->where('detalle_item', 'Severo')->first()->valor_ss }}
-                                                                    %
-                                                                @else
-                                                                    -
-                                                                @endif
-                                                            </td>
-                                                            <td style="border:1px solid black;  border-collapse: collapse;">
-                                                                Severo
-                                                            </td>
-                                                            <td style="border:1px solid black;  border-collapse: collapse;">
-                                                                @if ($recepcion->calidad->detalles->where('tipo_item', 'CORAZÓN MOHOSO')->where('detalle_item', 'Severo')->first())
-                                                                    {{ $recepcion->calidad->detalles->where('tipo_item', 'CORAZÓN MOHOSO')->where('detalle_item', 'Severo')->first()->valor_ss }}
-                                                                    %
-                                                                @else
-                                                                    -
-                                                                @endif
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                @endif
-
-                                                @if ($recepcion->n_especie == 'Apples' || $recepcion->n_especie == 'Pears')
-                                                    <table
-                                                        style="width:100%; border:1px solid black;  border-collapse: collapse;  text-align: center; margin-top: 30px; ">
-                                                        <tr style="width:100%; border:1px solid black;  border-collapse: collapse;">
-                                                            <th colspan="{{ $presiones->count() }}" style="border:1px solid black;  border-collapse: collapse;">
-                                                                % Distribución de Presiones (Lbs)
-                                                            </th>
-                                                            @if ($recepcion->n_especie == 'Apples')
-                                                                @if ($almidons->count())
-                                                                    <th colspan="{{ $almidons->count() }}"
-                                                                        style="border:1px solid black;  border-collapse: collapse;">
-                                                                        % Distribución Almidón
-                                                                    </th>
-                                                                @endif
-                                                            @endif
-                                                        </tr>
-                                                        <tr style="border:1px solid black;">
-                                                            @foreach ($presiones as $item)
-                                                                <td style="border:1px solid black;  border-collapse: collapse;">
-                                                                    {{ $item->name }}
-                                                                </td>
-                                                            @endforeach
-                                                            @if ($recepcion->n_especie == 'Apples')
-                                                                @if ($almidons->count())
-                                                                    @foreach ($almidons as $item)
-                                                                        <td style="border:1px solid black;  border-collapse: collapse;">
-                                                                            {{ $item->name }}
-                                                                        </td>
-                                                                    @endforeach
-                                                                @endif
-                                                            @endif
-                                                        </tr>
-                                                        <tr style="border:1px solid black;">
-                                                            @foreach ($presiones as $item)
-                                                                <td style="border:1px solid black;  border-collapse: collapse;">
-
-                                                                    @if ($recepcion->calidad->detalles->where('tipo_item', 'PRESIONES')->where('detalle_item', $item->name)->first())
-                                                                        {{ $recepcion->calidad->detalles->where('tipo_item', 'PRESIONES')->where('detalle_item', $item->name)->first()->valor_ss }}
-                                                                        %
-                                                                    @else
-                                                                        0 %
-                                                                    @endif
-
-                                                                </td>
-                                                            @endforeach
-                                                            @if ($recepcion->n_especie == 'Apples')
-                                                                @if ($almidons->count())
-                                                                    @foreach ($almidons as $item)
-                                                                        <td style="border:1px solid black;  border-collapse: collapse;">
-
-                                                                            @if ($recepcion->calidad->detalles->where('tipo_item', 'ALMIDON')->where('detalle_item', $item->name)->first())
-                                                                                {{ $recepcion->calidad->detalles->where('tipo_item', 'ALMIDON')->where('detalle_item', $item->name)->first()->valor_ss }}
-                                                                                %
-                                                                            @else
-                                                                                0 %
-                                                                            @endif
-
-                                                                        </td>
-                                                                    @endforeach
-                                                                @endif
-                                                            @endif
-                                                        </tr>
-
-                                                    </table>
-                                                @endif
-                                                @endif
-
-                                                @if (
-                                                    $recepcion->n_especie != 'Pears' &&
-                                                        $recepcion->n_especie != 'Peaches' &&
-                                                        $recepcion->n_especie != 'Apples' &&
-                                                        $recepcion->n_especie != 'Nectarines' &&
-                                                        $recepcion->n_especie != 'Plums' &&
-                                                        $recepcion->n_especie != 'Membrillos')
-                                                    <div class="page-break"></div>
-                                                @endif
-
-                                                @if ($recepcion->n_variedad == 'Dagen')
-                                                    <div class="page-break"></div>
-                                                @endif
-
-                                                @if ($recepcion->n_especie == 'Orange' || $recepcion->n_especie == 'Mandarinas')
-                                                    <table style="width:100%;">
-                                                        <tr>
-                                                            @isset($calibrix)
-                                                                <td>
-                                                                    <img style="width:100%;" src="{{ $calibrix }}" alt="">
-                                                                </td>
-                                                    @endif
-
                                                     </tr>
-                                                    </table>
-                                                    @endif
+                                                    <tr>
+                                                        <td> Presencia de Piedras </td>
+                                                        <td
+                                                            style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px ">
+                                                            @if ($recepcion->calidad->piedras == null)
+                                                                -
+                                                            @else
+                                                                {{ $recepcion->calidad->piedras }}
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Presencia de Barro y/o <br> Polvo </td>
+                                                        <td
+                                                            style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px ">
+                                                            @if ($recepcion->calidad->barro == null)
+                                                                -
+                                                            @else
+                                                                {{ $recepcion->calidad->barro }}
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Humedad Esponjas </td>
+                                                        <td
+                                                            style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px ">
+                                                            @if ($recepcion->calidad->esponjas == null)
+                                                                -
+                                                            @else
+                                                                {{ $recepcion->calidad->esponjas }}
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Llenado de Bins y/o Tottes </td>
+                                                        <td
+                                                            style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px ">
+                                                            @if ($recepcion->calidad->llenado_tottes == null)
+                                                                -
+                                                            @else
+                                                                {{ $recepcion->calidad->llenado_tottes }}
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                </table>
 
-                                                    <table style="width:100%;  font-size: 12px; border-spacing: 2px;">
+                                            </td>
+                                        </tr>
 
-                                                        <tr>
-                                                            <td style="background-color:#47ac34; color: white; padding-left: 5px;"><b>DEFECTOS DE CALIDAD</b> </td>
-                                                            <td style="background-color:#47ac34; color: white; padding-left: 5px;"><b>DEFECTOS DE CONDICIÓN</b> </td>
-                                                            <td style="background-color:#47ac34; color: white; padding-left: 5px;"><b>DAÑOS DE PLAGA </b></td>
-                                                            <td style="background-color:#47ac34; color: white; padding-left: 5px;"><b>CALIDAD DE LLEGADA</b> </td>
-
-                                                        </tr>
-
-
-
-
-
-                                                        <tr>
-                                                            <td style="vertical-align: text-top;font-size: 14px;">
-                                                                @php
-                                                                    $totalcalidad = 0;
-                                                                @endphp
-                                                                @if ($d_calidad->count())
-                                                                    @foreach ($d_calidad as $item)
-                                                                        <div>
-                                                                            <div style="display: inline;"> {{ $item->detalle_item }} </div>
-                                                                            <div style="display: inline; text-align: right; justify-items: end;">
-                                                                                {{ $item->porcentaje_muestra }}%</div>
-                                                                        </div>
-                                                                        @php
-                                                                            $totalcalidad += $item->porcentaje_muestra;
-                                                                        @endphp
-                                                                    @endforeach
-                                                                    <div style="background-color:#47ac34; color: white; font-size: 12px; padding-left: 3px;">
-                                                                        <div style=""><b> TOTAL DEFECTOS DE CALIDAD </b></div>
-                                                                        <div style="text-align: left; justify-items: end;"><b>{{ $totalcalidad }}%</b></div>
-                                                                    </div>
-                                                                @else
-                                                                    -
-                                                                @endif
-                                                            </td>
-                                                            <td style="vertical-align: text-top;font-size: 14px;">
-                                                                @php
-                                                                    $totalcondicion = 0;
-                                                                @endphp
-                                                                @if ($d_condicion->count())
-                                                                    @foreach ($d_condicion as $item)
-                                                                        <div>
-                                                                            <div style="display: inline;"> {{ $item->detalle_item }} </div>
-                                                                            <div style="display: inline; text-align: right; justify-items: end;">
-                                                                                {{ $item->porcentaje_muestra }}%</div>
-                                                                        </div>
-                                                                        @php
-                                                                            $totalcondicion +=
-                                                                                $item->porcentaje_muestra;
-                                                                        @endphp
-                                                                    @endforeach
-                                                                    <div style="background-color:#47ac34; color: white; font-size: 12px; padding-left: 3px;">
-                                                                        <div style=""> <b>TOTAL DEFECTOS DE CONDICIÓN </b></div>
-                                                                        <div style="text-align: left; justify-items: end;"><b>{{ $totalcondicion }}%</b></div>
-                                                                    </div>
-                                                                @else
-                                                                    -
-                                                                @endif
-                                                            </td>
-                                                            <td style="vertical-align: text-top;font-size: 14px;">
-                                                                @php
-                                                                    $totalplaga = 0;
-                                                                @endphp
-                                                                @if ($d_plaga->count())
-                                                                    @foreach ($d_plaga as $item)
-                                                                        <div>
-                                                                            <div style="display: inline;"> {{ $item->detalle_item }} </div>
-                                                                            <div style="display: inline; text-align: right; justify-items: end;">
-                                                                                {{ $item->porcentaje_muestra }}%</div>
-                                                                        </div>
-                                                                        @php
-                                                                            $totalplaga += $item->porcentaje_muestra;
-                                                                        @endphp
-                                                                    @endforeach
-                                                                    <div style="background-color:#47ac34; color: white; font-size: 12px; padding-left: 3px;">
-                                                                        <div style=""><b> TOTAL DAÑOS DE PLAGA </b></div>
-                                                                        <div style="text-align: left; justify-items: end;"><b>{{ $totalplaga }}%</b></div>
-                                                                    </div>
-                                                                @else
-                                                                    -
-                                                                @endif
-                                                            </td>
-                                                            <td style="vertical-align: text-top;font-size: 12px;">
-                                                                <table>
-                                                                    <tr>
-                                                                        <td>Materia Vegetal </td>
-                                                                        <td
-                                                                            style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px ">
-                                                                            @if ($recepcion->calidad->materia_vegetal == null)
-                                                                                -
-                                                                            @else
-                                                                                {{ $recepcion->calidad->materia_vegetal }}
-                                                                            @endif
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td> Presencia de Piedras </td>
-                                                                        <td
-                                                                            style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px ">
-                                                                            @if ($recepcion->calidad->piedras == null)
-                                                                                -
-                                                                            @else
-                                                                                {{ $recepcion->calidad->piedras }}
-                                                                            @endif
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Presencia de Barro y/o <br> Polvo </td>
-                                                                        <td
-                                                                            style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px ">
-                                                                            @if ($recepcion->calidad->barro == null)
-                                                                                -
-                                                                            @else
-                                                                                {{ $recepcion->calidad->barro }}
-                                                                            @endif
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Humedad Esponjas </td>
-                                                                        <td
-                                                                            style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px ">
-                                                                            @if ($recepcion->calidad->esponjas == null)
-                                                                                -
-                                                                            @else
-                                                                                {{ $recepcion->calidad->esponjas }}
-                                                                            @endif
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Llenado de Bins y/o Tottes </td>
-                                                                        <td
-                                                                            style=" text-align: center; justify-items: center; background-color:#47ac34; color: white; padding-top: 4px; padding-bottom: 3px;padding-left: 7px; padding-right: 7px ">
-                                                                            @if ($recepcion->calidad->llenado_tottes == null)
-                                                                                -
-                                                                            @else
-                                                                                {{ $recepcion->calidad->llenado_tottes }}
-                                                                            @endif
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-
-                                                            </td>
-                                                        </tr>
-
-                                                    </table>
-                                                    <table style="width:100%;  font-size: 12px; background-color:#47ac34; border-spacing: 0px; ">
-                                                        <tr>
-                                                            <td style="background-color:#47ac34; color: white; padding-left: 5px;"><b>TOTAL DEFECTOS: </b>
+                                    </table>
+                                    <table style="width:100%;  font-size: 12px; background-color:#47ac34; border-spacing: 0px; ">
+                                        <tr>
+                                            <td style="background-color:#47ac34; color: white; padding-left: 5px;"><b>TOTAL DEFECTOS: </b>
 
 
 
-                                                                @if ($total > 0)
+                                                @if ($total > 0)
 
-                                                                    {{ $total }}%
-                                                                @else
-                                                                    -
-                                                                @endif
-                                                            </td>
-                                                            <td style="background-color:#47ac34; color: white;"><b>PRECALIBRE: </b>
-                                                                @if ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE CALIBRES')->where('detalle_item', 'PRECALIBRE')->first())
-                                                                    {{ $recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE CALIBRES')->where('detalle_item', 'PRECALIBRE')->first()->porcentaje_muestra }}
-                                                                    %
-                                                                @elseif($recepcion->n_especie == 'Orange' || $recepcion->n_especie == 'Mandarinas')
-                                                                    {{ $a }}%
-                                                                @else
-                                                                    -
-                                                                @endif
+                                                    {{ $total }}%
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                            <td style="background-color:#47ac34; color: white;"><b>PRECALIBRE: </b>
+                                                @if ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE CALIBRES')->where('detalle_item', 'PRECALIBRE')->first())
+                                                    {{ $recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE CALIBRES')->where('detalle_item', 'PRECALIBRE')->first()->porcentaje_muestra }}
+                                                    %
+                                                @elseif($recepcion->n_especie == 'Orange' || $recepcion->n_especie == 'Mandarinas')
+                                                    {{ $a }}%
+                                                @else
+                                                    -
+                                                @endif
 
-                                                            </td>
-                                                            <td style="background-color:#47ac34; color: white;"><b>SOBRECALIBRE: </b>
-                                                                @if ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE CALIBRES')->where('detalle_item', 'SOBRECALIBRE')->first())
-                                                                    {{ $recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE CALIBRES')->where('detalle_item', 'SOBRECALIBRE')->first()->porcentaje_muestra }}
-                                                                    %
-                                                                @elseif($recepcion->n_especie == 'Orange' || $recepcion->n_especie == 'Mandarinas')
-                                                                    {{ $b }}%
-                                                                @else
-                                                                    -
-                                                                @endif
+                                            </td>
+                                            <td style="background-color:#47ac34; color: white;"><b>SOBRECALIBRE: </b>
+                                                @if ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE CALIBRES')->where('detalle_item', 'SOBRECALIBRE')->first())
+                                                    {{ $recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE CALIBRES')->where('detalle_item', 'SOBRECALIBRE')->first()->porcentaje_muestra }}
+                                                    %
+                                                @elseif($recepcion->n_especie == 'Orange' || $recepcion->n_especie == 'Mandarinas')
+                                                    {{ $b }}%
+                                                @else
+                                                    -
+                                                @endif
 
-                                                            </td>
-                                                            <td style="background-color:#47ac34; color: white;"><b>FUERA DE COLOR: </b>
-                                                                @if ($col > 0)
-                                                                    {{ $col }}%
-                                                                @else
-                                                                    -
-                                                                @endif
-                                                            </td>
-                                                            {{-- <td style="background-color:#47ac34; color: white;">
+                                            </td>
+                                            <td style="background-color:#47ac34; color: white;"><b>FUERA DE COLOR: </b>
+                                                @if ($col > 0)
+                                                    {{ $col }}%
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                            {{-- <td style="background-color:#47ac34; color: white;">
                                                                 <b>FRUTA BLANDA: </b>
 
                                                                 @if ($recepcion->n_variedad == 'Dagen')
@@ -957,42 +1046,42 @@
 
                                                             </td> --}}
 
-                                                        </tr>
-                                                    </table>
-                                                    <div
-                                                        style="background-color:#47ac34; color: white; font-size: 12px; padding-left: 3px; border-top: 1px solid white;">
-                                                        <div style="text-align: center;"><b> OBSERVACIONES: </b>
-                                                            @if ($recepcion->calidad->obs_ext)
-                                                                {{ $recepcion->calidad->obs_ext }}
-                                                            @else
-                                                                -
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        style="background-color:#bad047; color: white; font-size: 12px; padding-left: 3px; border-bottom: 5px solid #47ac34;">
-                                                        <div style="text-align: center;">
+                                        </tr>
+                                    </table>
+                                    <div
+                                        style="background-color:#47ac34; color: white; font-size: 12px; padding-left: 3px; border-top: 1px solid white;">
+                                        <div style="text-align: center;"><b> OBSERVACIONES: </b>
+                                            @if ($recepcion->calidad->obs_ext)
+                                                {{ $recepcion->calidad->obs_ext }}
+                                            @else
+                                                -
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div
+                                        style="background-color:#bad047; color: white; font-size: 12px; padding-left: 3px; border-bottom: 5px solid #47ac34;">
+                                        <div style="text-align: center;">
 
-                                                            @if ($user)
-                                                                @if ($user->profile_photo_path)
-                                                                    <img src="{{ 'https://appgreenex.cl/storage/' . $user->profile_photo_path }}"
-                                                                        alt="Logo de la empresa" class="logo">
-                                                                @else
-                                                                    <img src="{{ asset('image/logogreenex.png') }}" alt="Logo de la empresa" class="logo">
-                                                                @endif
-                                                            @else
-                                                                <img src="{{ asset('image/logogreenex.png') }}" alt="Logo de la empresa" class="logo">
-                                                            @endif
-
-
-
-                                                        </div>
-                                                    </div>
+                                            @if ($user)
+                                                @if ($user->profile_photo_path)
+                                                    <img src="{{ 'https://appgreenex.cl/storage/' . $user->profile_photo_path }}"
+                                                        alt="Logo de la empresa" class="logo">
+                                                @else
+                                                    <img src="{{ asset('image/logogreenex.png') }}" alt="Logo de la empresa" class="logo">
+                                                @endif
+                                            @else
+                                                <img src="{{ asset('image/logogreenex.png') }}" alt="Logo de la empresa" class="logo">
+                                            @endif
 
 
 
+                                        </div>
+                                    </div>
 
 
-                                                </body>
 
-                                                </html>
+
+
+                                </body>
+
+                                </html>
