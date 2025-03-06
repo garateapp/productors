@@ -179,20 +179,17 @@
             {{ $recepcion->numero_documento_recepcion }} | {{ $recepcion->n_especie }} | <br>
             {{ $recepcion->n_variedad }} | Cuartel GE001 | CSG <br> {{ $recepcion->Codigo_Sag_emisor }} </h1>
     </div>
-    <table style="width:100%; background-color:#ececec;">
+    <table style="width:100%; background-color:#ececec;font-size:12px;">
 
         <tr
-            style="padding-top: 10px;
-			padding-bottom: 10px;
-			padding-left: 10px;
-			padding-right: 10px;
+            style="
 			border-radius: 5px;
 			font-family: 'Roboto';">
             <td
                 style="background-color:#ffffff;padding-top: 10px;
-			padding-bottom: 10px;
-			padding-left: 10px;
-			padding-right: 10px;
+			padding-bottom: 5px;
+			padding-left: 5px;
+			padding-right: 5px;
 			border-radius: 5px;
 			font-family: 'Roboto';">
                 <h3 style="color: #47ac34;">Fecha<br></h3>
@@ -200,18 +197,18 @@
             </td>
             <td
                 style="background-color:#ffffff;padding-top: 10px;
-			padding-bottom: 10px;
-			padding-left: 10px;
-			padding-right: 10px;
+			padding-bottom: 5px;
+			padding-left: 5px;
+			padding-right: 5px;
 			border-radius: 5px;
 			font-family: 'Roboto';">
                 <h3 style="color: #47ac34;">N° <br>Lote</h3> {{ $recepcion->numero_g_recepcion }}
             </td>
             <td
                 style="background-color:#ffffff;padding-top: 10px;
-			padding-bottom: 10px;
-			padding-left: 10px;
-			padding-right: 10px;
+			padding-bottom: 5px;
+			padding-left: 5px;
+			padding-right: 5px;
 			border-radius: 5px;
 			font-family: 'Roboto';">
                 <h3 style="color: #47ac34;">Kilos <br>Recibidos</h3>
@@ -219,9 +216,9 @@
             </td>
             <td
                 style="background-color:#ffffff;padding-top: 10px;
-			padding-bottom: 10px;
-			padding-left: 10px;
-			padding-right: 10px;
+			padding-bottom: 5px;
+			padding-left: 5px;
+			padding-right: 5px;
 			border-radius: 5px;
 			font-family: 'Roboto';">
                 <h3 style="color: #47ac34;">N°<br> Envases</h3>{{ number_format($recepcion->cantidad, 0, '.', '.') }}
@@ -229,9 +226,9 @@
             @if ($recepcion->calidad->detalles->where('tipo_detalle', 'ss')->first())
                 <td
                     style="background-color:#ffffff;padding-top: 10px;
-			padding-bottom: 10px;
-			padding-left: 10px;
-			padding-right: 10px;
+			padding-bottom: 5px;
+			padding-left: 5px;
+			padding-right: 5px;
 			border-radius: 5px;
 			font-family: 'Roboto';">
                     <h3 style="color: teal;">T°<br> Pulpa</h3>
@@ -248,9 +245,9 @@
             @if ($recepcion->calidad->detalles->where('detalle_item', 'SETEO CAMION')->first())
                 <td
                     style="background-color:#ffffff;padding-top: 10px;
-			padding-bottom: 10px;
-			padding-left: 10px;
-			padding-right: 10px;
+			padding-bottom: 5px;
+			padding-left: 5px;
+			padding-right: 5px;
 			border-radius: 5px;">
                     <h3 style="color: teal;">Seteo <br> Camión</h3>
                     {{ $recepcion->calidad->detalles->where('detalle_item', 'SETEO CAMION')->first()->cantidad }}°C
@@ -258,9 +255,9 @@
             @endif
             <td
                 style="background-color:#ffffff;padding-top: 10px;
-			padding-bottom: 10px;
-			padding-left: 10px;
-			padding-right: 10px;
+			padding-bottom: 5px;
+			padding-left: 5px;
+			padding-right: 5px;
 			border-radius: 5px;">
                 <h3 style="color: teal;">Nota<br> Calidad</h3>
                 @if ($recepcion->calidad->detalles->where('detalle_item', 'EXTERNA')->first())
@@ -275,10 +272,10 @@
 
             </td>
             <td
-                style="background-color:#ffffff;padding-top: 10px;
-			padding-bottom: 10px;
-			padding-left: 10px;
-			padding-right: 10px;
+                style="background-color:#ffffff;padding-top: 5px;
+			padding-bottom: 5px;
+			padding-left: 5px;
+			padding-right: 5px;
 			border-radius: 5px;">
 
                 @php
@@ -419,7 +416,7 @@
 
                     @endif
                 @endif
-                <h3 style="color: teal;">Estimación<br> Exportación</h3>
+                <h3 style="color: teal;">Estimación Exportación</h3>
 
                     <table style="width:100%;">
                         <tr>

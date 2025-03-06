@@ -1742,13 +1742,13 @@ public function uploadAndReadExcelGreenvic(Request $request)
         //
         //
 
-        $distribucion_color=$this->generarGrafico($recepcion->id,'color','color',500,520);
+        $distribucion_color=$this->generarGrafico($recepcion->id,'color','color',440,460);
         //'https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html&delay=5&viewport=500x520';
 
 
 
         if ($recepcion->calidad->detalles->where('tipo_item','COLOR DE FONDO')->count()) {
-            $distribucion_color_fondo=$this->generarGrafico($recepcion->id,'color/fondo','color_fondo',500,520);
+            $distribucion_color_fondo=$this->generarGrafico($recepcion->id,'color/fondo','color_fondo',440,460);
             //'https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/fondo/'.$recepcion->id.'.html&delay=1&viewport=500x520';
         }else{
             $distribucion_color_fondo=NULL;
@@ -1763,11 +1763,11 @@ public function uploadAndReadExcelGreenvic(Request $request)
             //$firmezas_chica='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/chica/'.$recepcion->id.'.html&viewport=800x250';
         }
         elseif ($recepcion->n_especie=='Apples') {
-            $firmezas_grande=$this->generarGrafico($recepcion->id,'firmeza/grande','firmeza_grande',800,400);
+            $firmezas_grande=$this->generarGrafico($recepcion->id,'firmeza/grande','firmeza_grande',800,250);
             //$firmezas_grande='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/grande/'.$recepcion->id.'.html&viewport=800x250';
-            $firmezas_mediana=$this->generarGrafico($recepcion->id,'firmeza/mediana','firmeza_mediana',800,400);
+            $firmezas_mediana=$this->generarGrafico($recepcion->id,'firmeza/mediana','firmeza_mediana',800,250);
             //$firmezas_mediana='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/mediana/'.$recepcion->id.'.html&viewport=800x250';
-            $firmezas_chica=$this->generarGrafico($recepcion->id,'firmeza/chica','firmeza_chica',800,400);
+            $firmezas_chica=$this->generarGrafico($recepcion->id,'firmeza/chica','firmeza_chica',800,250);
             //$firmezas_chica='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/chica/'.$recepcion->id.'.html&viewport=800x250';
         }
         else{
@@ -1842,9 +1842,9 @@ public function uploadAndReadExcelGreenvic(Request $request)
         unlink($imagePath); // Borra la imagen anterior
     }
     //if (!file_exists($imagePath)) {
-        Browsershot::url("https://appgreenex.cl/{$tipo}/{$id}.html")
-        //Browsershot::url("http://productors.test/{$tipo}/{$id}.html")
-            ->setChromePath('/usr/bin/chromium-browser')
+       // Browsershot::url("https://appgreenex.cl/{$tipo}/{$id}.html")
+        Browsershot::url("http://productors.test/{$tipo}/{$id}.html")
+         //   ->setChromePath('/usr/bin/chromium-browser')
             ->windowSize($ancho, $alto)
             //->setOption('args', ['--verbose']) // Modo debug
            // ->setOption('debug', true) // Activa más detalles
