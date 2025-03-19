@@ -994,7 +994,7 @@
                                                 @if ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE CALIBRES')->where('detalle_item', 'PRECALIBRE')->first())
                                                     {{ $recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE CALIBRES')->where('detalle_item', 'PRECALIBRE')->first()->porcentaje_muestra }}
                                                     %
-                                                @elseif($recepcion->n_especie == 'Orange' || $recepcion->n_especie == 'Mandarinas' || $recepcion->n_especie = 'Membrillos')
+                                                @elseif($recepcion->n_especie == 'Orange' || $recepcion->n_especie == 'Mandarinas' )
                                                     {{ $a }}%
                                                 @else
                                                     -
@@ -1005,7 +1005,7 @@
                                                 @if ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE CALIBRES')->where('detalle_item', 'SOBRECALIBRE')->first())
                                                     {{ $recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE CALIBRES')->where('detalle_item', 'SOBRECALIBRE')->first()->porcentaje_muestra }}
                                                     %
-                                                @elseif($recepcion->n_especie == 'Orange' || $recepcion->n_especie == 'Mandarinas' || $recepcion->n_especie = 'Membrillos')
+                                                @elseif($recepcion->n_especie == 'Orange' || $recepcion->n_especie == 'Mandarinas')
                                                     {{ $b }}%
                                                 @else
                                                     -
