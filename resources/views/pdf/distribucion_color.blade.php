@@ -103,19 +103,6 @@
                         $colors[] = '#830d13';
                     }
                 }
-                if($recepcion->n_especie == 'Apples'){
-                    if ($name == '<30') {
-                        $colors[] = '#F05E5E';
-                    } elseif ($name == '30-50') {
-                        $colors[] = '#ED3F3F';
-                    } elseif ($name == '50-70') {
-                        $colors[] = '#e01620';
-                    } elseif ($name == '>70') {
-                        $colors[] = '#830d13';
-                    }
-                }
-
-        
             }
         }
 
@@ -124,7 +111,10 @@
         @php
 
         @endphp
-    
+    @elseif($recepcion->n_especie == 'Apples')
+        @php
+            $colors = ['#F05E5E', '#E01620', '#ED3F3F', '#830d13'];
+        @endphp
     @elseif($recepcion->n_especie == 'Peaches' || $recepcion->n_especie == 'Nectarines')
 
     @elseif($recepcion->n_especie == 'Plums' && $recepcion->n_variedad != 'Dagen')
