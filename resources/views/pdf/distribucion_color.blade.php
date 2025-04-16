@@ -113,7 +113,7 @@
         @endphp
     @elseif($recepcion->n_especie == 'Apples')
         @php
-            $colors = ['#830d13', '#E01620', '#ED3F3F', '#F05E5E', '#F0E770', '#F0E770'];
+            $colors = ['#830d13', '#E01620', '#ED3F3F', '#F05E5E'];
         @endphp
     @elseif($recepcion->n_especie == 'Peaches' || $recepcion->n_especie == 'Nectarines')
 
