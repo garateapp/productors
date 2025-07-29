@@ -1997,11 +1997,11 @@ public function uploadAndReadExcelGreenvic(Request $request)
         if ($recepcion->n_variedad == 'Dagen'){
             foreach ($recepcion->calidad->detalles->where('tipo_item', 'FIRMEZAS') as $detalle){
 
-                    $categories[] = $detalle->detalle_item;
+                    $categories_porc_firmeza[] = $detalle->detalle_item;
                     if ($recepcion->n_especie == 'Cherries') {
-                        $series[] = $detalle->valor_ss;
+                        $series_porc_firmeza[] = $detalle->valor_ss;
                     } else {
-                        $series[] = $detalle->porcentaje_muestra;
+                        $series_porc_firmeza[] = $detalle->porcentaje_muestra;
                     }
 
 
@@ -2010,11 +2010,11 @@ public function uploadAndReadExcelGreenvic(Request $request)
             foreach ($recepcion->calidad->detalles->where('tipo_item', 'FIRMEZAS') as $detalle){
                 if ($detalle->detalle_item == 'LIGHT' || $detalle->detalle_item == 'DARK' || $detalle->detalle_item == 'BLACK'){
 
-                        $categories[] = $detalle->detalle_item;
+                        $categories_porc_firmeza[] = $detalle->detalle_item;
                         if ($recepcion->n_especie == 'Cherries') {
-                            $series[] = $detalle->valor_ss;
+                            $series_porc_firmeza[] = $detalle->valor_ss;
                         } else {
-                            $series[] = $detalle->porcentaje_muestra;
+                            $series_porc_firmeza[] = $detalle->porcentaje_muestra;
                         }
 
                 }
@@ -2048,7 +2048,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
             $porcentaje_firmeza=NULL;
         }
         $html_tabla_calibrix='';
-        if ($recepcion->n_especie=='Orange'  || $recepcion->n_especie=='Mandarinas') {
+
             $calibrix=$this->generarGrafico($recepcion->id,'calibrix','calibrix',800,380);
 
         $categories_calibrix=[];
@@ -2056,7 +2056,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
         //$items=['LIGHT','DARK','BLACK'];
 
 
-
+        $cont=0;
         if ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES')->count()>0){
             foreach ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES') as $detalle){
 
@@ -2064,16 +2064,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
                         $categories_calibrix[]=$detalle->detalle_item;
                         $series_calibrix[]=$detalle->valor_ss;
             }
-
-
-        }
-        else{
-
-                        $categories_calibrix[]='NONAME';
-                        $series_calibrix[]=0;
-
-        }
-         $html_tabla_calibrix='<table border="1" cellpadding="5" cellspacing="0">';
+                   $html_tabla_calibrix='<table border="1" cellpadding="5" cellspacing="0">';
             $html_tabla_calibrix.='<thead><tr><th>Color</th><th>Valor</th></tr></thead>';
             $html_tabla_calibrix.='<tbody>';
             foreach ($series_calibrix as $serie) {
@@ -2082,12 +2073,93 @@ public function uploadAndReadExcelGreenvic(Request $request)
                 $html_tabla_calibrix.='<td>'.$serie.'</td>';
                 $html_tabla_calibrix.='</tr>';
                 $cont++;
+
             }
+            $html_tabla_calibrix.='</tbody>';
+            $html_tabla_calibrix.='</table>';
+
+        }
+        else{
+
+                        $categories_calibrix[]='NONAME';
+                        $series_calibrix[]=0;
+
+
+        }
+
+        $categories_porcentaje_firmezas = [];
+        $series_porcentaje_firmezas = [];
+        $colores=[];
+        $html_tabla_porcentaje_firmeza='';
+
+   if ($recepcion->calidad->detalles) {
+    if ($recepcion->n_variedad == 'Dagen') {
+        foreach ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE FIRMEZA') as $detalle) {
+            $categories_porcentaje_firmezas[] = $detalle->detalle_item;
+            $series_porcentaje_firmezas[] = $detalle->porcentaje_muestra;
+        }
+
+        // Generar tabla HTML para Dagen (1 fila de datos)
+        $html_tabla_porcentaje_firmeza = '<table border="1" cellpadding="5" cellspacing="0">';
+        $html_tabla_porcentaje_firmeza .= '<tr><th></th>';
+        foreach ($categories_porcentaje_firmezas as $categoria) {
+            $html_tabla_porcentaje_firmeza .= '<th>' . $categoria . '</th>';
+        }
+        $html_tabla_porcentaje_firmeza .= '</tr>';
+
+        $html_tabla_porcentaje_firmeza .= '<tr><td>Porcentaje</td>';
+        foreach ($series_porcentaje_firmezas as $valor) {
+            $html_tabla_porcentaje_firmeza .= '<td>' . round($valor, 2) . '%</td>';
+        }
+        $html_tabla_porcentaje_firmeza .= '</tr>';
+        $html_tabla_porcentaje_firmeza .= '</table>';
+
+    } else {
+        // Otras variedades (tabla de 3 filas: LIGHT, DARK, BLACK)
+
+        $l = $d = $b = [];
+        foreach ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item', 'LIGHT') as $detalle) {
+            $l[] = $detalle->valor_ss;
+        }
+        foreach ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item', 'DARK') as $detalle) {
+            $d[] = $detalle->valor_ss;
+        }
+        foreach ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE FIRMEZA')->where('detalle_item', 'BLACK') as $detalle) {
+            $b[] = $detalle->valor_ss;
+        }
+
+        $categories_porcentaje_firmezas = [
+            'Muy Firme >280 - 1000<br>Durofel >75',
+            'Firme 200 - 279<br>Durofel 72 - 74.9',
+            'Sensible 180 - 199<br>Durofel 65 - 69.9',
+            'Blando 0,1 - 179<br>Durofel <65,4'
+        ];
+        $series_porcentaje_firmezas = [$l, $d, $b];
+        $colores = ['LIGHT', 'DARK', 'BLACK'];
+
+        // Generar tabla HTML
+        $html_tabla_porcentaje_firmeza = '<table border="1" cellpadding="5" cellspacing="0">';
+        $html_tabla_porcentaje_firmeza .= '<tr><th></th>';
+        foreach ($categories_porcentaje_firmezas as $categoria) {
+            $html_tabla_porcentaje_firmeza .= '<th>' . $categoria . '</th>';
+        }
+        $html_tabla_porcentaje_firmeza .= '</tr>';
+
+        foreach ($series_porcentaje_firmezas as $index => $fila) {
+            $html_tabla_porcentaje_firmeza .= '<tr><td>' . $colores[$index] . '</td>';
+            foreach ($fila as $valor) {
+                $html_tabla_porcentaje_firmeza .= '<td>' . round($valor, 2) . '%</td>';
+            }
+            $html_tabla_porcentaje_firmeza .= '</tr>';
+        }
+        $html_tabla_porcentaje_firmeza .= '</table>';
+    }
+}
 
             //'https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibrix/'.$recepcion->id.'.html&viewport=800x380';
-        }else{
-            $calibrix=NULL;
-        }
+        // }else{
+        //     $calibrix=NULL;
+        // }
         //view()->share('productors.informe',$recepcion,$distribucion_calibre);
         $user=User::where('name',$recepcion->n_emisor)->first();
 
@@ -2115,7 +2187,8 @@ public function uploadAndReadExcelGreenvic(Request $request)
                                                     'html_tabla_porc_firmeza'=>$html_tabla_porc_firmeza,
                                                     'html_tabla_firmeza_grande'=>$html_tabla_firmeza_grande,
                                                     'html_tabla_firmeza_mediana'=>$html_tabla_firmeza_mediana,
-                                                    'html_tabla_firmeza_pequena'=>$html_tabla_firmeza_pequena,]);
+                                                    'html_tabla_firmeza_pequena'=>$html_tabla_firmeza_pequena,
+                                                'html_tabla_porcentaje_firmeza'=>$html_tabla_porcentaje_firmeza]);
 
         $pdfContent = $pdf->output();
         $filename = $recepcion->numero_g_recepcion.'-'.$recepcion->id_emisor.'.pdf';
@@ -2142,7 +2215,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
     }
     //if (!file_exists($imagePath)) {
         Browsershot::url("https://appgreenex.cl/{$tipo}/{$id}.html")
-        //Browsershot::url("http://productors.test/{$tipo}/{$id}.html")
+         //Browsershot::url("http://productors.test/{$tipo}/{$id}.html")
          ->setChromePath('/usr/bin/chromium-browser')
          ->windowSize($ancho, $alto)
             //->setOption('args', ['--verbose']) // Modo debug
