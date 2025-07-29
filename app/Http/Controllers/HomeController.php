@@ -1486,17 +1486,11 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
     public function dashboard () {
         $users=User::all();
-
-
-
-
         return view('dashboard',compact('users'));
     }
 
     public function dashboard_especie (Especie $especie) {
         $users=User::all();
-
-
         return view('dashboardespecie',compact('users','especie'));
     }
 
@@ -1511,13 +1505,10 @@ public function uploadAndReadExcelGreenvic(Request $request)
     }
 
     public function downloadpdf(Recepcion $recepcion) {
-
         return response()->download(storage_path('app/'.$recepcion->informe));
-
     }
     //PERAS // MANZANAS //CEREZAS //DAGEN
     public function distribucion_calibre(Recepcion $recepcion) {
-
         return view('pdf.distribucion_calibre',compact('recepcion'));
     }
     //PERAS // MANZANAS //CEREZAS //DAGEN
@@ -1542,7 +1533,6 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
     //CEREZAS //DAGEN
     public function promedio_firmeza(Recepcion $recepcion) {
-
         return view('pdf.promedio_firmeza',compact('recepcion'));
     }
      //NARANJAS
@@ -2153,7 +2143,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
     //if (!file_exists($imagePath)) {
         Browsershot::url("https://appgreenex.cl/{$tipo}/{$id}.html")
         //Browsershot::url("http://productors.test/{$tipo}/{$id}.html")
-          //->setChromePath('/usr/bin/chromium-browser')
+          ->setChromePath('/usr/bin/chromium-browser')
             ->windowSize($ancho, $alto)
             //->setOption('args', ['--verbose']) // Modo debug
            // ->setOption('debug', true) // Activa más detalles
