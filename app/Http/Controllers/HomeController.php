@@ -1742,19 +1742,164 @@ public function uploadAndReadExcelGreenvic(Request $request)
         //
         //
 
+        $categories_distribucion_calibre = [];
+        $series_distribucion_calibre = [];
+        $cantidad_distribucion_calibre = 0;
+
+
+    if ($recepcion->calidad->detalles){
+        foreach ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE CALIBRES') as $detalle){
+
+            if ($recepcion->n_especie == 'Cherries') {
+                $cantidad_distribucion_calibre += $detalle->cantidad;
+            } else {
+                $cantidad_distribucion_calibre += $detalle->cantidad;
+            }
+        }
+
+        foreach ($recepcion->calidad->detalles->where('tipo_item', 'DISTRIBUCIÓN DE CALIBRES') as $detalle){
+
+            $categories_distribucion_calibre[] = $detalle->detalle_item;
+            if ($recepcion->n_especie == 'Cherries') {
+                $series_distribucion_calibre[] = $detalle->valor_ss;
+            } else {
+                if ($cantidad_distribucion_calibre > 0) {
+                    $series_distribucion_calibre[] = ($detalle->porcentaje_muestra * 100) / $cantidad_distribucion_calibre;
+                } else {
+                    $series_distribucion_calibre[] = $detalle->porcentaje_muestra;
+                }
+            }
+        }
+    }
+    $html_tabla_distribucion_calibre = '<table border="1" cellpadding="5" cellspacing="0">';
+    $html_tabla_distribucion_calibre .= '<thead><tr><th>Calibre</th><th>Valor</th></tr></thead>';
+    $html_tabla_distribucion_calibre .= '<tbody>';
+
+    foreach ($categories_distribucion_calibre as $index => $categoria) {
+        $valor = $series_distribucion_calibre[$index] ?? '';
+        $html_tabla_distribucion_calibre .= '<tr>';
+        $html_tabla_distribucion_calibre .= '<td>' . htmlspecialchars($categoria) . '</td>';
+        $html_tabla_distribucion_calibre .= '<td>' . round($valor, 2) . '</td>';
+        $html_tabla_distribucion_calibre .= '</tr>';
+    }
+
+    $html_tabla_distribucion_calibre .= '</tbody></table>';
+    $html_tabla_porc_firmeza='';
+    $html_tabla_color_fondo='';
+
         $distribucion_color=$this->generarGrafico($recepcion->id,'color','color',440,460);
+
         //'https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/'.$recepcion->id.'.html&delay=5&viewport=500x520';
+        foreach ($recepcion->calidad->detalles->where('tipo_item', 'COLOR DE CUBRIMIENTO') as $detalle) {
+             $name_color = $detalle->detalle_item;
+             if ($recepcion->n_especie == 'Cherries') {
+                    $series_color[] = ['name' => $name_color, 'y' => $detalle->valor_ss];
+                } else {
+                    $series_color[] = ['name' => $name_color, 'y' => $detalle->porcentaje_muestra];
+                }
 
-
+        }
+        $html_tabla_color='<table border="1" cellpadding="5" cellspacing="0">';
+        $html_tabla_color.='<thead><tr><th>Color</th><th>Valor</th></tr></thead>';
+        $html_tabla_color.='<tbody>';
+        foreach ($series_color as $serie) {
+            $html_tabla_color.='<tr>';
+            $html_tabla_color.='<td>'.$serie['name'].'</td>';
+            $html_tabla_color.='<td>'.$serie['y'].'</td>';
+            $html_tabla_color.='</tr>';
+        }
+        $html_tabla_color.='</tbody></table>';
 
         if ($recepcion->calidad->detalles->where('tipo_item','COLOR DE FONDO')->count()) {
             $distribucion_color_fondo=$this->generarGrafico($recepcion->id,'color/fondo','color_fondo',440,460);
+
+            foreach ($recepcion->calidad->detalles->where('tipo_item', 'COLOR DE FONDO') as $detalle) {
+                //$categories[]=$detalle->detalle_item;
+                //$series[]=$detalle->porcentaje_muestra;
+                $name_color_fondo = $detalle->detalle_item;
+
+                $series_color_fondo[] = ['name' => $name_color_fondo, 'y' => $detalle->porcentaje_muestra];
+            }
+            $html_tabla_color_fondo='<table border="1" cellpadding="5" cellspacing="0">';
+            $html_tabla_color_fondo.='<thead><tr><th>Color</th><th>Valor</th></tr></thead>';
+            $html_tabla_color_fondo.='<tbody>';
+            foreach ($series_color_fondo as $serie) {
+                $html_tabla_color_fondo.='<tr>';
+                $html_tabla_color_fondo.='<td>'.$serie['name'].'</td>';
+                $html_tabla_color_fondo.='<td>'.$serie['y'].'</td>';
+                $html_tabla_color_fondo.='</tr>';
+            }
+            $html_tabla_color_fondo.='</tbody></table>';
             //'https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/color/fondo/'.$recepcion->id.'.html&delay=1&viewport=500x520';
         }else{
             $distribucion_color_fondo=NULL;
         }
-        Log::info("Color de Fondo:".$distribucion_color_fondo);
+        $html_tabla_firmeza_grande='';
+        $html_tabla_firmeza_mediana='';
+        $html_tabla_firmeza_pequena='';
         if ($recepcion->n_especie!='Orange' || $recepcion->n_especie=="Cherries") {
+                   $categories_firmeza_grande = [];
+                   $series_firmeza_grande = [];
+                   $categories_firmeza_mediana = [];
+                   $series_firmeza_mediana = [];
+                   $categories_firmeza_pequena = [];
+                   $series_firmeza_pequena = [];
+
+
+            if ($recepcion->calidad->detalles){
+                foreach ($recepcion->calidad->detalles->where('tipo_item', 'GRANDE') as $detalle){
+                        $categories_firmeza_grande[] = $detalle->detalle_item;
+                        $series_firmeza_grande[] = ['name' => $detalle->detalle_item, 'y' => $detalle->valor_ss];
+                }
+            }
+
+            if ($recepcion->calidad->detalles){
+                foreach ($recepcion->calidad->detalles->where('tipo_item', 'MEDIANO') as $detalle){
+                        $categories_firmeza_mediana[] = $detalle->detalle_item;
+                        $series_firmeza_mediana[] = ['name' => $detalle->detalle_item, 'y' => $detalle->valor_ss];
+                }
+            }
+
+            if ($recepcion->calidad->detalles){
+                foreach ($recepcion->calidad->detalles->where('tipo_item', 'CHICO') as $detalle){
+                        $categories_firmeza_pequena[] = $detalle->detalle_item;
+                        $series_firmeza_pequena[] = ['name' => $detalle->detalle_item, 'y' => $detalle->valor_ss];
+                }
+            }
+
+            $html_tabla_firmeza_grande='<table border="1" cellpadding="5" cellspacing="0">';
+            $html_tabla_firmeza_grande.='<thead><tr><th>Calibre</th><th>Valor</th></tr></thead>';
+            $html_tabla_firmeza_grande.='<tbody>';
+            foreach ($series_firmeza_grande as $serie) {
+                $html_tabla_firmeza_grande.='<tr>';
+                $html_tabla_firmeza_grande.='<td>'.$serie['name'].'</td>';
+                $html_tabla_firmeza_grande.='<td>'.$serie['y'].'</td>';
+                $html_tabla_firmeza_grande.='</tr>';
+            }
+            $html_tabla_firmeza_grande.='</tbody></table>';
+            $html_tabla_firmeza_mediana='<table border="1" cellpadding="5" cellspacing="0">';
+            $html_tabla_firmeza_mediana.='<thead><tr><th>Calibre</th><th>Valor</th></tr></thead>';
+            $html_tabla_firmeza_mediana.='<tbody>';
+            foreach ($series_firmeza_mediana as $serie) {
+                $html_tabla_firmeza_mediana.='<tr>';
+                $html_tabla_firmeza_mediana.='<td>'.$serie['name'].'</td>';
+                $html_tabla_firmeza_mediana.='<td>'.$serie['y'].'</td>';
+                $html_tabla_firmeza_mediana.='</tr>';
+            }
+            $html_tabla_firmeza_mediana.='</tbody></table>';
+
+            $html_tabla_firmeza_pequena='<table border="1" cellpadding="5" cellspacing="0">';
+            $html_tabla_firmeza_pequena.='<thead><tr><th>Calibre</th><th>Valor</th></tr></thead>';
+            $html_tabla_firmeza_pequena.='<tbody>';
+            foreach ($series_firmeza_pequena as $serie) {
+                $html_tabla_firmeza_pequena.='<tr>';
+                $html_tabla_firmeza_pequena.='<td>'.$serie['name'].'</td>';
+                $html_tabla_firmeza_pequena.='<td>'.$serie['y'].'</td>';
+                $html_tabla_firmeza_pequena.='</tr>';
+            }
+            $html_tabla_firmeza_pequena.='</tbody></table>';
+
+
             $firmezas_grande=$this->generarGrafico($recepcion->id,'firmeza/grande','firmeza_grande',800,250);
             //$firmezas_grande='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/grande/'.$recepcion->id.'.html&viewport=800x250';
             $firmezas_mediana=$this->generarGrafico($recepcion->id,'firmeza/mediana','firmeza_mediana',800,250);
@@ -1769,6 +1914,71 @@ public function uploadAndReadExcelGreenvic(Request $request)
             //$firmezas_mediana='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/mediana/'.$recepcion->id.'.html&viewport=800x250';
             $firmezas_chica=$this->generarGrafico($recepcion->id,'firmeza/chica','firmeza_chica',800,250);
             //$firmezas_chica='https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/chica/'.$recepcion->id.'.html&viewport=800x250';
+            $html_tabla_firmeza_grande='';
+        $html_tabla_firmeza_mediana='';
+        $html_tabla_firmeza_pequena='';
+        if ($recepcion->n_especie!='Orange' || $recepcion->n_especie=="Cherries") {
+                   $categories_firmeza_grande = [];
+                   $series_firmeza_grande = [];
+                   $categories_firmeza_mediana = [];
+                   $series_firmeza_mediana = [];
+                   $categories_firmeza_pequena = [];
+                   $series_firmeza_pequena = [];
+
+
+            if ($recepcion->calidad->detalles){
+                foreach ($recepcion->calidad->detalles->where('tipo_item', 'GRANDE') as $detalle){
+                        $categories_firmeza_grande[] = $detalle->detalle_item;
+                        $series_firmeza_grande[] = ['name' => $detalle->detalle_item, 'y' => $detalle->valor_ss];
+                }
+            }
+
+            if ($recepcion->calidad->detalles){
+                foreach ($recepcion->calidad->detalles->where('tipo_item', 'MEDIANO') as $detalle){
+                        $categories_firmeza_mediana[] = $detalle->detalle_item;
+                        $series_firmeza_mediana[] = ['name' => $detalle->detalle_item, 'y' => $detalle->valor_ss];
+                }
+            }
+
+            if ($recepcion->calidad->detalles){
+                foreach ($recepcion->calidad->detalles->where('tipo_item', 'CHICO') as $detalle){
+                        $categories_firmeza_pequena[] = $detalle->detalle_item;
+                        $series_firmeza_pequena[] = ['name' => $detalle->detalle_item, 'y' => $detalle->valor_ss];
+                }
+            }
+
+            $html_tabla_firmeza_grande='<table border="1" cellpadding="5" cellspacing="0">';
+            $html_tabla_firmeza_grande.='<thead><tr><th>Calibre</th><th>Valor</th></tr></thead>';
+            $html_tabla_firmeza_grande.='<tbody>';
+            foreach ($series_firmeza_grande as $serie) {
+                $html_tabla_firmeza_grande.='<tr>';
+                $html_tabla_firmeza_grande.='<td>'.$serie['name'].'</td>';
+                $html_tabla_firmeza_grande.='<td>'.$serie['y'].'</td>';
+                $html_tabla_firmeza_grande.='</tr>';
+            }
+            $html_tabla_firmeza_grande.='</tbody></table>';
+            $html_tabla_firmeza_mediana='<table border="1" cellpadding="5" cellspacing="0">';
+            $html_tabla_firmeza_mediana.='<thead><tr><th>Calibre</th><th>Valor</th></tr></thead>';
+            $html_tabla_firmeza_mediana.='<tbody>';
+            foreach ($series_firmeza_mediana as $serie) {
+                $html_tabla_firmeza_mediana.='<tr>';
+                $html_tabla_firmeza_mediana.='<td>'.$serie['name'].'</td>';
+                $html_tabla_firmeza_mediana.='<td>'.$serie['y'].'</td>';
+                $html_tabla_firmeza_mediana.='</tr>';
+            }
+            $html_tabla_firmeza_mediana.='</tbody></table>';
+
+            $html_tabla_firmeza_pequena='<table border="1" cellpadding="5" cellspacing="0">';
+            $html_tabla_firmeza_pequena.='<thead><tr><th>Calibre</th><th>Valor</th></tr></thead>';
+            $html_tabla_firmeza_pequena.='<tbody>';
+            foreach ($series_firmeza_pequena as $serie) {
+                $html_tabla_firmeza_pequena.='<tr>';
+                $html_tabla_firmeza_pequena.='<td>'.$serie['name'].'</td>';
+                $html_tabla_firmeza_pequena.='<td>'.$serie['y'].'</td>';
+                $html_tabla_firmeza_pequena.='</tr>';
+            }
+            $html_tabla_firmeza_pequena.='</tbody></table>';
+            }
         }
         else{
             $firmezas_grande=NULL;
@@ -1778,6 +1988,9 @@ public function uploadAndReadExcelGreenvic(Request $request)
 
         if ($recepcion->n_especie=="Cherries" || $recepcion->n_variedad=='Dagen') {
             $distribucion_calibre=$this->generarGrafico($recepcion->id,'calibre','calibre',800,360);
+
+
+
             //'https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibre/'.$recepcion->id.'.html&viewport=800x380';
             $promedio_firmeza=$this->generarGrafico($recepcion->id,'firmeza','firmeza',800,470);
             //'https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/firmeza/'.$recepcion->id.'.html&viewport=800x400';
@@ -1785,14 +1998,102 @@ public function uploadAndReadExcelGreenvic(Request $request)
             //'https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/brix/'.$recepcion->id.'.html&viewport=800x400';
 
             $porcentaje_firmeza=$this->generarGrafico($recepcion->id,'porcentaje/firmeza','porcentaje_firmeza',800,470);
+
+
+        $categories_porc_firmeza = [];
+        $series_porc_firmeza = [];
+
+
+        if ($recepcion->n_variedad == 'Dagen'){
+            foreach ($recepcion->calidad->detalles->where('tipo_item', 'FIRMEZAS') as $detalle){
+
+                    $categories[] = $detalle->detalle_item;
+                    if ($recepcion->n_especie == 'Cherries') {
+                        $series[] = $detalle->valor_ss;
+                    } else {
+                        $series[] = $detalle->porcentaje_muestra;
+                    }
+
+
+                }
+            }else{
+            foreach ($recepcion->calidad->detalles->where('tipo_item', 'FIRMEZAS') as $detalle){
+                if ($detalle->detalle_item == 'LIGHT' || $detalle->detalle_item == 'DARK' || $detalle->detalle_item == 'BLACK'){
+
+                        $categories[] = $detalle->detalle_item;
+                        if ($recepcion->n_especie == 'Cherries') {
+                            $series[] = $detalle->valor_ss;
+                        } else {
+                            $series[] = $detalle->porcentaje_muestra;
+                        }
+
+                }
+            }
+        }
+
+
+
+        $html_tabla_porc_firmeza='<table border="1" cellpadding="5" cellspacing="0">';
+        $html_tabla_porc_firmeza.='<thead><tr><th>Color</th><th>Valor</th></tr></thead>';
+        $html_tabla_porc_firmeza.='<tbody>';
+        foreach ($categories_porc_firmeza as $key => $value) {
+        $valor = $series_porc_firmeza[$key] ?? 0;
+        $html_tabla_porc_firmeza .= '<tr>';
+        $html_tabla_porc_firmeza .= '<td>' . htmlspecialchars($value) . '</td>';
+        $html_tabla_porc_firmeza .= '<td>' . round($valor, 2) . '</td>';
+        $html_tabla_porc_firmeza .= '</tr>';
+        }
+            $html_tabla_porc_firmeza.='</tbody>';
+            $html_tabla_porc_firmeza.='</table>';
+
+
+
+
+
+
             //'https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/porcentaje/firmeza/'.$recepcion->id.'.html&viewport=800x330';
         }else{
             $promedio_firmeza=NULL;
             $promedio_brix=NULL;
             $porcentaje_firmeza=NULL;
         }
+        $html_tabla_calibrix='';
         if ($recepcion->n_especie=='Orange'  || $recepcion->n_especie=='Mandarinas') {
             $calibrix=$this->generarGrafico($recepcion->id,'calibrix','calibrix',800,380);
+
+        $categories_calibrix=[];
+        $series_calibrix=[];
+        //$items=['LIGHT','DARK','BLACK'];
+
+
+
+        if ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES')->count()>0){
+            foreach ($recepcion->calidad->detalles->where('tipo_item','SOLIDOS SOLUBLES') as $detalle){
+
+
+                        $categories_calibrix[]=$detalle->detalle_item;
+                        $series_calibrix[]=$detalle->valor_ss;
+            }
+
+
+        }
+        else{
+
+                        $categories_calibrix[]='NONAME';
+                        $series_calibrix[]=0;
+
+        }
+         $html_tabla_calibrix='<table border="1" cellpadding="5" cellspacing="0">';
+            $html_tabla_calibrix.='<thead><tr><th>Color</th><th>Valor</th></tr></thead>';
+            $html_tabla_calibrix.='<tbody>';
+            foreach ($series_calibrix as $serie) {
+                $html_tabla_calibrix.='<tr>';
+                $html_tabla_calibrix.='<td>'.$categories_calibrix[$cont].'</td>';
+                $html_tabla_calibrix.='<td>'.$serie.'</td>';
+                $html_tabla_calibrix.='</tr>';
+                $cont++;
+            }
+
             //'https://v1.nocodeapi.com/greenex/screen/CbrYLdYsupiNNAot/screenshot?url=https://appgreenex.cl/calibrix/'.$recepcion->id.'.html&viewport=800x380';
         }else{
             $calibrix=NULL;
@@ -1816,7 +2117,15 @@ public function uploadAndReadExcelGreenvic(Request $request)
                                                     'porcentaje_firmeza'=>$porcentaje_firmeza,
                                                     'almidons'=>$almidons,
                                                     'calibrix'=>$calibrix,
-                                                    'user'=>$user]);
+                                                    'user'=>$user,
+                                                    'html_tabla_distribucion_calibre'=>$html_tabla_distribucion_calibre,
+                                                    'html_tabla_color'=>$html_tabla_color,
+                                                    'html_tabla_color_fondo'=>$html_tabla_color_fondo,
+                                                    'html_tabla_calibrix'=>$html_tabla_calibrix,
+                                                    'html_tabla_porc_firmeza'=>$html_tabla_porc_firmeza,
+                                                    'html_tabla_firmeza_grande'=>$html_tabla_firmeza_grande,
+                                                    'html_tabla_firmeza_mediana'=>$html_tabla_firmeza_mediana,
+                                                    'html_tabla_firmeza_pequena'=>$html_tabla_firmeza_pequena,]);
 
         $pdfContent = $pdf->output();
         $filename = $recepcion->numero_g_recepcion.'-'.$recepcion->id_emisor.'.pdf';
@@ -1844,7 +2153,7 @@ public function uploadAndReadExcelGreenvic(Request $request)
     //if (!file_exists($imagePath)) {
         Browsershot::url("https://appgreenex.cl/{$tipo}/{$id}.html")
         //Browsershot::url("http://productors.test/{$tipo}/{$id}.html")
-          ->setChromePath('/usr/bin/chromium-browser')
+          //->setChromePath('/usr/bin/chromium-browser')
             ->windowSize($ancho, $alto)
             //->setOption('args', ['--verbose']) // Modo debug
            // ->setOption('debug', true) // Activa más detalles

@@ -1073,11 +1073,47 @@
 
                                         </div>
                                     </div>
+                                    <pagebreak></pagebreak>
+                                @if(in_array(auth()->user()->id,[1749,1944,1945,1946,1947,1948,1949,1950,1988,2002,2010,2015,2346,2011,2345,2010,2015,2346,1932]))
 
 
+                                    <div style="text-align: center; font-size: 12px; padding-left: 3px; padding-right: 3px;">
+                                        <h3>Distribución de Calibres</h3>
+                                        @php
+                                            echo $html_tabla_distribucion_calibre;
+                                        @endphp
+                                        <h3>Distribución de Color</h3>
+                                        @php
+                                            echo $html_tabla_color;
+                                        @endphp
+                                        <h3>Distribución de Firmeza Grande</h3>
+                                        @php
+                                            echo $html_tabla_firmeza_grande;
+                                        @endphp
+                                        <h3>Distribución de Firmeza Mediana</h3>
+                                        @php
+                                            echo $html_tabla_firmeza_mediana;
+                                        @endphp
+                                        <h3>Distribución de Firmeza Pequeña</h3>
+                                        @php
+                                            echo $html_tabla_firmeza_pequena;
+                                        @endphp
+                                        <h3>Distribución de Color Fondo</h3>
+                                        @php
+                                            echo $html_tabla_color_fondo;
+                                        @endphp
+                                        <h3>Distribución de Calibrix</h3>
+                                        @php
+                                            echo $html_tabla_calibrix;
+                                        @endphp
+                                        <h3>Distribución de Porcentaje de Firmeza</h3>
+                                        @php
+                                            echo $html_tabla_porc_firmeza;
+                                        @endphp
 
+                                    </div>
 
-
+                                @endif
                                 </body>
 
                                 </html>
